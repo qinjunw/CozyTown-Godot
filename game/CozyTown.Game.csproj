@@ -1,0 +1,15 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <NuGetLockFilePath>packages.$(Configuration).lock.json</NuGetLockFilePath>
+    <Configurations>Debug;ExportDebug;ExportRelease</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../src/CozyTown.Core/CozyTown.Core.csproj" />
+  </ItemGroup>
+</Project>
