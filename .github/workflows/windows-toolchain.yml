@@ -22,6 +22,10 @@ jobs:
           persist-credentials: false
       - name: Install pinned portable tools
         run: ./tools/windows/install-toolchain.ps1
+      - name: Check model probe with offline fixtures
+        run: |
+          & ./.local/tools/dotnet/dotnet.exe run --project tools/experiments/CozyTown.ModelProbe --configuration Release -- --self-test
+          if ($LASTEXITCODE -ne 0) { throw 'Model probe offline checks failed.' }
       - name: Build, test, and run the Windows export
         run: ./tools/windows/verify.ps1
       - name: Upload export and verification evidence
