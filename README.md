@@ -15,7 +15,7 @@ pwsh -File tools/windows/install-toolchain.ps1
 pwsh -File tools/windows/verify.ps1 -Graphical
 ```
 
-工具固定为 Godot 4.7.2 .NET 与 .NET SDK 10.0.401，安装到忽略的 `.local/tools/`。验证结果和可运行程序保存在 `artifacts/verification/<run-id>/`；启动其中的 `windows/CozyTown.exe`，并保留整个导出目录。操作、锁文件和证明范围见 [Windows 构建与验证](docs/WINDOWS_TOOLCHAIN.md)。
+工具固定为 Godot 4.7.2 .NET 与 .NET SDK 10.0.401，安装到忽略的 `.local/tools/`。验证结果和可运行程序保存在 `artifacts/verification/<run-id>/`；启动其中的 `windows/CozyTown.exe`，并保留整个导出目录。操作、锁文件和证明范围见 [Windows 构建与验证](docs/WINDOWS_TOOLCHAIN.md)，已执行结果见 [工具链验证记录](docs/verification/windows-toolchain-2026-09-19.md)。
 
 ## 产品目标
 

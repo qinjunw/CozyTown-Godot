@@ -1,0 +1,213 @@
+{
+  "verification": {
+    "schemaVersion": 1,
+    "startedAtUtc": "2026-09-19T14:24:34.8390315Z",
+    "passed": true,
+    "osVersion": "Microsoft Windows NT 10.0.26200.0",
+    "graphicalRequested": true,
+    "sourceCommit": "e227648f03f7fb33f25b7de977cafa6fb36302c2",
+    "sourceDirty": false,
+    "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+    "steps": [
+      {
+        "name": "dotnet-version",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.294
+      },
+      {
+        "name": "godot-version",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.208
+      },
+      {
+        "name": "restore-host",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.589
+      },
+      {
+        "name": "restore-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.651
+      },
+      {
+        "name": "core-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 2.926
+      },
+      {
+        "name": "import",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 4.876
+      },
+      {
+        "name": "build-host",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.75
+      },
+      {
+        "name": "scene-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.675
+      },
+      {
+        "name": "export-windows",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.246
+      },
+      {
+        "name": "export-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.831
+      },
+      {
+        "name": "export-graphical",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.408
+      }
+    ],
+    "error": null,
+    "dotnetSdk": "10.0.401",
+    "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+    "coreTests": {
+      "total": 21,
+      "passed": 21
+    },
+    "finishedAtUtc": "2026-09-19T14:25:00.6236815Z"
+  },
+  "freshCheckout": true,
+  "buildCachesInitiallyAbsent": [
+    "game/.godot",
+    "src/CozyTown.Core/bin",
+    "src/CozyTown.Core/obj",
+    "tests/CozyTown.Core.Tests/bin",
+    "tests/CozyTown.Core.Tests/obj"
+  ],
+  "sharedToolsAndNuGetCache": true,
+  "worktreeCleanAfterVerification": true,
+  "reports": {
+    "scene-headless": {
+      "reportSchemaVersion": 1,
+      "test": "godot_toolchain_smoke",
+      "passed": true,
+      "status": "passed",
+      "engineVersion": "4.7.2-stable (official)",
+      "runtimeVersion": "10.0.12",
+      "runtimeAssemblyLocation": "<tools-root>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+      "displayServer": "headless",
+      "headless": true,
+      "inputMethod": "internal_button_signals",
+      "initialTicks": 0,
+      "afterAdvanceTicks": 120,
+      "afterReloadTicks": 120,
+      "finalTicks": 121,
+      "advanceButtonVerified": true,
+      "saveReloadButtonVerified": true,
+      "snapshotPath": "<verification-output>\\scene-headless.json.snapshot.json",
+      "snapshotJson": "{\"schemaVersion\":1,\"totalTicks\":120}",
+      "screenshotStatus": "not_requested",
+      "screenshotPath": null,
+      "error": null
+    },
+    "export-headless": {
+      "reportSchemaVersion": 1,
+      "test": "godot_toolchain_smoke",
+      "passed": true,
+      "status": "passed",
+      "engineVersion": "4.7.2-stable (official)",
+      "runtimeVersion": "10.0.12",
+      "runtimeAssemblyLocation": "<verification-output>\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+      "displayServer": "headless",
+      "headless": true,
+      "inputMethod": "internal_button_signals",
+      "initialTicks": 0,
+      "afterAdvanceTicks": 120,
+      "afterReloadTicks": 120,
+      "finalTicks": 121,
+      "advanceButtonVerified": true,
+      "saveReloadButtonVerified": true,
+      "snapshotPath": "<verification-output>\\export-headless.json.snapshot.json",
+      "snapshotJson": "{\"schemaVersion\":1,\"totalTicks\":120}",
+      "screenshotStatus": "not_requested",
+      "screenshotPath": null,
+      "error": null
+    },
+    "export-graphical": {
+      "reportSchemaVersion": 1,
+      "test": "godot_toolchain_smoke",
+      "passed": true,
+      "status": "passed",
+      "engineVersion": "4.7.2-stable (official)",
+      "runtimeVersion": "10.0.12",
+      "runtimeAssemblyLocation": "<verification-output>\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+      "displayServer": "Windows",
+      "headless": false,
+      "inputMethod": "internal_button_signals",
+      "initialTicks": 0,
+      "afterAdvanceTicks": 120,
+      "afterReloadTicks": 120,
+      "finalTicks": 121,
+      "advanceButtonVerified": true,
+      "saveReloadButtonVerified": true,
+      "snapshotPath": "<verification-output>\\export-graphical.json.snapshot.json",
+      "snapshotJson": "{\"schemaVersion\":1,\"totalTicks\":120}",
+      "screenshotStatus": "captured",
+      "screenshotPath": "<verification-output>\\export-graphical.png",
+      "error": null
+    }
+  },
+  "exportedFiles": [
+    {
+      "file": "CozyTown.exe",
+      "bytes": 109513728,
+      "sha256": "16e0ec3cfd398b938f514de95ff2474b532b5061ada78f92226dba3f7584d55d"
+    },
+    {
+      "file": "CozyTown.pck",
+      "bytes": 5856,
+      "sha256": "d249f45e9c31d3235b8c3937fd3c9583ade0dd1f7a5dce4f8d44f3ff6f9666a0"
+    },
+    {
+      "file": "data_CozyTown.Game_windows_x86_64/CozyTown.Game.dll",
+      "bytes": 23040,
+      "sha256": "72c0aaa3fa6ee1546c20d1732c743d521152a82f065e0f9d2ee1ada47991f006"
+    },
+    {
+      "file": "data_CozyTown.Game_windows_x86_64/CozyTown.Core.dll",
+      "bytes": 5632,
+      "sha256": "de895a47d27584ff00a09c7e6a45bec11281af104fa5794e2a8511a65af04a94"
+    },
+    {
+      "file": "data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll",
+      "bytes": 16033576,
+      "sha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678"
+    },
+    {
+      "file": "data_CozyTown.Game_windows_x86_64/coreclr.dll",
+      "bytes": 4614992,
+      "sha256": "128aee8c62a673d64739e585e3876b61133571cec83a46240a62581d5465639b"
+    }
+  ],
+  "negativeSmoke": {
+    "arguments": [
+      "--headless",
+      "--path",
+      "game",
+      "--",
+      "--toolchain-smoke"
+    ],
+    "expectedExitCode": 1,
+    "actualExitCode": 1,
+    "message": "--report=<absolute path> is required for this output."
+  }
+}
