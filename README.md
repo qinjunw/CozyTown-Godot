@@ -28,6 +28,8 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 下一份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动：独立规则与真实模型共同决策，世界日程优先，首切片画面达到可对外演示的完成度。该范围已确定，场景与居民功能仍待实现。
 
+内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；字段归属与待实现的一致性检查见[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
+
 ## 迭代入口
 
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。
