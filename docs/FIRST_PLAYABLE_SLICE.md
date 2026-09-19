@@ -12,7 +12,7 @@
 
 ## 规则、模型与世界的分工
 
-下表将已确认的“独立规则＋真实模型”落实为验收边界；具体协议在[真实模型接入票据](https://github.com/qinjunw/CozyTown-Godot/issues/11)中确定。
+下表将已确认的“独立规则＋真实模型”落实为验收边界；请求、预算与失败处理见[真实模型接入合同](REAL_MODEL_CONTRACT.md)。
 
 | 部分 | 职责与可观察结果 |
 | --- | --- |
@@ -72,8 +72,6 @@
 
 [存档与回放合同](SAVE_REPLAY_CONTRACT.md)已确定完整状态、恢复发布边界、在途请求、内容兼容与记录输入。首切片实现其中的保存恢复、跨读档预算保护和结构化记录导出；完整回放执行器仍在后续交付。
 
-实现前仍需完成的已建票据：
-
-- [确定首切片真实模型的接入、预算与失败验收](https://github.com/qinjunw/CozyTown-Godot/issues/11)：服务/模型、配置、额度、并发、超时及真实样本验收。
+[真实模型接入合同](REAL_MODEL_CONTRACT.md)已确定 DeepSeek 与独立 C# 接入、人民币 5 元和 48 次发送的共用预算、并发与超时，以及真实样本和故障的统计边界。接口探针与两组四人场景分别使用 4、22、22 次阶段上限，失败和恢复补发均计入；接口探针不能替代场景验收。
 
 具体美术方案和可运行结果由[垂直切片票据](https://github.com/qinjunw/CozyTown-Godot/issues/7)展示并取得用户反馈；完整 Demo 的后续实施顺序由[候选版本验收票据](https://github.com/qinjunw/CozyTown-Godot/issues/8)衔接。

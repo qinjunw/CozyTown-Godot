@@ -1,0 +1,34 @@
+{
+  "attemptId": "95024bb7-9963-4a67-a769-ec13f51a1400",
+  "residentId": "eli",
+  "status": "passed",
+  "httpStatus": 200,
+  "arrivedAtUtc": "2026-09-19T20:38:35.5909469\u002B00:00",
+  "preSendUtc": "2026-09-19T20:38:35.0035523\u002B00:00",
+  "dispatchStartedAtUtc": "2026-09-19T20:38:35.0049944\u002B00:00",
+  "durationMilliseconds": 585,
+  "requestFingerprint": "fc5ba9f41817b0ab5fef6b860f0122594f1003917a05d5fcc1e5486a64cf61f4",
+  "configurationFingerprint": "9dfc5589a52661e40fe1db33e3e2361e6deb3fe41c72fa07131a867b0710d57f",
+  "candidateBody": "{\u0022operation\u0022:\u0022wait\u0022,\u0022reason\u0022:\u0022I will rest here and let others approach if they wish.\u0022}",
+  "reportedUsage": {
+    "prompt_tokens": 194,
+    "completion_tokens": 20,
+    "total_tokens": 214,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 194
+  },
+  "providerErrorCode": null,
+  "providerErrorType": null,
+  "providerRequestId": "7c24ff8e-79dc-47f6-8eb9-d21b180378ae",
+  "returnedModel": "deepseek-flash",
+  "systemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "finishReason": "stop",
+  "promptTokens": 194,
+  "completionTokens": 20,
+  "conservativeCostMicros": 548,
+  "candidate": {
+    "operation": "wait",
+    "reason": "I will rest here and let others approach if they wish."
+  },
+  "failureCode": null
+}

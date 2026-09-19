@@ -1,0 +1,32 @@
+{
+  "budgetId": "cozytown-godot-first-slice-20260920-v1",
+  "stage": "probe",
+  "attemptId": "16e04293-dfa7-4c4a-8a65-95ab319a8a27",
+  "logicalRequestId": "interface-probe-ren",
+  "residentId": "ren",
+  "syntheticContext": true,
+  "preSendUtc": "2026-09-19T20:38:35.600313\u002B00:00",
+  "configurationFingerprint": "9dfc5589a52661e40fe1db33e3e2361e6deb3fe41c72fa07131a867b0710d57f",
+  "requestFingerprint": "bd3b2e5e2e05ead8126f08aee7a7af0bdba99c8e3f79a4411adc7aa4a0d68a19",
+  "request": {
+    "model": "deepseek-flash",
+    "thinking": {
+      "type": "disabled"
+    },
+    "stream": false,
+    "max_tokens": 512,
+    "response_format": {
+      "type": "json_object"
+    },
+    "messages": [
+      {
+        "role": "system",
+        "content": "This is a synthetic interface probe, not a live game. Choose one proposed action. Return only a JSON object with operation: wait, approach, or invite. For approach/invite, targetId must be one of visibleResidents; for wait omit targetId or use null. Optional text and reason must each be a single line of at most 200 characters. Do not add fields. You cannot execute actions or change world state. Example: {\u0022operation\u0022:\u0022wait\u0022,\u0022reason\u0022:\u0022I will rest.\u0022}"
+      },
+      {
+        "role": "user",
+        "content": "{\r\n  \u0022residentId\u0022: \u0022ren\u0022,\r\n  \u0022ownState\u0022: \u0022Fisher taking a break; may wait, approach, or invite someone visible.\u0022,\r\n  \u0022visibleResidents\u0022: [\r\n    \u0022sora\u0022,\r\n    \u0022mina\u0022\r\n  ]\r\n}"
+      }
+    ]
+  }
+}

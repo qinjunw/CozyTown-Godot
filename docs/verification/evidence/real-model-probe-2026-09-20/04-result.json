@@ -1,0 +1,34 @@
+{
+  "attemptId": "5d6fce48-d789-4c31-a62e-d7f1098c52ea",
+  "residentId": "sora",
+  "status": "passed",
+  "httpStatus": 200,
+  "arrivedAtUtc": "2026-09-19T20:38:36.540399\u002B00:00",
+  "preSendUtc": "2026-09-19T20:38:36.1639677\u002B00:00",
+  "dispatchStartedAtUtc": "2026-09-19T20:38:36.1651104\u002B00:00",
+  "durationMilliseconds": 375,
+  "requestFingerprint": "09a90113698aa630ad4f951df1d0b653fc2280cdcb4cd50d73d02ef9b2ce9edf",
+  "configurationFingerprint": "9dfc5589a52661e40fe1db33e3e2361e6deb3fe41c72fa07131a867b0710d57f",
+  "candidateBody": "{\u0022operation\u0022:\u0022wait\u0022,\u0022reason\u0022:\u0022I will use the free time to prepare ingredients before my next duty.\u0022}",
+  "reportedUsage": {
+    "prompt_tokens": 194,
+    "completion_tokens": 22,
+    "total_tokens": 216,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 194
+  },
+  "providerErrorCode": null,
+  "providerErrorType": null,
+  "providerRequestId": "4970a422-5c44-4373-8f11-d4eb55f1c966",
+  "returnedModel": "deepseek-flash",
+  "systemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "finishReason": "stop",
+  "promptTokens": 194,
+  "completionTokens": 22,
+  "conservativeCostMicros": 564,
+  "candidate": {
+    "operation": "wait",
+    "reason": "I will use the free time to prepare ingredients before my next duty."
+  },
+  "failureCode": null
+}

@@ -32,6 +32,8 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。待实现的状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。
 
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。场景中的模型决策路径仍待实现。
+
 ## 迭代入口
 
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。

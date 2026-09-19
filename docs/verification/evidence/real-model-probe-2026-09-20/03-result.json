@@ -1,0 +1,34 @@
+{
+  "attemptId": "16e04293-dfa7-4c4a-8a65-95ab319a8a27",
+  "residentId": "ren",
+  "status": "passed",
+  "httpStatus": 200,
+  "arrivedAtUtc": "2026-09-19T20:38:36.1552341\u002B00:00",
+  "preSendUtc": "2026-09-19T20:38:35.600313\u002B00:00",
+  "dispatchStartedAtUtc": "2026-09-19T20:38:35.6018365\u002B00:00",
+  "durationMilliseconds": 553,
+  "requestFingerprint": "bd3b2e5e2e05ead8126f08aee7a7af0bdba99c8e3f79a4411adc7aa4a0d68a19",
+  "configurationFingerprint": "9dfc5589a52661e40fe1db33e3e2361e6deb3fe41c72fa07131a867b0710d57f",
+  "candidateBody": "{\u0022operation\u0022:\u0022wait\u0022,\u0022reason\u0022:\u0022I will rest by the water and see who comes near.\u0022}",
+  "reportedUsage": {
+    "prompt_tokens": 192,
+    "completion_tokens": 20,
+    "total_tokens": 212,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 192
+  },
+  "providerErrorCode": null,
+  "providerErrorType": null,
+  "providerRequestId": "22d29963-6223-4bb0-b824-94ddae313c65",
+  "returnedModel": "deepseek-flash",
+  "systemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "finishReason": "stop",
+  "promptTokens": 192,
+  "completionTokens": 20,
+  "conservativeCostMicros": 544,
+  "candidate": {
+    "operation": "wait",
+    "reason": "I will rest by the water and see who comes near."
+  },
+  "failureCode": null
+}
