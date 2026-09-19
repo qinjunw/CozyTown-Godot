@@ -1,0 +1,26 @@
+# Godot generated data
+.godot/
+
+# .NET generated data
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+
+# Local tools, credentials and generated output
+.local/
+.env
+.env.*
+!.env.example
+build/
+builds/
+exports/
+artifacts/
+*.log
+export_credentials.cfg
+
+# Python cache
+__pycache__/
+*.pyc
