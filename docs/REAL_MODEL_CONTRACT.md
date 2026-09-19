@@ -2,6 +2,8 @@
 
 本文件对应[确定首切片真实模型的接入、预算与失败验收](https://github.com/qinjunw/CozyTown-Godot/issues/11)。2026-09-20 用户确认 DeepSeek 与独立 C# 接入、人民币 5 元及 48 次发送的首轮总上限，并提供仓库外凭据文件位置。本合同不声明 Godot 模型适配器或四人场景已经实现；官方依据见[DeepSeek 接入研究](research/deepseek-provider-2026-09-20.md)。
 
+已执行的 4 次接口调用、离线检查及预算余量见[探针实测记录](verification/real-model-probe-2026-09-20.md)。后续场景承接其中的预算消耗；接口通过不替代下文的场景验收。
+
 ## 接入路线与配置
 
 采用 DeepSeek 官方 Chat Completions：`https://api.deepseek.com/chat/completions`，请求模型 `deepseek-flash`，显式设置 `thinking.type=disabled`、`stream=false`、`response_format.type=json_object`、`max_tokens=512`。新 Godot 项目通过 C# HTTP 适配器直接调用；独立核心仅处理请求/结果数据和世界规则。普通测试使用固定替身，真实调用显式启用。旧 Unity 的 Python 代理仅作协议与记录参考，不作为运行依赖。

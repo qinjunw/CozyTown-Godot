@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "a672eb58c8b1d0e8db35272677dc17cf55c66ead",
+  "scope": "Complete sanitized output of one four-send synthetic API experiment; ledger is a historical snapshot.",
+  "files": {
+    "01-request.json": "de91ed049d16dc28cfbf24658a9bb033c75a777abe620d6384d6a2c80873296e",
+    "01-result.json": "7b536bab9293d949320157e3bfa1cb98e1518d0dff7d889f93c699ce0daffbdd",
+    "02-request.json": "f99d6f33c2a2a53b7d8407d42b7a3395978840f9974a55f46fbfad2485b10cb2",
+    "02-result.json": "0a8ac65be0b0fe02767f24757fd0fee1510418882b9e4cd54c749db72971717b",
+    "03-request.json": "67799970d51c9b8d7447b2991d4836ac4a29e5fd23e99e726378e956c3c5b653",
+    "03-result.json": "3dc95010cc44ef51373ed46d269bfdd130c899050666892af3c8d263a56b239d",
+    "04-request.json": "459be126b5a725809a78ecc279bdc60830b2f6410c4ff60b0cf0990d2cf28e66",
+    "04-result.json": "6dcc815663f64835cc60ae4c63788d2c0e6d7ded5476c1414dc18a0f2b7db02d",
+    "balance-check.json": "caf9d727f3656502206d42efab8b1d3d4eb6d22145870721cd0b5f7e83154d73",
+    "report.json": "150c276870e18eed28f0b7a8f4385cfe916a036ecbed580230385c3a9fc20b20"
+  },
+  "originalFiles": {
+    "01-request.json": "2fa36840c756df818218a26181d385f87877714a251bb6337cc9fe96b6c4fc1e",
+    "01-result.json": "283ce8119b29fe36656a66f664ff1d6187793eae665e7202bf55a11cb9e73f4b",
+    "02-request.json": "73d683a678947b121981fb50fed8070e44b5427be02330e606476738817e41ba",
+    "02-result.json": "7345abbd4751399e668c15128bc7ebea9ed60296af06b8d6ffea6ffff681e1de",
+    "03-request.json": "11a7739aa1bb32fb2f615889d971c5d996610b9625f8e62e72f4c1b73c0cf1b8",
+    "03-result.json": "0b28eb39c28dea4f40a9489ffcecea04b9759d0dcc42385044ea09dde28e5077",
+    "04-request.json": "b3eb5d7c45f2a82d4b0755cf77e4e4859e36efff2e82af8a364202cc6ea8392b",
+    "04-result.json": "d4736ec1e61ebd0d51d97e261d2146c44d29bbe97617d23952b637e961b79b5a",
+    "balance-check.json": "b7246fdddd9d71b69385fd6531efbf04ab9a7b4d069b86e5fb4fd16cda36d202",
+    "report.json": "710238eca79cb842a8c1969905ffb30a33a4b411995cd3621a39a0482846cc6d"
+  },
+  "normalization": "Archived outer JSON uses LF instead of CRLF; JSON values, including escaped request and candidate text, are unchanged."
+}

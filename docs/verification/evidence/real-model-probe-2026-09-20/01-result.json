@@ -1,0 +1,34 @@
+{
+  "attemptId": "b3bb4a72-7c74-4d30-86d6-46328e28efc3",
+  "residentId": "mina",
+  "status": "passed",
+  "httpStatus": 200,
+  "arrivedAtUtc": "2026-09-19T20:38:34.9704438\u002B00:00",
+  "preSendUtc": "2026-09-19T20:38:34.3917709\u002B00:00",
+  "dispatchStartedAtUtc": "2026-09-19T20:38:34.3985582\u002B00:00",
+  "durationMilliseconds": 571,
+  "requestFingerprint": "68558bd3cc4a79cec539ebfea457b027c14a60e2ed3bb3969d83f69e2d0493df",
+  "configurationFingerprint": "9dfc5589a52661e40fe1db33e3e2361e6deb3fe41c72fa07131a867b0710d57f",
+  "candidateBody": "{\u0022operation\u0022:\u0022wait\u0022,\u0022reason\u0022:\u0022I am on a short break and will wait before approaching anyone.\u0022}",
+  "reportedUsage": {
+    "prompt_tokens": 194,
+    "completion_tokens": 21,
+    "total_tokens": 215,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 194
+  },
+  "providerErrorCode": null,
+  "providerErrorType": null,
+  "providerRequestId": "5bc56123-b2af-4fd6-8bac-fe58b885bf77",
+  "returnedModel": "deepseek-flash",
+  "systemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "finishReason": "stop",
+  "promptTokens": 194,
+  "completionTokens": 21,
+  "conservativeCostMicros": 556,
+  "candidate": {
+    "operation": "wait",
+    "reason": "I am on a short break and will wait before approaching anyone."
+  },
+  "failureCode": null
+}
