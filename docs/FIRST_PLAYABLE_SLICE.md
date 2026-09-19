@@ -70,9 +70,10 @@
 
 内容编辑方式已确定为 Godot 场景维护空间布局、独立 JSON 维护居民与日程等定义；共用身份、派生数据和场景修改验收见[内容来源与一致性合同](CONTENT_AUTHORING.md)。相应提取、校验与场景实现仍由垂直切片交付。
 
+[存档与回放合同](SAVE_REPLAY_CONTRACT.md)已确定完整状态、恢复发布边界、在途请求、内容兼容与记录输入。首切片实现其中的保存恢复、跨读档预算保护和结构化记录导出；完整回放执行器仍在后续交付。
+
 实现前仍需完成的已建票据：
 
-- [确定新存档、状态续接与实验回放的合同](https://github.com/qinjunw/CozyTown-Godot/issues/6)：保存、恢复发布、在途请求与后续回放的具体合同。
 - [确定首切片真实模型的接入、预算与失败验收](https://github.com/qinjunw/CozyTown-Godot/issues/11)：服务/模型、配置、额度、并发、超时及真实样本验收。
 
 具体美术方案和可运行结果由[垂直切片票据](https://github.com/qinjunw/CozyTown-Godot/issues/7)展示并取得用户反馈；完整 Demo 的后续实施顺序由[候选版本验收票据](https://github.com/qinjunw/CozyTown-Godot/issues/8)衔接。

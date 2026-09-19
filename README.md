@@ -30,6 +30,8 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；字段归属与待实现的一致性检查见[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 
+保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。待实现的状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。
+
 ## 迭代入口
 
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。
