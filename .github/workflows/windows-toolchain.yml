@@ -1,0 +1,33 @@
+name: Windows toolchain
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install pinned portable tools
+        run: ./tools/windows/install-toolchain.ps1
+      - name: Build, test, and run the Windows export
+        run: ./tools/windows/verify.ps1
+      - name: Upload export and verification evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: windows-toolchain-${{ github.sha }}
+          path: artifacts/verification/
+          retention-days: 14

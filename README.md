@@ -4,7 +4,18 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 技术方向已确认采用 Godot .NET 与独立 C# 核心。首版使用自己的存档，不要求读取 Unity 旧档。原 [CozyTown](https://github.com/qinjunw/CozyTown) 继续独立开发，供本项目参考行为、测试和素材；两个仓库不自动同步，也不互相作为构建依赖。
 
-当前仓库处于路线建图与技术研究阶段，尚未包含可运行的 Godot Demo。引擎版本、世界适配边界、内容组织和交付流程通过 GitHub 决策票据确定，不能将计划中的能力当作已实现功能。
+当前包含可构建的 Godot .NET 诊断场景、独立 C# 核心探针与 Windows 验证脚本。诊断场景检查按钮调用、JSON 写盘恢复及继续运行；完整小镇玩法与四人 Agent Demo 尚待实现。
+
+## 构建与运行
+
+需要 Windows x64、Git 和 PowerShell 7。在仓库根目录运行：
+
+```powershell
+pwsh -File tools/windows/install-toolchain.ps1
+pwsh -File tools/windows/verify.ps1 -Graphical
+```
+
+工具固定为 Godot 4.7.2 .NET 与 .NET SDK 10.0.401，安装到忽略的 `.local/tools/`。验证结果和可运行程序保存在 `artifacts/verification/<run-id>/`；启动其中的 `windows/CozyTown.exe`，并保留整个导出目录。操作、锁文件和证明范围见 [Windows 构建与验证](docs/WINDOWS_TOOLCHAIN.md)，已执行结果见 [工具链验证记录](docs/verification/windows-toolchain-2026-09-19.md)。
 
 ## 产品目标
 
@@ -20,4 +31,3 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。
 
 美术可以沿用或重构。采用参考项目的代码、测试或素材时，应记录来源版本，并在本仓库独立验证；不复制 Unity 缓存、机器配置、凭据或旧项目的实时任务状态。
-Independent Godot reconstruction of the CozyTown playable town and four-resident AI Agent experiment demo.
