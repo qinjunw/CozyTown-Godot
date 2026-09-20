@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_slice_smoke",
+  "passed": true,
+  "scenario": "baseline",
+  "headless": false,
+  "mode": "rules",
+  "residents": 4,
+  "saveReloadVerified": true,
+  "pauseVerified": true,
+  "collisionVerified": true,
+  "runtimeAssemblyLocation": "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+  "screenshotStatus": "captured",
+  "screenshotPath": "<project-root>/artifacts/verification/20260920T115855Z-9ea21c1c/export-slice-1920.png",
+  "engine": "4.7.2-stable (official)",
+  "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+  "checks": [
+    {
+      "name": "node_rename_and_reorder_preserve_fingerprint",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reparent_preserving_global_transform_preserves_fingerprint",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "duplicate_scene_identity_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "missing_referenced_place_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unsupported_rotation_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unsupported_scale_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unregistered_world_collision_body_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "registered_obstacle_wrong_collision_layer_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "nonidentity_map_world_transform_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "moving_shop_updates_shared_geometry_and_fingerprint",
+      "passed": true,
+      "evidence": {
+        "from": {
+          "x": 542,
+          "y": 282
+        },
+        "to": {
+          "x": 550,
+          "y": 282
+        },
+        "footprintId": "building.shop"
+      }
+    },
+    {
+      "name": "shop_schedule_keeps_identity_and_uses_new_anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "moved_shop_matches_actual_godot_collision",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "mutation_checks_restore_original_content",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "resident_body_bindings",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "authoritative_places_clear_in_godot",
+      "passed": true,
+      "evidence": {
+        "count": 14
+      }
+    },
+    {
+      "name": "scene_obstacle_bodies",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "bench.plaza.east",
+          "blocked": true
+        },
+        {
+          "id": "bench.plaza.west",
+          "blocked": true
+        },
+        {
+          "id": "boundary.north",
+          "blocked": true
+        },
+        {
+          "id": "boundary.south",
+          "blocked": true
+        },
+        {
+          "id": "boundary.west",
+          "blocked": true
+        },
+        {
+          "id": "building.cafe",
+          "blocked": true
+        },
+        {
+          "id": "building.home.eli",
+          "blocked": true
+        },
+        {
+          "id": "building.home.mina",
+          "blocked": true
+        },
+        {
+          "id": "building.home.ren",
+          "blocked": true
+        },
+        {
+          "id": "building.home.sora",
+          "blocked": true
+        },
+        {
+          "id": "building.shop",
+          "blocked": true
+        },
+        {
+          "id": "landmark.farm",
+          "blocked": true
+        },
+        {
+          "id": "landmark.pond",
+          "blocked": true
+        },
+        {
+          "id": "tree.01",
+          "blocked": true
+        },
+        {
+          "id": "tree.02",
+          "blocked": true
+        },
+        {
+          "id": "tree.03",
+          "blocked": true
+        },
+        {
+          "id": "tree.04",
+          "blocked": true
+        },
+        {
+          "id": "tree.05",
+          "blocked": true
+        },
+        {
+          "id": "tree.06",
+          "blocked": true
+        },
+        {
+          "id": "tree.07",
+          "blocked": true
+        },
+        {
+          "id": "tree.08",
+          "blocked": true
+        },
+        {
+          "id": "tree.09",
+          "blocked": true
+        },
+        {
+          "id": "tree.10",
+          "blocked": true
+        },
+        {
+          "id": "tree.11",
+          "blocked": true
+        },
+        {
+          "id": "tree.12",
+          "blocked": true
+        },
+        {
+          "id": "tree.13",
+          "blocked": true
+        },
+        {
+          "id": "tree.14",
+          "blocked": true
+        },
+        {
+          "id": "tree.15",
+          "blocked": true
+        },
+        {
+          "id": "tree.16",
+          "blocked": true
+        },
+        {
+          "id": "tree.17",
+          "blocked": true
+        },
+        {
+          "id": "tree.18",
+          "blocked": true
+        },
+        {
+          "id": "tree.19",
+          "blocked": true
+        },
+        {
+          "id": "tree.20",
+          "blocked": true
+        },
+        {
+          "id": "tree.21",
+          "blocked": true
+        },
+        {
+          "id": "tree.22",
+          "blocked": true
+        },
+        {
+          "id": "tree.23",
+          "blocked": true
+        },
+        {
+          "id": "tree.24",
+          "blocked": true
+        },
+        {
+          "id": "tree.25",
+          "blocked": true
+        },
+        {
+          "id": "tree.26",
+          "blocked": true
+        },
+        {
+          "id": "tree.27",
+          "blocked": true
+        },
+        {
+          "id": "tree.28",
+          "blocked": true
+        },
+        {
+          "id": "tree.29",
+          "blocked": true
+        },
+        {
+          "id": "tree.30",
+          "blocked": true
+        },
+        {
+          "id": "tree.31",
+          "blocked": true
+        },
+        {
+          "id": "tree.32",
+          "blocked": true
+        },
+        {
+          "id": "water.canal.east",
+          "blocked": true
+        },
+        {
+          "id": "water.canal.west",
+          "blocked": true
+        },
+        {
+          "id": "water.river",
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "name": "player_collision_rejection",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "player_committed_movement",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "save_during_routes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "published_save_readable",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "save_belongs_to_current_branch",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "route_restore_preserves_positions_and_cursors",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "b8a5c97047f64004a0fd13b647426110",
+        "restoredBranch": "d45aa86ad7b241a18495bb582d94e648",
+        "journalRecordCount": 2
+      }
+    },
+    {
+      "name": "player_click_route_restored",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "player_click_route_continues",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "stacked_pause_keeps_world_frozen",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "resume_advances_world",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "social_state_continues_same_commitments",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_residents_moved_through_scene",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_independent_rule_decisions",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "ordinary_rules_created_social_activity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "assets_conserved",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "schedule_boundary_preempts_social_activity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "fault_restore_rebuilds_dispatch_and_preserves_other_pause",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "fault_restore_resumes_world",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshot": "<project-root>/artifacts/verification/20260920T115855Z-9ea21c1c/export-slice-1920.png",
+  "runDirectories": [
+    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\1920\\runs\\b8a5c97047f64004a0fd13b647426110",
+    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\1920\\runs\\d45aa86ad7b241a18495bb582d94e648",
+    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\1920\\runs\\1c8e4332641847f0b6ee38e91ddcc4be",
+    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\1920\\runs\\6a02f9f0a54b47cf9d27fc706e606e4d"
+  ],
+  "eventCount": 949,
+  "transfers": [
+    {
+      "sequence": 328,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 544.2500000000009,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "d45aa86ad7b241a18495bb582d94e648:meeting:2",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:9\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    },
+    {
+      "sequence": 347,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 544.450000000001,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "d45aa86ad7b241a18495bb582d94e648:meeting:2",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:12\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    },
+    {
+      "sequence": 368,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 544.650000000001,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "d45aa86ad7b241a18495bb582d94e648:meeting:2",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:15\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    },
+    {
+      "sequence": 406,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 544.9500000000011,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "1c8e4332641847f0b6ee38e91ddcc4be:meeting:4",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:20\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    },
+    {
+      "sequence": 425,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 545.1500000000011,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "1c8e4332641847f0b6ee38e91ddcc4be:meeting:4",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:23\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    },
+    {
+      "sequence": 444,
+      "branchId": "1c8e4332641847f0b6ee38e91ddcc4be",
+      "worldMinute": 545.3500000000012,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "1c8e4332641847f0b6ee38e91ddcc4be:meeting:4",
+      "dataJson": "{\r\n  \u0022transferId\u0022: \u00221c8e4332641847f0b6ee38e91ddcc4be:transfer:26\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+    }
+  ],
+  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore and pause behavior. Real-provider and user visual acceptance are separate."
+}

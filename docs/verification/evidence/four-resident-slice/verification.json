@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-09-20T11:58:55.5367624Z",
+  "passed": true,
+  "osVersion": "Microsoft Windows NT 10.0.26200.0",
+  "graphicalRequested": true,
+  "sourceCommit": "8ad692000abb2f8080d7dbca9e650b05df5e74fd",
+  "sourceDirty": false,
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "steps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.433
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.231
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.47
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.243
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 6.709
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.225
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 14.393
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.469
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.39
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.132
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.661
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.613
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.672
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.572
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.904
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.115
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 21.371
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.324
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.216
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.216
+    },
+    {
+      "name": "export-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.501
+    },
+    {
+      "name": "export-slice-baseline-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.933
+    }
+  ],
+  "error": null,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "coreTests": {
+    "total": 55,
+    "executed": 55,
+    "passed": 55,
+    "failed": 0,
+    "skipped": 0
+  },
+  "modelTests": {
+    "total": 45,
+    "executed": 45,
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostTests": {
+    "total": 39,
+    "executed": 39,
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0
+  },
+  "contentChecks": {
+    "baseline": {
+      "passed": true,
+      "fingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+      "inputDigest": "8a94ee8ee5ff2c9a92c689ebc81bd04346574f403722dd4f89edc05548e887b6",
+      "presentationDigest": "8795861f49d955fa83ab31faf42ec5e3dea2403bf6fe5effe9ab3d2b73cbec4c",
+      "places": 14,
+      "residents": 4
+    },
+    "counterfactual": {
+      "passed": true,
+      "fingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
+      "inputDigest": "8a94ee8ee5ff2c9a92c689ebc81bd04346574f403722dd4f89edc05548e887b6",
+      "presentationDigest": "8795861f49d955fa83ab31faf42ec5e3dea2403bf6fe5effe9ab3d2b73cbec4c",
+      "places": 14,
+      "residents": 4
+    }
+  },
+  "sliceChecks": {
+    "slice-baseline-headless": {
+      "passed": true,
+      "checks": 34,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+      "eventCount": 949
+    },
+    "slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 34,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
+      "eventCount": 955
+    },
+    "export-slice-baseline-headless": {
+      "passed": true,
+      "checks": 34,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+      "eventCount": 949
+    },
+    "export-slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 34,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
+      "eventCount": 955
+    },
+    "export-slice-baseline-graphical": {
+      "passed": true,
+      "checks": 34,
+      "scenario": "baseline",
+      "headless": false,
+      "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+      "eventCount": 949,
+      "screenshot": "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\export-slice-baseline-graphical.png"
+    }
+  },
+  "finishedAtUtc": "2026-09-20T12:00:40.1991440Z"
+}
