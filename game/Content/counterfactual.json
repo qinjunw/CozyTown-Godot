@@ -1,0 +1,6 @@
+{
+  "mina": { "berries": 4, "grain": 1, "fish": 0, "soup": 0 },
+  "eli": { "berries": 0, "grain": 0, "fish": 1, "soup": 4 },
+  "ren": { "berries": 1, "grain": 4, "fish": 0, "soup": 0 },
+  "sora": { "berries": 0, "grain": 0, "fish": 5, "soup": 0 }
+}

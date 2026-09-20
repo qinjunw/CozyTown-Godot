@@ -1,0 +1,1520 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://World/TownBackdrop.cs" id="1_backdrop"]
+[ext_resource type="Texture2D" path="res://Art/Props/prop_town_decor_16x32.png" id="tex_decor"]
+[ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_home_roofs_64.png" id="tex_house_roofs"]
+[ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_homes_64.png" id="tex_houses"]
+[ext_resource type="Texture2D" path="res://Art/Props/prop_town_lamp_16x32.png" id="tex_lamps"]
+[ext_resource type="Texture2D" path="res://Art/Props/prop_town_functions_96x64.png" id="tex_props"]
+[ext_resource type="Texture2D" path="res://Art/Buildings/bld_town_roof_foregrounds_64.png" id="tex_shop_roofs"]
+[ext_resource type="Texture2D" path="res://Art/Buildings/bld_town_functions_64.png" id="tex_shops"]
+
+[sub_resource type="RectangleShape2D" id="shape_bench"]
+size = Vector2(24, 8)
+
+[sub_resource type="RectangleShape2D" id="shape_building"]
+size = Vector2(56, 36)
+
+[sub_resource type="RectangleShape2D" id="shape_canal_left"]
+size = Vector2(26, 22)
+
+[sub_resource type="RectangleShape2D" id="shape_canal_right"]
+size = Vector2(34, 22)
+
+[sub_resource type="RectangleShape2D" id="shape_farm"]
+size = Vector2(86, 43)
+
+[sub_resource type="RectangleShape2D" id="shape_north"]
+size = Vector2(708, 12)
+
+[sub_resource type="RectangleShape2D" id="shape_outdoor"]
+size = Vector2(768, 512)
+
+[sub_resource type="RectangleShape2D" id="shape_pond"]
+size = Vector2(76, 40)
+
+[sub_resource type="RectangleShape2D" id="shape_river"]
+size = Vector2(60, 512)
+
+[sub_resource type="RectangleShape2D" id="shape_tree"]
+size = Vector2(6, 5)
+
+[sub_resource type="RectangleShape2D" id="shape_west"]
+size = Vector2(12, 512)
+
+[node name="TownMap" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_backdrop")
+metadata/width = 768
+metadata/height = 512
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="TownOutdoor" type="Area2D" parent="Regions"]
+position = Vector2(384, 256)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+metadata/role = "region"
+metadata/id = "town.outdoor"
+metadata/display_name = "榆树镇"
+
+[node name="Bounds" type="CollisionShape2D" parent="Regions/TownOutdoor"]
+shape = SubResource("shape_outdoor")
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="MinaHome" type="Node2D" parent="Buildings"]
+position = Vector2(168, 146)
+z_index = 146
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/MinaHome"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_houses")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/MinaHome"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_house_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/MinaHome"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.home.mina"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/MinaHome/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/MinaHome"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "home.mina"
+metadata/display_name = "Mina 的家"
+metadata/region_id = "town.outdoor"
+metadata/kind = "home"
+
+[node name="EliHome" type="Node2D" parent="Buildings"]
+position = Vector2(286, 146)
+z_index = 146
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/EliHome"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_houses")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/EliHome"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_house_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/EliHome"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.home.eli"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/EliHome/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/EliHome"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "home.eli"
+metadata/display_name = "Eli 的家"
+metadata/region_id = "town.outdoor"
+metadata/kind = "home"
+
+[node name="RenHome" type="Node2D" parent="Buildings"]
+position = Vector2(404, 146)
+z_index = 146
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/RenHome"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_houses")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/RenHome"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_house_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/RenHome"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.home.ren"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/RenHome/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/RenHome"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "home.ren"
+metadata/display_name = "Ren 的家"
+metadata/region_id = "town.outdoor"
+metadata/kind = "home"
+
+[node name="SoraHome" type="Node2D" parent="Buildings"]
+position = Vector2(522, 146)
+z_index = 146
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/SoraHome"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_houses")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/SoraHome"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_house_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/SoraHome"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.home.sora"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/SoraHome/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/SoraHome"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "home.sora"
+metadata/display_name = "Sora 的家"
+metadata/region_id = "town.outdoor"
+metadata/kind = "home"
+
+[node name="Shop" type="Node2D" parent="Buildings"]
+position = Vector2(536, 272)
+z_index = 272
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/Shop"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_shops")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/Shop"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_shop_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/Shop"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.shop"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/Shop/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/Shop"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "shop"
+metadata/display_name = "橡木杂货店"
+metadata/region_id = "town.outdoor"
+metadata/kind = "shop"
+
+[node name="Cafe" type="Node2D" parent="Buildings"]
+position = Vector2(404, 432)
+z_index = 432
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/Cafe"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_shops")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/Cafe"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_shop_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/Cafe"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.cafe"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/Cafe/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/Cafe"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "cafe"
+metadata/display_name = "暖炉小馆"
+metadata/region_id = "town.outdoor"
+metadata/kind = "cafe"
+
+[node name="Landmarks" type="Node2D" parent="."]
+
+[node name="Farm" type="Node2D" parent="Landmarks"]
+position = Vector2(122, 270)
+
+[node name="Surface" type="Sprite2D" parent="Landmarks/Farm"]
+position = Vector2(-48, -64)
+texture = ExtResource("tex_props")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Landmarks/Farm"]
+position = Vector2(0, -25)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "landmark.farm"
+
+[node name="Shape" type="CollisionShape2D" parent="Landmarks/Farm/Footprint"]
+shape = SubResource("shape_farm")
+
+[node name="Entrance" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(0, 8)
+metadata/role = "place"
+metadata/id = "farm"
+metadata/display_name = "西侧菜园"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm"
+
+[node name="Pond" type="Node2D" parent="Landmarks"]
+position = Vector2(658, 354)
+
+[node name="Surface" type="Sprite2D" parent="Landmarks/Pond"]
+position = Vector2(-48, -64)
+texture = ExtResource("tex_props")
+centered = false
+region_enabled = true
+region_rect = Rect2(96, 0, 96, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Landmarks/Pond"]
+position = Vector2(0, -24)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "landmark.pond"
+
+[node name="Shape" type="CollisionShape2D" parent="Landmarks/Pond/Footprint"]
+shape = SubResource("shape_pond")
+
+[node name="Entrance" type="Node2D" parent="Landmarks/Pond"]
+position = Vector2(0, 8)
+metadata/role = "place"
+metadata/id = "pond"
+metadata/display_name = "河岸池塘"
+metadata/region_id = "town.outdoor"
+metadata/kind = "pond"
+
+[node name="Places" type="Node2D" parent="."]
+
+[node name="Plaza" type="Node2D" parent="Places"]
+position = Vector2(354, 272)
+metadata/role = "place"
+metadata/id = "plaza"
+metadata/display_name = "榆树广场"
+metadata/region_id = "town.outdoor"
+metadata/kind = "plaza"
+
+[node name="PlazaWest" type="Node2D" parent="Places"]
+position = Vector2(306, 264)
+metadata/role = "place"
+metadata/id = "plaza.west"
+metadata/display_name = "榆树广场"
+metadata/region_id = "town.outdoor"
+metadata/kind = "plaza"
+
+[node name="PlazaNorth" type="Node2D" parent="Places"]
+position = Vector2(354, 238)
+metadata/role = "place"
+metadata/id = "plaza.north"
+metadata/display_name = "榆树广场"
+metadata/region_id = "town.outdoor"
+metadata/kind = "plaza"
+
+[node name="PlazaEast" type="Node2D" parent="Places"]
+position = Vector2(402, 264)
+metadata/role = "place"
+metadata/id = "plaza.east"
+metadata/display_name = "榆树广场"
+metadata/region_id = "town.outdoor"
+metadata/kind = "plaza"
+
+[node name="PlazaSouth" type="Node2D" parent="Places"]
+position = Vector2(354, 304)
+metadata/role = "place"
+metadata/id = "plaza.south"
+metadata/display_name = "榆树广场"
+metadata/region_id = "town.outdoor"
+metadata/kind = "plaza"
+
+[node name="PlayerSpawn" type="Node2D" parent="Places"]
+position = Vector2(330, 332)
+metadata/role = "place"
+metadata/id = "player.spawn"
+metadata/display_name = "广场南路"
+metadata/region_id = "town.outdoor"
+metadata/kind = "spawn"
+
+[node name="Roads" type="Node2D" parent="."]
+
+[node name="MinaLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 190, 174, 190, 174, 156)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.minalane"
+metadata/from_id = "plaza"
+metadata/to_id = "home.mina"
+
+[node name="EliLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 190, 292, 190, 292, 156)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.elilane"
+metadata/from_id = "plaza"
+metadata/to_id = "home.eli"
+
+[node name="RenLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 190, 410, 190, 410, 156)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.renlane"
+metadata/from_id = "plaza"
+metadata/to_id = "home.ren"
+
+[node name="SoraLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 190, 528, 190, 528, 156)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.soralane"
+metadata/from_id = "plaza"
+metadata/to_id = "home.sora"
+
+[node name="GardenLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 220, 272, 220, 278, 122, 278)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.gardenlane"
+metadata/from_id = "plaza"
+metadata/to_id = "farm"
+
+[node name="MarketLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 460, 272, 460, 282, 542, 282)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.marketlane"
+metadata/from_id = "plaza"
+metadata/to_id = "shop"
+
+[node name="PondLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(542, 282, 598, 282, 598, 362, 658, 362)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.pondlane"
+metadata/from_id = "shop"
+metadata/to_id = "pond"
+
+[node name="CafeLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 442, 410, 442)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.cafelane"
+metadata/from_id = "plaza"
+metadata/to_id = "cafe"
+
+[node name="BridgeLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(658, 362, 658, 414, 490, 414, 490, 442, 410, 442)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.bridgelane"
+metadata/from_id = "pond"
+metadata/to_id = "cafe"
+
+[node name="ArrivalLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(330, 332, 330, 304, 354, 304)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.arrivallane"
+metadata/from_id = "player.spawn"
+metadata/to_id = "plaza.south"
+
+[node name="PlazaWestLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 306, 272, 306, 264)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.plazawestlane"
+metadata/from_id = "plaza"
+metadata/to_id = "plaza.west"
+
+[node name="PlazaNorthLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 238)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.plazanorthlane"
+metadata/from_id = "plaza"
+metadata/to_id = "plaza.north"
+
+[node name="PlazaEastLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 402, 272, 402, 264)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.plazaeastlane"
+metadata/from_id = "plaza"
+metadata/to_id = "plaza.east"
+
+[node name="PlazaSouthLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(354, 272, 354, 304)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.plazasouthlane"
+metadata/from_id = "plaza"
+metadata/to_id = "plaza.south"
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="WestEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(6, 256)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "boundary.west"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/WestEdge"]
+shape = SubResource("shape_west")
+
+[node name="NorthEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(354, 6)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "boundary.north"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/NorthEdge"]
+shape = SubResource("shape_north")
+
+[node name="SouthEdge" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(354, 506)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "boundary.south"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/SouthEdge"]
+shape = SubResource("shape_north")
+
+[node name="River" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(738, 256)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "water.river"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/River"]
+shape = SubResource("shape_river")
+
+[node name="CanalWest" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(633, 381)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "water.canal.west"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/CanalWest"]
+shape = SubResource("shape_canal_left")
+
+[node name="CanalEast" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(691, 381)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "water.canal.east"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/CanalEast"]
+shape = SubResource("shape_canal_right")
+
+[node name="PlazaBenchWest" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(311, 333)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "bench.plaza.west"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/PlazaBenchWest"]
+shape = SubResource("shape_bench")
+
+[node name="PlazaBenchEast" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(397, 333)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "bench.plaza.east"
+
+[node name="Shape" type="CollisionShape2D" parent="Boundaries/PlazaBenchEast"]
+shape = SubResource("shape_bench")
+
+[node name="Scenery" type="Node2D" parent="."]
+
+[node name="Tree01" type="Node2D" parent="Scenery"]
+position = Vector2(42, 81)
+z_index = 81
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree01"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree01"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.01"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree01/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree02" type="Node2D" parent="Scenery"]
+position = Vector2(63, 69)
+z_index = 69
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree02"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree02"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.02"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree02/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree03" type="Node2D" parent="Scenery"]
+position = Vector2(79, 88)
+z_index = 88
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree03"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree03"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.03"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree03/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree04" type="Node2D" parent="Scenery"]
+position = Vector2(102, 67)
+z_index = 67
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree04"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree04"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.04"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree04/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree05" type="Node2D" parent="Scenery"]
+position = Vector2(128, 73)
+z_index = 73
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree05"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree05"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.05"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree05/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree06" type="Node2D" parent="Scenery"]
+position = Vector2(211, 74)
+z_index = 74
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree06"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree06"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.06"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree06/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree07" type="Node2D" parent="Scenery"]
+position = Vector2(236, 62)
+z_index = 62
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree07"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree07"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.07"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree07/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree08" type="Node2D" parent="Scenery"]
+position = Vector2(334, 77)
+z_index = 77
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree08"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree08"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.08"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree08/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree09" type="Node2D" parent="Scenery"]
+position = Vector2(352, 66)
+z_index = 66
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree09"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree09"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.09"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree09/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree10" type="Node2D" parent="Scenery"]
+position = Vector2(452, 70)
+z_index = 70
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree10"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree10"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.10"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree10/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree11" type="Node2D" parent="Scenery"]
+position = Vector2(563, 73)
+z_index = 73
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree11"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree11"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.11"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree11/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree12" type="Node2D" parent="Scenery"]
+position = Vector2(588, 86)
+z_index = 86
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree12"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree12"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.12"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree12/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree13" type="Node2D" parent="Scenery"]
+position = Vector2(618, 72)
+z_index = 72
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree13"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree13"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.13"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree13/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree14" type="Node2D" parent="Scenery"]
+position = Vector2(647, 87)
+z_index = 87
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree14"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree14"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.14"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree14/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree15" type="Node2D" parent="Scenery"]
+position = Vector2(678, 63)
+z_index = 63
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree15"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree15"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.15"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree15/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree16" type="Node2D" parent="Scenery"]
+position = Vector2(55, 163)
+z_index = 163
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree16"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree16"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.16"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree16/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree17" type="Node2D" parent="Scenery"]
+position = Vector2(40, 181)
+z_index = 181
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree17"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree17"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.17"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree17/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree18" type="Node2D" parent="Scenery"]
+position = Vector2(65, 197)
+z_index = 197
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree18"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree18"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.18"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree18/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree19" type="Node2D" parent="Scenery"]
+position = Vector2(53, 350)
+z_index = 350
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree19"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree19"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.19"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree19/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree20" type="Node2D" parent="Scenery"]
+position = Vector2(36, 370)
+z_index = 370
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree20"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree20"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.20"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree20/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree21" type="Node2D" parent="Scenery"]
+position = Vector2(66, 385)
+z_index = 385
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree21"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree21"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.21"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree21/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree22" type="Node2D" parent="Scenery"]
+position = Vector2(99, 438)
+z_index = 438
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree22"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree22"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.22"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree22/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree23" type="Node2D" parent="Scenery"]
+position = Vector2(120, 459)
+z_index = 459
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree23"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree23"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.23"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree23/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree24" type="Node2D" parent="Scenery"]
+position = Vector2(140, 443)
+z_index = 443
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree24"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree24"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.24"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree24/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree25" type="Node2D" parent="Scenery"]
+position = Vector2(205, 467)
+z_index = 467
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree25"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree25"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.25"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree25/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree26" type="Node2D" parent="Scenery"]
+position = Vector2(237, 448)
+z_index = 448
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree26"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree26"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.26"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree26/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree27" type="Node2D" parent="Scenery"]
+position = Vector2(291, 472)
+z_index = 472
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree27"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree27"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.27"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree27/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree28" type="Node2D" parent="Scenery"]
+position = Vector2(530, 464)
+z_index = 464
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree28"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree28"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.28"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree28/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree29" type="Node2D" parent="Scenery"]
+position = Vector2(554, 480)
+z_index = 480
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree29"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree29"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.29"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree29/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree30" type="Node2D" parent="Scenery"]
+position = Vector2(592, 464)
+z_index = 464
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree30"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree30"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.30"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree30/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree31" type="Node2D" parent="Scenery"]
+position = Vector2(670, 460)
+z_index = 460
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree31"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree31"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.31"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree31/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Tree32" type="Node2D" parent="Scenery"]
+position = Vector2(681, 484)
+z_index = 484
+
+[node name="Crown" type="Sprite2D" parent="Scenery/Tree32"]
+position = Vector2(-8, -32)
+texture = ExtResource("tex_decor")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Trunk" type="StaticBody2D" parent="Scenery/Tree32"]
+position = Vector2(0, -2)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "tree.32"
+
+[node name="Shape" type="CollisionShape2D" parent="Scenery/Tree32/Trunk"]
+shape = SubResource("shape_tree")
+
+[node name="Lamp1" type="Sprite2D" parent="Scenery"]
+position = Vector2(269, 216)
+z_index = 216
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp2" type="Sprite2D" parent="Scenery"]
+position = Vector2(440, 216)
+z_index = 216
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp3" type="Sprite2D" parent="Scenery"]
+position = Vector2(269, 326)
+z_index = 326
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp4" type="Sprite2D" parent="Scenery"]
+position = Vector2(440, 326)
+z_index = 326
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp5" type="Sprite2D" parent="Scenery"]
+position = Vector2(578, 290)
+z_index = 290
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp6" type="Sprite2D" parent="Scenery"]
+position = Vector2(178, 285)
+z_index = 285
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp7" type="Sprite2D" parent="Scenery"]
+position = Vector2(438, 444)
+z_index = 444
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Lamp8" type="Sprite2D" parent="Scenery"]
+position = Vector2(680, 363)
+z_index = 363
+texture = ExtResource("tex_lamps")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Fence1" type="Sprite2D" parent="Scenery"]
+position = Vector2(128, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence2" type="Sprite2D" parent="Scenery"]
+position = Vector2(144, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence3" type="Sprite2D" parent="Scenery"]
+position = Vector2(202, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence4" type="Sprite2D" parent="Scenery"]
+position = Vector2(218, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence5" type="Sprite2D" parent="Scenery"]
+position = Vector2(246, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence6" type="Sprite2D" parent="Scenery"]
+position = Vector2(262, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence7" type="Sprite2D" parent="Scenery"]
+position = Vector2(320, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence8" type="Sprite2D" parent="Scenery"]
+position = Vector2(336, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence9" type="Sprite2D" parent="Scenery"]
+position = Vector2(364, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence10" type="Sprite2D" parent="Scenery"]
+position = Vector2(380, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence11" type="Sprite2D" parent="Scenery"]
+position = Vector2(438, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence12" type="Sprite2D" parent="Scenery"]
+position = Vector2(454, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence13" type="Sprite2D" parent="Scenery"]
+position = Vector2(482, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence14" type="Sprite2D" parent="Scenery"]
+position = Vector2(498, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence15" type="Sprite2D" parent="Scenery"]
+position = Vector2(556, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence16" type="Sprite2D" parent="Scenery"]
+position = Vector2(572, 161)
+z_index = 161
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence17" type="Sprite2D" parent="Scenery"]
+position = Vector2(82, 282)
+z_index = 282
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence18" type="Sprite2D" parent="Scenery"]
+position = Vector2(98, 282)
+z_index = 282
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence19" type="Sprite2D" parent="Scenery"]
+position = Vector2(146, 282)
+z_index = 282
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence20" type="Sprite2D" parent="Scenery"]
+position = Vector2(162, 282)
+z_index = 282
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence21" type="Sprite2D" parent="Scenery"]
+position = Vector2(370, 446)
+z_index = 446
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="Fence22" type="Sprite2D" parent="Scenery"]
+position = Vector2(450, 446)
+z_index = 446
+texture = ExtResource("tex_decor")
+offset = Vector2(0, -16)
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)

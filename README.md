@@ -4,7 +4,7 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 技术方向已确认采用 Godot .NET 与独立 C# 核心。首版使用自己的存档，不要求读取 Unity 旧档。原 [CozyTown](https://github.com/qinjunw/CozyTown) 继续独立开发，供本项目参考行为、测试和素材；两个仓库不自动同步，也不互相作为构建依赖。
 
-当前包含可构建的 Godot .NET 诊断场景、独立 C# 核心探针与 Windows 验证脚本。诊断场景检查按钮调用、JSON 写盘恢复及继续运行；完整小镇玩法与四人 Agent Demo 尚待实现。
+当前默认入口为四人小镇切片：玩家移动、观察和交谈，居民独立决定邀请、回应、赴约及资源交换，支持日程、暂停、完整逻辑存档和运行记录导出。真实模型通过独立 C# 适配器接入；默认启动采用规则模式。操作与配置见[切片使用说明](docs/PLAYABLE_SLICE.md)，实际通过项及待验收项见[验证记录](docs/verification/four-resident-slice.md)。
 
 ## 构建与运行
 
@@ -26,13 +26,13 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 完整范围见 [产品目标与验收基线](docs/PRODUCT_BASELINE.md)，领域词汇见 [CONTEXT.md](CONTEXT.md)。
 
-下一份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动：独立规则与真实模型共同决策，世界日程优先，首切片画面达到可对外演示的完成度。该范围已确定，场景与居民功能仍待实现。
+首份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动，世界日程优先，并要求对外演示画面完成度。玩家生产生活循环仍由后续切片交付。
 
-内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；字段归属与待实现的一致性检查见[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
+内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 
-保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。待实现的状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。
+保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)；完整回放执行器尚未交付。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。场景中的模型决策路径仍待实现。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
 

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <StartupObject>CozyTown.Model.Tests.Program</StartupObject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="NUnit" Version="4.4.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+    <ProjectReference Include="../../src/CozyTown.Model/CozyTown.Model.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../docs/verification/evidence/real-model-probe-2026-09-20/report.json" Link="Fixtures/probe-report.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

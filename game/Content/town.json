@@ -1,0 +1,59 @@
+{
+  "startMinute": 540,
+  "resources": [
+    { "id": "berries", "displayName": "浆果" },
+    { "id": "grain", "displayName": "麦粒" },
+    { "id": "fish", "displayName": "鲜鱼" },
+    { "id": "soup", "displayName": "热汤" }
+  ],
+  "residents": [
+    {
+      "id": "mina", "displayName": "米娜", "homePlaceId": "home.mina", "spawnPlaceId": "home.mina",
+      "desiredResourceId": "fish", "inventory": { "berries": 4, "grain": 1, "fish": 0, "soup": 0 }, "coins": 12,
+      "personality": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+      "schedule": [
+        { "id": "mina.home", "startMinute": 0, "endMinute": 540, "placeId": "home.mina", "activity": "在家休息", "isFree": false },
+        { "id": "mina.morning", "startMinute": 540, "endMinute": 660, "placeId": "plaza.west", "activity": "广场闲逛", "isFree": true },
+        { "id": "mina.work", "startMinute": 660, "endMinute": 720, "placeId": "shop", "activity": "照看杂货铺", "isFree": false },
+        { "id": "mina.noon", "startMinute": 720, "endMinute": 840, "placeId": "plaza.west", "activity": "午间散步", "isFree": true },
+        { "id": "mina.evening", "startMinute": 840, "endMinute": 1440, "placeId": "home.mina", "activity": "在家整理货物", "isFree": false }
+      ]
+    },
+    {
+      "id": "eli", "displayName": "艾里", "homePlaceId": "home.eli", "spawnPlaceId": "home.eli",
+      "desiredResourceId": "berries", "inventory": { "berries": 0, "grain": 4, "fish": 1, "soup": 0 }, "coins": 12,
+      "personality": "照看麦田，耐心随和。想找些浆果，愿意分享多余麦粒；工作时间会回农场。",
+      "schedule": [
+        { "id": "eli.home", "startMinute": 0, "endMinute": 540, "placeId": "home.eli", "activity": "在家休息", "isFree": false },
+        { "id": "eli.morning", "startMinute": 540, "endMinute": 660, "placeId": "plaza.north", "activity": "广场闲逛", "isFree": true },
+        { "id": "eli.work", "startMinute": 660, "endMinute": 720, "placeId": "farm", "activity": "照看麦田", "isFree": false },
+        { "id": "eli.noon", "startMinute": 720, "endMinute": 840, "placeId": "plaza.north", "activity": "午间散步", "isFree": true },
+        { "id": "eli.evening", "startMinute": 840, "endMinute": 1440, "placeId": "home.eli", "activity": "在家休息", "isFree": false }
+      ]
+    },
+    {
+      "id": "ren", "displayName": "阿仁", "homePlaceId": "home.ren", "spawnPlaceId": "home.ren",
+      "desiredResourceId": "soup", "inventory": { "berries": 1, "grain": 0, "fish": 4, "soup": 0 }, "coins": 12,
+      "personality": "喜欢钓鱼，话不多但愿意帮忙。想喝一碗热汤，愿意分享多余鲜鱼；可拒绝不合适的邀请。",
+      "schedule": [
+        { "id": "ren.home", "startMinute": 0, "endMinute": 540, "placeId": "home.ren", "activity": "在家休息", "isFree": false },
+        { "id": "ren.morning", "startMinute": 540, "endMinute": 660, "placeId": "plaza.east", "activity": "广场闲逛", "isFree": true },
+        { "id": "ren.work", "startMinute": 660, "endMinute": 720, "placeId": "pond", "activity": "在池边钓鱼", "isFree": false },
+        { "id": "ren.noon", "startMinute": 720, "endMinute": 840, "placeId": "plaza.east", "activity": "午间散步", "isFree": true },
+        { "id": "ren.evening", "startMinute": 840, "endMinute": 1440, "placeId": "home.ren", "activity": "在家休息", "isFree": false }
+      ]
+    },
+    {
+      "id": "sora", "displayName": "小空", "homePlaceId": "home.sora", "spawnPlaceId": "home.sora",
+      "desiredResourceId": "grain", "inventory": { "berries": 0, "grain": 0, "fish": 1, "soup": 4 }, "coins": 12,
+      "personality": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+      "schedule": [
+        { "id": "sora.home", "startMinute": 0, "endMinute": 540, "placeId": "home.sora", "activity": "在家休息", "isFree": false },
+        { "id": "sora.morning", "startMinute": 540, "endMinute": 660, "placeId": "plaza.south", "activity": "广场闲逛", "isFree": true },
+        { "id": "sora.work", "startMinute": 660, "endMinute": 720, "placeId": "cafe", "activity": "在小馆备餐", "isFree": false },
+        { "id": "sora.noon", "startMinute": 720, "endMinute": 840, "placeId": "plaza.south", "activity": "午间散步", "isFree": true },
+        { "id": "sora.evening", "startMinute": 840, "endMinute": 1440, "placeId": "home.sora", "activity": "在家休息", "isFree": false }
+      ]
+    }
+  ]
+}

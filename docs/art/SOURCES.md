@@ -1,0 +1,62 @@
+# 首切片美术来源与图集布局
+
+本批于 2026-09-20 从 CozyTown Unity 参考项目复制 14 张生产 PNG 到 `game/Art/`。文件逐字节复制，未重新采样、改色或修改 Alpha；Unity 的 `.meta`、场景和编译器没有成为 Godot 运行依赖。
+
+## 来源与使用记录
+
+固定来源为 [CozyTown `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`](https://github.com/qinjunw/CozyTown/tree/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa)。下表的“固定提交”通过该提交的 Git LFS `oid sha256` 与实际 PNG 校验；“工作区”是参考项目中尚未提交的文件，以表内 SHA-256 固定本次输入。所有源路径均为 `Assets/CozyTown/Art/Production/` 加上表内路径，目标路径为 `game/Art/` 加上相同路径。
+
+源项目的 [ArtSource 说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/README.md)记载生成式源稿和原生像素编译流程。[T1 生成记录](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Generated/T1/GENERATION_LOG.md)记载四位居民与住宅源图由项目使用内置图像生成工具制作；[路灯说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Authored/L1/README.md)记载路灯直接使用原生像素源制作。所选目录及项目已跟踪文件中未发现单独的素材许可证。此次沿用用户已授权复用的项目素材，不为其添加或声明新的开源许可证。
+
+| 路径 | 来源 | SHA-256 |
+| --- | --- | --- |
+| `Buildings/bld_npc_home_roofs_64.png` | 固定提交 | `54c6173924a0478c47b25436282100f886d9fdbb286f07031c28fb9a3a16aefa` |
+| `Buildings/bld_npc_homes_64.png` | 固定提交 | `63b81137179751dff62d68fc495eef986581209d36ebd5cf7d1d57b0ac2ac3fe` |
+| `Buildings/bld_town_functions_64.png` | 固定提交 | `2ef6211c75467296a8900b379f08f41f325721126d96b3fc209b5eccb9c8ee27` |
+| `Buildings/bld_town_roof_foregrounds_64.png` | 固定提交 | `40b45ed71f6bd6207e9397602c308310fa03b3e4c84caed33128a9b955ceacd2` |
+| `Characters/chr_player_move_24x32.png` | 工作区 | `d6b3ba948f8c064cc69e78ca39e0f293d00ebab20c3404ca2b425f4fc8774842` |
+| `Characters/npc_cook_sora_move_24x32.png` | 固定提交 | `9570ac27bb637049bd01ceafb37d85cf051477a41687ebe9d5f49bfb33cceabe` |
+| `Characters/npc_farmer_eli_move_24x32.png` | 固定提交 | `cbd93d9f142960260de4a47fec443ccbc29f1d0cea361d7709fb1b8980b6c979` |
+| `Characters/npc_fisher_ren_move_24x32.png` | 固定提交 | `4056d3000324b3c6d9c53fac96309b8b4e9bbbb4b9821306110a4c8a1239bf66` |
+| `Characters/npc_portraits_48.png` | 工作区 | `f6fb5d304a408132fffb06640b021ace680639b5b9c740cc6236fc7052dc4ebc` |
+| `Characters/npc_shopkeeper_mina_move_24x32.png` | 固定提交 | `461cb20d95fe3852f7cf093da53d474c5bccbeb83d4b7c82492ac8d6d30892b2` |
+| `Environment/Tiles/tile_town_base_16.png` | 工作区 | `edb51bdfd03c89b6f2ce10d71b08fdda2387b5b5a00e9c30253d101a7a64a3b6` |
+| `Props/prop_town_decor_16x32.png` | 工作区 | `1cc9202e4f8cd70dfbd4ecfead43133c3784d2361a4cfacf563707789954d844` |
+| `Props/prop_town_functions_96x64.png` | 固定提交 | `87ca3014a699cf597cdfa76a48087cd623ecb56701e44b3b5c602dc0b4c9f2f8` |
+| `Props/prop_town_lamp_16x32.png` | 固定提交 | `53ab31dd4073eda9676ac249656b1120d9d14953c4a31fff7b0c0902d3e9d5cd` |
+
+工作区更新的说明保留在参考项目，下面的哈希标识本次读取的记录；这些文件没有被误写为固定提交的内容。
+
+| 参考项目内路径 | 记录内容 | SHA-256 |
+| --- | --- | --- |
+| `ArtSource/Generated/A2/PROMPTS.md` | 地表材质生成输入 | `ca5a27eb83e67983ba7f00ab2d3289d31455f4dbe9ae3d3dc385e56bf9c8c0de` |
+| `ArtSource/Authored/A2/Characters/README.md` | 主角步行修复、头像清理与人物细节恢复 | `a1657802545b6f91ada3026ba941a4a4356c0b7cde27c74333f32787c5d3f4a8` |
+| `ArtSource/Authored/A2/Decor/README.md` | 独立绘制装饰单元，清理跨格残片 | `ede604d081baf7d34cddd5c11e5a14f65f63a1170d50ef0b6de9984f794cd915` |
+| `docs/audits/characters-2026-09-10/detail-restore/README.md` | 恢复人物细节的范围与参考项目验证 | `cc03d628f57eab8cc1feabca956e016344cf9e30749e18f6fcd42cae5dfc1761` |
+
+## 切片与显示
+
+下列行列均从 PNG 左上角开始，列向右、行向下。源矩形为 `(列 × 单元宽, 行 × 单元高, 单元宽, 单元高)`，不要采用 Unity 的底部原点换算。
+
+| 图集 | 画布 | 单元与顺序 |
+| --- | --- | --- |
+| 玩家及四位居民的 `*_move_24x32.png` | 72×128 | 24×32，3 列为 idle、walk00、walk01；4 行为 down、left、right、up |
+| `npc_portraits_48.png` | 192×48 | 48×48，从左到右 Mina、Eli、Ren、Sora |
+| `bld_npc_homes_64.png` 及匹配屋顶 | 128×128 | 64×64，按行依次 Mina、Ren、Sora、Eli；与头像顺序不同 |
+| `bld_town_functions_64.png` 及匹配屋顶 | 128×128 | 64×64，按行依次 shop、player home、kitchen/cafe、coop |
+| `prop_town_functions_96x64.png` | 192×64 | 96×64，左为农田底图，右为池塘 |
+| `prop_town_decor_16x32.png` | 64×64 | 16×32，上行树、灌木、红花、黄花；下行横篱笆、竖篱笆、路牌、石头 |
+| `prop_town_lamp_16x32.png` | 32×32 | 16×32，左灯柱、右发光玻璃叠层；共用完整画布 |
+| `tile_town_base_16.png` | 64×80 | 16×16，上行为 4 个草地变体；其余 4 行为道路连接片 |
+
+道路格从第二行开始：孤立、东西、南北、十字；东北角、东南角、西南角、西北角；缺南、缺西、缺北、缺东的三叉；朝北、朝东、朝南、朝西的端点。每条接通边的道路只占格内第 5～10 像素，逻辑路宽不应直接从整个透明/背景单元推断。
+
+Mina 使用棕发与棕围裙，Eli 使用草帽与绿袖，Ren 使用蓝帽与蓝衣，Sora 使用白厨师帽与橙发。角色以脚底中心定位，绘制矩形相对脚底为 `(-12,-32,24,32)`。住宅与屋顶共用 `(-32,-64,64,64)`；屋顶图集底部 38 行透明，不能独立裁边后重新居中。
+
+纹理采用最近邻过滤，不生成 Mipmap。地图采用 16 像素格、768×512 原生世界；人物、建筑和地面保持相同像素密度。建议相机以整数比例显示，UI 保持独立字号。世界角色与建筑按脚底纵坐标排序，角色阴影位于脚底；碰撞取实体底部范围，而不是整张图片的矩形。
+
+## 字体与验证边界
+
+参考项目没有随项目提供的 `.ttf`、`.otf` 或 `.ttc` 字体。其 UI 代码读取 Unity 内置 `LegacyRuntime.ttf`，本批未复制该引擎字体。Windows 宿主另行配置中文系统字体并核验实际文本渲染。
+
+复制时核对了全部 14 张图片的源/目标 SHA-256、画布尺寸、Alpha 和不透明色数：地表全部不透明，其余 Alpha 仅为 0/255；单图不透明颜色最多 29 种。检查了地表、功能建筑、住宅、五人动作、头像、装饰、池塘及路灯的现有整数倍预览。此记录证明输入与复制一致，不替代 Godot 导入、行走动画、遮挡关系或最终演示画面的验收。

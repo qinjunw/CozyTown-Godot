@@ -1,0 +1,4 @@
+{
+  "credentialFile": "<absolute-path-to-credential-json>",
+  "ledgerFile": "<absolute-path-to-existing-budget-ledger>"
+}
