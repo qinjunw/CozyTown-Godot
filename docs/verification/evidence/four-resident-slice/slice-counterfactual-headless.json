@@ -329,8 +329,8 @@
       "name": "route_restore_preserves_positions_and_cursors",
       "passed": true,
       "evidence": {
-        "sourceBranch": "d69b9a61f9684dc289b0068bfa35d287",
-        "restoredBranch": "bac380b8c71c4b67b6bc2d8c5961f2af",
+        "sourceBranch": "20479c1a7851471cbf3b0198b0ff74c5",
+        "restoredBranch": "4e59f97b10144a6bab982f1a992ff452",
         "journalRecordCount": 2
       }
     },
@@ -380,6 +380,36 @@
       "evidence": null
     },
     {
+      "name": "logical_tab_shortcut_ignores_mismatched_physical_code",
+      "passed": true,
+      "evidence": {
+        "logicalKeycode": 4194306,
+        "physicalKeycode": 4194313,
+        "injection": "Godot.Input.ParseInputEvent"
+      }
+    },
+    {
+      "name": "logical_f5_shortcut_saves_current_branch",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "a8eec40e541e47b09bbb2046e1ae4d69",
+        "savedBranch": "a8eec40e541e47b09bbb2046e1ae4d69"
+      }
+    },
+    {
+      "name": "logical_f9_shortcut_restores_saved_state",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_e_shortcut_opens_nearby_dialogue",
+      "passed": true,
+      "evidence": {
+        "injection": "Godot.Input.ParseInputEvent",
+        "publicConversationCount": 1
+      }
+    },
+    {
       "name": "schedule_boundary_preempts_social_activity",
       "passed": true,
       "evidence": null
@@ -397,85 +427,86 @@
   ],
   "screenshot": null,
   "runDirectories": [
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\slice-counterfactual-headless\\runs\\d69b9a61f9684dc289b0068bfa35d287",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\slice-counterfactual-headless\\runs\\bac380b8c71c4b67b6bc2d8c5961f2af",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\slice-counterfactual-headless\\runs\\4fcbe09214f646158fa1de644d8170df",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\slice-counterfactual-headless\\runs\\dc03634c500245388dbe1e47c6caea89"
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\slice-counterfactual-headless\\runs\\20479c1a7851471cbf3b0198b0ff74c5",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\slice-counterfactual-headless\\runs\\4e59f97b10144a6bab982f1a992ff452",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\slice-counterfactual-headless\\runs\\a8eec40e541e47b09bbb2046e1ae4d69",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\slice-counterfactual-headless\\runs\\b66b53b01923467b8f6c04a3c1494c7f",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\slice-counterfactual-headless\\runs\\dabf64d642cd4f9d9c0a23198af347c9"
   ],
-  "eventCount": 955,
+  "eventCount": 1089,
   "transfers": [
     {
       "sequence": 332,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 544.2500000000009,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bac380b8c71c4b67b6bc2d8c5961f2af:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:10\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4e59f97b10144a6bab982f1a992ff452:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:10\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 351,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 544.450000000001,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bac380b8c71c4b67b6bc2d8c5961f2af:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:13\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4e59f97b10144a6bab982f1a992ff452:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:13\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 370,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 544.650000000001,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bac380b8c71c4b67b6bc2d8c5961f2af:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:16\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4e59f97b10144a6bab982f1a992ff452:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:16\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 415,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 545.0500000000011,
       "kind": "resource_transferred",
       "residentId": "sora",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "4fcbe09214f646158fa1de644d8170df:meeting:6",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:21\u0022,\r\n  \u0022from\u0022: \u0022ren\u0022,\r\n  \u0022to\u0022: \u0022sora\u0022,\r\n  \u0022offerResourceId\u0022: \u0022grain\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "a8eec40e541e47b09bbb2046e1ae4d69:meeting:6",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:21\",\r\n  \"from\": \"ren\",\r\n  \"to\": \"sora\",\r\n  \"offerResourceId\": \"grain\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 434,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 545.2500000000011,
       "kind": "resource_transferred",
       "residentId": "sora",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "4fcbe09214f646158fa1de644d8170df:meeting:6",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:24\u0022,\r\n  \u0022from\u0022: \u0022ren\u0022,\r\n  \u0022to\u0022: \u0022sora\u0022,\r\n  \u0022offerResourceId\u0022: \u0022grain\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "a8eec40e541e47b09bbb2046e1ae4d69:meeting:6",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:24\",\r\n  \"from\": \"ren\",\r\n  \"to\": \"sora\",\r\n  \"offerResourceId\": \"grain\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 453,
-      "branchId": "4fcbe09214f646158fa1de644d8170df",
+      "branchId": "a8eec40e541e47b09bbb2046e1ae4d69",
       "worldMinute": 545.4500000000012,
       "kind": "resource_transferred",
       "residentId": "sora",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "4fcbe09214f646158fa1de644d8170df:meeting:6",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00224fcbe09214f646158fa1de644d8170df:transfer:27\u0022,\r\n  \u0022from\u0022: \u0022ren\u0022,\r\n  \u0022to\u0022: \u0022sora\u0022,\r\n  \u0022offerResourceId\u0022: \u0022grain\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "a8eec40e541e47b09bbb2046e1ae4d69:meeting:6",
+      "dataJson": "{\r\n  \"transferId\": \"a8eec40e541e47b09bbb2046e1ae4d69:transfer:27\",\r\n  \"from\": \"ren\",\r\n  \"to\": \"sora\",\r\n  \"offerResourceId\": \"grain\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     }
   ],
-  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore and pause behavior. Real-provider and user visual acceptance are separate."
+  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore, pause behavior and synthetic Godot key-event routing. OS keyboard injection, real-provider and user visual acceptance are separate."
 }

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "startedAtUtc": "2026-09-20T11:58:55.5367624Z",
+  "startedAtUtc": "2026-09-20T14:12:39.2702793Z",
   "passed": true,
   "osVersion": "Microsoft Windows NT 10.0.26200.0",
   "graphicalRequested": true,
-  "sourceCommit": "8ad692000abb2f8080d7dbca9e650b05df5e74fd",
+  "sourceCommit": "41dc79d13dd72604c4e695b25d20789cfe26c0e4",
   "sourceDirty": false,
   "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
   "steps": [
@@ -12,133 +12,133 @@
       "name": "dotnet-version",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 0.433
+      "seconds": 0.353
     },
     {
       "name": "godot-version",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 0.231
+      "seconds": 0.176
     },
     {
       "name": "restore-host",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 3.47
+      "seconds": 2.422
     },
     {
       "name": "restore-core-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 2.243
+      "seconds": 1.629
     },
     {
       "name": "core-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 6.709
+      "seconds": 5.23
     },
     {
       "name": "restore-model-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 2.225
+      "seconds": 1.53
     },
     {
       "name": "model-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 14.393
+      "seconds": 13.123
     },
     {
       "name": "restore-host-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 2.469
+      "seconds": 1.805
     },
     {
       "name": "host-tests",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 9.39
+      "seconds": 7.144
     },
     {
       "name": "import",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 9.132
+      "seconds": 8.286
     },
     {
       "name": "build-host",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 4.661
+      "seconds": 3.789
     },
     {
       "name": "scene-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 1.613
+      "seconds": 1.18
     },
     {
       "name": "content-baseline",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 1.672
+      "seconds": 1.094
     },
     {
       "name": "content-counterfactual",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 1.572
+      "seconds": 1.098
     },
     {
       "name": "slice-baseline-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 3.904
+      "seconds": 3.332
     },
     {
       "name": "slice-counterfactual-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 4.115
+      "seconds": 3.451
     },
     {
       "name": "export-windows",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 21.371
+      "seconds": 15.407
     },
     {
       "name": "export-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 1.324
+      "seconds": 1.022
     },
     {
       "name": "export-slice-baseline-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 3.216
+      "seconds": 3.14
     },
     {
       "name": "export-slice-counterfactual-headless",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 3.216
+      "seconds": 3.057
     },
     {
       "name": "export-graphical",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 2.501
+      "seconds": 2.066
     },
     {
       "name": "export-slice-baseline-graphical",
       "exitCode": 0,
       "timedOut": false,
-      "seconds": 3.933
+      "seconds": 4.104
     }
   ],
   "error": null,
@@ -186,45 +186,45 @@
   "sliceChecks": {
     "slice-baseline-headless": {
       "passed": true,
-      "checks": 34,
+      "checks": 38,
       "scenario": "baseline",
       "headless": true,
       "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
-      "eventCount": 949
+      "eventCount": 1083
     },
     "slice-counterfactual-headless": {
       "passed": true,
-      "checks": 34,
+      "checks": 38,
       "scenario": "counterfactual",
       "headless": true,
       "contentFingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
-      "eventCount": 955
+      "eventCount": 1089
     },
     "export-slice-baseline-headless": {
       "passed": true,
-      "checks": 34,
+      "checks": 38,
       "scenario": "baseline",
       "headless": true,
       "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
-      "eventCount": 949
+      "eventCount": 1083
     },
     "export-slice-counterfactual-headless": {
       "passed": true,
-      "checks": 34,
+      "checks": 38,
       "scenario": "counterfactual",
       "headless": true,
       "contentFingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
-      "eventCount": 955
+      "eventCount": 1089
     },
     "export-slice-baseline-graphical": {
       "passed": true,
-      "checks": 34,
+      "checks": 38,
       "scenario": "baseline",
       "headless": false,
       "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
-      "eventCount": 949,
-      "screenshot": "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\export-slice-baseline-graphical.png"
+      "eventCount": 1083,
+      "screenshot": "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\export-slice-baseline-graphical.png"
     }
   },
-  "finishedAtUtc": "2026-09-20T12:00:40.1991440Z"
+  "finishedAtUtc": "2026-09-20T14:14:04.4128051Z"
 }

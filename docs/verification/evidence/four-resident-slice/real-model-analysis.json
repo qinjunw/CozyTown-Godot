@@ -1,0 +1,999 @@
+{
+  "schemaVersion": 1,
+  "expectedSourceCommit": "41dc79d13dd72604c4e695b25d20789cfe26c0e4",
+  "analysisScope": "Artifact checks only; no visual acceptance, live ledger access or provider calls.",
+  "costMeaning": "CNY micro-units at registered all-input-miss peak rates; not the actual provider invoice.",
+  "baseline": {
+    "scenario": "baseline",
+    "checks": {
+      "registeredBuild": true,
+      "realMode": true,
+      "scenarioMatches": true,
+      "fourResidentCoverage": true,
+      "reportCoverageAgrees": true,
+      "reportPassed": true,
+      "budgetIdentity": true,
+      "budgetWithinLimit": true,
+      "stageWithinLimit": true,
+      "physicalSlotsClear": true,
+      "finalSnapshotPresent": true,
+      "assetConservation": true,
+      "completeRecords": true
+    },
+    "passed": true,
+    "issues": [],
+    "sourceBuild": "1.0.0+41dc79d13dd72604c4e695b25d20789cfe26c0e4",
+    "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+    "inputDigest": "8a94ee8ee5ff2c9a92c689ebc81bd04346574f403722dd4f89edc05548e887b6",
+    "presentationDigest": "8795861f49d955fa83ab31faf42ec5e3dea2403bf6fe5effe9ab3d2b73cbec4c",
+    "modelProtocol": "town-choice-v1",
+    "elapsedSeconds": 53.9848511,
+    "stopReason": "stage_attempt_limit",
+    "snapshotFailure": null,
+    "journalRecords": 1147,
+    "residents": {
+      "eli": {
+        "executedReal": 2,
+        "choices": [
+          {
+            "sequence": 430,
+            "worldMinute": 542.3749999999978,
+            "action": "approach",
+            "targetId": "mina",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1419,
+            "worldMinute": 557.8249999999838,
+            "action": "approach",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 0,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 2,
+        "actualSentCompletions": 2,
+        "modelFailures": {}
+      },
+      "mina": {
+        "executedReal": 5,
+        "choices": [
+          {
+            "sequence": 590,
+            "worldMinute": 543.349999999997,
+            "action": "invite",
+            "targetId": "ren",
+            "placeId": "plaza.east",
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 824,
+            "worldMinute": 545.9499999999946,
+            "action": "propose_exchange",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": "berries",
+            "quantity": 3,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 885,
+            "worldMinute": 547.0999999999935,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 931,
+            "worldMinute": 547.8999999999928,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1770,
+            "worldMinute": 563.6999999999784,
+            "action": "approach",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 0,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 5,
+        "actualSentCompletions": 5,
+        "modelFailures": {}
+      },
+      "ren": {
+        "executedReal": 9,
+        "choices": [
+          {
+            "sequence": 450,
+            "worldMinute": 542.4749999999977,
+            "action": "approach",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 641,
+            "worldMinute": 543.7499999999966,
+            "action": "respond",
+            "targetId": "mina",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 854,
+            "worldMinute": 546.4999999999941,
+            "action": "respond",
+            "targetId": "mina",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 909,
+            "worldMinute": 547.5249999999932,
+            "action": "speak",
+            "targetId": "mina",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 956,
+            "worldMinute": 548.2749999999925,
+            "action": "end",
+            "targetId": "mina",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1786,
+            "worldMinute": 563.8249999999783,
+            "action": "invite",
+            "targetId": "sora",
+            "placeId": "plaza.east",
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1902,
+            "worldMinute": 564.8499999999774,
+            "action": "propose_exchange",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": "fish",
+            "quantity": 2,
+            "price": 4,
+            "accept": null
+          },
+          {
+            "sequence": 1973,
+            "worldMinute": 565.5499999999768,
+            "action": "speak",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 2029,
+            "worldMinute": 566.5749999999758,
+            "action": "speak",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 1,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 9,
+        "actualSentCompletions": 9,
+        "modelFailures": {}
+      },
+      "sora": {
+        "executedReal": 5,
+        "choices": [
+          {
+            "sequence": 1555,
+            "worldMinute": 559.4499999999823,
+            "action": "approach",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1820,
+            "worldMinute": 564.149999999978,
+            "action": "respond",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 1940,
+            "worldMinute": 565.2249999999771,
+            "action": "respond",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 1998,
+            "worldMinute": 565.9749999999764,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 2053,
+            "worldMinute": 566.9749999999755,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 1,
+        "responseRejected": 0,
+        "fallbacks": 1,
+        "dispatchRejected": 0,
+        "modelCompletions": 6,
+        "actualSentCompletions": 6,
+        "modelFailures": {}
+      }
+    },
+    "conservation": {
+      "transferCount": 2,
+      "transfers": [
+        {
+          "sequence": 852,
+          "source": "real_model",
+          "seller": "mina",
+          "buyer": "ren",
+          "resource": "berries",
+          "quantity": 3,
+          "price": 0
+        },
+        {
+          "sequence": 1938,
+          "source": "real_model",
+          "seller": "ren",
+          "buyer": "sora",
+          "resource": "fish",
+          "quantity": 2,
+          "price": 4
+        }
+      ],
+      "failures": [],
+      "initialTotals": {
+        "coins": 48,
+        "resources": {
+          "berries": 5,
+          "fish": 6,
+          "grain": 5,
+          "soup": 4
+        }
+      },
+      "finalTotals": {
+        "coins": 48,
+        "resources": {
+          "berries": 5,
+          "fish": 6,
+          "grain": 5,
+          "soup": 4
+        }
+      },
+      "totalsConserved": true,
+      "perTransferReplayMatchesFinalAssets": true
+    },
+    "modelOutcomes": {
+      "sentAttempts": 22,
+      "completedAttempts": 22,
+      "worldExecutedLogicalRequests": 21,
+      "completedWithoutWorldExecution": 1,
+      "providerFailures": 0,
+      "httpStatuses": {
+        "200": 22
+      },
+      "returnedModels": {
+        "deepseek-flash": 22
+      },
+      "systemFingerprints": {
+        "aeb56401ca74e127821c4f9126dcb669": 22
+      },
+      "finishReasons": {
+        "stop": 22
+      },
+      "completeUsageCount": 22,
+      "budgetSettledCount": 22,
+      "generationEndedCount": 22,
+      "slotsHeldCount": 0,
+      "terminalEvents": [
+        {
+          "sequence": 678,
+          "kind": "candidate_rejected",
+          "residentId": "sora",
+          "source": "real_model",
+          "reason": "participant_busy",
+          "logicalRequestId": "1b32bf05a81d4946bc72849d1228a215:decision:6"
+        },
+        {
+          "sequence": 679,
+          "kind": "rule_fallback",
+          "residentId": "sora",
+          "source": "rule_fallback",
+          "reason": "wait_after_participant_busy",
+          "logicalRequestId": "1b32bf05a81d4946bc72849d1228a215:decision:6"
+        },
+        {
+          "sequence": 953,
+          "kind": "candidate_rejected",
+          "residentId": "ren",
+          "source": "real_model",
+          "reason": "resident_ended",
+          "logicalRequestId": "1b32bf05a81d4946bc72849d1228a215:decision:13"
+        }
+      ],
+      "terminalEventMeaning": "Events can overlap the same logical request; successful end/speak can retire that request. Do not sum these events as failed attempts."
+    },
+    "budgetStart": {
+      "budgetId": "cozytown-godot-first-slice-20260920-v1",
+      "currency": "CNY",
+      "limitMicros": 5000000,
+      "settledMicros": 2212,
+      "reservedMicros": 0,
+      "availableMicros": 4997788,
+      "totalAttempts": 4,
+      "slotsHeld": 0,
+      "stopReason": null,
+      "stageCounts": {
+        "probe": 4
+      },
+      "unsettledAttemptCount": 0,
+      "recoveryAttemptCount": 0
+    },
+    "budgetFinish": {
+      "budgetId": "cozytown-godot-first-slice-20260920-v1",
+      "currency": "CNY",
+      "limitMicros": 5000000,
+      "settledMicros": 146918,
+      "reservedMicros": 0,
+      "availableMicros": 4853082,
+      "totalAttempts": 26,
+      "slotsHeld": 0,
+      "stopReason": null,
+      "stageCounts": {
+        "probe": 4,
+        "baseline": 22
+      },
+      "unsettledAttemptCount": 0,
+      "recoveryAttemptCount": 0
+    },
+    "newAttempts": 22,
+    "newSettledMicros": 144706,
+    "newReservedMicros": 0,
+    "newSlotsHeld": 0,
+    "reportedUsage": {
+      "promptTokens": 66853,
+      "completionTokens": 1375,
+      "totalTokens": 68228,
+      "cacheHitTokens": 7168,
+      "cacheMissTokens": 59685
+    },
+    "artifactSha256": {
+      "budget-at-finish.json": "27c88510b6ff718d316fbf45bfaf258400cd0f0241b51b93a1628172dac8cf67",
+      "budget-at-start.json": "5bca2a10c247de86a607aa438a5a12f8ba9b1676492a99f61ca2b9d74b3b8e04",
+      "content.json": "68872e6b0401b09bf78f6b5a1bb903ddc398819536a99e33b02b28134df5909a",
+      "events.jsonl": "b217bdea7231344d260e464ae2c466f399e521e18c66000d25772c3080cabb32",
+      "experiment-final-state.json": "4862230860da76051c56aa134daa923f36206fcb28c7aed27a1c7dca5b3c09db",
+      "experiment-report.json": "fed86dafc08d66507e63ba51ff78ffc29d62763858d6e9ddce8dccb0bef12ea9",
+      "initial-state.json": "7d5b11a7cf0643cad0015439686afce65761f5d08c7ff3946ba1882f78302b1f",
+      "manifest.json": "158f1b58e16e558c63ce40eac68eefec0f8860a2654553932b36b6277dd7d901"
+    }
+  },
+  "counterfactual": {
+    "scenario": "counterfactual",
+    "checks": {
+      "registeredBuild": true,
+      "realMode": true,
+      "scenarioMatches": true,
+      "fourResidentCoverage": true,
+      "reportCoverageAgrees": true,
+      "reportPassed": true,
+      "budgetIdentity": true,
+      "budgetWithinLimit": true,
+      "stageWithinLimit": true,
+      "physicalSlotsClear": true,
+      "finalSnapshotPresent": true,
+      "assetConservation": true,
+      "completeRecords": true
+    },
+    "passed": true,
+    "issues": [],
+    "sourceBuild": "1.0.0+41dc79d13dd72604c4e695b25d20789cfe26c0e4",
+    "contentFingerprint": "26a153b8548bb64019f98958920435d81cbb097b57582c40913a925179ba1a88",
+    "inputDigest": "8a94ee8ee5ff2c9a92c689ebc81bd04346574f403722dd4f89edc05548e887b6",
+    "presentationDigest": "8795861f49d955fa83ab31faf42ec5e3dea2403bf6fe5effe9ab3d2b73cbec4c",
+    "modelProtocol": "town-choice-v1",
+    "elapsedSeconds": 46.125734200000004,
+    "stopReason": "stage_attempt_limit",
+    "snapshotFailure": null,
+    "journalRecords": 991,
+    "residents": {
+      "eli": {
+        "executedReal": 5,
+        "choices": [
+          {
+            "sequence": 542,
+            "worldMinute": 543.274999999997,
+            "action": "respond",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 784,
+            "worldMinute": 545.1249999999953,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 833,
+            "worldMinute": 545.9999999999945,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 883,
+            "worldMinute": 546.8999999999937,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 933,
+            "worldMinute": 547.724999999993,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 3,
+        "responseRejected": 1,
+        "fallbacks": 1,
+        "dispatchRejected": 0,
+        "modelCompletions": 7,
+        "actualSentCompletions": 7,
+        "modelFailures": {}
+      },
+      "mina": {
+        "executedReal": 2,
+        "choices": [
+          {
+            "sequence": 533,
+            "worldMinute": 543.249999999997,
+            "action": "approach",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1423,
+            "worldMinute": 558.674999999983,
+            "action": "approach",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 0,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 2,
+        "actualSentCompletions": 2,
+        "modelFailures": {}
+      },
+      "ren": {
+        "executedReal": 8,
+        "choices": [
+          {
+            "sequence": 431,
+            "worldMinute": 542.3499999999979,
+            "action": "invite",
+            "targetId": "eli",
+            "placeId": "plaza.north",
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 758,
+            "worldMinute": 544.6749999999957,
+            "action": "speak",
+            "targetId": "eli",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 812,
+            "worldMinute": 545.6499999999949,
+            "action": "speak",
+            "targetId": "eli",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 855,
+            "worldMinute": 546.3749999999942,
+            "action": "speak",
+            "targetId": "eli",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 907,
+            "worldMinute": 547.3249999999933,
+            "action": "speak",
+            "targetId": "eli",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1501,
+            "worldMinute": 559.749999999982,
+            "action": "respond",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 1617,
+            "worldMinute": 561.3999999999805,
+            "action": "respond",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": true
+          },
+          {
+            "sequence": 1676,
+            "worldMinute": 562.5249999999795,
+            "action": "speak",
+            "targetId": "sora",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 0,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 8,
+        "actualSentCompletions": 8,
+        "modelFailures": {}
+      },
+      "sora": {
+        "executedReal": 5,
+        "choices": [
+          {
+            "sequence": 650,
+            "worldMinute": 543.9499999999964,
+            "action": "approach",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1477,
+            "worldMinute": 559.3499999999824,
+            "action": "invite",
+            "targetId": "ren",
+            "placeId": "plaza.east",
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1589,
+            "worldMinute": 560.899999999981,
+            "action": "propose_exchange",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": "fish",
+            "quantity": 2,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1648,
+            "worldMinute": 561.99999999998,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          },
+          {
+            "sequence": 1704,
+            "worldMinute": 563.049999999979,
+            "action": "speak",
+            "targetId": "ren",
+            "placeId": null,
+            "resourceId": null,
+            "quantity": 0,
+            "price": 0,
+            "accept": null
+          }
+        ],
+        "candidateRejected": 0,
+        "responseRejected": 0,
+        "fallbacks": 0,
+        "dispatchRejected": 0,
+        "modelCompletions": 5,
+        "actualSentCompletions": 5,
+        "modelFailures": {}
+      }
+    },
+    "conservation": {
+      "transferCount": 1,
+      "transfers": [
+        {
+          "sequence": 1615,
+          "source": "real_model",
+          "seller": "sora",
+          "buyer": "ren",
+          "resource": "fish",
+          "quantity": 2,
+          "price": 0
+        }
+      ],
+      "failures": [],
+      "initialTotals": {
+        "coins": 48,
+        "resources": {
+          "berries": 5,
+          "fish": 6,
+          "grain": 5,
+          "soup": 4
+        }
+      },
+      "finalTotals": {
+        "coins": 48,
+        "resources": {
+          "berries": 5,
+          "fish": 6,
+          "grain": 5,
+          "soup": 4
+        }
+      },
+      "totalsConserved": true,
+      "perTransferReplayMatchesFinalAssets": true
+    },
+    "modelOutcomes": {
+      "sentAttempts": 22,
+      "completedAttempts": 22,
+      "worldExecutedLogicalRequests": 20,
+      "completedWithoutWorldExecution": 2,
+      "providerFailures": 0,
+      "httpStatuses": {
+        "200": 22
+      },
+      "returnedModels": {
+        "deepseek-flash": 22
+      },
+      "systemFingerprints": {
+        "aeb56401ca74e127821c4f9126dcb669": 22
+      },
+      "finishReasons": {
+        "stop": 22
+      },
+      "completeUsageCount": 22,
+      "budgetSettledCount": 22,
+      "generationEndedCount": 22,
+      "slotsHeldCount": 0,
+      "terminalEvents": [
+        {
+          "sequence": 427,
+          "kind": "candidate_rejected",
+          "residentId": "eli",
+          "source": "world",
+          "reason": "invitation_received",
+          "logicalRequestId": "cc5efd3a4f5a4b6b85d07b01f067d17e:decision:1"
+        },
+        {
+          "sequence": 442,
+          "kind": "response_rejected",
+          "residentId": "eli",
+          "source": "real_model",
+          "reason": "terminal_request",
+          "logicalRequestId": "cc5efd3a4f5a4b6b85d07b01f067d17e:decision:1"
+        },
+        {
+          "sequence": 498,
+          "kind": "candidate_rejected",
+          "residentId": "eli",
+          "source": "real_model",
+          "reason": "unexpected_action_fields",
+          "logicalRequestId": "cc5efd3a4f5a4b6b85d07b01f067d17e:decision:4"
+        },
+        {
+          "sequence": 499,
+          "kind": "rule_fallback",
+          "residentId": "eli",
+          "source": "rule_fallback",
+          "reason": "wait_after_unexpected_action_fields",
+          "logicalRequestId": "cc5efd3a4f5a4b6b85d07b01f067d17e:decision:4"
+        },
+        {
+          "sequence": 930,
+          "kind": "candidate_rejected",
+          "residentId": "eli",
+          "source": "real_model",
+          "reason": "conversation_complete",
+          "logicalRequestId": "cc5efd3a4f5a4b6b85d07b01f067d17e:decision:15"
+        }
+      ],
+      "terminalEventMeaning": "Events can overlap the same logical request; successful end/speak can retire that request. Do not sum these events as failed attempts."
+    },
+    "budgetStart": {
+      "budgetId": "cozytown-godot-first-slice-20260920-v1",
+      "currency": "CNY",
+      "limitMicros": 5000000,
+      "settledMicros": 146918,
+      "reservedMicros": 0,
+      "availableMicros": 4853082,
+      "totalAttempts": 26,
+      "slotsHeld": 0,
+      "stopReason": null,
+      "stageCounts": {
+        "probe": 4,
+        "baseline": 22
+      },
+      "unsettledAttemptCount": 0,
+      "recoveryAttemptCount": 0
+    },
+    "budgetFinish": {
+      "budgetId": "cozytown-godot-first-slice-20260920-v1",
+      "currency": "CNY",
+      "limitMicros": 5000000,
+      "settledMicros": 300418,
+      "reservedMicros": 0,
+      "availableMicros": 4699582,
+      "totalAttempts": 48,
+      "slotsHeld": 0,
+      "stopReason": null,
+      "stageCounts": {
+        "probe": 4,
+        "baseline": 22,
+        "counterfactual": 22
+      },
+      "unsettledAttemptCount": 0,
+      "recoveryAttemptCount": 0
+    },
+    "newAttempts": 22,
+    "newSettledMicros": 153500,
+    "newReservedMicros": 0,
+    "newSlotsHeld": 0,
+    "reportedUsage": {
+      "promptTokens": 71126,
+      "completionTokens": 1406,
+      "totalTokens": 72532,
+      "cacheHitTokens": 8576,
+      "cacheMissTokens": 62550
+    },
+    "artifactSha256": {
+      "budget-at-finish.json": "a47e98307d122c960867cf0193a94b8cc0fbc30125b7267b7642234b9f9f5e83",
+      "budget-at-start.json": "27c88510b6ff718d316fbf45bfaf258400cd0f0241b51b93a1628172dac8cf67",
+      "content.json": "fc595f707757af8591ba434063440a54bd3174d802f3c03b82cb0fcf6beb184e",
+      "events.jsonl": "31f5ee6cdf21539817221d6c49984e631c1047908a6f40ac2c8f0469b991208c",
+      "experiment-final-state.json": "740d8f9ca9dd447da376e9b8a59d8f0d4b49bdfbedd9c15e7f8466fdb451344c",
+      "experiment-report.json": "0b6422e1bf2154499e0baca2abbbcc0fde88b3ada7ed152953ac682feeacadff",
+      "initial-state.json": "3361b3f81746bfd128b5ec015223caf3f0b76493064aa2511e3789c0138d8424",
+      "manifest.json": "9d49837391cfd3d86ba4da9c2709dac739fbe14d034cddb70a0c4a12aa09a894"
+    }
+  },
+  "comparison": {
+    "onlyInitialInventoriesDiffer": true,
+    "sameInitialResourceTotals": true,
+    "sameProtocolAndBuild": true,
+    "probeCarryforward": true,
+    "sequentialBudgetCarryforward": true,
+    "initialInventories": {
+      "baseline": {
+        "mina": {
+          "berries": 4,
+          "grain": 1,
+          "fish": 0,
+          "soup": 0
+        },
+        "eli": {
+          "berries": 0,
+          "grain": 4,
+          "fish": 1,
+          "soup": 0
+        },
+        "ren": {
+          "berries": 1,
+          "grain": 0,
+          "fish": 4,
+          "soup": 0
+        },
+        "sora": {
+          "berries": 0,
+          "grain": 0,
+          "fish": 1,
+          "soup": 4
+        }
+      },
+      "counterfactual": {
+        "mina": {
+          "berries": 4,
+          "grain": 1,
+          "fish": 0,
+          "soup": 0
+        },
+        "eli": {
+          "berries": 0,
+          "grain": 0,
+          "fish": 1,
+          "soup": 4
+        },
+        "ren": {
+          "berries": 1,
+          "grain": 4,
+          "fish": 0,
+          "soup": 0
+        },
+        "sora": {
+          "berries": 0,
+          "grain": 0,
+          "fish": 5,
+          "soup": 0
+        }
+      }
+    }
+  },
+  "finalCumulativeBudget": {
+    "budgetId": "cozytown-godot-first-slice-20260920-v1",
+    "currency": "CNY",
+    "limitMicros": 5000000,
+    "settledMicros": 300418,
+    "reservedMicros": 0,
+    "availableMicros": 4699582,
+    "totalAttempts": 48,
+    "slotsHeld": 0,
+    "stopReason": null,
+    "stageCounts": {
+      "probe": 4,
+      "baseline": 22,
+      "counterfactual": 22
+    },
+    "unsettledAttemptCount": 0,
+    "recoveryAttemptCount": 0
+  }
+}

@@ -9,7 +9,7 @@
   "saveReloadVerified": true,
   "pauseVerified": true,
   "collisionVerified": true,
-  "runtimeAssemblyLocation": "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+  "runtimeAssemblyLocation": "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
   "screenshotStatus": "not_requested",
   "screenshotPath": null,
   "engine": "4.7.2-stable (official)",
@@ -329,8 +329,8 @@
       "name": "route_restore_preserves_positions_and_cursors",
       "passed": true,
       "evidence": {
-        "sourceBranch": "b771b6ed1d8b448da7e841eb300fb4c6",
-        "restoredBranch": "bf5317e87f3549a4a9ff25c1ed6fec56",
+        "sourceBranch": "f0b8ec77a6eb47b789548487f59336ba",
+        "restoredBranch": "4d5980f4c705424cbaa41090c6e14878",
         "journalRecordCount": 2
       }
     },
@@ -380,6 +380,36 @@
       "evidence": null
     },
     {
+      "name": "logical_tab_shortcut_ignores_mismatched_physical_code",
+      "passed": true,
+      "evidence": {
+        "logicalKeycode": 4194306,
+        "physicalKeycode": 4194313,
+        "injection": "Godot.Input.ParseInputEvent"
+      }
+    },
+    {
+      "name": "logical_f5_shortcut_saves_current_branch",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "6ec91357ec2d4306a9f6d58428e8cb8c",
+        "savedBranch": "6ec91357ec2d4306a9f6d58428e8cb8c"
+      }
+    },
+    {
+      "name": "logical_f9_shortcut_restores_saved_state",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_e_shortcut_opens_nearby_dialogue",
+      "passed": true,
+      "evidence": {
+        "injection": "Godot.Input.ParseInputEvent",
+        "publicConversationCount": 1
+      }
+    },
+    {
       "name": "schedule_boundary_preempts_social_activity",
       "passed": true,
       "evidence": null
@@ -397,85 +427,86 @@
   ],
   "screenshot": null,
   "runDirectories": [
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\export-slice-baseline-headless\\runs\\b771b6ed1d8b448da7e841eb300fb4c6",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\export-slice-baseline-headless\\runs\\bf5317e87f3549a4a9ff25c1ed6fec56",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\export-slice-baseline-headless\\runs\\0942dd5ab37a4ab5a27059487382e957",
-    "<project-root>\\artifacts\\verification\\20260920T115855Z-9ea21c1c\\data\\export-slice-baseline-headless\\runs\\41cfe741b0424d459855d4f372d41921"
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\export-slice-baseline-headless\\runs\\f0b8ec77a6eb47b789548487f59336ba",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\export-slice-baseline-headless\\runs\\4d5980f4c705424cbaa41090c6e14878",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\export-slice-baseline-headless\\runs\\6ec91357ec2d4306a9f6d58428e8cb8c",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\export-slice-baseline-headless\\runs\\e9e9d7cc92494a8fbfd0c7c5c55b40b9",
+    "<project-root>\\artifacts\\verification\\20260920T141239Z-0465b0a9\\data\\export-slice-baseline-headless\\runs\\842ee44c16cb4f7bac2de3a20727f7c8"
   ],
-  "eventCount": 949,
+  "eventCount": 1083,
   "transfers": [
     {
       "sequence": 328,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 544.2500000000009,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bf5317e87f3549a4a9ff25c1ed6fec56:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:9\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4d5980f4c705424cbaa41090c6e14878:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:9\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 347,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 544.450000000001,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bf5317e87f3549a4a9ff25c1ed6fec56:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:12\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4d5980f4c705424cbaa41090c6e14878:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:12\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 368,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 544.650000000001,
       "kind": "resource_transferred",
       "residentId": "eli",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "bf5317e87f3549a4a9ff25c1ed6fec56:meeting:2",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:15\u0022,\r\n  \u0022from\u0022: \u0022mina\u0022,\r\n  \u0022to\u0022: \u0022eli\u0022,\r\n  \u0022offerResourceId\u0022: \u0022berries\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "4d5980f4c705424cbaa41090c6e14878:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:15\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 406,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 544.9500000000011,
       "kind": "resource_transferred",
       "residentId": "ren",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "0942dd5ab37a4ab5a27059487382e957:meeting:4",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:20\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "6ec91357ec2d4306a9f6d58428e8cb8c:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:20\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 425,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 545.1500000000011,
       "kind": "resource_transferred",
       "residentId": "ren",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "0942dd5ab37a4ab5a27059487382e957:meeting:4",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:23\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "6ec91357ec2d4306a9f6d58428e8cb8c:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:23\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     },
     {
       "sequence": 444,
-      "branchId": "0942dd5ab37a4ab5a27059487382e957",
+      "branchId": "6ec91357ec2d4306a9f6d58428e8cb8c",
       "worldMinute": 545.3500000000012,
       "kind": "resource_transferred",
       "residentId": "ren",
       "source": "rules",
       "reason": "atomic_transfer",
       "logicalRequestId": null,
-      "activityId": "0942dd5ab37a4ab5a27059487382e957:meeting:4",
-      "dataJson": "{\r\n  \u0022transferId\u0022: \u00220942dd5ab37a4ab5a27059487382e957:transfer:26\u0022,\r\n  \u0022from\u0022: \u0022sora\u0022,\r\n  \u0022to\u0022: \u0022ren\u0022,\r\n  \u0022offerResourceId\u0022: \u0022soup\u0022,\r\n  \u0022offerQuantity\u0022: 1,\r\n  \u0022offerPrice\u0022: 1\r\n}"
+      "activityId": "6ec91357ec2d4306a9f6d58428e8cb8c:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"6ec91357ec2d4306a9f6d58428e8cb8c:transfer:26\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
     }
   ],
-  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore and pause behavior. Real-provider and user visual acceptance are separate."
+  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore, pause behavior and synthetic Godot key-event routing. OS keyboard injection, real-provider and user visual acceptance are separate."
 }
