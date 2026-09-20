@@ -108,6 +108,7 @@ public partial class TownGame : Node2D
             CreateJournal();
             CreateActors();
             CreateInterface();
+            TownSpeechOverlay.Install(this, _actors.Values.Append(_player), _ui);
             _ready = true;
             _lastHostSeconds = _hostClock.Elapsed.TotalSeconds;
             SyncActors();

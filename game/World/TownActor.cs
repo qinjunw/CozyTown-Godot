@@ -13,9 +13,11 @@ public partial class TownActor : Node2D
     private int _frame;
     private double _walkSeconds;
     private double _speechSeconds;
-    private readonly List<string> _speechLines = [];
+    private string _speechText = "";
 
     public string ActorId { get; private set; } = "";
+    internal string DisplayName => _displayName;
+    internal string SpeechText => _speechSeconds > 0 ? _speechText : "";
 
     public bool Highlighted
     {
@@ -54,24 +56,10 @@ public partial class TownActor : Node2D
 
     public void Say(string text)
     {
-        _speechLines.Clear();
-        if (_font == null || string.IsNullOrWhiteSpace(text)) return;
-        string line = "";
-        foreach (var rune in text.Trim().EnumerateRunes().Take(160))
-        {
-            string next = System.Text.Rune.IsControl(rune) ? " " : rune.ToString();
-            if (_font.GetStringSize(line + next, fontSize: 8).X > 140 && line.Length > 0)
-            {
-                _speechLines.Add(line);
-                line = "";
-                if (_speechLines.Count == 2) { line = "…"; break; }
-            }
-            line += next;
-        }
-        if (line.Length > 0) _speechLines.Add(line);
-        _speechSeconds = 4;
-        SetProcess(true);
-        QueueRedraw();
+        _speechText = string.Concat(text.Trim().EnumerateRunes().Take(160)
+            .Select(rune => System.Text.Rune.IsControl(rune) ? " " : rune.ToString()));
+        _speechSeconds = _speechText.Length == 0 ? 0 : 4;
+        SetProcess(_walking || _speechSeconds > 0);
     }
 
     public override void _Process(double delta)
@@ -85,7 +73,7 @@ public partial class TownActor : Node2D
         if (_speechSeconds > 0)
         {
             _speechSeconds -= delta;
-            if (_speechSeconds <= 0) { _speechLines.Clear(); QueueRedraw(); }
+            if (_speechSeconds <= 0) _speechText = "";
         }
         if (!_walking && _speechSeconds <= 0) SetProcess(false);
     }
@@ -115,19 +103,6 @@ public partial class TownActor : Node2D
                 modulate: _highlighted ? new Color("fff1b8") : new Color("fff6d9"));
             DrawString(_font, label, _displayName, fontSize: fontSize,
                 modulate: new Color("344136"));
-        }
-        if (_font != null && _speechLines.Count > 0)
-        {
-            float width = Math.Max(28, _speechLines.Max(s => _font.GetStringSize(s, fontSize: 8).X) + 12);
-            float height = _speechLines.Count * 11 + 9;
-            var box = new Rect2(Mathf.Round(-width / 2), -49 - height, width, height);
-            DrawRect(box.Grow(1), new Color("6b6248"));
-            DrawRect(box, new Color("fff3d4"));
-            DrawRect(new Rect2(-2, -49, 5, 2), new Color("6b6248"));
-            DrawRect(new Rect2(-1, -49, 3, 3), new Color("fff3d4"));
-            for (int i = 0; i < _speechLines.Count; i++)
-                DrawString(_font, box.Position + new Vector2(6, 12 + i * 11), _speechLines[i],
-                    fontSize: 8, modulate: new Color("4c4639"));
         }
     }
 }
