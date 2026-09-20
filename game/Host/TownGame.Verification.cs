@@ -316,9 +316,14 @@ public partial class TownGame
             _view = _world.GetView(); SyncActors(); RefreshInterface();
             string? screenshot = await CaptureVerificationScreenshotAsync();
             budget = _model!.Budget;
+            TownHostSnapshot? finalSnapshot = null;
+            string? snapshotFailure = null;
+            try { finalSnapshot = CaptureHostSnapshot(); }
+            catch (InvalidOperationException) { snapshotFailure = "response_persistence_incomplete"; }
             var report = new
             {
-                schemaVersion = 1, test = "four_resident_real_model", passed = coveragePassed && drained && budget.SlotsHeld == 0 && budget.StopReason is null,
+                schemaVersion = 1, test = "four_resident_real_model", passed = coveragePassed && drained && budget.SlotsHeld == 0 && budget.StopReason is null && snapshotFailure is null,
+                snapshotFailure,
                 fourResidentCoveragePassed = coveragePassed, missingResidents = missing, scenario = _scenario,
                 stopReason = _experimentStopReason, elapsedSeconds = _elapsed, worldMinute = _world.WorldMinute,
                 activeRequestsDrained = drained, remainingActiveRequests = _activeModelRequests.ToArray(),
@@ -334,7 +339,7 @@ public partial class TownGame
                 screenshotPath = screenshot,
                 coverage = "Every recorded request, failure and fallback remains in the denominator. This report checks actual model choices accepted by the world; it does not establish long-term success rate or user visual acceptance."
             };
-            _journal.WriteArtifact("experiment-final-state.json", CaptureHostSnapshot());
+            if (finalSnapshot != null) _journal.WriteArtifact("experiment-final-state.json", finalSnapshot);
             _journal.WriteArtifact("budget-at-finish.json", budget);
             _journal.WriteArtifact("experiment-report.json", report);
             WriteReport(report);
