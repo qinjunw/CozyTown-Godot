@@ -223,8 +223,8 @@ public partial class TownGame : Node2D
     private void AdvancePlayer(double seconds)
     {
         Vector2 direction = new(
-            (Input.IsPhysicalKeyPressed(Key.D) || Input.IsPhysicalKeyPressed(Key.Right) ? 1 : 0) - (Input.IsPhysicalKeyPressed(Key.A) || Input.IsPhysicalKeyPressed(Key.Left) ? 1 : 0),
-            (Input.IsPhysicalKeyPressed(Key.S) || Input.IsPhysicalKeyPressed(Key.Down) ? 1 : 0) - (Input.IsPhysicalKeyPressed(Key.W) || Input.IsPhysicalKeyPressed(Key.Up) ? 1 : 0));
+            (MovementKeyHeld(Key.D) || MovementKeyHeld(Key.Right) ? 1 : 0) - (MovementKeyHeld(Key.A) || MovementKeyHeld(Key.Left) ? 1 : 0),
+            (MovementKeyHeld(Key.S) || MovementKeyHeld(Key.Down) ? 1 : 0) - (MovementKeyHeld(Key.W) || MovementKeyHeld(Key.Up) ? 1 : 0));
         TownPoint current = _world.GetView().PlayerPosition;
         if (direction.LengthSquared() > 0)
         {
@@ -383,26 +383,31 @@ public partial class TownGame : Node2D
         _camera.Offset = _inspector.Visible ? new Vector2(70, 0) : Vector2.Zero;
     }
 
-    public override void _UnhandledInput(InputEvent input)
+    private static bool MovementKeyHeld(Key key) => Input.IsPhysicalKeyPressed(key) || Input.IsKeyPressed(key);
+
+    public override void _Input(InputEvent input)
     {
-        if (!_ready) return;
+        if (!_ready || input is not InputEventKey { Pressed: true, Echo: false } key) return;
+        // Windows virtual input can report a scan code for a different key; shortcuts use logical identity.
+        Key pressed = key.Keycode != Key.None ? key.Keycode : key.PhysicalKeycode;
         if (_fatal)
         {
-            if (input is InputEventKey { Pressed: true, Echo: false } recoveryKey)
-            {
-                if (recoveryKey.PhysicalKeycode == Key.F9) LoadWorld();
-                else if (recoveryKey.Keycode == Key.Escape) { _menu.Visible = !_menu.Visible; }
-            }
+            if (pressed == Key.F9) LoadWorld();
+            else if (pressed == Key.Escape) _menu.Visible = !_menu.Visible;
             return;
         }
-        if (input is InputEventKey { Pressed: true, Echo: false } key)
-        {
-            if (key.Keycode == Key.Escape) { ToggleMenu(); GetViewport().SetInputAsHandled(); }
-            else if (key.PhysicalKeycode == Key.E && _pauseReasons.Count == 0) TalkNearby();
-            else if (key.PhysicalKeycode == Key.Tab) ToggleInspector();
-            else if (key.PhysicalKeycode == Key.F5) SaveWorld();
-            else if (key.PhysicalKeycode == Key.F9) LoadWorld();
-        }
+        if (pressed == Key.Escape) ToggleMenu();
+        else if (pressed == Key.E && _pauseReasons.Count == 0) TalkNearby();
+        else if (pressed == Key.Tab) ToggleInspector();
+        else if (pressed == Key.F5) SaveWorld();
+        else if (pressed == Key.F9) LoadWorld();
+        else return;
+        GetViewport().SetInputAsHandled();
+    }
+
+    public override void _UnhandledInput(InputEvent input)
+    {
+        if (!_ready || _fatal) return;
         if (input is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } && _pauseReasons.Count == 0)
         {
             TownPoint target = Point(GetGlobalMousePosition());

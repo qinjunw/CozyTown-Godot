@@ -107,6 +107,8 @@ public partial class TownGame
             Check("ordinary_rules_created_social_activity", savedSocialState && _experimentEvents.Any(e => e.Kind == "conversation_started"));
             Check("assets_conserved", _view.Residents.Sum(r => r.Coins) == _loaded.Definitions.Residents.Sum(r => r.Coins)
                 && _loaded.Definitions.Resources.All(resource => _view.Residents.Sum(r => r.Inventory.GetValueOrDefault(resource.Id)) == _loaded.Definitions.Residents.Sum(r => r.Inventory.GetValueOrDefault(resource.Id))));
+            await RunShortcutInputChecksAsync(Check);
+            _view = _world.GetView();
             SyncActors(); RefreshInterface();
             string? screenshot = await CaptureVerificationScreenshotAsync();
             var nextBusyMinute = _loaded.Definitions.Residents.SelectMany(r => r.Schedule).Where(s => !s.IsFree && s.StartMinute > _world.WorldMinute % 1440).Min(s => s.StartMinute);
@@ -140,7 +142,7 @@ public partial class TownGame
                 engine = Engine.GetVersionInfo()["string"].AsString(), contentFingerprint = _loaded.Content.Fingerprint,
                 checks, screenshot, runDirectories = _journals.Select(j => j.DirectoryPath).ToArray(),
                 eventCount = _experimentEvents.Count, transfers = _experimentEvents.Where(e => e.Kind == "resource_transferred").ToArray(),
-                coverage = "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore and pause behavior. Real-provider and user visual acceptance are separate."
+                coverage = "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore, pause behavior and synthetic Godot key-event routing. OS keyboard injection, real-provider and user visual acceptance are separate."
             };
             _journal.WriteArtifact("verification-report.json", report);
             WriteReport(report);
@@ -173,6 +175,68 @@ public partial class TownGame
         FlushWorldEvents();
         _finishing = true;
         _ = FinishRealExperimentAsync(budget, _activeModelRequests.Count == 0);
+    }
+
+    private async Task RunShortcutInputChecksAsync(Action<string, bool, object?> check)
+    {
+        async Task SendShortcutAsync(Key logical)
+        {
+            // The observed Windows injection reported logical Tab with physical Pause.
+            using var press = new InputEventKey { Keycode = logical, PhysicalKeycode = Key.Pause, Pressed = true, Echo = false };
+            using var release = new InputEventKey { Keycode = logical, PhysicalKeycode = Key.Pause, Pressed = false, Echo = false };
+            Input.ParseInputEvent(press);
+            Input.FlushBufferedEvents();
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            Input.ParseInputEvent(release);
+            Input.FlushBufferedEvents();
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        }
+
+        bool inspectorBefore = _inspector.Visible;
+        string? selectedBefore = _selectedResident;
+        await SendShortcutAsync(Key.Tab);
+        bool inspectorToggled = _inspector.Visible != inspectorBefore;
+        await SendShortcutAsync(Key.Tab);
+        check("logical_tab_shortcut_ignores_mismatched_physical_code", inspectorToggled && _inspector.Visible == inspectorBefore,
+            new { logicalKeycode = (long)Key.Tab, physicalKeycode = (long)Key.Pause, injection = "Godot.Input.ParseInputEvent" });
+        _selectedResident = selectedBefore;
+
+        _view = _world.GetView();
+        var stateBeforeSave = _view;
+        await SendShortcutAsync(Key.F5);
+        var saved = TownSaveFile.Read(_savePath);
+        var savedWorld = TownJson.Deserialize<TownSnapshot>(saved.WorldJson).State;
+        check("logical_f5_shortcut_saves_current_branch", savedWorld.BranchId == stateBeforeSave.BranchId
+            && savedWorld.WorldMinute == stateBeforeSave.WorldMinute && savedWorld.Sequence == stateBeforeSave.Sequence,
+            new { sourceBranch = stateBeforeSave.BranchId, savedBranch = savedWorld.BranchId });
+
+        _world.Advance(.5, 0);
+        FlushWorldEvents();
+        string sessionBeforeLoad = _world.SessionId;
+        await SendShortcutAsync(Key.F9);
+        var restored = _world.GetView();
+        check("logical_f9_shortcut_restores_saved_state", !_fatal && _world.SessionId != sessionBeforeLoad
+            && restored.WorldMinute == savedWorld.WorldMinute && restored.ParentBranchId == savedWorld.BranchId
+            && restored.PlayerPosition == savedWorld.PlayerPosition
+            && restored.Residents.All(r => r.Position == savedWorld.Residents.Single(s => s.Id == r.Id).Position), null);
+
+        var nearby = restored.Residents.OrderBy(r => r.Position.DistanceTo(restored.PlayerPosition)).First();
+        var approaches = new[] { new TownPoint(-20, 0), new TownPoint(20, 0), new TownPoint(0, -20), new TownPoint(0, 20) }
+            .Select(offset => new TownPoint(nearby.Position.X + offset.X, nearby.Position.Y + offset.Y));
+        _playerRoute = approaches.Select(target => _loaded.Content.FindRoute(restored.PlayerPosition, target)).FirstOrDefault(route => route is not null)
+            ?? throw new InvalidDataException("No walkable route to a resident for the shortcut verification.");
+        _playerRouteCursor = 0;
+        for (int step = 0; step < 400 && _playerRoute is not null && _playerRouteCursor < _playerRoute.Count; step++) AdvancePlayer(.1);
+        FlushWorldEvents();
+        _view = _world.GetView();
+        int previousConversations = _experimentEvents.Count(e => e.Kind == "player_conversation");
+        await SendShortcutAsync(Key.E);
+        bool dialogueOpened = _dialogue.Visible && _pauseReasons.Contains("dialogue")
+            && _experimentEvents.Count(e => e.Kind == "player_conversation") == previousConversations + 1;
+        await SendShortcutAsync(Key.Escape);
+        check("logical_e_shortcut_opens_nearby_dialogue", dialogueOpened && !_dialogue.Visible && !_pauseReasons.Contains("dialogue"),
+            new { injection = "Godot.Input.ParseInputEvent", publicConversationCount = _experimentEvents.Count(e => e.Kind == "player_conversation") });
+        _selectedResident = selectedBefore;
     }
 
     private async Task RunContentMutationChecksAsync(Action<string, bool, object?> check)

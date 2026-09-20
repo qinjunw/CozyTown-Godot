@@ -173,6 +173,9 @@ function Assert-SliceReport {
         'fault_restore_rebuilds_dispatch_and_preserves_other_pause', 'fault_restore_resumes_world',
         'social_state_continues_same_commitments', 'four_residents_moved_through_scene',
         'four_independent_rule_decisions', 'ordinary_rules_created_social_activity', 'assets_conserved',
+        'logical_tab_shortcut_ignores_mismatched_physical_code',
+        'logical_f5_shortcut_saves_current_branch', 'logical_f9_shortcut_restores_saved_state',
+        'logical_e_shortcut_opens_nearby_dialogue',
         'schedule_boundary_preempts_social_activity'
     )
     $checkNames = @($report.checks | ForEach-Object { $_.name })
