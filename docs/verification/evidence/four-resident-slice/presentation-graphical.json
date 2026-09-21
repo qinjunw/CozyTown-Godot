@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_slice_smoke",
+  "passed": true,
+  "scenario": "baseline",
+  "headless": false,
+  "mode": "rules",
+  "residents": 4,
+  "saveReloadVerified": true,
+  "pauseVerified": true,
+  "collisionVerified": true,
+  "runtimeAssemblyLocation": "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+  "screenshotStatus": "captured",
+  "screenshotPath": "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\export-slice-baseline-graphical.png",
+  "engine": "4.7.2-stable (official)",
+  "contentFingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+  "checks": [
+    {
+      "name": "node_rename_and_reorder_preserve_fingerprint",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reparent_preserving_global_transform_preserves_fingerprint",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "duplicate_scene_identity_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "missing_referenced_place_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unsupported_rotation_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unsupported_scale_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unregistered_world_collision_body_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "registered_obstacle_wrong_collision_layer_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "nonidentity_map_world_transform_rejected",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "moving_shop_updates_shared_geometry_and_fingerprint",
+      "passed": true,
+      "evidence": {
+        "from": {
+          "x": 542,
+          "y": 282
+        },
+        "to": {
+          "x": 550,
+          "y": 282
+        },
+        "footprintId": "building.shop"
+      }
+    },
+    {
+      "name": "shop_schedule_keeps_identity_and_uses_new_anchor",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "moved_shop_matches_actual_godot_collision",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "mutation_checks_restore_original_content",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "resident_body_bindings",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "authoritative_places_clear_in_godot",
+      "passed": true,
+      "evidence": {
+        "count": 14
+      }
+    },
+    {
+      "name": "scene_obstacle_bodies",
+      "passed": true,
+      "evidence": [
+        {
+          "id": "bench.plaza.east",
+          "blocked": true
+        },
+        {
+          "id": "bench.plaza.west",
+          "blocked": true
+        },
+        {
+          "id": "boundary.north",
+          "blocked": true
+        },
+        {
+          "id": "boundary.south",
+          "blocked": true
+        },
+        {
+          "id": "boundary.west",
+          "blocked": true
+        },
+        {
+          "id": "building.cafe",
+          "blocked": true
+        },
+        {
+          "id": "building.home.eli",
+          "blocked": true
+        },
+        {
+          "id": "building.home.mina",
+          "blocked": true
+        },
+        {
+          "id": "building.home.ren",
+          "blocked": true
+        },
+        {
+          "id": "building.home.sora",
+          "blocked": true
+        },
+        {
+          "id": "building.shop",
+          "blocked": true
+        },
+        {
+          "id": "landmark.farm",
+          "blocked": true
+        },
+        {
+          "id": "landmark.pond",
+          "blocked": true
+        },
+        {
+          "id": "tree.01",
+          "blocked": true
+        },
+        {
+          "id": "tree.02",
+          "blocked": true
+        },
+        {
+          "id": "tree.03",
+          "blocked": true
+        },
+        {
+          "id": "tree.04",
+          "blocked": true
+        },
+        {
+          "id": "tree.05",
+          "blocked": true
+        },
+        {
+          "id": "tree.06",
+          "blocked": true
+        },
+        {
+          "id": "tree.07",
+          "blocked": true
+        },
+        {
+          "id": "tree.08",
+          "blocked": true
+        },
+        {
+          "id": "tree.09",
+          "blocked": true
+        },
+        {
+          "id": "tree.10",
+          "blocked": true
+        },
+        {
+          "id": "tree.11",
+          "blocked": true
+        },
+        {
+          "id": "tree.12",
+          "blocked": true
+        },
+        {
+          "id": "tree.13",
+          "blocked": true
+        },
+        {
+          "id": "tree.14",
+          "blocked": true
+        },
+        {
+          "id": "tree.15",
+          "blocked": true
+        },
+        {
+          "id": "tree.16",
+          "blocked": true
+        },
+        {
+          "id": "tree.17",
+          "blocked": true
+        },
+        {
+          "id": "tree.18",
+          "blocked": true
+        },
+        {
+          "id": "tree.19",
+          "blocked": true
+        },
+        {
+          "id": "tree.20",
+          "blocked": true
+        },
+        {
+          "id": "tree.21",
+          "blocked": true
+        },
+        {
+          "id": "tree.22",
+          "blocked": true
+        },
+        {
+          "id": "tree.23",
+          "blocked": true
+        },
+        {
+          "id": "tree.24",
+          "blocked": true
+        },
+        {
+          "id": "tree.25",
+          "blocked": true
+        },
+        {
+          "id": "tree.26",
+          "blocked": true
+        },
+        {
+          "id": "tree.27",
+          "blocked": true
+        },
+        {
+          "id": "tree.28",
+          "blocked": true
+        },
+        {
+          "id": "tree.29",
+          "blocked": true
+        },
+        {
+          "id": "tree.30",
+          "blocked": true
+        },
+        {
+          "id": "tree.31",
+          "blocked": true
+        },
+        {
+          "id": "tree.32",
+          "blocked": true
+        },
+        {
+          "id": "water.canal.east",
+          "blocked": true
+        },
+        {
+          "id": "water.canal.west",
+          "blocked": true
+        },
+        {
+          "id": "water.river",
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "name": "player_collision_rejection",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "player_committed_movement",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "save_during_routes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "published_save_readable",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "save_belongs_to_current_branch",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "route_restore_preserves_positions_and_cursors",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "f69dbbb61da54ad395a71d120c36ccd7",
+        "restoredBranch": "615066c7f7ab4759aecca2e47f0127de",
+        "journalRecordCount": 2
+      }
+    },
+    {
+      "name": "player_click_route_restored",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "player_click_route_continues",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "stacked_pause_keeps_world_frozen",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "resume_advances_world",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "social_state_continues_same_commitments",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_residents_moved_through_scene",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_independent_rule_decisions",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "ordinary_rules_created_social_activity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "assets_conserved",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_tab_shortcut_ignores_mismatched_physical_code",
+      "passed": true,
+      "evidence": {
+        "logicalKeycode": 4194306,
+        "physicalKeycode": 4194313,
+        "injection": "Godot.Input.ParseInputEvent"
+      }
+    },
+    {
+      "name": "logical_f5_shortcut_saves_current_branch",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "9345847b33464708af3045428f7abe7a",
+        "savedBranch": "9345847b33464708af3045428f7abe7a"
+      }
+    },
+    {
+      "name": "logical_f9_shortcut_restores_saved_state",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_e_shortcut_opens_nearby_dialogue",
+      "passed": true,
+      "evidence": {
+        "injection": "Godot.Input.ParseInputEvent",
+        "publicConversationCount": 1
+      }
+    },
+    {
+      "name": "schedule_boundary_preempts_social_activity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "fault_restore_rebuilds_dispatch_and_preserves_other_pause",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "fault_restore_resumes_world",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshot": "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\export-slice-baseline-graphical.png",
+  "runDirectories": [
+    "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\data\\export-slice-baseline-graphical\\runs\\f69dbbb61da54ad395a71d120c36ccd7",
+    "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\data\\export-slice-baseline-graphical\\runs\\615066c7f7ab4759aecca2e47f0127de",
+    "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\data\\export-slice-baseline-graphical\\runs\\9345847b33464708af3045428f7abe7a",
+    "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\data\\export-slice-baseline-graphical\\runs\\51785b11b8f5460391cce831fd97cadc",
+    "<project-root>\\artifacts\\verification\\20260920T142448Z-88a494c4\\data\\export-slice-baseline-graphical\\runs\\1751019910db4f09a9a5407ecdb86615"
+  ],
+  "eventCount": 1083,
+  "transfers": [
+    {
+      "sequence": 328,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 544.2500000000009,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "615066c7f7ab4759aecca2e47f0127de:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:9\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    },
+    {
+      "sequence": 347,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 544.450000000001,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "615066c7f7ab4759aecca2e47f0127de:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:12\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    },
+    {
+      "sequence": 368,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 544.650000000001,
+      "kind": "resource_transferred",
+      "residentId": "eli",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "615066c7f7ab4759aecca2e47f0127de:meeting:2",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:15\",\r\n  \"from\": \"mina\",\r\n  \"to\": \"eli\",\r\n  \"offerResourceId\": \"berries\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    },
+    {
+      "sequence": 406,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 544.9500000000011,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "9345847b33464708af3045428f7abe7a:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:20\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    },
+    {
+      "sequence": 425,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 545.1500000000011,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "9345847b33464708af3045428f7abe7a:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:23\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    },
+    {
+      "sequence": 444,
+      "branchId": "9345847b33464708af3045428f7abe7a",
+      "worldMinute": 545.3500000000012,
+      "kind": "resource_transferred",
+      "residentId": "ren",
+      "source": "rules",
+      "reason": "atomic_transfer",
+      "logicalRequestId": null,
+      "activityId": "9345847b33464708af3045428f7abe7a:meeting:4",
+      "dataJson": "{\r\n  \"transferId\": \"9345847b33464708af3045428f7abe7a:transfer:26\",\r\n  \"from\": \"sora\",\r\n  \"to\": \"ren\",\r\n  \"offerResourceId\": \"soup\",\r\n  \"offerQuantity\": 1,\r\n  \"offerPrice\": 1\r\n}"
+    }
+  ],
+  "coverage": "Actual Godot collision queries, ordinary rule decisions, world movement, file save/restore, pause behavior and synthetic Godot key-event routing. OS keyboard injection, real-provider and user visual acceptance are separate."
+}

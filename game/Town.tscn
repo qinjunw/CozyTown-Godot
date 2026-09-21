@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Host/TownGame.cs" id="1_host"]
+[ext_resource type="PackedScene" path="res://World/TownMap.tscn" id="2_map"]
+
+[node name="CozyTown" type="Node2D"]
+script = ExtResource("1_host")
+
+[node name="Map" parent="." instance=ExtResource("2_map")]
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(330, 300)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+limit_left = 0
+limit_top = 0
+limit_right = 768
+limit_bottom = 512

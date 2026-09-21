@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "1e7ebf0697489365b2d19ca92d2e59458d39324f",
+  "sourceDirty": true,
+  "sourceDirtyContext": "Verification started with uncommitted documentation and evidence updates; runtime source changes were committed. This run is not evidence of a clean checkout.",
+  "sourceDirtyContextBasis": "Verification operator record; current tracked changes remain under docs/. Godot generated TownSpeechOverlay.cs.uid after verification started.",
+  "sourceArtifactDirectory": "artifacts/verification/20260920T142448Z-88a494c4",
+  "startedAtUtc": "2026-09-20T14:24:48.4835746Z",
+  "finishedAtUtc": "2026-09-20T14:26:20.1159731Z",
+  "pathRedaction": "Repository absolute paths are replaced recursively with <project-root>. Screenshot bytes are unchanged.",
+  "files": [
+    {
+      "source": "verification.json",
+      "published": "presentation-verification.json",
+      "sourceSha256": "d103184a6284dc7f952a97091b00a77e3615d7a20f4bc9f953e774da60739906",
+      "publishedSha256": "3c6988bc61fcb956e41a6df49121917ab67399533a7ec40ade452fca82991826"
+    },
+    {
+      "source": "export-slice-baseline-graphical.json",
+      "published": "presentation-graphical.json",
+      "sourceSha256": "549cbe655f906f0827a257674e2387bc76a6f996f42bb83b2f1001b71826a1e2",
+      "publishedSha256": "bfdaa7b141619b9de35bc81045581f45fa9683c68296507dcc8042c03478414a"
+    },
+    {
+      "source": "export-slice-baseline-graphical.png",
+      "published": "presentation-1280.png",
+      "sourceSha256": "f9e5614f8fee76a5cd777e959de3f28ee632ffae7d8762223de85bca7bd9cd34",
+      "publishedSha256": "f9e5614f8fee76a5cd777e959de3f28ee632ffae7d8762223de85bca7bd9cd34"
+    }
+  ]
+}

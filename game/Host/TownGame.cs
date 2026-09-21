@@ -1,0 +1,596 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text.Json;
+using CozyTown.Core.Town;
+using CozyTown.Model;
+using Godot;
+using File = System.IO.File;
+
+namespace CozyTown.Game;
+
+public partial class TownGame : Node2D
+{
+    private const double StepSeconds = 0.05;
+    private LoadedTownContent _loaded = null!;
+    private TownWorld _world = null!;
+    private TownState _view = null!;
+    private TownRunJournal _journal = null!;
+    private readonly List<TownRunJournal> _journals = [];
+    private readonly Dictionary<string, TownActor> _actors = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, Vector2> _lastPositions = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, FrozenModelRequest> _frozen = new(StringComparer.Ordinal);
+    private readonly ConcurrentQueue<Action> _mainThread = new();
+    private readonly ConcurrentDictionary<string, Stopwatch> _admissionClocks = new(StringComparer.Ordinal);
+    private ModelDispatchGate _dispatchGate = new();
+    private readonly Stopwatch _hostClock = Stopwatch.StartNew();
+    private readonly HashSet<string> _activeModelRequests = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _pauseReasons = new(StringComparer.Ordinal);
+    private readonly List<object> _spaceQueries = [];
+    private readonly List<ModelCompletion> _modelCompletions = [];
+    private readonly List<TownEvent> _experimentEvents = [];
+    private readonly List<TownEvent> _recentEvents = [];
+    private readonly List<DeepSeekClient> _clients = [];
+    private DeepSeekClient? _model;
+    private DeepSeekOptions? _modelOptions;
+    private Camera2D _camera = null!;
+    private Node2D _map = null!;
+    private TownActor _player = null!;
+    private string _scenario = "baseline";
+    private string _mode = "rules";
+    private string _userRoot = "";
+    private string _savePath = "";
+    private string[] _arguments = [];
+    private string? _selectedResident;
+    private List<TownPoint>? _playerRoute;
+    private int _playerRouteCursor;
+    private long _persistedWorldSequence;
+    private double _accumulator;
+    private double _uiTimer;
+    private double _elapsed;
+    private double _lastHostSeconds;
+    private double _playerWalkingUntil;
+    private double _toastSeconds;
+    private bool _ready;
+    private bool _headless;
+    private bool _fatal;
+    private bool _automated;
+    private bool _finishing;
+    private string? _failure;
+
+    public override void _Ready() => _ = InitializeAsync();
+
+    private async Task InitializeAsync()
+    {
+        _arguments = OS.GetCmdlineUserArgs();
+        if (_arguments.Contains("--toolchain-smoke"))
+        {
+            GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "res://Main.tscn");
+            return;
+        }
+        try
+        {
+            _headless = DisplayServer.GetName() == "headless";
+            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--real-experiment");
+            _scenario = Argument("--scenario=") ?? "baseline";
+            _map = GetNode<Node2D>("Map");
+            _camera = GetNode<Camera2D>("Camera");
+            _loaded = TownContentLoader.Load(_map, _scenario);
+            if (!_loaded.Definitions.Residents.Select(r => r.Id).Order().SequenceEqual(new[] { "eli", "mina", "ren", "sora" }))
+                throw new InvalidDataException("This slice requires the Mina, Eli, Ren, and Sora content package.");
+            _userRoot = Argument("--data-dir=") ?? ProjectSettings.GlobalizePath("user://town");
+            if (!Path.IsPathFullyQualified(_userRoot)) throw new InvalidDataException("Data directory must be an absolute path.");
+            Directory.CreateDirectory(_userRoot);
+            _savePath = Path.Combine(_userRoot, "save.json");
+            if (_arguments.Contains("--validate-content"))
+            {
+                WriteReport(new { passed = true, test = "content", scenario = _scenario, fingerprint = _loaded.Content.Fingerprint,
+                    extractorVersion = "scene-rect-v1", _loaded.InputDigest, _loaded.PresentationDigest,
+                    dependencies = _loaded.Dependencies, manifest = _loaded.Manifest, definitions = _loaded.Definitions });
+                GetTree().Quit(0);
+                return;
+            }
+            string? modelConfig = Argument("--model-config=");
+            if (modelConfig != null)
+            {
+                var local = TownJson.Deserialize<LocalModelSettings>(File.ReadAllText(modelConfig));
+                if (!Path.IsPathFullyQualified(local.CredentialFile) || !Path.IsPathFullyQualified(local.LedgerFile))
+                    throw new InvalidDataException("Local model configuration requires absolute credential and ledger paths.");
+                _modelOptions = new(local.CredentialFile, local.LedgerFile);
+                _mode = "real";
+            }
+            if (_arguments.Contains("--real-experiment") && _modelOptions == null)
+                throw new InvalidDataException("Real experiment requires an explicit local model configuration.");
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+            _world = new TownWorld(_loaded.Content, _scenario, movementQuery: CheckMotion);
+            _view = _world.GetView();
+            CreateJournal();
+            CreateActors();
+            CreateInterface();
+            TownSpeechOverlay.Install(this, _actors.Values.Append(_player), _ui);
+            _ready = true;
+            _lastHostSeconds = _hostClock.Elapsed.TotalSeconds;
+            SyncActors();
+            RefreshInterface();
+            Toast("欢迎来到榆溪。走近邻居，听听他们今天的打算。", 7);
+            if (_arguments.Contains("--slice-smoke")) _ = RunSceneSmokeAsync();
+        }
+        catch (Exception error)
+        {
+            Fail("startup_failed", error);
+            if (_automated || _arguments.Contains("--validate-content"))
+            {
+                WriteReport(new { passed = false, test = "startup", code = _failure });
+                GetTree().Quit(1);
+            }
+        }
+    }
+
+    private void CreateJournal()
+    {
+        TownState full = _world.State;
+        _journal = new TownRunJournal(Path.Combine(_userRoot, "runs"), full.BranchId, new
+        {
+            schemaVersion = 1, branchId = full.BranchId, full.ParentBranchId, full.SourceSnapshotId, full.InitialStateId,
+            decisionMode = _mode, stage = _scenario, budgetId = full.BudgetId,
+            contentFingerprint = _loaded.Content.Fingerprint, inputDigest = _loaded.InputDigest,
+            presentationDigest = _loaded.PresentationDigest, dependencies = _loaded.Dependencies,
+            modelProtocol = TownModelProtocol.Version, rulesVersion = TownWorld.RulesVersion,
+            numericVersion = TownWorld.NumericVersion, engineVersion = Engine.GetVersionInfo()["string"].AsString(),
+            buildVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
+            worldMinutesPerSecond = .5, fixedStepSeconds = StepSeconds, bodyRadius = TownContent.BodyRadius,
+            recordScope = "Complete accepted input, spatial query, model result and world event prefix; replay executor is not included."
+        });
+        _journals.Add(_journal);
+        _journal.WriteArtifact("content.json", new { _loaded.Manifest, _loaded.Definitions });
+        _journal.WriteArtifact("initial-state.json", CaptureHostSnapshot());
+        string session = _world.SessionId;
+        _journal.BeforeSendOnHost = dispatch =>
+        {
+            string key = session + ":" + dispatch.Request.Identity.LogicalRequestId;
+            TimeSpan elapsed = _admissionClocks.TryGetValue(key, out var clock) ? clock.Elapsed : dispatch.Request.RemainingWait;
+            return _dispatchGate.EnqueueAsync(session,
+                () => _world.MarkDispatched(dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId),
+                dispatch.Request.RemainingWait - elapsed);
+        };
+        _persistedWorldSequence = 0;
+        if (_mode == "real" && _modelOptions != null)
+        {
+            _model = new DeepSeekClient(_modelOptions, _journal);
+            _model.ResponseArrived += (dispatch, elapsed) => _mainThread.Enqueue(() =>
+                _world.MarkResponseArrived(dispatch.Request.Identity.SessionId, dispatch.Request.Identity.LogicalRequestId,
+                    dispatch.AttemptId, 60 - dispatch.Request.RemainingWait.TotalSeconds + elapsed.TotalSeconds));
+            _clients.Add(_model);
+            _journal.WriteArtifact("budget-at-start.json", _model.Budget);
+        }
+        else _model = null;
+        FlushWorldEvents();
+    }
+
+    private void CreateActors()
+    {
+        using var catalog = JsonDocument.Parse(TownContentLoader.ReadText("res://Art/catalog.json"));
+        JsonElement actors = catalog.RootElement.GetProperty("actors");
+        Node2D parent = GetNode<Node2D>("Actors");
+        foreach (var definition in _loaded.Definitions.Residents)
+        {
+            var actor = new TownActor();
+            parent.AddChild(actor);
+            actor.Configure(definition.Id, definition.DisplayName, actors.GetProperty(definition.Id).GetString()!);
+            _actors.Add(definition.Id, actor);
+        }
+        _player = new TownActor();
+        parent.AddChild(_player);
+        _player.Configure("player", "你", actors.GetProperty("player").GetString()!);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (!_ready || _fatal || _finishing) return;
+        try
+        {
+            if (_journal.Failed) throw new IOException("Run journal is interrupted.");
+            while (_mainThread.TryDequeue(out var work)) work();
+            _dispatchGate.Tick(_world.SessionId, _pauseReasons.Count > 0, _fatal);
+            double now = _hostClock.Elapsed.TotalSeconds;
+            double elapsed = Math.Max(0, now - _lastHostSeconds);
+            _lastHostSeconds = now;
+            _elapsed += elapsed;
+            // Simulation catches up only a bounded interval; logical deadlines still include the entire host delay.
+            double accepted = Math.Min(elapsed, .25);
+            if (elapsed > accepted) _world.Advance(0, elapsed - accepted, true);
+            _accumulator += accepted;
+            while (_accumulator >= StepSeconds)
+            {
+                if (_journal.Failed) throw new IOException("Run journal is interrupted.");
+                _accumulator -= StepSeconds;
+                bool paused = _pauseReasons.Count > 0;
+                if (!paused) AdvancePlayer(StepSeconds);
+                _world.Advance(paused ? 0 : StepSeconds * .5, StepSeconds, paused);
+                FlushWorldEvents();
+                if (!paused) DispatchDecisions();
+            }
+            _view = _world.GetView();
+            SyncActors();
+            _uiTimer += delta;
+            if (_uiTimer >= .2) { _uiTimer = 0; RefreshInterface(); }
+            if (_toastSeconds > 0) { _toastSeconds -= delta; if (_toastSeconds <= 0) _toast.Visible = false; }
+            if (_arguments.Contains("--real-experiment")) CheckExperimentCompletion();
+        }
+        catch (Exception error) { Fail("runtime_failed", error); }
+    }
+
+    private void AdvancePlayer(double seconds)
+    {
+        Vector2 direction = new(
+            (MovementKeyHeld(Key.D) || MovementKeyHeld(Key.Right) ? 1 : 0) - (MovementKeyHeld(Key.A) || MovementKeyHeld(Key.Left) ? 1 : 0),
+            (MovementKeyHeld(Key.S) || MovementKeyHeld(Key.Down) ? 1 : 0) - (MovementKeyHeld(Key.W) || MovementKeyHeld(Key.Up) ? 1 : 0));
+        TownPoint current = _world.GetView().PlayerPosition;
+        if (direction.LengthSquared() > 0)
+        {
+            _selectedResident = null;
+            _playerRoute = null;
+            direction = direction.Normalized() * (float)(seconds * 62);
+            if (!_world.SetPlayerPosition(new(current.X + direction.X, current.Y + direction.Y)))
+            {
+                if (Math.Abs(direction.X) > .001) _world.SetPlayerPosition(new(current.X + direction.X, current.Y));
+                if (Math.Abs(direction.Y) > .001) _world.SetPlayerPosition(new(current.X, current.Y + direction.Y));
+            }
+        }
+        else if (_playerRoute != null && _playerRouteCursor < _playerRoute.Count)
+        {
+            TownPoint target = _playerRoute[_playerRouteCursor];
+            double distance = current.DistanceTo(target);
+            double amount = Math.Min(distance, seconds * 62);
+            if (distance < .01) { _playerRouteCursor++; return; }
+            var next = new TownPoint(current.X + (target.X - current.X) / distance * amount, current.Y + (target.Y - current.Y) / distance * amount);
+            if (!_world.SetPlayerPosition(next)) { _playerRoute = null; Toast("这里走不过去，换一条路试试。"); }
+            else if (amount >= distance) _playerRouteCursor++;
+        }
+    }
+
+    private bool CheckMotion(string id, TownPoint from, TownPoint to)
+    {
+        using var shape = new CircleShape2D { Radius = (float)TownContent.BodyRadius };
+        using var query = new PhysicsShapeQueryParameters2D
+        {
+            Shape = shape, Transform = new Transform2D(0, Vector(from)), Motion = Vector(to) - Vector(from),
+            CollisionMask = 1, CollideWithAreas = false, CollideWithBodies = true, Margin = 0.001f
+        };
+        var space = GetWorld2D().DirectSpaceState;
+        bool startClear = space.IntersectShape(query, 1).Count == 0;
+        float[] motion = space.CastMotion(query);
+        bool clear = startClear && motion.Length >= 2 && motion[0] >= .9999f;
+        _spaceQueries.Add(new { id, from, to, radius = TownContent.BodyRadius, startClear, safeFraction = motion.Length > 0 ? motion[0] : 0, clear });
+        return clear;
+    }
+
+    private void FlushWorldEvents()
+    {
+        TownEvent[] events = _world.Events.Where(e => e.Sequence > _persistedWorldSequence).ToArray();
+        if (events.Length == 0 && _spaceQueries.Count == 0) return;
+        _journal.Append("world_boundary", new { events, spaceQueries = _spaceQueries.ToArray() });
+        _spaceQueries.Clear();
+        if (events.Length > 0)
+        {
+            _persistedWorldSequence = events[^1].Sequence;
+            _world.AcknowledgeEvents(_persistedWorldSequence);
+            if (_automated) _experimentEvents.AddRange(events);
+            foreach (TownEvent entry in events)
+            {
+                if (entry.Kind is not ("time_input" or "space_query")) _recentEvents.Add(entry);
+                if (entry.Kind == "dialogue_spoken" && entry.ResidentId != null && _actors.TryGetValue(entry.ResidentId, out var actor))
+                {
+                    using var data = JsonDocument.Parse(entry.DataJson);
+                    if (data.RootElement.TryGetProperty("text", out var text)) actor.Say(text.GetString() ?? "");
+                }
+                if (entry.Kind == "resource_transferred") Toast("邻居完成了一次双方同意的交换。");
+            }
+            if (_recentEvents.Count > 120) _recentEvents.RemoveRange(0, _recentEvents.Count - 120);
+        }
+    }
+
+    private void DispatchDecisions()
+    {
+        if (_experimentStopping || (_arguments.Contains("--real-experiment") && _elapsed >= 180)) return;
+        foreach (DecisionRequest request in _world.GetDecisionRequests())
+        {
+            string key = _world.SessionId + ":" + request.LogicalRequestId;
+            if (_activeModelRequests.Contains(key)) continue;
+            if (_mode != "real" || _model == null)
+            {
+                string attempt = "rules-" + Guid.NewGuid().ToString("N");
+                if (_world.MarkDispatched(request.LogicalRequestId, attempt))
+                    _world.ReceiveResult(new(_world.SessionId, request.LogicalRequestId, attempt, request.ResidentId,
+                        _world.CreateRuleCandidate(request), "rules", null));
+                continue;
+            }
+            if (_activeModelRequests.Count >= 2) break;
+            var identity = new ModelRequestIdentity(_world.GetView().BranchId, _world.SessionId, request.LogicalRequestId, request.ResidentId, request.ActivityRevision);
+            string body = _frozen.TryGetValue(request.LogicalRequestId, out var old) ? old.InputJson : TownModelProtocol.BuildRequest(request);
+            bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
+            var frozen = new FrozenModelRequest(identity, _scenario == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual,
+                body, request.IsRecovery || originalRecorded, TimeSpan.FromSeconds(request.RemainingWaitSeconds));
+            _frozen[request.LogicalRequestId] = frozen;
+            _activeModelRequests.Add(key);
+            _ = SendModelAsync(_model, request, frozen, key);
+        }
+        FlushWorldEvents();
+    }
+
+    private async Task SendModelAsync(DeepSeekClient client, DecisionRequest request, FrozenModelRequest frozen, string key)
+    {
+        var admissionClock = Stopwatch.StartNew();
+        _admissionClocks[key] = admissionClock;
+        try
+        {
+            ModelCompletion result = await client.SendAsync(frozen);
+            double arrivedAfter = 60 - frozen.RemainingWait.TotalSeconds + (result.LogicalElapsedToArrival ?? admissionClock.Elapsed).TotalSeconds;
+            _mainThread.Enqueue(() =>
+            {
+                _activeModelRequests.Remove(key);
+                _modelCompletions.Add(result);
+                ActionCandidate? candidate = null;
+                string? error = result.FailureCode;
+                if (result.Succeeded && result.CandidateJson != null)
+                {
+                    try { candidate = TownModelProtocol.Parse(result.CandidateJson); }
+                    catch { error = "candidate_schema_invalid"; }
+                }
+                if (result.DispatchedAtUtc == null && _world.SessionId == frozen.Identity.SessionId)
+                    _world.MarkDispatched(request.LogicalRequestId, result.Dispatch.AttemptId);
+                _world.ReceiveResult(new(frozen.Identity.SessionId, request.LogicalRequestId, result.Dispatch.AttemptId,
+                    request.ResidentId, candidate, "real_model", error,
+                    arrivedAfter));
+                if (error != null) Toast("模型回复未采用，居民会按规则处理。详情见观察记录。");
+            });
+        }
+        catch (Exception error)
+        {
+            string code = error is ModelException modelError ? modelError.Code : "model_unavailable";
+            _mainThread.Enqueue(() =>
+            {
+                _activeModelRequests.Remove(key);
+                if (_world.SessionId != frozen.Identity.SessionId) return;
+                if (code is "concurrency_limit" or "budget_concurrency_limit") return;
+                string attempt = "not-sent-" + Guid.NewGuid().ToString("N");
+                if (_world.MarkDispatched(request.LogicalRequestId, attempt))
+                    _world.ReceiveResult(new(_world.SessionId, request.LogicalRequestId, attempt, request.ResidentId, null, "rule_fallback", code));
+                _journal.Append("dispatch_rejected", new { request.LogicalRequestId, request.ResidentId, code });
+                Toast("真实调用暂不可用，已明确转为规则回退。");
+            });
+        }
+        finally { _admissionClocks.TryRemove(key, out _); }
+    }
+
+    private void SyncActors()
+    {
+        foreach (ResidentState resident in _view.Residents)
+        {
+            var actor = _actors[resident.Id];
+            Vector2 position = Vector(resident.Position);
+            bool walking = _pauseReasons.Count == 0 && resident.RouteCursor < resident.Route.Count && resident.BlockedReason == null;
+            actor.SetPose(position, Vector(resident.Facing), walking);
+            actor.Highlighted = _selectedResident == resident.Id;
+            _lastPositions[resident.Id] = position;
+        }
+        Vector2 player = Vector(_view.PlayerPosition);
+        if (_lastPositions.TryGetValue("player", out Vector2 last) && last.DistanceTo(player) > .01) _playerWalkingUntil = _elapsed + .09;
+        bool playerWalking = _pauseReasons.Count == 0 && _elapsed < _playerWalkingUntil;
+        _player.SetPose(player, Vector(_view.PlayerFacing), playerWalking);
+        _lastPositions["player"] = player;
+        _camera.Position = _selectedResident == null ? player : Vector(_view.Residents.Single(r => r.Id == _selectedResident).Position);
+        _camera.Offset = _inspector.Visible ? new Vector2(70, 0) : Vector2.Zero;
+    }
+
+    private static bool MovementKeyHeld(Key key) => Input.IsPhysicalKeyPressed(key) || Input.IsKeyPressed(key);
+
+    public override void _Input(InputEvent input)
+    {
+        if (!_ready || input is not InputEventKey { Pressed: true, Echo: false } key) return;
+        // Windows virtual input can report a scan code for a different key; shortcuts use logical identity.
+        Key pressed = key.Keycode != Key.None ? key.Keycode : key.PhysicalKeycode;
+        if (_fatal)
+        {
+            if (pressed == Key.F9) LoadWorld();
+            else if (pressed == Key.Escape) _menu.Visible = !_menu.Visible;
+            return;
+        }
+        if (pressed == Key.Escape) ToggleMenu();
+        else if (pressed == Key.E && _pauseReasons.Count == 0) TalkNearby();
+        else if (pressed == Key.Tab) ToggleInspector();
+        else if (pressed == Key.F5) SaveWorld();
+        else if (pressed == Key.F9) LoadWorld();
+        else return;
+        GetViewport().SetInputAsHandled();
+    }
+
+    public override void _UnhandledInput(InputEvent input)
+    {
+        if (!_ready || _fatal) return;
+        if (input is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } && _pauseReasons.Count == 0)
+        {
+            TownPoint target = Point(GetGlobalMousePosition());
+            ResidentState? nearby = _view.Residents.OrderBy(r => r.Position.DistanceTo(target)).FirstOrDefault();
+            if (nearby != null && nearby.Position.DistanceTo(target) < 17) { SelectResident(nearby.Id); return; }
+            _selectedResident = null;
+            _playerRoute = _loaded.Content.FindRoute(_view.PlayerPosition, target);
+            _playerRouteCursor = 0;
+            _journal.Append("player_route_requested", new { target, route = _playerRoute });
+            if (_playerRoute == null) Toast("这里暂时走不到。");
+        }
+    }
+
+    public override void _Notification(int what)
+    {
+        if (!_ready || _headless || _automated) return;
+        if (what == NotificationApplicationFocusOut) SetPause("focus", true);
+        else if (what == NotificationApplicationFocusIn) SetPause("focus", false);
+    }
+
+    private void SetPause(string reason, bool pause)
+    {
+        if (pause) _pauseReasons.Add(reason); else _pauseReasons.Remove(reason);
+        if (_journal != null && !_journal.Failed) _journal.Append("pause_changed", new { reason, pause, activeReasons = _pauseReasons.Order().ToArray() });
+        if (_ready) RefreshInterface();
+    }
+
+    private TownHostSnapshot CaptureHostSnapshot() => new(1, _world.CaptureJson(), Path.GetFileName(_journal?.DirectoryPath ?? _world.GetView().BranchId),
+        _journal?.RecordCount ?? 0, _accumulator, _mode, _scenario, new Dictionary<string, FrozenModelRequest>(_frozen),
+        _playerRoute?.ToArray(), _playerRoute == null ? 0 : _playerRouteCursor);
+
+    private void SaveWorld()
+    {
+        if (_fatal) return;
+        try
+        {
+            while (_mainThread.TryDequeue(out var work)) work();
+            FlushWorldEvents();
+            if (_world.HasUncommittedResponses) { Toast("回复正在落盘，请稍后保存。原存档保持不变。"); return; }
+            var snapshot = CaptureHostSnapshot();
+            TownSaveFile.Write(_savePath, snapshot, candidate => _ = TownWorld.RestoreCandidate(_loaded.Content, candidate.WorldJson));
+            _journal.Append("snapshot_saved", new { snapshot.JournalRecordCount, worldSequence = _view.Sequence });
+            Toast("已保存这一刻。下次会从原来的行程继续。");
+        }
+        catch (Exception error)
+        {
+            Toast("保存失败，之前的存档仍被保留。");
+            if (_journal.Failed) Fail("journal_failed", error);
+            else _journal.Append("save_failed", new { code = error.GetType().Name });
+        }
+    }
+
+    private void LoadWorld()
+    {
+        if (!File.Exists(_savePath)) { Toast("还没有存档，可以先保存当前进度。"); return; }
+        bool committed = false;
+        bool recoveringFault = _fatal;
+        try
+        {
+            SetPause("loading", true);
+            if (!recoveringFault) while (_mainThread.TryDequeue(out var work)) work();
+            else _spaceQueries.Clear();
+            var snapshot = TownSaveFile.Read(_savePath);
+            if (snapshot.Stage != _scenario) throw new InvalidDataException("Saved initial state differs from the current content.");
+            if (snapshot.DecisionMode == "real" && _modelOptions == null)
+                throw new InvalidDataException("Real-mode restore requires explicit model configuration.");
+            TownWorld candidate = TownWorld.RestoreCandidate(_loaded.Content, snapshot.WorldJson, CheckMotion);
+            if (snapshot.PlayerRoute != null)
+            {
+                TownPoint previous = candidate.GetView().PlayerPosition;
+                foreach (TownPoint point in snapshot.PlayerRoute.Skip(snapshot.PlayerRouteCursor))
+                {
+                    if (!_loaded.Content.CanMove(previous, point)) throw new InvalidDataException("Saved player route is not walkable.");
+                    previous = point;
+                }
+            }
+            foreach (ResidentState resident in candidate.GetView().Residents)
+                if (!CheckMotion(resident.Id, resident.Position, resident.Position)) throw new InvalidDataException("Saved body overlaps scene geometry.");
+            if (!CheckMotion("player", candidate.GetView().PlayerPosition, candidate.GetView().PlayerPosition))
+                throw new InvalidDataException("Saved player overlaps scene geometry.");
+            if (!_journal.Failed) FlushWorldEvents();
+            _world = candidate;
+            committed = true;
+            _recentEvents.Clear();
+            _frozen.Clear();
+            foreach (var pair in snapshot.ModelRequests) _frozen.Add(pair.Key, pair.Value);
+            _mode = snapshot.DecisionMode;
+            _accumulator = snapshot.UnconsumedSeconds;
+            _playerRoute = snapshot.PlayerRoute?.ToList();
+            _playerRouteCursor = snapshot.PlayerRouteCursor;
+            _view = _world.GetView();
+            CreateJournal();
+            _lastHostSeconds = _hostClock.Elapsed.TotalSeconds;
+            if (recoveringFault)
+            {
+                _dispatchGate = new ModelDispatchGate();
+                _fatal = false;
+                _failure = null;
+                _pauseReasons.Remove("fault");
+            }
+            SyncActors();
+            string sourceRecords = Path.Combine(_userRoot, "runs", snapshot.SourceRunDirectoryName, "events.jsonl");
+            bool sourcePrefixAvailable = HasJournalPrefix(sourceRecords, snapshot.JournalRecordCount);
+            _journal.Append("restore_committed", new { snapshot.SourceRunDirectoryName, snapshot.JournalRecordCount, _view.SourceSnapshotId,
+                recoveringFault, sourcePrefixAvailable, recordStatus = sourcePrefixAvailable ? "source_prefix_present" : "source_prefix_missing_replay_unavailable" });
+            Toast("已续接原来的路线、约定与交谈。");
+        }
+        catch (Exception error)
+        {
+            if (committed) { Fail("restore_publication_failed", error); return; }
+            Toast("无法读取这份存档，当前小镇保持原样。");
+            if (_journal.Failed) Fail("journal_failed", error);
+            else _journal.Append("restore_rejected", new { code = error.GetType().Name });
+        }
+        finally { if (!_fatal) SetPause("loading", false); }
+    }
+
+    private void ExportRun()
+    {
+        try
+        {
+            FlushWorldEvents();
+            _journal.WriteArtifact("export-state.json", CaptureHostSnapshot());
+            if (_model != null) _journal.WriteArtifact("budget-at-export.json", _model.Budget);
+            string path = Path.Combine(_userRoot, "exports", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N")[..6] + ".zip");
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            _journal.ExportSnapshotZip(path);
+            Toast("本次观察记录已导出。保存目录已打开。", 5);
+            if (!_automated) OS.ShellOpen(Path.GetDirectoryName(path)!);
+        }
+        catch { Toast("导出失败，已有运行记录仍保留。"); }
+    }
+
+    private void Fail(string code, Exception error)
+    {
+        _fatal = true;
+        _failure = code + ":" + error.GetType().Name;
+        _pauseReasons.Add("fault");
+        _dispatchGate.Stop();
+        GD.PushError(_failure);
+        if (_mode == "rules") GD.PrintErr(error.ToString());
+        if (!_ready && !_headless)
+        {
+            var layer = new CanvasLayer();
+            AddChild(layer);
+            var message = new Godot.Label { Text = "小镇无法启动\n" + _failure + "\n请检查内容验证记录后重新启动。", Position = new Vector2(40, 40) };
+            layer.AddChild(message);
+        }
+        if (_ready) Toast("小镇已暂停：" + _failure + "。当前状态不会继续改变。", 9999);
+        if (_ready && _automated) WriteFailureReport();
+    }
+
+    public override void _ExitTree() => _dispatchGate.Stop();
+
+    private static bool HasJournalPrefix(string path, long count)
+    {
+        try
+        {
+            using var stream = new FileStream(path, FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite);
+            using var reader = new StreamReader(stream);
+            for (long sequence = 1; sequence <= count; sequence++)
+            {
+                string? line = reader.ReadLine();
+                if (line == null) return false;
+                using var entry = JsonDocument.Parse(line);
+                if (entry.RootElement.GetProperty("sequence").GetInt64() != sequence) return false;
+            }
+            return true;
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or JsonException or KeyNotFoundException) { return false; }
+    }
+
+    private string? Argument(string prefix) => _arguments.FirstOrDefault(a => a.StartsWith(prefix, StringComparison.Ordinal))?[prefix.Length..];
+    private static Vector2 Vector(TownPoint point) => new((float)point.X, (float)point.Y);
+    private static TownPoint Point(Vector2 point) => new(point.X, point.Y);
+    private void WriteReport(object report)
+    {
+        string? path = Argument("--report=");
+        if (path == null || !Path.IsPathFullyQualified(path)) throw new InvalidDataException("Verification requires --report=<absolute path>.");
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, JsonSerializer.Serialize(report, TownJson.Options));
+    }
+
+    private sealed record LocalModelSettings(string CredentialFile, string LedgerFile);
+}

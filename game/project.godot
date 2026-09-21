@@ -2,16 +2,16 @@ config_version=5
 
 [application]
 
-config/name="CozyTown Toolchain"
-run/main_scene="res://Main.tscn"
+config/name="CozyTown"
+run/main_scene="res://Town.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=560
-window/size/window_width_override=800
-window/size/window_height_override=560
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -23,3 +23,5 @@ project/assembly_name="CozyTown.Game"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.059, 0.078, 0.09, 1)
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0

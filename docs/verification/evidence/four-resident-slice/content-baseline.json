@@ -1,0 +1,1153 @@
+{
+  "passed": true,
+  "test": "content",
+  "scenario": "baseline",
+  "fingerprint": "21816f08f7af4a49a4b2535bb73816aafdd0fb0d728699481802e6419a74e5f5",
+  "extractorVersion": "scene-rect-v1",
+  "inputDigest": "8a94ee8ee5ff2c9a92c689ebc81bd04346574f403722dd4f89edc05548e887b6",
+  "presentationDigest": "8795861f49d955fa83ab31faf42ec5e3dea2403bf6fe5effe9ab3d2b73cbec4c",
+  "dependencies": {
+    "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+    "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+    "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+    "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+    "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+    "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+    "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+    "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+    "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+    "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+    "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+    "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+    "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+    "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+    "res://Art/catalog.json": "adafbde44f720812f316235d9ba33d24bb94c3ace70410b24a806767a459de03",
+    "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+    "res://Content/town.json": "c9afb908652c9976072b9e5f4c6c0984ecf498b1876140406c9482dafafc03e2",
+    "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+  },
+  "manifest": {
+    "width": 768,
+    "height": 512,
+    "places": [
+      {
+        "id": "cafe",
+        "displayName": "\u6696\u7089\u5C0F\u9986",
+        "position": {
+          "x": 410,
+          "y": 442
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm",
+        "displayName": "\u897F\u4FA7\u83DC\u56ED",
+        "position": {
+          "x": 122,
+          "y": 278
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.eli",
+        "displayName": "Eli \u7684\u5BB6",
+        "position": {
+          "x": 292,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.mina",
+        "displayName": "Mina \u7684\u5BB6",
+        "position": {
+          "x": 174,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.ren",
+        "displayName": "Ren \u7684\u5BB6",
+        "position": {
+          "x": 410,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.sora",
+        "displayName": "Sora \u7684\u5BB6",
+        "position": {
+          "x": 528,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "player.spawn",
+        "displayName": "\u5E7F\u573A\u5357\u8DEF",
+        "position": {
+          "x": 330,
+          "y": 332
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza",
+        "displayName": "\u6986\u6811\u5E7F\u573A",
+        "position": {
+          "x": 354,
+          "y": 272
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.east",
+        "displayName": "\u6986\u6811\u5E7F\u573A",
+        "position": {
+          "x": 402,
+          "y": 264
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.north",
+        "displayName": "\u6986\u6811\u5E7F\u573A",
+        "position": {
+          "x": 354,
+          "y": 238
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.south",
+        "displayName": "\u6986\u6811\u5E7F\u573A",
+        "position": {
+          "x": 354,
+          "y": 304
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.west",
+        "displayName": "\u6986\u6811\u5E7F\u573A",
+        "position": {
+          "x": 306,
+          "y": 264
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "pond",
+        "displayName": "\u6CB3\u5CB8\u6C60\u5858",
+        "position": {
+          "x": 658,
+          "y": 362
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "shop",
+        "displayName": "\u6A61\u6728\u6742\u8D27\u5E97",
+        "position": {
+          "x": 542,
+          "y": 282
+        },
+        "regionId": "town.outdoor"
+      }
+    ],
+    "obstacles": [
+      {
+        "id": "bench.plaza.east",
+        "bounds": {
+          "x": 385,
+          "y": 329,
+          "width": 24,
+          "height": 8
+        }
+      },
+      {
+        "id": "bench.plaza.west",
+        "bounds": {
+          "x": 299,
+          "y": 329,
+          "width": 24,
+          "height": 8
+        }
+      },
+      {
+        "id": "boundary.north",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 708,
+          "height": 12
+        }
+      },
+      {
+        "id": "boundary.south",
+        "bounds": {
+          "x": 0,
+          "y": 500,
+          "width": 708,
+          "height": 12
+        }
+      },
+      {
+        "id": "boundary.west",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 12,
+          "height": 512
+        }
+      },
+      {
+        "id": "building.cafe",
+        "bounds": {
+          "x": 376,
+          "y": 396,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.eli",
+        "bounds": {
+          "x": 258,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.mina",
+        "bounds": {
+          "x": 140,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.ren",
+        "bounds": {
+          "x": 376,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.sora",
+        "bounds": {
+          "x": 494,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.shop",
+        "bounds": {
+          "x": 508,
+          "y": 236,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "landmark.farm",
+        "bounds": {
+          "x": 79,
+          "y": 223.5,
+          "width": 86,
+          "height": 43
+        }
+      },
+      {
+        "id": "landmark.pond",
+        "bounds": {
+          "x": 620,
+          "y": 310,
+          "width": 76,
+          "height": 40
+        }
+      },
+      {
+        "id": "tree.01",
+        "bounds": {
+          "x": 39,
+          "y": 76.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.02",
+        "bounds": {
+          "x": 60,
+          "y": 64.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.03",
+        "bounds": {
+          "x": 76,
+          "y": 83.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.04",
+        "bounds": {
+          "x": 99,
+          "y": 62.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.05",
+        "bounds": {
+          "x": 125,
+          "y": 68.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.06",
+        "bounds": {
+          "x": 208,
+          "y": 69.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.07",
+        "bounds": {
+          "x": 233,
+          "y": 57.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.08",
+        "bounds": {
+          "x": 331,
+          "y": 72.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.09",
+        "bounds": {
+          "x": 349,
+          "y": 61.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.10",
+        "bounds": {
+          "x": 449,
+          "y": 65.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.11",
+        "bounds": {
+          "x": 560,
+          "y": 68.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.12",
+        "bounds": {
+          "x": 585,
+          "y": 81.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.13",
+        "bounds": {
+          "x": 615,
+          "y": 67.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.14",
+        "bounds": {
+          "x": 644,
+          "y": 82.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.15",
+        "bounds": {
+          "x": 675,
+          "y": 58.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.16",
+        "bounds": {
+          "x": 52,
+          "y": 158.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.17",
+        "bounds": {
+          "x": 37,
+          "y": 176.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.18",
+        "bounds": {
+          "x": 62,
+          "y": 192.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.19",
+        "bounds": {
+          "x": 50,
+          "y": 345.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.20",
+        "bounds": {
+          "x": 33,
+          "y": 365.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.21",
+        "bounds": {
+          "x": 63,
+          "y": 380.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.22",
+        "bounds": {
+          "x": 96,
+          "y": 433.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.23",
+        "bounds": {
+          "x": 117,
+          "y": 454.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.24",
+        "bounds": {
+          "x": 137,
+          "y": 438.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.25",
+        "bounds": {
+          "x": 202,
+          "y": 462.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.26",
+        "bounds": {
+          "x": 234,
+          "y": 443.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.27",
+        "bounds": {
+          "x": 288,
+          "y": 467.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.28",
+        "bounds": {
+          "x": 527,
+          "y": 459.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.29",
+        "bounds": {
+          "x": 551,
+          "y": 475.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.30",
+        "bounds": {
+          "x": 589,
+          "y": 459.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.31",
+        "bounds": {
+          "x": 667,
+          "y": 455.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.32",
+        "bounds": {
+          "x": 678,
+          "y": 479.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "water.canal.east",
+        "bounds": {
+          "x": 674,
+          "y": 370,
+          "width": 34,
+          "height": 22
+        }
+      },
+      {
+        "id": "water.canal.west",
+        "bounds": {
+          "x": 620,
+          "y": 370,
+          "width": 26,
+          "height": 22
+        }
+      },
+      {
+        "id": "water.river",
+        "bounds": {
+          "x": 708,
+          "y": 0,
+          "width": 60,
+          "height": 512
+        }
+      }
+    ],
+    "regions": [
+      {
+        "id": "town.outdoor",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 512
+        }
+      }
+    ],
+    "roads": [
+      {
+        "id": "road.arrivallane",
+        "fromPlaceId": "player.spawn",
+        "toPlaceId": "plaza.south",
+        "points": [
+          {
+            "x": 330,
+            "y": 332
+          },
+          {
+            "x": 330,
+            "y": 304
+          },
+          {
+            "x": 354,
+            "y": 304
+          }
+        ]
+      },
+      {
+        "id": "road.bridgelane",
+        "fromPlaceId": "pond",
+        "toPlaceId": "cafe",
+        "points": [
+          {
+            "x": 658,
+            "y": 362
+          },
+          {
+            "x": 658,
+            "y": 414
+          },
+          {
+            "x": 490,
+            "y": 414
+          },
+          {
+            "x": 490,
+            "y": 442
+          },
+          {
+            "x": 410,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.cafelane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "cafe",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 442
+          },
+          {
+            "x": 410,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.elilane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.eli",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 292,
+            "y": 190
+          },
+          {
+            "x": 292,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.gardenlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "farm",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 220,
+            "y": 272
+          },
+          {
+            "x": 220,
+            "y": 278
+          },
+          {
+            "x": 122,
+            "y": 278
+          }
+        ]
+      },
+      {
+        "id": "road.marketlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "shop",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 460,
+            "y": 272
+          },
+          {
+            "x": 460,
+            "y": 282
+          },
+          {
+            "x": 542,
+            "y": 282
+          }
+        ]
+      },
+      {
+        "id": "road.minalane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.mina",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 174,
+            "y": 190
+          },
+          {
+            "x": 174,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.plazaeastlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.east",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 402,
+            "y": 272
+          },
+          {
+            "x": 402,
+            "y": 264
+          }
+        ]
+      },
+      {
+        "id": "road.plazanorthlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.north",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 238
+          }
+        ]
+      },
+      {
+        "id": "road.plazasouthlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.south",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 304
+          }
+        ]
+      },
+      {
+        "id": "road.plazawestlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.west",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 306,
+            "y": 272
+          },
+          {
+            "x": 306,
+            "y": 264
+          }
+        ]
+      },
+      {
+        "id": "road.pondlane",
+        "fromPlaceId": "shop",
+        "toPlaceId": "pond",
+        "points": [
+          {
+            "x": 542,
+            "y": 282
+          },
+          {
+            "x": 598,
+            "y": 282
+          },
+          {
+            "x": 598,
+            "y": 362
+          },
+          {
+            "x": 658,
+            "y": 362
+          }
+        ]
+      },
+      {
+        "id": "road.renlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.ren",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 410,
+            "y": 190
+          },
+          {
+            "x": 410,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.soralane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.sora",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 528,
+            "y": 190
+          },
+          {
+            "x": 528,
+            "y": 156
+          }
+        ]
+      }
+    ]
+  },
+  "definitions": {
+    "residents": [
+      {
+        "id": "mina",
+        "displayName": "\u7C73\u5A1C",
+        "homePlaceId": "home.mina",
+        "spawnPlaceId": "home.mina",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 4,
+          "grain": 1,
+          "fish": 0,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "mina.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.mina",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          },
+          {
+            "id": "mina.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.west",
+            "activity": "\u5E7F\u573A\u95F2\u901B",
+            "isFree": true
+          },
+          {
+            "id": "mina.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "shop",
+            "activity": "\u7167\u770B\u6742\u8D27\u94FA",
+            "isFree": false
+          },
+          {
+            "id": "mina.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.west",
+            "activity": "\u5348\u95F4\u6563\u6B65",
+            "isFree": true
+          },
+          {
+            "id": "mina.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.mina",
+            "activity": "\u5728\u5BB6\u6574\u7406\u8D27\u7269",
+            "isFree": false
+          }
+        ],
+        "personality": "\u7ECF\u8425\u6742\u8D27\u94FA\uFF0C\u723D\u6717\u5065\u8C08\u3002\u5348\u9910\u60F3\u5403\u9C9C\u9C7C\uFF0C\u613F\u610F\u5206\u4EAB\u591A\u4F59\u6D46\u679C\uFF1B\u9009\u62E9\u662F\u5426\u4EA4\u5F80\u7531\u81EA\u5DF1\u51B3\u5B9A\u3002"
+      },
+      {
+        "id": "eli",
+        "displayName": "\u827E\u91CC",
+        "homePlaceId": "home.eli",
+        "spawnPlaceId": "home.eli",
+        "desiredResourceId": "berries",
+        "inventory": {
+          "berries": 0,
+          "grain": 4,
+          "fish": 1,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "eli.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.eli",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          },
+          {
+            "id": "eli.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.north",
+            "activity": "\u5E7F\u573A\u95F2\u901B",
+            "isFree": true
+          },
+          {
+            "id": "eli.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "farm",
+            "activity": "\u7167\u770B\u9EA6\u7530",
+            "isFree": false
+          },
+          {
+            "id": "eli.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.north",
+            "activity": "\u5348\u95F4\u6563\u6B65",
+            "isFree": true
+          },
+          {
+            "id": "eli.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.eli",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          }
+        ],
+        "personality": "\u7167\u770B\u9EA6\u7530\uFF0C\u8010\u5FC3\u968F\u548C\u3002\u60F3\u627E\u4E9B\u6D46\u679C\uFF0C\u613F\u610F\u5206\u4EAB\u591A\u4F59\u9EA6\u7C92\uFF1B\u5DE5\u4F5C\u65F6\u95F4\u4F1A\u56DE\u519C\u573A\u3002"
+      },
+      {
+        "id": "ren",
+        "displayName": "\u963F\u4EC1",
+        "homePlaceId": "home.ren",
+        "spawnPlaceId": "home.ren",
+        "desiredResourceId": "soup",
+        "inventory": {
+          "berries": 1,
+          "grain": 0,
+          "fish": 4,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "ren.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.ren",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          },
+          {
+            "id": "ren.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.east",
+            "activity": "\u5E7F\u573A\u95F2\u901B",
+            "isFree": true
+          },
+          {
+            "id": "ren.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "pond",
+            "activity": "\u5728\u6C60\u8FB9\u9493\u9C7C",
+            "isFree": false
+          },
+          {
+            "id": "ren.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.east",
+            "activity": "\u5348\u95F4\u6563\u6B65",
+            "isFree": true
+          },
+          {
+            "id": "ren.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.ren",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          }
+        ],
+        "personality": "\u559C\u6B22\u9493\u9C7C\uFF0C\u8BDD\u4E0D\u591A\u4F46\u613F\u610F\u5E2E\u5FD9\u3002\u60F3\u559D\u4E00\u7897\u70ED\u6C64\uFF0C\u613F\u610F\u5206\u4EAB\u591A\u4F59\u9C9C\u9C7C\uFF1B\u53EF\u62D2\u7EDD\u4E0D\u5408\u9002\u7684\u9080\u8BF7\u3002"
+      },
+      {
+        "id": "sora",
+        "displayName": "\u5C0F\u7A7A",
+        "homePlaceId": "home.sora",
+        "spawnPlaceId": "home.sora",
+        "desiredResourceId": "grain",
+        "inventory": {
+          "berries": 0,
+          "grain": 0,
+          "fish": 1,
+          "soup": 4
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "sora.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.sora",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          },
+          {
+            "id": "sora.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.south",
+            "activity": "\u5E7F\u573A\u95F2\u901B",
+            "isFree": true
+          },
+          {
+            "id": "sora.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "cafe",
+            "activity": "\u5728\u5C0F\u9986\u5907\u9910",
+            "isFree": false
+          },
+          {
+            "id": "sora.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.south",
+            "activity": "\u5348\u95F4\u6563\u6B65",
+            "isFree": true
+          },
+          {
+            "id": "sora.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.sora",
+            "activity": "\u5728\u5BB6\u4F11\u606F",
+            "isFree": false
+          }
+        ],
+        "personality": "\u7ECF\u8425\u6CB3\u7554\u5C0F\u9986\uFF0C\u559C\u6B22\u542C\u90BB\u5C45\u8BB2\u6545\u4E8B\u3002\u9700\u8981\u9EA6\u7C92\uFF0C\u613F\u610F\u5206\u4EAB\u591A\u4F59\u70ED\u6C64\uFF1B\u4EA4\u8C08\u548C\u4EA4\u6362\u90FD\u987B\u5BF9\u65B9\u540C\u610F\u3002"
+      }
+    ],
+    "resources": [
+      {
+        "id": "berries",
+        "displayName": "\u6D46\u679C"
+      },
+      {
+        "id": "grain",
+        "displayName": "\u9EA6\u7C92"
+      },
+      {
+        "id": "fish",
+        "displayName": "\u9C9C\u9C7C"
+      },
+      {
+        "id": "soup",
+        "displayName": "\u70ED\u6C64"
+      }
+    ],
+    "startMinute": 540
+  }
+}

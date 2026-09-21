@@ -101,6 +101,113 @@ function Assert-SmokeReport {
     }
 }
 
+function Read-TestCounts {
+    param([string] $Path, [string] $Name)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "$Name did not produce a TRX report: $Path" }
+    [xml] $trx = Get-Content -LiteralPath $Path -Raw
+    $counts = $trx.TestRun.ResultSummary.Counters
+    if ([int] $counts.total -lt 1 -or [int] $counts.passed -ne [int] $counts.total -or
+        [int] $counts.executed -ne [int] $counts.total) { throw "$Name were skipped or failed." }
+    return [ordered]@{
+        total = [int] $counts.total
+        executed = [int] $counts.executed
+        passed = [int] $counts.passed
+        failed = [int] $counts.failed
+        skipped = [int] $counts.total - [int] $counts.executed
+    }
+}
+
+function Assert-ContentReport {
+    param([string] $Path, [string] $Scenario)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "Content validation did not produce $Path." }
+    $report = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+    if ($report.passed -isnot [bool] -or $report.passed -ne $true -or
+        $report.test -ne 'content' -or $report.scenario -ne $Scenario -or
+        $report.extractorVersion -ne 'scene-rect-v1' -or
+        $report.fingerprint -notmatch '^[0-9a-f]{64}$' -or
+        $report.inputDigest -notmatch '^[0-9a-f]{64}$' -or
+        $report.presentationDigest -notmatch '^[0-9a-f]{64}$') {
+        throw "Content report failed its identity checks: $Path"
+    }
+    $residents = @($report.definitions.residents | ForEach-Object { $_.id } | Sort-Object)
+    if (($residents -join ',') -ne 'eli,mina,ren,sora' -or
+        $report.manifest.width -ne 768 -or $report.manifest.height -ne 512 -or
+        @($report.manifest.places).Count -ne 14 -or @($report.manifest.roads).Count -ne 14 -or
+        @($report.manifest.obstacles).Count -lt 1 -or @($report.manifest.regions).Count -lt 1) {
+        throw "Content report failed the four-resident map checks: $Path"
+    }
+    return $report
+}
+
+function Assert-SliceReport {
+    param(
+        [string] $Path, [string] $Scenario, [bool] $Headless,
+        [string] $BundledRuntimeRoot = '', [string] $ExpectedScreenshot = ''
+    )
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "Slice smoke did not produce $Path." }
+    $report = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+    foreach ($flag in @('passed', 'saveReloadVerified', 'pauseVerified', 'collisionVerified')) {
+        if ($report.$flag -isnot [bool] -or $report.$flag -ne $true) { throw "Slice report failed $flag`: $Path" }
+    }
+    if ($report.test -ne 'godot_slice_smoke' -or $report.scenario -ne $Scenario -or
+        $report.headless -isnot [bool] -or $report.headless -ne $Headless -or
+        $report.mode -ne 'rules' -or $report.residents -ne 4 -or
+        $report.contentFingerprint -notmatch '^[0-9a-f]{64}$') {
+        throw "Slice report failed its mode, scenario or resident checks: $Path"
+    }
+    $requiredChecks = @(
+        'node_rename_and_reorder_preserve_fingerprint',
+        'reparent_preserving_global_transform_preserves_fingerprint',
+        'duplicate_scene_identity_rejected', 'missing_referenced_place_rejected',
+        'unsupported_rotation_rejected', 'unsupported_scale_rejected',
+        'moving_shop_updates_shared_geometry_and_fingerprint',
+        'shop_schedule_keeps_identity_and_uses_new_anchor', 'moved_shop_matches_actual_godot_collision',
+        'mutation_checks_restore_original_content',
+        'unregistered_world_collision_body_rejected', 'registered_obstacle_wrong_collision_layer_rejected',
+        'nonidentity_map_world_transform_rejected',
+        'resident_body_bindings', 'authoritative_places_clear_in_godot', 'scene_obstacle_bodies',
+        'player_collision_rejection', 'player_committed_movement', 'save_during_routes', 'published_save_readable',
+        'save_belongs_to_current_branch', 'route_restore_preserves_positions_and_cursors',
+        'player_click_route_restored', 'player_click_route_continues',
+        'stacked_pause_keeps_world_frozen', 'resume_advances_world',
+        'fault_restore_rebuilds_dispatch_and_preserves_other_pause', 'fault_restore_resumes_world',
+        'social_state_continues_same_commitments', 'four_residents_moved_through_scene',
+        'four_independent_rule_decisions', 'ordinary_rules_created_social_activity', 'assets_conserved',
+        'logical_tab_shortcut_ignores_mismatched_physical_code',
+        'logical_f5_shortcut_saves_current_branch', 'logical_f9_shortcut_restores_saved_state',
+        'logical_e_shortcut_opens_nearby_dialogue',
+        'schedule_boundary_preempts_social_activity'
+    )
+    $checkNames = @($report.checks | ForEach-Object { $_.name })
+    if (@($checkNames | Sort-Object -Unique).Count -ne $checkNames.Count) { throw "Slice report repeats check names: $Path" }
+    foreach ($name in $requiredChecks) {
+        if ($name -notin $checkNames) { throw "Slice report is missing $name`: $Path" }
+    }
+    foreach ($check in $report.checks) {
+        if ($check.passed -isnot [bool] -or $check.passed -ne $true) { throw "Slice check failed: $($check.name) in $Path" }
+    }
+    if ($BundledRuntimeRoot) {
+        if (-not [IO.Path]::IsPathFullyQualified($report.runtimeAssemblyLocation)) { throw 'Export runtime path must be absolute.' }
+        $runtime = [IO.Path]::GetFullPath($report.runtimeAssemblyLocation)
+        $prefix = [IO.Path]::GetFullPath($BundledRuntimeRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
+        if (-not $runtime.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw "Slice export loaded runtime outside its bundle: $runtime"
+        }
+    }
+    if ($ExpectedScreenshot) {
+        if ($Headless -or $report.screenshotStatus -ne 'captured' -or
+            [IO.Path]::GetFullPath($report.screenshotPath) -ne [IO.Path]::GetFullPath($ExpectedScreenshot) -or
+            -not (Test-Path -LiteralPath $ExpectedScreenshot -PathType Leaf)) {
+            throw "Slice graphical smoke did not capture the requested screenshot: $Path"
+        }
+        $signature = [IO.File]::ReadAllBytes($ExpectedScreenshot)
+        if ($signature.Length -lt 8 -or [Convert]::ToHexString($signature[0..7]) -ne '89504E470D0A1A0A') {
+            throw "Slice screenshot is not a PNG: $ExpectedScreenshot"
+        }
+    }
+    return $report
+}
+
 $summary = [ordered]@{
     schemaVersion = 1
     startedAtUtc = [DateTime]::UtcNow.ToString('O')
@@ -119,17 +226,48 @@ try {
     $summary.godotVersion = Invoke-CheckedProcess 'godot-version' $godot @('--version')
     if ($summary.godotVersion -notlike '4.7.2.stable.mono.*') { throw "Unexpected Godot: $($summary.godotVersion)" }
     $null = Invoke-CheckedProcess 'restore-host' $dotnet @('restore', 'game/CozyTown.Game.csproj', '--locked-mode') 600
-    $null = Invoke-CheckedProcess 'restore-tests' $dotnet @('restore', 'tests/CozyTown.Core.Tests/CozyTown.Core.Tests.csproj', '--locked-mode') 600
-    $null = Invoke-CheckedProcess 'core-tests' $dotnet @('test', 'tests/CozyTown.Core.Tests/CozyTown.Core.Tests.csproj', '-c', 'Release', '--no-restore', '--logger', 'trx;LogFileName=core.trx', '--results-directory', $output) 300
-    [xml] $trx = Get-Content -LiteralPath (Join-Path $output 'core.trx') -Raw
-    $counts = $trx.TestRun.ResultSummary.Counters
-    if ([int] $counts.total -lt 1 -or [int] $counts.passed -ne [int] $counts.total) { throw 'Core tests were skipped or failed.' }
-    $summary.coreTests = [ordered]@{ total = [int] $counts.total; passed = [int] $counts.passed }
+    foreach ($suite in @('core', 'model', 'host')) {
+        $projectName = 'CozyTown.' + (Get-Culture).TextInfo.ToTitleCase($suite) + '.Tests'
+        $project = "tests/$projectName/$projectName.csproj"
+        $null = Invoke-CheckedProcess "restore-$suite-tests" $dotnet @('restore', $project, '--locked-mode') 600
+        $null = Invoke-CheckedProcess "$suite-tests" $dotnet @('test', $project, '-c', 'Release', '--no-restore', '--logger', "trx;LogFileName=$suite.trx", '--results-directory', $output) 300
+        $summary[$suite + 'Tests'] = Read-TestCounts (Join-Path $output "$suite.trx") "$projectName tests"
+    }
     $null = Invoke-CheckedProcess 'import' $godot @('--headless', '--path', 'game', '--import') 300
     $null = Invoke-CheckedProcess 'build-host' $dotnet @('build', 'game/CozyTown.Game.csproj', '-c', 'Debug', '--no-restore') 300
     $sceneReport = Join-Path $output 'scene-headless.json'
     $null = Invoke-CheckedProcess 'scene-headless' $godot @('--headless', '--path', 'game', '--', '--toolchain-smoke', "--report=$sceneReport")
     Assert-SmokeReport $sceneReport $true
+    $summary.contentChecks = [ordered]@{}
+    foreach ($scenario in @('baseline', 'counterfactual')) {
+        $contentReportPath = Join-Path $output "content-$scenario.json"
+        $contentData = Join-Path $output "data/content-$scenario"
+        $null = Invoke-CheckedProcess "content-$scenario" $godot @('--headless', '--path', 'game', '--', '--validate-content', "--scenario=$scenario", "--report=$contentReportPath", "--data-dir=$contentData")
+        $contentReport = Assert-ContentReport $contentReportPath $scenario
+        $summary.contentChecks[$scenario] = [ordered]@{
+            passed = $true; fingerprint = $contentReport.fingerprint
+            inputDigest = $contentReport.inputDigest; presentationDigest = $contentReport.presentationDigest
+            places = @($contentReport.manifest.places).Count; residents = @($contentReport.definitions.residents).Count
+        }
+    }
+    if ($summary.contentChecks.baseline.fingerprint -eq $summary.contentChecks.counterfactual.fingerprint) {
+        throw 'Baseline and counterfactual content fingerprints must differ.'
+    }
+    $summary.sliceChecks = [ordered]@{}
+    foreach ($scenario in @('baseline', 'counterfactual')) {
+        $sliceName = "slice-$scenario-headless"
+        $sliceReportPath = Join-Path $output "$sliceName.json"
+        $sliceData = Join-Path $output "data/$sliceName"
+        $null = Invoke-CheckedProcess $sliceName $godot @('--headless', '--path', 'game', '--', '--slice-smoke', "--scenario=$scenario", "--report=$sliceReportPath", "--data-dir=$sliceData") 300
+        $sliceReport = Assert-SliceReport $sliceReportPath $scenario $true
+        if ($sliceReport.contentFingerprint -ne $summary.contentChecks[$scenario].fingerprint) {
+            throw "Slice and validation loaded different $scenario content."
+        }
+        $summary.sliceChecks[$sliceName] = [ordered]@{
+            passed = $true; checks = @($sliceReport.checks).Count; scenario = $scenario; headless = $true
+            contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
+        }
+    }
     $executable = Join-Path $windows 'CozyTown.exe'
     $null = Invoke-CheckedProcess 'export-windows' $godot @('--headless', '--path', 'game', '--export-release', 'Windows Desktop', $executable) 600
     if (-not (Test-Path -LiteralPath $executable)) { throw 'Windows export is missing.' }
@@ -142,11 +280,39 @@ try {
     $exportReport = Join-Path $output 'export-headless.json'
     $null = Invoke-CheckedProcess 'export-headless' $executable @('--headless', '--', '--toolchain-smoke', "--report=$exportReport") -WorkingDirectory $windows -Environment $runtimeEnvironment
     Assert-SmokeReport $exportReport $true $windows
+    foreach ($scenario in @('baseline', 'counterfactual')) {
+        $sliceName = "export-slice-$scenario-headless"
+        $sliceReportPath = Join-Path $output "$sliceName.json"
+        $sliceData = Join-Path $output "data/$sliceName"
+        $null = Invoke-CheckedProcess $sliceName $executable @('--headless', '--', '--slice-smoke', "--scenario=$scenario", "--report=$sliceReportPath", "--data-dir=$sliceData") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        $sliceReport = Assert-SliceReport $sliceReportPath $scenario $true $windows
+        if ($sliceReport.contentFingerprint -ne $summary.contentChecks[$scenario].fingerprint) {
+            throw "Export and scene loaded different $scenario content."
+        }
+        $summary.sliceChecks[$sliceName] = [ordered]@{
+            passed = $true; checks = @($sliceReport.checks).Count; scenario = $scenario; headless = $true
+            contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
+        }
+    }
     if ($Graphical) {
         $graphicalReport = Join-Path $output 'export-graphical.json'
         $screenshot = Join-Path $output 'export-graphical.png'
         $null = Invoke-CheckedProcess 'export-graphical' $executable @('--', '--toolchain-smoke', "--report=$graphicalReport", "--screenshot=$screenshot") -WorkingDirectory $windows -Environment $runtimeEnvironment
         Assert-SmokeReport $graphicalReport $false $windows
+        $sliceName = 'export-slice-baseline-graphical'
+        $sliceReportPath = Join-Path $output "$sliceName.json"
+        $sliceScreenshot = Join-Path $output "$sliceName.png"
+        $sliceData = Join-Path $output "data/$sliceName"
+        $null = Invoke-CheckedProcess $sliceName $executable @('--', '--slice-smoke', '--scenario=baseline', "--report=$sliceReportPath", "--data-dir=$sliceData", "--screenshot=$sliceScreenshot") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        $sliceReport = Assert-SliceReport $sliceReportPath 'baseline' $false $windows $sliceScreenshot
+        if ($sliceReport.contentFingerprint -ne $summary.contentChecks.baseline.fingerprint) {
+            throw 'Graphical export and scene loaded different baseline content.'
+        }
+        $summary.sliceChecks[$sliceName] = [ordered]@{
+            passed = $true; checks = @($sliceReport.checks).Count; scenario = 'baseline'; headless = $false
+            contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
+            screenshot = $sliceScreenshot
+        }
     }
     $summary.passed = $true
 }
