@@ -38,4 +38,6 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。
 
+后续玩家生活闭环、模型对话、两类回放及最终 Windows 交付的职责与证据要求见[完整 Demo 验收映射](docs/DEMO_ACCEPTANCE_MAP.md)。新增状态的存档、输入记录和失败验收随对应功能交付。
+
 美术可以沿用或重构。采用参考项目的代码、测试或素材时，应记录来源版本，并在本仓库独立验证；不复制 Unity 缓存、机器配置、凭据或旧项目的实时任务状态。
