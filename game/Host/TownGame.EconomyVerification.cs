@@ -172,10 +172,16 @@ public partial class TownGame
                     failedTrades = expectedOperations.Count(o => o.TradeResult?.Succeeded == false),
                     quickbarSelections = expectedOperations.Count(o => o.Kind == "quickbar_select") });
             string economyBeforeConversation = TownJson.Serialize(_world.GetView().Economy);
-            _world.Advance(664 - _world.WorldMinute, 0);
+            for (int step = 0; step < 4960; step++)
+                _world.Advance(StepSeconds * .5, StepSeconds);
             FlushWorldEvents();
             _view = _world.GetView();
             SyncActors(); RefreshInterface();
+            SaveWorld();
+            var afterBoundarySave = TownJson.Deserialize<TownSnapshot>(TownSaveFile.Read(_savePath).WorldJson).State;
+            Check("fixed_step_boundary_preserves_save", Math.Abs(_view.WorldMinute - 664) < .000001
+                && Math.Abs(afterBoundarySave.WorldMinute - _view.WorldMinute) < .000001
+                && TownJson.Serialize(afterBoundarySave.Economy) == economyBeforeConversation);
             var shopNeighbor = _view.Residents.Single(r => r.Id == "mina");
             Check("shop_neighbor_button_available", shopNeighbor.ScheduleId == "mina.work"
                 && shopNeighbor.Position.DistanceTo(entrance) < .01 && shopNeighbor.RouteCursor == shopNeighbor.Route.Count

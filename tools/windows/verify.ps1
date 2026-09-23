@@ -236,6 +236,7 @@ function Assert-EconomyReport {
         'save_reload_preserves_economy',
         'npc_assets_unchanged',
         'economy_journal_records_inputs_and_checkpoints',
+        'fixed_step_boundary_preserves_save',
         'shop_neighbor_button_available',
         'shop_neighbor_dialogue_pauses_world',
         'shop_reopens_after_neighbor_dialogue',

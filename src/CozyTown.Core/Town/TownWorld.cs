@@ -5,7 +5,7 @@ namespace CozyTown.Core.Town;
 public sealed partial class TownWorld
 {
     public const string RulesVersion = "town-social-economy-v2";
-    public const string NumericVersion = "pixels-double-grid16-radius5-v1";
+    public const string NumericVersion = "pixels-double-grid16-radius5-clock-boundary-v2";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private readonly TownContent _content;
     private readonly Func<string, TownPoint, TownPoint, bool>? _movementQuery;
@@ -86,17 +86,18 @@ public sealed partial class TownWorld
         while (_state.AcceptedWorldMinutes > .00000001)
         {
             var nextBoundary = _state.Residents.Select(r => ScheduleEnd(r)).Concat(_state.Commitments.Where(IsActive).Select(c => c.EndsAtMinute)).DefaultIfEmpty(_state.WorldMinute + .25).Min();
-            var step = Math.Min(.25, Math.Min(_state.AcceptedWorldMinutes, Math.Max(0, nextBoundary - _state.WorldMinute)));
-            if (step > .00000001)
+            var boundaryDistance = Math.Max(0, nextBoundary - _state.WorldMinute);
+            var step = Math.Min(.25, Math.Min(_state.AcceptedWorldMinutes, boundaryDistance));
+            // A positive boundary remainder must be consumed even when it is smaller than the accumulation threshold.
+            if (step > 0)
             {
                 foreach (var resident in _state.Residents) Move(resident, step * TownContent.MovementPerMinute);
-                _state.WorldMinute += step;
+                _state.WorldMinute = step == boundaryDistance ? nextBoundary : _state.WorldMinute + step;
                 _state.AcceptedWorldMinutes = Math.Max(0, _state.AcceptedWorldMinutes - step);
             }
             UpdateSchedules();
             foreach (var commitment in _state.Commitments.Where(c => IsActive(c) && c.EndsAtMinute <= _state.WorldMinute).ToArray()) EndCommitment(commitment, "window_ended", "world");
             UpdateArrivals();
-            if (step <= .00000001 && nextBoundary > _state.WorldMinute) break;
         }
         UpdateSchedules();
         ConsumeMailbox();
