@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "fa75ab35813f2f7dc5b67a4e82b7fe1a07823298",
+  "sourceDirty": false,
+  "originalRunDirectory": "artifacts/verification/20260923T111630Z-0ef2f747",
+  "pathRedaction": "Repository directory replaced with <project-root>; simulation identities and values are unchanged.",
+  "archives": [
+    {
+      "path": "artifacts/verification/20260923T111630Z-0ef2f747/CozyTown-fa75ab3-Windows.zip",
+      "bytes": 75761648,
+      "sha256": "18d4eadb00ca6b01f7cdb86fcf8d89bbad93afa98f1ac59e052e35ee91369ae7",
+      "files": 198,
+      "crcAndFileHashesVerified": true
+    },
+    {
+      "path": "artifacts/verification/20260923T111630Z-0ef2f747/offline-run-records-fa75ab3.zip",
+      "bytes": 867719,
+      "sha256": "0f93830ab41e931ff627683f506583051a5bb2bda76aa5a7ae8cfe400083e36f",
+      "files": 150,
+      "crcAndFileHashesVerified": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "bag-1280.png",
+      "bytes": 107238,
+      "sha256": "c8f44bc04fc2a11613caa968469e3dc4a32bd75bde45c382dd58c9a8a41fb475"
+    },
+    {
+      "path": "economy-headless.json",
+      "bytes": 5873,
+      "sha256": "71aa545ce979fa284509e8efbe8bb5575cc60b83b04b32dcb7ec8c7465d073e9"
+    },
+    {
+      "path": "export-economy-graphical.json",
+      "bytes": 6306,
+      "sha256": "f92343c1cb982e60fe5803574f7d6c96d4c136a757445bc2caa1bc31a35cb0c0"
+    },
+    {
+      "path": "export-economy-headless.json",
+      "bytes": 5920,
+      "sha256": "7d776614827a606adfec4cedd8d454781de17e8c81c0ced73726fe947aeded31"
+    },
+    {
+      "path": "failure-1280.png",
+      "bytes": 163780,
+      "sha256": "77c22137e73fa685fec8904f73ef3b215774e82e406d6f8629522b196a4c78c1"
+    },
+    {
+      "path": "input-checkpoints.json",
+      "bytes": 189417,
+      "sha256": "9b27bad6c1ed1aa2674c340f17b33035da1f2ccd5341b108df3d077ecd7487f3"
+    },
+    {
+      "path": "shop-1280.png",
+      "bytes": 158936,
+      "sha256": "752e067fd2cd7022078b7918af13f07407c69b94f259505455948b12a633f43e"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 7480,
+      "sha256": "5b13f2bc2f7adb42a58e5ced6d76b50c50983697e0b46a6bd27fab7684fa7069"
+    }
+  ]
+}

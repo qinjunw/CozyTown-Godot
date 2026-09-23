@@ -60,3 +60,5 @@
 ```
 
 自动场景检查经真实 Godot 路线、UI 回调和合成键事件执行；真实 Windows 键鼠操作另行记录。
+
+版本、测试结果、截图及待验事项见[玩家经济验证记录](verification/player-economy.md)。
