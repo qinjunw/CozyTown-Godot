@@ -1,11 +1,56 @@
 {
   "startMinute": 540,
   "resources": [
-    { "id": "berries", "displayName": "浆果" },
-    { "id": "grain", "displayName": "麦粒" },
-    { "id": "fish", "displayName": "鲜鱼" },
-    { "id": "soup", "displayName": "热汤" }
+    { "id": "seed.potato", "displayName": "土豆种子", "stackLimit": 99, "displayOrder": 0 },
+    { "id": "seed.carrot", "displayName": "胡萝卜种子", "stackLimit": 99, "displayOrder": 1 },
+    { "id": "seed.tomato", "displayName": "番茄种子", "stackLimit": 99, "displayOrder": 2 },
+    { "id": "crop.potato", "displayName": "土豆", "stackLimit": 99, "displayOrder": 3 },
+    { "id": "crop.carrot", "displayName": "胡萝卜", "stackLimit": 99, "displayOrder": 4 },
+    { "id": "crop.tomato", "displayName": "番茄", "stackLimit": 99, "displayOrder": 5 },
+    { "id": "feed.chicken", "displayName": "鸡饲料", "stackLimit": 99, "displayOrder": 6 },
+    { "id": "animal_product.egg", "displayName": "鸡蛋", "stackLimit": 99, "displayOrder": 7 },
+    { "id": "fish.carp", "displayName": "鲤鱼", "stackLimit": 99, "displayOrder": 8 },
+    { "id": "fish.trout", "displayName": "鳟鱼", "stackLimit": 99, "displayOrder": 9 },
+    { "id": "fish.bass", "displayName": "鲈鱼", "stackLimit": 99, "displayOrder": 10 },
+    { "id": "ingredient.salt", "displayName": "盐", "stackLimit": 99, "displayOrder": 11 },
+    { "id": "ingredient.flour", "displayName": "面粉", "stackLimit": 99, "displayOrder": 12 },
+    { "id": "food.baked_potato", "displayName": "烤土豆", "stackLimit": 99, "displayOrder": 13 },
+    { "id": "food.vegetable_soup", "displayName": "蔬菜汤", "stackLimit": 99, "displayOrder": 14 },
+    { "id": "food.grilled_fish", "displayName": "烤鱼", "stackLimit": 99, "displayOrder": 15 },
+    { "id": "food.tomato_egg", "displayName": "番茄炒蛋", "stackLimit": 99, "displayOrder": 16 },
+    { "id": "food.fish_pie", "displayName": "鱼肉派", "stackLimit": 99, "displayOrder": 17 },
+    { "id": "berries", "displayName": "浆果", "displayOrder": 100 },
+    { "id": "grain", "displayName": "麦粒", "displayOrder": 101 },
+    { "id": "fish", "displayName": "鲜鱼", "displayOrder": 102 },
+    { "id": "soup", "displayName": "热汤", "displayOrder": 103 }
   ],
+  "economy": {
+    "player": { "coins": 300, "slotCapacity": 24, "inventory": {} },
+    "shops": [{
+      "id": "shop.town.general", "displayName": "橡木杂货铺", "placeId": "shop", "coins": 10000,
+      "inventory": { "seed.carrot": 4, "seed.tomato": 3, "feed.chicken": 9, "ingredient.flour": 6 },
+      "prices": [
+        { "resourceId": "seed.potato", "buyPrice": 20, "sellPrice": 0 },
+        { "resourceId": "seed.carrot", "buyPrice": 25, "sellPrice": 0 },
+        { "resourceId": "seed.tomato", "buyPrice": 30, "sellPrice": 0 },
+        { "resourceId": "crop.potato", "buyPrice": 0, "sellPrice": 20 },
+        { "resourceId": "crop.carrot", "buyPrice": 0, "sellPrice": 25 },
+        { "resourceId": "crop.tomato", "buyPrice": 0, "sellPrice": 30 },
+        { "resourceId": "feed.chicken", "buyPrice": 10, "sellPrice": 0 },
+        { "resourceId": "animal_product.egg", "buyPrice": 0, "sellPrice": 20 },
+        { "resourceId": "fish.carp", "buyPrice": 0, "sellPrice": 25 },
+        { "resourceId": "fish.trout", "buyPrice": 0, "sellPrice": 35 },
+        { "resourceId": "fish.bass", "buyPrice": 0, "sellPrice": 45 },
+        { "resourceId": "ingredient.salt", "buyPrice": 5, "sellPrice": 0 },
+        { "resourceId": "ingredient.flour", "buyPrice": 10, "sellPrice": 0 },
+        { "resourceId": "food.baked_potato", "buyPrice": 0, "sellPrice": 50 },
+        { "resourceId": "food.vegetable_soup", "buyPrice": 0, "sellPrice": 60 },
+        { "resourceId": "food.grilled_fish", "buyPrice": 0, "sellPrice": 55 },
+        { "resourceId": "food.tomato_egg", "buyPrice": 0, "sellPrice": 75 },
+        { "resourceId": "food.fish_pie", "buyPrice": 0, "sellPrice": 100 }
+      ]
+    }]
+  },
   "residents": [
     {
       "id": "mina", "displayName": "米娜", "homePlaceId": "home.mina", "spawnPlaceId": "home.mina",

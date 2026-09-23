@@ -326,7 +326,7 @@ public sealed class TownWorldTests
         var node = JsonNode.Parse(json)!;
         node["state"]!["pendingDecisions"]![0]!["observation"]!["worldMinute"] = 0;
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, node.ToJsonString()));
-        var duplicate = json.Replace("\"schemaVersion\": 1,", "\"schemaVersion\": 1, \"schemaVersion\": 1,");
+        var duplicate = json.Replace("\"schemaVersion\": 2,", "\"schemaVersion\": 2, \"schemaVersion\": 2,");
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, duplicate));
     }
 

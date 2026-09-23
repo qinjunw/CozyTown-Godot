@@ -71,7 +71,7 @@ public partial class TownGame : Node2D
         try
         {
             _headless = DisplayServer.GetName() == "headless";
-            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--real-experiment");
+            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--real-experiment");
             _scenario = Argument("--scenario=") ?? "baseline";
             _map = GetNode<Node2D>("Map");
             _camera = GetNode<Camera2D>("Camera");
@@ -91,6 +91,8 @@ public partial class TownGame : Node2D
                 return;
             }
             string? modelConfig = Argument("--model-config=");
+            if (modelConfig is not null && (_scenario == "economy-fixture" || _arguments.Contains("--economy-smoke")))
+                throw new InvalidDataException("Economy verification requires offline rules mode.");
             if (modelConfig != null)
             {
                 var local = TownJson.Deserialize<LocalModelSettings>(File.ReadAllText(modelConfig));
@@ -115,6 +117,7 @@ public partial class TownGame : Node2D
             RefreshInterface();
             Toast("欢迎来到榆溪。走近邻居，听听他们今天的打算。", 7);
             if (_arguments.Contains("--slice-smoke")) _ = RunSceneSmokeAsync();
+            else if (_arguments.Contains("--economy-smoke")) _ = RunEconomySmokeAsync();
         }
         catch (Exception error)
         {
@@ -140,7 +143,7 @@ public partial class TownGame : Node2D
             numericVersion = TownWorld.NumericVersion, engineVersion = Engine.GetVersionInfo()["string"].AsString(),
             buildVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
             worldMinutesPerSecond = .5, fixedStepSeconds = StepSeconds, bodyRadius = TownContent.BodyRadius,
-            recordScope = "Complete accepted input, spatial query, model result and world event prefix; replay executor is not included."
+            recordScope = "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
         });
         _journals.Add(_journal);
         _journal.WriteArtifact("content.json", new { _loaded.Manifest, _loaded.Definitions });
@@ -398,7 +401,10 @@ public partial class TownGame : Node2D
             return;
         }
         if (pressed == Key.Escape) ToggleMenu();
-        else if (pressed == Key.E && _pauseReasons.Count == 0) TalkNearby();
+        else if (pressed == Key.E && _pauseReasons.Count == 0) InteractNearby();
+        else if (pressed == Key.B) ToggleInventory();
+        else if (pressed >= Key.Key1 && pressed <= Key.Key5 && GetViewport().GuiGetFocusOwner() is not LineEdit)
+            SelectQuickbarSlot((int)pressed - (int)Key.Key1);
         else if (pressed == Key.Tab) ToggleInspector();
         else if (pressed == Key.F5) SaveWorld();
         else if (pressed == Key.F9) LoadWorld();
@@ -443,6 +449,7 @@ public partial class TownGame : Node2D
     private void SaveWorld()
     {
         if (_fatal) return;
+        bool published = false;
         try
         {
             while (_mainThread.TryDequeue(out var work)) work();
@@ -450,14 +457,19 @@ public partial class TownGame : Node2D
             if (_world.HasUncommittedResponses) { Toast("回复正在落盘，请稍后保存。原存档保持不变。"); return; }
             var snapshot = CaptureHostSnapshot();
             TownSaveFile.Write(_savePath, snapshot, candidate => _ = TownWorld.RestoreCandidate(_loaded.Content, candidate.WorldJson));
+            published = true;
             _journal.Append("snapshot_saved", new { snapshot.JournalRecordCount, worldSequence = _view.Sequence });
             Toast("已保存这一刻。下次会从原来的行程继续。");
         }
         catch (Exception error)
         {
-            Toast("保存失败，之前的存档仍被保留。");
             if (_journal.Failed) Fail("journal_failed", error);
-            else _journal.Append("save_failed", new { code = error.GetType().Name });
+            else
+            {
+                try { _journal.Append("save_failed", new { code = error.GetType().Name }); }
+                catch (Exception journalError) { Fail("journal_failed", journalError); }
+            }
+            Toast(published ? "存档已写入，但后续记录失败，小镇已暂停。" : "保存失败，之前的存档仍被保留。", _fatal ? 9999 : 4);
         }
     }
 

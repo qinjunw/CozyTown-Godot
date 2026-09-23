@@ -208,6 +208,67 @@ function Assert-SliceReport {
     return $report
 }
 
+function Assert-EconomyReport {
+    param([string] $Path, [bool] $Headless, [string] $BundledRuntimeRoot = '', [string] $ExpectedScreenshot = '')
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "Economy verification did not produce $Path." }
+    $report = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+    if ($report.passed -isnot [bool] -or -not $report.passed -or $report.test -ne 'godot_economy_smoke' -or
+        $report.scenario -ne 'economy-fixture' -or $report.mode -ne 'rules' -or $report.residents -ne 4 -or
+        $report.headless -isnot [bool] -or $report.headless -ne $Headless -or $report.contentFingerprint -notmatch '^[0-9a-f]{64}$') {
+        throw "Economy report identity or outcome failed: $Path"
+    }
+    $required = @(
+        'economy_fixture_is_explicit',
+        'baseline_player_inventory_empty',
+        'player_route_reaches_shop',
+        'logical_e_opens_shop',
+        'shop_pause_preserves_world',
+        'ui_buy_conserves_assets',
+        'ui_sell_conserves_assets',
+        'ui_failed_buy_preserves_assets',
+        'ui_failed_sell_preserves_assets',
+        'logical_escape_closes_shop',
+        'logical_number_keys_select_quickbar',
+        'logical_b_opens_readonly_inventory',
+        'logical_escape_closes_inventory',
+        'economy_save_published',
+        'economy_changed_after_save',
+        'save_reload_preserves_economy',
+        'npc_assets_unchanged',
+        'economy_journal_records_inputs_and_checkpoints',
+        'shop_neighbor_button_available',
+        'shop_neighbor_dialogue_pauses_world',
+        'shop_reopens_after_neighbor_dialogue',
+        'final_shop_visible'
+    )
+    $names = @($report.checks | ForEach-Object name)
+    if (@($names | Sort-Object -Unique).Count -ne $names.Count) { throw 'Duplicate economy verification check.' }
+    foreach ($name in $required) { if ($name -notin $names) { throw "Missing economy check: $name" } }
+    foreach ($check in $report.checks) {
+        if ($check.passed -isnot [bool] -or -not $check.passed) { throw "Economy check failed: $($check.name)" }
+    }
+    if ($BundledRuntimeRoot) {
+        $runtime = [IO.Path]::GetFullPath($report.runtimeAssemblyLocation)
+        $prefix = [IO.Path]::GetFullPath($BundledRuntimeRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
+        if (-not $runtime.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) { throw 'Economy export loaded an external runtime.' }
+    }
+    if ($ExpectedScreenshot) {
+        if ($Headless -or $report.screenshotStatus -ne 'captured' -or
+            [IO.Path]::GetFullPath($report.screenshotPath) -ne [IO.Path]::GetFullPath($ExpectedScreenshot)) { throw 'Economy screenshot identity failed.' }
+        foreach ($kind in @('shop', 'bag', 'failure')) {
+            $imagePath = $report.screenshots.$kind
+            $expectedPath = if ($kind -eq 'shop') { $ExpectedScreenshot } else {
+                Join-Path (Split-Path $ExpectedScreenshot -Parent) ([IO.Path]::GetFileNameWithoutExtension($ExpectedScreenshot) + "-$kind.png")
+            }
+            if ([IO.Path]::GetFullPath($imagePath) -ne [IO.Path]::GetFullPath($expectedPath)) { throw "Economy $kind screenshot identity failed." }
+            if (-not (Test-Path -LiteralPath $imagePath -PathType Leaf)) { throw "Missing economy $kind screenshot." }
+            $signature = [IO.File]::ReadAllBytes($imagePath)
+            if ($signature.Length -lt 8 -or [Convert]::ToHexString($signature[0..7]) -ne '89504E470D0A1A0A') { throw 'Economy screenshot is not PNG.' }
+        }
+    }
+    return $report
+}
+
 $summary = [ordered]@{
     schemaVersion = 1
     startedAtUtc = [DateTime]::UtcNow.ToString('O')
@@ -239,7 +300,7 @@ try {
     $null = Invoke-CheckedProcess 'scene-headless' $godot @('--headless', '--path', 'game', '--', '--toolchain-smoke', "--report=$sceneReport")
     Assert-SmokeReport $sceneReport $true
     $summary.contentChecks = [ordered]@{}
-    foreach ($scenario in @('baseline', 'counterfactual')) {
+    foreach ($scenario in @('baseline', 'counterfactual', 'economy-fixture')) {
         $contentReportPath = Join-Path $output "content-$scenario.json"
         $contentData = Join-Path $output "data/content-$scenario"
         $null = Invoke-CheckedProcess "content-$scenario" $godot @('--headless', '--path', 'game', '--', '--validate-content', "--scenario=$scenario", "--report=$contentReportPath", "--data-dir=$contentData")
@@ -268,6 +329,13 @@ try {
             contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
         }
     }
+    $summary.economyChecks = [ordered]@{}
+    $economyReportPath = Join-Path $output 'economy-headless.json'
+    $economyData = Join-Path $output 'data/economy-headless'
+    $null = Invoke-CheckedProcess 'economy-headless' $godot @('--headless', '--path', 'game', '--', '--economy-smoke', '--scenario=economy-fixture', "--report=$economyReportPath", "--data-dir=$economyData") 300
+    $economyReport = Assert-EconomyReport $economyReportPath $true
+    if ($economyReport.contentFingerprint -ne $summary.contentChecks['economy-fixture'].fingerprint) { throw 'Economy smoke and content validation differ.' }
+    $summary.economyChecks['economy-headless'] = [ordered]@{ passed = $true; checks = @($economyReport.checks).Count; contentFingerprint = $economyReport.contentFingerprint }
     $executable = Join-Path $windows 'CozyTown.exe'
     $null = Invoke-CheckedProcess 'export-windows' $godot @('--headless', '--path', 'game', '--export-release', 'Windows Desktop', $executable) 600
     if (-not (Test-Path -LiteralPath $executable)) { throw 'Windows export is missing.' }
@@ -294,6 +362,12 @@ try {
             contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
         }
     }
+    $economyReportPath = Join-Path $output 'export-economy-headless.json'
+    $economyData = Join-Path $output 'data/export-economy-headless'
+    $null = Invoke-CheckedProcess 'export-economy-headless' $executable @('--headless', '--', '--economy-smoke', '--scenario=economy-fixture', "--report=$economyReportPath", "--data-dir=$economyData") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+    $economyReport = Assert-EconomyReport $economyReportPath $true $windows
+    if ($economyReport.contentFingerprint -ne $summary.contentChecks['economy-fixture'].fingerprint) { throw 'Economy export and content validation differ.' }
+    $summary.economyChecks['export-economy-headless'] = [ordered]@{ passed = $true; checks = @($economyReport.checks).Count; contentFingerprint = $economyReport.contentFingerprint }
     if ($Graphical) {
         $graphicalReport = Join-Path $output 'export-graphical.json'
         $screenshot = Join-Path $output 'export-graphical.png'
@@ -313,6 +387,15 @@ try {
             contentFingerprint = $sliceReport.contentFingerprint; eventCount = $sliceReport.eventCount
             screenshot = $sliceScreenshot
         }
+    }
+    if ($Graphical) {
+        $economyReportPath = Join-Path $output 'export-economy-graphical.json'
+        $economyData = Join-Path $output 'data/export-economy-graphical'
+        $economyScreenshot = Join-Path $output 'export-economy-graphical.png'
+        $null = Invoke-CheckedProcess 'export-economy-graphical' $executable @('--', '--economy-smoke', '--scenario=economy-fixture', "--report=$economyReportPath", "--data-dir=$economyData", "--screenshot=$economyScreenshot") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        $economyReport = Assert-EconomyReport $economyReportPath $false $windows $economyScreenshot
+        if ($economyReport.contentFingerprint -ne $summary.contentChecks['economy-fixture'].fingerprint) { throw 'Graphical economy export and content validation differ.' }
+        $summary.economyChecks['export-economy-graphical'] = [ordered]@{ passed = $true; checks = @($economyReport.checks).Count; contentFingerprint = $economyReport.contentFingerprint; screenshots = $economyReport.screenshots }
     }
     $summary.passed = $true
 }

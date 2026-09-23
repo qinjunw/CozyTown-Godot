@@ -8,7 +8,7 @@ public sealed partial class TownWorld
     public TownSnapshot CaptureSnapshot()
     {
         if (HasUncommittedResponses) throw new InvalidOperationException("A received model response is still being persisted; save after its completion is sealed.");
-        return new(1, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
+        return new(2, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
     }
     public string CaptureJson() => TownJson.Serialize(CaptureSnapshot());
 
@@ -39,7 +39,7 @@ public sealed partial class TownWorld
     {
         void Require([DoesNotReturnIf(false)] bool condition, string field) { if (!condition) throw new InvalidDataException($"Invalid town snapshot: {field}"); }
         bool Id(string? id) => !string.IsNullOrWhiteSpace(id) && id.Length <= 200;
-        Require(snapshot.SchemaVersion == 1, "schemaVersion");
+        Require(snapshot.SchemaVersion == 2, "schemaVersion");
         Require(snapshot.ContentFingerprint == content.Fingerprint, "contentFingerprint");
         Require(snapshot.RulesVersion == RulesVersion && snapshot.NumericVersion == NumericVersion, "simulation versions");
         Require(Id(snapshot.SnapshotId) && snapshot.State is not null, "snapshot identity/state");
@@ -78,6 +78,8 @@ public sealed partial class TownWorld
         foreach (var resource in content.Data.Resources)
             Require(state.Residents.Sum(r => (long)r.Inventory.GetValueOrDefault(resource.Id)) == content.Data.Residents.Sum(r => (long)r.Inventory.GetValueOrDefault(resource.Id)), $"resource conservation {resource.Id}");
         Require(state.Residents.Sum(r => (long)r.Coins) == content.Data.Residents.Sum(r => (long)r.Coins), "coin conservation");
+        ValidateEconomy(content, state.Economy);
+        Require(state.Economy.InputSequence <= state.Sequence, "economy input sequence exceeds world event sequence");
         foreach (var commitment in state.Commitments)
         {
             Require(commitment.InitiatorId != commitment.InviteeId && state.Residents.Any(r => r.Id == commitment.InitiatorId) && state.Residents.Any(r => r.Id == commitment.InviteeId), $"{commitment.Id} participants");
