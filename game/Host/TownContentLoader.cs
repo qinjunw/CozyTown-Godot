@@ -71,11 +71,17 @@ public static class TownContentLoader
                 throw new InvalidDataException("Counterfactual inventory identities do not match the resident definitions.");
             definitions = definitions with { Residents = definitions.Residents.Select(r => r with { Inventory = inventories[r.Id] }).ToArray() };
         }
-        else if (initialState != "baseline") throw new InvalidDataException("Initial state must be baseline or counterfactual.");
+        else if (initialState == "economy-fixture")
+        {
+            var inventory = TownJson.Deserialize<Dictionary<string, int>>(ReadText("res://Content/economy-fixture.json"));
+            if (definitions.Economy is null) throw new InvalidDataException("Economy fixture requires an economy definition.");
+            definitions = definitions with { Economy = definitions.Economy with { Player = definitions.Economy.Player with { Inventory = inventory } } };
+        }
+        else if (initialState != "baseline") throw new InvalidDataException("Initial state must be baseline, counterfactual or economy-fixture.");
         TownContent content = TownContent.Create(manifest, definitions);
         var dependencies = new SortedDictionary<string, string>(StringComparer.Ordinal);
         dependencies["res://World/TownMap.tscn#extracted-geometry-v1"] = Hash(TownJson.Serialize(manifest));
-        foreach (string path in new[] { "res://Content/town.json", "res://Content/counterfactual.json", "res://Art/catalog.json" })
+        foreach (string path in new[] { "res://Content/town.json", "res://Content/counterfactual.json", "res://Content/economy-fixture.json", "res://Art/catalog.json" })
         {
             dependencies[path] = Convert.ToHexString(SHA256.HashData(Godot.FileAccess.GetFileAsBytes(path))).ToLowerInvariant();
         }

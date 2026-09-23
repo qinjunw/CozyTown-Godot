@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CozyTown.Core.Town;
 
-public sealed class TownContent
+public sealed partial class TownContent
 {
     internal TownManifest Geometry { get; }
     internal TownDefinitions Data { get; }
@@ -54,6 +54,10 @@ public sealed class TownContent
         Unique(manifest.Roads.Select(p => p.Id), "roads");
         Unique(definitions.Residents.Select(p => p.Id), "residents");
         Unique(definitions.Resources.Select(p => p.Id), "resources");
+        foreach (var resource in definitions.Resources)
+            if (string.IsNullOrWhiteSpace(resource.DisplayName) || resource.StackLimit is < 1 or > 100000 || resource.DisplayOrder < 0)
+                Fail($"resource {resource.Id} inventory definition");
+        definitions = definitions with { Economy = NormalizeEconomy(manifest, definitions) };
         if (manifest.Places.Length == 0 || manifest.Regions.Length == 0 || definitions.Residents.Length == 0 || definitions.Resources.Length == 0) Fail("empty required content");
         if (definitions.StartMinute is < 0 or >= 1440) Fail("startMinute");
         foreach (var region in manifest.Regions) ValidateRect(region.Bounds, $"region {region.Id}");

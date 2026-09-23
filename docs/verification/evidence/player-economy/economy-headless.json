@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_economy_smoke",
+  "passed": true,
+  "scenario": "economy-fixture",
+  "headless": true,
+  "mode": "rules",
+  "residents": 4,
+  "runtimeAssemblyLocation": "<project-root>\\.local\\tools\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+  "engine": "4.7.2-stable (official)",
+  "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+  "checks": [
+    {
+      "name": "economy_fixture_is_explicit",
+      "passed": true,
+      "evidence": {
+        "scenario": "economy-fixture",
+        "player": {
+          "coins": 300,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 2,
+            "fish.carp": 1,
+            "food.baked_potato": 1
+          },
+          "selectedQuickbarIndex": 0
+        }
+      }
+    },
+    {
+      "name": "baseline_player_inventory_empty",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "player_route_reaches_shop",
+      "passed": true,
+      "evidence": {
+        "routePoints": 1,
+        "start": {
+          "x": 330,
+          "y": 332
+        },
+        "end": {
+          "x": 542,
+          "y": 282
+        },
+        "entrance": {
+          "x": 542,
+          "y": 282
+        }
+      }
+    },
+    {
+      "name": "logical_e_opens_shop",
+      "passed": true,
+      "evidence": {
+        "injection": "Godot.Input.ParseInputEvent",
+        "osInput": false
+      }
+    },
+    {
+      "name": "shop_pause_preserves_world",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "ui_buy_conserves_assets",
+      "passed": true,
+      "evidence": {
+        "bought": {
+          "operationId": "c6e3cb520fc74bc6857e8963f4634a49:player:0f6a5ad3c5bb45248c6069370cca56cc",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 25,
+          "totalPrice": 50,
+          "isDuplicate": false
+        },
+        "playerCoins": 250
+      }
+    },
+    {
+      "name": "ui_sell_conserves_assets",
+      "passed": true,
+      "evidence": {
+        "sold": {
+          "operationId": "c6e3cb520fc74bc6857e8963f4634a49:player:2e9a4ce0def1475594f185bac99a4457",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 20,
+          "totalPrice": 20,
+          "isDuplicate": false
+        },
+        "playerCoins": 270
+      }
+    },
+    {
+      "name": "ui_failed_buy_preserves_assets",
+      "passed": true,
+      "evidence": {
+        "operationId": "c6e3cb520fc74bc6857e8963f4634a49:player:0edeff8df85f4fe5926cb5cba05d2f71",
+        "succeeded": false,
+        "code": "insufficient_shop_stock",
+        "unitPrice": 25,
+        "totalPrice": 249975,
+        "isDuplicate": false
+      }
+    },
+    {
+      "name": "ui_failed_sell_preserves_assets",
+      "passed": true,
+      "evidence": {
+        "operationId": "c6e3cb520fc74bc6857e8963f4634a49:player:f4bd6f319ca54e679294b3d02c691df4",
+        "succeeded": false,
+        "code": "insufficient_player_stock",
+        "unitPrice": 20,
+        "totalPrice": 199980,
+        "isDuplicate": false
+      }
+    },
+    {
+      "name": "logical_escape_closes_shop",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_number_keys_select_quickbar",
+      "passed": true,
+      "evidence": {
+        "keys": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "injection": "Godot.Input.ParseInputEvent",
+        "osInput": false
+      }
+    },
+    {
+      "name": "logical_b_opens_readonly_inventory",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "logical_escape_closes_inventory",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "economy_save_published",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "economy_changed_after_save",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "save_reload_preserves_economy",
+      "passed": true,
+      "evidence": {
+        "sourceBranch": "c6e3cb520fc74bc6857e8963f4634a49",
+        "restoredBranch": "2a6791d6932f4925b0fea025e9ae30d5",
+        "receipts": 9
+      }
+    },
+    {
+      "name": "npc_assets_unchanged",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "economy_journal_records_inputs_and_checkpoints",
+      "passed": true,
+      "evidence": {
+        "records": 11,
+        "successfulTrades": 3,
+        "failedTrades": 2,
+        "quickbarSelections": 6
+      }
+    },
+    {
+      "name": "shop_neighbor_button_available",
+      "passed": true,
+      "evidence": {
+        "worldMinute": 664,
+        "id": "mina",
+        "position": {
+          "x": 542,
+          "y": 282
+        },
+        "button": "和邻居聊聊"
+      }
+    },
+    {
+      "name": "shop_neighbor_dialogue_pauses_world",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "shop_reopens_after_neighbor_dialogue",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "final_shop_visible",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshotStatus": "not_requested",
+  "screenshotPath": null,
+  "screenshots": {
+    "shop": null,
+    "bag": null,
+    "failure": null
+  },
+  "runDirectories": [
+    "<project-root>\\artifacts\\verification\\20260923T111630Z-0ef2f747\\data\\economy-headless\\runs\\c6e3cb520fc74bc6857e8963f4634a49",
+    "<project-root>\\artifacts\\verification\\20260923T111630Z-0ef2f747\\data\\economy-headless\\runs\\2a6791d6932f4925b0fea025e9ae30d5"
+  ],
+  "coverage": "Actual Godot route movement, shop button callbacks, synthetic Godot key-event routing, asset conservation, file save/restore and durable economy commands. Input uses Godot.Input.ParseInputEvent, not OS keyboard injection. No model requests are dispatched."
+}

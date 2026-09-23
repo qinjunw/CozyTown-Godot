@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-09-23T13:27:55.0478523Z",
+  "passed": true,
+  "osVersion": "Microsoft Windows NT 10.0.26200.0",
+  "graphicalRequested": true,
+  "sourceCommit": "6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+  "sourceDirty": false,
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "steps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.272
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.2
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.099
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.088
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.649
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.009
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 8.911
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.175
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 5.411
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.461
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.884
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.754
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.756
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.785
+    },
+    {
+      "name": "content-economy-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.04
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.162
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.229
+    },
+    {
+      "name": "economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.76
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.267
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.702
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.81
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.833
+    },
+    {
+      "name": "export-economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.593
+    },
+    {
+      "name": "export-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.856
+    },
+    {
+      "name": "export-slice-baseline-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.644
+    },
+    {
+      "name": "export-economy-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.41
+    }
+  ],
+  "error": null,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "coreTests": {
+    "total": 103,
+    "executed": 103,
+    "passed": 103,
+    "failed": 0,
+    "skipped": 0
+  },
+  "modelTests": {
+    "total": 45,
+    "executed": 45,
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostTests": {
+    "total": 55,
+    "executed": 55,
+    "passed": 55,
+    "failed": 0,
+    "skipped": 0
+  },
+  "contentChecks": {
+    "baseline": {
+      "passed": true,
+      "fingerprint": "24dcd2396447ff3d941b8e679502412f9312ae1413d23453156e5010d865122a",
+      "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 14,
+      "residents": 4
+    },
+    "counterfactual": {
+      "passed": true,
+      "fingerprint": "05967e4ecec3ac5b93ebd328614b0157cfdd1865475d3678c4fcbfbd20e9eb4e",
+      "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 14,
+      "residents": 4
+    },
+    "economy-fixture": {
+      "passed": true,
+      "fingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+      "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 14,
+      "residents": 4
+    }
+  },
+  "sliceChecks": {
+    "slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "24dcd2396447ff3d941b8e679502412f9312ae1413d23453156e5010d865122a",
+      "eventCount": 1083
+    },
+    "slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "05967e4ecec3ac5b93ebd328614b0157cfdd1865475d3678c4fcbfbd20e9eb4e",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "24dcd2396447ff3d941b8e679502412f9312ae1413d23453156e5010d865122a",
+      "eventCount": 1083
+    },
+    "export-slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "05967e4ecec3ac5b93ebd328614b0157cfdd1865475d3678c4fcbfbd20e9eb4e",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-graphical": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": false,
+      "contentFingerprint": "24dcd2396447ff3d941b8e679502412f9312ae1413d23453156e5010d865122a",
+      "eventCount": 1083,
+      "screenshot": "<project-root>\\artifacts\\verification\\20260923T132755Z-00866ad5\\export-slice-baseline-graphical.png"
+    }
+  },
+  "economyChecks": {
+    "economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43"
+    },
+    "export-economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43"
+    },
+    "export-economy-graphical": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+      "screenshots": {
+        "shop": "<project-root>\\artifacts\\verification\\20260923T132755Z-00866ad5\\export-economy-graphical.png",
+        "bag": "<project-root>\\artifacts\\verification\\20260923T132755Z-00866ad5\\export-economy-graphical-bag.png",
+        "failure": "<project-root>\\artifacts\\verification\\20260923T132755Z-00866ad5\\export-economy-graphical-failure.png"
+      }
+    }
+  },
+  "finishedAtUtc": "2026-09-23T13:28:58.3528109Z"
+}

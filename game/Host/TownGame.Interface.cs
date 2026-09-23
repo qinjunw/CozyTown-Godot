@@ -14,6 +14,7 @@ public partial class TownGame
     private Label _clock = null!;
     private Label _modeLabel = null!;
     private Button _talkButton = null!;
+    private Button _residentTalkButton = null!;
     private Label _inspectorTitle = null!;
     private RichTextLabel _inspectorBody = null!;
     private PanelContainer _dialogue = null!;
@@ -81,8 +82,10 @@ public partial class TownGame
         guide.AddThemeConstantOverride("separation", 16);
         guidePanel.AddChild(Margin(guide, 17, 8));
         guide.AddChild(Label("W A S D  /  点击地面移动", 15, _ink));
-        _talkButton = Button("E  交谈", TalkNearby);
+        _talkButton = Button("E  交互", InteractNearby);
         guide.AddChild(_talkButton);
+        _residentTalkButton = Button("和邻居聊聊", TalkNearby);
+        guide.AddChild(_residentTalkButton);
         _modeLabel = Label("规则模拟", 13, _muted);
         guide.AddChild(_modeLabel);
         bottom.AddChild(new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill, MouseFilter = Control.MouseFilterEnum.Ignore });
@@ -117,7 +120,7 @@ public partial class TownGame
 
         _toast = Panel();
         _ui.AddChild(_toast);
-        Place(_toast, -305, -139, 305, -90, leftAnchor: .5f, rightAnchor: .5f, topAnchor: 1, bottomAnchor: 1);
+        Place(_toast, -305, -215, 305, -164, leftAnchor: .5f, rightAnchor: .5f, topAnchor: 1, bottomAnchor: 1);
         _toast.MouseFilter = Control.MouseFilterEnum.Ignore;
         _toastText = Label("", 15, _ink);
         _toastText.HorizontalAlignment = HorizontalAlignment.Center;
@@ -143,6 +146,7 @@ public partial class TownGame
         dialogueColumn.AddChild(_dialogueText);
         dialogueColumn.AddChild(Button("继续散步", CloseDialogue));
         _dialogue.Visible = false;
+        CreateEconomyInterface(top, bottom);
         CreateMenu();
     }
 
@@ -178,6 +182,7 @@ public partial class TownGame
 
     private void ToggleMenu()
     {
+        if (_economyPanel.Visible) { CloseEconomy(); return; }
         if (_dialogue.Visible) { CloseDialogue(); return; }
         _menu.Visible = !_menu.Visible;
         SetPause("menu", _menu.Visible);
@@ -185,6 +190,7 @@ public partial class TownGame
 
     private void ToggleInspector()
     {
+        if (_economyPanel.Visible || _dialogue.Visible || _menu.Visible) return;
         _inspector.Visible = !_inspector.Visible;
         if (_inspector.Visible && _selectedResident == null) _selectedResident = _view.Residents[0].Id;
         RefreshInterface();
@@ -192,6 +198,7 @@ public partial class TownGame
 
     private void SelectResident(string id)
     {
+        if (_pauseReasons.Count > 0 || _fatal) return;
         _selectedResident = id;
         _inspector.Visible = true;
         RefreshInterface();
@@ -224,10 +231,13 @@ public partial class TownGame
         _modeLabel.Text = _mode == "real" ? "真实模型" : "规则模拟";
         ResidentState? nearest = _view.Residents.Where(r => r.Position.DistanceTo(_view.PlayerPosition) <= 42)
             .OrderBy(r => r.Position.DistanceTo(_view.PlayerPosition)).FirstOrDefault();
-        _talkButton.Text = nearest == null ? "E  交谈" : "E  和" + _loaded.Definitions.Residents.Single(r => r.Id == nearest.Id).DisplayName + "交谈";
+        _talkButton.Text = NearbyShop() is not null ? "E  逛杂货铺" : nearest == null ? "E  交互" : "E  和" + _loaded.Definitions.Residents.Single(r => r.Id == nearest.Id).DisplayName + "交谈";
         _talkButton.Disabled = _pauseReasons.Count > 0;
+        _residentTalkButton.Visible = NearbyShop() is not null && nearest is not null;
+        _residentTalkButton.Disabled = _pauseReasons.Count > 0;
         foreach (var pair in _residentButtons)
             pair.Value.Modulate = _selectedResident == pair.Key ? new Color("d8e9c8") : Colors.White;
+        RefreshEconomyInterface();
         if (!_inspector.Visible || _selectedResident == null) return;
         ResidentState resident = _view.Residents.Single(r => r.Id == _selectedResident);
         ResidentDefinition definition = _loaded.Definitions.Residents.Single(r => r.Id == resident.Id);
@@ -287,8 +297,16 @@ public partial class TownGame
     private void Toast(string text, double seconds = 4)
     {
         if (_toast == null) return;
+        if (_economyPanel is not null && _economyPanel.Visible)
+        {
+            _tradeFeedback.Text = text;
+            _tradeFeedback.Modulate = _fatal ? new Color("ad593d") : Colors.White;
+            _toast.Visible = false;
+            return;
+        }
         _toastText.Text = text;
         _toast.Visible = true;
+        _ui.MoveChild(_toast, _ui.GetChildCount() - 1);
         _toastSeconds = seconds;
     }
     private Label Label(string text, int size, Color color)

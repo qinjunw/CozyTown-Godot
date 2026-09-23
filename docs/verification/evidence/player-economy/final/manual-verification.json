@@ -1,0 +1,1364 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+  "passed": true,
+  "clientResolution": [
+    1920,
+    1080
+  ],
+  "captureLogicalResolution": [
+    962,
+    570
+  ],
+  "inputMethod": "Windows Computer Use mouse and keyboard; no Godot synthetic events",
+  "scenario": "economy-fixture",
+  "decisionMode": "rules",
+  "checks": {
+    "buySellConservation": true,
+    "quantityTypedWithoutEnter": true,
+    "rejectedSalePreservesAssets": true,
+    "quickbarAndBagConsistent": true,
+    "saveThenFurtherTradeThenRestore": true,
+    "bothEconomiesAndSelectionRestored": true,
+    "naturalScheduleBoundaryAndSave": true,
+    "shopNeighborDialogue": true,
+    "noSaveOrRestoreFailure": true
+  },
+  "savedWorldMinute": 675.199999999877,
+  "savedAcceptedWorldMinutes": 0,
+  "snapshotSavedCount": 2,
+  "restoreCount": 2,
+  "saveSha256": "0ad9f919ce5eadb27a124d7f8758063931362de45e1801ef5f305ee32e3b4e07",
+  "previousSaveSha256": "1b6f222aea3af6e2931f17b70e154b4138e0ef0e88b9212ba7537724133a788b",
+  "finalEconomy": {
+    "player": {
+      "coins": 270,
+      "slotCapacity": 24,
+      "inventory": {
+        "animal_product.egg": 3,
+        "crop.potato": 1,
+        "fish.carp": 1,
+        "food.baked_potato": 1,
+        "seed.carrot": 2
+      },
+      "selectedQuickbarIndex": 4
+    },
+    "shops": [
+      {
+        "id": "shop.town.general",
+        "coins": 10030,
+        "inventory": {
+          "feed.chicken": 9,
+          "ingredient.flour": 6,
+          "seed.carrot": 2,
+          "seed.tomato": 3,
+          "crop.potato": 1
+        }
+      }
+    ],
+    "inputSequence": 4,
+    "receipts": {
+      "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+        "inputSequence": 1,
+        "kind": "trade",
+        "trade": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+          "actorId": "player",
+          "shopId": "shop.town.general",
+          "resourceId": "seed.carrot",
+          "direction": "buy",
+          "quantity": 2,
+          "expectedUnitPrice": 25
+        },
+        "tradeResult": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 25,
+          "totalPrice": 50,
+          "isDuplicate": false
+        },
+        "selection": null,
+        "selectionResult": null
+      },
+      "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+        "inputSequence": 2,
+        "kind": "trade",
+        "trade": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+          "actorId": "player",
+          "shopId": "shop.town.general",
+          "resourceId": "crop.potato",
+          "direction": "sell",
+          "quantity": 1,
+          "expectedUnitPrice": 20
+        },
+        "tradeResult": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 20,
+          "totalPrice": 20,
+          "isDuplicate": false
+        },
+        "selection": null,
+        "selectionResult": null
+      },
+      "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+        "inputSequence": 3,
+        "kind": "trade",
+        "trade": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+          "actorId": "player",
+          "shopId": "shop.town.general",
+          "resourceId": "crop.carrot",
+          "direction": "sell",
+          "quantity": 1,
+          "expectedUnitPrice": 25
+        },
+        "tradeResult": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+          "succeeded": false,
+          "code": "insufficient_player_stock",
+          "unitPrice": 25,
+          "totalPrice": 25,
+          "isDuplicate": false
+        },
+        "selection": null,
+        "selectionResult": null
+      },
+      "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+        "inputSequence": 4,
+        "kind": "quickbar_select",
+        "trade": null,
+        "tradeResult": null,
+        "selection": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+          "actorId": "player",
+          "index": 4
+        },
+        "selectionResult": {
+          "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+          "succeeded": true,
+          "code": "accepted",
+          "index": 4,
+          "isDuplicate": false
+        }
+      }
+    }
+  },
+  "operations": [
+    {
+      "schemaVersion": 1,
+      "inputSequence": 1,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 567.7249999999748,
+      "kind": "trade",
+      "trade": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+        "actorId": "player",
+        "shopId": "shop.town.general",
+        "resourceId": "seed.carrot",
+        "direction": "buy",
+        "quantity": 2,
+        "expectedUnitPrice": 25
+      },
+      "tradeResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+        "succeeded": true,
+        "code": "accepted",
+        "unitPrice": 25,
+        "totalPrice": 50,
+        "isDuplicate": false
+      },
+      "selection": null,
+      "selectionResult": null,
+      "checkpoint": {
+        "player": {
+          "coins": 250,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 2,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10050,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3
+            }
+          }
+        ],
+        "inputSequence": 1,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "inputSequence": 2,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 567.7249999999748,
+      "kind": "trade",
+      "trade": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+        "actorId": "player",
+        "shopId": "shop.town.general",
+        "resourceId": "crop.potato",
+        "direction": "sell",
+        "quantity": 1,
+        "expectedUnitPrice": 20
+      },
+      "tradeResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+        "succeeded": true,
+        "code": "accepted",
+        "unitPrice": 20,
+        "totalPrice": 20,
+        "isDuplicate": false
+      },
+      "selection": null,
+      "selectionResult": null,
+      "checkpoint": {
+        "player": {
+          "coins": 270,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10030,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 2,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "inputSequence": 3,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 567.7249999999748,
+      "kind": "trade",
+      "trade": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+        "actorId": "player",
+        "shopId": "shop.town.general",
+        "resourceId": "crop.carrot",
+        "direction": "sell",
+        "quantity": 1,
+        "expectedUnitPrice": 25
+      },
+      "tradeResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+        "succeeded": false,
+        "code": "insufficient_player_stock",
+        "unitPrice": 25,
+        "totalPrice": 25,
+        "isDuplicate": false
+      },
+      "selection": null,
+      "selectionResult": null,
+      "checkpoint": {
+        "player": {
+          "coins": 270,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10030,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 3,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "inputSequence": 4,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 573.1999999999698,
+      "kind": "quickbar_select",
+      "trade": null,
+      "tradeResult": null,
+      "selection": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+        "actorId": "player",
+        "index": 4
+      },
+      "selectionResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+        "succeeded": true,
+        "code": "accepted",
+        "index": 4,
+        "isDuplicate": false
+      },
+      "checkpoint": {
+        "player": {
+          "coins": 270,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 4
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10030,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 4,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+            "inputSequence": 4,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "actorId": "player",
+              "index": 4
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 4,
+              "isDuplicate": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "inputSequence": 5,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 585.1749999999589,
+      "kind": "trade",
+      "trade": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+        "actorId": "player",
+        "shopId": "shop.town.general",
+        "resourceId": "seed.carrot",
+        "direction": "buy",
+        "quantity": 1,
+        "expectedUnitPrice": 25
+      },
+      "tradeResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+        "succeeded": true,
+        "code": "accepted",
+        "unitPrice": 25,
+        "totalPrice": 25,
+        "isDuplicate": false
+      },
+      "selection": null,
+      "selectionResult": null,
+      "checkpoint": {
+        "player": {
+          "coins": 245,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 3
+          },
+          "selectedQuickbarIndex": 4
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10055,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 1,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 5,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+            "inputSequence": 4,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "actorId": "player",
+              "index": 4
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 4,
+              "isDuplicate": false
+            }
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111": {
+            "inputSequence": 5,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          }
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "inputSequence": 6,
+      "branchId": "14ea11b41cf4408e80c4468ff3535693",
+      "worldMinute": 585.1749999999589,
+      "kind": "quickbar_select",
+      "trade": null,
+      "tradeResult": null,
+      "selection": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:129b02683ce44c46a596974cd14fae8d",
+        "actorId": "player",
+        "index": 0
+      },
+      "selectionResult": {
+        "operationId": "14ea11b41cf4408e80c4468ff3535693:player:129b02683ce44c46a596974cd14fae8d",
+        "succeeded": true,
+        "code": "accepted",
+        "index": 0,
+        "isDuplicate": false
+      },
+      "checkpoint": {
+        "player": {
+          "coins": 245,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 3
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10055,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 1,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 6,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+            "inputSequence": 4,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "actorId": "player",
+              "index": 4
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 4,
+              "isDuplicate": false
+            }
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111": {
+            "inputSequence": 5,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:8392566c3e43442e8fc5979407531111",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:129b02683ce44c46a596974cd14fae8d": {
+            "inputSequence": 6,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:129b02683ce44c46a596974cd14fae8d",
+              "actorId": "player",
+              "index": 0
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:129b02683ce44c46a596974cd14fae8d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 0,
+              "isDuplicate": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "conversations": [
+    {
+      "sequence": 11874,
+      "branchId": "e2174d226ea340258dda65d07e74798f",
+      "worldMinute": 675.199999999877,
+      "kind": "player_conversation",
+      "residentId": "mina",
+      "source": "player",
+      "reason": "spoken",
+      "logicalRequestId": null,
+      "activityId": null,
+      "dataJson": "{\r\n  \"text\": \"\\u4F60\\u597D\\uFF0C\\u6211\\u73B0\\u5728\\u8981\\u53BB\\u6A61\\u6728\\u6742\\u8D27\\u5E97\\u5FD9\\u4E00\\u4F1A\\u513F\\u3002\"\r\n}"
+    }
+  ],
+  "branches": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "branchId": "14ea11b41cf4408e80c4468ff3535693",
+        "parentBranchId": null,
+        "sourceSnapshotId": null,
+        "initialStateId": "economy-fixture",
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "budgetId": "cozytown-godot-first-slice-20260920-v1",
+        "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+        "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+        "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+        "dependencies": {
+          "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+          "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+          "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+          "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+          "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+          "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+          "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+          "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+          "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+          "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+          "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+          "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+          "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+          "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+          "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+          "res://Art/catalog.json": "01340d3cdb5566ced4f42372d8ace321a9ef547f53b075ec0607700b1ab0bb2b",
+          "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+          "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+          "res://Content/town.json": "5bac5165452e1b6e64e04ca85aa3821e5e2c9d99064f7c2e2a8865b2c631fbdb",
+          "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+        },
+        "modelProtocol": "town-choice-v1",
+        "rulesVersion": "town-social-economy-v2",
+        "numericVersion": "pixels-double-grid16-radius5-clock-boundary-v2",
+        "engineVersion": "4.7.2-stable (official)",
+        "buildVersion": "1.0.0+6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+        "worldMinutesPerSecond": 0.5,
+        "fixedStepSeconds": 0.05,
+        "bodyRadius": 5,
+        "recordScope": "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
+      },
+      "initialWorldMinute": 540,
+      "initialEconomy": {
+        "player": {
+          "coins": 300,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 2,
+            "fish.carp": 1,
+            "food.baked_potato": 1
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10000,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 4,
+              "seed.tomato": 3
+            }
+          }
+        ],
+        "inputSequence": 0,
+        "receipts": {}
+      },
+      "journalSha256": "fa62a4cba96ffccc482208471236b7bd7f779d1d634b1df4475f68c076f8f7a4",
+      "journalRecords": 6092
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "branchId": "19e85c0c1aec40f9abe84a04a0d9125b",
+        "parentBranchId": "e2174d226ea340258dda65d07e74798f",
+        "sourceSnapshotId": "a62ebc6aeb3c4d76a0096f147617ad0c",
+        "initialStateId": "economy-fixture",
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "budgetId": "cozytown-godot-first-slice-20260920-v1",
+        "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+        "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+        "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+        "dependencies": {
+          "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+          "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+          "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+          "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+          "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+          "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+          "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+          "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+          "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+          "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+          "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+          "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+          "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+          "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+          "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+          "res://Art/catalog.json": "01340d3cdb5566ced4f42372d8ace321a9ef547f53b075ec0607700b1ab0bb2b",
+          "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+          "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+          "res://Content/town.json": "5bac5165452e1b6e64e04ca85aa3821e5e2c9d99064f7c2e2a8865b2c631fbdb",
+          "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+        },
+        "modelProtocol": "town-choice-v1",
+        "rulesVersion": "town-social-economy-v2",
+        "numericVersion": "pixels-double-grid16-radius5-clock-boundary-v2",
+        "engineVersion": "4.7.2-stable (official)",
+        "buildVersion": "1.0.0+6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+        "worldMinutesPerSecond": 0.5,
+        "fixedStepSeconds": 0.05,
+        "bodyRadius": 5,
+        "recordScope": "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
+      },
+      "initialWorldMinute": 675.199999999877,
+      "initialEconomy": {
+        "player": {
+          "coins": 270,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 4
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10030,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 4,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+            "inputSequence": 4,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "actorId": "player",
+              "index": 4
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 4,
+              "isDuplicate": false
+            }
+          }
+        }
+      },
+      "journalSha256": "a0513becb0f8d66a22f5a39d84b0d1f5f9508f8c0cea34a7d1b27907982b09e1",
+      "journalRecords": 949
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "branchId": "e2174d226ea340258dda65d07e74798f",
+        "parentBranchId": "14ea11b41cf4408e80c4468ff3535693",
+        "sourceSnapshotId": "8e7c89f501a24560bbb4a9b530947bda",
+        "initialStateId": "economy-fixture",
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "budgetId": "cozytown-godot-first-slice-20260920-v1",
+        "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+        "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+        "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+        "dependencies": {
+          "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+          "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+          "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+          "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+          "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+          "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+          "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+          "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+          "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+          "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+          "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+          "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+          "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+          "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+          "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+          "res://Art/catalog.json": "01340d3cdb5566ced4f42372d8ace321a9ef547f53b075ec0607700b1ab0bb2b",
+          "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+          "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+          "res://Content/town.json": "5bac5165452e1b6e64e04ca85aa3821e5e2c9d99064f7c2e2a8865b2c631fbdb",
+          "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+        },
+        "modelProtocol": "town-choice-v1",
+        "rulesVersion": "town-social-economy-v2",
+        "numericVersion": "pixels-double-grid16-radius5-clock-boundary-v2",
+        "engineVersion": "4.7.2-stable (official)",
+        "buildVersion": "1.0.0+6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+        "worldMinutesPerSecond": 0.5,
+        "fixedStepSeconds": 0.05,
+        "bodyRadius": 5,
+        "recordScope": "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
+      },
+      "initialWorldMinute": 578.2749999999652,
+      "initialEconomy": {
+        "player": {
+          "coins": 270,
+          "slotCapacity": 24,
+          "inventory": {
+            "animal_product.egg": 3,
+            "crop.potato": 1,
+            "fish.carp": 1,
+            "food.baked_potato": 1,
+            "seed.carrot": 2
+          },
+          "selectedQuickbarIndex": 4
+        },
+        "shops": [
+          {
+            "id": "shop.town.general",
+            "coins": 10030,
+            "inventory": {
+              "feed.chicken": 9,
+              "ingredient.flour": 6,
+              "seed.carrot": 2,
+              "seed.tomato": 3,
+              "crop.potato": 1
+            }
+          }
+        ],
+        "inputSequence": 4,
+        "receipts": {
+          "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257": {
+            "inputSequence": 1,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:eddd067bfa5543e584feacfeabc8c257",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8": {
+            "inputSequence": 2,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:10e7c1be38e04a0a89b8910b739355f8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9": {
+            "inputSequence": 3,
+            "kind": "trade",
+            "trade": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:569a4ed6b683412baa236fb99135d0f9",
+              "succeeded": false,
+              "code": "insufficient_player_stock",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null
+          },
+          "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d": {
+            "inputSequence": 4,
+            "kind": "quickbar_select",
+            "trade": null,
+            "tradeResult": null,
+            "selection": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "actorId": "player",
+              "index": 4
+            },
+            "selectionResult": {
+              "operationId": "14ea11b41cf4408e80c4468ff3535693:player:22275bf64e6e488090d9b183c3bed18d",
+              "succeeded": true,
+              "code": "accepted",
+              "index": 4,
+              "isDuplicate": false
+            }
+          }
+        }
+      },
+      "journalSha256": "19633621bf11fe68e72e1dfa40d9068420d7e193516c490c4f1feb41d844c722",
+      "journalRecords": 4867
+    }
+  ]
+}

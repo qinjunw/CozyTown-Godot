@@ -29,6 +29,44 @@ public sealed class TownWorldTests
         var world = new TownWorld(content ?? Content()); world.Advance(.001, 0); return world;
     }
 
+    [TestCase(540, 4960, 664, "afternoon", 0)]
+    [TestCase(1439, 80, 1441, "free", 1)]
+    public void FixedHostStepsCrossScheduleAndDayBoundariesAfterSaveAndPause(int startMinute, int steps,
+        double expectedMinute, string expectedSchedule, long expectedDay)
+    {
+        var originalContent = Content();
+        var content = TownContent.Create(originalContent.Manifest, originalContent.Definitions with { StartMinute = startMinute });
+        var world = new TownWorld(content);
+        int saveStep = steps > 160 ? steps - 160 : steps / 2;
+        for (int i = 0; i < steps; i++)
+        {
+            world.Advance(.025, .05);
+            if (i % 100 == 0) world.AcknowledgeEvents(world.Events[^1].Sequence);
+            if (i + 1 != saveStep) continue;
+            world = TownWorld.RestoreCandidate(content, world.CaptureJson());
+            double beforePause = world.WorldMinute;
+            double acceptedBeforePause = world.State.AcceptedWorldMinutes;
+            world.Advance(.025, .05, paused: true);
+            Assert.That(world.WorldMinute, Is.EqualTo(beforePause));
+            Assert.That(world.State.AcceptedWorldMinutes, Is.EqualTo(acceptedBeforePause));
+        }
+        Assert.That(world.WorldMinute, Is.EqualTo(expectedMinute).Within(1e-7));
+        Assert.That(world.State.AcceptedWorldMinutes, Is.LessThan(1e-8));
+        Assert.That(world.State.Residents.All(r => r.ScheduleId == expectedSchedule && r.ScheduleDay == expectedDay), Is.True);
+        Assert.DoesNotThrow(() => TownWorld.RestoreCandidate(content, world.CaptureJson()));
+    }
+
+    [Test]
+    public void PreviousClockNumericVersionIsRejectedWithoutChangingCurrentWorld()
+    {
+        var content = Content(); var world = new TownWorld(content);
+        string before = TownJson.Serialize(world.State);
+        var snapshot = JsonNode.Parse(world.CaptureJson())!;
+        snapshot["numericVersion"] = "pixels-double-grid16-radius5-v1";
+        Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, snapshot.ToJsonString()));
+        Assert.That(TownJson.Serialize(world.State), Is.EqualTo(before));
+    }
+
     private static DecisionRequest Request(TownWorld world, string id) => world.GetDecisionRequests().Single(r => r.ResidentId == id);
     private static DecisionResult Queue(TownWorld world, DecisionRequest request, ActionCandidate candidate, string source = "fixed_model")
     {
@@ -326,7 +364,7 @@ public sealed class TownWorldTests
         var node = JsonNode.Parse(json)!;
         node["state"]!["pendingDecisions"]![0]!["observation"]!["worldMinute"] = 0;
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, node.ToJsonString()));
-        var duplicate = json.Replace("\"schemaVersion\": 1,", "\"schemaVersion\": 1, \"schemaVersion\": 1,");
+        var duplicate = json.Replace("\"schemaVersion\": 2,", "\"schemaVersion\": 2, \"schemaVersion\": 2,");
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, duplicate));
     }
 

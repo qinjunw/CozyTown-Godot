@@ -18,10 +18,10 @@ public sealed record ObstacleDefinition(string Id, TownRect Bounds);
 public sealed record ObservationRegionDefinition(string Id, TownRect Bounds);
 public sealed record RoadDefinition(string Id, string FromPlaceId, string ToPlaceId, TownPoint[] Points);
 public sealed record TownManifest(double Width, double Height, PlaceDefinition[] Places, ObstacleDefinition[] Obstacles, ObservationRegionDefinition[] Regions, RoadDefinition[]? Roads = null);
-public sealed record ResourceDefinition(string Id, string DisplayName);
+public sealed record ResourceDefinition(string Id, string DisplayName, int StackLimit = 99, int DisplayOrder = 0);
 public sealed record ScheduleDefinition(string Id, int StartMinute, int EndMinute, string PlaceId, string Activity, bool IsFree);
 public sealed record ResidentDefinition(string Id, string DisplayName, string HomePlaceId, string SpawnPlaceId, string DesiredResourceId, Dictionary<string, int> Inventory, int Coins, ScheduleDefinition[] Schedule, string Personality = "");
-public sealed record TownDefinitions(ResidentDefinition[] Residents, ResourceDefinition[] Resources, int StartMinute = 540);
+public sealed record TownDefinitions(ResidentDefinition[] Residents, ResourceDefinition[] Resources, int StartMinute = 540, EconomyDefinition? Economy = null);
 public sealed record VisibleResident(string Id, string DisplayName, TownPoint Position, string Activity, string DesiredResourceId, string[] OfferedResourceIds);
 public sealed record LocalObservation(string ResidentId, double WorldMinute, TownPoint Position, string RegionId, VisibleResident[] Residents, PlaceDefinition[] Places);
 public sealed record DecisionRequest(string LogicalRequestId, string ResidentId, int ActivityRevision, double WindowEndMinute, double RemainingWaitSeconds, string InputJson, string InputFingerprint, string[] AllowedActions, string[] AllowedTargets, bool IsRecovery, string? AttemptId);
@@ -94,6 +94,7 @@ public sealed class TownState
     [JsonRequired] public double AcceptedWorldMinutes { get; set; }
     [JsonRequired] public TownPoint PlayerPosition { get; set; }
     [JsonRequired] public TownPoint PlayerFacing { get; set; }
+    [JsonRequired] public EconomyState Economy { get; set; } = null!;
     [JsonRequired] public long Sequence { get; set; }
     [JsonRequired] public long IdentitySequence { get; set; }
     [JsonRequired] public int DecisionCursor { get; set; }

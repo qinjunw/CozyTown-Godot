@@ -1,5 +1,6 @@
 {
   "textures": [
+    "res://Art/Items/item_mvp_16.png",
     "res://Art/Buildings/bld_npc_home_roofs_64.png",
     "res://Art/Buildings/bld_npc_homes_64.png",
     "res://Art/Buildings/bld_town_functions_64.png",
@@ -22,5 +23,9 @@
     "sora": "res://Art/Characters/npc_cook_sora_move_24x32.png",
     "player": "res://Art/Characters/chr_player_move_24x32.png"
   },
-  "portraits": "res://Art/Characters/npc_portraits_48.png"
+  "portraits": "res://Art/Characters/npc_portraits_48.png",
+  "items": {
+    "atlas": "res://Art/Items/item_mvp_16.png",
+    "resourceIds": ["seed.potato", "seed.carrot", "seed.tomato", "crop.potato", "crop.carrot", "crop.tomato", "feed.chicken", "animal_product.egg", "fish.carp", "fish.trout", "fish.bass", "ingredient.salt", "ingredient.flour", "food.baked_potato", "food.vegetable_soup", "food.grilled_fish", "food.tomato_egg", "food.fish_pie"]
+  }
 }
