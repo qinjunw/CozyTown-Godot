@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+  "sourceDirty": false,
+  "originalRunDirectory": "artifacts/verification/20260923T132755Z-00866ad5",
+  "pathRedaction": "Repository directory replaced with <project-root>; simulation identities and values are unchanged.",
+  "archives": [
+    {
+      "path": "artifacts/verification/20260923T132755Z-00866ad5/CozyTown-6f9358e-Windows.zip",
+      "bytes": 75761793,
+      "sha256": "42a7d2b79d95a0bbd19298c69ac5a794d6e6e19c758caff19a0f8ac8986133d7",
+      "files": 198,
+      "crcAndFileHashesVerified": true
+    },
+    {
+      "path": "artifacts/verification/20260923T132755Z-00866ad5/offline-run-records-6f9358e.zip",
+      "bytes": 1095986,
+      "sha256": "6b20283e24f46184f466dc9a211f2c77ad7fcd70931eca5d569c51a93a3491da",
+      "files": 153,
+      "crcAndFileHashesVerified": true
+    },
+    {
+      "path": "artifacts/verification/20260923T132755Z-00866ad5/manual-run-records-6f9358e.zip",
+      "bytes": 534037,
+      "sha256": "635032befdd9646f0f3dfc5321a55d71cfc901a0a41eabf1f18ae1a551739fdf",
+      "files": 14,
+      "crcAndFileHashesVerified": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "bag-1280.png",
+      "bytes": 107238,
+      "sha256": "c8f44bc04fc2a11613caa968469e3dc4a32bd75bde45c382dd58c9a8a41fb475"
+    },
+    {
+      "path": "economy-headless.json",
+      "bytes": 5997,
+      "sha256": "d548708fdce5ff61cdcd375cd35951d288fb5d0fb4aeec7f76553725d90b37da"
+    },
+    {
+      "path": "export-economy-graphical.json",
+      "bytes": 6430,
+      "sha256": "406533d7a70b07fc6f80f5bd282ba228b68e010d029fa2f8db727a0cf57847fe"
+    },
+    {
+      "path": "export-economy-headless.json",
+      "bytes": 6044,
+      "sha256": "e5d4229257bd886eaf3828cf685c117e1c9ec85a96cfdcfec774189ff0d6a3ec"
+    },
+    {
+      "path": "failure-1280.png",
+      "bytes": 163780,
+      "sha256": "77c22137e73fa685fec8904f73ef3b215774e82e406d6f8629522b196a4c78c1"
+    },
+    {
+      "path": "input-checkpoints.json",
+      "bytes": 189478,
+      "sha256": "5862cdb5eb54fed4bea50a177671fb249348155e8b7b7cb0e4837a9474e966a9"
+    },
+    {
+      "path": "manual-1920-boundary-restore.png",
+      "bytes": 97507,
+      "sha256": "a8c418e85259dc49895146edd926d7de0d7d94d8214281d9ecb0a03617543f6a"
+    },
+    {
+      "path": "manual-1920-buy.png",
+      "bytes": 74271,
+      "sha256": "d0a4c01400146347882e6c39cb6fe86ef77a4e57428458d8c23f679145170534"
+    },
+    {
+      "path": "manual-1920-failure.png",
+      "bytes": 74548,
+      "sha256": "d2744d6ffa9db2bc3ac52a630c774bcc038943871fcc43ad5441df8e393e88e1"
+    },
+    {
+      "path": "manual-1920-neighbor.png",
+      "bytes": 97756,
+      "sha256": "8da1462caa542ca4828eb2c27eb1a223a0e5f29d9f7a7fe41eab618166d37496"
+    },
+    {
+      "path": "manual-1920-restore.png",
+      "bytes": 74497,
+      "sha256": "029472f9501c23c753fd57d078c8f0aa1a498fffa8b8e4d01e7aa26e9d2f70c3"
+    },
+    {
+      "path": "manual-1920-save.png",
+      "bytes": 58908,
+      "sha256": "db41ddd922c75fa7cfd3cbaaa776b009f5f8e2d0c5b9b4f4bf9ae6b3f3109cfc"
+    },
+    {
+      "path": "manual-verification.json",
+      "bytes": 54129,
+      "sha256": "41ef07a8e14887f8b394981653936ede4ba702bf765a3642a3bfbb2ce1d5e1e7"
+    },
+    {
+      "path": "shop-1280.png",
+      "bytes": 158936,
+      "sha256": "752e067fd2cd7022078b7918af13f07407c69b94f259505455948b12a633f43e"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 7477,
+      "sha256": "0c92c386e8ae4c26f7837b052f30ceb69b6fa23876b0decbccd2e94fb7bda9c7"
+    }
+  ]
+}

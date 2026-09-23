@@ -1,0 +1,2281 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+  "scenario": "economy-fixture",
+  "sourceReport": "export-economy-headless.json",
+  "coverage": "Versioned economy input and checkpoint sample. This is not an executed full-world replay.",
+  "branches": [
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+        "parentBranchId": null,
+        "sourceSnapshotId": null,
+        "initialStateId": "economy-fixture",
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "budgetId": "cozytown-godot-first-slice-20260920-v1",
+        "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+        "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+        "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+        "dependencies": {
+          "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+          "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+          "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+          "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+          "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+          "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+          "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+          "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+          "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+          "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+          "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+          "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+          "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+          "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+          "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+          "res://Art/catalog.json": "01340d3cdb5566ced4f42372d8ace321a9ef547f53b075ec0607700b1ab0bb2b",
+          "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+          "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+          "res://Content/town.json": "5bac5165452e1b6e64e04ca85aa3821e5e2c9d99064f7c2e2a8865b2c631fbdb",
+          "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+        },
+        "modelProtocol": "town-choice-v1",
+        "rulesVersion": "town-social-economy-v2",
+        "numericVersion": "pixels-double-grid16-radius5-clock-boundary-v2",
+        "engineVersion": "4.7.2-stable (official)",
+        "buildVersion": "1.0.0+6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+        "worldMinutesPerSecond": 0.5,
+        "fixedStepSeconds": 0.05,
+        "bodyRadius": 5,
+        "recordScope": "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
+      },
+      "initialHostSnapshot": {
+        "schemaVersion": 1,
+        "worldJson": "{\r\n  \"schemaVersion\": 2,\r\n  \"snapshotId\": \"be2a41a258a343f0abd2adf2304b617c\",\r\n  \"contentFingerprint\": \"f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\",\r\n  \"rulesVersion\": \"town-social-economy-v2\",\r\n  \"numericVersion\": \"pixels-double-grid16-radius5-clock-boundary-v2\",\r\n  \"state\": {\r\n    \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n    \"parentBranchId\": null,\r\n    \"sourceSnapshotId\": null,\r\n    \"forkSequence\": 0,\r\n    \"budgetId\": \"cozytown-godot-first-slice-20260920-v1\",\r\n    \"initialStateId\": \"economy-fixture\",\r\n    \"initialStateFingerprint\": \"f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\",\r\n    \"worldMinute\": 540,\r\n    \"acceptedWorldMinutes\": 0,\r\n    \"playerPosition\": {\r\n      \"x\": 330,\r\n      \"y\": 332\r\n    },\r\n    \"playerFacing\": {\r\n      \"x\": 0,\r\n      \"y\": 1\r\n    },\r\n    \"economy\": {\r\n      \"player\": {\r\n        \"coins\": 300,\r\n        \"slotCapacity\": 24,\r\n        \"inventory\": {\r\n          \"animal_product.egg\": 3,\r\n          \"crop.potato\": 2,\r\n          \"fish.carp\": 1,\r\n          \"food.baked_potato\": 1\r\n        },\r\n        \"selectedQuickbarIndex\": 0\r\n      },\r\n      \"shops\": [\r\n        {\r\n          \"id\": \"shop.town.general\",\r\n          \"coins\": 10000,\r\n          \"inventory\": {\r\n            \"feed.chicken\": 9,\r\n            \"ingredient.flour\": 6,\r\n            \"seed.carrot\": 4,\r\n            \"seed.tomato\": 3\r\n          }\r\n        }\r\n      ],\r\n      \"inputSequence\": 0,\r\n      \"receipts\": {}\r\n    },\r\n    \"sequence\": 5,\r\n    \"identitySequence\": 0,\r\n    \"decisionCursor\": 0,\r\n    \"residents\": [\r\n      {\r\n        \"id\": \"eli\",\r\n        \"position\": {\r\n          \"x\": 292,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 0,\r\n          \"fish\": 1,\r\n          \"grain\": 4,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"eli.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.north\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 354,\r\n            \"y\": 238\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"mina\",\r\n        \"position\": {\r\n          \"x\": 174,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 4,\r\n          \"fish\": 0,\r\n          \"grain\": 1,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"mina.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.west\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 306,\r\n            \"y\": 264\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"ren\",\r\n        \"position\": {\r\n          \"x\": 410,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 1,\r\n          \"fish\": 4,\r\n          \"grain\": 0,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"ren.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.east\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 402,\r\n            \"y\": 264\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"sora\",\r\n        \"position\": {\r\n          \"x\": 528,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 0,\r\n          \"fish\": 1,\r\n          \"grain\": 0,\r\n          \"soup\": 4\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"sora.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.south\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 354,\r\n            \"y\": 304\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      }\r\n    ],\r\n    \"commitments\": [],\r\n    \"pendingDecisions\": [],\r\n    \"terminalRequestIds\": [],\r\n    \"executedTransferIds\": [],\r\n    \"events\": [\r\n      {\r\n        \"sequence\": 1,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"eli\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"eli.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022eli.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.north\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 2,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"mina\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"mina.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022mina.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.west\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 3,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"ren\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"ren.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022ren.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.east\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 4,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"sora\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"sora.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022sora.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.south\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 5,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"world_started\",\r\n        \"residentId\": null,\r\n        \"source\": \"world\",\r\n        \"reason\": \"economy-fixture\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022contentFingerprint\\u0022: \\u0022f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\\u0022,\\r\\n  \\u0022budgetId\\u0022: \\u0022cozytown-godot-first-slice-20260920-v1\\u0022\\r\\n}\"\r\n      }\r\n    ]\r\n  }\r\n}",
+        "sourceRunDirectoryName": "586daebb5a824eb2b5f79ed9858871b7",
+        "journalRecordCount": 0,
+        "unconsumedSeconds": 0,
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "modelRequests": {},
+        "playerRoute": null,
+        "playerRouteCursor": 0
+      },
+      "economyRecords": [
+        {
+          "sequence": 5,
+          "receivedAtUtc": "2026-09-23T13:28:50.8166585+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 1,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "trade",
+              "trade": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                "actorId": "player",
+                "shopId": "shop.town.general",
+                "resourceId": "seed.carrot",
+                "direction": "buy",
+                "quantity": 2,
+                "expectedUnitPrice": 25
+              },
+              "tradeResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                "succeeded": true,
+                "code": "accepted",
+                "unitPrice": 25,
+                "totalPrice": 50,
+                "isDuplicate": false
+              },
+              "selection": null,
+              "selectionResult": null,
+              "checkpoint": {
+                "player": {
+                  "coins": 250,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 2,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10050,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 1,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 77,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": [
+              "shop"
+            ]
+          }
+        },
+        {
+          "sequence": 7,
+          "receivedAtUtc": "2026-09-23T13:28:50.8327674+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 2,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "trade",
+              "trade": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                "actorId": "player",
+                "shopId": "shop.town.general",
+                "resourceId": "crop.potato",
+                "direction": "sell",
+                "quantity": 1,
+                "expectedUnitPrice": 20
+              },
+              "tradeResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                "succeeded": true,
+                "code": "accepted",
+                "unitPrice": 20,
+                "totalPrice": 20,
+                "isDuplicate": false
+              },
+              "selection": null,
+              "selectionResult": null,
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 2,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 78,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": [
+              "shop"
+            ]
+          }
+        },
+        {
+          "sequence": 9,
+          "receivedAtUtc": "2026-09-23T13:28:50.8562487+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 3,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "trade",
+              "trade": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                "actorId": "player",
+                "shopId": "shop.town.general",
+                "resourceId": "seed.carrot",
+                "direction": "buy",
+                "quantity": 9999,
+                "expectedUnitPrice": 25
+              },
+              "tradeResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                "succeeded": false,
+                "code": "insufficient_shop_stock",
+                "unitPrice": 25,
+                "totalPrice": 249975,
+                "isDuplicate": false
+              },
+              "selection": null,
+              "selectionResult": null,
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 3,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 79,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": [
+              "shop"
+            ]
+          }
+        },
+        {
+          "sequence": 11,
+          "receivedAtUtc": "2026-09-23T13:28:50.8684078+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 4,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "trade",
+              "trade": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                "actorId": "player",
+                "shopId": "shop.town.general",
+                "resourceId": "crop.potato",
+                "direction": "sell",
+                "quantity": 9999,
+                "expectedUnitPrice": 20
+              },
+              "tradeResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                "succeeded": false,
+                "code": "insufficient_player_stock",
+                "unitPrice": 20,
+                "totalPrice": 199980,
+                "isDuplicate": false
+              },
+              "selection": null,
+              "selectionResult": null,
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 4,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 80,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": [
+              "shop"
+            ]
+          }
+        },
+        {
+          "sequence": 14,
+          "receivedAtUtc": "2026-09-23T13:28:50.8848536+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 5,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                "actorId": "player",
+                "index": 0
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 0,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 5,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 81,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        },
+        {
+          "sequence": 16,
+          "receivedAtUtc": "2026-09-23T13:28:50.9027979+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 6,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                "actorId": "player",
+                "index": 1
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 1,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 1
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 6,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 82,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        },
+        {
+          "sequence": 18,
+          "receivedAtUtc": "2026-09-23T13:28:50.9126338+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 7,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                "actorId": "player",
+                "index": 2
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 2,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 2
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 7,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041": {
+                    "inputSequence": 7,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "actorId": "player",
+                      "index": 2
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 2,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 83,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        },
+        {
+          "sequence": 20,
+          "receivedAtUtc": "2026-09-23T13:28:50.9270227+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 8,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                "actorId": "player",
+                "index": 3
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 3,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 3
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 8,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041": {
+                    "inputSequence": 7,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "actorId": "player",
+                      "index": 2
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 2,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27": {
+                    "inputSequence": 8,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "actorId": "player",
+                      "index": 3
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 3,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 84,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        },
+        {
+          "sequence": 22,
+          "receivedAtUtc": "2026-09-23T13:28:50.9409903+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 9,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                "actorId": "player",
+                "index": 4
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 4,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 270,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 2
+                  },
+                  "selectedQuickbarIndex": 4
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10030,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 2,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 9,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041": {
+                    "inputSequence": 7,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "actorId": "player",
+                      "index": 2
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 2,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27": {
+                    "inputSequence": 8,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "actorId": "player",
+                      "index": 3
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 3,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee": {
+                    "inputSequence": 9,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "actorId": "player",
+                      "index": 4
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 4,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 85,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        },
+        {
+          "sequence": 28,
+          "receivedAtUtc": "2026-09-23T13:28:51.0387328+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 10,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "trade",
+              "trade": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                "actorId": "player",
+                "shopId": "shop.town.general",
+                "resourceId": "seed.carrot",
+                "direction": "buy",
+                "quantity": 1,
+                "expectedUnitPrice": 25
+              },
+              "tradeResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                "succeeded": true,
+                "code": "accepted",
+                "unitPrice": 25,
+                "totalPrice": 25,
+                "isDuplicate": false
+              },
+              "selection": null,
+              "selectionResult": null,
+              "checkpoint": {
+                "player": {
+                  "coins": 245,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 3
+                  },
+                  "selectedQuickbarIndex": 4
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10055,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 1,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 10,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041": {
+                    "inputSequence": 7,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "actorId": "player",
+                      "index": 2
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 2,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27": {
+                    "inputSequence": 8,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "actorId": "player",
+                      "index": 3
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 3,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee": {
+                    "inputSequence": 9,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "actorId": "player",
+                      "index": 4
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 4,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8": {
+                    "inputSequence": 10,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 1,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 25,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 86,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": [
+              "shop"
+            ]
+          }
+        },
+        {
+          "sequence": 31,
+          "receivedAtUtc": "2026-09-23T13:28:51.0523361+00:00",
+          "kind": "player_economy_command",
+          "data": {
+            "schemaVersion": 1,
+            "operation": {
+              "schemaVersion": 1,
+              "inputSequence": 11,
+              "branchId": "586daebb5a824eb2b5f79ed9858871b7",
+              "worldMinute": 540,
+              "kind": "quickbar_select",
+              "trade": null,
+              "tradeResult": null,
+              "selection": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:0b7eab86f41e46169a92b9df1674b3bc",
+                "actorId": "player",
+                "index": 0
+              },
+              "selectionResult": {
+                "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:0b7eab86f41e46169a92b9df1674b3bc",
+                "succeeded": true,
+                "code": "accepted",
+                "index": 0,
+                "isDuplicate": false
+              },
+              "checkpoint": {
+                "player": {
+                  "coins": 245,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 1,
+                    "food.baked_potato": 1,
+                    "seed.carrot": 3
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10055,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 1,
+                      "seed.tomato": 3,
+                      "crop.potato": 1
+                    }
+                  }
+                ],
+                "inputSequence": 11,
+                "receipts": {
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff": {
+                    "inputSequence": 1,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 2,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 50,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526": {
+                    "inputSequence": 2,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 1,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 20,
+                      "totalPrice": 20,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec": {
+                    "inputSequence": 3,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec",
+                      "succeeded": false,
+                      "code": "insufficient_shop_stock",
+                      "unitPrice": 25,
+                      "totalPrice": 249975,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6": {
+                    "inputSequence": 4,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "crop.potato",
+                      "direction": "sell",
+                      "quantity": 9999,
+                      "expectedUnitPrice": 20
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6",
+                      "succeeded": false,
+                      "code": "insufficient_player_stock",
+                      "unitPrice": 20,
+                      "totalPrice": 199980,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a": {
+                    "inputSequence": 5,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7": {
+                    "inputSequence": 6,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "actorId": "player",
+                      "index": 1
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 1,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041": {
+                    "inputSequence": 7,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "actorId": "player",
+                      "index": 2
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 2,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27": {
+                    "inputSequence": 8,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "actorId": "player",
+                      "index": 3
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 3,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee": {
+                    "inputSequence": 9,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "actorId": "player",
+                      "index": 4
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 4,
+                      "isDuplicate": false
+                    }
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8": {
+                    "inputSequence": 10,
+                    "kind": "trade",
+                    "trade": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                      "actorId": "player",
+                      "shopId": "shop.town.general",
+                      "resourceId": "seed.carrot",
+                      "direction": "buy",
+                      "quantity": 1,
+                      "expectedUnitPrice": 25
+                    },
+                    "tradeResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:45ed72d72df54cb8bdfac5f5c2e939d8",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "unitPrice": 25,
+                      "totalPrice": 25,
+                      "isDuplicate": false
+                    },
+                    "selection": null,
+                    "selectionResult": null
+                  },
+                  "586daebb5a824eb2b5f79ed9858871b7:player:0b7eab86f41e46169a92b9df1674b3bc": {
+                    "inputSequence": 11,
+                    "kind": "quickbar_select",
+                    "trade": null,
+                    "tradeResult": null,
+                    "selection": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:0b7eab86f41e46169a92b9df1674b3bc",
+                      "actorId": "player",
+                      "index": 0
+                    },
+                    "selectionResult": {
+                      "operationId": "586daebb5a824eb2b5f79ed9858871b7:player:0b7eab86f41e46169a92b9df1674b3bc",
+                      "succeeded": true,
+                      "code": "accepted",
+                      "index": 0,
+                      "isDuplicate": false
+                    }
+                  }
+                }
+              }
+            },
+            "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+            "worldSequenceBefore": 87,
+            "unconsumedSeconds": 0,
+            "playerRoute": null,
+            "playerRouteCursor": 0,
+            "pauseReasons": []
+          }
+        }
+      ],
+      "restoreRecords": []
+    },
+    {
+      "manifest": {
+        "schemaVersion": 1,
+        "branchId": "49e0dd5859d5456b9d3af0f656059d50",
+        "parentBranchId": "586daebb5a824eb2b5f79ed9858871b7",
+        "sourceSnapshotId": "d02b1c008e394196a9632195935ab79a",
+        "initialStateId": "economy-fixture",
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "budgetId": "cozytown-godot-first-slice-20260920-v1",
+        "contentFingerprint": "f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43",
+        "inputDigest": "fd0d30908be4a4da1ea9c25c9016c33a14e7e638c466e43ed343722041492767",
+        "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+        "dependencies": {
+          "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+          "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+          "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+          "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+          "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+          "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+          "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+          "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+          "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+          "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+          "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+          "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+          "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+          "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+          "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+          "res://Art/catalog.json": "01340d3cdb5566ced4f42372d8ace321a9ef547f53b075ec0607700b1ab0bb2b",
+          "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+          "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+          "res://Content/town.json": "5bac5165452e1b6e64e04ca85aa3821e5e2c9d99064f7c2e2a8865b2c631fbdb",
+          "res://World/TownMap.tscn#extracted-geometry-v1": "18a6c56572c15d79af0b0830ef1bdc9471387a24b7c687c09a84e5fe328e1f27"
+        },
+        "modelProtocol": "town-choice-v1",
+        "rulesVersion": "town-social-economy-v2",
+        "numericVersion": "pixels-double-grid16-radius5-clock-boundary-v2",
+        "engineVersion": "4.7.2-stable (official)",
+        "buildVersion": "1.0.0+6f9358e25511ad6693fd29d2e3d81e2fdb2c3ffe",
+        "worldMinutesPerSecond": 0.5,
+        "fixedStepSeconds": 0.05,
+        "bodyRadius": 5,
+        "recordScope": "World events, spatial/model records and versioned player economy inputs/checkpoints; full replay executor is not included."
+      },
+      "initialHostSnapshot": {
+        "schemaVersion": 1,
+        "worldJson": "{\r\n  \"schemaVersion\": 2,\r\n  \"snapshotId\": \"c093d948cbed434ab618f86bbb222a03\",\r\n  \"contentFingerprint\": \"f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\",\r\n  \"rulesVersion\": \"town-social-economy-v2\",\r\n  \"numericVersion\": \"pixels-double-grid16-radius5-clock-boundary-v2\",\r\n  \"state\": {\r\n    \"branchId\": \"49e0dd5859d5456b9d3af0f656059d50\",\r\n    \"parentBranchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n    \"sourceSnapshotId\": \"d02b1c008e394196a9632195935ab79a\",\r\n    \"forkSequence\": 86,\r\n    \"budgetId\": \"cozytown-godot-first-slice-20260920-v1\",\r\n    \"initialStateId\": \"economy-fixture\",\r\n    \"initialStateFingerprint\": \"f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\",\r\n    \"worldMinute\": 540,\r\n    \"acceptedWorldMinutes\": 0,\r\n    \"playerPosition\": {\r\n      \"x\": 542,\r\n      \"y\": 282\r\n    },\r\n    \"playerFacing\": {\r\n      \"x\": 0.9732966135517358,\r\n      \"y\": -0.22955108810180608\r\n    },\r\n    \"economy\": {\r\n      \"player\": {\r\n        \"coins\": 270,\r\n        \"slotCapacity\": 24,\r\n        \"inventory\": {\r\n          \"animal_product.egg\": 3,\r\n          \"crop.potato\": 1,\r\n          \"fish.carp\": 1,\r\n          \"food.baked_potato\": 1,\r\n          \"seed.carrot\": 2\r\n        },\r\n        \"selectedQuickbarIndex\": 4\r\n      },\r\n      \"shops\": [\r\n        {\r\n          \"id\": \"shop.town.general\",\r\n          \"coins\": 10030,\r\n          \"inventory\": {\r\n            \"feed.chicken\": 9,\r\n            \"ingredient.flour\": 6,\r\n            \"seed.carrot\": 2,\r\n            \"seed.tomato\": 3,\r\n            \"crop.potato\": 1\r\n          }\r\n        }\r\n      ],\r\n      \"inputSequence\": 9,\r\n      \"receipts\": {\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff\": {\r\n          \"inputSequence\": 1,\r\n          \"kind\": \"trade\",\r\n          \"trade\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff\",\r\n            \"actorId\": \"player\",\r\n            \"shopId\": \"shop.town.general\",\r\n            \"resourceId\": \"seed.carrot\",\r\n            \"direction\": \"buy\",\r\n            \"quantity\": 2,\r\n            \"expectedUnitPrice\": 25\r\n          },\r\n          \"tradeResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"unitPrice\": 25,\r\n            \"totalPrice\": 50,\r\n            \"isDuplicate\": false\r\n          },\r\n          \"selection\": null,\r\n          \"selectionResult\": null\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526\": {\r\n          \"inputSequence\": 2,\r\n          \"kind\": \"trade\",\r\n          \"trade\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526\",\r\n            \"actorId\": \"player\",\r\n            \"shopId\": \"shop.town.general\",\r\n            \"resourceId\": \"crop.potato\",\r\n            \"direction\": \"sell\",\r\n            \"quantity\": 1,\r\n            \"expectedUnitPrice\": 20\r\n          },\r\n          \"tradeResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"unitPrice\": 20,\r\n            \"totalPrice\": 20,\r\n            \"isDuplicate\": false\r\n          },\r\n          \"selection\": null,\r\n          \"selectionResult\": null\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec\": {\r\n          \"inputSequence\": 3,\r\n          \"kind\": \"trade\",\r\n          \"trade\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec\",\r\n            \"actorId\": \"player\",\r\n            \"shopId\": \"shop.town.general\",\r\n            \"resourceId\": \"seed.carrot\",\r\n            \"direction\": \"buy\",\r\n            \"quantity\": 9999,\r\n            \"expectedUnitPrice\": 25\r\n          },\r\n          \"tradeResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec\",\r\n            \"succeeded\": false,\r\n            \"code\": \"insufficient_shop_stock\",\r\n            \"unitPrice\": 25,\r\n            \"totalPrice\": 249975,\r\n            \"isDuplicate\": false\r\n          },\r\n          \"selection\": null,\r\n          \"selectionResult\": null\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6\": {\r\n          \"inputSequence\": 4,\r\n          \"kind\": \"trade\",\r\n          \"trade\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6\",\r\n            \"actorId\": \"player\",\r\n            \"shopId\": \"shop.town.general\",\r\n            \"resourceId\": \"crop.potato\",\r\n            \"direction\": \"sell\",\r\n            \"quantity\": 9999,\r\n            \"expectedUnitPrice\": 20\r\n          },\r\n          \"tradeResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6\",\r\n            \"succeeded\": false,\r\n            \"code\": \"insufficient_player_stock\",\r\n            \"unitPrice\": 20,\r\n            \"totalPrice\": 199980,\r\n            \"isDuplicate\": false\r\n          },\r\n          \"selection\": null,\r\n          \"selectionResult\": null\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a\": {\r\n          \"inputSequence\": 5,\r\n          \"kind\": \"quickbar_select\",\r\n          \"trade\": null,\r\n          \"tradeResult\": null,\r\n          \"selection\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a\",\r\n            \"actorId\": \"player\",\r\n            \"index\": 0\r\n          },\r\n          \"selectionResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"index\": 0,\r\n            \"isDuplicate\": false\r\n          }\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7\": {\r\n          \"inputSequence\": 6,\r\n          \"kind\": \"quickbar_select\",\r\n          \"trade\": null,\r\n          \"tradeResult\": null,\r\n          \"selection\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7\",\r\n            \"actorId\": \"player\",\r\n            \"index\": 1\r\n          },\r\n          \"selectionResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"index\": 1,\r\n            \"isDuplicate\": false\r\n          }\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041\": {\r\n          \"inputSequence\": 7,\r\n          \"kind\": \"quickbar_select\",\r\n          \"trade\": null,\r\n          \"tradeResult\": null,\r\n          \"selection\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041\",\r\n            \"actorId\": \"player\",\r\n            \"index\": 2\r\n          },\r\n          \"selectionResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"index\": 2,\r\n            \"isDuplicate\": false\r\n          }\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27\": {\r\n          \"inputSequence\": 8,\r\n          \"kind\": \"quickbar_select\",\r\n          \"trade\": null,\r\n          \"tradeResult\": null,\r\n          \"selection\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27\",\r\n            \"actorId\": \"player\",\r\n            \"index\": 3\r\n          },\r\n          \"selectionResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"index\": 3,\r\n            \"isDuplicate\": false\r\n          }\r\n        },\r\n        \"586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee\": {\r\n          \"inputSequence\": 9,\r\n          \"kind\": \"quickbar_select\",\r\n          \"trade\": null,\r\n          \"tradeResult\": null,\r\n          \"selection\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee\",\r\n            \"actorId\": \"player\",\r\n            \"index\": 4\r\n          },\r\n          \"selectionResult\": {\r\n            \"operationId\": \"586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee\",\r\n            \"succeeded\": true,\r\n            \"code\": \"accepted\",\r\n            \"index\": 4,\r\n            \"isDuplicate\": false\r\n          }\r\n        }\r\n      }\r\n    },\r\n    \"sequence\": 87,\r\n    \"identitySequence\": 0,\r\n    \"decisionCursor\": 0,\r\n    \"residents\": [\r\n      {\r\n        \"id\": \"eli\",\r\n        \"position\": {\r\n          \"x\": 292,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 0,\r\n          \"fish\": 1,\r\n          \"grain\": 4,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"eli.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.north\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 354,\r\n            \"y\": 238\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"mina\",\r\n        \"position\": {\r\n          \"x\": 174,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 4,\r\n          \"fish\": 0,\r\n          \"grain\": 1,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"mina.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.west\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 306,\r\n            \"y\": 264\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"ren\",\r\n        \"position\": {\r\n          \"x\": 410,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 1,\r\n          \"fish\": 4,\r\n          \"grain\": 0,\r\n          \"soup\": 0\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"ren.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.east\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 402,\r\n            \"y\": 264\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      },\r\n      {\r\n        \"id\": \"sora\",\r\n        \"position\": {\r\n          \"x\": 528,\r\n          \"y\": 156\r\n        },\r\n        \"facing\": {\r\n          \"x\": 0,\r\n          \"y\": 1\r\n        },\r\n        \"regionId\": \"town.outdoor\",\r\n        \"inventory\": {\r\n          \"berries\": 0,\r\n          \"fish\": 1,\r\n          \"grain\": 0,\r\n          \"soup\": 4\r\n        },\r\n        \"coins\": 12,\r\n        \"scheduleId\": \"sora.morning\",\r\n        \"scheduleDay\": 0,\r\n        \"activity\": \"free_travel\",\r\n        \"activityRevision\": 2,\r\n        \"destinationPlaceId\": \"plaza.south\",\r\n        \"route\": [\r\n          {\r\n            \"x\": 354,\r\n            \"y\": 304\r\n          }\r\n        ],\r\n        \"routeCursor\": 0,\r\n        \"blockedReason\": null,\r\n        \"commitmentId\": null,\r\n        \"pendingRequestId\": null,\r\n        \"cooldownSeconds\": 0,\r\n        \"lastOpportunityFingerprint\": \"\",\r\n        \"memories\": []\r\n      }\r\n    ],\r\n    \"commitments\": [],\r\n    \"pendingDecisions\": [],\r\n    \"terminalRequestIds\": [],\r\n    \"executedTransferIds\": [],\r\n    \"events\": [\r\n      {\r\n        \"sequence\": 1,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"eli\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"eli.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022eli.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.north\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 2,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"mina\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"mina.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022mina.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.west\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 3,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"ren\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"ren.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022ren.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.east\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 4,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"schedule_started\",\r\n        \"residentId\": \"sora\",\r\n        \"source\": \"world\",\r\n        \"reason\": \"\\u5E7F\\u573A\\u95F2\\u901B\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": \"sora.morning\",\r\n        \"dataJson\": \"{\\r\\n  \\u0022day\\u0022: 0,\\r\\n  \\u0022schedule\\u0022: {\\r\\n    \\u0022id\\u0022: \\u0022sora.morning\\u0022,\\r\\n    \\u0022startMinute\\u0022: 540,\\r\\n    \\u0022endMinute\\u0022: 660,\\r\\n    \\u0022placeId\\u0022: \\u0022plaza.south\\u0022,\\r\\n    \\u0022activity\\u0022: \\u0022\\\\u5E7F\\\\u573A\\\\u95F2\\\\u901B\\u0022,\\r\\n    \\u0022isFree\\u0022: true\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 5,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"world_started\",\r\n        \"residentId\": null,\r\n        \"source\": \"world\",\r\n        \"reason\": \"economy-fixture\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022contentFingerprint\\u0022: \\u0022f8b4a3eb9a46375f7fc54b6fc34cdf6bbb1ce3fe5e18fd2c35fbb55b7d662d43\\u0022,\\r\\n  \\u0022budgetId\\u0022: \\u0022cozytown-godot-first-slice-20260920-v1\\u0022\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 6,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 330,\\r\\n    \\u0022y\\u0022: 332\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 333.0172195020104,\\r\\n    \\u0022y\\u0022: 331.28839162688433\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 7,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 333.0172195020104,\\r\\n    \\u0022y\\u0022: 331.28839162688433\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 336.0344390040208,\\r\\n    \\u0022y\\u0022: 330.57678325376867\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 8,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 336.0344390040208,\\r\\n    \\u0022y\\u0022: 330.57678325376867\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 339.0516585060312,\\r\\n    \\u0022y\\u0022: 329.865174880653\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 9,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 339.0516585060312,\\r\\n    \\u0022y\\u0022: 329.865174880653\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 342.06887800804157,\\r\\n    \\u0022y\\u0022: 329.15356650753733\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 10,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 342.06887800804157,\\r\\n    \\u0022y\\u0022: 329.15356650753733\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 345.08609751005196,\\r\\n    \\u0022y\\u0022: 328.44195813442167\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 11,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 345.08609751005196,\\r\\n    \\u0022y\\u0022: 328.44195813442167\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 348.10331701206235,\\r\\n    \\u0022y\\u0022: 327.730349761306\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 12,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 348.10331701206235,\\r\\n    \\u0022y\\u0022: 327.730349761306\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 351.12053651407274,\\r\\n    \\u0022y\\u0022: 327.01874138819034\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 13,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 351.12053651407274,\\r\\n    \\u0022y\\u0022: 327.01874138819034\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 354.13775601608313,\\r\\n    \\u0022y\\u0022: 326.30713301507467\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 14,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 354.13775601608313,\\r\\n    \\u0022y\\u0022: 326.30713301507467\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 357.1549755180935,\\r\\n    \\u0022y\\u0022: 325.595524641959\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 15,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 357.1549755180935,\\r\\n    \\u0022y\\u0022: 325.595524641959\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 360.1721950201039,\\r\\n    \\u0022y\\u0022: 324.88391626884334\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 16,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 360.1721950201039,\\r\\n    \\u0022y\\u0022: 324.88391626884334\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 363.1894145221143,\\r\\n    \\u0022y\\u0022: 324.17230789572767\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 17,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 363.1894145221143,\\r\\n    \\u0022y\\u0022: 324.17230789572767\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 366.2066340241247,\\r\\n    \\u0022y\\u0022: 323.460699522612\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 18,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 366.2066340241247,\\r\\n    \\u0022y\\u0022: 323.460699522612\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 369.2238535261351,\\r\\n    \\u0022y\\u0022: 322.74909114949634\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 19,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 369.2238535261351,\\r\\n    \\u0022y\\u0022: 322.74909114949634\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 372.2410730281455,\\r\\n    \\u0022y\\u0022: 322.03748277638067\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 20,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 372.2410730281455,\\r\\n    \\u0022y\\u0022: 322.03748277638067\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 375.25829253015587,\\r\\n    \\u0022y\\u0022: 321.325874403265\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 21,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 375.25829253015587,\\r\\n    \\u0022y\\u0022: 321.325874403265\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 378.27551203216626,\\r\\n    \\u0022y\\u0022: 320.61426603014934\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 22,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 378.27551203216626,\\r\\n    \\u0022y\\u0022: 320.61426603014934\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 381.29273153417665,\\r\\n    \\u0022y\\u0022: 319.90265765703367\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 23,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 381.29273153417665,\\r\\n    \\u0022y\\u0022: 319.90265765703367\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 384.30995103618704,\\r\\n    \\u0022y\\u0022: 319.191049283918\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 24,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 384.30995103618704,\\r\\n    \\u0022y\\u0022: 319.191049283918\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 387.32717053819744,\\r\\n    \\u0022y\\u0022: 318.47944091080234\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 25,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 387.32717053819744,\\r\\n    \\u0022y\\u0022: 318.47944091080234\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 390.3443900402078,\\r\\n    \\u0022y\\u0022: 317.7678325376867\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 26,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 390.3443900402078,\\r\\n    \\u0022y\\u0022: 317.7678325376867\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 393.3616095422182,\\r\\n    \\u0022y\\u0022: 317.056224164571\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 27,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 393.3616095422182,\\r\\n    \\u0022y\\u0022: 317.056224164571\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 396.3788290442286,\\r\\n    \\u0022y\\u0022: 316.34461579145534\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 28,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 396.3788290442286,\\r\\n    \\u0022y\\u0022: 316.34461579145534\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 399.396048546239,\\r\\n    \\u0022y\\u0022: 315.6330074183397\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 29,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 399.396048546239,\\r\\n    \\u0022y\\u0022: 315.6330074183397\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 402.4132680482494,\\r\\n    \\u0022y\\u0022: 314.921399045224\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 30,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 402.4132680482494,\\r\\n    \\u0022y\\u0022: 314.921399045224\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 405.4304875502598,\\r\\n    \\u0022y\\u0022: 314.20979067210834\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 31,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 405.4304875502598,\\r\\n    \\u0022y\\u0022: 314.20979067210834\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 408.4477070522702,\\r\\n    \\u0022y\\u0022: 313.4981822989927\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 32,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 408.4477070522702,\\r\\n    \\u0022y\\u0022: 313.4981822989927\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 411.46492655428057,\\r\\n    \\u0022y\\u0022: 312.786573925877\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 33,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 411.46492655428057,\\r\\n    \\u0022y\\u0022: 312.786573925877\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 414.48214605629096,\\r\\n    \\u0022y\\u0022: 312.07496555276134\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 34,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 414.48214605629096,\\r\\n    \\u0022y\\u0022: 312.07496555276134\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 417.49936555830135,\\r\\n    \\u0022y\\u0022: 311.3633571796457\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 35,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 417.49936555830135,\\r\\n    \\u0022y\\u0022: 311.3633571796457\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 420.51658506031174,\\r\\n    \\u0022y\\u0022: 310.65174880653\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 36,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 420.51658506031174,\\r\\n    \\u0022y\\u0022: 310.65174880653\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 423.53380456232213,\\r\\n    \\u0022y\\u0022: 309.94014043341434\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 37,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 423.53380456232213,\\r\\n    \\u0022y\\u0022: 309.94014043341434\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 426.5510240643325,\\r\\n    \\u0022y\\u0022: 309.2285320602987\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 38,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 426.5510240643325,\\r\\n    \\u0022y\\u0022: 309.2285320602987\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 429.5682435663429,\\r\\n    \\u0022y\\u0022: 308.516923687183\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 39,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 429.5682435663429,\\r\\n    \\u0022y\\u0022: 308.516923687183\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 432.5854630683533,\\r\\n    \\u0022y\\u0022: 307.80531531406734\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 40,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 432.5854630683533,\\r\\n    \\u0022y\\u0022: 307.80531531406734\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 435.6026825703637,\\r\\n    \\u0022y\\u0022: 307.0937069409517\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 41,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 435.6026825703637,\\r\\n    \\u0022y\\u0022: 307.0937069409517\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 438.6199020723741,\\r\\n    \\u0022y\\u0022: 306.382098567836\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 42,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 438.6199020723741,\\r\\n    \\u0022y\\u0022: 306.382098567836\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 441.6371215743845,\\r\\n    \\u0022y\\u0022: 305.67049019472034\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 43,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 441.6371215743845,\\r\\n    \\u0022y\\u0022: 305.67049019472034\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 444.65434107639487,\\r\\n    \\u0022y\\u0022: 304.9588818216047\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 44,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 444.65434107639487,\\r\\n    \\u0022y\\u0022: 304.9588818216047\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 447.67156057840526,\\r\\n    \\u0022y\\u0022: 304.247273448489\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 45,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 447.67156057840526,\\r\\n    \\u0022y\\u0022: 304.247273448489\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 450.68878008041565,\\r\\n    \\u0022y\\u0022: 303.53566507537334\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 46,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 450.68878008041565,\\r\\n    \\u0022y\\u0022: 303.53566507537334\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 453.70599958242605,\\r\\n    \\u0022y\\u0022: 302.8240567022577\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 47,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 453.70599958242605,\\r\\n    \\u0022y\\u0022: 302.8240567022577\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 456.72321908443644,\\r\\n    \\u0022y\\u0022: 302.112448329142\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 48,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 456.72321908443644,\\r\\n    \\u0022y\\u0022: 302.112448329142\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 459.7404385864468,\\r\\n    \\u0022y\\u0022: 301.40083995602635\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 49,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 459.7404385864468,\\r\\n    \\u0022y\\u0022: 301.40083995602635\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 462.7576580884572,\\r\\n    \\u0022y\\u0022: 300.6892315829107\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 50,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 462.7576580884572,\\r\\n    \\u0022y\\u0022: 300.6892315829107\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 465.7748775904676,\\r\\n    \\u0022y\\u0022: 299.977623209795\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 51,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 465.7748775904676,\\r\\n    \\u0022y\\u0022: 299.977623209795\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 468.792097092478,\\r\\n    \\u0022y\\u0022: 299.26601483667935\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 52,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 468.792097092478,\\r\\n    \\u0022y\\u0022: 299.26601483667935\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 471.8093165944884,\\r\\n    \\u0022y\\u0022: 298.5544064635637\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 53,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 471.8093165944884,\\r\\n    \\u0022y\\u0022: 298.5544064635637\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 474.8265360964988,\\r\\n    \\u0022y\\u0022: 297.84279809044807\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 54,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 474.8265360964988,\\r\\n    \\u0022y\\u0022: 297.84279809044807\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 477.8437555985092,\\r\\n    \\u0022y\\u0022: 297.1311897173324\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 55,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 477.8437555985092,\\r\\n    \\u0022y\\u0022: 297.1311897173324\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 480.86097510051957,\\r\\n    \\u0022y\\u0022: 296.4195813442168\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 56,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 480.86097510051957,\\r\\n    \\u0022y\\u0022: 296.4195813442168\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 483.87819460252996,\\r\\n    \\u0022y\\u0022: 295.7079729711011\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 57,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 483.87819460252996,\\r\\n    \\u0022y\\u0022: 295.7079729711011\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 486.89541410454035,\\r\\n    \\u0022y\\u0022: 294.99636459798546\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 58,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 486.89541410454035,\\r\\n    \\u0022y\\u0022: 294.99636459798546\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 489.91263360655074,\\r\\n    \\u0022y\\u0022: 294.28475622486985\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 59,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 489.91263360655074,\\r\\n    \\u0022y\\u0022: 294.28475622486985\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 492.92985310856113,\\r\\n    \\u0022y\\u0022: 293.5731478517542\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 60,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 492.92985310856113,\\r\\n    \\u0022y\\u0022: 293.5731478517542\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 495.9470726105715,\\r\\n    \\u0022y\\u0022: 292.8615394786386\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 61,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 495.9470726105715,\\r\\n    \\u0022y\\u0022: 292.8615394786386\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 498.9642921125819,\\r\\n    \\u0022y\\u0022: 292.1499311055229\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 62,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 498.9642921125819,\\r\\n    \\u0022y\\u0022: 292.1499311055229\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 501.9815116145923,\\r\\n    \\u0022y\\u0022: 291.4383227324073\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 63,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 501.9815116145923,\\r\\n    \\u0022y\\u0022: 291.4383227324073\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 504.9987311166027,\\r\\n    \\u0022y\\u0022: 290.72671435929163\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 64,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 504.9987311166027,\\r\\n    \\u0022y\\u0022: 290.72671435929163\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 508.0159506186131,\\r\\n    \\u0022y\\u0022: 290.01510598617597\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 65,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 508.0159506186131,\\r\\n    \\u0022y\\u0022: 290.01510598617597\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 511.0331701206235,\\r\\n    \\u0022y\\u0022: 289.30349761306036\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 66,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 511.0331701206235,\\r\\n    \\u0022y\\u0022: 289.30349761306036\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 514.0503896226338,\\r\\n    \\u0022y\\u0022: 288.5918892399447\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 67,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 514.0503896226338,\\r\\n    \\u0022y\\u0022: 288.5918892399447\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 517.0676091246442,\\r\\n    \\u0022y\\u0022: 287.8802808668291\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 68,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 517.0676091246442,\\r\\n    \\u0022y\\u0022: 287.8802808668291\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 520.0848286266545,\\r\\n    \\u0022y\\u0022: 287.1686724937134\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 69,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 520.0848286266545,\\r\\n    \\u0022y\\u0022: 287.1686724937134\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 523.1020481286648,\\r\\n    \\u0022y\\u0022: 286.4570641205978\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 70,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 523.1020481286648,\\r\\n    \\u0022y\\u0022: 286.4570641205978\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 526.1192676306752,\\r\\n    \\u0022y\\u0022: 285.7454557474822\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 71,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 526.1192676306752,\\r\\n    \\u0022y\\u0022: 285.7454557474822\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 529.1364871326855,\\r\\n    \\u0022y\\u0022: 285.03384737436653\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 72,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 529.1364871326855,\\r\\n    \\u0022y\\u0022: 285.03384737436653\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 532.1537066346958,\\r\\n    \\u0022y\\u0022: 284.3222390012509\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 73,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 532.1537066346958,\\r\\n    \\u0022y\\u0022: 284.3222390012509\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 535.1709261367062,\\r\\n    \\u0022y\\u0022: 283.6106306281353\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 74,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 535.1709261367062,\\r\\n    \\u0022y\\u0022: 283.6106306281353\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 538.1881456387165,\\r\\n    \\u0022y\\u0022: 282.89902225501964\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 75,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 538.1881456387165,\\r\\n    \\u0022y\\u0022: 282.89902225501964\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 541.2053651407268,\\r\\n    \\u0022y\\u0022: 282.18741388190404\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 76,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"player_moved\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022from\\u0022: {\\r\\n    \\u0022x\\u0022: 541.2053651407268,\\r\\n    \\u0022y\\u0022: 282.18741388190404\\r\\n  },\\r\\n  \\u0022to\\u0022: {\\r\\n    \\u0022x\\u0022: 542,\\r\\n    \\u0022y\\u0022: 282\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 77,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"time_input\",\r\n        \"residentId\": null,\r\n        \"source\": \"host\",\r\n        \"reason\": \"paused\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022worldMinutes\\u0022: 10,\\r\\n  \\u0022realSeconds\\u0022: 0,\\r\\n  \\u0022paused\\u0022: true\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 78,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"economy_trade\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 1,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022shopId\\u0022: \\u0022shop.town.general\\u0022,\\r\\n    \\u0022resourceId\\u0022: \\u0022seed.carrot\\u0022,\\r\\n    \\u0022direction\\u0022: \\u0022buy\\u0022,\\r\\n    \\u0022quantity\\u0022: 2,\\r\\n    \\u0022expectedUnitPrice\\u0022: 25\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:a14db13660e34021abf366fec8109cff\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022unitPrice\\u0022: 25,\\r\\n    \\u0022totalPrice\\u0022: 50,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 79,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"economy_trade\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 2,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022shopId\\u0022: \\u0022shop.town.general\\u0022,\\r\\n    \\u0022resourceId\\u0022: \\u0022crop.potato\\u0022,\\r\\n    \\u0022direction\\u0022: \\u0022sell\\u0022,\\r\\n    \\u0022quantity\\u0022: 1,\\r\\n    \\u0022expectedUnitPrice\\u0022: 20\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:7f436d3ee336428fa34af9743a5e1526\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022unitPrice\\u0022: 20,\\r\\n    \\u0022totalPrice\\u0022: 20,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 80,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"economy_trade\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"insufficient_shop_stock\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 3,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022shopId\\u0022: \\u0022shop.town.general\\u0022,\\r\\n    \\u0022resourceId\\u0022: \\u0022seed.carrot\\u0022,\\r\\n    \\u0022direction\\u0022: \\u0022buy\\u0022,\\r\\n    \\u0022quantity\\u0022: 9999,\\r\\n    \\u0022expectedUnitPrice\\u0022: 25\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:a8470e3972174087a198d9bae00f35ec\\u0022,\\r\\n    \\u0022succeeded\\u0022: false,\\r\\n    \\u0022code\\u0022: \\u0022insufficient_shop_stock\\u0022,\\r\\n    \\u0022unitPrice\\u0022: 25,\\r\\n    \\u0022totalPrice\\u0022: 249975,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 81,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"economy_trade\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"insufficient_player_stock\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 4,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022shopId\\u0022: \\u0022shop.town.general\\u0022,\\r\\n    \\u0022resourceId\\u0022: \\u0022crop.potato\\u0022,\\r\\n    \\u0022direction\\u0022: \\u0022sell\\u0022,\\r\\n    \\u0022quantity\\u0022: 9999,\\r\\n    \\u0022expectedUnitPrice\\u0022: 20\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:34cdc78d0c394f09b500ae013ab18ca6\\u0022,\\r\\n    \\u0022succeeded\\u0022: false,\\r\\n    \\u0022code\\u0022: \\u0022insufficient_player_stock\\u0022,\\r\\n    \\u0022unitPrice\\u0022: 20,\\r\\n    \\u0022totalPrice\\u0022: 199980,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 82,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"quickbar_selected\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 5,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022index\\u0022: 0\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:4312ad205c0442aa80701c60e486109a\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022index\\u0022: 0,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 83,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"quickbar_selected\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 6,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022index\\u0022: 1\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:441f0b71384349e8aeb09b6b459bf4e7\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022index\\u0022: 1,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 84,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"quickbar_selected\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 7,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022index\\u0022: 2\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:366dbf177931494585a0c34f0c7e9041\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022index\\u0022: 2,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 85,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"quickbar_selected\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 8,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022index\\u0022: 3\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:5bdaadb7e2734424b059a74bb74efd27\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022index\\u0022: 3,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 86,\r\n        \"branchId\": \"586daebb5a824eb2b5f79ed9858871b7\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"quickbar_selected\",\r\n        \"residentId\": \"player\",\r\n        \"source\": \"player\",\r\n        \"reason\": \"accepted\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022schemaVersion\\u0022: 1,\\r\\n  \\u0022inputSequence\\u0022: 9,\\r\\n  \\u0022request\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee\\u0022,\\r\\n    \\u0022actorId\\u0022: \\u0022player\\u0022,\\r\\n    \\u0022index\\u0022: 4\\r\\n  },\\r\\n  \\u0022result\\u0022: {\\r\\n    \\u0022operationId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7:player:8dca8571baf24cc0b510a6348cf0b9ee\\u0022,\\r\\n    \\u0022succeeded\\u0022: true,\\r\\n    \\u0022code\\u0022: \\u0022accepted\\u0022,\\r\\n    \\u0022index\\u0022: 4,\\r\\n    \\u0022isDuplicate\\u0022: false\\r\\n  }\\r\\n}\"\r\n      },\r\n      {\r\n        \"sequence\": 87,\r\n        \"branchId\": \"49e0dd5859d5456b9d3af0f656059d50\",\r\n        \"worldMinute\": 540,\r\n        \"kind\": \"world_restored\",\r\n        \"residentId\": null,\r\n        \"source\": \"host\",\r\n        \"reason\": \"snapshot_validated\",\r\n        \"logicalRequestId\": null,\r\n        \"activityId\": null,\r\n        \"dataJson\": \"{\\r\\n  \\u0022snapshotId\\u0022: \\u0022d02b1c008e394196a9632195935ab79a\\u0022,\\r\\n  \\u0022parentBranchId\\u0022: \\u0022586daebb5a824eb2b5f79ed9858871b7\\u0022,\\r\\n  \\u0022snapshotSequence\\u0022: 86\\r\\n}\"\r\n      }\r\n    ]\r\n  }\r\n}",
+        "sourceRunDirectoryName": "49e0dd5859d5456b9d3af0f656059d50",
+        "journalRecordCount": 0,
+        "unconsumedSeconds": 0,
+        "decisionMode": "rules",
+        "stage": "economy-fixture",
+        "modelRequests": {},
+        "playerRoute": null,
+        "playerRouteCursor": 0
+      },
+      "economyRecords": [],
+      "restoreRecords": [
+        {
+          "sequence": 2,
+          "receivedAtUtc": "2026-09-23T13:28:51.0941235+00:00",
+          "kind": "restore_committed",
+          "data": {
+            "sourceRunDirectoryName": "586daebb5a824eb2b5f79ed9858871b7",
+            "journalRecordCount": 25,
+            "sourceSnapshotId": "d02b1c008e394196a9632195935ab79a",
+            "recoveringFault": false,
+            "sourcePrefixAvailable": true,
+            "recordStatus": "source_prefix_present"
+          }
+        }
+      ]
+    }
+  ]
+}
