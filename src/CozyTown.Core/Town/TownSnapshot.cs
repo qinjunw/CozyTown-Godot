@@ -8,7 +8,7 @@ public sealed partial class TownWorld
     public TownSnapshot CaptureSnapshot()
     {
         if (HasUncommittedResponses) throw new InvalidOperationException("A received model response is still being persisted; save after its completion is sealed.");
-        return new(2, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
+        return new(3, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
     }
     public string CaptureJson() => TownJson.Serialize(CaptureSnapshot());
 
@@ -39,13 +39,14 @@ public sealed partial class TownWorld
     {
         void Require([DoesNotReturnIf(false)] bool condition, string field) { if (!condition) throw new InvalidDataException($"Invalid town snapshot: {field}"); }
         bool Id(string? id) => !string.IsNullOrWhiteSpace(id) && id.Length <= 200;
-        Require(snapshot.SchemaVersion == 2, "schemaVersion");
+        Require(snapshot.SchemaVersion == 3, "schemaVersion");
         Require(snapshot.ContentFingerprint == content.Fingerprint, "contentFingerprint");
         Require(snapshot.RulesVersion == RulesVersion && snapshot.NumericVersion == NumericVersion, "simulation versions");
         Require(Id(snapshot.SnapshotId) && snapshot.State is not null, "snapshot identity/state");
         var state = snapshot.State!;
         Require(Id(state.BranchId) && Id(state.BudgetId) && Id(state.InitialStateId) && state.InitialStateFingerprint == content.Fingerprint, "state identities");
-        Require(TownContent.Finite(state.WorldMinute) && state.WorldMinute >= 0 && state.WorldMinute < 1440 * 1_000_000 && TownContent.Finite(state.AcceptedWorldMinutes) && state.AcceptedWorldMinutes >= 0 && state.AcceptedWorldMinutes <= 1440, "world time");
+        Require(TownContent.Finite(state.WorldMinute) && state.WorldMinute >= 0 && state.WorldMinute < 1440 * 1_000_000 && TownContent.Finite(state.AcceptedWorldMinutes) && state.AcceptedWorldMinutes >= 0 && state.AcceptedWorldMinutes <= MaximumAdvanceMinutes, "world time");
+        Require(state.WorldMinute + state.AcceptedWorldMinutes < 1440 * 1_000_000, "accepted time exceeds world range");
         Require(state.Residents is not null && state.Commitments is not null && state.PendingDecisions is not null && state.TerminalRequestIds is not null && state.ExecutedTransferIds is not null && state.Events is not null, "collections");
         Require(state.Residents.All(r => r is not null) && state.Commitments.All(c => c is not null) && state.PendingDecisions.All(p => p is not null), "null state entry");
         Require(state.Sequence >= 0 && state.IdentitySequence >= 0 && state.ForkSequence >= 0 && state.ForkSequence <= state.Sequence, "sequences");
@@ -78,7 +79,7 @@ public sealed partial class TownWorld
         foreach (var resource in content.Data.Resources)
             Require(state.Residents.Sum(r => (long)r.Inventory.GetValueOrDefault(resource.Id)) == content.Data.Residents.Sum(r => (long)r.Inventory.GetValueOrDefault(resource.Id)), $"resource conservation {resource.Id}");
         Require(state.Residents.Sum(r => (long)r.Coins) == content.Data.Residents.Sum(r => (long)r.Coins), "coin conservation");
-        ValidateEconomy(content, state.Economy);
+        ValidateEconomy(content, state.Economy, state.Farming, state.WorldMinute);
         Require(state.Economy.InputSequence <= state.Sequence, "economy input sequence exceeds world event sequence");
         foreach (var commitment in state.Commitments)
         {

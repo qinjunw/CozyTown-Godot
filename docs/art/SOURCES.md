@@ -1,5 +1,7 @@
 # 首切片美术来源与图集布局
 
+2026-09-25 种植与睡眠增补：玩家住宅复用 `bld_town_functions_64.png` 和匹配屋顶的 `(64,0,64,64)` 区域；农田沿用空土底图。`FarmPlotView.cs` 根据已提交的地块状态绘制幼苗、叶丛和湿土，成熟时显示已有物品图集的对应作物格；`TownBackdrop.cs` 绘制家门边的床形休息路牌。这些表现没有新增或修改 PNG，位置由 `TownMap.tscn` 中的地点标记提供。
+
 2026-09-23 玩家经济增补：复制固定参考 `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa` 的 `Assets/CozyTown/Art/Production/Items/item_mvp_16.png` 到 `game/Art/Items/item_mvp_16.png`。实际 PNG 为 96×48、5,078 字节，SHA-256 `956ef71f0aab2b1ee461ffa964025f766fe88ec27a81f8ad68845d5f8c901e2e` 与固定 Git LFS 对象一致。18 格按左上起逐行、每格 16×16 映射，资源顺序见 `game/Art/catalog.json` 的 `items.resourceIds`；以最近邻采样显示，未重采样或改色。
 
 本批于 2026-09-20 从 CozyTown Unity 参考项目复制 14 张生产 PNG 到 `game/Art/`。文件逐字节复制，未重新采样、改色或修改 Alpha；Unity 的 `.meta`、场景和编译器没有成为 Godot 运行依赖。

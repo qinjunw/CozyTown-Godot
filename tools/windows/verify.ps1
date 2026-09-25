@@ -132,7 +132,7 @@ function Assert-ContentReport {
     $residents = @($report.definitions.residents | ForEach-Object { $_.id } | Sort-Object)
     if (($residents -join ',') -ne 'eli,mina,ren,sora' -or
         $report.manifest.width -ne 768 -or $report.manifest.height -ne 512 -or
-        @($report.manifest.places).Count -ne 14 -or @($report.manifest.roads).Count -ne 14 -or
+        @($report.manifest.places).Count -ne 22 -or @($report.manifest.roads).Count -ne 16 -or
         @($report.manifest.obstacles).Count -lt 1 -or @($report.manifest.regions).Count -lt 1) {
         throw "Content report failed the four-resident map checks: $Path"
     }
@@ -270,6 +270,50 @@ function Assert-EconomyReport {
     return $report
 }
 
+function Assert-FarmingReport {
+    param([string] $Path, [bool] $Headless, [string] $BundledRuntimeRoot = '', [string] $ExpectedScreenshot = '', [switch] $Capacity)
+    $report = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+    $expectedTest = if ($Capacity) { 'godot_farming_capacity_smoke' } else { 'godot_farming_smoke' }
+    $expectedScenario = if ($Capacity) { 'farming-capacity-fixture' } else { 'baseline' }
+    if ($report.passed -ne $true -or $report.test -ne $expectedTest -or $report.scenario -ne $expectedScenario -or
+        $report.mode -ne 'rules' -or $report.residents -ne 4 -or $report.headless -ne $Headless -or
+        $report.contentFingerprint -notmatch '^[0-9a-f]{64}$') { throw 'Farming report identity or outcome failed.' }
+    $required = @('normal_new_game', 'plot_interaction_and_pause', 'missing_seed_feedback', 'buy_seed',
+        'plant_consumes_one_seed', 'immature_harvest_preserves_crop', 'dry_plot_does_not_block_morning',
+        'reference_day_two_stock', 'water_day_0', 'growth_day_0', 'water_day_1', 'growth_day_1', 'water_day_2', 'growth_day_2',
+        'mature_crop_visible', 'harvest_receives_produce', 'restore_unclaimed_mature_crop', 'second_harvest_does_not_duplicate',
+        'sell_produce', 'reinvest_in_next_crop', 'external_pause_blocks_sleep', 'four_residents_followed_routes',
+        'production_and_restock_recorded', 'versioned_commands_and_checkpoints')
+    if ($Capacity) {
+        $required = @('explicit_offline_capacity_fixture', 'plot_opened_with_fixture', 'plant_keeps_all_five_slots_occupied',
+            'water_before_morning_0', 'growth_after_morning_0', 'water_before_morning_1', 'growth_after_morning_1',
+            'water_before_morning_2', 'growth_after_morning_2', 'mature_before_rejected_harvest',
+            'capacity_failure_explains_and_preserves_assets', 'rejected_harvest_state_survives_restore',
+            'selling_potato_frees_one_slot', 'harvest_succeeds_after_freeing_capacity', 'rejected_command_has_durable_checkpoint')
+    }
+    $names = @($report.checks | ForEach-Object name)
+    if (@($names | Sort-Object -Unique).Count -ne $names.Count) { throw 'Duplicate farming check.' }
+    foreach ($name in $required) { if ($name -notin $names) { throw "Missing farming check: $name" } }
+    foreach ($check in $report.checks) { if ($check.passed -ne $true) { throw "Farming check failed: $($check.name)" } }
+    if ($BundledRuntimeRoot) {
+        $prefix = [IO.Path]::GetFullPath($BundledRuntimeRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
+        if (-not [IO.Path]::GetFullPath($report.runtimeAssemblyLocation).StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Farming export loaded an external runtime.'
+        }
+    }
+    if ($ExpectedScreenshot) {
+        $imageKinds = if ($Capacity) { @('failure', 'success') } else { @('sleep', 'dry', 'mature', 'field') }
+        foreach ($kind in $imageKinds) {
+            $expected = if ($kind -eq 'sleep' -or ($Capacity -and $kind -eq 'failure')) { $ExpectedScreenshot } else {
+                Join-Path (Split-Path $ExpectedScreenshot -Parent) ([IO.Path]::GetFileNameWithoutExtension($ExpectedScreenshot) + "-$kind.png")
+            }
+            if ([IO.Path]::GetFullPath($report.screenshots.$kind) -ne [IO.Path]::GetFullPath($expected) -or
+                -not (Test-Path -LiteralPath $expected -PathType Leaf)) { throw "Missing farming screenshot: $kind" }
+        }
+    }
+    return $report
+}
+
 $summary = [ordered]@{
     schemaVersion = 1
     startedAtUtc = [DateTime]::UtcNow.ToString('O')
@@ -301,7 +345,7 @@ try {
     $null = Invoke-CheckedProcess 'scene-headless' $godot @('--headless', '--path', 'game', '--', '--toolchain-smoke', "--report=$sceneReport")
     Assert-SmokeReport $sceneReport $true
     $summary.contentChecks = [ordered]@{}
-    foreach ($scenario in @('baseline', 'counterfactual', 'economy-fixture')) {
+    foreach ($scenario in @('baseline', 'counterfactual', 'economy-fixture', 'farming-capacity-fixture')) {
         $contentReportPath = Join-Path $output "content-$scenario.json"
         $contentData = Join-Path $output "data/content-$scenario"
         $null = Invoke-CheckedProcess "content-$scenario" $godot @('--headless', '--path', 'game', '--', '--validate-content', "--scenario=$scenario", "--report=$contentReportPath", "--data-dir=$contentData")
@@ -369,6 +413,51 @@ try {
     $economyReport = Assert-EconomyReport $economyReportPath $true $windows
     if ($economyReport.contentFingerprint -ne $summary.contentChecks['economy-fixture'].fingerprint) { throw 'Economy export and content validation differ.' }
     $summary.economyChecks['export-economy-headless'] = [ordered]@{ passed = $true; checks = @($economyReport.checks).Count; contentFingerprint = $economyReport.contentFingerprint }
+    $summary.farmingChecks = [ordered]@{}
+    foreach ($capacityTarget in @('scene', 'export')) {
+        $capacityName = "$capacityTarget-farming-capacity-headless"
+        $capacityPath = Join-Path $output "$capacityName.json"
+        $capacityData = Join-Path $output "data/$capacityName"
+        if ($capacityTarget -eq 'scene') {
+            $null = Invoke-CheckedProcess $capacityName $godot @('--headless', '--path', 'game', '--', '--farming-capacity-smoke', '--scenario=farming-capacity-fixture', "--report=$capacityPath", "--data-dir=$capacityData") 300
+        } else {
+            $null = Invoke-CheckedProcess $capacityName $executable @('--headless', '--', '--farming-capacity-smoke', '--scenario=farming-capacity-fixture', "--report=$capacityPath", "--data-dir=$capacityData") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        }
+        $capacityReport = Assert-FarmingReport $capacityPath $true $(if ($capacityTarget -eq 'export') { $windows } else { '' }) -Capacity
+        if ($capacityReport.contentFingerprint -ne $summary.contentChecks['farming-capacity-fixture'].fingerprint) { throw 'Capacity fixture fingerprint differs.' }
+        $summary.farmingChecks[$capacityName] = [ordered]@{ passed = $true; checks = @($capacityReport.checks).Count; contentFingerprint = $capacityReport.contentFingerprint }
+    }
+    if ($Graphical) {
+        $capacityPath = Join-Path $output 'export-farming-capacity-graphical.json'
+        $capacityData = Join-Path $output 'data/export-farming-capacity-graphical'
+        $capacityScreenshot = Join-Path $output 'export-farming-capacity-graphical.png'
+        $null = Invoke-CheckedProcess 'export-farming-capacity-graphical' $executable @('--', '--farming-capacity-smoke', '--scenario=farming-capacity-fixture', "--report=$capacityPath", "--data-dir=$capacityData", "--screenshot=$capacityScreenshot") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        $capacityReport = Assert-FarmingReport $capacityPath $false $windows $capacityScreenshot -Capacity
+        if ($capacityReport.contentFingerprint -ne $summary.contentChecks['farming-capacity-fixture'].fingerprint) { throw 'Graphical capacity fingerprint differs.' }
+        $summary.farmingChecks['export-farming-capacity-graphical'] = [ordered]@{ passed = $true; checks = @($capacityReport.checks).Count; contentFingerprint = $capacityReport.contentFingerprint; screenshots = $capacityReport.screenshots }
+    }
+    foreach ($farmingTarget in @('scene', 'export')) {
+        $farmingName = "$farmingTarget-farming-headless"
+        $farmingPath = Join-Path $output "$farmingName.json"
+        $farmingData = Join-Path $output "data/$farmingName"
+        if ($farmingTarget -eq 'scene') {
+            $null = Invoke-CheckedProcess $farmingName $godot @('--headless', '--path', 'game', '--', '--farming-smoke', "--report=$farmingPath", "--data-dir=$farmingData") 300
+        } else {
+            $null = Invoke-CheckedProcess $farmingName $executable @('--headless', '--', '--farming-smoke', "--report=$farmingPath", "--data-dir=$farmingData") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        }
+        $farmingReport = Assert-FarmingReport $farmingPath $true $(if ($farmingTarget -eq 'export') { $windows } else { '' })
+        if ($farmingReport.contentFingerprint -ne $summary.contentChecks.baseline.fingerprint) { throw 'Farming content fingerprint differs.' }
+        $summary.farmingChecks[$farmingName] = [ordered]@{ passed = $true; checks = @($farmingReport.checks).Count; contentFingerprint = $farmingReport.contentFingerprint }
+    }
+    if ($Graphical) {
+        $farmingPath = Join-Path $output 'export-farming-graphical.json'
+        $farmingData = Join-Path $output 'data/export-farming-graphical'
+        $farmingScreenshot = Join-Path $output 'export-farming-graphical.png'
+        $null = Invoke-CheckedProcess 'export-farming-graphical' $executable @('--', '--farming-smoke', "--report=$farmingPath", "--data-dir=$farmingData", "--screenshot=$farmingScreenshot") 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+        $farmingReport = Assert-FarmingReport $farmingPath $false $windows $farmingScreenshot
+        if ($farmingReport.contentFingerprint -ne $summary.contentChecks.baseline.fingerprint) { throw 'Graphical farming fingerprint differs.' }
+        $summary.farmingChecks['export-farming-graphical'] = [ordered]@{ passed = $true; checks = @($farmingReport.checks).Count; contentFingerprint = $farmingReport.contentFingerprint; screenshots = $farmingReport.screenshots }
+    }
     if ($Graphical) {
         $graphicalReport = Join-Path $output 'export-graphical.json'
         $screenshot = Join-Path $output 'export-graphical.png'

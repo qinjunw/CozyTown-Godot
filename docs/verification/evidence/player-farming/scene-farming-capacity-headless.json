@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_farming_capacity_smoke",
+  "passed": true,
+  "scenario": "farming-capacity-fixture",
+  "headless": true,
+  "mode": "rules",
+  "residents": 4,
+  "runtimeAssemblyLocation": "<project-root>\\.local\\tools\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+  "contentFingerprint": "1891060d72fe10d1c76f6b161bf663e989833b57166257e9bccfd3a401ed0280",
+  "checks": [
+    {
+      "name": "explicit_offline_capacity_fixture",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "plot_opened_with_fixture",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "plant_keeps_all_five_slots_occupied",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_before_morning_0",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_after_morning_0",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_before_morning_1",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_after_morning_1",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_before_morning_2",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_after_morning_2",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "mature_before_rejected_harvest",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "capacity_failure_explains_and_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "rejected_harvest_state_survives_restore",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "selling_potato_frees_one_slot",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "harvest_succeeds_after_freeing_capacity",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "rejected_command_has_durable_checkpoint",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshots": {
+    "failure": null,
+    "success": null
+  },
+  "runDirectories": [
+    "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\data\\scene-farming-capacity-headless\\runs\\9e2688d2c42f4a888cf2e9b18623064a",
+    "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\data\\scene-farming-capacity-headless\\runs\\0f3b86b9bfe04f3bb8ecb61bfca47c60"
+  ],
+  "coverage": "Explicit five-slot offline fixture. Godot routes and UI callbacks plant, water and sleep through three mornings; full-inventory harvest retains the mature crop and assets across restore, then selling one item permits harvest. OS input is verified separately. No model calls."
+}

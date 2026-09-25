@@ -1,3 +1,4 @@
+using CozyTown.Core.Town;
 using Godot;
 
 namespace CozyTown.Game;
@@ -7,6 +8,20 @@ public partial class TownBackdrop : Node2D
 {
     private Texture2D? _ground;
     private Texture2D? _decor;
+
+    public void UpdateFarming(FarmingDefinition definition, FarmingState state)
+    {
+        var farm = GetNodeOrNull<Node2D>("Landmarks/Farm");
+        if (farm == null) return;
+        foreach (FarmPlotView view in farm.GetChildren().OfType<FarmPlotView>())
+        {
+            string placeId = view.GetMeta("id").AsString();
+            FarmPlotDefinition? plot = definition.Plots.SingleOrDefault(p => p.PlaceId == placeId);
+            if (plot == null) continue;
+            FarmPlotState saved = state.Plots.Single(p => p.Id == plot.Id);
+            view.SetState(definition.Crops.SingleOrDefault(c => c.Id == saved.CropId), saved);
+        }
+    }
 
     public override void _Ready()
     {
@@ -75,6 +90,7 @@ public partial class TownBackdrop : Node2D
         DrawPlaza();
         DrawBridge();
         DrawGardenDetails(roads);
+        DrawRestSign();
     }
 
     private List<Vector2[]> FindRoads()
@@ -181,6 +197,8 @@ public partial class TownBackdrop : Node2D
         {
             var point = new Vector2(35 + i * 71 % 650, 42 + i * 113 % 425);
             if (point.X > 610 && point.Y > 300 || new Rect2(278, 214, 154, 127).HasPoint(point)) continue;
+            var farm = GetNodeOrNull<Node2D>("Landmarks/Farm");
+            if (farm != null && new Rect2(ToLocal(farm.GlobalPosition) - new Vector2(50, 66), new Vector2(100, 68)).HasPoint(point)) continue;
             if (roads.Any(road => NearRoad(point, road))) continue;
             int column = i % 5 == 0 ? 2 + i % 2 : 1;
             Color tint = i % 3 == 0 ? new Color(0.89f, 0.94f, 0.85f) : Colors.White;
@@ -192,6 +210,20 @@ public partial class TownBackdrop : Node2D
             DrawTextureRectRegion(_decor, new Rect2(x, 8, 16, 32), new Rect2(16, 0, 16, 32));
             DrawTextureRectRegion(_decor, new Rect2(x + 8, 473, 16, 32), new Rect2(16, 0, 16, 32));
         }
+    }
+
+    private void DrawRestSign()
+    {
+        var bed = GetNodeOrNull<Node2D>("Buildings/PlayerHome/BedEntrance");
+        if (bed == null) return;
+        Vector2 point = ToLocal(bed.GlobalPosition) + new Vector2(12, -2);
+        DrawRect(new Rect2(point + new Vector2(5, 1), new Vector2(2, 7)), new Color("795939"));
+        DrawRect(new Rect2(point + new Vector2(0, -9), new Vector2(13, 10)), new Color("614930"));
+        DrawRect(new Rect2(point + new Vector2(1, -8), new Vector2(11, 8)), new Color("ecd6a1"));
+        DrawRect(new Rect2(point + new Vector2(3, -6), new Vector2(2, 2)), new Color("658991"));
+        DrawRect(new Rect2(point + new Vector2(5, -5), new Vector2(5, 3)), new Color("658991"));
+        DrawRect(new Rect2(point + new Vector2(2, -4), new Vector2(1, 3)), new Color("658991"));
+        DrawRect(new Rect2(point + new Vector2(9, -3), new Vector2(1, 2)), new Color("658991"));
     }
 
     private static bool NearRoad(Vector2 point, Vector2[] road)

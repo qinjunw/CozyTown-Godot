@@ -4,7 +4,7 @@ namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    private static void ValidateEconomy(TownContent content, EconomyState? economy)
+    private static void ValidateEconomy(TownContent content, EconomyState? economy, FarmingState? farming, double worldMinute)
     {
         void Require([DoesNotReturnIf(false)] bool condition, string field)
         {
@@ -20,17 +20,58 @@ public sealed partial class TownWorld
         Require(TownContent.RequiredSlots(economy.Player.Inventory, content.Data.Resources) <= economy.Player.SlotCapacity, "player inventory capacity");
         foreach (var shop in economy.Shops)
             Require(shop.Coins >= 0 && TownContent.ValidInventory(shop.Inventory, content.Data.Resources), $"shop {shop.Id} assets");
-        foreach (var resource in content.Data.Resources)
-            Require(economy.Player.Inventory.GetValueOrDefault(resource.Id) + economy.Shops.Sum(s => (long)s.Inventory.GetValueOrDefault(resource.Id))
-                == definition.Player.Inventory.GetValueOrDefault(resource.Id) + definition.Shops.Sum(s => (long)s.Inventory.GetValueOrDefault(resource.Id)), $"resource conservation {resource.Id}");
         Require(economy.Player.Coins + economy.Shops.Sum(s => (long)s.Coins)
             == definition.Player.Coins + definition.Shops.Sum(s => (long)s.Coins), "coin conservation");
         Require(economy.Receipts.All(p => ValidOperationId(p.Key) && p.Value is not null), "receipt identities");
         Require(economy.Receipts.Values.All(r => r.InputSequence > 0 && r.InputSequence <= economy.InputSequence)
             && economy.Receipts.Values.Select(r => r.InputSequence).Distinct().Count() == economy.Receipts.Count, "receipt input sequence");
+        ValidateFarmingStructure(content, farming, worldMinute);
+        var farm = farming!;
+        var allIdentities = economy.Receipts.Keys.Concat(farm.Receipts.Keys).Concat(farm.SleepReceipts.Keys).ToArray();
+        Require(allIdentities.Distinct(StringComparer.Ordinal).Count() == allIdentities.Length, "command identity collision");
+        var sequences = economy.Receipts.Values.Select(r => r.InputSequence).Concat(farm.Receipts.Values.Select(r => r.InputSequence))
+            .Concat(farm.SleepReceipts.Values.Select(r => r.InputSequence)).Concat(farm.Mornings.Select(r => r.InputSequence)).ToArray();
+        Require(sequences.All(s => s > 0 && s <= economy.InputSequence) && sequences.Distinct().Count() == sequences.Length, "operation/source input sequence");
         var reconstructed = CreateInitialEconomy(content);
-        foreach (var pair in economy.Receipts.OrderBy(p => p.Value.InputSequence))
+        var reconstructedFarm = CreateInitialFarming(content);
+        var economyBySequence = economy.Receipts.ToDictionary(p => p.Value.InputSequence);
+        var farmBySequence = farm.Receipts.ToDictionary(p => p.Value.InputSequence);
+        var morningBySequence = farm.Mornings.ToDictionary(r => r.InputSequence);
+        var sleepBySequence = farm.SleepReceipts.Values.ToDictionary(r => r.InputSequence);
+        double lastFarmingMinute = content.Data.StartMinute;
+        double lastCommandMinute = content.Data.StartMinute;
+        foreach (long sequence in sequences.Order())
         {
+            if (morningBySequence.TryGetValue(sequence, out var morning))
+            {
+                double at = morning.Day * 1440 + MorningMinute;
+                Require(morning.Day == reconstructedFarm.LastSettledDay + 1 && at >= lastFarmingMinute && at <= worldMinute, "morning source day/order");
+                ApplyMorning(content, reconstructed, reconstructedFarm, morning.Day);
+                lastFarmingMinute = at;
+                continue;
+            }
+            if (farmBySequence.TryGetValue(sequence, out var farmPair))
+            {
+                var operation = farmPair.Value;
+                Require(operation.WorldMinute >= lastFarmingMinute && operation.WorldMinute <= worldMinute, "farm operation time/order");
+                lastFarmingMinute = operation.WorldMinute;
+                lastCommandMinute = operation.WorldMinute;
+                if (operation.Result.Succeeded)
+                {
+                    Require(operation.Request.ActorId == "player" && reconstructedFarm.Plots.Any(p => p.Id == operation.Request.PlotId)
+                        && EvaluateFarm(content, reconstructed, reconstructedFarm, operation.Request) == "accepted", "farm history conditions/assets");
+                    ApplyFarm(content, reconstructed, reconstructedFarm, operation.Request);
+                }
+                continue;
+            }
+            if (sleepBySequence.TryGetValue(sequence, out var sleep))
+            {
+                Require(sleep.Result.FromMinute >= lastCommandMinute - 1e-7 && sleep.Result.ToMinute >= lastFarmingMinute - 1e-7, "sleep source interval/order");
+                lastCommandMinute = sleep.Result.ToMinute;
+                lastFarmingMinute = sleep.Result.ToMinute;
+                continue;
+            }
+            if (!economyBySequence.TryGetValue(sequence, out var pair)) continue;
             var receipt = pair.Value;
             if (receipt.Kind == "trade")
             {
@@ -70,6 +111,8 @@ public sealed partial class TownWorld
                 if (result.Succeeded) reconstructed.Player.SelectedQuickbarIndex = request.Index;
             }
         }
+        Require(reconstructedFarm.LastSettledDay == farm.LastSettledDay
+            && TownJson.Serialize(reconstructedFarm.Plots) == TownJson.Serialize(farm.Plots), "farming state differs from recorded operations/sources");
         bool SameInventory(Dictionary<string, int> first, Dictionary<string, int> second) => content.Data.Resources.All(r => first.GetValueOrDefault(r.Id) == second.GetValueOrDefault(r.Id));
         Require(reconstructed.Player.Coins == economy.Player.Coins && SameInventory(reconstructed.Player.Inventory, economy.Player.Inventory)
             && reconstructed.Player.SelectedQuickbarIndex == economy.Player.SelectedQuickbarIndex, "player assets/selection differ from recorded operations");

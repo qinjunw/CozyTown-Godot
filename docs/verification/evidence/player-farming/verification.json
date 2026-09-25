@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-09-25T12:41:51.2560715Z",
+  "passed": true,
+  "osVersion": "Microsoft Windows NT 10.0.26200.0",
+  "graphicalRequested": true,
+  "sourceCommit": "897518b9cb682abdd882db964cd8c6878013e474",
+  "sourceDirty": false,
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "steps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.438
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.32
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.635
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.987
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.51
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.795
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.726
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.088
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 11.877
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 7.639
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.931
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.469
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.269
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.346
+    },
+    {
+      "name": "content-economy-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.443
+    },
+    {
+      "name": "content-farming-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.421
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.685
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.608
+    },
+    {
+      "name": "economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.836
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 14.039
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.563
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.375
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.165
+    },
+    {
+      "name": "export-economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.369
+    },
+    {
+      "name": "scene-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 5.79
+    },
+    {
+      "name": "export-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 5.221
+    },
+    {
+      "name": "export-farming-capacity-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 6.429
+    },
+    {
+      "name": "scene-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 7.296
+    },
+    {
+      "name": "export-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 7.369
+    },
+    {
+      "name": "export-farming-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 7.694
+    },
+    {
+      "name": "export-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.297
+    },
+    {
+      "name": "export-slice-baseline-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.386
+    },
+    {
+      "name": "export-economy-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.047
+    }
+  ],
+  "error": null,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "coreTests": {
+    "total": 130,
+    "executed": 130,
+    "passed": 130,
+    "failed": 0,
+    "skipped": 0
+  },
+  "modelTests": {
+    "total": 45,
+    "executed": 45,
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostTests": {
+    "total": 74,
+    "executed": 74,
+    "passed": 74,
+    "failed": 0,
+    "skipped": 0
+  },
+  "contentChecks": {
+    "baseline": {
+      "passed": true,
+      "fingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+      "inputDigest": "4da2e1e3f691ddfc633713a17988cb408ff4667fdddb830566c34e93d2dfee5e",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 22,
+      "residents": 4
+    },
+    "counterfactual": {
+      "passed": true,
+      "fingerprint": "83a3bc2a207cad2d7754073a62abf9cdb48e554ac04cc10f7ce679b83c79c5fd",
+      "inputDigest": "4da2e1e3f691ddfc633713a17988cb408ff4667fdddb830566c34e93d2dfee5e",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 22,
+      "residents": 4
+    },
+    "economy-fixture": {
+      "passed": true,
+      "fingerprint": "aef69b88657498cf291284545b6219b3db9db6cc3b8a1c204df37d390e11f182",
+      "inputDigest": "4da2e1e3f691ddfc633713a17988cb408ff4667fdddb830566c34e93d2dfee5e",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 22,
+      "residents": 4
+    },
+    "farming-capacity-fixture": {
+      "passed": true,
+      "fingerprint": "1891060d72fe10d1c76f6b161bf663e989833b57166257e9bccfd3a401ed0280",
+      "inputDigest": "4da2e1e3f691ddfc633713a17988cb408ff4667fdddb830566c34e93d2dfee5e",
+      "presentationDigest": "61d7e4a56be2117611207f2f9f40cefda08bd5bca331de6950b88cbf0458b405",
+      "places": 22,
+      "residents": 4
+    }
+  },
+  "sliceChecks": {
+    "slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+      "eventCount": 1083
+    },
+    "slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "83a3bc2a207cad2d7754073a62abf9cdb48e554ac04cc10f7ce679b83c79c5fd",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+      "eventCount": 1083
+    },
+    "export-slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "83a3bc2a207cad2d7754073a62abf9cdb48e554ac04cc10f7ce679b83c79c5fd",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-graphical": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": false,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+      "eventCount": 1083,
+      "screenshot": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-slice-baseline-graphical.png"
+    }
+  },
+  "economyChecks": {
+    "economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "aef69b88657498cf291284545b6219b3db9db6cc3b8a1c204df37d390e11f182"
+    },
+    "export-economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "aef69b88657498cf291284545b6219b3db9db6cc3b8a1c204df37d390e11f182"
+    },
+    "export-economy-graphical": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "aef69b88657498cf291284545b6219b3db9db6cc3b8a1c204df37d390e11f182",
+      "screenshots": {
+        "shop": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-economy-graphical.png",
+        "bag": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-economy-graphical-bag.png",
+        "failure": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-economy-graphical-failure.png"
+      }
+    }
+  },
+  "farmingChecks": {
+    "scene-farming-capacity-headless": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "1891060d72fe10d1c76f6b161bf663e989833b57166257e9bccfd3a401ed0280"
+    },
+    "export-farming-capacity-headless": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "1891060d72fe10d1c76f6b161bf663e989833b57166257e9bccfd3a401ed0280"
+    },
+    "export-farming-capacity-graphical": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "1891060d72fe10d1c76f6b161bf663e989833b57166257e9bccfd3a401ed0280",
+      "screenshots": {
+        "failure": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-capacity-graphical.png",
+        "success": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-capacity-graphical-success.png"
+      }
+    },
+    "scene-farming-headless": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4"
+    },
+    "export-farming-headless": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4"
+    },
+    "export-farming-graphical": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+      "screenshots": {
+        "sleep": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-graphical.png",
+        "dry": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-graphical-dry.png",
+        "mature": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-graphical-mature.png",
+        "field": "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\export-farming-graphical-field.png"
+      }
+    }
+  },
+  "finishedAtUtc": "2026-09-25T12:44:22.3157364Z"
+}

@@ -6,7 +6,7 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 当前默认入口为四人小镇切片：玩家移动、观察和交谈，居民独立决定邀请、回应、赴约及资源交换，支持日程、暂停、完整逻辑存档和运行记录导出。真实模型通过独立 C# 适配器接入；默认启动采用规则模式。操作与配置见[切片使用说明](docs/PLAYABLE_SLICE.md)，实际通过项及待验收项见[验证记录](docs/verification/four-resident-slice.md)。
 
-玩家现可查看钱包、背包与五格快捷栏，并在杂货铺买卖物品；双方资产及操作去重随存档恢复。初态、报价和验证入口见[玩家资产与商店操作](docs/PLAYER_ECONOMY.md)。生产与晨间补给仍由后续票据实现。
+玩家现可查看钱包、背包与五格快捷栏，并在杂货铺买卖物品；双方资产及操作去重随存档恢复。初态、报价和验证入口见[玩家资产与商店操作](docs/PLAYER_ECONOMY.md)。六块菜地支持三种作物的种植、浇水和收获，每日 05:00 结算成长与商店补给；玩家可在家选择休息 1～12 小时，见[种植与睡眠操作](docs/PLAYER_FARMING.md)。
 
 ## 构建与运行
 
@@ -28,7 +28,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 完整范围见 [产品目标与验收基线](docs/PRODUCT_BASELINE.md)，领域词汇见 [CONTEXT.md](CONTEXT.md)。
 
-首份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动，世界日程优先，并要求对外演示画面完成度。玩家生产生活循环仍由后续切片交付。
+首份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动，世界日程优先，并要求对外演示画面完成度。种植与交易已贯通，养鸡、钓鱼和烹饪由后续票据交付。
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 

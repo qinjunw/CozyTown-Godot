@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://World/TownBackdrop.cs" id="1_backdrop"]
+[ext_resource type="Script" path="res://World/FarmPlotView.cs" id="2_farm_plot"]
 [ext_resource type="Texture2D" path="res://Art/Props/prop_town_decor_16x32.png" id="tex_decor"]
 [ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_home_roofs_64.png" id="tex_house_roofs"]
 [ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_homes_64.png" id="tex_houses"]
@@ -20,9 +21,6 @@ size = Vector2(26, 22)
 
 [sub_resource type="RectangleShape2D" id="shape_canal_right"]
 size = Vector2(34, 22)
-
-[sub_resource type="RectangleShape2D" id="shape_farm"]
-size = Vector2(86, 43)
 
 [sub_resource type="RectangleShape2D" id="shape_north"]
 size = Vector2(708, 12)
@@ -287,6 +285,51 @@ metadata/display_name = "暖炉小馆"
 metadata/region_id = "town.outdoor"
 metadata/kind = "cafe"
 
+[node name="PlayerHome" type="Node2D" parent="Buildings"]
+position = Vector2(230, 432)
+z_index = 432
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/PlayerHome"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_shops")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/PlayerHome"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_shop_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/PlayerHome"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.home.player"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/PlayerHome/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/PlayerHome"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "home.player"
+metadata/display_name = "我的家"
+metadata/region_id = "town.outdoor"
+metadata/kind = "home"
+
+[node name="BedEntrance" type="Node2D" parent="Buildings/PlayerHome"]
+position = Vector2(22, 10)
+metadata/role = "place"
+metadata/id = "bed.player"
+metadata/display_name = "我的家 · 休息"
+metadata/region_id = "town.outdoor"
+metadata/kind = "bed"
+
 [node name="Landmarks" type="Node2D" parent="."]
 
 [node name="Farm" type="Node2D" parent="Landmarks"]
@@ -299,15 +342,59 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 64)
 
-[node name="Footprint" type="StaticBody2D" parent="Landmarks/Farm"]
-position = Vector2(0, -25)
-collision_layer = 1
-collision_mask = 0
-metadata/role = "obstacle"
-metadata/id = "landmark.farm"
+[node name="Plot01" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(-24, -44)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.01"
+metadata/display_name = "一号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
 
-[node name="Shape" type="CollisionShape2D" parent="Landmarks/Farm/Footprint"]
-shape = SubResource("shape_farm")
+[node name="Plot02" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(0, -44)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.02"
+metadata/display_name = "二号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
+
+[node name="Plot03" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(24, -44)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.03"
+metadata/display_name = "三号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
+
+[node name="Plot04" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(-24, -20)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.04"
+metadata/display_name = "四号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
+
+[node name="Plot05" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(0, -20)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.05"
+metadata/display_name = "五号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
+
+[node name="Plot06" type="Node2D" parent="Landmarks/Farm"]
+position = Vector2(24, -20)
+script = ExtResource("2_farm_plot")
+metadata/role = "place"
+metadata/id = "farm.plot.06"
+metadata/display_name = "六号地"
+metadata/region_id = "town.outdoor"
+metadata/kind = "farm_plot"
 
 [node name="Entrance" type="Node2D" parent="Landmarks/Farm"]
 position = Vector2(0, 8)
@@ -477,6 +564,24 @@ metadata/role = "road"
 metadata/id = "road.bridgelane"
 metadata/from_id = "pond"
 metadata/to_id = "cafe"
+
+[node name="PlayerHomeLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(410, 442, 236, 442)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.playerhomelane"
+metadata/from_id = "cafe"
+metadata/to_id = "home.player"
+
+[node name="BedEntranceLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(236, 442, 252, 442)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.bedentrancelane"
+metadata/from_id = "home.player"
+metadata/to_id = "bed.player"
 
 [node name="ArrivalLane" type="Line2D" parent="Roads"]
 visible = false
@@ -1133,8 +1238,8 @@ metadata/id = "tree.25"
 shape = SubResource("shape_tree")
 
 [node name="Tree26" type="Node2D" parent="Scenery"]
-position = Vector2(237, 448)
-z_index = 448
+position = Vector2(180, 460)
+z_index = 460
 
 [node name="Crown" type="Sprite2D" parent="Scenery/Tree26"]
 position = Vector2(-8, -32)

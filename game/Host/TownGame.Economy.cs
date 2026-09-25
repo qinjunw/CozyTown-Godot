@@ -157,6 +157,8 @@ public partial class TownGame
         if (_pauseReasons.Count > 0 || _fatal) return;
         var shop = NearbyShop();
         if (shop is not null) OpenEconomy(shop.Id);
+        else if (NearbyPlot() is { } plot) OpenFarming(plot.Id);
+        else if (_world.CanSleep()) OpenFarming(null);
         else TalkNearby();
     }
 
@@ -296,7 +298,7 @@ public partial class TownGame
                 button.TooltipText = "快捷栏只读 · 数字键选择，不消耗物品";
                 button.Disabled = !EconomyInputAllowed;
             }
-            _hotbar.Visible = !_dialogue.Visible && !_economyPanel.Visible && !_menu.Visible && !_inspector.Visible;
+            _hotbar.Visible = !_dialogue.Visible && !_economyPanel.Visible && !_menu.Visible && !_inspector.Visible && !(_farmingPanel?.Visible ?? false);
             if (!_economyPanel.Visible) return;
             while (_bagSlots.Count < slots.Length)
             {
@@ -326,7 +328,7 @@ public partial class TownGame
             _shopColumn.Visible = _activeShopId is not null;
             _bagGrid.Columns = _activeShopId is null ? 8 : 5;
             _economyTitle.Text = _activeShopId is null ? "随身行囊" : _loaded.Definitions.Economy!.Shops.Single(s => s.Id == _activeShopId).DisplayName;
-            _economySubtitle.Text = _scenario == "economy-fixture" ? "交易验证初态 · 背包含测试产物，不影响普通新档。" : _activeShopId is null ? "物品按目录排列，前五格同步到快捷栏。" : "买一点种子，带回下一季的期待。";
+            _economySubtitle.Text = _scenario == "farming-capacity-fixture" ? "满包验证初态 · 五格背包与预置物品。" : _scenario == "economy-fixture" ? "交易验证初态 · 背包含测试产物，不影响普通新档。" : _activeShopId is null ? "物品按目录排列，前五格同步到快捷栏。" : "买一点种子，带回下一季的期待。";
             if (_activeShopId is null) return;
             var shop = economy.Shops.Single(s => s.Id == _activeShopId);
             var definition = _loaded.Definitions.Economy!.Shops.Single(s => s.Id == _activeShopId);

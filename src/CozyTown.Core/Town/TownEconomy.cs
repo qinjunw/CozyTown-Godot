@@ -95,6 +95,8 @@ public sealed partial class TownWorld
             result = prior.Kind == "trade" && prior.Trade == request
                 ? prior.TradeResult! with { IsDuplicate = true }
                 : new(request.OperationId, false, "operation_id_conflict", 0, 0);
+        else if (candidate.Farming.Receipts.ContainsKey(request.OperationId) || candidate.Farming.SleepReceipts.ContainsKey(request.OperationId))
+            result = new(request.OperationId, false, "operation_id_conflict", 0, 0);
         else
         {
             if (!ValidOperationId(request.OperationId)) result = new(request.OperationId, false, "invalid_operation_id", 0, 0);
@@ -127,6 +129,8 @@ public sealed partial class TownWorld
             result = prior.Kind == "quickbar_select" && prior.Selection == request
                 ? prior.SelectionResult! with { IsDuplicate = true }
                 : new(operationId, false, "operation_id_conflict", index);
+        else if (candidate.Farming.Receipts.ContainsKey(operationId) || candidate.Farming.SleepReceipts.ContainsKey(operationId))
+            result = new(operationId, false, "operation_id_conflict", index);
         else
         {
             string code = !ValidOperationId(operationId) ? "invalid_operation_id" : index is < 0 or >= 5 ? "invalid_quickbar_index" : "accepted";
@@ -175,6 +179,6 @@ public sealed partial class TownWorld
     }
     private void EnsureEconomyNotCommitting()
     {
-        if (_economyCommitPending) throw new InvalidOperationException("World mutation is not allowed from an economy persistence callback.");
+        if (_economyCommitPending) throw new InvalidOperationException("World mutation is not allowed from a persistence or settlement callback.");
     }
 }
