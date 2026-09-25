@@ -219,8 +219,10 @@ public sealed class TownWorldTests
     [Test]
     public void DeadlineWinsOverResponseAtTheSameWorldBoundary()
     {
-        var world = World(); var request = Request(world, "mina"); Queue(world, request, Invite());
+        var world = World(); var request = Request(world, "mina");
+        world.MarkDispatched(request.LogicalRequestId, "deadline-attempt");
         world.Advance(600 - world.WorldMinute, 0);
+        Assert.That(world.ReceiveResult(new(world.SessionId, request.LogicalRequestId, "deadline-attempt", "mina", Invite(), "fixed_model", null)), Is.False);
         Assert.That(world.State.Commitments, Is.Empty);
         Assert.That(world.Events.Any(e => e.ResidentId == "mina" && e.Reason == "schedule_boundary"), Is.True);
         Assert.That(world.State.Residents.All(r => r.ScheduleId == "work"), Is.True);
@@ -364,7 +366,7 @@ public sealed class TownWorldTests
         var node = JsonNode.Parse(json)!;
         node["state"]!["pendingDecisions"]![0]!["observation"]!["worldMinute"] = 0;
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, node.ToJsonString()));
-        var duplicate = json.Replace("\"schemaVersion\": 2,", "\"schemaVersion\": 2, \"schemaVersion\": 2,");
+        var duplicate = json.Replace("\"schemaVersion\": 3,", "\"schemaVersion\": 3, \"schemaVersion\": 3,");
         Assert.Throws<InvalidDataException>(() => TownWorld.RestoreCandidate(content, duplicate));
     }
 

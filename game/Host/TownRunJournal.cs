@@ -169,8 +169,8 @@ public static class TownSaveFile
     {
         if (snapshot is null || snapshot.SchemaVersion != 1 || snapshot.JournalRecordCount < 0 || !double.IsFinite(snapshot.UnconsumedSeconds)
             || snapshot.UnconsumedSeconds < 0 || snapshot.UnconsumedSeconds > 1 || snapshot.ModelRequests == null
-            || snapshot.DecisionMode is not ("rules" or "real") || snapshot.Stage is not ("baseline" or "counterfactual" or "economy-fixture")
-            || (snapshot.Stage == "economy-fixture" && snapshot.DecisionMode != "rules")
+            || snapshot.DecisionMode is not ("rules" or "real") || snapshot.Stage is not ("baseline" or "counterfactual" or "economy-fixture" or "farming-capacity-fixture")
+            || (snapshot.Stage is "economy-fixture" or "farming-capacity-fixture" && snapshot.DecisionMode != "rules")
             || string.IsNullOrWhiteSpace(snapshot.WorldJson))
             throw new InvalidDataException("Host snapshot fields are invalid or unsupported.");
         RequireBaseName(snapshot.SourceRunDirectoryName);

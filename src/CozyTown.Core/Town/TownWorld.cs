@@ -4,8 +4,8 @@ namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    public const string RulesVersion = "town-social-economy-v2";
-    public const string NumericVersion = "pixels-double-grid16-radius5-clock-boundary-v2";
+    public const string RulesVersion = "town-social-farming-v3";
+    public const string NumericVersion = "pixels-double-grid16-radius5-morning-motion-prefix-v3";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private readonly TownContent _content;
     private readonly Func<string, TownPoint, TownPoint, bool>? _movementQuery;
@@ -23,7 +23,7 @@ public sealed partial class TownWorld
             ForkSequence = _state.ForkSequence, BudgetId = _state.BudgetId, InitialStateId = _state.InitialStateId,
             InitialStateFingerprint = _state.InitialStateFingerprint, WorldMinute = _state.WorldMinute,
             AcceptedWorldMinutes = _state.AcceptedWorldMinutes, PlayerPosition = _state.PlayerPosition,
-            PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
+            PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Farming = _state.Farming, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
             DecisionCursor = _state.DecisionCursor, Residents = _state.Residents, Commitments = _state.Commitments.Where(IsActive).ToList(),
             PendingDecisions = _state.PendingDecisions, Events = _state.Events.TakeLast(20).ToList()
         };
@@ -42,6 +42,7 @@ public sealed partial class TownWorld
             PlayerPosition = content.Geometry.Places.FirstOrDefault(p => p.Id == "player.spawn")?.Position ?? content.Geometry.Places[0].Position,
             PlayerFacing = new TownPoint(0, 1),
             Economy = CreateInitialEconomy(content),
+            Farming = CreateInitialFarming(content),
             Residents = content.Data.Residents.Select(r => new ResidentState
             {
                 Id = r.Id, Position = content.Place(r.SpawnPlaceId).Position, Facing = new TownPoint(0, 1),
@@ -68,10 +69,20 @@ public sealed partial class TownWorld
         return new LocalObservation(residentId, _state.WorldMinute, resident.Position, resident.RegionId, visible, places);
     }
 
-    public void Advance(double worldMinutes, double realSeconds, bool paused = false)
+    public void Advance(double worldMinutes, double realSeconds, bool paused = false, Action<long>? settlementGuard = null)
     {
         EnsureEconomyNotCommitting();
-        if (!TownContent.Finite(worldMinutes) || worldMinutes < 0 || worldMinutes > 1440 || !TownContent.Finite(realSeconds) || realSeconds < 0 || realSeconds > 86400) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
+        if (!TownContent.Finite(worldMinutes) || worldMinutes < 0 || worldMinutes > MaximumAdvanceMinutes || !TownContent.Finite(realSeconds) || realSeconds < 0 || realSeconds > 86400) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
+        if (!paused && (_state.AcceptedWorldMinutes + worldMinutes > MaximumAdvanceMinutes || _state.WorldMinute + _state.AcceptedWorldMinutes + worldMinutes >= 1440 * 1_000_000)) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
+        bool crossesMorning = !paused && _state.WorldMinute + _state.AcceptedWorldMinutes + worldMinutes >= (_state.Farming.LastSettledDay + 1) * 1440 + MorningMinute;
+        var original = _state;
+        if (crossesMorning) _state = TownJson.Clone(original);
+        try { AdvanceCore(worldMinutes, realSeconds, paused, settlementGuard); }
+        catch { if (crossesMorning) _state = original; throw; }
+    }
+
+    private void AdvanceCore(double worldMinutes, double realSeconds, bool paused, Action<long>? settlementGuard)
+    {
         foreach (var resident in _state.Residents) resident.CooldownSeconds = Math.Max(0, resident.CooldownSeconds - realSeconds);
         foreach (var pending in _state.PendingDecisions.Where(p => p.SealedResult is null && p.ResponseArrivalSeconds is null))
         {
@@ -82,10 +93,15 @@ public sealed partial class TownWorld
         }
         Log("time_input", null, "host", paused ? "paused" : "advance", data: new { worldMinutes, realSeconds, paused });
         if (paused) return;
+        UpdateSchedules();
+        foreach (var commitment in _state.Commitments.Where(c => IsActive(c) && c.EndsAtMinute <= _state.WorldMinute).ToArray()) EndCommitment(commitment, "window_ended", "world");
+        ConsumeMailbox();
+        UpdateArrivals();
         _state.AcceptedWorldMinutes += worldMinutes;
         while (_state.AcceptedWorldMinutes > .00000001)
         {
-            var nextBoundary = _state.Residents.Select(r => ScheduleEnd(r)).Concat(_state.Commitments.Where(IsActive).Select(c => c.EndsAtMinute)).DefaultIfEmpty(_state.WorldMinute + .25).Min();
+            var morningBoundary = (_state.Farming.LastSettledDay + 1) * 1440 + MorningMinute;
+            var nextBoundary = _state.Residents.Select(r => ScheduleEnd(r)).Concat(_state.Commitments.Where(IsActive).Select(c => c.EndsAtMinute)).Append(morningBoundary).Min();
             var boundaryDistance = Math.Max(0, nextBoundary - _state.WorldMinute);
             var step = Math.Min(.25, Math.Min(_state.AcceptedWorldMinutes, boundaryDistance));
             // A positive boundary remainder must be consumed even when it is smaller than the accumulation threshold.
@@ -97,6 +113,8 @@ public sealed partial class TownWorld
             }
             UpdateSchedules();
             foreach (var commitment in _state.Commitments.Where(c => IsActive(c) && c.EndsAtMinute <= _state.WorldMinute).ToArray()) EndCommitment(commitment, "window_ended", "world");
+            if (_state.WorldMinute >= morningBoundary) SettleMorning(_state.Farming.LastSettledDay + 1, settlementGuard);
+            ConsumeMailbox();
             UpdateArrivals();
         }
         UpdateSchedules();
@@ -450,15 +468,40 @@ public sealed partial class TownWorld
             if (remaining <= .000001) { resident.RouteCursor++; continue; }
             var fraction = Math.Min(1, Math.Min(distance, 4) / remaining);
             var next = new TownPoint(resident.Position.X + (waypoint.X - resident.Position.X) * fraction, resident.Position.Y + (waypoint.Y - resident.Position.Y) * fraction);
-            var allowed = _content.CanMove(resident.Position, next) && (_movementQuery?.Invoke(resident.Id, resident.Position, next) ?? true);
-            Log("space_query", resident.Id, "world", allowed ? "clear" : "blocked", data: new { from = resident.Position, to = next, radius = TownContent.BodyRadius, allowed });
-            if (!allowed) { resident.BlockedReason = "body_blocked"; return; }
+            if (!QueryMovement(resident, next))
+            {
+                var origin = resident.Position;
+                double length = origin.DistanceTo(next);
+                const double tolerance = .0000001;
+                TownPoint At(double distance) => new(origin.X + (next.X - origin.X) * distance / length, origin.Y + (next.Y - origin.Y) * distance / length);
+                if (length > tolerance && QueryMovement(resident, At(tolerance)))
+                {
+                    double low = tolerance, high = length;
+                    while (high - low > tolerance)
+                    {
+                        double middle = (low + high) / 2;
+                        if (QueryMovement(resident, At(middle))) low = middle; else high = middle;
+                    }
+                    resident.Position = At(low);
+                    resident.Facing = new((next.X - origin.X) / length, (next.Y - origin.Y) / length);
+                    resident.RegionId = _content.RegionAt(resident.Position);
+                }
+                resident.BlockedReason = "body_blocked";
+                return;
+            }
             resident.BlockedReason = null;
             resident.Facing = new TownPoint((next.X - resident.Position.X) / (remaining * fraction), (next.Y - resident.Position.Y) / (remaining * fraction));
             distance -= remaining * fraction; resident.Position = next; resident.RegionId = _content.RegionAt(next);
             if (fraction >= 1) resident.RouteCursor++;
         }
         if (resident.RouteCursor == resident.Route.Count && resident.CommitmentId is null) resident.Activity = IsFree(resident) ? "free" : "scheduled";
+    }
+
+    private bool QueryMovement(ResidentState resident, TownPoint next)
+    {
+        bool allowed = _content.CanMove(resident.Position, next) && (_movementQuery?.Invoke(resident.Id, resident.Position, next) ?? true);
+        Log("space_query", resident.Id, "world", allowed ? "clear" : "blocked", data: new { from = resident.Position, to = next, radius = TownContent.BodyRadius, allowed });
+        return allowed;
     }
 
     private void UpdateArrivals()

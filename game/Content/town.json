@@ -51,6 +51,33 @@
       ]
     }]
   },
+  "farming": {
+    "crops": [
+      { "id": "crop_definition.potato", "displayName": "土豆", "seedResourceId": "seed.potato", "harvestResourceId": "crop.potato", "growthDays": 2, "harvestQuantity": 2 },
+      { "id": "crop_definition.carrot", "displayName": "胡萝卜", "seedResourceId": "seed.carrot", "harvestResourceId": "crop.carrot", "growthDays": 3, "harvestQuantity": 2 },
+      { "id": "crop_definition.tomato", "displayName": "番茄", "seedResourceId": "seed.tomato", "harvestResourceId": "crop.tomato", "growthDays": 4, "harvestQuantity": 3 }
+    ],
+    "plots": [
+      { "id": "plot.01", "displayName": "一号地", "placeId": "farm.plot.01" },
+      { "id": "plot.02", "displayName": "二号地", "placeId": "farm.plot.02" },
+      { "id": "plot.03", "displayName": "三号地", "placeId": "farm.plot.03" },
+      { "id": "plot.04", "displayName": "四号地", "placeId": "farm.plot.04" },
+      { "id": "plot.05", "displayName": "五号地", "placeId": "farm.plot.05" },
+      { "id": "plot.06", "displayName": "六号地", "placeId": "farm.plot.06" }
+    ],
+    "bedPlaceId": "bed.player",
+    "restocks": [{
+      "shopId": "shop.town.general", "worldSeed": 12345, "minimumDistinctItems": 4,
+      "entries": [
+        { "resourceId": "seed.potato", "probabilityPermille": 700, "minQuantity": 3, "maxQuantity": 6 },
+        { "resourceId": "seed.carrot", "probabilityPermille": 700, "minQuantity": 3, "maxQuantity": 6 },
+        { "resourceId": "seed.tomato", "probabilityPermille": 700, "minQuantity": 3, "maxQuantity": 6 },
+        { "resourceId": "feed.chicken", "probabilityPermille": 1000, "minQuantity": 6, "maxQuantity": 12 },
+        { "resourceId": "ingredient.salt", "probabilityPermille": 750, "minQuantity": 3, "maxQuantity": 8 },
+        { "resourceId": "ingredient.flour", "probabilityPermille": 750, "minQuantity": 3, "maxQuantity": 8 }
+      ]
+    }]
+  },
   "residents": [
     {
       "id": "mina", "displayName": "米娜", "homePlaceId": "home.mina", "spawnPlaceId": "home.mina",
