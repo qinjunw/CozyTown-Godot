@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_farming_smoke",
+  "passed": true,
+  "scenario": "baseline",
+  "headless": true,
+  "mode": "rules",
+  "residents": 4,
+  "runtimeAssemblyLocation": "<project-root>\\.local\\tools\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+  "contentFingerprint": "9fd649bced7e96cbfdd10d2cd78dae76fa6953c7967ab4806f6ed3b01a5fd1e4",
+  "checks": [
+    {
+      "name": "normal_new_game",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "plot_interaction_and_pause",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "missing_seed_feedback",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "buy_seed",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "plant_consumes_one_seed",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "immature_harvest_preserves_crop",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "dry_plot_does_not_block_morning",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reference_day_two_stock",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_day_0",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_day_0",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_day_1",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_day_1",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "water_day_2",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "growth_day_2",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "mature_crop_visible",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "harvest_receives_produce",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "restore_unclaimed_mature_crop",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "second_harvest_does_not_duplicate",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "sell_produce",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reinvest_in_next_crop",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "external_pause_blocks_sleep",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_residents_followed_routes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "production_and_restock_recorded",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "versioned_commands_and_checkpoints",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshots": {
+    "sleep": null,
+    "dry": null,
+    "mature": null,
+    "field": null
+  },
+  "runDirectories": [
+    "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\data\\scene-farming-headless\\runs\\ad1f46d532f14303bcbe02fee8d9e033",
+    "<project-root>\\artifacts\\verification\\20260925T124151Z-fdedfbcd\\data\\scene-farming-headless\\runs\\7b89992a7c09433486c2766cada563db"
+  ],
+  "coverage": "Godot route movement, farm/shop/sleep button callbacks, synthetic key routing, production loop, dry morning, reference restock, mature save/restore and durable command checkpoints. OS input is verified separately. No model calls."
+}

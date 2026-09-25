@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "897518b9cb682abdd882db964cd8c6878013e474",
+  "sourceDirty": false,
+  "originalRunDirectory": "artifacts/verification/20260925T124151Z-fdedfbcd",
+  "pathRedaction": "Committed JSON replaces the project directory with <project-root>; archives preserve original bytes. Simulation values and identities are unchanged.",
+  "archives": [
+    {
+      "path": "artifacts/verification/20260925T124151Z-fdedfbcd/CozyTown-897518b-Windows.zip",
+      "bytes": 75812984,
+      "sha256": "597149cb4c791a891b49d50880b132b8c3a1cd9f6dccf03c180692f32311117f",
+      "files": 198,
+      "crcAndFileHashesVerified": true
+    },
+    {
+      "path": "artifacts/verification/20260925T124151Z-fdedfbcd/offline-run-records-897518b.zip",
+      "bytes": 4625281,
+      "sha256": "627853399311a134929e5e9c888a8d3e7e9bcf3e66a93aac80bd3a4bea1f39f1",
+      "files": 219,
+      "crcAndFileHashesVerified": true
+    },
+    {
+      "path": "artifacts/verification/20260925T124151Z-fdedfbcd/manual-run-records-897518b.zip",
+      "bytes": 4173337,
+      "sha256": "00bb3763d5f8926152cf809762ca515e7d0f6d3fa1c66fc88f10b8b20931cea9",
+      "files": 66,
+      "crcAndMemberHashesVerified": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "capacity-failure-1280.png",
+      "bytes": 151090,
+      "sha256": "949bf4f84191ef93c035c85dc1768066dae7210b79a048061d23c46d5336b0ea"
+    },
+    {
+      "path": "capacity-success-1280.png",
+      "bytes": 151238,
+      "sha256": "057360931fdeac248af1e770141444b27796f9311b02809459dfdb4d17a65545"
+    },
+    {
+      "path": "export-farming-capacity-graphical.json",
+      "bytes": 2959,
+      "sha256": "d22c0033b47776d1a5c86ad72dfe50f86c498b43de5244069a2900da47ac1e32"
+    },
+    {
+      "path": "export-farming-capacity-headless.json",
+      "bytes": 2742,
+      "sha256": "681c59c55e21d0617a228dc42349248f7c210953946e034a0ccdb51511cab1e4"
+    },
+    {
+      "path": "export-farming-graphical.json",
+      "bytes": 3828,
+      "sha256": "7464c12ecfb83e937c6d9f76f42099d02c3a242f11f7321d64acf20437a6992c"
+    },
+    {
+      "path": "export-farming-headless.json",
+      "bytes": 3432,
+      "sha256": "2b1bcd6379029371e71eabe3a1bc725296bae38d4bdd83fd9b289f9df51036fa"
+    },
+    {
+      "path": "farming-capacity-input-checkpoints.json",
+      "bytes": 3275861,
+      "sha256": "83c3af39d385890f67a2a32bd18d071a92cdf8ed1426973c53fc61be4880fa67"
+    },
+    {
+      "path": "farming-dry-1280.png",
+      "bytes": 153878,
+      "sha256": "68ee3afb05f44976981ce2926db3fdb619dc3469e4a0cedae9d723d35ade1b97"
+    },
+    {
+      "path": "farming-field-1280.png",
+      "bytes": 128107,
+      "sha256": "49165077009b2862f47450cbfd8621ba60fa3613849eae5d3a626581df2bf5b9"
+    },
+    {
+      "path": "farming-input-checkpoints.json",
+      "bytes": 4576629,
+      "sha256": "f4dd4027f66cf83ef2799fba0bd3cc4ad4871d78a017486e79e40a0213dccf25"
+    },
+    {
+      "path": "farming-mature-1280.png",
+      "bytes": 144908,
+      "sha256": "3610ba21fdf41997cbc07a110b775cd883614fc8031d004544c56cbeee0ee0fb"
+    },
+    {
+      "path": "farming-sleep-1280.png",
+      "bytes": 125917,
+      "sha256": "c22638cb049a1c44e7fdf6d2304125cc42a72ba4ce6356d9f98d0ec1dbe0169d"
+    },
+    {
+      "path": "manual-baseline-harvest-before-restore.jpg",
+      "bytes": 108158,
+      "sha256": "5266e3132445d2e57c613ee0935199575ecb3b04bc01478fef7e303b4ab6ec7e"
+    },
+    {
+      "path": "manual-baseline-immature.jpg",
+      "bytes": 79783,
+      "sha256": "745e8662cec361984d86256145dd4ac3bfc0512970a223c8e096289db50246cd"
+    },
+    {
+      "path": "manual-baseline-missing-seed.jpg",
+      "bytes": 79518,
+      "sha256": "0570e22042d0912ecfbfb55db5edc2fc4f39caab335aaf6e4dc03956d9cb1dca"
+    },
+    {
+      "path": "manual-baseline-reinvest.jpg",
+      "bytes": 70846,
+      "sha256": "bf881c7d0293a0f08a88b2c649364ad9bce7f19e1fc6c8f248647e1c279af785"
+    },
+    {
+      "path": "manual-baseline-restored-mature.jpg",
+      "bytes": 75413,
+      "sha256": "378a2c3bb2dccd2bc266479865270ce92bb1132babb8806359593da05a98cfb0"
+    },
+    {
+      "path": "manual-baseline-sleep-typed12.jpg",
+      "bytes": 70739,
+      "sha256": "e4e4d931a6d29b8953bda72e777509d63e321c96bbe0830368453d96b801b5bc"
+    },
+    {
+      "path": "manual-baseline-sold.jpg",
+      "bytes": 70791,
+      "sha256": "6c4b01c116137cdab9a89550ad9897dd154ac1cce3945d918dc521f38b2a6488"
+    },
+    {
+      "path": "manual-capacity-full-rejected.jpg",
+      "bytes": 79252,
+      "sha256": "b061809fabc5b856fb88c88b81d7deb5dae9a01fe8fe75c2b44b72d4a05f98ea"
+    },
+    {
+      "path": "manual-capacity-harvest-inventory.jpg",
+      "bytes": 113839,
+      "sha256": "e312881f9fbb5570eccef537ab47109546e6310e9f43148a5815ca7626efa2e9"
+    },
+    {
+      "path": "manual-capacity-restored-mature.jpg",
+      "bytes": 77105,
+      "sha256": "679fd459e24ccaedc065006898b1d22e895f6d59aba8b0807e2dfe436fb9c28a"
+    },
+    {
+      "path": "manual-capacity-slot-freed.jpg",
+      "bytes": 66803,
+      "sha256": "787c03962e69b4e12dc45f3d24a6332bdfb2d9ba66e561b649c001d281759d95"
+    },
+    {
+      "path": "manual-farming-summary.json",
+      "bytes": 270539,
+      "sha256": "9a7206bd674453b96e2b75a5719447c2ed8e9798c46069fc1aa9b0d916d96d73"
+    },
+    {
+      "path": "scene-farming-capacity-headless.json",
+      "bytes": 2707,
+      "sha256": "daa0744b5b8f805336d341561761ddb664fdf89c9bdb1d912529482d4c0ba46b"
+    },
+    {
+      "path": "scene-farming-headless.json",
+      "bytes": 3397,
+      "sha256": "7a5ab7d67252c2fce83f7365876dad9bc9582a03f81fe1bc98cb7914f93d300a"
+    },
+    {
+      "path": "test-results.json",
+      "bytes": 47417,
+      "sha256": "3d66508324cdacc4ba068e066ad5334bf96d48bc88c0e9e90cffe2fe93cac2a4"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 10683,
+      "sha256": "c48804d848f21ea73096b19c9dacb89527de85fae689101a97364933c32295a3"
+    }
+  ],
+  "manualEvidence": {
+    "summary": "manual-farming-summary.json",
+    "capture": "Windows mouse and keyboard, launched with --resolution 1920x1080; captured JPEGs are 962x570 including window chrome.",
+    "fixturePreparation": "Capacity session copies the same candidate automatic graphical mature save and restores it through F9. Copied journals and inherited receipts are excluded from new manual command counts.",
+    "allOriginalScreenshotsArchived": 24
+  }
+}

@@ -1,0 +1,1296 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "897518b9cb682abdd882db964cd8c6878013e474",
+  "suites": [
+    {
+      "suite": "core",
+      "source": "artifacts/verification/20260925T124151Z-fdedfbcd/core.trx",
+      "sourceSha256": "334801f52ff22967d5fb0e6c4c75e47277b6c7cfba17572bbbf8ea97ed4cc135",
+      "outcome": "Completed",
+      "counters": {
+        "total": 130,
+        "executed": 130,
+        "passed": 130,
+        "failed": 0,
+        "skipped": 0
+      },
+      "tests": [
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"schemaVersion\\\":1}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0053040"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"shop_quantity_overflow\",\"numeric_overflow\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0096040"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"wrong_shop\",\"unknown_shop\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0090870"
+        },
+        {
+          "testName": "JsonRoundTripPreservesExactInt64Ticks(9007199254740993L)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0006320"
+        },
+        {
+          "testName": "NullSnapshotArgumentIsRejected",
+          "outcome": "Passed",
+          "duration": "00:00:00.0004830"
+        },
+        {
+          "testName": "FourResidentsEnterDecisionQueueAndDispatchCursorSurvivesRestore",
+          "outcome": "Passed",
+          "duration": "00:00:00.0109580"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"no_stock\",\"insufficient_shop_stock\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0131020"
+        },
+        {
+          "testName": "TimedOutDecisionUsesExplicitRuleFallbackAndCannotAcceptLateReply",
+          "outcome": "Passed",
+          "duration": "00:00:00.0017760"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"wrong_resource\",\"unknown_resource\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0086040"
+        },
+        {
+          "testName": "BodyArrivingAt59SecondsSurvivesDurableCompletionAt61Seconds(False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0142760"
+        },
+        {
+          "testName": "FractionalContinuousStepsMatchSleepPositionAndDoNotChargeWorldHoursAsRealWait",
+          "outcome": "Passed",
+          "duration": "00:00:00.4176019"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"schemaVersion\\\":1,\\\"totalTicks\\\":-1}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0002820"
+        },
+        {
+          "testName": "AcknowledgingDurableEventsKeepsAContiguousSnapshotSuffix",
+          "outcome": "Passed",
+          "duration": "00:00:00.0062260"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"null\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0001710"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0010080"
+        },
+        {
+          "testName": "TimelyBodyArrivalCannotReviveARequestAfterItsWorldScheduleEnds",
+          "outcome": "Passed",
+          "duration": "00:00:00.0023700"
+        },
+        {
+          "testName": "SettlementCallbackCannotMutateWorldAndRejectedInputLeavesWholeState",
+          "outcome": "Passed",
+          "duration": "00:00:00.0149330"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"schemaVersion\\\":1,\\\"totalTicks\\\":1.5}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0003959"
+        },
+        {
+          "testName": "EconomyDefinitionsAreCanonicalAndChangesEnterCompatibilityFingerprint",
+          "outcome": "Passed",
+          "duration": "00:00:00.0099659"
+        },
+        {
+          "testName": "NewProbeStartsAtZero",
+          "outcome": "Passed",
+          "duration": "00:00:00.0081650"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"not-json\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0011840"
+        },
+        {
+          "testName": "InitiatorWithoutAnOfferGivesPartnerAConversationTurn",
+          "outcome": "Passed",
+          "duration": "00:00:00.0289500"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"schemaVersion\\\":1,\\\"totalTicks\\\":9223372036854775808}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0002190"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"growth\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0239480"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"old_schema\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0035240"
+        },
+        {
+          "testName": "AcceptedInvitationRestoresMidRouteWithOriginalCommitment",
+          "outcome": "Passed",
+          "duration": "00:00:00.0258250"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"shop_coins_overflow\",\"numeric_overflow\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0099620"
+        },
+        {
+          "testName": "IllegalCandidatesAreRejectedAndFallbackIsLabeled(\"teleport\",null)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0038800"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"wrong_actor\",\"invalid_actor\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0099020"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"negative\",\"invalid_quantity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0121380"
+        },
+        {
+          "testName": "BodyArrivingAt59SecondsSurvivesDurableCompletionAt61Seconds(True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0075940"
+        },
+        {
+          "testName": "FarmOperationIdentityCannotBeReusedForTradeSleepOrChangedCrop",
+          "outcome": "Passed",
+          "duration": "00:00:00.0188820"
+        },
+        {
+          "testName": "OrdinaryResidentRulesReachAnAcceptedTradeWithoutAssignedPairs",
+          "outcome": "Passed",
+          "duration": "00:00:00.0215990"
+        },
+        {
+          "testName": "RestoredProbeResumesTheSameSequenceAsUninterruptedProbe",
+          "outcome": "Passed",
+          "duration": "00:00:00.0029380"
+        },
+        {
+          "testName": "FixedHostStepsCrossScheduleAndDayBoundariesAfterSaveAndPause(540,4960,664,\"afternoon\",0)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0559180"
+        },
+        {
+          "testName": "ResourceTransferRequiresAcceptanceAndIsAtomicAcrossSaveAndDuplicateResult",
+          "outcome": "Passed",
+          "duration": "00:00:00.0260440"
+        },
+        {
+          "testName": "ObservationContainsOnlyVisibleNeighborsAndAnnouncedSurplusKinds",
+          "outcome": "Passed",
+          "duration": "00:00:00.0183080"
+        },
+        {
+          "testName": "InvalidEconomyDefinitionsRejectDuplicateOwnersReferencesAndInitialCapacity",
+          "outcome": "Passed",
+          "duration": "00:00:00.0055370"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"no_player_stock\",\"insufficient_player_stock\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0099700"
+        },
+        {
+          "testName": "ArrivalAtDeadlineDoesNotFreezeTimeoutOrPermitPartialResponseSnapshot",
+          "outcome": "Passed",
+          "duration": "00:00:00.0115340"
+        },
+        {
+          "testName": "CapturingSnapshotDoesNotAdvanceOrShareMutableState",
+          "outcome": "Passed",
+          "duration": "00:00:00.0012510"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"source\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0209610"
+        },
+        {
+          "testName": "CropAndRestockRulesAffectFingerprintAndMissingStateRejectsPreviousSaveSchema",
+          "outcome": "Passed",
+          "duration": "00:00:00.0376770"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"shop_no_money\",\"insufficient_shop_coins\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0130290"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"cursor\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0256120"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"selection\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0034840"
+        },
+        {
+          "testName": "IllegalCandidatesAreRejectedAndFallbackIsLabeled(\"invite\",\"unknown-resident\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0030030"
+        },
+        {
+          "testName": "MissingWaterBlocksOnlyItsPlotWhileTimeCursorAndShopAdvance",
+          "outcome": "Passed",
+          "duration": "00:00:00.5656810"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"zero\",\"invalid_quantity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0107550"
+        },
+        {
+          "testName": "ChangedPublicSurplusChangesTheIndependentRulesChosenNeighbor",
+          "outcome": "Passed",
+          "duration": "00:00:00.0090220"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.player.selectedQuickbarIndex\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0039890"
+        },
+        {
+          "testName": "FixedHostStepsCrossScheduleAndDayBoundariesAfterSaveAndPause(1439,80,1441,\"free\",1)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0062920"
+        },
+        {
+          "testName": "JsonRoundTripPreservesExactInt64Ticks(0L)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0053580"
+        },
+        {
+          "testName": "InvalidSaveDoesNotAlterTheRunningWorld",
+          "outcome": "Passed",
+          "duration": "00:00:00.0033200"
+        },
+        {
+          "testName": "FarmRejectionsPreserveAssetsAndHarvestableState(\"full\",\"inventory_full\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.3728110"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"disabled\",\"direction_disabled\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0097840"
+        },
+        {
+          "testName": "NonpositiveAdvanceLeavesStateUnchanged(-1L)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0002890"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"player_coins_overflow\",\"numeric_overflow\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0092260"
+        },
+        {
+          "testName": "CanonicalFingerprintDoesNotDependOnAuthorTraversalOrder",
+          "outcome": "Passed",
+          "duration": "00:00:00.0018340"
+        },
+        {
+          "testName": "TimelyArrivalMarkerCanReplaceAnUnconsumedPausedTimeout",
+          "outcome": "Passed",
+          "duration": "00:00:00.0036940"
+        },
+        {
+          "testName": "PauseSealsTimelyResponseUntilResumeWithoutTimingItOutLater",
+          "outcome": "Passed",
+          "duration": "00:00:00.0046750"
+        },
+        {
+          "testName": "SavingAnExpiredPausedRequestDoesNotGrantAnotherWaitBudget",
+          "outcome": "Passed",
+          "duration": "00:00:00.0105690"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"wrong_direction\",\"invalid_direction\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0104420"
+        },
+        {
+          "testName": "QuotesAndReturnedViewsDoNotMutateAuthoritativeState",
+          "outcome": "Passed",
+          "duration": "00:00:00.0063350"
+        },
+        {
+          "testName": "SleepSnapshotRejectsOverlappingRecordedIntervals",
+          "outcome": "Passed",
+          "duration": "00:00:00.0361210"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"quantity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0035310"
+        },
+        {
+          "testName": "PreviousClockNumericVersionIsRejectedWithoutChangingCurrentWorld",
+          "outcome": "Passed",
+          "duration": "00:00:00.0025620"
+        },
+        {
+          "testName": "FarmAndSleepPersistenceFailuresKeepEntireWorldAndPreventReentry",
+          "outcome": "Passed",
+          "duration": "00:00:00.0810830"
+        },
+        {
+          "testName": "NonpositiveAdvanceLeavesStateUnchanged(0L)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0011440"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"conserved_swap\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0033810"
+        },
+        {
+          "testName": "CorruptAssetsRouteAndSuspendedCommitmentAreRejected",
+          "outcome": "Passed",
+          "duration": "00:00:00.0030950"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"mature\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0213750"
+        },
+        {
+          "testName": "PersistFailureLeavesAssetsReceiptsEventsAndInputSequenceUnchanged",
+          "outcome": "Passed",
+          "duration": "00:00:00.0064280"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.player.slotCapacity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0043229"
+        },
+        {
+          "testName": "NormalHostStepsAndSleepStopAtSameQueriedCollisionBoundary",
+          "outcome": "Passed",
+          "duration": "00:00:01.4290989"
+        },
+        {
+          "testName": "MorningRestoreConsumesAcceptedTimeOnceAndSleepRespectsAdvanceBound",
+          "outcome": "Passed",
+          "duration": "00:00:00.0406850"
+        },
+        {
+          "testName": "InvalidCropRestockAndPlotReferencesFailContentBeforeSimulation",
+          "outcome": "Passed",
+          "duration": "00:00:00.0283280"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"totalTicks\\\":0}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0008680"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.inputSequence\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0044440"
+        },
+        {
+          "testName": "ShopDistanceAndLineOfSightAreCheckedByCore",
+          "outcome": "Passed",
+          "duration": "00:00:00.0084440"
+        },
+        {
+          "testName": "DuplicateAndConflictingOperationsDoNotRepeatTransferAfterRestore",
+          "outcome": "Passed",
+          "duration": "00:00:00.0295860"
+        },
+        {
+          "testName": "SealedResponseResumesWithoutResendingAndRejectsOldSessionCallback",
+          "outcome": "Passed",
+          "duration": "00:00:00.0067130"
+        },
+        {
+          "testName": "InvisibleNeighborCannotLeakThroughAVisibilityWall",
+          "outcome": "Passed",
+          "duration": "00:00:00.0022820"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"full\",\"inventory_full\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0117290"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"no_money\",\"insufficient_player_coins\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0123980"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.shops\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0054900"
+        },
+        {
+          "testName": "NonpositiveAdvanceLeavesStateUnchanged(long.MinValue)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0000370"
+        },
+        {
+          "testName": "DeadlineWinsOverResponseAtTheSameWorldBoundary",
+          "outcome": "Passed",
+          "duration": "00:00:00.0069260"
+        },
+        {
+          "testName": "ReferenceCropsRequireWateredMorningsAndHarvestExactlyOnce(\"potato\",2,2)",
+          "outcome": "Passed",
+          "duration": "00:00:00.5425730"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"generation\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0193230"
+        },
+        {
+          "testName": "SnapshotIsIndependentOfLaterChangesToTheOriginalProbe",
+          "outcome": "Passed",
+          "duration": "00:00:00.0007069"
+        },
+        {
+          "testName": "DuplicateIdentityMissingReferenceAndOverlappingSchedulesFailBeforeWorldStarts",
+          "outcome": "Passed",
+          "duration": "00:00:00.0025750"
+        },
+        {
+          "testName": "SleepAndMultiDayAdvanceFollowSameRoutesQueriesSchedulesAndCommitments",
+          "outcome": "Passed",
+          "duration": "00:00:00.8866290"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.player\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0050780"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"receipt_identity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0029380"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"receipt_price\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0028910"
+        },
+        {
+          "testName": "JsonRoundTripPreservesExactInt64Ticks(long.MaxValue)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0000310"
+        },
+        {
+          "testName": "DuplicatedNumericJsonFieldsAndTamperedFrozenObservationFailRestore",
+          "outcome": "Passed",
+          "duration": "00:00:00.0100710"
+        },
+        {
+          "testName": "DayBoundaryContinuesSchedulesWithoutTeleporting",
+          "outcome": "Passed",
+          "duration": "00:00:00.0246450"
+        },
+        {
+          "testName": "MovementQueriesCanBlockWithoutChangingCommittedPosition",
+          "outcome": "Passed",
+          "duration": "00:00:00.0039920"
+        },
+        {
+          "testName": "DefinitionViewsCannotMutateAuthoritativeContent",
+          "outcome": "Passed",
+          "duration": "00:00:00.0027680"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.player.coins\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0047460"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"{\\\"schemaVersion\\\":2,\\\"totalTicks\\\":0}\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0013720"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"unknown_crop\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0209930"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.receipts\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0151300"
+        },
+        {
+          "testName": "InvalidSnapshotCannotCreateAProbe(\"\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0440220"
+        },
+        {
+          "testName": "FarmRejectionsPreserveAssetsAndHarvestableState(\"seed\",\"insufficient_seed\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0170870"
+        },
+        {
+          "testName": "OverflowLeavesStateUnchanged",
+          "outcome": "Passed",
+          "duration": "00:00:00.0004280"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy.player.inventory\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0044120"
+        },
+        {
+          "testName": "InventoryProjectionUsesCatalogOrderSplitsStacksCompactsAndPreservesSelection",
+          "outcome": "Passed",
+          "duration": "00:00:00.0189310"
+        },
+        {
+          "testName": "RestockMatchesFixedReferenceReplacesSoldStockAndKeepsWallets",
+          "outcome": "Passed",
+          "duration": "00:00:00.1217110"
+        },
+        {
+          "testName": "MissingEconomyFieldsRejectWithoutChangingCurrentWorld(\"economy\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0075750"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"future_input_sequence\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0036090"
+        },
+        {
+          "testName": "PersistenceCallbackCannotMutateCandidateOrReenterWorld",
+          "outcome": "Passed",
+          "duration": "00:00:00.0098770"
+        },
+        {
+          "testName": "RejectedSleepRecordsFailureWithoutPartialMorningOrPositionCommit",
+          "outcome": "Passed",
+          "duration": "00:00:00.0209090"
+        },
+        {
+          "testName": "FarmingSnapshotsRejectTamperedProductionStateAndSources(\"receipts\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0223200"
+        },
+        {
+          "testName": "ReferenceCropsRequireWateredMorningsAndHarvestExactlyOnce(\"carrot\",3,2)",
+          "outcome": "Passed",
+          "duration": "00:00:01.0542810"
+        },
+        {
+          "testName": "PendingRestorePreservesLogicalIdentityFrozenInputAndRecoveryClassification",
+          "outcome": "Passed",
+          "duration": "00:00:00.0271790"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"receipt_removed\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0034500"
+        },
+        {
+          "testName": "FarmRejectionsPreserveAssetsAndHarvestableState(\"immature\",\"not_mature\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0149450"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"coins\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0081210"
+        },
+        {
+          "testName": "SecondMorningFailureRejectsWholeRequestAndPreservesEarlierIndependentAdvance",
+          "outcome": "Passed",
+          "duration": "00:00:00.1461629"
+        },
+        {
+          "testName": "CorruptEconomyAssetsAndReceiptReferencesAreRejected(\"shop_identity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0030240"
+        },
+        {
+          "testName": "BuyAndSellPreserveEveryAssetOwnerAndUseConfiguredQuotes",
+          "outcome": "Passed",
+          "duration": "00:00:00.3021110"
+        },
+        {
+          "testName": "ReferenceCropsRequireWateredMorningsAndHarvestExactlyOnce(\"tomato\",4,3)",
+          "outcome": "Passed",
+          "duration": "00:00:01.4706649"
+        },
+        {
+          "testName": "InsufficientMoneyLeavesEveryAssetUnchanged",
+          "outcome": "Passed",
+          "duration": "00:00:00.0148940"
+        },
+        {
+          "testName": "BusyTargetAndUnobservedTargetCannotBeInvited",
+          "outcome": "Passed",
+          "duration": "00:00:00.0037980"
+        },
+        {
+          "testName": "GridRouteAvoidsObstacleAndSnapshotContinuesTheSameWaypoints",
+          "outcome": "Passed",
+          "duration": "00:00:00.0152930"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"total_overflow\",\"numeric_overflow\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0115900"
+        },
+        {
+          "testName": "RejectedTradesPersistTheirOutcomeWithoutChangingAssets(\"wrong_price\",\"price_changed\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0092929"
+        }
+      ]
+    },
+    {
+      "suite": "model",
+      "source": "artifacts/verification/20260925T124151Z-fdedfbcd/model.trx",
+      "sourceSha256": "6fe1df107ef5dd84d5afb929f010f23c9b9304321f4f3ed79a9b08b09d56594d",
+      "outcome": "Completed",
+      "counters": {
+        "total": 45,
+        "executed": 45,
+        "passed": 45,
+        "failed": 0,
+        "skipped": 0
+      },
+      "tests": [
+        {
+          "testName": "KilledProcessKeepsReservationAndRecoveryQuotaAfterRestart",
+          "outcome": "Passed",
+          "duration": "00:00:00.4834800"
+        },
+        {
+          "testName": "CompletionJournalFailurePreservesChargeAndStopsFutureSends",
+          "outcome": "Passed",
+          "duration": "00:00:00.1107770"
+        },
+        {
+          "testName": "ArrivalObserverFailureCannotPreventAccountingOrDurableCompletion",
+          "outcome": "Passed",
+          "duration": "00:00:00.1388260"
+        },
+        {
+          "testName": "TwoProcessesCompetingForRecoveryReserveExactlyOneAttempt",
+          "outcome": "Passed",
+          "duration": "00:00:00.6313540"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"http-429\",\"rate_limited\",False,True,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0839730"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"too-large\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0128170"
+        },
+        {
+          "testName": "UnknownTransportRetainsCostAndSlotButAllowsOneOtherAttempt",
+          "outcome": "Passed",
+          "duration": "00:00:00.1349600"
+        },
+        {
+          "testName": "SettlementAndOutstandingReserveTogetherEnforceMoneyLimit",
+          "outcome": "Passed",
+          "duration": "00:00:00.1003990"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"max_tokens\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0108380"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"invalid-cache\",\"usage_invalid_or_missing\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0873640"
+        },
+        {
+          "testName": "RequestJournalFailurePreventsPaidSendAndStopsLedger",
+          "outcome": "Passed",
+          "duration": "00:00:00.0950240"
+        },
+        {
+          "testName": "HostAdmissionRejectionReleasesUnsentReservationWithoutStoppingBudget(\"host_request_terminal_before_send\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0673850"
+        },
+        {
+          "testName": "StageAndTotalLimitsCarryForwardFromFourProbeCalls",
+          "outcome": "Passed",
+          "duration": "00:00:02.5422520"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"thinking\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0135490"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"invalid-secret-finish\",\"generation_terminal_unverified\",False,True,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0722050"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"duplicate-response-field\",\"duplicate_json_property\",False,True,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0744200"
+        },
+        {
+          "testName": "SlowCompletionJournalDoesNotChangeTheRecordedArrivalOrExpireTimelyResponse",
+          "outcome": "Passed",
+          "duration": "00:00:02.1797260"
+        },
+        {
+          "testName": "UnregisteredJournalExceptionCodeIsNotExported",
+          "outcome": "Passed",
+          "duration": "00:00:00.0991870"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"length\",\"generation_length\",True,False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0761199"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"http-502\",\"provider_http_failure\",False,True,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0717090"
+        },
+        {
+          "testName": "HostAdmissionRejectionReleasesUnsentReservationWithoutStoppingBudget(\"logical_wait_expired\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0649850"
+        },
+        {
+          "testName": "ExistingProbeConsumptionSurvivesOpeningAndSettlement",
+          "outcome": "Passed",
+          "duration": "00:00:00.2319380"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"no-usage\",\"usage_invalid_or_missing\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.1500209"
+        },
+        {
+          "testName": "TransportDeadlineUsesRemainingLogicalWait",
+          "outcome": "Passed",
+          "duration": "00:00:00.2067280"
+        },
+        {
+          "testName": "MissingOrCorruptLedgerAndMissingMarkerNeverInitialize",
+          "outcome": "Passed",
+          "duration": "00:00:00.0344850"
+        },
+        {
+          "testName": "SuccessfulCompletionIsAccountedBeforeHostConsumesIt",
+          "outcome": "Passed",
+          "duration": "00:00:00.0932220"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"model-mismatch\",\"model_not_registered\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0773890"
+        },
+        {
+          "testName": "CancellationKeepsUnknownReservationAndAllowsOtherLogicalRequest",
+          "outcome": "Passed",
+          "duration": "00:00:00.1156180"
+        },
+        {
+          "testName": "HostAdmissionRejectionReleasesUnsentReservationWithoutStoppingBudget(\"host_unavailable_before_send\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0640290"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"bad-json\",\"invalid_json\",True,False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0711090"
+        },
+        {
+          "testName": "GenerationTerminalWithoutUsageReleasesOnlySlotAndStops",
+          "outcome": "Passed",
+          "duration": "00:00:00.0631840"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"empty\",\"candidate_empty\",True,False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0708830"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"key\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0089280"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"secret-echo\",\"response_secret_echo\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0728179"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"invalid-secret-candidate\",\"invalid_json\",True,False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0802670"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"model\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0140080"
+        },
+        {
+          "testName": "HostAdmissionRejectionReleasesUnsentReservationWithoutStoppingBudget(\"host_request_retired_before_send\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0705680"
+        },
+        {
+          "testName": "WrongAccountCurrencyPreventsReservationAndChatCall",
+          "outcome": "Passed",
+          "duration": "00:00:00.0440700"
+        },
+        {
+          "testName": "ConcurrentRequestsCompleteIndependentlyOfWorldAndNeverHoldLedgerLockAcrossHttp",
+          "outcome": "Passed",
+          "duration": "00:00:00.1604950"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"http-401\",\"authentication_failed\",False,True,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0720060"
+        },
+        {
+          "testName": "InvalidRequestCannotReachEvenAccountEndpoint(\"stream\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0101560"
+        },
+        {
+          "testName": "RecoveryMustUseOriginalStageAndCannotRefreshAcrossBranches",
+          "outcome": "Passed",
+          "duration": "00:00:00.1330530"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"no-fingerprint\",\"fingerprint_not_registered\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0879770"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"aborted\",\"generation_aborted\",True,False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0705050"
+        },
+        {
+          "testName": "FailuresRetainTheCorrectFeeAndPhysicalSlot(\"fingerprint-mismatch\",\"fingerprint_not_registered\",False,False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0797480"
+        }
+      ]
+    },
+    {
+      "suite": "host",
+      "source": "artifacts/verification/20260925T124151Z-fdedfbcd/host.trx",
+      "sourceSha256": "501dd47a7c3972f00a8651fe0fa6c5d3eee8596f9d5e9db48e7422ff1d5d5d75",
+      "outcome": "Completed",
+      "counters": {
+        "total": 74,
+        "executed": 74,
+        "passed": 74,
+        "failed": 0,
+        "skipped": 0
+      },
+      "tests": [
+        {
+          "testName": "MissingHostFieldsAreRejected(\"stage\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0314640"
+        },
+        {
+          "testName": "UnavailableJournalLeavesWholeStateAndOperationIdentityUnchanged(False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0472270"
+        },
+        {
+          "testName": "ExportIncludesSuccessfulAndRejectedRequestsResultsAndEconomicCheckpoints",
+          "outcome": "Passed",
+          "duration": "00:00:00.2240630"
+        },
+        {
+          "testName": "CapacityFixtureRulesStageRoundTripsThroughPublishedSave",
+          "outcome": "Passed",
+          "duration": "00:00:00.0775740"
+        },
+        {
+          "testName": "UnavailableJournalDoesNotPublishPlantOrSleep(True,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0584940"
+        },
+        {
+          "testName": "ExistingRunDirectoryCannotBeOverwritten",
+          "outcome": "Passed",
+          "duration": "00:00:00.0273180"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"unconsumedSeconds\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0317400"
+        },
+        {
+          "testName": "DeniedWindowsReplacePreservesSaveAndPrevious",
+          "outcome": "Passed",
+          "duration": "00:00:00.1233690"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\".\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0037910"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\"../branch\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0060500"
+        },
+        {
+          "testName": "UnavailableJournalDoesNotPublishPlantOrSleep(True,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.1107000"
+        },
+        {
+          "testName": "FailedValidationDoesNotReplaceSaveOrPrevious",
+          "outcome": "Passed",
+          "duration": "00:00:00.1124440"
+        },
+        {
+          "testName": "LogicalDeadlineExpiresWithoutAHostTick",
+          "outcome": "Passed",
+          "duration": "00:00:00.0487950"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"maturity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1985580"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"receipt-identity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1657910"
+        },
+        {
+          "testName": "RequestJournalFlushesBeforeHostAcknowledgement",
+          "outcome": "Passed",
+          "duration": "00:00:00.0659370"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"missing-receipts\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1372660"
+        },
+        {
+          "testName": "UnavailableJournalLeavesWholeStateAndOperationIdentityUnchanged(True,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0634730"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"old-schema\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1834530"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\"..\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0039890"
+        },
+        {
+          "testName": "CapacityFixtureRejectsRealModeBeforePublishingOrReadingSave",
+          "outcome": "Passed",
+          "duration": "00:00:00.1079900"
+        },
+        {
+          "testName": "DurableTradeRecordExistsBeforeLiveStateIsPublished(\"buy\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0709390"
+        },
+        {
+          "testName": "DiskPublicationFailureDuringCallbackDoesNotCommitTrade",
+          "outcome": "Passed",
+          "duration": "00:00:00.3225410"
+        },
+        {
+          "testName": "ConcurrentExportsContainAnExactCompleteJournalPrefix",
+          "outcome": "Passed",
+          "duration": "00:00:00.2926620"
+        },
+        {
+          "testName": "BeforeAndAfterMorningSavesResumeGrowthAndHarvestExactlyOnce",
+          "outcome": "Passed",
+          "duration": "00:00:00.2666580"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"sourceRunDirectoryName\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0318680"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"receipt-identity\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1985750"
+        },
+        {
+          "testName": "UnavailableHostOrStopReleasesAllPendingTasks(True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0023080"
+        },
+        {
+          "testName": "CallbackFailureDoesNotLeaveOtherRequestsWaiting",
+          "outcome": "Passed",
+          "duration": "00:00:00.0222950"
+        },
+        {
+          "testName": "ModeStageAndWorldBranchMustAgree",
+          "outcome": "Passed",
+          "duration": "00:00:00.0224830"
+        },
+        {
+          "testName": "PlayerRouteRoundTripsAndRejectsInvalidCoordinatesOrCursor",
+          "outcome": "Passed",
+          "duration": "00:00:00.0278880"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"missing-watered\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1702480"
+        },
+        {
+          "testName": "ArtifactDiskFailureInterruptsAllFutureWrites",
+          "outcome": "Passed",
+          "duration": "00:00:00.0394400"
+        },
+        {
+          "testName": "FailedExportPreservesExistingDestinationAndJournalCanContinue",
+          "outcome": "Passed",
+          "duration": "00:00:00.0223740"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"input-sequence\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1912090"
+        },
+        {
+          "testName": "PausedGateAcknowledgesOnlyDuringUnpausedTick",
+          "outcome": "Passed",
+          "duration": "00:00:00.0035550"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"unknown-crop\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1812060"
+        },
+        {
+          "testName": "UnavailableJournalDoesNotPublishPlantOrSleep(False,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0575680"
+        },
+        {
+          "testName": "ExportContainsRejectedFarmRequestsSleepAndWholeWorldCheckpoints",
+          "outcome": "Passed",
+          "duration": "00:00:00.1156400"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"modelRequests\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0272540"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"unknown-shop\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1771370"
+        },
+        {
+          "testName": "FailedSerializationDoesNotPublishPartialJournalRecord",
+          "outcome": "Passed",
+          "duration": "00:00:00.0303950"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"missing-mornings\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1709940"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\"branch:alternate\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0044980"
+        },
+        {
+          "testName": "TemporaryWriteFailureLeavesBothPublishedFilesUntouched",
+          "outcome": "Passed",
+          "duration": "00:00:00.0253840"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"worldJson\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0289880"
+        },
+        {
+          "testName": "SavedAcceptedTimeSurvivesPauseAndCrossesMorningOnlyOnce",
+          "outcome": "Passed",
+          "duration": "00:00:00.1031620"
+        },
+        {
+          "testName": "UnavailableHostOrStopReleasesAllPendingTasks(False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0039860"
+        },
+        {
+          "testName": "UnavailableJournalLeavesWholeStateAndOperationIdentityUnchanged(True,False)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0604950"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\"C:\\\\branch\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0075570"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"decisionMode\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0289930"
+        },
+        {
+          "testName": "AtomicSaveRoundTripsAndKeepsExactlyThePreviousPublishedSave",
+          "outcome": "Passed",
+          "duration": "00:00:00.1032580"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"journalRecordCount\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0330590"
+        },
+        {
+          "testName": "SavedBuySellAndQuickbarRestoreTheirAssetsAndOperationDedupe",
+          "outcome": "Passed",
+          "duration": "00:00:00.1355470"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"settlement-cursor\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.2058450"
+        },
+        {
+          "testName": "DispatchedRealDecisionRequiresItsFrozenProviderBody",
+          "outcome": "Passed",
+          "duration": "00:00:00.0384330"
+        },
+        {
+          "testName": "RequestHistoryCanKeepOldSessionAndRunIdentityAfterRestore",
+          "outcome": "Passed",
+          "duration": "00:00:00.0256200"
+        },
+        {
+          "testName": "RetiredSessionsAreRejectedWhilePausedWithoutTouchingWorld",
+          "outcome": "Passed",
+          "duration": "00:00:00.0011110"
+        },
+        {
+          "testName": "TerminalRequestCannotStartTransport",
+          "outcome": "Passed",
+          "duration": "00:00:00.0010810"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"missing-economy\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1494400"
+        },
+        {
+          "testName": "RunDirectoryNamesCannotEscapeTheirRoot(\"..\\\\branch\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0047479"
+        },
+        {
+          "testName": "InvalidUtf8AndDuplicateHostFieldsAreRejected",
+          "outcome": "Passed",
+          "duration": "00:00:00.0327900"
+        },
+        {
+          "testName": "UnavailableJournalLeavesWholeStateAndOperationIdentityUnchanged(False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0499460"
+        },
+        {
+          "testName": "TruncatedCurrentSaveDoesNotSilentlyLoadPrevious",
+          "outcome": "Passed",
+          "duration": "00:00:00.0751650"
+        },
+        {
+          "testName": "MissingHostFieldsAreRejected(\"schemaVersion\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0325520"
+        },
+        {
+          "testName": "FrozenRequestMustMatchItsLogicalIdentityStageAndPendingInput",
+          "outcome": "Passed",
+          "duration": "00:00:00.0885660"
+        },
+        {
+          "testName": "DurableSleepCheckpointPrecedesPublicationOfProductionAndShopReplacement",
+          "outcome": "Passed",
+          "duration": "00:00:00.1121650"
+        },
+        {
+          "testName": "InvalidEconomySaveCannotReplaceEitherPublishedFile(\"negative-coins\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1869930"
+        },
+        {
+          "testName": "CallerCancellationCompletesPendingTaskAndPreventsLaterAcknowledgement",
+          "outcome": "Passed",
+          "duration": "00:00:00.0131000"
+        },
+        {
+          "testName": "SleepingDoesNotSpendWorldHoursAsModelWaitOrBypassPausedDispatch",
+          "outcome": "Passed",
+          "duration": "00:00:00.0810540"
+        },
+        {
+          "testName": "UnavailableJournalDoesNotPublishPlantOrSleep(False,True)",
+          "outcome": "Passed",
+          "duration": "00:00:00.0567330"
+        },
+        {
+          "testName": "InvalidFarmingSavePreservesLiveStateAndBothPublishedFiles(\"missing-farming\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.1818090"
+        },
+        {
+          "testName": "DurableTradeRecordExistsBeforeLiveStateIsPublished(\"sell\")",
+          "outcome": "Passed",
+          "duration": "00:00:00.0581860"
+        },
+        {
+          "testName": "DiskFailureWhilePersistingSleepPreservesBothPublishedSavesAndLiveWorld",
+          "outcome": "Passed",
+          "duration": "00:00:00.1598010"
+        }
+      ]
+    }
+  ]
+}
