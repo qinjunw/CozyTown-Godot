@@ -78,6 +78,30 @@
       ]
     }]
   },
+  "production": {
+    "chickens": [
+      { "id": "animal.hen_01", "displayName": "小母鸡", "placeId": "coop", "feedResourceId": "feed.chicken", "productResourceId": "animal_product.egg", "productQuantity": 1 }
+    ],
+    "fishingSpots": [
+      { "id": "fishing.town.pond", "displayName": "河岸池塘", "placeId": "pond" }
+    ],
+    "fish": [
+      { "id": "fish_definition.carp", "resourceId": "fish.carp", "minRollInclusive": 0, "maxRollExclusive": 40 },
+      { "id": "fish_definition.trout", "resourceId": "fish.trout", "minRollInclusive": 40, "maxRollExclusive": 70 },
+      { "id": "fish_definition.bass", "resourceId": "fish.bass", "minRollInclusive": 70, "maxRollExclusive": 90 }
+    ],
+    "kitchens": [
+      { "id": "kitchen.town.cafe", "displayName": "暖炉厨房", "placeId": "cafe" }
+    ],
+    "recipes": [
+      { "id": "recipe.baked_potato", "displayName": "烤土豆", "ingredients": [{ "resourceId": "crop.potato", "quantity": 1 }, { "resourceId": "ingredient.salt", "quantity": 1 }], "outputResourceId": "food.baked_potato", "outputQuantity": 1 },
+      { "id": "recipe.vegetable_soup", "displayName": "蔬菜汤", "ingredients": [{ "resourceId": "crop.carrot", "quantity": 1 }, { "resourceId": "crop.tomato", "quantity": 1 }], "outputResourceId": "food.vegetable_soup", "outputQuantity": 1 },
+      { "id": "recipe.grilled_fish", "displayName": "烤鱼", "ingredients": [{ "resourceId": "fish.carp", "quantity": 1 }, { "resourceId": "ingredient.salt", "quantity": 1 }], "outputResourceId": "food.grilled_fish", "outputQuantity": 1 },
+      { "id": "recipe.tomato_egg", "displayName": "番茄炒蛋", "ingredients": [{ "resourceId": "crop.tomato", "quantity": 1 }, { "resourceId": "animal_product.egg", "quantity": 1 }], "outputResourceId": "food.tomato_egg", "outputQuantity": 1 },
+      { "id": "recipe.fish_pie", "displayName": "鱼肉派", "ingredients": [{ "resourceId": "fish.trout", "quantity": 1 }, { "resourceId": "animal_product.egg", "quantity": 1 }, { "resourceId": "ingredient.flour", "quantity": 1 }], "outputResourceId": "food.fish_pie", "outputQuantity": 1 }
+    ],
+    "fishingSeed": 12345
+  },
   "residents": [
     {
       "id": "mina", "displayName": "米娜", "homePlaceId": "home.mina", "spawnPlaceId": "home.mina",

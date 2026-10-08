@@ -41,7 +41,7 @@ public sealed partial class TownWorld
         if (candidate.Farming.Receipts.TryGetValue(request.OperationId, out var prior))
             result = prior.Request == request ? prior.Result with { IsDuplicate = true }
                 : new(request.OperationId, false, "operation_id_conflict");
-        else if (candidate.Economy.Receipts.ContainsKey(request.OperationId) || candidate.Farming.SleepReceipts.ContainsKey(request.OperationId))
+        else if (candidate.Economy.Receipts.ContainsKey(request.OperationId) || candidate.Farming.SleepReceipts.ContainsKey(request.OperationId) || candidate.Production.Receipts.ContainsKey(request.OperationId))
             result = new(request.OperationId, false, "operation_id_conflict");
         else
         {
@@ -121,7 +121,7 @@ public sealed partial class TownWorld
         SleepResult result;
         if (candidate.Farming.SleepReceipts.TryGetValue(request.OperationId, out var prior))
             result = prior.Request == request ? prior.Result with { IsDuplicate = true } : new(request.OperationId, false, "operation_id_conflict", original.WorldMinute, original.WorldMinute);
-        else if (candidate.Economy.Receipts.ContainsKey(request.OperationId) || candidate.Farming.Receipts.ContainsKey(request.OperationId))
+        else if (candidate.Economy.Receipts.ContainsKey(request.OperationId) || candidate.Farming.Receipts.ContainsKey(request.OperationId) || candidate.Production.Receipts.ContainsKey(request.OperationId))
             result = new(request.OperationId, false, "operation_id_conflict", original.WorldMinute, original.WorldMinute);
         else
         {
@@ -144,7 +144,7 @@ public sealed partial class TownWorld
         }
         long sequence = checked(++candidate.Economy.InputSequence);
         if (ValidOperationId(request.OperationId) && !candidate.Farming.SleepReceipts.ContainsKey(request.OperationId)
-            && !candidate.Economy.Receipts.ContainsKey(request.OperationId) && !candidate.Farming.Receipts.ContainsKey(request.OperationId))
+            && !candidate.Economy.Receipts.ContainsKey(request.OperationId) && !candidate.Farming.Receipts.ContainsKey(request.OperationId) && !candidate.Production.Receipts.ContainsKey(request.OperationId))
             candidate.Farming.SleepReceipts.Add(request.OperationId, new(sequence, request, result));
         AddCandidateEvent(candidate, "sleep_command", result.Code, new { schemaVersion = 1, inputSequence = sequence, request, result, realSeconds, paused });
         var record = new SleepOperationRecord(1, sequence, candidate.BranchId, candidate.WorldMinute, request, result, TownJson.Clone(candidate));
@@ -178,6 +178,13 @@ public sealed partial class TownWorld
                     unclaimedQuantity = nextGrowth == crop.GrowthDays ? crop.HarvestQuantity : 0, crop.HarvestResourceId });
         }
         ApplyMorning(_content, _state.Economy, _state.Farming, day);
+        foreach (var chicken in _state.Production.Chickens.Where(c => c.Fed))
+        {
+            var definition = _content.Data.Production!.Chickens.Single(c => c.Id == chicken.Id);
+            Log("chicken_product_ready", null, "morning", "production_created", data: new { inputSequence = sequence, day,
+                chicken.Id, chicken.Generation, resourceId = definition.ProductResourceId, quantity = definition.ProductQuantity });
+        }
+        ApplyChickenMorning(_state.Production);
         _state.Farming.Mornings.Add(new(sequence, day));
         Log("morning_settled", null, "morning", "committed", data: new { inputSequence = sequence, day });
     }

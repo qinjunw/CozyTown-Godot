@@ -148,6 +148,7 @@ public partial class TownGame
         _dialogue.Visible = false;
         CreateEconomyInterface(top, bottom);
         CreateFarmingInterface();
+        CreateProductionInterface();
         CreateMenu();
     }
 
@@ -183,6 +184,7 @@ public partial class TownGame
 
     private void ToggleMenu()
     {
+        if (_productionPanel.Visible) { CloseProduction(); return; }
         if (_farmingPanel.Visible) { CloseFarming(); return; }
         if (_economyPanel.Visible) { CloseEconomy(); return; }
         if (_dialogue.Visible) { CloseDialogue(); return; }
@@ -192,7 +194,7 @@ public partial class TownGame
 
     private void ToggleInspector()
     {
-        if (_economyPanel.Visible || _dialogue.Visible || _menu.Visible || _farmingPanel.Visible) return;
+        if (_economyPanel.Visible || _dialogue.Visible || _menu.Visible || _farmingPanel.Visible || _productionPanel.Visible) return;
         _inspector.Visible = !_inspector.Visible;
         if (_inspector.Visible && _selectedResident == null) _selectedResident = _view.Residents[0].Id;
         RefreshInterface();
@@ -230,17 +232,19 @@ public partial class TownGame
     {
         int minute = (int)_view.WorldMinute % 1440;
         _clock.Text = $"春日 · 第 {(long)_view.WorldMinute / 1440 + 1} 天    {minute / 60:00}:{minute % 60:00}" + (_pauseReasons.Count > 0 ? "  · 暂停" : "");
-        _modeLabel.Text = _scenario == "farming-capacity-fixture" ? "满包验证初态" : _mode == "real" ? "真实模型" : "规则模拟";
+        _modeLabel.Text = _scenario is "farming-capacity-fixture" or "production-capacity-fixture" ? "满包验证初态" : _mode == "real" ? "真实模型" : "规则模拟";
         ResidentState? nearest = _view.Residents.Where(r => r.Position.DistanceTo(_view.PlayerPosition) <= 42)
             .OrderBy(r => r.Position.DistanceTo(_view.PlayerPosition)).FirstOrDefault();
-        _talkButton.Text = NearbyShop() is not null ? "E  逛杂货铺" : NearbyPlot() is not null ? "E  照看菜园" : _world.CanSleep() ? "E  回家休息" : nearest == null ? "E  交互" : "E  和" + _loaded.Definitions.Residents.Single(r => r.Id == nearest.Id).DisplayName + "交谈";
+        string? productionId = NearbyProductionId();
+        _talkButton.Text = NearbyShop() is not null ? "E  逛杂货铺" : NearbyPlot() is not null ? "E  照看菜园" : _world.CanSleep() ? "E  回家休息" : productionId is not null ? "E  " + ProductionTargets().Single(t => t.Id == productionId).Name : nearest == null ? "E  交互" : "E  和" + _loaded.Definitions.Residents.Single(r => r.Id == nearest.Id).DisplayName + "交谈";
         _talkButton.Disabled = _pauseReasons.Count > 0;
-        _residentTalkButton.Visible = (NearbyShop() is not null || NearbyPlot() is not null || _world.CanSleep()) && nearest is not null;
+        _residentTalkButton.Visible = (NearbyShop() is not null || NearbyPlot() is not null || _world.CanSleep() || productionId is not null) && nearest is not null;
         _residentTalkButton.Disabled = _pauseReasons.Count > 0;
         foreach (var pair in _residentButtons)
             pair.Value.Modulate = _selectedResident == pair.Key ? new Color("d8e9c8") : Colors.White;
         RefreshEconomyInterface();
         RefreshFarmingInterface();
+        RefreshProductionInterface();
         if (!_inspector.Visible || _selectedResident == null) return;
         ResidentState resident = _view.Residents.Single(r => r.Id == _selectedResident);
         ResidentDefinition definition = _loaded.Definitions.Residents.Single(r => r.Id == resident.Id);
@@ -300,6 +304,13 @@ public partial class TownGame
     private void Toast(string text, double seconds = 4)
     {
         if (_toast == null) return;
+        if (_productionPanel is not null && _productionPanel.Visible)
+        {
+            _productionFeedback.Text = text;
+            _productionFeedback.Modulate = _fatal ? new Color("ad593d") : Colors.White;
+            _toast.Visible = false;
+            return;
+        }
         if (_farmingPanel is not null && _farmingPanel.Visible)
         {
             _farmingFeedback.Text = text;

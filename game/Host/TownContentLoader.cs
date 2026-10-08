@@ -83,11 +83,17 @@ public static class TownContentLoader
             if (definitions.Economy is null) throw new InvalidDataException("Farming capacity fixture requires an economy definition.");
             definitions = definitions with { Economy = definitions.Economy with { Player = player } };
         }
-        else if (initialState != "baseline") throw new InvalidDataException("Initial state must be baseline, counterfactual, economy-fixture or farming-capacity-fixture.");
+        else if (initialState == "production-capacity-fixture")
+        {
+            var player = TownJson.Deserialize<PlayerDefinition>(ReadText("res://Content/production-capacity-fixture.json"));
+            if (definitions.Economy is null) throw new InvalidDataException("Production capacity fixture requires an economy definition.");
+            definitions = definitions with { Economy = definitions.Economy with { Player = player } };
+        }
+        else if (initialState != "baseline") throw new InvalidDataException("Initial state must be baseline, counterfactual, economy-fixture, farming-capacity-fixture or production-capacity-fixture.");
         TownContent content = TownContent.Create(manifest, definitions);
         var dependencies = new SortedDictionary<string, string>(StringComparer.Ordinal);
         dependencies["res://World/TownMap.tscn#extracted-geometry-v1"] = Hash(TownJson.Serialize(manifest));
-        foreach (string path in new[] { "res://Content/town.json", "res://Content/counterfactual.json", "res://Content/economy-fixture.json", "res://Content/farming-capacity-fixture.json", "res://Art/catalog.json" })
+        foreach (string path in new[] { "res://Content/town.json", "res://Content/counterfactual.json", "res://Content/economy-fixture.json", "res://Content/farming-capacity-fixture.json", "res://Content/production-capacity-fixture.json", "res://Art/catalog.json" })
         {
             dependencies[path] = Convert.ToHexString(SHA256.HashData(Godot.FileAccess.GetFileAsBytes(path))).ToLowerInvariant();
         }

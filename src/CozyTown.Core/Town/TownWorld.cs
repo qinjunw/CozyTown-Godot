@@ -4,7 +4,7 @@ namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    public const string RulesVersion = "town-social-farming-v3";
+    public const string RulesVersion = "town-social-production-v4";
     public const string NumericVersion = "pixels-double-grid16-radius5-morning-motion-prefix-v3";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private readonly TownContent _content;
@@ -23,7 +23,7 @@ public sealed partial class TownWorld
             ForkSequence = _state.ForkSequence, BudgetId = _state.BudgetId, InitialStateId = _state.InitialStateId,
             InitialStateFingerprint = _state.InitialStateFingerprint, WorldMinute = _state.WorldMinute,
             AcceptedWorldMinutes = _state.AcceptedWorldMinutes, PlayerPosition = _state.PlayerPosition,
-            PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Farming = _state.Farming, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
+            PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Farming = _state.Farming, Production = _state.Production, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
             DecisionCursor = _state.DecisionCursor, Residents = _state.Residents, Commitments = _state.Commitments.Where(IsActive).ToList(),
             PendingDecisions = _state.PendingDecisions, Events = _state.Events.TakeLast(20).ToList()
         };
@@ -43,6 +43,7 @@ public sealed partial class TownWorld
             PlayerFacing = new TownPoint(0, 1),
             Economy = CreateInitialEconomy(content),
             Farming = CreateInitialFarming(content),
+            Production = CreateInitialProduction(content),
             Residents = content.Data.Residents.Select(r => new ResidentState
             {
                 Id = r.Id, Position = content.Place(r.SpawnPlaceId).Position, Facing = new TownPoint(0, 1),

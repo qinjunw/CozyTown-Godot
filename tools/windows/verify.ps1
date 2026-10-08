@@ -132,7 +132,7 @@ function Assert-ContentReport {
     $residents = @($report.definitions.residents | ForEach-Object { $_.id } | Sort-Object)
     if (($residents -join ',') -ne 'eli,mina,ren,sora' -or
         $report.manifest.width -ne 768 -or $report.manifest.height -ne 512 -or
-        @($report.manifest.places).Count -ne 22 -or @($report.manifest.roads).Count -ne 16 -or
+        @($report.manifest.places).Count -ne 23 -or @($report.manifest.roads).Count -ne 17 -or
         @($report.manifest.obstacles).Count -lt 1 -or @($report.manifest.regions).Count -lt 1) {
         throw "Content report failed the four-resident map checks: $Path"
     }
@@ -314,6 +314,72 @@ function Assert-FarmingReport {
     return $report
 }
 
+function Assert-ProductionReport {
+    param([string] $Path, [bool] $Headless, [string] $BundledRuntimeRoot = '', [string] $ExpectedScreenshot = '', [switch] $Capacity)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "Production verification did not produce $Path." }
+    $report = Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+    $expectedTest = if ($Capacity) { 'godot_production_capacity_smoke' } else { 'godot_production_smoke' }
+    $expectedScenario = if ($Capacity) { 'production-capacity-fixture' } else { 'baseline' }
+    if ($report.passed -isnot [bool] -or -not $report.passed -or $report.test -ne $expectedTest -or
+        $report.scenario -ne $expectedScenario -or $report.mode -ne 'rules' -or $report.residents -ne 4 -or
+        $report.headless -isnot [bool] -or $report.headless -ne $Headless -or
+        $report.contentFingerprint -notmatch '^[0-9a-f]{64}$') {
+        throw "Production report identity or outcome failed: $Path"
+    }
+    $required = @('normal_new_game', 'missing_feed_preserves_assets', 'missing_material_preserves_assets',
+        'buy_initial_materials', 'plant_carrot_and_tomato', 'feed_once', 'already_fed_preserves_assets',
+        'restore_fed_chicken', 'first_morning_egg', 'collect_first_egg', 'feed_second_cycle',
+        'buy_restocked_materials', 'three_crops_mature', 'pending_egg_does_not_stack',
+        'feed_with_pending_egg_preserves_assets', 'restore_unclaimed_egg', 'collect_second_egg',
+        'repeated_collect_preserves_assets', 'harvest_three_crops', 'restore_fishing_random',
+        'three_fish_and_empty_roll', 'cook_all_five_recipes', 'restore_cooked_assets',
+        'sell_processed_outputs', 'reinvest_production_income', 'external_pause_blocks_production',
+        'four_residents_followed_routes', 'versioned_production_checkpoints', 'shared_space_samples')
+    if ($Capacity) {
+        $required = @('explicit_offline_capacity_fixture', 'chicken_ui_and_route', 'feeding_keeps_five_slots',
+            'already_fed_preserves_assets', 'morning_produces_one_egg', 'unclaimed_egg_does_not_stack',
+            'pending_feed_preserves_assets', 'full_collect_preserves_egg_and_assets', 'rejected_collect_save_published',
+            'rejected_collect_restored_on_new_branch', 'kitchen_ui_and_route', 'full_cooking_preserves_ingredients',
+            'pond_ui_and_route', 'full_fishing_preserves_random_and_assets', 'selling_carrots_frees_one_slot',
+            'collect_succeeds_after_freeing_slot', 'selling_tomatoes_frees_one_slot', 'fishing_succeeds_after_freeing_slot',
+            'versioned_commands_and_checkpoints', 'rejected_production_checkpoints_preserve_state',
+            'production_targets_have_scene_samples', 'production_sources_and_transfers_are_separate')
+    }
+    $names = @($report.checks | ForEach-Object name)
+    if (@($names | Sort-Object -Unique).Count -ne $names.Count) { throw "Duplicate production verification check: $Path" }
+    foreach ($name in $required) { if ($name -notin $names) { throw "Missing production check $name`: $Path" } }
+    foreach ($check in $report.checks) {
+        if ([string]::IsNullOrWhiteSpace($check.name) -or $check.passed -isnot [bool] -or -not $check.passed) {
+            throw "Production check failed: $($check.name) in $Path"
+        }
+    }
+    if ($BundledRuntimeRoot) {
+        if (-not [IO.Path]::IsPathFullyQualified($report.runtimeAssemblyLocation)) { throw 'Production export runtime path must be absolute.' }
+        $runtime = [IO.Path]::GetFullPath($report.runtimeAssemblyLocation)
+        $prefix = [IO.Path]::GetFullPath($BundledRuntimeRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
+        if (-not $runtime.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase) -or
+            -not (Test-Path -LiteralPath $runtime -PathType Leaf)) { throw 'Production export loaded a runtime outside its bundle or reported a missing assembly.' }
+    }
+    if ($ExpectedScreenshot) {
+        if ($Headless) { throw "Headless production verification cannot provide graphical evidence: $Path" }
+        $imageKinds = if ($Capacity) { @('failure', 'success') } else { @('chicken', 'ready', 'fishing', 'kitchen', 'cooked', 'sold') }
+        foreach ($kind in $imageKinds) {
+            $expected = if ($kind -eq 'chicken' -or ($Capacity -and $kind -eq 'failure')) { $ExpectedScreenshot } else {
+                Join-Path (Split-Path $ExpectedScreenshot -Parent) ([IO.Path]::GetFileNameWithoutExtension($ExpectedScreenshot) + "-$kind.png")
+            }
+            $imagePath = $report.screenshots.$kind
+            if (-not [IO.Path]::IsPathFullyQualified($imagePath) -or
+                [IO.Path]::GetFullPath($imagePath) -ne [IO.Path]::GetFullPath($expected) -or
+                -not (Test-Path -LiteralPath $expected -PathType Leaf)) { throw "Missing or mismatched production screenshot: $kind" }
+            $signature = [IO.File]::ReadAllBytes($expected)
+            if ($signature.Length -lt 8 -or [Convert]::ToHexString($signature[0..7]) -ne '89504E470D0A1A0A') {
+                throw "Production screenshot is not PNG: $expected"
+            }
+        }
+    }
+    return $report
+}
+
 $summary = [ordered]@{
     schemaVersion = 1
     startedAtUtc = [DateTime]::UtcNow.ToString('O')
@@ -345,7 +411,7 @@ try {
     $null = Invoke-CheckedProcess 'scene-headless' $godot @('--headless', '--path', 'game', '--', '--toolchain-smoke', "--report=$sceneReport")
     Assert-SmokeReport $sceneReport $true
     $summary.contentChecks = [ordered]@{}
-    foreach ($scenario in @('baseline', 'counterfactual', 'economy-fixture', 'farming-capacity-fixture')) {
+    foreach ($scenario in @('baseline', 'counterfactual', 'economy-fixture', 'farming-capacity-fixture', 'production-capacity-fixture')) {
         $contentReportPath = Join-Path $output "content-$scenario.json"
         $contentData = Join-Path $output "data/content-$scenario"
         $null = Invoke-CheckedProcess "content-$scenario" $godot @('--headless', '--path', 'game', '--', '--validate-content', "--scenario=$scenario", "--report=$contentReportPath", "--data-dir=$contentData")
@@ -457,6 +523,43 @@ try {
         $farmingReport = Assert-FarmingReport $farmingPath $false $windows $farmingScreenshot
         if ($farmingReport.contentFingerprint -ne $summary.contentChecks.baseline.fingerprint) { throw 'Graphical farming fingerprint differs.' }
         $summary.farmingChecks['export-farming-graphical'] = [ordered]@{ passed = $true; checks = @($farmingReport.checks).Count; contentFingerprint = $farmingReport.contentFingerprint; screenshots = $farmingReport.screenshots }
+    }
+    $summary.productionChecks = [ordered]@{}
+    $productionModes = if ($Graphical) { @('headless', 'graphical') } else { @('headless') }
+    foreach ($capacity in @($false, $true)) {
+        $productionScenario = if ($capacity) { 'production-capacity-fixture' } else { 'baseline' }
+        $productionFlag = if ($capacity) { '--production-capacity-smoke' } else { '--production-smoke' }
+        $productionKind = if ($capacity) { 'production-capacity' } else { 'production' }
+        foreach ($productionTarget in @('scene', 'export')) {
+            foreach ($productionMode in $productionModes) {
+                $headless = $productionMode -eq 'headless'
+                $productionName = "$productionTarget-$productionKind-$productionMode"
+                $productionPath = Join-Path $output "$productionName.json"
+                $productionData = Join-Path $output "data/$productionName"
+                $productionScreenshot = if ($headless) { '' } else { Join-Path $output "$productionName.png" }
+                $productionArguments = @()
+                if ($headless) { $productionArguments += '--headless' }
+                if ($productionTarget -eq 'scene') { $productionArguments += @('--path', 'game') }
+                $productionArguments += @('--', $productionFlag, "--scenario=$productionScenario", "--report=$productionPath", "--data-dir=$productionData")
+                if (-not $headless) { $productionArguments += "--screenshot=$productionScreenshot" }
+                $runtimeRoot = ''
+                if ($productionTarget -eq 'scene') {
+                    $null = Invoke-CheckedProcess $productionName $godot $productionArguments 300
+                } else {
+                    $null = Invoke-CheckedProcess $productionName $executable $productionArguments 300 -WorkingDirectory $windows -Environment $runtimeEnvironment
+                    $runtimeRoot = $windows
+                }
+                $productionReport = Assert-ProductionReport $productionPath $headless $runtimeRoot $productionScreenshot -Capacity:$capacity
+                if ($productionReport.contentFingerprint -ne $summary.contentChecks[$productionScenario].fingerprint) {
+                    throw "Production and content validation loaded different $productionScenario content: $productionName"
+                }
+                $summary.productionChecks[$productionName] = [ordered]@{
+                    passed = $true; checks = @($productionReport.checks).Count; scenario = $productionScenario
+                    mode = $productionReport.mode; headless = $headless; contentFingerprint = $productionReport.contentFingerprint
+                }
+                if (-not $headless) { $summary.productionChecks[$productionName].screenshots = $productionReport.screenshots }
+            }
+        }
     }
     if ($Graphical) {
         $graphicalReport = Join-Path $output 'export-graphical.json'

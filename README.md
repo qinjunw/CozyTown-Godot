@@ -8,6 +8,8 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 玩家现可查看钱包、背包与五格快捷栏，并在杂货铺买卖物品；双方资产及操作去重随存档恢复。初态、报价和验证入口见[玩家资产与商店操作](docs/PLAYER_ECONOMY.md)。六块菜地支持三种作物的种植、浇水和收获，每日 05:00 结算成长与商店补给；玩家可在家选择休息 1～12 小时，见[种植与睡眠操作](docs/PLAYER_FARMING.md)。
 
+鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。
+
 ## 构建与运行
 
 需要 Windows x64、Git 和 PowerShell 7。在仓库根目录运行：
@@ -28,7 +30,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 完整范围见 [产品目标与验收基线](docs/PRODUCT_BASELINE.md)，领域词汇见 [CONTEXT.md](CONTEXT.md)。
 
-首份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动，世界日程优先，并要求对外演示画面完成度。种植与交易已贯通，养鸡、钓鱼和烹饪由后续票据交付。
+首份可玩交付的[范围与验收](docs/FIRST_PLAYABLE_SLICE.md)聚焦四人自主互动，世界日程优先，并要求对外演示画面完成度。种植、养鸡、钓鱼、烹饪与交易已接入同一玩家资产及晨间结算。
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 

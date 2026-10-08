@@ -4,7 +4,7 @@ namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    private static void ValidateEconomy(TownContent content, EconomyState? economy, FarmingState? farming, double worldMinute)
+    private static void ValidateEconomy(TownContent content, EconomyState? economy, FarmingState? farming, ProductionState? production, double worldMinute)
     {
         void Require([DoesNotReturnIf(false)] bool condition, string field)
         {
@@ -26,18 +26,23 @@ public sealed partial class TownWorld
         Require(economy.Receipts.Values.All(r => r.InputSequence > 0 && r.InputSequence <= economy.InputSequence)
             && economy.Receipts.Values.Select(r => r.InputSequence).Distinct().Count() == economy.Receipts.Count, "receipt input sequence");
         ValidateFarmingStructure(content, farming, worldMinute);
+        ValidateProductionStructure(content, production, worldMinute);
         var farm = farming!;
-        var allIdentities = economy.Receipts.Keys.Concat(farm.Receipts.Keys).Concat(farm.SleepReceipts.Keys).ToArray();
+        var productionState = production!;
+        var allIdentities = economy.Receipts.Keys.Concat(farm.Receipts.Keys).Concat(farm.SleepReceipts.Keys).Concat(productionState.Receipts.Keys).ToArray();
         Require(allIdentities.Distinct(StringComparer.Ordinal).Count() == allIdentities.Length, "command identity collision");
         var sequences = economy.Receipts.Values.Select(r => r.InputSequence).Concat(farm.Receipts.Values.Select(r => r.InputSequence))
-            .Concat(farm.SleepReceipts.Values.Select(r => r.InputSequence)).Concat(farm.Mornings.Select(r => r.InputSequence)).ToArray();
+            .Concat(farm.SleepReceipts.Values.Select(r => r.InputSequence)).Concat(farm.Mornings.Select(r => r.InputSequence))
+            .Concat(productionState.Receipts.Values.Select(r => r.InputSequence)).ToArray();
         Require(sequences.All(s => s > 0 && s <= economy.InputSequence) && sequences.Distinct().Count() == sequences.Length, "operation/source input sequence");
         var reconstructed = CreateInitialEconomy(content);
         var reconstructedFarm = CreateInitialFarming(content);
+        var reconstructedProduction = CreateInitialProduction(content);
         var economyBySequence = economy.Receipts.ToDictionary(p => p.Value.InputSequence);
         var farmBySequence = farm.Receipts.ToDictionary(p => p.Value.InputSequence);
         var morningBySequence = farm.Mornings.ToDictionary(r => r.InputSequence);
         var sleepBySequence = farm.SleepReceipts.Values.ToDictionary(r => r.InputSequence);
+        var productionBySequence = productionState.Receipts.Values.ToDictionary(r => r.InputSequence);
         double lastFarmingMinute = content.Data.StartMinute;
         double lastCommandMinute = content.Data.StartMinute;
         foreach (long sequence in sequences.Order())
@@ -47,6 +52,7 @@ public sealed partial class TownWorld
                 double at = morning.Day * 1440 + MorningMinute;
                 Require(morning.Day == reconstructedFarm.LastSettledDay + 1 && at >= lastFarmingMinute && at <= worldMinute, "morning source day/order");
                 ApplyMorning(content, reconstructed, reconstructedFarm, morning.Day);
+                ApplyChickenMorning(reconstructedProduction);
                 lastFarmingMinute = at;
                 continue;
             }
@@ -69,6 +75,23 @@ public sealed partial class TownWorld
                 Require(sleep.Result.FromMinute >= lastCommandMinute - 1e-7 && sleep.Result.ToMinute >= lastFarmingMinute - 1e-7, "sleep source interval/order");
                 lastCommandMinute = sleep.Result.ToMinute;
                 lastFarmingMinute = sleep.Result.ToMinute;
+                continue;
+            }
+            if (productionBySequence.TryGetValue(sequence, out var productionOperation))
+            {
+                Require(productionOperation.WorldMinute >= lastFarmingMinute && productionOperation.WorldMinute <= worldMinute, "production operation time/order");
+                lastFarmingMinute = productionOperation.WorldMinute;
+                lastCommandMinute = productionOperation.WorldMinute;
+                Require(productionOperation.RandomStateBefore == reconstructedProduction.FishingRandomState, "production random state before operation");
+                if (productionOperation.Result.Succeeded)
+                {
+                    Require(productionOperation.Request.ActorId == "player" && ProductionTargetExists(content, productionOperation.Request.TargetId)
+                        && EvaluateProduction(content, reconstructed, reconstructedProduction, productionOperation.Request) == productionOperation.Result, "production history conditions/output");
+                    ApplyProduction(content, reconstructed, reconstructedProduction, productionOperation.Request, productionOperation.Result);
+                }
+                else if (productionOperation.Result.Roll is int roll)
+                    Require(productionOperation.Request.Action == "fish" && roll == NextFishingRandom(reconstructedProduction.FishingRandomState) % 100, "rejected fishing roll");
+                Require(productionOperation.RandomStateAfter == reconstructedProduction.FishingRandomState, "production random state after operation");
                 continue;
             }
             if (!economyBySequence.TryGetValue(sequence, out var pair)) continue;
@@ -113,6 +136,9 @@ public sealed partial class TownWorld
         }
         Require(reconstructedFarm.LastSettledDay == farm.LastSettledDay
             && TownJson.Serialize(reconstructedFarm.Plots) == TownJson.Serialize(farm.Plots), "farming state differs from recorded operations/sources");
+        Require(reconstructedProduction.FishingRandomState == productionState.FishingRandomState
+            && reconstructedProduction.FishingDrawCount == productionState.FishingDrawCount
+            && TownJson.Serialize(reconstructedProduction.Chickens) == TownJson.Serialize(productionState.Chickens), "production state differs from recorded operations/sources");
         bool SameInventory(Dictionary<string, int> first, Dictionary<string, int> second) => content.Data.Resources.All(r => first.GetValueOrDefault(r.Id) == second.GetValueOrDefault(r.Id));
         Require(reconstructed.Player.Coins == economy.Player.Coins && SameInventory(reconstructed.Player.Inventory, economy.Player.Inventory)
             && reconstructed.Player.SelectedQuickbarIndex == economy.Player.SelectedQuickbarIndex, "player assets/selection differ from recorded operations");

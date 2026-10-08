@@ -1,0 +1,11 @@
+{
+  "coins": 300,
+  "slotCapacity": 5,
+  "inventory": {
+    "feed.chicken": 2,
+    "crop.carrot": 2,
+    "crop.tomato": 2,
+    "ingredient.salt": 2,
+    "ingredient.flour": 2
+  }
+}
