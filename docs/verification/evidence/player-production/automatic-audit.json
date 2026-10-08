@@ -1,0 +1,1587 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "sourceDirty": false,
+  "originalRunDirectory": "artifacts/verification/20261008T072203Z-b9a0e31b",
+  "passed": true,
+  "scope": "Automatic C# tests and Godot production matrix. OS keyboard and mouse acceptance is recorded separately.",
+  "countingRule": "Counts use final-run checkpoint sample arrays aggregating saved and restored branches. Each sampled attempt is counted, including abandoned pre-restore attempts. Receipt dictionaries are not counted.",
+  "rngRule": "Each fishing attempt previews xorshift32 (13,17,5), modulo 100. Succeeded attempts advance RNG state. inventory_full preserves RNG state and retains the previewed roll in the result.",
+  "verification": {
+    "passed": true,
+    "csharpTests": 325,
+    "normalRuns": 4,
+    "normalChecksPerRun": 29,
+    "capacityRuns": 4,
+    "capacityChecksPerRun": 22
+  },
+  "matrixConsistency": {
+    "allBranchBuildVersionsMatchSourceCommit": true,
+    "allReportsMatchScenarioContentFingerprint": true,
+    "allInputDigestsMatch": true,
+    "allPresentationDigestsMatch": true,
+    "allRejectedProductionCommandsPreserveAssetsChickensAndRng": true
+  },
+  "matrix": [
+    {
+      "report": "export-production-capacity-graphical.json",
+      "scenario": "production-capacity-fixture",
+      "headless": false,
+      "checks": 22,
+      "passed": true,
+      "runBranches": 2,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 16,
+        "succeeded": 11,
+        "rejected": 5,
+        "byKind": {
+          "player_production_command": {
+            "succeeded": 3,
+            "rejected": 5
+          },
+          "player_sleep_command": {
+            "succeeded": 6
+          },
+          "player_economy_command": {
+            "succeeded": 2
+          }
+        },
+        "production": {
+          "sampledRecords": 8,
+          "succeeded": 3,
+          "rejected": 5,
+          "codes": {
+            "accepted": 3,
+            "already_fed": 1,
+            "product_pending": 1,
+            "inventory_full": 3
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "ac8794b69e1541519ecc64de3ded183a",
+          "inputSequence": 2,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "ac8794b69e1541519ecc64de3ded183a",
+          "inputSequence": 12,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "ac8794b69e1541519ecc64de3ded183a",
+          "inputSequence": 13,
+          "action": "collect",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "d950043a64b54e1cba933f2502260924",
+          "inputSequence": 14,
+          "action": "cook",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "d950043a64b54e1cba933f2502260924",
+          "inputSequence": 15,
+          "action": "fish",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 2,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 410,
+      "capacity": {
+        "slotCapacity": 5,
+        "initialInventory": {
+          "crop.carrot": 2,
+          "crop.tomato": 2,
+          "feed.chicken": 2,
+          "ingredient.flour": 2,
+          "ingredient.salt": 2
+        },
+        "fullInventoryRejectedActions": [
+          "collect",
+          "cook",
+          "fish"
+        ],
+        "rejectedFishingRollPreview": 30,
+        "firstSuccessfulFishingRoll": 30,
+        "finalCoins": 410
+      }
+    },
+    {
+      "report": "export-production-capacity-headless.json",
+      "scenario": "production-capacity-fixture",
+      "headless": true,
+      "checks": 22,
+      "passed": true,
+      "runBranches": 2,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 16,
+        "succeeded": 11,
+        "rejected": 5,
+        "byKind": {
+          "player_production_command": {
+            "succeeded": 3,
+            "rejected": 5
+          },
+          "player_sleep_command": {
+            "succeeded": 6
+          },
+          "player_economy_command": {
+            "succeeded": 2
+          }
+        },
+        "production": {
+          "sampledRecords": 8,
+          "succeeded": 3,
+          "rejected": 5,
+          "codes": {
+            "accepted": 3,
+            "already_fed": 1,
+            "product_pending": 1,
+            "inventory_full": 3
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "107cf1b341b146f0ac58f7f396851861",
+          "inputSequence": 2,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "107cf1b341b146f0ac58f7f396851861",
+          "inputSequence": 12,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "107cf1b341b146f0ac58f7f396851861",
+          "inputSequence": 13,
+          "action": "collect",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "c86f524bb424432e92ac8159a4a0b354",
+          "inputSequence": 14,
+          "action": "cook",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "c86f524bb424432e92ac8159a4a0b354",
+          "inputSequence": 15,
+          "action": "fish",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 2,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 410,
+      "capacity": {
+        "slotCapacity": 5,
+        "initialInventory": {
+          "crop.carrot": 2,
+          "crop.tomato": 2,
+          "feed.chicken": 2,
+          "ingredient.flour": 2,
+          "ingredient.salt": 2
+        },
+        "fullInventoryRejectedActions": [
+          "collect",
+          "cook",
+          "fish"
+        ],
+        "rejectedFishingRollPreview": 30,
+        "firstSuccessfulFishingRoll": 30,
+        "finalCoins": 410
+      }
+    },
+    {
+      "report": "export-production-graphical.json",
+      "scenario": "baseline",
+      "headless": false,
+      "checks": 29,
+      "passed": true,
+      "runBranches": 5,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 75,
+        "rejected": 5,
+        "succeeded": 70,
+        "byKind": {
+          "player_production_command": {
+            "rejected": 5,
+            "succeeded": 35
+          },
+          "player_economy_command": {
+            "succeeded": 12
+          },
+          "player_farm_command": {
+            "succeeded": 15
+          },
+          "player_sleep_command": {
+            "succeeded": 8
+          }
+        },
+        "production": {
+          "sampledRecords": 40,
+          "rejected": 5,
+          "succeeded": 35,
+          "codes": {
+            "insufficient_feed": 1,
+            "insufficient_ingredients": 1,
+            "accepted": 34,
+            "already_fed": 1,
+            "product_pending": 1,
+            "product_not_ready": 1,
+            "no_catch": 1
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "a0f17af59af34043a1970f11cf4cd6c9",
+          "inputSequence": 1,
+          "action": "feed",
+          "code": "insufficient_feed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "a0f17af59af34043a1970f11cf4cd6c9",
+          "inputSequence": 2,
+          "action": "cook",
+          "code": "insufficient_ingredients",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "a0f17af59af34043a1970f11cf4cd6c9",
+          "inputSequence": 10,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "722b035d7a4b4afc81a5cdb74c9dc3c5",
+          "inputSequence": 37,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "696137aae6a84ae99c6255a9ea4e98a7",
+          "inputSequence": 39,
+          "action": "collect",
+          "code": "product_not_ready",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 26,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 500,
+      "economy": {
+        "initialCoins": 300,
+        "initialInventory": {},
+        "materialPurchasesCost": 115,
+        "coinsBeforeSales": 185,
+        "processedSalesIncome": 340,
+        "coinsAfterSales": 525,
+        "reinvestmentCost": 25,
+        "finalCoins": 500,
+        "sales": [
+          {
+            "inputSequence": 73,
+            "resourceId": "food.baked_potato",
+            "quantity": 1,
+            "totalPrice": 50,
+            "coinsAfter": 235
+          },
+          {
+            "inputSequence": 74,
+            "resourceId": "food.vegetable_soup",
+            "quantity": 1,
+            "totalPrice": 60,
+            "coinsAfter": 295
+          },
+          {
+            "inputSequence": 75,
+            "resourceId": "food.grilled_fish",
+            "quantity": 1,
+            "totalPrice": 55,
+            "coinsAfter": 350
+          },
+          {
+            "inputSequence": 76,
+            "resourceId": "food.tomato_egg",
+            "quantity": 1,
+            "totalPrice": 75,
+            "coinsAfter": 425
+          },
+          {
+            "inputSequence": 77,
+            "resourceId": "food.fish_pie",
+            "quantity": 1,
+            "totalPrice": 100,
+            "coinsAfter": 525
+          }
+        ],
+        "reinvestment": {
+          "inputSequence": 78,
+          "resourceId": "seed.carrot",
+          "quantity": 1,
+          "totalPrice": 25,
+          "coinsAfter": 500
+        }
+      },
+      "fiveRecipes": [
+        {
+          "recipeId": "recipe.baked_potato",
+          "outputResourceId": "food.baked_potato",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.vegetable_soup",
+          "outputResourceId": "food.vegetable_soup",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.grilled_fish",
+          "outputResourceId": "food.grilled_fish",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.tomato_egg",
+          "outputResourceId": "food.tomato_egg",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.fish_pie",
+          "outputResourceId": "food.fish_pie",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        }
+      ]
+    },
+    {
+      "report": "export-production-headless.json",
+      "scenario": "baseline",
+      "headless": true,
+      "checks": 29,
+      "passed": true,
+      "runBranches": 5,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 75,
+        "rejected": 5,
+        "succeeded": 70,
+        "byKind": {
+          "player_production_command": {
+            "rejected": 5,
+            "succeeded": 35
+          },
+          "player_economy_command": {
+            "succeeded": 12
+          },
+          "player_farm_command": {
+            "succeeded": 15
+          },
+          "player_sleep_command": {
+            "succeeded": 8
+          }
+        },
+        "production": {
+          "sampledRecords": 40,
+          "rejected": 5,
+          "succeeded": 35,
+          "codes": {
+            "insufficient_feed": 1,
+            "insufficient_ingredients": 1,
+            "accepted": 34,
+            "already_fed": 1,
+            "product_pending": 1,
+            "product_not_ready": 1,
+            "no_catch": 1
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "e884bdd5a4694841af5b1a523cfdf91c",
+          "inputSequence": 1,
+          "action": "feed",
+          "code": "insufficient_feed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "e884bdd5a4694841af5b1a523cfdf91c",
+          "inputSequence": 2,
+          "action": "cook",
+          "code": "insufficient_ingredients",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "e884bdd5a4694841af5b1a523cfdf91c",
+          "inputSequence": 10,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "181889d629f0416880061a09ed6628b7",
+          "inputSequence": 37,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "bcfd35bc816947b6bf66f3dff8548108",
+          "inputSequence": 39,
+          "action": "collect",
+          "code": "product_not_ready",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 26,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 500,
+      "economy": {
+        "initialCoins": 300,
+        "initialInventory": {},
+        "materialPurchasesCost": 115,
+        "coinsBeforeSales": 185,
+        "processedSalesIncome": 340,
+        "coinsAfterSales": 525,
+        "reinvestmentCost": 25,
+        "finalCoins": 500,
+        "sales": [
+          {
+            "inputSequence": 73,
+            "resourceId": "food.baked_potato",
+            "quantity": 1,
+            "totalPrice": 50,
+            "coinsAfter": 235
+          },
+          {
+            "inputSequence": 74,
+            "resourceId": "food.vegetable_soup",
+            "quantity": 1,
+            "totalPrice": 60,
+            "coinsAfter": 295
+          },
+          {
+            "inputSequence": 75,
+            "resourceId": "food.grilled_fish",
+            "quantity": 1,
+            "totalPrice": 55,
+            "coinsAfter": 350
+          },
+          {
+            "inputSequence": 76,
+            "resourceId": "food.tomato_egg",
+            "quantity": 1,
+            "totalPrice": 75,
+            "coinsAfter": 425
+          },
+          {
+            "inputSequence": 77,
+            "resourceId": "food.fish_pie",
+            "quantity": 1,
+            "totalPrice": 100,
+            "coinsAfter": 525
+          }
+        ],
+        "reinvestment": {
+          "inputSequence": 78,
+          "resourceId": "seed.carrot",
+          "quantity": 1,
+          "totalPrice": 25,
+          "coinsAfter": 500
+        }
+      },
+      "fiveRecipes": [
+        {
+          "recipeId": "recipe.baked_potato",
+          "outputResourceId": "food.baked_potato",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.vegetable_soup",
+          "outputResourceId": "food.vegetable_soup",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.grilled_fish",
+          "outputResourceId": "food.grilled_fish",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.tomato_egg",
+          "outputResourceId": "food.tomato_egg",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.fish_pie",
+          "outputResourceId": "food.fish_pie",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        }
+      ]
+    },
+    {
+      "report": "scene-production-capacity-graphical.json",
+      "scenario": "production-capacity-fixture",
+      "headless": false,
+      "checks": 22,
+      "passed": true,
+      "runBranches": 2,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 16,
+        "succeeded": 11,
+        "rejected": 5,
+        "byKind": {
+          "player_production_command": {
+            "succeeded": 3,
+            "rejected": 5
+          },
+          "player_sleep_command": {
+            "succeeded": 6
+          },
+          "player_economy_command": {
+            "succeeded": 2
+          }
+        },
+        "production": {
+          "sampledRecords": 8,
+          "succeeded": 3,
+          "rejected": 5,
+          "codes": {
+            "accepted": 3,
+            "already_fed": 1,
+            "product_pending": 1,
+            "inventory_full": 3
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "ee6f1b8bb11748d5b5b781813cc13431",
+          "inputSequence": 2,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "ee6f1b8bb11748d5b5b781813cc13431",
+          "inputSequence": 12,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "ee6f1b8bb11748d5b5b781813cc13431",
+          "inputSequence": 13,
+          "action": "collect",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "79d671c1fb224554b2692782c98d057b",
+          "inputSequence": 14,
+          "action": "cook",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "79d671c1fb224554b2692782c98d057b",
+          "inputSequence": 15,
+          "action": "fish",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 2,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 410,
+      "capacity": {
+        "slotCapacity": 5,
+        "initialInventory": {
+          "crop.carrot": 2,
+          "crop.tomato": 2,
+          "feed.chicken": 2,
+          "ingredient.flour": 2,
+          "ingredient.salt": 2
+        },
+        "fullInventoryRejectedActions": [
+          "collect",
+          "cook",
+          "fish"
+        ],
+        "rejectedFishingRollPreview": 30,
+        "firstSuccessfulFishingRoll": 30,
+        "finalCoins": 410
+      }
+    },
+    {
+      "report": "scene-production-capacity-headless.json",
+      "scenario": "production-capacity-fixture",
+      "headless": true,
+      "checks": 22,
+      "passed": true,
+      "runBranches": 2,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 16,
+        "succeeded": 11,
+        "rejected": 5,
+        "byKind": {
+          "player_production_command": {
+            "succeeded": 3,
+            "rejected": 5
+          },
+          "player_sleep_command": {
+            "succeeded": 6
+          },
+          "player_economy_command": {
+            "succeeded": 2
+          }
+        },
+        "production": {
+          "sampledRecords": 8,
+          "succeeded": 3,
+          "rejected": 5,
+          "codes": {
+            "accepted": 3,
+            "already_fed": 1,
+            "product_pending": 1,
+            "inventory_full": 3
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "525a1046a2a0439f8fe8b902365bd054",
+          "inputSequence": 2,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "525a1046a2a0439f8fe8b902365bd054",
+          "inputSequence": 12,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "525a1046a2a0439f8fe8b902365bd054",
+          "inputSequence": 13,
+          "action": "collect",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "d2a3c4475821443aafb26287107bae1a",
+          "inputSequence": 14,
+          "action": "cook",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "d2a3c4475821443aafb26287107bae1a",
+          "inputSequence": 15,
+          "action": "fish",
+          "code": "inventory_full",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 2,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 410,
+      "capacity": {
+        "slotCapacity": 5,
+        "initialInventory": {
+          "crop.carrot": 2,
+          "crop.tomato": 2,
+          "feed.chicken": 2,
+          "ingredient.flour": 2,
+          "ingredient.salt": 2
+        },
+        "fullInventoryRejectedActions": [
+          "collect",
+          "cook",
+          "fish"
+        ],
+        "rejectedFishingRollPreview": 30,
+        "firstSuccessfulFishingRoll": 30,
+        "finalCoins": 410
+      }
+    },
+    {
+      "report": "scene-production-graphical.json",
+      "scenario": "baseline",
+      "headless": false,
+      "checks": 29,
+      "passed": true,
+      "runBranches": 5,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 75,
+        "rejected": 5,
+        "succeeded": 70,
+        "byKind": {
+          "player_production_command": {
+            "rejected": 5,
+            "succeeded": 35
+          },
+          "player_economy_command": {
+            "succeeded": 12
+          },
+          "player_farm_command": {
+            "succeeded": 15
+          },
+          "player_sleep_command": {
+            "succeeded": 8
+          }
+        },
+        "production": {
+          "sampledRecords": 40,
+          "rejected": 5,
+          "succeeded": 35,
+          "codes": {
+            "insufficient_feed": 1,
+            "insufficient_ingredients": 1,
+            "accepted": 34,
+            "already_fed": 1,
+            "product_pending": 1,
+            "product_not_ready": 1,
+            "no_catch": 1
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "4c0b7ed27efa48219c21d8e5dacc8c65",
+          "inputSequence": 1,
+          "action": "feed",
+          "code": "insufficient_feed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "4c0b7ed27efa48219c21d8e5dacc8c65",
+          "inputSequence": 2,
+          "action": "cook",
+          "code": "insufficient_ingredients",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "4c0b7ed27efa48219c21d8e5dacc8c65",
+          "inputSequence": 10,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "dfe57be72efe43a4aabad94cf7996a82",
+          "inputSequence": 37,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "2884381fb14e440d871565801e980f62",
+          "inputSequence": 39,
+          "action": "collect",
+          "code": "product_not_ready",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 26,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 500,
+      "economy": {
+        "initialCoins": 300,
+        "initialInventory": {},
+        "materialPurchasesCost": 115,
+        "coinsBeforeSales": 185,
+        "processedSalesIncome": 340,
+        "coinsAfterSales": 525,
+        "reinvestmentCost": 25,
+        "finalCoins": 500,
+        "sales": [
+          {
+            "inputSequence": 73,
+            "resourceId": "food.baked_potato",
+            "quantity": 1,
+            "totalPrice": 50,
+            "coinsAfter": 235
+          },
+          {
+            "inputSequence": 74,
+            "resourceId": "food.vegetable_soup",
+            "quantity": 1,
+            "totalPrice": 60,
+            "coinsAfter": 295
+          },
+          {
+            "inputSequence": 75,
+            "resourceId": "food.grilled_fish",
+            "quantity": 1,
+            "totalPrice": 55,
+            "coinsAfter": 350
+          },
+          {
+            "inputSequence": 76,
+            "resourceId": "food.tomato_egg",
+            "quantity": 1,
+            "totalPrice": 75,
+            "coinsAfter": 425
+          },
+          {
+            "inputSequence": 77,
+            "resourceId": "food.fish_pie",
+            "quantity": 1,
+            "totalPrice": 100,
+            "coinsAfter": 525
+          }
+        ],
+        "reinvestment": {
+          "inputSequence": 78,
+          "resourceId": "seed.carrot",
+          "quantity": 1,
+          "totalPrice": 25,
+          "coinsAfter": 500
+        }
+      },
+      "fiveRecipes": [
+        {
+          "recipeId": "recipe.baked_potato",
+          "outputResourceId": "food.baked_potato",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.vegetable_soup",
+          "outputResourceId": "food.vegetable_soup",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.grilled_fish",
+          "outputResourceId": "food.grilled_fish",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.tomato_egg",
+          "outputResourceId": "food.tomato_egg",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.fish_pie",
+          "outputResourceId": "food.fish_pie",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        }
+      ]
+    },
+    {
+      "report": "scene-production-headless.json",
+      "scenario": "baseline",
+      "headless": true,
+      "checks": 29,
+      "passed": true,
+      "runBranches": 5,
+      "buildVersion": "1.0.0+73863087c44c2cd91d4f29dac0083e3317153203",
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "rulesVersion": "town-social-production-v4",
+      "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+      "engineVersion": "4.7.2-stable (official)",
+      "worldSnapshotSchemaVersion": 4,
+      "commandSchemaVersion": 1,
+      "fishingRandomVersion": "xorshift32-mod100-v1",
+      "commands": {
+        "sampledRecords": 75,
+        "rejected": 5,
+        "succeeded": 70,
+        "byKind": {
+          "player_production_command": {
+            "rejected": 5,
+            "succeeded": 35
+          },
+          "player_economy_command": {
+            "succeeded": 12
+          },
+          "player_farm_command": {
+            "succeeded": 15
+          },
+          "player_sleep_command": {
+            "succeeded": 8
+          }
+        },
+        "production": {
+          "sampledRecords": 40,
+          "rejected": 5,
+          "succeeded": 35,
+          "codes": {
+            "insufficient_feed": 1,
+            "insufficient_ingredients": 1,
+            "accepted": 34,
+            "already_fed": 1,
+            "product_pending": 1,
+            "product_not_ready": 1,
+            "no_catch": 1
+          }
+        }
+      },
+      "rejectedProductionCommands": [
+        {
+          "branchId": "885199822455447aab98e01b5a36b2c0",
+          "inputSequence": 1,
+          "action": "feed",
+          "code": "insufficient_feed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "885199822455447aab98e01b5a36b2c0",
+          "inputSequence": 2,
+          "action": "cook",
+          "code": "insufficient_ingredients",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "885199822455447aab98e01b5a36b2c0",
+          "inputSequence": 10,
+          "action": "feed",
+          "code": "already_fed",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "c1a55b7040434b8397b96f9ea4ba47ba",
+          "inputSequence": 37,
+          "action": "feed",
+          "code": "product_pending",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        },
+        {
+          "branchId": "7e8157c76b274c0c83da4afc354f66b4",
+          "inputSequence": 39,
+          "action": "collect",
+          "code": "product_not_ready",
+          "playerAssetsUnchanged": true,
+          "chickensUnchanged": true,
+          "rngUnchanged": true,
+          "randomTransitionUnchanged": true
+        }
+      ],
+      "fishingAttemptsChecked": 26,
+      "fishingRandomTransitionsMatchXorshift32": true,
+      "finalCoins": 500,
+      "economy": {
+        "initialCoins": 300,
+        "initialInventory": {},
+        "materialPurchasesCost": 115,
+        "coinsBeforeSales": 185,
+        "processedSalesIncome": 340,
+        "coinsAfterSales": 525,
+        "reinvestmentCost": 25,
+        "finalCoins": 500,
+        "sales": [
+          {
+            "inputSequence": 73,
+            "resourceId": "food.baked_potato",
+            "quantity": 1,
+            "totalPrice": 50,
+            "coinsAfter": 235
+          },
+          {
+            "inputSequence": 74,
+            "resourceId": "food.vegetable_soup",
+            "quantity": 1,
+            "totalPrice": 60,
+            "coinsAfter": 295
+          },
+          {
+            "inputSequence": 75,
+            "resourceId": "food.grilled_fish",
+            "quantity": 1,
+            "totalPrice": 55,
+            "coinsAfter": 350
+          },
+          {
+            "inputSequence": 76,
+            "resourceId": "food.tomato_egg",
+            "quantity": 1,
+            "totalPrice": 75,
+            "coinsAfter": 425
+          },
+          {
+            "inputSequence": 77,
+            "resourceId": "food.fish_pie",
+            "quantity": 1,
+            "totalPrice": 100,
+            "coinsAfter": 525
+          }
+        ],
+        "reinvestment": {
+          "inputSequence": 78,
+          "resourceId": "seed.carrot",
+          "quantity": 1,
+          "totalPrice": 25,
+          "coinsAfter": 500
+        }
+      },
+      "fiveRecipes": [
+        {
+          "recipeId": "recipe.baked_potato",
+          "outputResourceId": "food.baked_potato",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.vegetable_soup",
+          "outputResourceId": "food.vegetable_soup",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.grilled_fish",
+          "outputResourceId": "food.grilled_fish",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.tomato_egg",
+          "outputResourceId": "food.tomato_egg",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        },
+        {
+          "recipeId": "recipe.fish_pie",
+          "outputResourceId": "food.fish_pie",
+          "outputQuantity": 1,
+          "ingredientsConsumedAsDefined": true,
+          "coinsUnchanged": true
+        }
+      ]
+    }
+  ],
+  "inputSources": [
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/content-baseline.json",
+      "bytes": 43866,
+      "sha256": "61d0a3e7ff3cea692a527e59e1cc16de3c319c601ae96c6a22df594292468d2d"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/content-production-capacity-fixture.json",
+      "bytes": 44048,
+      "sha256": "2db3cd2668fc782b6a7f20eeb2cb90f9eb6052fbb9cb9b2cd5345263df35c7c1"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/core.trx",
+      "bytes": 240409,
+      "sha256": "fb2184b83ba202c7fd0ef1b5822c3b84fe59814b6f49bc324701f0471a5015d6"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/ac8794b69e1541519ecc64de3ded183a/initial-state.json",
+      "bytes": 15277,
+      "sha256": "f6bddce339c1569220ce2cc1b090a7f1fbdb37cdf06be609c10fdfa6c497d192"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/ac8794b69e1541519ecc64de3ded183a/manifest.json",
+      "bytes": 4096,
+      "sha256": "bf2d1099fd6b237c5874447ab1590a90c54b435d51387f7314d63e4d2c297e49"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/d950043a64b54e1cba933f2502260924/manifest.json",
+      "bytes": 4156,
+      "sha256": "81ceea8b6a2a77f7a0edb91fbc2bfbf8a88bd67bec3a4222b7ab911e7372d84e"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/d950043a64b54e1cba933f2502260924/production-capacity-input-checkpoints.json",
+      "bytes": 3283781,
+      "sha256": "7b25e5d12b02d4ba5c00ce3ea0dbee27f042814953578330ddc664ba9b66dab5"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-headless/runs/107cf1b341b146f0ac58f7f396851861/initial-state.json",
+      "bytes": 15277,
+      "sha256": "e577bd3c34a42c10d6bbc0609c57110497e055d1951a8fb24ae1dfa26b6bdd25"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-headless/runs/107cf1b341b146f0ac58f7f396851861/manifest.json",
+      "bytes": 4096,
+      "sha256": "931b2a572d3e7e29e0f8a6eed463249abb53888cc7993866021d8af2763f5a91"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-headless/runs/c86f524bb424432e92ac8159a4a0b354/manifest.json",
+      "bytes": 4156,
+      "sha256": "14f0def8a3702c84ae95afc3a939e9aaa1b3c2a97edefcbad33608b11e3c1417"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-headless/runs/c86f524bb424432e92ac8159a4a0b354/production-capacity-input-checkpoints.json",
+      "bytes": 3283780,
+      "sha256": "884bfef77e33fd7b49ab43fe8c211b919befa3d0f4e7c489c84a93385c2eaf57"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/219fb73fed5e44fb9a49de8f0df50f59/manifest.json",
+      "bytes": 4118,
+      "sha256": "912263aa59efc4f4ad6b27dd10b2170b46a37e415b98eb576c5f569fc285edd5"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/696137aae6a84ae99c6255a9ea4e98a7/manifest.json",
+      "bytes": 4118,
+      "sha256": "5080624d4ef545f26fe82338156792d311cf398ed144677597ea40b664a1c4b2"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/manifest.json",
+      "bytes": 4118,
+      "sha256": "c47bdf179b44bb2cbafcd0444fa9798ea533e4b95ec168efbb267079c010e594"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/a0f17af59af34043a1970f11cf4cd6c9/initial-state.json",
+      "bytes": 14995,
+      "sha256": "59e66d9eaae1a1e1121cfac55a529c2805b6965932c7784d723e163e8ae75050"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/a0f17af59af34043a1970f11cf4cd6c9/manifest.json",
+      "bytes": 4058,
+      "sha256": "d8d3252f1ffe84a8c9e38faac23c4159949eea3441c4b6459d4f6bf010cca475"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/fd951bcf09b84e94993f5358c8f4cb84/manifest.json",
+      "bytes": 4118,
+      "sha256": "4543c7cf394d2b3f5294a5c5ad01c581faf2fe84ff194c4fa2c2e5c03b7c4112"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/fd951bcf09b84e94993f5358c8f4cb84/production-input-checkpoints.json",
+      "bytes": 10926214,
+      "sha256": "6652230bfbbc9e24e0fa53174c7b23cbfcf31a2fae2a5dd601bdd9a95f7f431a"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/04c9baa0ff39419f91e53889b1a62a34/manifest.json",
+      "bytes": 4118,
+      "sha256": "a8ef43e8480c0bb69d3dcc48631c6d15796c1dae18446e84f4819979cf647ebe"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/181889d629f0416880061a09ed6628b7/manifest.json",
+      "bytes": 4118,
+      "sha256": "ea6f59a5ae10188e0aeb2e21ba1ca2f7e8b82774e85ae42b635aae1691115c66"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/75fc3fa092d74ca1ac058bea38ad85cf/manifest.json",
+      "bytes": 4118,
+      "sha256": "cecf75152a2a236ff60ad53843178601d2506c9412ffb60f610ef90f622709d7"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/75fc3fa092d74ca1ac058bea38ad85cf/production-input-checkpoints.json",
+      "bytes": 10926212,
+      "sha256": "261d535a075a0a7d124ad3c65c9e4964d95ff07ba18bedc8982b6342a0171cef"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/bcfd35bc816947b6bf66f3dff8548108/manifest.json",
+      "bytes": 4118,
+      "sha256": "6ddabf6e6360f9a933be675c92225f41c3e6387558cf11a6236c9094827bd12a"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/e884bdd5a4694841af5b1a523cfdf91c/initial-state.json",
+      "bytes": 14995,
+      "sha256": "6db4f5747811a3d8f8cb96906211c028ed360d76f4cc8559634e3718717a2928"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-headless/runs/e884bdd5a4694841af5b1a523cfdf91c/manifest.json",
+      "bytes": 4058,
+      "sha256": "4f2ccb6004a348d19707438d74a932dff564c126a0b0f9f24dba7114e8581405"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-graphical/runs/79d671c1fb224554b2692782c98d057b/manifest.json",
+      "bytes": 4156,
+      "sha256": "6c23925bc31d08e97fe78bf77d3c3db70d4b389c44af59571ac71bdc6d70475f"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-graphical/runs/79d671c1fb224554b2692782c98d057b/production-capacity-input-checkpoints.json",
+      "bytes": 3283779,
+      "sha256": "974055521962276f4350f80128b661901f6469b56b0eba6b05bb1fd8d8ffeb92"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-graphical/runs/ee6f1b8bb11748d5b5b781813cc13431/initial-state.json",
+      "bytes": 15277,
+      "sha256": "ebc6b03fa7c6f7edae290f6bc63842ce393ea01d26f82cd94647a4cd9962a563"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-graphical/runs/ee6f1b8bb11748d5b5b781813cc13431/manifest.json",
+      "bytes": 4096,
+      "sha256": "1bd6d45111bb7a94ed03245f4ba40f400045febd3b1501b78134bc75662dc098"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-headless/runs/525a1046a2a0439f8fe8b902365bd054/initial-state.json",
+      "bytes": 15277,
+      "sha256": "6a6187abd1ebf65e8f394a61c1e2115c04af5c2114e22077d0bcc676496eae53"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-headless/runs/525a1046a2a0439f8fe8b902365bd054/manifest.json",
+      "bytes": 4096,
+      "sha256": "8cba8711878e41c594576d016bfaa11f4b4a7adf7e43a9d54a44e74b6979e4e2"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-headless/runs/d2a3c4475821443aafb26287107bae1a/manifest.json",
+      "bytes": 4156,
+      "sha256": "6d476631712704ff0c12f5fae6025c9b33da564073a531fa7d5a0aed7c102b34"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-capacity-headless/runs/d2a3c4475821443aafb26287107bae1a/production-capacity-input-checkpoints.json",
+      "bytes": 3283779,
+      "sha256": "824f374ac1db6332621efea11a8397bfddc61c135f30a54bc61d5793ebd13963"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/2884381fb14e440d871565801e980f62/manifest.json",
+      "bytes": 4118,
+      "sha256": "b86e89f2038f04cc403686c1bd03842080ef92da2cb91cb094c5c6606dd6ffc1"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/4c0b7ed27efa48219c21d8e5dacc8c65/initial-state.json",
+      "bytes": 14995,
+      "sha256": "403195243da7d98cf8daba2798e292a751fd366774d0f89ec31337c7d5a5cc61"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/4c0b7ed27efa48219c21d8e5dacc8c65/manifest.json",
+      "bytes": 4058,
+      "sha256": "7dfc2f091e68cc4000a1af33f6ca69a989dae94d0f64ed7eecf34b31672c9e59"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/c0facd9e664e49b3a699f112d5a1d10f/manifest.json",
+      "bytes": 4118,
+      "sha256": "c4811113e5bd846d4bd3dabbb4af5c96536b99c7dfad8a7fe55b42893523d5de"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/df8fb17630734461b242df51d22a6909/manifest.json",
+      "bytes": 4118,
+      "sha256": "e71c821323a3ae12f8b7b479c9aedbf5d6807a6b69b803aa984e745377c0cf86"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/df8fb17630734461b242df51d22a6909/production-input-checkpoints.json",
+      "bytes": 10926216,
+      "sha256": "84495f6835928bd09b33e88de3cd0d812863662314989cba12eb9abb545ed8c1"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-graphical/runs/dfe57be72efe43a4aabad94cf7996a82/manifest.json",
+      "bytes": 4118,
+      "sha256": "916e38f21e2bb386f05a559c39b7ab6905268dca39294e34986e48c61066fae6"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/2c317d27d9cb4422a6f730a6a66a5fda/manifest.json",
+      "bytes": 4118,
+      "sha256": "c8accdab1c73b09186427358087085440e9a80536074bfa48ec68561476a297c"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/2c317d27d9cb4422a6f730a6a66a5fda/production-input-checkpoints.json",
+      "bytes": 10926215,
+      "sha256": "bd9ba79533a87f5722bfc6a277bf06269b8d6f59e519f5ad709f94e776b4cff0"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/7e8157c76b274c0c83da4afc354f66b4/manifest.json",
+      "bytes": 4118,
+      "sha256": "e34b8765635551556723cb96a6fd7a1270ab1e91d607d94e44c2747e17bd1057"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/885199822455447aab98e01b5a36b2c0/initial-state.json",
+      "bytes": 14995,
+      "sha256": "b20ad1a39dd992788cc674b5b78053be71b21760041223006a39c2e5f23454cb"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/885199822455447aab98e01b5a36b2c0/manifest.json",
+      "bytes": 4058,
+      "sha256": "2c734736139a8e04e19d0aca7b9925c3481007747009b56ff646bc74bb0dfce9"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/97bf7a0108be432e8cc09548bf800850/manifest.json",
+      "bytes": 4118,
+      "sha256": "cf54acd5cf43aeb6417dfe68955800c01d89ca8e6d9db4d0b81d00470e0875a6"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/data/scene-production-headless/runs/c1a55b7040434b8397b96f9ea4ba47ba/manifest.json",
+      "bytes": 4118,
+      "sha256": "f1603a9dafbdbe7261ae9ee8ba1f5f04d0779a4131b3fc3615dd19fb1f723c5b"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-graphical.json",
+      "bytes": 4690,
+      "sha256": "0cdba7762f4cb1d123e550e4d1d408cbd36d7b1b9553b320127b7188ae7e55be"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-headless.json",
+      "bytes": 4409,
+      "sha256": "f5e064f0c681a4e1063746b25642348a483ce9fcccb1df5643972f54155de0bf"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical.json",
+      "bytes": 5762,
+      "sha256": "20855ac6684a5e4e384c470f9afeef90f5a2861a8b23ca820ee526052a39665d"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/export-production-headless.json",
+      "bytes": 4966,
+      "sha256": "f5535af2c5096ca4b58f8d6065eaf086df9fe8b4cb27a2002ad84d88b2924fa4"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/host.trx",
+      "bytes": 143130,
+      "sha256": "9f7c1ad8acf5ba71fba0dca2095313bc227d242291d0c52bd724923b8d3338d0"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/model.trx",
+      "bytes": 64409,
+      "sha256": "e769f1d90858674fceedbbe181476d2c4ca37b20f387d131e77f2aac86d35165"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-capacity-graphical.json",
+      "bytes": 4653,
+      "sha256": "c3644dd336a05b8f39751f1a793c781463354ccb134c0061583cae292847e591"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-capacity-headless.json",
+      "bytes": 4374,
+      "sha256": "7da49a449e6ebc2d21290a3592bde79fa806c864b2d31614c92ef882042f4a8e"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical.json",
+      "bytes": 5718,
+      "sha256": "aeb227bba69e6fa17393ce8301ccd1a61b4d9eb8b230462b5148a431827a319b"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-headless.json",
+      "bytes": 4928,
+      "sha256": "2528406626f050053d9e708d121487734f98472e3a9da19c7e031b29d9f09658"
+    },
+    {
+      "path": "artifacts/verification/20261008T072203Z-b9a0e31b/verification.json",
+      "bytes": 17896,
+      "sha256": "e9ab1b6da212282bb66236fa46be3601736ab44b01221066621000d225ca6870"
+    }
+  ]
+}

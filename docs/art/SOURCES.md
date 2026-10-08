@@ -1,5 +1,7 @@
 # 首切片美术来源与图集布局
 
+2026-10-08 生产增补：鸡舍复用 `bld_town_functions_64.png` 和匹配屋顶的 `(64,64,64,64)` 区域。复制固定参考提交的 `Assets/CozyTown/Art/Production/Props/prop_hen_states_16.png` 到 `game/Art/Props/prop_hen_states_16.png`，实际 PNG 为 48×16、1,262 字节，SHA-256 `430f2761df7a932dcd734abf178c950525bac66bf562fd062afc552c2da661a8` 与固定 Git LFS 对象一致。三格从左到右为未喂食、已喂食、待领产物；`ChickenView.cs` 按已提交的母鸡状态选择一格，以最近邻采样显示，没有重采样或改色。池塘与厨房沿用已有图集及入口。
+
 2026-09-25 种植与睡眠增补：玩家住宅复用 `bld_town_functions_64.png` 和匹配屋顶的 `(64,0,64,64)` 区域；农田沿用空土底图。`FarmPlotView.cs` 根据已提交的地块状态绘制幼苗、叶丛和湿土，成熟时显示已有物品图集的对应作物格；`TownBackdrop.cs` 绘制家门边的床形休息路牌。这些表现没有新增或修改 PNG，位置由 `TownMap.tscn` 中的地点标记提供。
 
 2026-09-23 玩家经济增补：复制固定参考 `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa` 的 `Assets/CozyTown/Art/Production/Items/item_mvp_16.png` 到 `game/Art/Items/item_mvp_16.png`。实际 PNG 为 96×48、5,078 字节，SHA-256 `956ef71f0aab2b1ee461ffa964025f766fe88ec27a81f8ad68845d5f8c901e2e` 与固定 Git LFS 对象一致。18 格按左上起逐行、每格 16×16 映射，资源顺序见 `game/Art/catalog.json` 的 `items.resourceIds`；以最近邻采样显示，未重采样或改色。
@@ -26,6 +28,7 @@
 | `Characters/npc_shopkeeper_mina_move_24x32.png` | 固定提交 | `461cb20d95fe3852f7cf093da53d474c5bccbeb83d4b7c82492ac8d6d30892b2` |
 | `Environment/Tiles/tile_town_base_16.png` | 工作区 | `edb51bdfd03c89b6f2ce10d71b08fdda2387b5b5a00e9c30253d101a7a64a3b6` |
 | `Props/prop_town_decor_16x32.png` | 工作区 | `1cc9202e4f8cd70dfbd4ecfead43133c3784d2361a4cfacf563707789954d844` |
+| `Props/prop_hen_states_16.png` | 固定提交 | `430f2761df7a932dcd734abf178c950525bac66bf562fd062afc552c2da661a8` |
 | `Props/prop_town_functions_96x64.png` | 固定提交 | `87ca3014a699cf597cdfa76a48087cd623ecb56701e44b3b5c602dc0b4c9f2f8` |
 | `Props/prop_town_lamp_16x32.png` | 固定提交 | `53ab31dd4073eda9676ac249656b1120d9d14953c4a31fff7b0c0902d3e9d5cd` |
 
@@ -49,6 +52,7 @@
 | `bld_npc_homes_64.png` 及匹配屋顶 | 128×128 | 64×64，按行依次 Mina、Ren、Sora、Eli；与头像顺序不同 |
 | `bld_town_functions_64.png` 及匹配屋顶 | 128×128 | 64×64，按行依次 shop、player home、kitchen/cafe、coop |
 | `prop_town_functions_96x64.png` | 192×64 | 96×64，左为农田底图，右为池塘 |
+| `prop_hen_states_16.png` | 48×16 | 16×16，从左到右 idle、fed、product_ready；脚底中心定位 |
 | `prop_town_decor_16x32.png` | 64×64 | 16×32，上行树、灌木、红花、黄花；下行横篱笆、竖篱笆、路牌、石头 |
 | `prop_town_lamp_16x32.png` | 32×32 | 16×32，左灯柱、右发光玻璃叠层；共用完整画布 |
 | `tile_town_base_16.png` | 64×80 | 16×16，上行为 4 个草地变体；其余 4 行为道路连接片 |

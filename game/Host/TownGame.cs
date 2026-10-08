@@ -71,7 +71,7 @@ public partial class TownGame : Node2D
         try
         {
             _headless = DisplayServer.GetName() == "headless";
-            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--real-experiment");
+            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment");
             _scenario = Argument("--scenario=") ?? "baseline";
             _map = GetNode<Node2D>("Map");
             _camera = GetNode<Camera2D>("Camera");
@@ -91,7 +91,7 @@ public partial class TownGame : Node2D
                 return;
             }
             string? modelConfig = Argument("--model-config=");
-            if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke")))
+            if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" or "production-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke")))
                 throw new InvalidDataException("Economy verification requires offline rules mode.");
             if (modelConfig != null)
             {
@@ -120,6 +120,8 @@ public partial class TownGame : Node2D
             else if (_arguments.Contains("--economy-smoke")) _ = RunEconomySmokeAsync();
             else if (_arguments.Contains("--farming-smoke")) _ = RunFarmingSmokeAsync();
             else if (_arguments.Contains("--farming-capacity-smoke")) _ = RunFarmingCapacitySmokeAsync();
+            else if (_arguments.Contains("--production-smoke")) _ = RunProductionSmokeAsync();
+            else if (_arguments.Contains("--production-capacity-smoke")) _ = RunProductionCapacitySmokeAsync();
         }
         catch (Exception error)
         {
@@ -145,7 +147,7 @@ public partial class TownGame : Node2D
             numericVersion = TownWorld.NumericVersion, engineVersion = Engine.GetVersionInfo()["string"].AsString(),
             buildVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
             worldMinutesPerSecond = .5, fixedStepSeconds = StepSeconds, bodyRadius = TownContent.BodyRadius,
-            recordScope = "World events, spatial/model records and versioned player economy, farming and sleep inputs/checkpoints; full replay executor is not included."
+            recordScope = "World events, spatial/model records and versioned player economy, farming, sleep and production inputs/checkpoints; full replay executor is not included."
         });
         _journals.Add(_journal);
         _journal.WriteArtifact("content.json", new { _loaded.Manifest, _loaded.Definitions });
@@ -372,6 +374,7 @@ public partial class TownGame : Node2D
     private void SyncActors()
     {
         if (_map is TownBackdrop backdrop) backdrop.UpdateFarming(_loaded.Definitions.Farming!, _view.Farming);
+        if (_map is TownBackdrop productionBackdrop) productionBackdrop.UpdateProduction(_loaded.Definitions.Production!, _view.Production);
         foreach (ResidentState resident in _view.Residents)
         {
             var actor = _actors[resident.Id];

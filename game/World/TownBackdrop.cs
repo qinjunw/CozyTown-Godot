@@ -23,6 +23,19 @@ public partial class TownBackdrop : Node2D
         }
     }
 
+    public void UpdateProduction(ProductionDefinition definition, ProductionState state)
+    {
+        var buildings = GetNodeOrNull<Node2D>("Buildings");
+        if (buildings == null) return;
+        foreach (ChickenView view in buildings.GetChildren().SelectMany(b => b.GetChildren()).OfType<ChickenView>())
+        {
+            string chickenId = view.GetMeta("chicken_id").AsString();
+            ChickenDefinition? chicken = definition.Chickens.SingleOrDefault(c => c.Id == chickenId);
+            if (chicken == null) continue;
+            view.SetState(state.Chickens.Single(c => c.Id == chicken.Id));
+        }
+    }
+
     public override void _Ready()
     {
         TextureFilter = TextureFilterEnum.Nearest;

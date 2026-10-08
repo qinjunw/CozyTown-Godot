@@ -1,0 +1,1775 @@
+{
+  "passed": true,
+  "test": "content",
+  "scenario": "production-capacity-fixture",
+  "fingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+  "extractorVersion": "scene-rect-v1",
+  "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+  "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+  "dependencies": {
+    "res://Art/Buildings/bld_npc_home_roofs_64.png#rgba8-pixels": "353635f38e51ac05fef67db9c280e5432038e462034018b7bbf433c492a5f7d3",
+    "res://Art/Buildings/bld_npc_homes_64.png#rgba8-pixels": "6c92214e8b43f8b4fafecb904f4d8e39308e4c444323f10391a68c63c4390b6e",
+    "res://Art/Buildings/bld_town_functions_64.png#rgba8-pixels": "12fb99a566afbb21c92fed5b322d68ba88c9b03aa8cb2322d1075341640bbeb2",
+    "res://Art/Buildings/bld_town_roof_foregrounds_64.png#rgba8-pixels": "77098e9a369767c02f7b9147d0066c8c3476929da1fa205f920d836bb3e07d27",
+    "res://Art/Characters/chr_player_move_24x32.png#rgba8-pixels": "5773a2c5fd7fcf5256f4881fa39a28f9581f6aa3e01e0f455f92c86afc8db4b8",
+    "res://Art/Characters/npc_cook_sora_move_24x32.png#rgba8-pixels": "b6d045066b22fefc67fd9e4a8f8e9df7ec397be13f37ce46895c32992824b0e2",
+    "res://Art/Characters/npc_farmer_eli_move_24x32.png#rgba8-pixels": "66674f21f4cf2bc615e580972ce6eccd0642e3338f30fa205c46801d885df1e6",
+    "res://Art/Characters/npc_fisher_ren_move_24x32.png#rgba8-pixels": "95b861ee3baa4109c580ea107d034e5bc096fc1015d587018e0568a3437c8aa4",
+    "res://Art/Characters/npc_portraits_48.png#rgba8-pixels": "3391893cac30fc48650fd6566d227e4225760da0d5fb5ec9255023cf3cdb9f2c",
+    "res://Art/Characters/npc_shopkeeper_mina_move_24x32.png#rgba8-pixels": "f2f00dc2ff72992431ad2baaba4fb1253427eaebd38c974f595268bacb52a31d",
+    "res://Art/Environment/Tiles/tile_town_base_16.png#rgba8-pixels": "539ce92cd26e5cc754d9bc80d87e83d1360dd097aef5c11511d3070b693fd1ac",
+    "res://Art/Items/item_mvp_16.png#rgba8-pixels": "e3f2df697c9e8cb96695e6d736b561fce87798f53fdbddf3dabba7e5999606f8",
+    "res://Art/Props/prop_hen_states_16.png#rgba8-pixels": "a667b8e98db23a2d64fe1765badad04f8669f33db73a114122a88e10bd1a1d30",
+    "res://Art/Props/prop_town_decor_16x32.png#rgba8-pixels": "c7678359b5e63c4e33917199de35946122ab568f7e50f3be85f1070d06d6bab3",
+    "res://Art/Props/prop_town_functions_96x64.png#rgba8-pixels": "c8d7ce46563ccab2412cf2d582b2be7bce288a9f4bdcf2c4cdf7ddf5baa0610a",
+    "res://Art/Props/prop_town_lamp_16x32.png#rgba8-pixels": "dccdcbd5df8a8c7e5e6725a4489f209596e105e9e17271811136b436d5754301",
+    "res://Art/catalog.json": "625b1943f55e20ee5c0743f05ee63b8653ebbbdf57a62722b5cc63f94f0bccf4",
+    "res://Content/counterfactual.json": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88",
+    "res://Content/economy-fixture.json": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284",
+    "res://Content/farming-capacity-fixture.json": "e35931f92277f0b72d4de3d1e1360c752853f55f770286a814f88f29d853f5a9",
+    "res://Content/production-capacity-fixture.json": "c149d652573a13adcf1dff7a196ebd3264bb937a7866620e4d99d804cb75bd4e",
+    "res://Content/town.json": "12ee363edf104768998b4936ad91c143c619fade91af09f30df03dd38b3ff259",
+    "res://World/TownMap.tscn#extracted-geometry-v1": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e"
+  },
+  "manifest": {
+    "width": 768,
+    "height": 512,
+    "places": [
+      {
+        "id": "bed.player",
+        "displayName": "我的家 · 休息",
+        "position": {
+          "x": 252,
+          "y": 442
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "cafe",
+        "displayName": "暖炉小馆",
+        "position": {
+          "x": 410,
+          "y": 442
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "coop",
+        "displayName": "菜园鸡舍",
+        "position": {
+          "x": 128,
+          "y": 388
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm",
+        "displayName": "西侧菜园",
+        "position": {
+          "x": 122,
+          "y": 278
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.01",
+        "displayName": "一号地",
+        "position": {
+          "x": 98,
+          "y": 226
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.02",
+        "displayName": "二号地",
+        "position": {
+          "x": 122,
+          "y": 226
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.03",
+        "displayName": "三号地",
+        "position": {
+          "x": 146,
+          "y": 226
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.04",
+        "displayName": "四号地",
+        "position": {
+          "x": 98,
+          "y": 250
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.05",
+        "displayName": "五号地",
+        "position": {
+          "x": 122,
+          "y": 250
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "farm.plot.06",
+        "displayName": "六号地",
+        "position": {
+          "x": 146,
+          "y": 250
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.eli",
+        "displayName": "Eli 的家",
+        "position": {
+          "x": 292,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.mina",
+        "displayName": "Mina 的家",
+        "position": {
+          "x": 174,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.player",
+        "displayName": "我的家",
+        "position": {
+          "x": 236,
+          "y": 442
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.ren",
+        "displayName": "Ren 的家",
+        "position": {
+          "x": 410,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "home.sora",
+        "displayName": "Sora 的家",
+        "position": {
+          "x": 528,
+          "y": 156
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "player.spawn",
+        "displayName": "广场南路",
+        "position": {
+          "x": 330,
+          "y": 332
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza",
+        "displayName": "榆树广场",
+        "position": {
+          "x": 354,
+          "y": 272
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.east",
+        "displayName": "榆树广场",
+        "position": {
+          "x": 402,
+          "y": 264
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.north",
+        "displayName": "榆树广场",
+        "position": {
+          "x": 354,
+          "y": 238
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.south",
+        "displayName": "榆树广场",
+        "position": {
+          "x": 354,
+          "y": 304
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "plaza.west",
+        "displayName": "榆树广场",
+        "position": {
+          "x": 306,
+          "y": 264
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "pond",
+        "displayName": "河岸池塘",
+        "position": {
+          "x": 658,
+          "y": 362
+        },
+        "regionId": "town.outdoor"
+      },
+      {
+        "id": "shop",
+        "displayName": "橡木杂货店",
+        "position": {
+          "x": 542,
+          "y": 282
+        },
+        "regionId": "town.outdoor"
+      }
+    ],
+    "obstacles": [
+      {
+        "id": "bench.plaza.east",
+        "bounds": {
+          "x": 385,
+          "y": 329,
+          "width": 24,
+          "height": 8
+        }
+      },
+      {
+        "id": "bench.plaza.west",
+        "bounds": {
+          "x": 299,
+          "y": 329,
+          "width": 24,
+          "height": 8
+        }
+      },
+      {
+        "id": "boundary.north",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 708,
+          "height": 12
+        }
+      },
+      {
+        "id": "boundary.south",
+        "bounds": {
+          "x": 0,
+          "y": 500,
+          "width": 708,
+          "height": 12
+        }
+      },
+      {
+        "id": "boundary.west",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 12,
+          "height": 512
+        }
+      },
+      {
+        "id": "building.cafe",
+        "bounds": {
+          "x": 376,
+          "y": 396,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.coop",
+        "bounds": {
+          "x": 94,
+          "y": 342,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.eli",
+        "bounds": {
+          "x": 258,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.mina",
+        "bounds": {
+          "x": 140,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.player",
+        "bounds": {
+          "x": 202,
+          "y": 396,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.ren",
+        "bounds": {
+          "x": 376,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.home.sora",
+        "bounds": {
+          "x": 494,
+          "y": 110,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "building.shop",
+        "bounds": {
+          "x": 508,
+          "y": 236,
+          "width": 56,
+          "height": 36
+        }
+      },
+      {
+        "id": "landmark.pond",
+        "bounds": {
+          "x": 620,
+          "y": 310,
+          "width": 76,
+          "height": 40
+        }
+      },
+      {
+        "id": "tree.01",
+        "bounds": {
+          "x": 39,
+          "y": 76.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.02",
+        "bounds": {
+          "x": 60,
+          "y": 64.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.03",
+        "bounds": {
+          "x": 76,
+          "y": 83.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.04",
+        "bounds": {
+          "x": 99,
+          "y": 62.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.05",
+        "bounds": {
+          "x": 125,
+          "y": 68.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.06",
+        "bounds": {
+          "x": 208,
+          "y": 69.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.07",
+        "bounds": {
+          "x": 233,
+          "y": 57.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.08",
+        "bounds": {
+          "x": 331,
+          "y": 72.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.09",
+        "bounds": {
+          "x": 349,
+          "y": 61.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.10",
+        "bounds": {
+          "x": 449,
+          "y": 65.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.11",
+        "bounds": {
+          "x": 560,
+          "y": 68.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.12",
+        "bounds": {
+          "x": 585,
+          "y": 81.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.13",
+        "bounds": {
+          "x": 615,
+          "y": 67.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.14",
+        "bounds": {
+          "x": 644,
+          "y": 82.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.15",
+        "bounds": {
+          "x": 675,
+          "y": 58.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.16",
+        "bounds": {
+          "x": 52,
+          "y": 158.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.17",
+        "bounds": {
+          "x": 37,
+          "y": 176.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.18",
+        "bounds": {
+          "x": 62,
+          "y": 192.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.19",
+        "bounds": {
+          "x": 50,
+          "y": 345.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.20",
+        "bounds": {
+          "x": 33,
+          "y": 365.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.21",
+        "bounds": {
+          "x": 63,
+          "y": 380.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.22",
+        "bounds": {
+          "x": 96,
+          "y": 433.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.23",
+        "bounds": {
+          "x": 117,
+          "y": 454.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.24",
+        "bounds": {
+          "x": 137,
+          "y": 438.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.25",
+        "bounds": {
+          "x": 202,
+          "y": 462.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.26",
+        "bounds": {
+          "x": 177,
+          "y": 455.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.27",
+        "bounds": {
+          "x": 288,
+          "y": 467.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.28",
+        "bounds": {
+          "x": 527,
+          "y": 459.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.29",
+        "bounds": {
+          "x": 551,
+          "y": 475.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.30",
+        "bounds": {
+          "x": 589,
+          "y": 459.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.31",
+        "bounds": {
+          "x": 667,
+          "y": 455.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "tree.32",
+        "bounds": {
+          "x": 678,
+          "y": 479.5,
+          "width": 6,
+          "height": 5
+        }
+      },
+      {
+        "id": "water.canal.east",
+        "bounds": {
+          "x": 674,
+          "y": 370,
+          "width": 34,
+          "height": 22
+        }
+      },
+      {
+        "id": "water.canal.west",
+        "bounds": {
+          "x": 620,
+          "y": 370,
+          "width": 26,
+          "height": 22
+        }
+      },
+      {
+        "id": "water.river",
+        "bounds": {
+          "x": 708,
+          "y": 0,
+          "width": 60,
+          "height": 512
+        }
+      }
+    ],
+    "regions": [
+      {
+        "id": "town.outdoor",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 512
+        }
+      }
+    ],
+    "roads": [
+      {
+        "id": "road.arrivallane",
+        "fromPlaceId": "player.spawn",
+        "toPlaceId": "plaza.south",
+        "points": [
+          {
+            "x": 330,
+            "y": 332
+          },
+          {
+            "x": 330,
+            "y": 304
+          },
+          {
+            "x": 354,
+            "y": 304
+          }
+        ]
+      },
+      {
+        "id": "road.bedentrancelane",
+        "fromPlaceId": "home.player",
+        "toPlaceId": "bed.player",
+        "points": [
+          {
+            "x": 236,
+            "y": 442
+          },
+          {
+            "x": 252,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.bridgelane",
+        "fromPlaceId": "pond",
+        "toPlaceId": "cafe",
+        "points": [
+          {
+            "x": 658,
+            "y": 362
+          },
+          {
+            "x": 658,
+            "y": 414
+          },
+          {
+            "x": 490,
+            "y": 414
+          },
+          {
+            "x": 490,
+            "y": 442
+          },
+          {
+            "x": 410,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.cafelane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "cafe",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 442
+          },
+          {
+            "x": 410,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.cooplane",
+        "fromPlaceId": "farm",
+        "toPlaceId": "coop",
+        "points": [
+          {
+            "x": 122,
+            "y": 278
+          },
+          {
+            "x": 180,
+            "y": 278
+          },
+          {
+            "x": 180,
+            "y": 388
+          },
+          {
+            "x": 128,
+            "y": 388
+          }
+        ]
+      },
+      {
+        "id": "road.elilane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.eli",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 292,
+            "y": 190
+          },
+          {
+            "x": 292,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.gardenlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "farm",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 220,
+            "y": 272
+          },
+          {
+            "x": 220,
+            "y": 278
+          },
+          {
+            "x": 122,
+            "y": 278
+          }
+        ]
+      },
+      {
+        "id": "road.marketlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "shop",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 460,
+            "y": 272
+          },
+          {
+            "x": 460,
+            "y": 282
+          },
+          {
+            "x": 542,
+            "y": 282
+          }
+        ]
+      },
+      {
+        "id": "road.minalane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.mina",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 174,
+            "y": 190
+          },
+          {
+            "x": 174,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.playerhomelane",
+        "fromPlaceId": "cafe",
+        "toPlaceId": "home.player",
+        "points": [
+          {
+            "x": 410,
+            "y": 442
+          },
+          {
+            "x": 236,
+            "y": 442
+          }
+        ]
+      },
+      {
+        "id": "road.plazaeastlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.east",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 402,
+            "y": 272
+          },
+          {
+            "x": 402,
+            "y": 264
+          }
+        ]
+      },
+      {
+        "id": "road.plazanorthlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.north",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 238
+          }
+        ]
+      },
+      {
+        "id": "road.plazasouthlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.south",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 304
+          }
+        ]
+      },
+      {
+        "id": "road.plazawestlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "plaza.west",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 306,
+            "y": 272
+          },
+          {
+            "x": 306,
+            "y": 264
+          }
+        ]
+      },
+      {
+        "id": "road.pondlane",
+        "fromPlaceId": "shop",
+        "toPlaceId": "pond",
+        "points": [
+          {
+            "x": 542,
+            "y": 282
+          },
+          {
+            "x": 598,
+            "y": 282
+          },
+          {
+            "x": 598,
+            "y": 362
+          },
+          {
+            "x": 658,
+            "y": 362
+          }
+        ]
+      },
+      {
+        "id": "road.renlane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.ren",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 410,
+            "y": 190
+          },
+          {
+            "x": 410,
+            "y": 156
+          }
+        ]
+      },
+      {
+        "id": "road.soralane",
+        "fromPlaceId": "plaza",
+        "toPlaceId": "home.sora",
+        "points": [
+          {
+            "x": 354,
+            "y": 272
+          },
+          {
+            "x": 354,
+            "y": 190
+          },
+          {
+            "x": 528,
+            "y": 190
+          },
+          {
+            "x": 528,
+            "y": 156
+          }
+        ]
+      }
+    ]
+  },
+  "definitions": {
+    "residents": [
+      {
+        "id": "mina",
+        "displayName": "米娜",
+        "homePlaceId": "home.mina",
+        "spawnPlaceId": "home.mina",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 4,
+          "grain": 1,
+          "fish": 0,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "mina.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.mina",
+            "activity": "在家休息",
+            "isFree": false
+          },
+          {
+            "id": "mina.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.west",
+            "activity": "广场闲逛",
+            "isFree": true
+          },
+          {
+            "id": "mina.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "shop",
+            "activity": "照看杂货铺",
+            "isFree": false
+          },
+          {
+            "id": "mina.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.west",
+            "activity": "午间散步",
+            "isFree": true
+          },
+          {
+            "id": "mina.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.mina",
+            "activity": "在家整理货物",
+            "isFree": false
+          }
+        ],
+        "personality": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。"
+      },
+      {
+        "id": "eli",
+        "displayName": "艾里",
+        "homePlaceId": "home.eli",
+        "spawnPlaceId": "home.eli",
+        "desiredResourceId": "berries",
+        "inventory": {
+          "berries": 0,
+          "grain": 4,
+          "fish": 1,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "eli.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.eli",
+            "activity": "在家休息",
+            "isFree": false
+          },
+          {
+            "id": "eli.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.north",
+            "activity": "广场闲逛",
+            "isFree": true
+          },
+          {
+            "id": "eli.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "farm",
+            "activity": "照看麦田",
+            "isFree": false
+          },
+          {
+            "id": "eli.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.north",
+            "activity": "午间散步",
+            "isFree": true
+          },
+          {
+            "id": "eli.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.eli",
+            "activity": "在家休息",
+            "isFree": false
+          }
+        ],
+        "personality": "照看麦田，耐心随和。想找些浆果，愿意分享多余麦粒；工作时间会回农场。"
+      },
+      {
+        "id": "ren",
+        "displayName": "阿仁",
+        "homePlaceId": "home.ren",
+        "spawnPlaceId": "home.ren",
+        "desiredResourceId": "soup",
+        "inventory": {
+          "berries": 1,
+          "grain": 0,
+          "fish": 4,
+          "soup": 0
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "ren.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.ren",
+            "activity": "在家休息",
+            "isFree": false
+          },
+          {
+            "id": "ren.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.east",
+            "activity": "广场闲逛",
+            "isFree": true
+          },
+          {
+            "id": "ren.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "pond",
+            "activity": "在池边钓鱼",
+            "isFree": false
+          },
+          {
+            "id": "ren.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.east",
+            "activity": "午间散步",
+            "isFree": true
+          },
+          {
+            "id": "ren.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.ren",
+            "activity": "在家休息",
+            "isFree": false
+          }
+        ],
+        "personality": "喜欢钓鱼，话不多但愿意帮忙。想喝一碗热汤，愿意分享多余鲜鱼；可拒绝不合适的邀请。"
+      },
+      {
+        "id": "sora",
+        "displayName": "小空",
+        "homePlaceId": "home.sora",
+        "spawnPlaceId": "home.sora",
+        "desiredResourceId": "grain",
+        "inventory": {
+          "berries": 0,
+          "grain": 0,
+          "fish": 1,
+          "soup": 4
+        },
+        "coins": 12,
+        "schedule": [
+          {
+            "id": "sora.home",
+            "startMinute": 0,
+            "endMinute": 540,
+            "placeId": "home.sora",
+            "activity": "在家休息",
+            "isFree": false
+          },
+          {
+            "id": "sora.morning",
+            "startMinute": 540,
+            "endMinute": 660,
+            "placeId": "plaza.south",
+            "activity": "广场闲逛",
+            "isFree": true
+          },
+          {
+            "id": "sora.work",
+            "startMinute": 660,
+            "endMinute": 720,
+            "placeId": "cafe",
+            "activity": "在小馆备餐",
+            "isFree": false
+          },
+          {
+            "id": "sora.noon",
+            "startMinute": 720,
+            "endMinute": 840,
+            "placeId": "plaza.south",
+            "activity": "午间散步",
+            "isFree": true
+          },
+          {
+            "id": "sora.evening",
+            "startMinute": 840,
+            "endMinute": 1440,
+            "placeId": "home.sora",
+            "activity": "在家休息",
+            "isFree": false
+          }
+        ],
+        "personality": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。"
+      }
+    ],
+    "resources": [
+      {
+        "id": "seed.potato",
+        "displayName": "土豆种子",
+        "stackLimit": 99,
+        "displayOrder": 0
+      },
+      {
+        "id": "seed.carrot",
+        "displayName": "胡萝卜种子",
+        "stackLimit": 99,
+        "displayOrder": 1
+      },
+      {
+        "id": "seed.tomato",
+        "displayName": "番茄种子",
+        "stackLimit": 99,
+        "displayOrder": 2
+      },
+      {
+        "id": "crop.potato",
+        "displayName": "土豆",
+        "stackLimit": 99,
+        "displayOrder": 3
+      },
+      {
+        "id": "crop.carrot",
+        "displayName": "胡萝卜",
+        "stackLimit": 99,
+        "displayOrder": 4
+      },
+      {
+        "id": "crop.tomato",
+        "displayName": "番茄",
+        "stackLimit": 99,
+        "displayOrder": 5
+      },
+      {
+        "id": "feed.chicken",
+        "displayName": "鸡饲料",
+        "stackLimit": 99,
+        "displayOrder": 6
+      },
+      {
+        "id": "animal_product.egg",
+        "displayName": "鸡蛋",
+        "stackLimit": 99,
+        "displayOrder": 7
+      },
+      {
+        "id": "fish.carp",
+        "displayName": "鲤鱼",
+        "stackLimit": 99,
+        "displayOrder": 8
+      },
+      {
+        "id": "fish.trout",
+        "displayName": "鳟鱼",
+        "stackLimit": 99,
+        "displayOrder": 9
+      },
+      {
+        "id": "fish.bass",
+        "displayName": "鲈鱼",
+        "stackLimit": 99,
+        "displayOrder": 10
+      },
+      {
+        "id": "ingredient.salt",
+        "displayName": "盐",
+        "stackLimit": 99,
+        "displayOrder": 11
+      },
+      {
+        "id": "ingredient.flour",
+        "displayName": "面粉",
+        "stackLimit": 99,
+        "displayOrder": 12
+      },
+      {
+        "id": "food.baked_potato",
+        "displayName": "烤土豆",
+        "stackLimit": 99,
+        "displayOrder": 13
+      },
+      {
+        "id": "food.vegetable_soup",
+        "displayName": "蔬菜汤",
+        "stackLimit": 99,
+        "displayOrder": 14
+      },
+      {
+        "id": "food.grilled_fish",
+        "displayName": "烤鱼",
+        "stackLimit": 99,
+        "displayOrder": 15
+      },
+      {
+        "id": "food.tomato_egg",
+        "displayName": "番茄炒蛋",
+        "stackLimit": 99,
+        "displayOrder": 16
+      },
+      {
+        "id": "food.fish_pie",
+        "displayName": "鱼肉派",
+        "stackLimit": 99,
+        "displayOrder": 17
+      },
+      {
+        "id": "berries",
+        "displayName": "浆果",
+        "stackLimit": 99,
+        "displayOrder": 100
+      },
+      {
+        "id": "grain",
+        "displayName": "麦粒",
+        "stackLimit": 99,
+        "displayOrder": 101
+      },
+      {
+        "id": "fish",
+        "displayName": "鲜鱼",
+        "stackLimit": 99,
+        "displayOrder": 102
+      },
+      {
+        "id": "soup",
+        "displayName": "热汤",
+        "stackLimit": 99,
+        "displayOrder": 103
+      }
+    ],
+    "startMinute": 540,
+    "economy": {
+      "player": {
+        "coins": 300,
+        "slotCapacity": 5,
+        "inventory": {
+          "feed.chicken": 2,
+          "crop.carrot": 2,
+          "crop.tomato": 2,
+          "ingredient.salt": 2,
+          "ingredient.flour": 2
+        }
+      },
+      "shops": [
+        {
+          "id": "shop.town.general",
+          "displayName": "橡木杂货铺",
+          "placeId": "shop",
+          "coins": 10000,
+          "inventory": {
+            "seed.carrot": 4,
+            "seed.tomato": 3,
+            "feed.chicken": 9,
+            "ingredient.flour": 6
+          },
+          "prices": [
+            {
+              "resourceId": "seed.potato",
+              "buyPrice": 20,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "seed.carrot",
+              "buyPrice": 25,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "seed.tomato",
+              "buyPrice": 30,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "crop.potato",
+              "buyPrice": 0,
+              "sellPrice": 20
+            },
+            {
+              "resourceId": "crop.carrot",
+              "buyPrice": 0,
+              "sellPrice": 25
+            },
+            {
+              "resourceId": "crop.tomato",
+              "buyPrice": 0,
+              "sellPrice": 30
+            },
+            {
+              "resourceId": "feed.chicken",
+              "buyPrice": 10,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "animal_product.egg",
+              "buyPrice": 0,
+              "sellPrice": 20
+            },
+            {
+              "resourceId": "fish.carp",
+              "buyPrice": 0,
+              "sellPrice": 25
+            },
+            {
+              "resourceId": "fish.trout",
+              "buyPrice": 0,
+              "sellPrice": 35
+            },
+            {
+              "resourceId": "fish.bass",
+              "buyPrice": 0,
+              "sellPrice": 45
+            },
+            {
+              "resourceId": "ingredient.salt",
+              "buyPrice": 5,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "ingredient.flour",
+              "buyPrice": 10,
+              "sellPrice": 0
+            },
+            {
+              "resourceId": "food.baked_potato",
+              "buyPrice": 0,
+              "sellPrice": 50
+            },
+            {
+              "resourceId": "food.vegetable_soup",
+              "buyPrice": 0,
+              "sellPrice": 60
+            },
+            {
+              "resourceId": "food.grilled_fish",
+              "buyPrice": 0,
+              "sellPrice": 55
+            },
+            {
+              "resourceId": "food.tomato_egg",
+              "buyPrice": 0,
+              "sellPrice": 75
+            },
+            {
+              "resourceId": "food.fish_pie",
+              "buyPrice": 0,
+              "sellPrice": 100
+            }
+          ]
+        }
+      ]
+    },
+    "farming": {
+      "crops": [
+        {
+          "id": "crop_definition.potato",
+          "displayName": "土豆",
+          "seedResourceId": "seed.potato",
+          "harvestResourceId": "crop.potato",
+          "growthDays": 2,
+          "harvestQuantity": 2
+        },
+        {
+          "id": "crop_definition.carrot",
+          "displayName": "胡萝卜",
+          "seedResourceId": "seed.carrot",
+          "harvestResourceId": "crop.carrot",
+          "growthDays": 3,
+          "harvestQuantity": 2
+        },
+        {
+          "id": "crop_definition.tomato",
+          "displayName": "番茄",
+          "seedResourceId": "seed.tomato",
+          "harvestResourceId": "crop.tomato",
+          "growthDays": 4,
+          "harvestQuantity": 3
+        }
+      ],
+      "plots": [
+        {
+          "id": "plot.01",
+          "displayName": "一号地",
+          "placeId": "farm.plot.01"
+        },
+        {
+          "id": "plot.02",
+          "displayName": "二号地",
+          "placeId": "farm.plot.02"
+        },
+        {
+          "id": "plot.03",
+          "displayName": "三号地",
+          "placeId": "farm.plot.03"
+        },
+        {
+          "id": "plot.04",
+          "displayName": "四号地",
+          "placeId": "farm.plot.04"
+        },
+        {
+          "id": "plot.05",
+          "displayName": "五号地",
+          "placeId": "farm.plot.05"
+        },
+        {
+          "id": "plot.06",
+          "displayName": "六号地",
+          "placeId": "farm.plot.06"
+        }
+      ],
+      "bedPlaceId": "bed.player",
+      "restocks": [
+        {
+          "shopId": "shop.town.general",
+          "worldSeed": 12345,
+          "minimumDistinctItems": 4,
+          "entries": [
+            {
+              "resourceId": "seed.potato",
+              "probabilityPermille": 700,
+              "minQuantity": 3,
+              "maxQuantity": 6
+            },
+            {
+              "resourceId": "seed.carrot",
+              "probabilityPermille": 700,
+              "minQuantity": 3,
+              "maxQuantity": 6
+            },
+            {
+              "resourceId": "seed.tomato",
+              "probabilityPermille": 700,
+              "minQuantity": 3,
+              "maxQuantity": 6
+            },
+            {
+              "resourceId": "feed.chicken",
+              "probabilityPermille": 1000,
+              "minQuantity": 6,
+              "maxQuantity": 12
+            },
+            {
+              "resourceId": "ingredient.salt",
+              "probabilityPermille": 750,
+              "minQuantity": 3,
+              "maxQuantity": 8
+            },
+            {
+              "resourceId": "ingredient.flour",
+              "probabilityPermille": 750,
+              "minQuantity": 3,
+              "maxQuantity": 8
+            }
+          ]
+        }
+      ]
+    },
+    "production": {
+      "chickens": [
+        {
+          "id": "animal.hen_01",
+          "displayName": "小母鸡",
+          "placeId": "coop",
+          "feedResourceId": "feed.chicken",
+          "productResourceId": "animal_product.egg",
+          "productQuantity": 1
+        }
+      ],
+      "fishingSpots": [
+        {
+          "id": "fishing.town.pond",
+          "displayName": "河岸池塘",
+          "placeId": "pond"
+        }
+      ],
+      "fish": [
+        {
+          "id": "fish_definition.carp",
+          "resourceId": "fish.carp",
+          "minRollInclusive": 0,
+          "maxRollExclusive": 40
+        },
+        {
+          "id": "fish_definition.trout",
+          "resourceId": "fish.trout",
+          "minRollInclusive": 40,
+          "maxRollExclusive": 70
+        },
+        {
+          "id": "fish_definition.bass",
+          "resourceId": "fish.bass",
+          "minRollInclusive": 70,
+          "maxRollExclusive": 90
+        }
+      ],
+      "kitchens": [
+        {
+          "id": "kitchen.town.cafe",
+          "displayName": "暖炉厨房",
+          "placeId": "cafe"
+        }
+      ],
+      "recipes": [
+        {
+          "id": "recipe.baked_potato",
+          "displayName": "烤土豆",
+          "ingredients": [
+            {
+              "resourceId": "crop.potato",
+              "quantity": 1
+            },
+            {
+              "resourceId": "ingredient.salt",
+              "quantity": 1
+            }
+          ],
+          "outputResourceId": "food.baked_potato",
+          "outputQuantity": 1
+        },
+        {
+          "id": "recipe.vegetable_soup",
+          "displayName": "蔬菜汤",
+          "ingredients": [
+            {
+              "resourceId": "crop.carrot",
+              "quantity": 1
+            },
+            {
+              "resourceId": "crop.tomato",
+              "quantity": 1
+            }
+          ],
+          "outputResourceId": "food.vegetable_soup",
+          "outputQuantity": 1
+        },
+        {
+          "id": "recipe.grilled_fish",
+          "displayName": "烤鱼",
+          "ingredients": [
+            {
+              "resourceId": "fish.carp",
+              "quantity": 1
+            },
+            {
+              "resourceId": "ingredient.salt",
+              "quantity": 1
+            }
+          ],
+          "outputResourceId": "food.grilled_fish",
+          "outputQuantity": 1
+        },
+        {
+          "id": "recipe.tomato_egg",
+          "displayName": "番茄炒蛋",
+          "ingredients": [
+            {
+              "resourceId": "crop.tomato",
+              "quantity": 1
+            },
+            {
+              "resourceId": "animal_product.egg",
+              "quantity": 1
+            }
+          ],
+          "outputResourceId": "food.tomato_egg",
+          "outputQuantity": 1
+        },
+        {
+          "id": "recipe.fish_pie",
+          "displayName": "鱼肉派",
+          "ingredients": [
+            {
+              "resourceId": "fish.trout",
+              "quantity": 1
+            },
+            {
+              "resourceId": "animal_product.egg",
+              "quantity": 1
+            },
+            {
+              "resourceId": "ingredient.flour",
+              "quantity": 1
+            }
+          ],
+          "outputResourceId": "food.fish_pie",
+          "outputQuantity": 1
+        }
+      ],
+      "fishingSeed": 12345
+    }
+  }
+}

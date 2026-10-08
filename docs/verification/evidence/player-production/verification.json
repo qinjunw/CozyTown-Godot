@@ -1,0 +1,528 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-10-08T07:22:03.5825617Z",
+  "passed": true,
+  "osVersion": "Microsoft Windows NT 10.0.26200.0",
+  "graphicalRequested": true,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "sourceDirty": false,
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "steps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.263
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.278
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.083
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.616
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 8.705
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.51
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 11.235
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.629
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 11.83
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.194
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.452
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.751
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.778
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.775
+    },
+    {
+      "name": "content-economy-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.766
+    },
+    {
+      "name": "content-farming-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.752
+    },
+    {
+      "name": "content-production-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.754
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.168
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.995
+    },
+    {
+      "name": "economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.744
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.3
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.75
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.791
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.03
+    },
+    {
+      "name": "export-economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.705
+    },
+    {
+      "name": "scene-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.1
+    },
+    {
+      "name": "export-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.981
+    },
+    {
+      "name": "export-farming-capacity-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.783
+    },
+    {
+      "name": "scene-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.698
+    },
+    {
+      "name": "export-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.599
+    },
+    {
+      "name": "export-farming-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.868
+    },
+    {
+      "name": "scene-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 5.998
+    },
+    {
+      "name": "scene-production-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 7.18
+    },
+    {
+      "name": "export-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 5.939
+    },
+    {
+      "name": "export-production-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 8.002
+    },
+    {
+      "name": "scene-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.341
+    },
+    {
+      "name": "scene-production-capacity-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.427
+    },
+    {
+      "name": "export-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.311
+    },
+    {
+      "name": "export-production-capacity-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.325
+    },
+    {
+      "name": "export-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.548
+    },
+    {
+      "name": "export-slice-baseline-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.833
+    },
+    {
+      "name": "export-economy-graphical",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 2.605
+    }
+  ],
+  "error": null,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "coreTests": {
+    "total": 175,
+    "executed": 175,
+    "passed": 175,
+    "failed": 0,
+    "skipped": 0
+  },
+  "modelTests": {
+    "total": 45,
+    "executed": 45,
+    "passed": 45,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostTests": {
+    "total": 105,
+    "executed": 105,
+    "passed": 105,
+    "failed": 0,
+    "skipped": 0
+  },
+  "contentChecks": {
+    "baseline": {
+      "passed": true,
+      "fingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "places": 23,
+      "residents": 4
+    },
+    "counterfactual": {
+      "passed": true,
+      "fingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "places": 23,
+      "residents": 4
+    },
+    "economy-fixture": {
+      "passed": true,
+      "fingerprint": "e71a55e8cfd2f28990dbbfed56c8b623a9764843fb576c6544ead9f5ef2bb9ce",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "places": 23,
+      "residents": 4
+    },
+    "farming-capacity-fixture": {
+      "passed": true,
+      "fingerprint": "eb6ffe0649ae6c081aae6529a094a508100bc995f14b5d1fc2127a1bdba800e4",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "places": 23,
+      "residents": 4
+    },
+    "production-capacity-fixture": {
+      "passed": true,
+      "fingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "inputDigest": "2c646a584c132c87778e277c48e5e876419fd3cf66e3a5463b452d34076ce809",
+      "presentationDigest": "099b333d00891014c3bc63793ae22559989216c8e214d06ac5ed19bf0fb7e165",
+      "places": 23,
+      "residents": 4
+    }
+  },
+  "sliceChecks": {
+    "slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "eventCount": 1083
+    },
+    "slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": true,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "eventCount": 1083
+    },
+    "export-slice-counterfactual-headless": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "counterfactual",
+      "headless": true,
+      "contentFingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+      "eventCount": 1089
+    },
+    "export-slice-baseline-graphical": {
+      "passed": true,
+      "checks": 38,
+      "scenario": "baseline",
+      "headless": false,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "eventCount": 1083,
+      "screenshot": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-slice-baseline-graphical.png"
+    }
+  },
+  "economyChecks": {
+    "economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "e71a55e8cfd2f28990dbbfed56c8b623a9764843fb576c6544ead9f5ef2bb9ce"
+    },
+    "export-economy-headless": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "e71a55e8cfd2f28990dbbfed56c8b623a9764843fb576c6544ead9f5ef2bb9ce"
+    },
+    "export-economy-graphical": {
+      "passed": true,
+      "checks": 23,
+      "contentFingerprint": "e71a55e8cfd2f28990dbbfed56c8b623a9764843fb576c6544ead9f5ef2bb9ce",
+      "screenshots": {
+        "shop": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-economy-graphical.png",
+        "bag": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-economy-graphical-bag.png",
+        "failure": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-economy-graphical-failure.png"
+      }
+    }
+  },
+  "farmingChecks": {
+    "scene-farming-capacity-headless": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "eb6ffe0649ae6c081aae6529a094a508100bc995f14b5d1fc2127a1bdba800e4"
+    },
+    "export-farming-capacity-headless": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "eb6ffe0649ae6c081aae6529a094a508100bc995f14b5d1fc2127a1bdba800e4"
+    },
+    "export-farming-capacity-graphical": {
+      "passed": true,
+      "checks": 15,
+      "contentFingerprint": "eb6ffe0649ae6c081aae6529a094a508100bc995f14b5d1fc2127a1bdba800e4",
+      "screenshots": {
+        "failure": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-capacity-graphical.png",
+        "success": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-capacity-graphical-success.png"
+      }
+    },
+    "scene-farming-headless": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7"
+    },
+    "export-farming-headless": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7"
+    },
+    "export-farming-graphical": {
+      "passed": true,
+      "checks": 24,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "screenshots": {
+        "sleep": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-graphical.png",
+        "dry": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-graphical-dry.png",
+        "mature": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-graphical-mature.png",
+        "field": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-farming-graphical-field.png"
+      }
+    }
+  },
+  "productionChecks": {
+    "scene-production-headless": {
+      "passed": true,
+      "checks": 29,
+      "scenario": "baseline",
+      "mode": "rules",
+      "headless": true,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7"
+    },
+    "scene-production-graphical": {
+      "passed": true,
+      "checks": 29,
+      "scenario": "baseline",
+      "mode": "rules",
+      "headless": false,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "screenshots": {
+        "chicken": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical.png",
+        "ready": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical-ready.png",
+        "fishing": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical-fishing.png",
+        "kitchen": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical-kitchen.png",
+        "cooked": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical-cooked.png",
+        "sold": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-graphical-sold.png"
+      }
+    },
+    "export-production-headless": {
+      "passed": true,
+      "checks": 29,
+      "scenario": "baseline",
+      "mode": "rules",
+      "headless": true,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7"
+    },
+    "export-production-graphical": {
+      "passed": true,
+      "checks": 29,
+      "scenario": "baseline",
+      "mode": "rules",
+      "headless": false,
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "screenshots": {
+        "chicken": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical.png",
+        "ready": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-ready.png",
+        "fishing": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-fishing.png",
+        "kitchen": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-kitchen.png",
+        "cooked": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-cooked.png",
+        "sold": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-sold.png"
+      }
+    },
+    "scene-production-capacity-headless": {
+      "passed": true,
+      "checks": 22,
+      "scenario": "production-capacity-fixture",
+      "mode": "rules",
+      "headless": true,
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64"
+    },
+    "scene-production-capacity-graphical": {
+      "passed": true,
+      "checks": 22,
+      "scenario": "production-capacity-fixture",
+      "mode": "rules",
+      "headless": false,
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "screenshots": {
+        "failure": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-capacity-graphical.png",
+        "success": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/scene-production-capacity-graphical-success.png"
+      }
+    },
+    "export-production-capacity-headless": {
+      "passed": true,
+      "checks": 22,
+      "scenario": "production-capacity-fixture",
+      "mode": "rules",
+      "headless": true,
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64"
+    },
+    "export-production-capacity-graphical": {
+      "passed": true,
+      "checks": 22,
+      "scenario": "production-capacity-fixture",
+      "mode": "rules",
+      "headless": false,
+      "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+      "screenshots": {
+        "failure": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-graphical.png",
+        "success": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-graphical-success.png"
+      }
+    }
+  },
+  "finishedAtUtc": "2026-10-08T07:24:30.6297226Z"
+}

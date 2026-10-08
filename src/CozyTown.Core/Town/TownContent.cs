@@ -59,6 +59,7 @@ public sealed partial class TownContent
                 Fail($"resource {resource.Id} inventory definition");
         definitions = definitions with { Economy = NormalizeEconomy(manifest, definitions) };
         definitions = definitions with { Farming = NormalizeFarming(manifest, definitions) };
+        definitions = definitions with { Production = NormalizeProduction(manifest, definitions) };
         if (manifest.Places.Length == 0 || manifest.Regions.Length == 0 || definitions.Residents.Length == 0 || definitions.Resources.Length == 0) Fail("empty required content");
         if (definitions.StartMinute is < 0 or >= 1440) Fail("startMinute");
         foreach (var region in manifest.Regions) ValidateRect(region.Bounds, $"region {region.Id}");

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://World/TownBackdrop.cs" id="1_backdrop"]
 [ext_resource type="Script" path="res://World/FarmPlotView.cs" id="2_farm_plot"]
+[ext_resource type="Script" path="res://World/ChickenView.cs" id="3_chicken"]
 [ext_resource type="Texture2D" path="res://Art/Props/prop_town_decor_16x32.png" id="tex_decor"]
 [ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_home_roofs_64.png" id="tex_house_roofs"]
 [ext_resource type="Texture2D" path="res://Art/Buildings/bld_npc_homes_64.png" id="tex_houses"]
@@ -330,6 +331,49 @@ metadata/display_name = "我的家 · 休息"
 metadata/region_id = "town.outdoor"
 metadata/kind = "bed"
 
+[node name="Coop" type="Node2D" parent="Buildings"]
+position = Vector2(122, 378)
+z_index = 378
+
+[node name="Exterior" type="Sprite2D" parent="Buildings/Coop"]
+position = Vector2(-32, -64)
+texture = ExtResource("tex_shops")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="Roof" type="Sprite2D" parent="Buildings/Coop"]
+position = Vector2(-32, -64)
+z_index = 1
+texture = ExtResource("tex_shop_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="Footprint" type="StaticBody2D" parent="Buildings/Coop"]
+position = Vector2(0, -18)
+collision_layer = 1
+collision_mask = 0
+metadata/role = "obstacle"
+metadata/id = "building.coop"
+
+[node name="Shape" type="CollisionShape2D" parent="Buildings/Coop/Footprint"]
+shape = SubResource("shape_building")
+
+[node name="Entrance" type="Node2D" parent="Buildings/Coop"]
+position = Vector2(6, 10)
+metadata/role = "place"
+metadata/id = "coop"
+metadata/display_name = "菜园鸡舍"
+metadata/region_id = "town.outdoor"
+metadata/kind = "coop"
+
+[node name="Hen" type="Node2D" parent="Buildings/Coop"]
+position = Vector2(-16, 12)
+z_index = 12
+script = ExtResource("3_chicken")
+metadata/chicken_id = "animal.hen_01"
+
 [node name="Landmarks" type="Node2D" parent="."]
 
 [node name="Farm" type="Node2D" parent="Landmarks"]
@@ -528,6 +572,15 @@ metadata/role = "road"
 metadata/id = "road.gardenlane"
 metadata/from_id = "plaza"
 metadata/to_id = "farm"
+
+[node name="CoopLane" type="Line2D" parent="Roads"]
+visible = false
+points = PackedVector2Array(122, 278, 180, 278, 180, 388, 128, 388)
+width = 12.0
+metadata/role = "road"
+metadata/id = "road.cooplane"
+metadata/from_id = "farm"
+metadata/to_id = "coop"
 
 [node name="MarketLane" type="Line2D" parent="Roads"]
 visible = false

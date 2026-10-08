@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "acceptanceStatus": "partial_pending_human",
+  "completedRecordedScopes": [
+    "basic-resumed-1920: ordinary fresh-game hen/feed/sleep/egg/sale and fed-state save/restore",
+    "recipes-1920: three recorded fishing attempts including deterministic readback, five recipes, ingredient rejection, cooked-state save/restore, five sales and reinvestment",
+    "capacity-1920: pending-feed and full-bag collect/cook/fish rejection, full-state save/restore, two quantity-2 sales and egg collection"
+  ],
+  "remainingScope": "capacity-1920 successful fishing after freeing space and final save/restore",
+  "inputOwner": "human_operator",
+  "furtherAgentUiActionsRequested": false,
+  "startingState": {
+    "evidence": "manual-final-snapshots.json#unsavedProgress",
+    "branchId": "d1902e65048b476ca5ea890008012535",
+    "inputSequence": 20,
+    "coins": 410,
+    "usedSlots": 4,
+    "slotCapacity": 5,
+    "inventory": {
+      "feed.chicken": 1,
+      "ingredient.flour": 2,
+      "ingredient.salt": 2,
+      "animal_product.egg": 1
+    },
+    "fishingRandomState": 12345,
+    "fishingDrawCount": 0,
+    "savedCheckpointConstraint": "Use the still-running session if it retains this state. Reloading the existing input-15 save restores 300 coins and the pending egg; repeat the two sales and collection before continuing."
+  },
+  "pendingChecks": [
+    {
+      "id": "capacity_fish_after_freeing_space",
+      "action": "At the pond, perform one fishing action.",
+      "expected": {
+        "code": "accepted",
+        "resourceId": "fish.carp",
+        "quantity": 1,
+        "roll": 30,
+        "randomStateBefore": 12345,
+        "randomStateAfter": 3336926330,
+        "fishingDrawCount": 1,
+        "coins": 410,
+        "usedSlots": 5,
+        "henCollectedCount": 1
+      }
+    },
+    {
+      "id": "capacity_final_save",
+      "action": "Press F5 after successful fishing.",
+      "expected": "A new snapshot_saved record and an actual save file containing 410 coins, one egg, one carp and fishing RNG state 3336926330/draw count 1."
+    },
+    {
+      "id": "capacity_restore_probe_cast",
+      "action": "After F5, cast once more at the pond to create a state that differs from the saved state.",
+      "expected": {
+        "code": "accepted",
+        "resourceId": "fish.carp",
+        "quantity": 1,
+        "roll": 7,
+        "carpCount": 2,
+        "coins": 410,
+        "randomStateBefore": 3336926330,
+        "randomStateAfter": 1697253807,
+        "fishingDrawCount": 2
+      }
+    },
+    {
+      "id": "capacity_final_restore",
+      "action": "Press F9 after the probe cast. Press Esc to close the pond panel, then B to inspect the bag.",
+      "expected": {
+        "newBranch": "Matching parent/sourceSnapshot with source_prefix_present.",
+        "restoredAssets": "Identical economy, farming, production and worldMinute to the F5 snapshot.",
+        "coins": 410,
+        "carpCount": 1,
+        "eggCount": 1,
+        "fishingRandomState": 3336926330,
+        "fishingDrawCount": 1
+      }
+    }
+  ]
+}
