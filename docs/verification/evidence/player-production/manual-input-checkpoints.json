@@ -1,0 +1,4567 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "inputAttribution": "operator_declared_os_mouse_keyboard",
+  "countingRule": "Count direct player command records from new session branches. Count copied automatic branches separately. Include pre-restore commands even when their receipts are absent from the final save.",
+  "commands": [
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 3223,
+      "record": {
+        "sequence": 2212,
+        "receivedAtUtc": "2026-10-08T09:08:34.0347958+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 1,
+            "branchId": "003782e97eb940f294fa7004dfe880e1",
+            "worldMinute": 587.3749999999569,
+            "kind": "trade",
+            "trade": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:09f8171857824e0faa51c04f047d7a7d",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "feed.chicken",
+              "direction": "buy",
+              "quantity": 1,
+              "expectedUnitPrice": 10
+            },
+            "tradeResult": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:09f8171857824e0faa51c04f047d7a7d",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 10,
+              "totalPrice": 10,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 290,
+                "slotCapacity": 24,
+                "inventory": {
+                  "feed.chicken": 1
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 10010,
+                  "inventory": {
+                    "feed.chicken": 8,
+                    "ingredient.flour": 6,
+                    "seed.carrot": 4,
+                    "seed.tomato": 3
+                  }
+                }
+              ],
+              "inputSequence": 1,
+              "receiptCount": 1
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 3222,
+          "unconsumedSeconds": 0.021217799999995943,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 5488,
+      "record": {
+        "sequence": 3695,
+        "receivedAtUtc": "2026-10-08T09:09:46.6261795+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 2,
+            "branchId": "003782e97eb940f294fa7004dfe880e1",
+            "worldMinute": 612.8749999999337,
+            "request": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:79f32a0469344be7979aede1d9993ec1",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "feed",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:79f32a0469344be7979aede1d9993ec1",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "feed.chicken",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "003782e97eb940f294fa7004dfe880e1",
+              "parentBranchId": null,
+              "sourceSnapshotId": null,
+              "forkSequence": 0,
+              "worldMinute": 612.8749999999337,
+              "playerPosition": {
+                "x": 142.66668701171875,
+                "y": 386.00030517578125
+              },
+              "playerFacing": {
+                "x": -0.9730828747607763,
+                "y": -0.23045545957365238
+              },
+              "sequence": 5489,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {},
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 8,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 2,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 0,
+                "mornings": [],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 0
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": true,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 1
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 5487,
+          "unconsumedSeconds": 0.001160899999986073,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 5611,
+      "record": {
+        "sequence": 3818,
+        "receivedAtUtc": "2026-10-08T09:09:52.6768803+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 3,
+            "branchId": "003782e97eb940f294fa7004dfe880e1",
+            "worldMinute": 612.8749999999337,
+            "request": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:e12012272fa341759790b9760d94906f",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "feed",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "003782e97eb940f294fa7004dfe880e1:player:e12012272fa341759790b9760d94906f",
+              "succeeded": false,
+              "code": "already_fed",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "003782e97eb940f294fa7004dfe880e1",
+              "parentBranchId": null,
+              "sourceSnapshotId": null,
+              "forkSequence": 0,
+              "worldMinute": 612.8749999999337,
+              "playerPosition": {
+                "x": 142.66668701171875,
+                "y": 386.00030517578125
+              },
+              "playerFacing": {
+                "x": -0.9730828747607763,
+                "y": -0.23045545957365238
+              },
+              "sequence": 5611,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {},
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 8,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 3,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 0,
+                "mornings": [],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 0
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": true,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 2
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 5610,
+          "unconsumedSeconds": 0.026147199999991905,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 8969,
+      "record": {
+        "sequence": 1733,
+        "receivedAtUtc": "2026-10-08T09:11:44.0988828+00:00",
+        "kind": "player_sleep_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 4,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 1127.749999999902,
+            "request": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:8587ea4e437546cf80f34fd6b04dee5c",
+              "actorId": "player",
+              "hours": 8
+            },
+            "result": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:8587ea4e437546cf80f34fd6b04dee5c",
+              "succeeded": true,
+              "code": "accepted",
+              "fromMinute": 647.749999999902,
+              "toMinute": 1127.749999999902,
+              "isDuplicate": false
+            },
+            "checkpoint": {
+              "branchId": "f9768473c21447dd84dc295ebd9820bf",
+              "parentBranchId": "003782e97eb940f294fa7004dfe880e1",
+              "sourceSnapshotId": "558af04e76d74b378d195d4c53ae3622",
+              "forkSequence": 5835,
+              "worldMinute": 1127.749999999902,
+              "playerPosition": {
+                "x": 277.3333435058594,
+                "y": 426.6666564941406
+              },
+              "playerFacing": {
+                "x": 0.7071067811865475,
+                "y": -0.7071067811865475
+              },
+              "sequence": 8969,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {},
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 8,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 4,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 0,
+                "mornings": [],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 1
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": true,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 2
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 8238,
+          "unconsumedSeconds": 0.005669400000005986,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "farming"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 9146,
+      "record": {
+        "sequence": 1906,
+        "receivedAtUtc": "2026-10-08T09:11:52.6379078+00:00",
+        "kind": "player_sleep_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 5,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 1607.749999999902,
+            "request": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:01c6f3d794594490973a6adc90321499",
+              "actorId": "player",
+              "hours": 8
+            },
+            "result": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:01c6f3d794594490973a6adc90321499",
+              "succeeded": true,
+              "code": "accepted",
+              "fromMinute": 1127.749999999902,
+              "toMinute": 1607.749999999902,
+              "isDuplicate": false
+            },
+            "checkpoint": {
+              "branchId": "f9768473c21447dd84dc295ebd9820bf",
+              "parentBranchId": "003782e97eb940f294fa7004dfe880e1",
+              "sourceSnapshotId": "558af04e76d74b378d195d4c53ae3622",
+              "forkSequence": 5835,
+              "worldMinute": 1607.749999999902,
+              "playerPosition": {
+                "x": 277.3333435058594,
+                "y": 426.6666564941406
+              },
+              "playerFacing": {
+                "x": 0.7071067811865475,
+                "y": -0.7071067811865475
+              },
+              "sequence": 9146,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {},
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 8,
+                      "ingredient.flour": 6,
+                      "seed.carrot": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 5,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 0,
+                "mornings": [],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 2
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": true,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 2
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 9140,
+          "unconsumedSeconds": 0.019599600000021214,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "farming"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 9434,
+      "record": {
+        "sequence": 2032,
+        "receivedAtUtc": "2026-10-08T09:11:58.8496638+00:00",
+        "kind": "player_sleep_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 7,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 2087.749999999902,
+            "request": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:89a1d5d3cc57437ba9729504309c3bf5",
+              "actorId": "player",
+              "hours": 8
+            },
+            "result": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:89a1d5d3cc57437ba9729504309c3bf5",
+              "succeeded": true,
+              "code": "accepted",
+              "fromMinute": 1607.749999999902,
+              "toMinute": 2087.749999999902,
+              "isDuplicate": false
+            },
+            "checkpoint": {
+              "branchId": "f9768473c21447dd84dc295ebd9820bf",
+              "parentBranchId": "003782e97eb940f294fa7004dfe880e1",
+              "sourceSnapshotId": "558af04e76d74b378d195d4c53ae3622",
+              "forkSequence": 5835,
+              "worldMinute": 2087.749999999902,
+              "playerPosition": {
+                "x": 277.3333435058594,
+                "y": 426.6666564941406
+              },
+              "playerFacing": {
+                "x": 0.7071067811865475,
+                "y": -0.7071067811865475
+              },
+              "sequence": 9434,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {},
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.salt": 7,
+                      "seed.carrot": 3,
+                      "seed.potato": 3,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 7,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 1,
+                "mornings": [
+                  {
+                    "inputSequence": 6,
+                    "day": 1
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 3
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": true,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 2
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 9270,
+          "unconsumedSeconds": 0.021782600000011768,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "farming"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 10486,
+      "record": {
+        "sequence": 2771,
+        "receivedAtUtc": "2026-10-08T09:12:35.2342866+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 8,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 2098.0999999999394,
+            "request": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:a531b6cc6a584259a0499cb505a5f735",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "collect",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:a531b6cc6a584259a0499cb505a5f735",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "animal_product.egg",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "f9768473c21447dd84dc295ebd9820bf",
+              "parentBranchId": "003782e97eb940f294fa7004dfe880e1",
+              "sourceSnapshotId": "558af04e76d74b378d195d4c53ae3622",
+              "forkSequence": 5835,
+              "worldMinute": 2098.0999999999394,
+              "playerPosition": {
+                "x": 142,
+                "y": 386.6666564941406
+              },
+              "playerFacing": {
+                "x": -0.424433710303557,
+                "y": -0.9054590137372074
+              },
+              "sequence": 10487,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.salt": 7,
+                      "seed.carrot": 3,
+                      "seed.potato": 3,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 8,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 1,
+                "mornings": [
+                  {
+                    "inputSequence": 6,
+                    "day": 1
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 3
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 1
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 3
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 10485,
+          "unconsumedSeconds": 0.02133980000001358,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 10616,
+      "record": {
+        "sequence": 2901,
+        "receivedAtUtc": "2026-10-08T09:12:41.6128244+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 9,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 2098.0999999999394,
+            "request": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:eb7fdf6dd03f4f6786f6614726093b65",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "collect",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:eb7fdf6dd03f4f6786f6614726093b65",
+              "succeeded": false,
+              "code": "product_not_ready",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "f9768473c21447dd84dc295ebd9820bf",
+              "parentBranchId": "003782e97eb940f294fa7004dfe880e1",
+              "sourceSnapshotId": "558af04e76d74b378d195d4c53ae3622",
+              "forkSequence": 5835,
+              "worldMinute": 2098.0999999999394,
+              "playerPosition": {
+                "x": 142,
+                "y": 386.6666564941406
+              },
+              "playerFacing": {
+                "x": -0.424433710303557,
+                "y": -0.9054590137372074
+              },
+              "sequence": 10616,
+              "economy": {
+                "player": {
+                  "coins": 290,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "animal_product.egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10010,
+                    "inventory": {
+                      "feed.chicken": 9,
+                      "ingredient.salt": 7,
+                      "seed.carrot": 3,
+                      "seed.potato": 3,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 9,
+                "receiptCount": 1
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 1,
+                "mornings": [
+                  {
+                    "inputSequence": 6,
+                    "day": 1
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 3
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 1
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 4
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 10615,
+          "unconsumedSeconds": 0.003145400000020185,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "basic-resumed-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 12701,
+      "record": {
+        "sequence": 4120,
+        "receivedAtUtc": "2026-10-08T09:13:42.2933449+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 10,
+            "branchId": "f9768473c21447dd84dc295ebd9820bf",
+            "worldMinute": 2112.6499999999924,
+            "kind": "trade",
+            "trade": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:147fbc287f4247bfb16cf60a8490c36a",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "animal_product.egg",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 20
+            },
+            "tradeResult": {
+              "operationId": "f9768473c21447dd84dc295ebd9820bf:player:147fbc287f4247bfb16cf60a8490c36a",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 20,
+              "totalPrice": 20,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 310,
+                "slotCapacity": 24,
+                "inventory": {},
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9990,
+                  "inventory": {
+                    "feed.chicken": 9,
+                    "ingredient.salt": 7,
+                    "seed.carrot": 3,
+                    "seed.potato": 3,
+                    "seed.tomato": 3,
+                    "animal_product.egg": 1
+                  }
+                }
+              ],
+              "inputSequence": 10,
+              "receiptCount": 2
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 12700,
+          "unconsumedSeconds": 0.03591519999997683,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 7653,
+      "record": {
+        "sequence": 798,
+        "receivedAtUtc": "2026-10-08T09:15:44.4591992+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 68,
+            "branchId": "812eeb2d6752429abca6d39662d31b5d",
+            "worldMinute": 6316.449999999761,
+            "request": {
+              "operationId": "812eeb2d6752429abca6d39662d31b5d:player:337ed640c30a4fd58f415ce705b144cb",
+              "actorId": "player",
+              "targetId": "fishing.town.pond",
+              "action": "fish",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "812eeb2d6752429abca6d39662d31b5d:player:337ed640c30a4fd58f415ce705b144cb",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "fish.trout",
+              "quantity": 1,
+              "roll": 41,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 3021616597,
+            "randomStateAfter": 2797435941,
+            "checkpoint": {
+              "branchId": "812eeb2d6752429abca6d39662d31b5d",
+              "parentBranchId": "219fb73fed5e44fb9a49de8f0df50f59",
+              "sourceSnapshotId": "51b4ab78d4294ffdb024ce968d10272a",
+              "forkSequence": 6045,
+              "worldMinute": 6316.449999999761,
+              "playerPosition": {
+                "x": 675.333251953125,
+                "y": 362
+              },
+              "playerFacing": {
+                "x": 0.9973337077781957,
+                "y": 0.07297585442731312
+              },
+              "sequence": 7654,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "ingredient.salt": 2,
+                    "crop.carrot": 2,
+                    "crop.tomato": 3,
+                    "crop.potato": 2,
+                    "fish.carp": 11,
+                    "fish.trout": 9,
+                    "fish.bass": 5
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 68,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 2797435941,
+                "fishingDrawCount": 26,
+                "receiptCount": 35
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 7652,
+          "unconsumedSeconds": 0.027739299999999634,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 8005,
+      "record": {
+        "sequence": 1151,
+        "receivedAtUtc": "2026-10-08T09:16:01.963693+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 69,
+            "branchId": "812eeb2d6752429abca6d39662d31b5d",
+            "worldMinute": 6316.449999999761,
+            "request": {
+              "operationId": "812eeb2d6752429abca6d39662d31b5d:player:90c00132c5d443998547f47e8f28f3dc",
+              "actorId": "player",
+              "targetId": "fishing.town.pond",
+              "action": "fish",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "812eeb2d6752429abca6d39662d31b5d:player:90c00132c5d443998547f47e8f28f3dc",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "fish.trout",
+              "quantity": 1,
+              "roll": 53,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 2797435941,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "812eeb2d6752429abca6d39662d31b5d",
+              "parentBranchId": "219fb73fed5e44fb9a49de8f0df50f59",
+              "sourceSnapshotId": "51b4ab78d4294ffdb024ce968d10272a",
+              "forkSequence": 6045,
+              "worldMinute": 6316.449999999761,
+              "playerPosition": {
+                "x": 675.333251953125,
+                "y": 362
+              },
+              "playerFacing": {
+                "x": 0.9973337077781957,
+                "y": 0.07297585442731312
+              },
+              "sequence": 8006,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "ingredient.salt": 2,
+                    "crop.carrot": 2,
+                    "crop.tomato": 3,
+                    "crop.potato": 2,
+                    "fish.carp": 11,
+                    "fish.trout": 10,
+                    "fish.bass": 5
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 69,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 36
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 8004,
+          "unconsumedSeconds": 0.044504500000000474,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 7980,
+      "record": {
+        "sequence": 129,
+        "receivedAtUtc": "2026-10-08T09:16:17.0147683+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 69,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6316.449999999761,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:fdb15cf91a294826878b92409545d0ca",
+              "actorId": "player",
+              "targetId": "fishing.town.pond",
+              "action": "fish",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:fdb15cf91a294826878b92409545d0ca",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "fish.trout",
+              "quantity": 1,
+              "roll": 53,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 2797435941,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6316.449999999761,
+              "playerPosition": {
+                "x": 675.333251953125,
+                "y": 362
+              },
+              "playerFacing": {
+                "x": 0.9973337077781957,
+                "y": 0.07297585442731312
+              },
+              "sequence": 7981,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "ingredient.salt": 2,
+                    "crop.carrot": 2,
+                    "crop.tomato": 3,
+                    "crop.potato": 2,
+                    "fish.carp": 11,
+                    "fish.trout": 10,
+                    "fish.bass": 5
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 69,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 36
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 7979,
+          "unconsumedSeconds": 0.04440490000000474,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 10174,
+      "record": {
+        "sequence": 1935,
+        "receivedAtUtc": "2026-10-08T09:17:46.5706088+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 70,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a9b83f2f7e8a46bc9f84095f2aa5ea48",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.baked_potato"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a9b83f2f7e8a46bc9f84095f2aa5ea48",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "food.baked_potato",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 10175,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "ingredient.salt": 1,
+                    "crop.carrot": 2,
+                    "crop.tomato": 3,
+                    "crop.potato": 1,
+                    "fish.carp": 11,
+                    "fish.trout": 10,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 70,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 37
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 10173,
+          "unconsumedSeconds": 0.00915779999998756,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 10427,
+      "record": {
+        "sequence": 2188,
+        "receivedAtUtc": "2026-10-08T09:17:59.1440429+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 71,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:ee5fb7004cf748368cd550bf02129f4d",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.vegetable_soup"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:ee5fb7004cf748368cd550bf02129f4d",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "food.vegetable_soup",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 10428,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "ingredient.salt": 1,
+                    "crop.carrot": 1,
+                    "crop.tomato": 2,
+                    "crop.potato": 1,
+                    "fish.carp": 11,
+                    "fish.trout": 10,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 71,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 38
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 10426,
+          "unconsumedSeconds": 0.02866359999998859,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 11284,
+      "record": {
+        "sequence": 3045,
+        "receivedAtUtc": "2026-10-08T09:18:41.9068077+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 72,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a4c1958819f2460e92c0968c8a753797",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.grilled_fish"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a4c1958819f2460e92c0968c8a753797",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "food.grilled_fish",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 11285,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 2,
+                    "food.grilled_fish": 1,
+                    "crop.carrot": 1,
+                    "crop.tomato": 2,
+                    "crop.potato": 1,
+                    "fish.carp": 10,
+                    "fish.trout": 10,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 72,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 39
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 11283,
+          "unconsumedSeconds": 0.04333449999998493,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 11524,
+      "record": {
+        "sequence": 3285,
+        "receivedAtUtc": "2026-10-08T09:18:53.8105203+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 73,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:78b8f5ce39204854bc5629f05e8bbaf1",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.tomato_egg"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:78b8f5ce39204854bc5629f05e8bbaf1",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "food.tomato_egg",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 11525,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "ingredient.flour": 1,
+                    "animal_product.egg": 1,
+                    "food.grilled_fish": 1,
+                    "crop.carrot": 1,
+                    "crop.tomato": 1,
+                    "crop.potato": 1,
+                    "fish.carp": 10,
+                    "fish.trout": 10,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.tomato_egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 73,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 40
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 11523,
+          "unconsumedSeconds": 0.033884299999986545,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 11745,
+      "record": {
+        "sequence": 3506,
+        "receivedAtUtc": "2026-10-08T09:19:04.7637051+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 74,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:7ef161977ae14b2b8085903c28a2355e",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.fish_pie"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:7ef161977ae14b2b8085903c28a2355e",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "food.fish_pie",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 11746,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "food.fish_pie": 1,
+                    "food.grilled_fish": 1,
+                    "crop.carrot": 1,
+                    "crop.tomato": 1,
+                    "crop.potato": 1,
+                    "fish.carp": 10,
+                    "fish.trout": 9,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.tomato_egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 74,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 41
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 11744,
+          "unconsumedSeconds": 0.034196999999969516,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 11886,
+      "record": {
+        "sequence": 3647,
+        "receivedAtUtc": "2026-10-08T09:19:11.701487+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 75,
+            "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+            "worldMinute": 6339.749999999422,
+            "request": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a498bd0cd4604227a1eb92e6391cc69b",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.fish_pie"
+            },
+            "result": {
+              "operationId": "80b13e4f67d14d54828c8b5116b143e4:player:a498bd0cd4604227a1eb92e6391cc69b",
+              "succeeded": false,
+              "code": "insufficient_ingredients",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 771936153,
+            "randomStateAfter": 771936153,
+            "checkpoint": {
+              "branchId": "80b13e4f67d14d54828c8b5116b143e4",
+              "parentBranchId": "812eeb2d6752429abca6d39662d31b5d",
+              "sourceSnapshotId": "c3fa2fc4db9d4ca68897d00461e38958",
+              "forkSequence": 7853,
+              "worldMinute": 6339.749999999422,
+              "playerPosition": {
+                "x": 444,
+                "y": 431.33331298828125
+              },
+              "playerFacing": {
+                "x": -0.789356757253093,
+                "y": 0.6139347764859729
+              },
+              "sequence": 11886,
+              "economy": {
+                "player": {
+                  "coins": 185,
+                  "slotCapacity": 24,
+                  "inventory": {
+                    "food.fish_pie": 1,
+                    "food.grilled_fish": 1,
+                    "crop.carrot": 1,
+                    "crop.tomato": 1,
+                    "crop.potato": 1,
+                    "fish.carp": 10,
+                    "fish.trout": 9,
+                    "fish.bass": 5,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.tomato_egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10115,
+                    "inventory": {
+                      "feed.chicken": 10,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 5,
+                      "seed.carrot": 5,
+                      "seed.potato": 4,
+                      "seed.tomato": 3
+                    }
+                  }
+                ],
+                "inputSequence": 75,
+                "receiptCount": 6
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 1,
+                    "harvestedCount": 1
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 4,
+                "mornings": [
+                  {
+                    "inputSequence": 14,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 25,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 31,
+                    "day": 3
+                  },
+                  {
+                    "inputSequence": 35,
+                    "day": 4
+                  }
+                ],
+                "farmReceiptCount": 15,
+                "sleepReceiptCount": 8
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 2,
+                    "collectedCount": 2
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 771936153,
+                "fishingDrawCount": 27,
+                "receiptCount": 42
+              }
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 11885,
+          "unconsumedSeconds": 0.02609739999997776,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 14310,
+      "record": {
+        "sequence": 2116,
+        "receivedAtUtc": "2026-10-08T09:21:09.998361+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 76,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:12d18cc2428d47e69712445f3887535d",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "food.baked_potato",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 50
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:12d18cc2428d47e69712445f3887535d",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 50,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 235,
+                "slotCapacity": 24,
+                "inventory": {
+                  "food.fish_pie": 1,
+                  "food.grilled_fish": 1,
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5,
+                  "food.vegetable_soup": 1,
+                  "food.tomato_egg": 1
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 10065,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 5,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1
+                  }
+                }
+              ],
+              "inputSequence": 76,
+              "receiptCount": 7
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 14309,
+          "unconsumedSeconds": 0.033496499999935245,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 14558,
+      "record": {
+        "sequence": 2365,
+        "receivedAtUtc": "2026-10-08T09:21:22.3325568+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 77,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:606f6e5cdece42459c47a3296a4a4f0e",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "food.vegetable_soup",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 60
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:606f6e5cdece42459c47a3296a4a4f0e",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 60,
+              "totalPrice": 60,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 295,
+                "slotCapacity": 24,
+                "inventory": {
+                  "food.fish_pie": 1,
+                  "food.grilled_fish": 1,
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5,
+                  "food.tomato_egg": 1
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 10005,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 5,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1
+                  }
+                }
+              ],
+              "inputSequence": 77,
+              "receiptCount": 8
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 14557,
+          "unconsumedSeconds": 0.01704179999996025,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 14969,
+      "record": {
+        "sequence": 2777,
+        "receivedAtUtc": "2026-10-08T09:21:42.8110676+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 78,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:c306d810713c40f88765aaf9d24829dd",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "food.grilled_fish",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 55
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:c306d810713c40f88765aaf9d24829dd",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 55,
+              "totalPrice": 55,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 350,
+                "slotCapacity": 24,
+                "inventory": {
+                  "food.fish_pie": 1,
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5,
+                  "food.tomato_egg": 1
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9950,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 5,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.grilled_fish": 1
+                  }
+                }
+              ],
+              "inputSequence": 78,
+              "receiptCount": 9
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 14968,
+          "unconsumedSeconds": 0.0011262999999535894,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 15216,
+      "record": {
+        "sequence": 3025,
+        "receivedAtUtc": "2026-10-08T09:21:55.1105875+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 79,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:9c99a13f227c42f193c193aca2513690",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "food.tomato_egg",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 75
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:9c99a13f227c42f193c193aca2513690",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 75,
+              "totalPrice": 75,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 425,
+                "slotCapacity": 24,
+                "inventory": {
+                  "food.fish_pie": 1,
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9875,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 5,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.grilled_fish": 1,
+                    "food.tomato_egg": 1
+                  }
+                }
+              ],
+              "inputSequence": 79,
+              "receiptCount": 10
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 15215,
+          "unconsumedSeconds": 0.01060899999994247,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 15666,
+      "record": {
+        "sequence": 3476,
+        "receivedAtUtc": "2026-10-08T09:22:17.5970518+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 80,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:f3240fd8e32742f59b25aea0315b007b",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "food.fish_pie",
+              "direction": "sell",
+              "quantity": 1,
+              "expectedUnitPrice": 100
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:f3240fd8e32742f59b25aea0315b007b",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 100,
+              "totalPrice": 100,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 525,
+                "slotCapacity": 24,
+                "inventory": {
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9775,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 5,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.grilled_fish": 1,
+                    "food.tomato_egg": 1,
+                    "food.fish_pie": 1
+                  }
+                }
+              ],
+              "inputSequence": 80,
+              "receiptCount": 11
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 15665,
+          "unconsumedSeconds": 0.0395762999999633,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "recipes-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 16250,
+      "record": {
+        "sequence": 4061,
+        "receivedAtUtc": "2026-10-08T09:22:46.7300468+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 81,
+            "branchId": "bd072de1b44f418c917c2c66aaab8cf8",
+            "worldMinute": 6352.449999999237,
+            "kind": "trade",
+            "trade": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:803bcb03917243cdbaef4bda96b1062f",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "seed.carrot",
+              "direction": "buy",
+              "quantity": 1,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "bd072de1b44f418c917c2c66aaab8cf8:player:803bcb03917243cdbaef4bda96b1062f",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 25,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 500,
+                "slotCapacity": 24,
+                "inventory": {
+                  "crop.carrot": 1,
+                  "crop.tomato": 1,
+                  "crop.potato": 1,
+                  "fish.carp": 10,
+                  "fish.trout": 9,
+                  "fish.bass": 5,
+                  "seed.carrot": 1
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9800,
+                  "inventory": {
+                    "feed.chicken": 10,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 5,
+                    "seed.carrot": 4,
+                    "seed.potato": 4,
+                    "seed.tomato": 3,
+                    "food.baked_potato": 1,
+                    "food.vegetable_soup": 1,
+                    "food.grilled_fish": 1,
+                    "food.tomato_egg": 1,
+                    "food.fish_pie": 1
+                  }
+                }
+              ],
+              "inputSequence": 81,
+              "receiptCount": 12
+            }
+          },
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "worldSequenceBefore": 16249,
+          "unconsumedSeconds": 0.023109699999937824,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 3529,
+      "record": {
+        "sequence": 256,
+        "receivedAtUtc": "2026-10-08T09:23:50.5861957+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 14,
+            "branchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+            "worldMinute": 4862.624999999962,
+            "request": {
+              "operationId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c:player:9a3853cc3ae9431ebdeef09051b89ee1",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "feed",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c:player:9a3853cc3ae9431ebdeef09051b89ee1",
+              "succeeded": false,
+              "code": "product_pending",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+              "parentBranchId": "ac8794b69e1541519ecc64de3ded183a",
+              "sourceSnapshotId": "5d9e19862aba4053abeee4124d6a9cbc",
+              "forkSequence": 2921,
+              "worldMinute": 4862.624999999962,
+              "playerPosition": {
+                "x": 128,
+                "y": 388
+              },
+              "playerFacing": {
+                "x": -0.7682212795973759,
+                "y": -0.6401843996644798
+              },
+              "sequence": 3529,
+              "economy": {
+                "player": {
+                  "coins": 300,
+                  "slotCapacity": 5,
+                  "inventory": {
+                    "crop.carrot": 2,
+                    "crop.tomato": 2,
+                    "feed.chicken": 1,
+                    "ingredient.flour": 2,
+                    "ingredient.salt": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10000,
+                    "inventory": {
+                      "feed.chicken": 11,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 8,
+                      "seed.potato": 4
+                    }
+                  }
+                ],
+                "inputSequence": 14,
+                "receiptCount": 0
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 3,
+                "mornings": [
+                  {
+                    "inputSequence": 4,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 7,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 10,
+                    "day": 3
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 6
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": true,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 5
+              }
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 3528,
+          "unconsumedSeconds": 0.031495100000002926,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 3679,
+      "record": {
+        "sequence": 407,
+        "receivedAtUtc": "2026-10-08T09:23:58.0472425+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 15,
+            "branchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+            "worldMinute": 4862.624999999962,
+            "request": {
+              "operationId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c:player:750d064a1ace49e2bc1e3c31f98e3aed",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "collect",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c:player:750d064a1ace49e2bc1e3c31f98e3aed",
+              "succeeded": false,
+              "code": "inventory_full",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+              "parentBranchId": "ac8794b69e1541519ecc64de3ded183a",
+              "sourceSnapshotId": "5d9e19862aba4053abeee4124d6a9cbc",
+              "forkSequence": 2921,
+              "worldMinute": 4862.624999999962,
+              "playerPosition": {
+                "x": 128,
+                "y": 388
+              },
+              "playerFacing": {
+                "x": -0.7682212795973759,
+                "y": -0.6401843996644798
+              },
+              "sequence": 3679,
+              "economy": {
+                "player": {
+                  "coins": 300,
+                  "slotCapacity": 5,
+                  "inventory": {
+                    "crop.carrot": 2,
+                    "crop.tomato": 2,
+                    "feed.chicken": 1,
+                    "ingredient.flour": 2,
+                    "ingredient.salt": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10000,
+                    "inventory": {
+                      "feed.chicken": 11,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 8,
+                      "seed.potato": 4
+                    }
+                  }
+                ],
+                "inputSequence": 15,
+                "receiptCount": 0
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 3,
+                "mornings": [
+                  {
+                    "inputSequence": 4,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 7,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 10,
+                    "day": 3
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 6
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": true,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 6
+              }
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 3678,
+          "unconsumedSeconds": 0.04618150000000046,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 5444,
+      "record": {
+        "sequence": 1168,
+        "receivedAtUtc": "2026-10-08T09:25:11.5856811+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 16,
+            "branchId": "d1902e65048b476ca5ea890008012535",
+            "worldMinute": 4877.249999999749,
+            "request": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:168f73a03d8549e0853fe1c3378cd3cf",
+              "actorId": "player",
+              "targetId": "kitchen.town.cafe",
+              "action": "cook",
+              "definitionId": "recipe.vegetable_soup"
+            },
+            "result": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:168f73a03d8549e0853fe1c3378cd3cf",
+              "succeeded": false,
+              "code": "inventory_full",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "d1902e65048b476ca5ea890008012535",
+              "parentBranchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+              "sourceSnapshotId": "dafb777f31354ecbb1b706a874754c87",
+              "forkSequence": 3814,
+              "worldMinute": 4877.249999999749,
+              "playerPosition": {
+                "x": 444.66668701171875,
+                "y": 431.3333435058594
+              },
+              "playerFacing": {
+                "x": 0.4741018567604555,
+                "y": -0.8804700048362174
+              },
+              "sequence": 5444,
+              "economy": {
+                "player": {
+                  "coins": 300,
+                  "slotCapacity": 5,
+                  "inventory": {
+                    "crop.carrot": 2,
+                    "crop.tomato": 2,
+                    "feed.chicken": 1,
+                    "ingredient.flour": 2,
+                    "ingredient.salt": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10000,
+                    "inventory": {
+                      "feed.chicken": 11,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 8,
+                      "seed.potato": 4
+                    }
+                  }
+                ],
+                "inputSequence": 16,
+                "receiptCount": 0
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 3,
+                "mornings": [
+                  {
+                    "inputSequence": 4,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 7,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 10,
+                    "day": 3
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 6
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": true,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 7
+              }
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 5443,
+          "unconsumedSeconds": 0.01455839999999814,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 6492,
+      "record": {
+        "sequence": 1966,
+        "receivedAtUtc": "2026-10-08T09:25:51.0485319+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 17,
+            "branchId": "d1902e65048b476ca5ea890008012535",
+            "worldMinute": 4889.0999999995765,
+            "request": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:1d3dffe79ee44621991355380802b4a9",
+              "actorId": "player",
+              "targetId": "fishing.town.pond",
+              "action": "fish",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:1d3dffe79ee44621991355380802b4a9",
+              "succeeded": false,
+              "code": "inventory_full",
+              "resourceId": null,
+              "quantity": 0,
+              "roll": 30,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "d1902e65048b476ca5ea890008012535",
+              "parentBranchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+              "sourceSnapshotId": "dafb777f31354ecbb1b706a874754c87",
+              "forkSequence": 3814,
+              "worldMinute": 4889.0999999995765,
+              "playerPosition": {
+                "x": 680.6665649414062,
+                "y": 362.6666564941406
+              },
+              "playerFacing": {
+                "x": 0.9874405755026416,
+                "y": 0.15799085369416802
+              },
+              "sequence": 6492,
+              "economy": {
+                "player": {
+                  "coins": 300,
+                  "slotCapacity": 5,
+                  "inventory": {
+                    "crop.carrot": 2,
+                    "crop.tomato": 2,
+                    "feed.chicken": 1,
+                    "ingredient.flour": 2,
+                    "ingredient.salt": 2
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 10000,
+                    "inventory": {
+                      "feed.chicken": 11,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 8,
+                      "seed.potato": 4
+                    }
+                  }
+                ],
+                "inputSequence": 17,
+                "receiptCount": 0
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 3,
+                "mornings": [
+                  {
+                    "inputSequence": 4,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 7,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 10,
+                    "day": 3
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 6
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": true,
+                    "generation": 1,
+                    "collectedCount": 0
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 8
+              }
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 6491,
+          "unconsumedSeconds": 0.02306930000000333,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 8123,
+      "record": {
+        "sequence": 3389,
+        "receivedAtUtc": "2026-10-08T09:27:01.7290945+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 18,
+            "branchId": "d1902e65048b476ca5ea890008012535",
+            "worldMinute": 4899.949999999419,
+            "kind": "trade",
+            "trade": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:09cbcc8f501a4c2f9bcbd2ec102b2d79",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.carrot",
+              "direction": "sell",
+              "quantity": 2,
+              "expectedUnitPrice": 25
+            },
+            "tradeResult": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:09cbcc8f501a4c2f9bcbd2ec102b2d79",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 25,
+              "totalPrice": 50,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 350,
+                "slotCapacity": 5,
+                "inventory": {
+                  "crop.tomato": 2,
+                  "feed.chicken": 1,
+                  "ingredient.flour": 2,
+                  "ingredient.salt": 2
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9950,
+                  "inventory": {
+                    "feed.chicken": 11,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 8,
+                    "seed.potato": 4,
+                    "crop.carrot": 2
+                  }
+                }
+              ],
+              "inputSequence": 18,
+              "receiptCount": 1
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 8122,
+          "unconsumedSeconds": 0.0037390999999749736,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 8613,
+      "record": {
+        "sequence": 3880,
+        "receivedAtUtc": "2026-10-08T09:27:26.1824564+00:00",
+        "kind": "player_economy_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 19,
+            "branchId": "d1902e65048b476ca5ea890008012535",
+            "worldMinute": 4899.949999999419,
+            "kind": "trade",
+            "trade": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:5a4741023c1e40e08d3428b28a52bdf8",
+              "actorId": "player",
+              "shopId": "shop.town.general",
+              "resourceId": "crop.tomato",
+              "direction": "sell",
+              "quantity": 2,
+              "expectedUnitPrice": 30
+            },
+            "tradeResult": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:5a4741023c1e40e08d3428b28a52bdf8",
+              "succeeded": true,
+              "code": "accepted",
+              "unitPrice": 30,
+              "totalPrice": 60,
+              "isDuplicate": false
+            },
+            "selection": null,
+            "selectionResult": null,
+            "checkpoint": {
+              "player": {
+                "coins": 410,
+                "slotCapacity": 5,
+                "inventory": {
+                  "feed.chicken": 1,
+                  "ingredient.flour": 2,
+                  "ingredient.salt": 2
+                },
+                "selectedQuickbarIndex": 0
+              },
+              "shops": [
+                {
+                  "id": "shop.town.general",
+                  "coins": 9890,
+                  "inventory": {
+                    "feed.chicken": 11,
+                    "ingredient.flour": 3,
+                    "ingredient.salt": 8,
+                    "seed.potato": 4,
+                    "crop.carrot": 2,
+                    "crop.tomato": 2
+                  }
+                }
+              ],
+              "inputSequence": 19,
+              "receiptCount": 2
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 8612,
+          "unconsumedSeconds": 0.0047341999999737094,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "shop"
+          ]
+        }
+      }
+    },
+    {
+      "sessionDirectory": "capacity-1920",
+      "sourceJournal": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "inputAttribution": "operator_declared_os_mouse_keyboard",
+      "coreJournalSequence": 11024,
+      "record": {
+        "sequence": 5785,
+        "receivedAtUtc": "2026-10-08T09:29:00.6778533+00:00",
+        "kind": "player_production_command",
+        "data": {
+          "schemaVersion": 1,
+          "operation": {
+            "schemaVersion": 1,
+            "inputSequence": 20,
+            "branchId": "d1902e65048b476ca5ea890008012535",
+            "worldMinute": 4931.599999998958,
+            "request": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:1ebedffd66654d84af7eeda84ad1f348",
+              "actorId": "player",
+              "targetId": "animal.hen_01",
+              "action": "collect",
+              "definitionId": null
+            },
+            "result": {
+              "operationId": "d1902e65048b476ca5ea890008012535:player:1ebedffd66654d84af7eeda84ad1f348",
+              "succeeded": true,
+              "code": "accepted",
+              "resourceId": "animal_product.egg",
+              "quantity": 1,
+              "roll": null,
+              "isDuplicate": false
+            },
+            "randomStateBefore": 12345,
+            "randomStateAfter": 12345,
+            "checkpoint": {
+              "branchId": "d1902e65048b476ca5ea890008012535",
+              "parentBranchId": "4b6cc34f8f394ad5b0be6a9ed50c1c3c",
+              "sourceSnapshotId": "dafb777f31354ecbb1b706a874754c87",
+              "forkSequence": 3814,
+              "worldMinute": 4931.599999998958,
+              "playerPosition": {
+                "x": 143.33334350585938,
+                "y": 390.0002136230469
+              },
+              "playerFacing": {
+                "x": -0.8696825945679634,
+                "y": 0.4936113701137115
+              },
+              "sequence": 11025,
+              "economy": {
+                "player": {
+                  "coins": 410,
+                  "slotCapacity": 5,
+                  "inventory": {
+                    "feed.chicken": 1,
+                    "ingredient.flour": 2,
+                    "ingredient.salt": 2,
+                    "animal_product.egg": 1
+                  },
+                  "selectedQuickbarIndex": 0
+                },
+                "shops": [
+                  {
+                    "id": "shop.town.general",
+                    "coins": 9890,
+                    "inventory": {
+                      "feed.chicken": 11,
+                      "ingredient.flour": 3,
+                      "ingredient.salt": 8,
+                      "seed.potato": 4,
+                      "crop.carrot": 2,
+                      "crop.tomato": 2
+                    }
+                  }
+                ],
+                "inputSequence": 20,
+                "receiptCount": 2
+              },
+              "farming": {
+                "plots": [
+                  {
+                    "id": "plot.01",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.02",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.03",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.04",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.05",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  },
+                  {
+                    "id": "plot.06",
+                    "cropId": null,
+                    "growthDays": 0,
+                    "watered": false,
+                    "mature": false,
+                    "generation": 0,
+                    "harvestedCount": 0
+                  }
+                ],
+                "lastSettledDay": 3,
+                "mornings": [
+                  {
+                    "inputSequence": 4,
+                    "day": 1
+                  },
+                  {
+                    "inputSequence": 7,
+                    "day": 2
+                  },
+                  {
+                    "inputSequence": 10,
+                    "day": 3
+                  }
+                ],
+                "farmReceiptCount": 0,
+                "sleepReceiptCount": 6
+              },
+              "production": {
+                "chickens": [
+                  {
+                    "id": "animal.hen_01",
+                    "fed": false,
+                    "productReady": false,
+                    "generation": 1,
+                    "collectedCount": 1
+                  }
+                ],
+                "fishingRandomVersion": "xorshift32-mod100-v1",
+                "fishingRandomState": 12345,
+                "fishingDrawCount": 0,
+                "receiptCount": 9
+              }
+            }
+          },
+          "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+          "worldSequenceBefore": 11023,
+          "unconsumedSeconds": 0.045052100000004855,
+          "playerRoute": null,
+          "playerRouteCursor": 0,
+          "pauseReasons": [
+            "production"
+          ]
+        }
+      }
+    }
+  ],
+  "checkpointScope": "Projected player/shop assets, farming, chicken/RNG state, lineage and input/time fields. Receipt counts replace repeated receipt dictionaries. The raw archive preserves complete journal checkpoint payloads."
+}

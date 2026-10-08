@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "manualSourceDirectory": "artifacts/manual-production-frozen-20261008T093418Z",
+  "inputAttribution": "operator_declared_os_mouse_keyboard",
+  "automaticManifest": "manifest.json",
+  "frozenAtUtc": "2026-10-08T09:37:44.893266+00:00",
+  "evidenceFiles": [
+    {
+      "path": "docs/verification/evidence/player-production/manual-acceptance-checklist.json",
+      "bytes": 3111,
+      "sha256": "34ccc1e6781cd24197a43b084c02a4dfab8bc78ac109e6133288bdf3d2aeb245"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-final-snapshots.json",
+      "bytes": 439142,
+      "sha256": "2f17fa69c1e3dba164dd3be1e195ef48dbdc238bce2b5e0cd1933292d9224240"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-input-checkpoints.json",
+      "bytes": 159681,
+      "sha256": "46a5b5aafe88113e1ffc30f1be4b786c13faad404ff810963d39b7bc63b3f02c"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-screenshot-inventory.json",
+      "bytes": 6314,
+      "sha256": "b2cd37de4b3d088d525c088155ddc8ee0f8ce30e920064803e22fefe75450204"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-summary.json",
+      "bytes": 209038,
+      "sha256": "a13392813235a88198f2582b5e78f84a36c40b88ce71beb128f004ac7f835cdd"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-basic-egg-ready.jpg",
+      "bytes": 70089,
+      "sha256": "96dc88943864e25f4d0d08dcc37a58638c4568355bf8e11e26f11468033cd2ce"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-basic-final-saved.jpg",
+      "bytes": 72585,
+      "sha256": "6b24463e89fecb7270f49253f04de3817387e839a7dc1021c4200338aaf69225"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-basic-second-collection-rejected.jpg",
+      "bytes": 72745,
+      "sha256": "b0667c6226e9fa70ff63375ead2fa3bbeb1dde7a7be37a619b2c11be94fef232"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-capacity-collect-succeeded.jpg",
+      "bytes": 71557,
+      "sha256": "edd57b51b5d060e45db4fefd438653f0fd0913902deef1a7ade0dce4b65bea97"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-capacity-cook-rejected.jpg",
+      "bytes": 66522,
+      "sha256": "f8ea90ca751adcec89189f582be6ed9d6eef750a6ff420003e677fccb7c6b52e"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-capacity-fishing-rejected.jpg",
+      "bytes": 72638,
+      "sha256": "b17f1e1e2f4959e8839222b4d734e112dabd8fbfa49320ea9ffd265ffca62834"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-capacity-two-slots-freed.jpg",
+      "bytes": 68044,
+      "sha256": "c70dfb06a29ea77ac2d737e18ea8f6be1757e3e3af84cd478ab9b5e9646caa65"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-recipes-all-products-inventory.jpg",
+      "bytes": 75657,
+      "sha256": "e718441d354eeb180d497fd6b1bcd0a6aca603accc79fd9e725a7c9cd38762dd"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-recipes-final-saved.jpg",
+      "bytes": 75616,
+      "sha256": "5223809662be72918d08791df0e2998816dc96108e95049ac9bda7b4865ae7b0"
+    },
+    {
+      "path": "docs/verification/evidence/player-production/manual-recipes-fishing-after-restore.jpg",
+      "bytes": 71272,
+      "sha256": "235748f15b80406008ef4fb4518d6406da9a386ad077ff6c9f30ef64cbeef70b"
+    }
+  ],
+  "rawArchive": {
+    "path": "artifacts/verification/20261008T072203Z-b9a0e31b/manual-run-records-7386308.zip",
+    "bytes": 7340165,
+    "sha256": "2d502f79f88d89b8377b059e5571280e68ecbda850306372fd1d417c02f72880"
+  },
+  "rawSourceFiles": [
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-1920/runs/5a0f6d92bb2f49ea97ca2d2c75ac4aeb/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-1920/runs/5a0f6d92bb2f49ea97ca2d2c75ac4aeb/events.jsonl",
+      "bytes": 3227953,
+      "sha256": "29d700030f7051227846ce3b0d426fce90ecc3027efffb97a3e835bfd6894fcd"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-1920/runs/5a0f6d92bb2f49ea97ca2d2c75ac4aeb/initial-state.json",
+      "bytes": 14995,
+      "sha256": "1b1bddb4c613dfc359aeb97a921e5ce52ec899f09b50671d33dc47108bd38d43"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-1920/runs/5a0f6d92bb2f49ea97ca2d2c75ac4aeb/manifest.json",
+      "bytes": 4058,
+      "sha256": "4c65ac89e072e67f19771474431923442d7fe8e3b2240b9fa02908436b96d2ff"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/events.jsonl",
+      "bytes": 4563972,
+      "sha256": "5b20cba5d736b8499440bc9d39d3f3d7f8f535f69b8fd6ffd0f915f773483eaf"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/initial-state.json",
+      "bytes": 14995,
+      "sha256": "63a68b1a8200c737c6e379e51abf8a06f39897ac1260e772fcea0be1a4d7e3ff"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/003782e97eb940f294fa7004dfe880e1/manifest.json",
+      "bytes": 4058,
+      "sha256": "8b6eeea8709fb7c75581d02c5dcaf5e536b576dd7f1d360054547743a33a02a1"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/events.jsonl",
+      "bytes": 6008478,
+      "sha256": "256f9a1c8fc4295fba8e49eb2fb3e089b7e466ba531bd74b2849d143ee69c030"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/initial-state.json",
+      "bytes": 172891,
+      "sha256": "7341b2f444ab264fa8045a4333098f0967f55cda39c784a3179e01983febc02c"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/runs/f9768473c21447dd84dc295ebd9820bf/manifest.json",
+      "bytes": 4118,
+      "sha256": "2eb489572ea680b312b40809fbd01d713cd9d307f3851be7e41e5508b5749894"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/save.json",
+      "bytes": 220364,
+      "sha256": "8f95cdbd31555650ea2c6100f5100605f43f1cb449765f1f53b552273f3cd496"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/basic-resumed-1920/save.json.previous",
+      "bytes": 172053,
+      "sha256": "a5c427a8968dd98cb96a3b1cd89050296732059a303086872eba2974bc50986a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/preparation.json",
+      "bytes": 647,
+      "sha256": "750e45121e02126b32732189e0119de4865fc9d90ecb2715000e7101e3504cd1"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/1ee8fa392be84743a0fc6b39bbc349b1/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/1ee8fa392be84743a0fc6b39bbc349b1/events.jsonl",
+      "bytes": 1077025,
+      "sha256": "f81506e6b81c0b0c1e527c4b0c0263d137fc5a4f42701c0844a5e6ea2f0ba367"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/1ee8fa392be84743a0fc6b39bbc349b1/initial-state.json",
+      "bytes": 15277,
+      "sha256": "ae597208197c5463cf890567b2dc96ef90f6c8bb7ebe59bd50c21341a4bf367c"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/1ee8fa392be84743a0fc6b39bbc349b1/manifest.json",
+      "bytes": 4096,
+      "sha256": "b315b1e4622d858dc5cc74cfc63989fe5951c7b07e430d5c9d87c846b9fc05b7"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/events.jsonl",
+      "bytes": 792810,
+      "sha256": "b6e8c94cc5078d9929120464752b903ba595f9bdcdad951fb8d498aaae86cce2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/initial-state.json",
+      "bytes": 128734,
+      "sha256": "0c312f0c340260a0628dd4099cfe701fd697e995b14777145cbfbe773b906d5f"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/4b6cc34f8f394ad5b0be6a9ed50c1c3c/manifest.json",
+      "bytes": 4156,
+      "sha256": "a9f425659d9d3b9661cbc836b15514d821e87a4c08928ecfa4721c8c6e2fdd83"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/ac8794b69e1541519ecc64de3ded183a/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/ac8794b69e1541519ecc64de3ded183a/events.jsonl",
+      "bytes": 3911283,
+      "sha256": "b43bb1efbd3dcc2794a564cdaa4be043bcec40a8d2f572c12adc5c577bb3dced"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/ac8794b69e1541519ecc64de3ded183a/initial-state.json",
+      "bytes": 15277,
+      "sha256": "f6bddce339c1569220ce2cc1b090a7f1fbdb37cdf06be609c10fdfa6c497d192"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/ac8794b69e1541519ecc64de3ded183a/manifest.json",
+      "bytes": 4096,
+      "sha256": "bf2d1099fd6b237c5874447ab1590a90c54b435d51387f7314d63e4d2c297e49"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/events.jsonl",
+      "bytes": 6075935,
+      "sha256": "9812086e3bdeebf4184ebdd3ab42f1453c823cd8ea62b87ded1e1006379b99b2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/initial-state.json",
+      "bytes": 110505,
+      "sha256": "1e23038dff1c123904f0e821a077eaab29aa80fd6382b2d4e60c23cb2b88e1bc"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d1902e65048b476ca5ea890008012535/manifest.json",
+      "bytes": 4156,
+      "sha256": "3146600bdbc80550a93263fb72bc5921aeb94498e0fc13783a8e47d4ffb8b878"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/events.jsonl",
+      "bytes": 777982,
+      "sha256": "9b102fc796560e9c34d249542ef8a529607dce7872d5a6eef1ad9d5cf90355c8"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/initial-state.json",
+      "bytes": 128734,
+      "sha256": "61bafda52fb5f215b8c60108622f7e2ef9948db4eb954cbbeff33cb07b472c44"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/manifest.json",
+      "bytes": 4156,
+      "sha256": "81ceea8b6a2a77f7a0edb91fbc2bfbf8a88bd67bec3a4222b7ab911e7372d84e"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/production-capacity-final-state.json",
+      "bytes": 127656,
+      "sha256": "4ca4f29d7e28bbb75b0251cc6fefb3dbb23ebdaf1d04b12046a2820bb9c3ed8b"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/production-capacity-input-checkpoints.json",
+      "bytes": 3283781,
+      "sha256": "7b25e5d12b02d4ba5c00ce3ea0dbee27f042814953578330ddc664ba9b66dab5"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/production-capacity-spatial-samples.json",
+      "bytes": 233517,
+      "sha256": "d2222587c7d90ce845145c925a712289e2675d5e7cacc59100def8ffd4d308f0"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/runs/d950043a64b54e1cba933f2502260924/production-capacity-verification-report.json",
+      "bytes": 4690,
+      "sha256": "0cdba7762f4cb1d123e550e4d1d408cbd36d7b1b9553b320127b7188ae7e55be"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/save.json",
+      "bytes": 109749,
+      "sha256": "f16ea3d9117fddc8e928680afacd8ef6a9716cbbea53e3176ede13c369fd49ce"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/capacity-1920/save.json.previous",
+      "bytes": 127907,
+      "sha256": "77b98d6d1f57a504d1cd97abad5e054d1c294e554030c85914d67fe722e22000"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/manual-audit-evidence.py",
+      "bytes": 33371,
+      "sha256": "48be6cf3bb196206e2de47388be37b87caf79fb1c8d08bb48d0682b44344f3cc"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/manual-source-freeze.json",
+      "bytes": 80609,
+      "sha256": "7c1438c256d0005e82db6df8549e42c5e10b01e33296e36c50c10eb0b2b87eb4"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/checkpoints/cooked-save.json",
+      "bytes": 209421,
+      "sha256": "193f2345a2833ad06f087f47777dfac0d5260d68a4df0ccf3957278778b09eca"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/checkpoints/fishing-save.json",
+      "bytes": 189414,
+      "sha256": "e4e99fbfba9fcd55aff5bd4474ddec71c2f0a59b2474527fbaad58fbf1e1706c"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/preparation.json",
+      "bytes": 818,
+      "sha256": "618ac155083c062e7231ead0a85ce3886ffd3af8f62401e316a576904fa40c36"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/events.jsonl",
+      "bytes": 3202046,
+      "sha256": "4caabe53698ce18b202f0b284b4e491f185e003966ccfec695b644269bb0e9e1"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/initial-state.json",
+      "bytes": 147212,
+      "sha256": "994441a7a1b7eee3ead1fe3318ff9714160856689fee9b47d8f176b1fd8abed8"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/manifest.json",
+      "bytes": 4118,
+      "sha256": "912263aa59efc4f4ad6b27dd10b2170b46a37e415b98eb576c5f569fc285edd5"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/production-cooked-save.json",
+      "bytes": 189584,
+      "sha256": "90f2ecfe1a50bb24dd4337b4d152f367349ef86850605daba592be376e8dacbf"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/219fb73fed5e44fb9a49de8f0df50f59/production-materials-save.json",
+      "bytes": 180468,
+      "sha256": "db1506ca352f0dd9ccf24cbc421ec6544e2f1fbdd9e4779df93ac64f78f5de34"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/696137aae6a84ae99c6255a9ea4e98a7/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/696137aae6a84ae99c6255a9ea4e98a7/events.jsonl",
+      "bytes": 759684,
+      "sha256": "c52bf4d85adb35c167d919ca6c9458e95b2af28305e57df5897fd28713e67836"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/696137aae6a84ae99c6255a9ea4e98a7/initial-state.json",
+      "bytes": 152130,
+      "sha256": "007e2a320db60a5c2e957c9d5dba8e65e6af778fb04a14e2886d186f60a98dc4"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/696137aae6a84ae99c6255a9ea4e98a7/manifest.json",
+      "bytes": 4118,
+      "sha256": "5080624d4ef545f26fe82338156792d311cf398ed144677597ea40b664a1c4b2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/696137aae6a84ae99c6255a9ea4e98a7/production-before-fishing-save.json",
+      "bytes": 146468,
+      "sha256": "4c636aa2e31fad273b953fd2f82f67cd810ed6fd77d078b8e31a0d152e3a9974"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/events.jsonl",
+      "bytes": 6568255,
+      "sha256": "06dafcc84b68d17203f66db1041edbbc77824131904079cddaf50329d664c3ba"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/initial-state.json",
+      "bytes": 124567,
+      "sha256": "85383f92fb51dba39f3e767d6a8e85ff2f00708fbb24c8ee3f455aac626814bb"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/manifest.json",
+      "bytes": 4118,
+      "sha256": "c47bdf179b44bb2cbafcd0444fa9798ea533e4b95ec168efbb267079c010e594"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/722b035d7a4b4afc81a5cdb74c9dc3c5/production-ready-save.json",
+      "bytes": 151386,
+      "sha256": "e4a970404a39a5a88dc6f90fca089fc528b24b9c75e7118a3091bbd91a5c6f96"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/events.jsonl",
+      "bytes": 3091865,
+      "sha256": "3f93009483bfa999c66fe48decea8ca38284604bc0d059c3055bc4bf44f490e5"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/initial-state.json",
+      "bytes": 190170,
+      "sha256": "16ff6cca0155d2aa8a4722df3bcf028f78aa3101e57ef692b111396a6bfdfac0"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/80b13e4f67d14d54828c8b5116b143e4/manifest.json",
+      "bytes": 4118,
+      "sha256": "c3ea6a04ed3d65b38b4c9a8697d74f14bd1886772751f02ea36b68ba24489adc"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/events.jsonl",
+      "bytes": 1769411,
+      "sha256": "950fa80cad09e4807415f950456e5355a5e6a8efc4b200a2b634646a57b40665"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/initial-state.json",
+      "bytes": 181212,
+      "sha256": "a3d045ee03aa11933eb9df842491a34a70615722e36982ba0aa2008ec52951ed"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/812eeb2d6752429abca6d39662d31b5d/manifest.json",
+      "bytes": 4118,
+      "sha256": "6dcc92d08aff691373a67d631c884d4911fa6074ff25e872b4fa859ba0caac21"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/a0f17af59af34043a1970f11cf4cd6c9/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/a0f17af59af34043a1970f11cf4cd6c9/events.jsonl",
+      "bytes": 738405,
+      "sha256": "21ce98c4822567d9bd892734162fcb071b70954a78f8f7ba3a2f1a0dceae2082"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/a0f17af59af34043a1970f11cf4cd6c9/initial-state.json",
+      "bytes": 14995,
+      "sha256": "59e66d9eaae1a1e1121cfac55a529c2805b6965932c7784d723e163e8ae75050"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/a0f17af59af34043a1970f11cf4cd6c9/manifest.json",
+      "bytes": 4058,
+      "sha256": "d8d3252f1ffe84a8c9e38faac23c4159949eea3441c4b6459d4f6bf010cca475"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/a0f17af59af34043a1970f11cf4cd6c9/production-fed-save.json",
+      "bytes": 123744,
+      "sha256": "b724c2b350accc82e153eefc0a074f4936c6c2d37cd87d1f545e8b92c3f1d850"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/events.jsonl",
+      "bytes": 2406727,
+      "sha256": "2d54dc9d71c29e238e22ce89b4dd5fe4aa5268da1b5479e28d4bbd802a1f7f88"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/initial-state.json",
+      "bytes": 210179,
+      "sha256": "6161b8541d6726e0f76ea3c85509de0942adcdddf09070c4a0ec45888cbd60ab"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/bd072de1b44f418c917c2c66aaab8cf8/manifest.json",
+      "bytes": 4118,
+      "sha256": "f808dc59996c0fef8732c2f6d0ad14b38e88cde5bba8698901a57691f6a925ca"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/f4435f9ca1b14c5190a560d623d066dd/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/f4435f9ca1b14c5190a560d623d066dd/events.jsonl",
+      "bytes": 1007444,
+      "sha256": "bc4179990e6172020e57c6d4190fe0ec95217208405011e05bc91d13ec7b352c"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/f4435f9ca1b14c5190a560d623d066dd/initial-state.json",
+      "bytes": 14995,
+      "sha256": "003e451d15f5d8c65fd49ea776a7982d775ec0cc03f7c0ab7eeaffa86a85d542"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/f4435f9ca1b14c5190a560d623d066dd/manifest.json",
+      "bytes": 4058,
+      "sha256": "3966fd3c8389e4040c7ab11674a162e115ed59eed8bfaefab07d653d9fa5307b"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/events.jsonl",
+      "bytes": 208172,
+      "sha256": "2f13b894d318fe6057eec84db215abe24f574b9f80e269279a7a5cf9dba7362a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/initial-state.json",
+      "bytes": 190328,
+      "sha256": "96f40feb2e5ab789d741370e5637215a0f900cd980d9d21aac50fe45c5b43d1a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/manifest.json",
+      "bytes": 4118,
+      "sha256": "4543c7cf394d2b3f5294a5c5ad01c581faf2fe84ff194c4fa2c2e5c03b7c4112"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/production-input-checkpoints.json",
+      "bytes": 10926214,
+      "sha256": "6652230bfbbc9e24e0fa53174c7b23cbfcf31a2fae2a5dd601bdd9a95f7f431a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/production-space-samples.json",
+      "bytes": 5854852,
+      "sha256": "c07b9982b7a3b0569054223207eb26c179acb656ddef7931feb82a412808dd7f"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/runs/fd951bcf09b84e94993f5358c8f4cb84/production-verification-report.json",
+      "bytes": 5762,
+      "sha256": "20855ac6684a5e4e384c470f9afeef90f5a2861a8b23ca820ee526052a39665d"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/save.json",
+      "bytes": 223315,
+      "sha256": "6dba9da5e8a02c24c2fcb89b05b4dce4e079f871cb6ff6279a370f6877fdf33a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/recipes-1920/save.json.previous",
+      "bytes": 209421,
+      "sha256": "193f2345a2833ad06f087f47777dfac0d5260d68a4df0ccf3957278778b09eca"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-crossed-morning.jpg",
+      "bytes": 74712,
+      "sha256": "ead93a59e0f031eb4b596460d7cdcd52a3ded9653849a596e1285496b037e835"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-egg-collected.jpg",
+      "bytes": 71753,
+      "sha256": "6d7ceecb5392db2acccd10a537251e9aa109d8185e4146d8cefc249383cc06f7"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-egg-ready.jpg",
+      "bytes": 70089,
+      "sha256": "96dc88943864e25f4d0d08dcc37a58638c4568355bf8e11e26f11468033cd2ce"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-egg-sold.jpg",
+      "bytes": 71671,
+      "sha256": "a2c20dbfffb8d435856e72aa5e464627193e92fcb88ddb78dd48f8f20719005e"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-fed-again-rejected.jpg",
+      "bytes": 71815,
+      "sha256": "b4ff168061523a036540d3a73296df45f59bc8b2d9a3558e78a89a0cc1cbde83"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-fed-restored.jpg",
+      "bytes": 71416,
+      "sha256": "6fd402f8df47761dff7341e676988b73227127ad21ceacaf4adcce1905fe91ab"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-fed-saved.jpg",
+      "bytes": 71761,
+      "sha256": "c2493efcaf98c122752c88db2e9e458dd102987543cbeee23bc1f4a9c12b05fc"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-fed.jpg",
+      "bytes": 71567,
+      "sha256": "2163b003f35b3c652fa939899d7306562a6a0aab8780832602aa9945e998759b"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-feed-bought.jpg",
+      "bytes": 71815,
+      "sha256": "045b326b5f3a5d211506e4794c14d845f15cb9298b39c1073654f83288a1a3a9"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-final-saved.jpg",
+      "bytes": 72585,
+      "sha256": "6b24463e89fecb7270f49253f04de3817387e839a7dc1021c4200338aaf69225"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-hen-idle.jpg",
+      "bytes": 70573,
+      "sha256": "2078b7189410a60439642351c7c055696858fb906c00e28325159184960c187f"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-resumed-start.jpg",
+      "bytes": 104967,
+      "sha256": "64e69c9ebee5b4689f4bec93b565fc570be4186b577e22515842a1f9214dd4ef"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-second-collection-rejected.jpg",
+      "bytes": 72745,
+      "sha256": "b0667c6226e9fa70ff63375ead2fa3bbeb1dde7a7be37a619b2c11be94fef232"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-shop.jpg",
+      "bytes": 71363,
+      "sha256": "77c5082e8d80fa0e94f042019d54a166c7b1f4004eeca38c7d7f48037eb9a262"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-sleep.jpg",
+      "bytes": 72861,
+      "sha256": "f879259fd5724714bc20a0f3d4b3052be06ef7f007a45d1123c7b26fa7f1d764"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-start.jpg",
+      "bytes": 107032,
+      "sha256": "f0e5b9ce246a85112f631485132b3280bf210bb4c5dd799bb996261556933fd6"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-collect-rejected.jpg",
+      "bytes": 72280,
+      "sha256": "f4165566b1ea8e212a8712204c1b8e15792045b29d5109863274328b4023ca8a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-collect-succeeded.jpg",
+      "bytes": 71557,
+      "sha256": "edd57b51b5d060e45db4fefd438653f0fd0913902deef1a7ade0dce4b65bea97"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-cook-rejected.jpg",
+      "bytes": 66522,
+      "sha256": "f8ea90ca751adcec89189f582be6ed9d6eef750a6ff420003e677fccb7c6b52e"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-fishing-rejected.jpg",
+      "bytes": 72638,
+      "sha256": "b17f1e1e2f4959e8839222b4d734e112dabd8fbfa49320ea9ffd265ffca62834"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-hen-ready.jpg",
+      "bytes": 70094,
+      "sha256": "e391aeab5590641f8b678740c2b8083bbdc4e9a25c87c787459f8c6c9817fc2d"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-pending-egg-restored.jpg",
+      "bytes": 102268,
+      "sha256": "fc0fd015ed7ee0a23dc2fd030481ca974a4766e5eb8fbbb1439a2ca65c656d12"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-pending-feed-rejected.jpg",
+      "bytes": 71852,
+      "sha256": "27efe12f9f356867eeda534cc29b27ca671d8bffbc540a61570bbe09d514f1fe"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-rejection-restored.jpg",
+      "bytes": 71447,
+      "sha256": "0622f49fe317d02140704419756e24f20a4c8461e69337f3fdc3825f77f06367"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-rejection-saved.jpg",
+      "bytes": 71731,
+      "sha256": "e617eb9afb7e14b8c7f1b98810713843bb238d42f688415055279d7b15ed88a3"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-sale-quantity-two.jpg",
+      "bytes": 67895,
+      "sha256": "69ea3dc64dafd58f297a3247d648dcb199a3cd2130669457c88bd4396dce2e64"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-slot-freed.jpg",
+      "bytes": 68386,
+      "sha256": "bf44458d174d1b2241dbd3ffa37fccc621bfa0cc58fad5c7db21737c7f10ff34"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-soup-materials.jpg",
+      "bytes": 64300,
+      "sha256": "ee3f47b63ffd75a88bfed6cfbed20d2d370cf2af4137253375a935b43034d115"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-two-slots-freed.jpg",
+      "bytes": 68044,
+      "sha256": "c70dfb06a29ea77ac2d737e18ea8f6be1757e3e3af84cd478ab9b5e9646caa65"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/inventory.json",
+      "bytes": 13352,
+      "sha256": "654368a1aa3422ac58ca71aa5d4f17f37cef19a96bf64c9e5d5cab581eddf487"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-all-products-inventory.jpg",
+      "bytes": 75657,
+      "sha256": "e718441d354eeb180d497fd6b1bcd0a6aca603accc79fd9e725a7c9cd38762dd"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-baked-potato.jpg",
+      "bytes": 65402,
+      "sha256": "1d371926cb34f5ac13bc873b8fc97ec79a7bff1aa16921036b4a51dc68e97318"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-cooked-restored.jpg",
+      "bytes": 67292,
+      "sha256": "620bfff33cdebf8b6b0d3f57d51830d69c3713c0db3e28b84033a31cf7ea23f7"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-cooked-saved.jpg",
+      "bytes": 67502,
+      "sha256": "71741ffb0a713c1b0833c174e5cac80c4c2c087d603b973d53c3c7c5f9da232c"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-final-saved.jpg",
+      "bytes": 75616,
+      "sha256": "5223809662be72918d08791df0e2998816dc96108e95049ac9bda7b4865ae7b0"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fish-caught.jpg",
+      "bytes": 71319,
+      "sha256": "3a782db178a9735cae99464380aed0135944445f019f55e13505886fa98c9628"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fish-pie.jpg",
+      "bytes": 66656,
+      "sha256": "bad783e1efa5cb49d349eb17b1a14baff1e1b0c418a14d423936791d76f65604"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-after-restore.jpg",
+      "bytes": 71272,
+      "sha256": "235748f15b80406008ef4fb4518d6406da9a386ad077ff6c9f30ef64cbeef70b"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-before-restore.jpg",
+      "bytes": 71283,
+      "sha256": "e164c74dc7337efc0792d7fc243de2028161a11b434f072e8a4fc0336f5c52a6"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-open.jpg",
+      "bytes": 70377,
+      "sha256": "8f499531b744be22b671562e52e9c22734546ba3dc42c1301e9e0e9bbcdccbd1"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-restored.jpg",
+      "bytes": 71635,
+      "sha256": "e58e14b0024230991187ff38d95081f44f83f0b65627c5bfa6255b06a958e187"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-saved.jpg",
+      "bytes": 71949,
+      "sha256": "4760c5f9b6c89fc83971258da6b0b0f79d53df3e5d3e8744546796373ac11074"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-grilled-fish.jpg",
+      "bytes": 64963,
+      "sha256": "242f1ba788aa03fc238ab02daabf21e10032099af312d53fd259a51983ed79c0"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-grilled-materials.jpg",
+      "bytes": 64486,
+      "sha256": "81807187b7bf5021a0589319436448d3861ef3d5e1f4da950a375b50bfe668cd"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-kitchen-materials.jpg",
+      "bytes": 64977,
+      "sha256": "72413a2aa23311149845899969247b311069b7c062932e2fd95116c28b6d4183"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-materials-restored.jpg",
+      "bytes": 106144,
+      "sha256": "efe11dd7b75de0af3ac992fd36f6812537d364d6b8375074d5a3b73f55c5cb47"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-missing-materials.jpg",
+      "bytes": 68125,
+      "sha256": "b3c2b3e2b98ae57fcfbade91514ad882785a15a92a5cdf0dafed7ddc48bee105"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-pie-materials.jpg",
+      "bytes": 65938,
+      "sha256": "d711af652c5d91b75fc5c8f61bdc76e27630af7905d18ad38d71b174dc69ed31"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-product-prices.jpg",
+      "bytes": 76132,
+      "sha256": "587d7423b5d40a9148388e896f14325535328f4cc66eb53f88397fa272dfe4b8"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-reinvested.jpg",
+      "bytes": 74952,
+      "sha256": "50bb8ca18470b1afb901e4abbda81944dbd4f969c59755d38250b4cbb3d27199"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-sold-all-five.jpg",
+      "bytes": 75824,
+      "sha256": "fedb73f2913bc22ec4c7fd90cfc4aec445044341f7658caaa9f45ed720dea022"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-sold-grilled.jpg",
+      "bytes": 76485,
+      "sha256": "f5644c9dbbe98f1e365b3825762bc14cf7d15be5e588240b1d1ac65f6a08fa88"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-sold-potato.jpg",
+      "bytes": 76679,
+      "sha256": "293d56929263e9cec7a0ee8b76560b9e3f5c2a974060478bd39fc87f82accc93"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-sold-soup.jpg",
+      "bytes": 76117,
+      "sha256": "b03be4e75d1c301725673af384483c7b98c0cb51dc3ae0bba16c69eff214c52a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-sold-tomato-egg.jpg",
+      "bytes": 76214,
+      "sha256": "2b3723f104f6b724cd930b0d225bc574f5647bc0ae50b50de3514bd260a3b92d"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-soup-materials.jpg",
+      "bytes": 65018,
+      "sha256": "3262f972156647d28c5ee920f9eb08b1eb11a05d3a8f8c0653f456638f762ec5"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-tomato-egg.jpg",
+      "bytes": 65716,
+      "sha256": "4f3ab0fee808a8757745c7285974b4a7b27f59aafa2ff40e14440c254a86694e"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-tomato-materials.jpg",
+      "bytes": 64990,
+      "sha256": "ffd5d5eeb8599db8518bcf205b72c7afee9cd7dc426f7e5ee77893c27c45772a"
+    },
+    {
+      "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-vegetable-soup.jpg",
+      "bytes": 65752,
+      "sha256": "51f0509b05d920167250a5c4ae13269243762118327257b61d1e477b3369d41d"
+    }
+  ],
+  "frozenSourceByteStabilityChecked": true,
+  "liveSourceStabilityClaimed": false,
+  "allArchiveMembersMatchSourceBytes": true,
+  "screenshotTransformation": "Original bytes retained with a manual- filename prefix.",
+  "jsonTransformation": "Derived JSON uses repository-relative paths, UTF-8, LF and two-space indentation. Input checkpoint state uses the documented projection; original complete records remain in the raw archive.",
+  "faultCountingRule": "Count retained save_failed, restore_rejected, dispatch_rejected records and pause_changed records with fault in activeReasons.",
+  "modelCallCountingRule": "Count model_dispatched journal records; rule decisions do not count as provider model calls.",
+  "evidenceSelection": {
+    "capturedScreenshotCount": 58,
+    "publishedEvidenceScreenshotCount": 10,
+    "rawArchiveRetainsAllSourceCaptures": true
+  }
+}

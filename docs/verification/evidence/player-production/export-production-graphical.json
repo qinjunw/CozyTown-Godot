@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_production_smoke",
+  "passed": true,
+  "scenario": "baseline",
+  "headless": false,
+  "mode": "rules",
+  "residents": 4,
+  "runtimeAssemblyLocation": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/windows/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll",
+  "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+  "checks": [
+    {
+      "name": "normal_new_game",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "missing_feed_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "missing_material_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "buy_initial_materials",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "plant_carrot_and_tomato",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "feed_once",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "already_fed_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "restore_fed_chicken",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "first_morning_egg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "collect_first_egg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "feed_second_cycle",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "buy_restocked_materials",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "three_crops_mature",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "pending_egg_does_not_stack",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "feed_with_pending_egg_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "restore_unclaimed_egg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "collect_second_egg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "repeated_collect_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "harvest_three_crops",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "restore_fishing_random",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "three_fish_and_empty_roll",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "cook_all_five_recipes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "restore_cooked_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "sell_processed_outputs",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "reinvest_production_income",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "external_pause_blocks_production",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "four_residents_followed_routes",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "versioned_production_checkpoints",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "shared_space_samples",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshots": {
+    "chicken": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical.png",
+    "ready": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-ready.png",
+    "fishing": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-fishing.png",
+    "kitchen": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-kitchen.png",
+    "cooked": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-cooked.png",
+    "sold": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-graphical-sold.png"
+  },
+  "runDirectories": [
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/a0f17af59af34043a1970f11cf4cd6c9",
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/722b035d7a4b4afc81a5cdb74c9dc3c5",
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/696137aae6a84ae99c6255a9ea4e98a7",
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/219fb73fed5e44fb9a49de8f0df50f59",
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-graphical/runs/fd951bcf09b84e94993f5358c8f4cb84"
+  ],
+  "coverage": "Normal empty new game: purchases, three crops, two chicken cycles, retained egg, saved fishing random state, three fish and empty roll, five recipes, save/restore, sales and reinvestment through Godot routes/UI callbacks and synthetic keys. Versioned inputs and shared scene queries are samples for future replay adapters. OS input is verified separately. No model calls."
+}

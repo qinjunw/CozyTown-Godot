@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "73863087c44c2cd91d4f29dac0083e3317153203",
+  "screenshotRule": "Capture names describe intended checkpoints. Journal commands and saved files determine counts, transaction results and final states.",
+  "sourceInventory": {
+    "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/inventory.json",
+    "bytes": 13352,
+    "sha256": "654368a1aa3422ac58ca71aa5d4f17f37cef19a96bf64c9e5d5cab581eddf487"
+  },
+  "screenshots": [
+    {
+      "name": "basic-egg-ready",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-egg-ready.jpg",
+        "bytes": 70089,
+        "sha256": "96dc88943864e25f4d0d08dcc37a58638c4568355bf8e11e26f11468033cd2ce"
+      },
+      "evidencePath": "manual-basic-egg-ready.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "basic-final-saved",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-final-saved.jpg",
+        "bytes": 72585,
+        "sha256": "6b24463e89fecb7270f49253f04de3817387e839a7dc1021c4200338aaf69225"
+      },
+      "evidencePath": "manual-basic-final-saved.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "basic-second-collection-rejected",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/basic-second-collection-rejected.jpg",
+        "bytes": 72745,
+        "sha256": "b0667c6226e9fa70ff63375ead2fa3bbeb1dde7a7be37a619b2c11be94fef232"
+      },
+      "evidencePath": "manual-basic-second-collection-rejected.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "capacity-collect-succeeded",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-collect-succeeded.jpg",
+        "bytes": 71557,
+        "sha256": "edd57b51b5d060e45db4fefd438653f0fd0913902deef1a7ade0dce4b65bea97"
+      },
+      "evidencePath": "manual-capacity-collect-succeeded.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "capacity-cook-rejected",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-cook-rejected.jpg",
+        "bytes": 66522,
+        "sha256": "f8ea90ca751adcec89189f582be6ed9d6eef750a6ff420003e677fccb7c6b52e"
+      },
+      "evidencePath": "manual-capacity-cook-rejected.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "capacity-fishing-rejected",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-fishing-rejected.jpg",
+        "bytes": 72638,
+        "sha256": "b17f1e1e2f4959e8839222b4d734e112dabd8fbfa49320ea9ffd265ffca62834"
+      },
+      "evidencePath": "manual-capacity-fishing-rejected.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "capacity-two-slots-freed",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/capacity-two-slots-freed.jpg",
+        "bytes": 68044,
+        "sha256": "c70dfb06a29ea77ac2d737e18ea8f6be1757e3e3af84cd478ab9b5e9646caa65"
+      },
+      "evidencePath": "manual-capacity-two-slots-freed.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "recipes-all-products-inventory",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-all-products-inventory.jpg",
+        "bytes": 75657,
+        "sha256": "e718441d354eeb180d497fd6b1bcd0a6aca603accc79fd9e725a7c9cd38762dd"
+      },
+      "evidencePath": "manual-recipes-all-products-inventory.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "recipes-final-saved",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-final-saved.jpg",
+        "bytes": 75616,
+        "sha256": "5223809662be72918d08791df0e2998816dc96108e95049ac9bda7b4865ae7b0"
+      },
+      "evidencePath": "manual-recipes-final-saved.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    },
+    {
+      "name": "recipes-fishing-after-restore",
+      "nameMeaning": "operator capture intent; displayed frame may lag input",
+      "source": {
+        "path": "artifacts/manual-production-frozen-20261008T093418Z/screenshots/recipes-fishing-after-restore.jpg",
+        "bytes": 71272,
+        "sha256": "235748f15b80406008ef4fb4518d6406da9a386ad077ff6c9f30ef64cbeef70b"
+      },
+      "evidencePath": "manual-recipes-fishing-after-restore.jpg",
+      "captureMetadata": {
+        "mime": "image/jpeg",
+        "width": 962,
+        "height": 570
+      }
+    }
+  ],
+  "capturedScreenshotCount": 58,
+  "publishedEvidenceScreenshotCount": 10,
+  "selectionRule": "Ten representative captures for egg readiness/rejection/sale, recipe products/RNG readback/reinvestment, full-bag rejection and collection after freeing slots. All 58 source captures remain in the raw archive."
+}

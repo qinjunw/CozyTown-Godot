@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "test": "godot_production_capacity_smoke",
+  "passed": true,
+  "scenario": "production-capacity-fixture",
+  "headless": false,
+  "mode": "rules",
+  "residents": 4,
+  "runtimeAssemblyLocation": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/windows/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll",
+  "contentFingerprint": "9e047bc6a9ec20d412a1bf1c83506d7a358b87efa27b4005175f144e3e343f64",
+  "checks": [
+    {
+      "name": "explicit_offline_capacity_fixture",
+      "passed": true,
+      "evidence": {
+        "scenario": "production-capacity-fixture",
+        "player": {
+          "coins": 300,
+          "slotCapacity": 5,
+          "inventory": {
+            "crop.carrot": 2,
+            "crop.tomato": 2,
+            "feed.chicken": 2,
+            "ingredient.flour": 2,
+            "ingredient.salt": 2
+          },
+          "selectedQuickbarIndex": 0
+        },
+        "fishingRandomVersion": "xorshift32-mod100-v1",
+        "fishingRandomState": 12345
+      }
+    },
+    {
+      "name": "chicken_ui_and_route",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "feeding_keeps_five_slots",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "already_fed_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "morning_produces_one_egg",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "unclaimed_egg_does_not_stack",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "pending_feed_preserves_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "full_collect_preserves_egg_and_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "rejected_collect_save_published",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "rejected_collect_restored_on_new_branch",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "kitchen_ui_and_route",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "full_cooking_preserves_ingredients",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "pond_ui_and_route",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "full_fishing_preserves_random_and_assets",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "selling_carrots_frees_one_slot",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "collect_succeeds_after_freeing_slot",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "selling_tomatoes_frees_one_slot",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "fishing_succeeds_after_freeing_slot",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "versioned_commands_and_checkpoints",
+      "passed": true,
+      "evidence": {
+        "commandCount": 16,
+        "productionCount": 8,
+        "expectedCount": 8
+      }
+    },
+    {
+      "name": "rejected_production_checkpoints_preserve_state",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "production_targets_have_scene_samples",
+      "passed": true,
+      "evidence": null
+    },
+    {
+      "name": "production_sources_and_transfers_are_separate",
+      "passed": true,
+      "evidence": null
+    }
+  ],
+  "screenshots": {
+    "failure": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-graphical.png",
+    "success": "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/export-production-capacity-graphical-success.png"
+  },
+  "runDirectories": [
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/ac8794b69e1541519ecc64de3ded183a",
+    "<repo>/artifacts/verification/20261008T072203Z-b9a0e31b/data/export-production-capacity-graphical/runs/d950043a64b54e1cba933f2502260924"
+  ],
+  "coverage": "Explicit five-slot offline fixture. Godot route queries and UI callbacks verify single unclaimed egg production, atomic full-inventory rejection for collection/cooking/fishing, saved-state restore and production after selling items. Versioned commands include RNG transitions and whole-world checkpoints. OS input is verified separately. No model calls."
+}
