@@ -36,5 +36,20 @@
     }
   ],
   "realModelSamples": 0,
-  "manualWindowsAcceptance": "not-in-scope"
+  "manualWindowsAcceptance": "not-in-scope",
+  "postSceneIntegration": {
+    "integrationBase": "1287f35",
+    "mergeCommit": "170d288bf7a0a1187fbc8b0fb3923401aa0c8ec1",
+    "modelTargetedPassed": 24,
+    "hostPassed": 141,
+    "failures": 0,
+    "gameConfiguration": "Debug",
+    "gameRestore": "locked",
+    "gameWarnings": 0,
+    "gameErrors": 0,
+    "fullProfileAlignedWithCore": true,
+    "budgetSnapshotShapeUnchanged": true,
+    "sceneMatrixRerun": false,
+    "externalRequests": 0
+  }
 }

@@ -41,3 +41,9 @@ dotnet build tools/CozyTown.Budget/CozyTown.Budget.csproj -c Release --no-restor
 [结果计数](evidence/full-demo-budget/results.json)、[CLI 检查](evidence/full-demo-budget/cli-results.json)、[合成初始快照](evidence/full-demo-budget/initialized-synthetic-budget.json)、[源码哈希](evidence/full-demo-budget/source-manifest.json)。完整测试 TRX 保存在候选制品的 `artifacts/budget-verification/`，其中包含本机运行路径，不提交到仓库。
 
 操作入口和配置模板见[模型库说明](../../src/CozyTown.Model/README.md)。本结果验证模型适配与账本；宿主的预算身份、四阶段路由、真实玩家生成入口、两天驱动与付费样本仍由[综合评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)接续。
+
+## 场景回放合入后的兼容检查
+
+合入集成提交 `1287f35` 后形成 `170d288bf7a0a1187fbc8b0fb3923401aa0c8ec1`。新预算相关 24 项模型测试及 141 项宿主测试再次通过；Godot 游戏执行锁定依赖还原和 Debug 构建，0 警告、0 错误。模型与核心的完整 Demo 配置在版本、身份、金额、预留、总量、并发和四阶段上限上相同；宿主使用的模型快照与核心预算状态保持相同字段。
+
+该检查确认新增模型配置与正式场景回放源码同时编译。模型源码变化会改变场景回放的模拟源码摘要；此前场景矩阵仍属于其原候选。综合入口票 [35](https://github.com/qinjunw/CozyTown-Godot/issues/35)将冻结新候选并重新生成回放输入。
