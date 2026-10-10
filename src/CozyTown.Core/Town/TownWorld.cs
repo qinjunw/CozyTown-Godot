@@ -10,7 +10,7 @@ public sealed partial class TownWorld
     private readonly TownContent _content;
     private readonly Func<string, TownPoint, TownPoint, bool>? _movementQuery;
     private TownState _state;
-    public string SessionId { get; } = Guid.NewGuid().ToString("N");
+    public string SessionId { get; private set; } = Guid.NewGuid().ToString("N");
     public TownState State => TownJson.Clone(_state);
     public IReadOnlyList<TownEvent> Events => _state.Events.ToArray();
     public double WorldMinute => _state.WorldMinute;
@@ -72,6 +72,7 @@ public sealed partial class TownWorld
 
     public void Advance(double worldMinutes, double realSeconds, bool paused = false, Action<long>? settlementGuard = null)
     {
+        using var trace = TraceInput("advance", new { worldMinutes, realSeconds, paused });
         EnsureEconomyNotCommitting();
         if (!TownContent.Finite(worldMinutes) || worldMinutes < 0 || worldMinutes > MaximumAdvanceMinutes || !TownContent.Finite(realSeconds) || realSeconds < 0 || realSeconds > 86400) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
         if (!paused && (_state.AcceptedWorldMinutes + worldMinutes > MaximumAdvanceMinutes || _state.WorldMinute + _state.AcceptedWorldMinutes + worldMinutes >= 1440 * 1_000_000)) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
@@ -125,8 +126,9 @@ public sealed partial class TownWorld
 
     public bool SetPlayerPosition(TownPoint position)
     {
+        using var trace = TraceInput("move", new { position });
         EnsureEconomyNotCommitting();
-        if (!_content.CanMove(_state.PlayerPosition, position) || (_movementQuery is not null && !_movementQuery("player", _state.PlayerPosition, position))) return false;
+        if (!_content.CanMove(_state.PlayerPosition, position) || !QueryMotion("player", _state.PlayerPosition, position)) return false;
         var distance = _state.PlayerPosition.DistanceTo(position);
         if (distance > .00001) _state.PlayerFacing = new TownPoint((position.X - _state.PlayerPosition.X) / distance, (position.Y - _state.PlayerPosition.Y) / distance);
         Log("player_moved", "player", "player", "accepted", data: new { from = _state.PlayerPosition, to = position });
@@ -135,6 +137,7 @@ public sealed partial class TownWorld
 
     public string TalkToResident(string residentId)
     {
+        using var trace = TraceInput("talk", new { residentId });
         EnsureEconomyNotCommitting();
         var resident = FindResident(residentId);
         if (resident.Position.DistanceTo(_state.PlayerPosition) > 42 || !HasSight(resident.Position, _state.PlayerPosition)) return "请走近一些再交谈。";
@@ -147,6 +150,7 @@ public sealed partial class TownWorld
 
     public IReadOnlyList<DecisionRequest> GetDecisionRequests()
     {
+        using var trace = TraceInput("decisions", new { });
         EnsureEconomyNotCommitting();
         UpdateSchedules();
         var order = Enumerable.Range(0, _state.Residents.Count).Select(i => _state.Residents[(_state.DecisionCursor + i) % _state.Residents.Count]).ToArray();
@@ -191,6 +195,7 @@ public sealed partial class TownWorld
 
     public bool MarkDispatched(string logicalRequestId, string attemptId)
     {
+        using var trace = TraceInput("dispatch", new { logicalRequestId, attemptId });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == logicalRequestId);
         if (pending is null || pending.Request.AttemptId is not null || pending.SealedResult is not null || string.IsNullOrWhiteSpace(attemptId)) return false;
@@ -204,6 +209,7 @@ public sealed partial class TownWorld
 
     public bool MarkResponseArrived(string sessionId, string logicalRequestId, string attemptId, double receivedAfterSeconds)
     {
+        using var trace = TraceInput("arrival", new { sessionId, logicalRequestId, attemptId, receivedAfterSeconds });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == logicalRequestId);
         string? reason = sessionId != SessionId ? "retired_session"
@@ -229,6 +235,7 @@ public sealed partial class TownWorld
 
     public bool ReceiveResult(DecisionResult result)
     {
+        using var trace = TraceInput("result", new { result });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == result.LogicalRequestId);
         var reason = result.SessionId != SessionId ? "retired_session" : _state.TerminalRequestIds.Contains(result.LogicalRequestId) ? "terminal_request" : pending is null ? "unknown_request" : pending.SealedResult is not null ? "duplicate_result" : pending.Request.ResidentId != result.ResidentId ? "wrong_resident" : pending.Request.AttemptId != result.AttemptId ? "wrong_attempt" : pending.ResponseArrivalSeconds is double arrived && Math.Abs(arrived - result.ReceivedAfterSeconds) > .000001 ? "arrival_time_conflict" : null;
@@ -500,7 +507,7 @@ public sealed partial class TownWorld
 
     private bool QueryMovement(ResidentState resident, TownPoint next)
     {
-        bool allowed = _content.CanMove(resident.Position, next) && (_movementQuery?.Invoke(resident.Id, resident.Position, next) ?? true);
+        bool allowed = _content.CanMove(resident.Position, next) && QueryMotion(resident.Id, resident.Position, next);
         Log("space_query", resident.Id, "world", allowed ? "clear" : "blocked", data: new { from = resident.Position, to = next, radius = TownContent.BodyRadius, allowed });
         return allowed;
     }
@@ -578,6 +585,7 @@ public sealed partial class TownWorld
 
     public void AcknowledgeEvents(long persistedSequence)
     {
+        using var trace = TraceInput("acknowledge", new { persistedSequence });
         EnsureEconomyNotCommitting();
         if (persistedSequence < 0 || persistedSequence > _state.Sequence) throw new ArgumentOutOfRangeException(nameof(persistedSequence));
         if (_state.Events.Count > 128) _state.Events.RemoveAll(e => e.Sequence <= persistedSequence && e.Sequence <= _state.Sequence - 128);

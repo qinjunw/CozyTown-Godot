@@ -29,39 +29,50 @@ public sealed class PersistentBudgetLedger
     {
         using var held = AcquireLock();
         var ledger = Read();
+        return ToBudgetSnapshot(ledger);
+    }
+
+    private static BudgetSnapshot ToBudgetSnapshot(LedgerDocument ledger)
+    {
         var attempts = ledger.Attempts.Select(ToSnapshot).ToArray();
         return new(BudgetId, "CNY", LimitMicros,
             attempts.Sum(a => a.SettledCostMicros), attempts.Sum(a => a.ReservedCostMicros),
             attempts.Length, attempts.Count(a => a.SlotHeld), ledger.StopReason, Array.AsReadOnly(attempts));
     }
 
-    public BudgetAttempt Reserve(ModelStage stage, string logicalRequestId, bool recovery = false) =>
+    public BudgetAttempt Reserve(ModelStage stage, string logicalRequestId, bool recovery = false, Action<BudgetAdmission>? recordAdmission = null) =>
         ReserveCore(stage switch
         {
             ModelStage.Baseline => "baseline", ModelStage.Counterfactual => "counterfactual",
             _ => throw new ModelException("stage_invalid")
-        }, logicalRequestId, recovery);
+        }, logicalRequestId, recovery, recordAdmission);
 
-    private BudgetAttempt ReserveCore(string stage, string logicalRequestId, bool recovery)
+    private BudgetAttempt ReserveCore(string stage, string logicalRequestId, bool recovery, Action<BudgetAdmission>? recordAdmission)
     {
         using var held = AcquireLock();
         var ledger = Read();
-        if (ledger.StopReason != null) throw new ModelException("ledger_stopped");
+        var before = ToBudgetSnapshot(ledger);
+        void Reject(string reason)
+        {
+            recordAdmission?.Invoke(new(stage, logicalRequestId, recovery, null, reason, before, before));
+            throw new ModelException(reason);
+        }
+        if (ledger.StopReason != null) Reject("ledger_stopped");
         if (!StageLimits.ContainsKey(stage) || string.IsNullOrWhiteSpace(logicalRequestId))
-            throw new ModelException("attempt_identity_invalid");
+            Reject("attempt_identity_invalid");
         var originals = ledger.Attempts.Where(a => a.LogicalRequestId == logicalRequestId && !a.Recovery).ToArray();
-        if (!recovery && originals.Length != 0) throw new ModelException("logical_request_already_sent");
+        if (!recovery && originals.Length != 0) Reject("logical_request_already_sent");
         if (recovery && (originals.Length != 1 || originals[0].Stage != stage))
-            throw new ModelException("recovery_original_missing_or_wrong_stage");
-        if (ledger.Attempts.Count >= TotalLimit) throw new ModelException("total_limit");
+            Reject("recovery_original_missing_or_wrong_stage");
+        if (ledger.Attempts.Count >= TotalLimit) Reject("total_limit");
         if (ledger.Attempts.Count(a => a.Stage == stage) >= StageLimits[stage])
-            throw new ModelException("stage_limit");
+            Reject("stage_limit");
         if (recovery && ledger.Attempts.Any(a => a.LogicalRequestId == logicalRequestId && a.Recovery))
-            throw new ModelException("recovery_limit");
+            Reject("recovery_limit");
         if (ledger.Attempts.Count(a => a.SlotHeld) >= ConcurrentLimit)
-            throw new ModelException("concurrency_limit");
+            Reject("concurrency_limit");
         long occupied = ledger.Attempts.Sum(a => checked(a.SettledCostMicros + a.ReservedCostMicros));
-        if (checked(occupied + ReserveMicros) > LimitMicros) throw new ModelException("money_limit");
+        if (checked(occupied + ReserveMicros) > LimitMicros) Reject("money_limit");
         var attempt = new AttemptRecord
         {
             AttemptId = Guid.NewGuid().ToString("D"), Stage = stage, LogicalRequestId = logicalRequestId,
@@ -70,6 +81,7 @@ public sealed class PersistentBudgetLedger
         };
         ledger.Attempts.Add(attempt);
         Write(ledger);
+        recordAdmission?.Invoke(new(stage, logicalRequestId, recovery, attempt.AttemptId, "accepted", before, ToBudgetSnapshot(ledger)));
         return ToSnapshot(attempt);
     }
 
