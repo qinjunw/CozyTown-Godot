@@ -1,0 +1,97 @@
+{
+  "packages": [
+    {
+      "file": "gameplay.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "sceneArguments": [],
+      "expectedMotionQueries": 3071
+    },
+    {
+      "file": "player-dialogue.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "sceneArguments": [],
+      "expectedMotionQueries": 22
+    },
+    {
+      "file": "player-dialogue-retired-restore.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "sceneArguments": [],
+      "expectedMotionQueries": 19
+    },
+    {
+      "file": "missing-scene.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "wrong-engine.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "wrong-radius.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "wrong-query.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "wrong-geometry.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "wrong-source.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "missing-resource.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "tampered-motion-fraction.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "missing-parent.json",
+      "expectedCoreCode": "missing_parent_prefix",
+      "expectedSceneCode": "missing_parent_prefix",
+      "sceneArguments": [],
+      "expectedMotionQueries": null
+    },
+    {
+      "file": "runtime-obstacle.json",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "sceneArguments": [
+        "--scene-replay-obstruct"
+      ],
+      "expectedMotionQueries": 1
+    }
+  ]
+}

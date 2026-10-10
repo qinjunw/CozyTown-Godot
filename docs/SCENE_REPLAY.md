@@ -39,4 +39,6 @@ tools/windows/verify-scene-replay.ps1 -ToolsRoot <installed-toolchain>
 
 脚本从公开 `--scene-replay-fixture` 入口生成实际 Godot 记录，对相同包执行核心 CLI、源场景 headless、Windows 导出 headless。样例覆盖玩家路线中途保存和父前缀恢复、键盘取消点击路线、阻塞操作、四居民规则互动，以及商店、农田、床、鸡、钓鱼点和厨房。玩家文本包覆盖四居民固定客户端、菜单/失焦封存、仅对话暂停展示，以及旧等待存档读取后终结旧生成且不导入未来文本。生成的 manifest 固定正常和故障包的预期报告；输出位于 ignored `artifacts/scene-replay/`。
 
+[2026-10-10 验证记录](verification/scene-replay-2026-10-10.md)及其归档包绑定源码冻结 `377f670c92a1fba022d773f69f9704ac4b3de94e`。复现归档包应使用该提交和锁定工具链；在当前候选验证时，运行上述脚本重新生成并回放记录。后续核心、模型适配器或宿主源码改变摘要时，当前构建拒绝旧归档包是预期结果。
+
 故障包分别缺少场景描述、资源或父前缀，并更改引擎、几何、半径、查询配置、源码摘要和记录中的 motion fraction。`--scene-replay-obstruct` 仅用于此验证：预检后在第一段较长移动的终点加入实际静态碰撞体，证明查询路径能在首个受影响的空间边界停止。它不会修改源地图文件。
