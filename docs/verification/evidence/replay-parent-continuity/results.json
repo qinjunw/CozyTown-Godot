@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "e37533173619d3d29cee6a09dc0426d16bbd779e",
+  "baseCommit": "ff81cbf1f28557036eccdaa468b6e7f2785299f5",
+  "sourceDirtyAtSceneBuild": false,
+  "simulationSourceDigest": "07975501034143f014140088b6083abcfb8030628cf43a4ee30f0af3a4b1abfa",
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "red": {
+    "inventedHost": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0
+    },
+    "missingHost": {
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0
+    },
+    "budgetStop": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0
+    },
+    "baselineHostAndCli": {
+      "total": 12,
+      "passed": 2,
+      "failed": 10,
+      "skipped": 0
+    }
+  },
+  "green": {
+    "newCore": {
+      "total": 33,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0
+    },
+    "newHostAndCli": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    },
+    "allCore": {
+      "total": 283,
+      "passed": 283,
+      "failed": 0,
+      "skipped": 0
+    },
+    "allHost": {
+      "total": 153,
+      "passed": 153,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "scene": {
+    "passed": true,
+    "expectedCommandOutcomes": 15,
+    "packages": [
+      {
+        "file": "gameplay.json",
+        "sha256": "35233a99d950606d52c9c4b799fde492fdfd4955d275837602e7a0687ef00cf0",
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 949,
+          "field": null,
+          "command": null,
+          "motionQueries": null,
+          "initialBodyQueries": null
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 949,
+          "field": null,
+          "command": null,
+          "motionQueries": 3071,
+          "initialBodyQueries": 10
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 949,
+          "field": null,
+          "command": null,
+          "motionQueries": 3071,
+          "initialBodyQueries": 10
+        }
+      },
+      {
+        "file": "player-dialogue.json",
+        "sha256": "f1ebc7743d68c51d048f203ecf19c3eb290aee33e06380d6019a9f787138281e",
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 98,
+          "field": null,
+          "command": null,
+          "motionQueries": null,
+          "initialBodyQueries": null
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 98,
+          "field": null,
+          "command": null,
+          "motionQueries": 22,
+          "initialBodyQueries": 5
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 98,
+          "field": null,
+          "command": null,
+          "motionQueries": 22,
+          "initialBodyQueries": 5
+        }
+      },
+      {
+        "file": "player-dialogue-retired-restore.json",
+        "sha256": "a3c3709eb5e4215061f3f906d89d3aa7e25176478f29d5b7c7517cfed86efec2",
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 4,
+          "field": null,
+          "command": null,
+          "motionQueries": null,
+          "initialBodyQueries": null
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 4,
+          "field": null,
+          "command": null,
+          "motionQueries": 19,
+          "initialBodyQueries": 10
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "boundary": 4,
+          "field": null,
+          "command": null,
+          "motionQueries": 19,
+          "initialBodyQueries": 10
+        }
+      },
+      {
+        "file": "parent-host-tamper.json",
+        "sha256": "f4bbbce0beda164ea361e66b9bf3407e8cfd679a12f10a93224b003a98941957",
+        "core": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 3,
+          "field": "parent.savedHost.unconsumedSeconds",
+          "command": "host_move",
+          "motionQueries": null,
+          "initialBodyQueries": null
+        },
+        "source": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 3,
+          "field": "parent.savedHost.unconsumedSeconds",
+          "command": "host_move",
+          "motionQueries": 1,
+          "initialBodyQueries": 5
+        },
+        "export": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 3,
+          "field": "parent.savedHost.unconsumedSeconds",
+          "command": "host_move",
+          "motionQueries": 1,
+          "initialBodyQueries": 5
+        }
+      },
+      {
+        "file": "parent-budget-rewind.json",
+        "sha256": "8e10b0cd680be54aaeada3a826080afcaf01b02c13dd28dcecfa53a0f7e91161",
+        "core": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 4,
+          "field": "parent.budget.external.stopReason",
+          "command": "budget_stop",
+          "motionQueries": null,
+          "initialBodyQueries": null
+        },
+        "source": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 4,
+          "field": "parent.budget.external.stopReason",
+          "command": "budget_stop",
+          "motionQueries": 1,
+          "initialBodyQueries": 5
+        },
+        "export": {
+          "passed": false,
+          "code": "divergence",
+          "boundary": 4,
+          "field": "parent.budget.external.stopReason",
+          "command": "budget_stop",
+          "motionQueries": 1,
+          "initialBodyQueries": 5
+        }
+      }
+    ]
+  },
+  "constraints": {
+    "syntheticBudgetOnly": true,
+    "liveKeysRead": false,
+    "realLedgerOpened": false,
+    "httpCalls": 0,
+    "nativeUiRuns": 0,
+    "windowsExportUsesBundledRuntime": true
+  }
+}
