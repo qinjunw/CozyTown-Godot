@@ -29,6 +29,7 @@ public partial class TownGame : Node2D
     private readonly List<object> _spaceQueries = [];
     private readonly List<ModelCompletion> _modelCompletions = [];
     private readonly List<TownEvent> _experimentEvents = [];
+    private readonly HashSet<(string BranchId, long Sequence)> _experimentEventIds = [];
     private readonly List<TownEvent> _recentEvents = [];
     private readonly List<DeepSeekClient> _clients = [];
     private DeepSeekClient? _model;
@@ -361,7 +362,7 @@ public partial class TownGame : Node2D
                 _inputHost.PruneTerminalRequests();
                 foreach (string key in _frozen.Keys.Where(terminal.Contains).ToArray()) _frozen.Remove(key);
             }
-            if (_automated) _experimentEvents.AddRange(events);
+            if (_automated) _experimentEvents.AddRange(events.Where(e => _experimentEventIds.Add((e.BranchId, e.Sequence))));
             foreach (TownEvent entry in events)
             {
                 if (entry.Kind is not ("time_input" or "space_query")) _recentEvents.Add(entry);

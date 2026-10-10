@@ -269,20 +269,7 @@ public partial class TownGame
             _finishing = true;
             _journal.WriteArtifact("full-demo-final-state.json", CaptureHostSnapshot());
             if (_model is not null) _journal.WriteArtifact("full-demo-final-budget.json", _model.Budget);
-            var branches = new List<object>();
-            foreach (var journal in _journals)
-            {
-                var package = journal.CaptureReplay();
-                journal.WriteArtifact("replay.json", package);
-                string export = Path.Combine(_userRoot, "exports", Path.GetFileName(journal.DirectoryPath) + ".zip");
-                journal.ExportSnapshotZip(export);
-                branches.Add(new { branchId = Path.GetFileName(journal.DirectoryPath), export,
-                    sha256 = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(export))),
-                    archiveBytes = new FileInfo(export).Length,
-                    packageBytes = new FileInfo(Path.Combine(journal.DirectoryPath, "replay.json")).Length,
-                    journalBytes = new FileInfo(Path.Combine(journal.DirectoryPath, "events.jsonl")).Length,
-                    boundaries = package.BoundaryCount, parentBoundaries = package.Parent?.Prefix.BoundaryCount ?? 0 });
-            }
+            var branches = _journals.Select(ExportFullDemoBranch).ToArray();
             var report = new { schemaVersion = 1, test = "full_demo_evaluation", passed = true, mode = _fullDemoFixed ? "fixed" : "real",
                 realAcceptanceEvaluated = false,
                 scenario = _scenario, input = _fullDemoPlan, inputSha256 = _fullDemoPlanHash,
@@ -301,14 +288,46 @@ public partial class TownGame
         catch (Exception error)
         {
             _experimentStopping = true;
-            WriteReport(new { schemaVersion = 1, test = "full_demo_evaluation", passed = false,
-                mode = _fullDemoFixed ? "fixed" : "real", scenario = _scenario, cursor = _fullDemoCursor,
-                error = error.Message, acceptedRealSeconds = _elapsed, wallSeconds = watch.Elapsed.TotalSeconds,
-                inputSha256 = _fullDemoPlanHash, dispatchStopReason = _fullDemoDispatchStopReason,
-                windows = _fullDemoWindows, commands = _fullDemoCommands,
-                events = _experimentEvents, budget = _model?.Budget, completions = _modelCompletions,
-                runDirectories = _journals.Select(j => j.DirectoryPath) });
-            GetTree().Quit(1);
+            _finishing = true;
+            BudgetSnapshot? budget = null;
+            string? budgetReadFailure = null, flushFailure = null;
+            try { budget = _model?.Budget; }
+            catch (Exception fault) { budgetReadFailure = fault.GetType().Name; }
+            try { FlushWorldEvents(); }
+            catch (Exception fault) { flushFailure = fault.GetType().Name; }
+            var branches = new List<object>();
+            var exportFailures = new List<object>();
+            foreach (var journal in _journals)
+            {
+                try { branches.Add(ExportFullDemoBranch(journal)); }
+                catch (Exception fault) { exportFailures.Add(new { journal.DirectoryPath, code = fault.GetType().Name }); }
+            }
+            try
+            {
+                WriteReport(new { schemaVersion = 1, test = "full_demo_evaluation", passed = false,
+                    mode = _fullDemoFixed ? "fixed" : "real", scenario = _scenario, cursor = _fullDemoCursor,
+                    error = error.Message, acceptedRealSeconds = _elapsed, wallSeconds = watch.Elapsed.TotalSeconds,
+                    inputSha256 = _fullDemoPlanHash, dispatchStopReason = _fullDemoDispatchStopReason,
+                    windows = _fullDemoWindows, commands = _fullDemoCommands, branches, exportFailures, flushFailure,
+                    events = _experimentEvents, budget, budgetReadFailure, completions = _modelCompletions,
+                    runDirectories = _journals.Select(j => j.DirectoryPath) });
+            }
+            catch (Exception fault) { GD.PushError("Full-demo failure report could not be written: " + fault.GetType().Name); }
+            finally { GetTree().Quit(1); }
         }
+    }
+
+    private object ExportFullDemoBranch(TownRunJournal journal)
+    {
+        var package = journal.CaptureReplay();
+        journal.WriteArtifact("replay.json", package);
+        string export = Path.Combine(_userRoot, "exports", Path.GetFileName(journal.DirectoryPath) + ".zip");
+        journal.ExportSnapshotZip(export);
+        return new { branchId = Path.GetFileName(journal.DirectoryPath), export,
+            sha256 = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(export))),
+            archiveBytes = new FileInfo(export).Length,
+            packageBytes = new FileInfo(Path.Combine(journal.DirectoryPath, "replay.json")).Length,
+            journalBytes = new FileInfo(Path.Combine(journal.DirectoryPath, "events.jsonl")).Length,
+            boundaries = package.BoundaryCount, parentBoundaries = package.Parent?.Prefix.BoundaryCount ?? 0 };
     }
 }
