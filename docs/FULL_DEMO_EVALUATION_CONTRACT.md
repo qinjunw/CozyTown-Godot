@@ -4,7 +4,7 @@
 
 ## 已有证据
 
-[离线可行性记录](verification/full-demo-evaluation-feasibility-2026-10-10.md)使用 `29c3c1c` 的核心规则与 Godot 场景提取内容，分别运行两个日间窗口、买料、种植浇水、喂鸡、睡眠、领蛋和存读档。两组四人每天均取得规则客户端的决定机会。玩家模型对话和完整回放尚在实现，不属于该结果。
+[离线可行性记录](verification/full-demo-evaluation-feasibility-2026-10-10.md)使用 `29c3c1c` 的核心规则与 Godot 场景提取内容，分别运行两个日间窗口、买料、种植浇水、喂鸡、睡眠、领蛋和存读档。两组四人每天均取得规则客户端的决定机会。该诊断未验证玩家模型对话或完整回放；后续实现证据见[玩家对话](verification/player-dialogue.md)、[核心回放](REPLAY.md)及[场景回放](SCENE_REPLAY.md)，最终候选仍须执行本合同的完整验证门。
 
 [首切片真实运行](verification/four-resident-real-model-2026-09-20.md)已使用原实验的 48 次发送，保守扣减人民币 0.300418 元。原金额余量不授权额外发送，原账本及样本继续保留。当前服务事实见[2026-10-10 官方资料核验](research/deepseek-provider-2026-10-10.md)。
 

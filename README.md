@@ -36,7 +36,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 
-保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)已能从导出包重算规则、预算与父分支前缀，逐边界核对完整状态；Godot 实际碰撞回放由后继票继续实现。
+保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，当前候选应重新生成并验证。
 
 真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo 另获人民币 5 元、96 次的独立授权，接线与本轮真实样本尚未完成；阶段、两天输入和通过标准见[完整 Demo 跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 

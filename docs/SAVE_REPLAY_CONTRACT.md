@@ -1,6 +1,6 @@
 # 新存档、状态续接与实验回放合同
 
-本文件记录[确定新存档、状态续接与实验回放的合同](https://github.com/qinjunw/CozyTown-Godot/issues/6)中的协议与验收。小镇逻辑快照、宿主存档与记录导出已在切片实现，操作见[切片说明](PLAYABLE_SLICE.md)，执行结果见[验证记录](verification/four-resident-slice.md)。集成分支已实现[离线核心回放](REPLAY.md)和[玩家对话续接](verification/player-dialogue.md)；Godot 场景回放仍在验证。
+本文件记录[确定新存档、状态续接与实验回放的合同](https://github.com/qinjunw/CozyTown-Godot/issues/6)中的协议与验收。小镇逻辑快照、宿主存档与记录导出已在切片实现，操作见[切片说明](PLAYABLE_SLICE.md)，执行结果见[验证记录](verification/four-resident-slice.md)。集成分支已实现[离线核心回放](REPLAY.md)、[Godot 场景回放](SCENE_REPLAY.md)和[玩家对话续接](verification/player-dialogue.md)。场景回放通过源场景及 Windows 导出的实际碰撞检查，玩家对话的画面和键鼠仍待用户验收。
 
 2026-09-20 用户确认：不兼容存档明确拒绝且保护当前世界，纯表现修改不因此阻止读取；未完成的真实模型请求在剩余预算内自动续接，最多补发一次，追加费用如实记录。首版创建新档、完整恢复已实现状态的目标保持不变。范围见[首切片合同](FIRST_PLAYABLE_SLICE.md)，内容来源见[内容合同](CONTENT_AUTHORING.md)。
 
@@ -135,4 +135,4 @@ Unity 固定提交的[完整快照矩阵](https://github.com/qinjunw/CozyTown/bl
 
 旧项目的[验证范围](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/docs/verification/complete-agent-snapshots-2026-09-19.md)未交付完整轨迹回放；[待办快照测试](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Tests/EditMode/NpcAgents/NpcDecisionSnapshotTests.cs)中的请求计数与占槽恢复也不能证明跨进程费用账本或提供方幂等。新项目另行验证这些合同，不复制 Unity 旧档迁移分支或预设人物配对。
 
-本票决定协议和验收。[垂直切片](https://github.com/qinjunw/CozyTown-Godot/issues/7)实现保存恢复与记录导出；[核心回放](https://github.com/qinjunw/CozyTown-Godot/issues/22)已进入集成分支，[场景回放](https://github.com/qinjunw/CozyTown-Godot/issues/23)和[综合评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接后续执行验证。真实服务配置、额度与超时数值由模型接入及评测合同约束。
+本票决定协议和验收。[垂直切片](https://github.com/qinjunw/CozyTown-Godot/issues/7)实现保存恢复与记录导出；[核心回放](https://github.com/qinjunw/CozyTown-Godot/issues/22)和[场景回放](https://github.com/qinjunw/CozyTown-Godot/issues/23)已进入集成分支，[综合评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接同一最终候选的输入与执行验证。真实服务配置、额度与超时数值由模型接入及评测合同约束。
