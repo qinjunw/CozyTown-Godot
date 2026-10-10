@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "29c3c1c55fa63a3d09f049f1d43a4450314afa42",
+  "scope": "Core fixed rules with scene-extracted content; simulated monotonic time; no Godot motion, player model dialogue, replay executor or real provider",
+  "passed": true,
+  "reports": [
+    {
+      "scenario": "baseline",
+      "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+      "windows": [
+        {
+          "day": 0,
+          "fromMinute": 548.4499999999923,
+          "toMinute": 638.4499999999105,
+          "simulatedSeconds": 180,
+          "requestsByResident": {
+            "eli": 21,
+            "mina": 19,
+            "ren": 18,
+            "sora": 19
+          }
+        },
+        {
+          "day": 1,
+          "fromMinute": 2083.2499999999127,
+          "toMinute": 2173.2500000002397,
+          "simulatedSeconds": 180,
+          "requestsByResident": {
+            "eli": 5,
+            "mina": 4,
+            "ren": 3,
+            "sora": 3
+          }
+        }
+      ],
+      "commands": [
+        {
+          "operationId": "feasibility-1",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 10,
+          "totalPrice": 20,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-2",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 25,
+          "totalPrice": 25,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-3",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "feed.chicken",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-4",
+          "succeeded": true,
+          "code": "accepted",
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-5",
+          "succeeded": true,
+          "code": "accepted",
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-83",
+          "succeeded": true,
+          "code": "accepted",
+          "fromMinute": 641.7499999999075,
+          "toMinute": 1361.7499999999075,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-84",
+          "succeeded": true,
+          "code": "accepted",
+          "fromMinute": 1361.7499999999075,
+          "toMinute": 2081.7499999999072,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-85",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "animal_product.egg",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-86",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "feed.chicken",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        }
+      ],
+      "simulatedSeconds": 386.5000000000222,
+      "implementationSeconds": 2.1238952,
+      "restores": 1,
+      "finalMinute": 2173.2500000002397,
+      "morningDays": [
+        1
+      ],
+      "coins": 255,
+      "inventory": {
+        "animal_product.egg": 1
+      },
+      "plot": {
+        "id": "plot.01",
+        "cropId": "crop_definition.carrot",
+        "growthDays": 1,
+        "watered": false,
+        "mature": false,
+        "generation": 1,
+        "harvestedCount": 0
+      },
+      "chicken": {
+        "id": "animal.hen_01",
+        "fed": true,
+        "productReady": false,
+        "generation": 2,
+        "collectedCount": 1
+      },
+      "events": 7968,
+      "acceptedChoices": 0
+    },
+    {
+      "scenario": "counterfactual",
+      "contentFingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+      "windows": [
+        {
+          "day": 0,
+          "fromMinute": 548.4499999999923,
+          "toMinute": 638.4499999999105,
+          "simulatedSeconds": 180,
+          "requestsByResident": {
+            "eli": 19,
+            "mina": 19,
+            "ren": 17,
+            "sora": 18
+          }
+        },
+        {
+          "day": 1,
+          "fromMinute": 2083.2499999999127,
+          "toMinute": 2173.2500000002397,
+          "simulatedSeconds": 180,
+          "requestsByResident": {
+            "eli": 6,
+            "mina": 4,
+            "ren": 5,
+            "sora": 5
+          }
+        }
+      ],
+      "commands": [
+        {
+          "operationId": "feasibility-1",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 10,
+          "totalPrice": 20,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-2",
+          "succeeded": true,
+          "code": "accepted",
+          "unitPrice": 25,
+          "totalPrice": 25,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-3",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "feed.chicken",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-4",
+          "succeeded": true,
+          "code": "accepted",
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-5",
+          "succeeded": true,
+          "code": "accepted",
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-79",
+          "succeeded": true,
+          "code": "accepted",
+          "fromMinute": 641.7499999999075,
+          "toMinute": 1361.7499999999075,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-80",
+          "succeeded": true,
+          "code": "accepted",
+          "fromMinute": 1361.7499999999075,
+          "toMinute": 2081.7499999999072,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-81",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "animal_product.egg",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        },
+        {
+          "operationId": "feasibility-82",
+          "succeeded": true,
+          "code": "accepted",
+          "resourceId": "feed.chicken",
+          "quantity": 1,
+          "roll": null,
+          "isDuplicate": false
+        }
+      ],
+      "simulatedSeconds": 386.5000000000222,
+      "implementationSeconds": 1.3941737,
+      "restores": 1,
+      "finalMinute": 2173.2500000002397,
+      "morningDays": [
+        1
+      ],
+      "coins": 255,
+      "inventory": {
+        "animal_product.egg": 1
+      },
+      "plot": {
+        "id": "plot.01",
+        "cropId": "crop_definition.carrot",
+        "growthDays": 1,
+        "watered": false,
+        "mature": false,
+        "generation": 1,
+        "harvestedCount": 0
+      },
+      "chicken": {
+        "id": "animal.hen_01",
+        "fed": true,
+        "productReady": false,
+        "generation": 2,
+        "collectedCount": 1
+      },
+      "events": 7949,
+      "acceptedChoices": 0
+    }
+  ]
+}

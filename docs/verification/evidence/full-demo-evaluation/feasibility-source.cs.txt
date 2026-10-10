@@ -1,0 +1,92 @@
+using System.Diagnostics;
+using System.Text.Json;
+using CozyTown.Core.Town;
+
+var root = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../../"));
+using var document = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, ".local/evaluation-feasibility/content-baseline.json")));
+var manifest = TownJson.Deserialize<TownManifest>(document.RootElement.GetProperty("manifest").GetRawText());
+var definitions = TownJson.Deserialize<TownDefinitions>(document.RootElement.GetProperty("definitions").GetRawText());
+var counter = TownJson.Deserialize<Dictionary<string, Dictionary<string,int>>>(File.ReadAllText(Path.Combine(root, "game/Content/counterfactual.json")));
+var reports = new List<object>();
+foreach (var scenario in new[] { "baseline", "counterfactual" })
+{
+    var data = scenario == "baseline" ? definitions : definitions with { Residents = definitions.Residents.Select(r => r with { Inventory = counter[r.Id] }).ToArray() };
+    var content = TownContent.Create(manifest, data);
+    var world = new TownWorld(content, scenario, "offline-feasibility-only");
+    var watch = Stopwatch.StartNew();
+    int operation = 0; double simulatedSeconds = 0; int restores = 0;
+    var commands = new List<object>(); var windows = new List<object>();
+    string Id() => "feasibility-" + ++operation;
+    void Walk(string place)
+    {
+        var position = world.GetView().PlayerPosition;
+        var route = content.FindRoute(position, content.Place(place).Position) ?? throw new Exception("No route: " + place);
+        foreach (var destination in route)
+            while (position.DistanceTo(destination) > .00001)
+            {
+                double distance = position.DistanceTo(destination), length = Math.Min(3.1, distance);
+                var next = new TownPoint(position.X + (destination.X-position.X)*length/distance, position.Y + (destination.Y-position.Y)*length/distance);
+                if (!world.SetPlayerPosition(next)) throw new Exception("Movement rejected: " + place);
+                world.Advance(.025, .05); simulatedSeconds += .05; position = next;
+            }
+    }
+    void Buy(string resource, int quantity)
+    {
+        var quote = world.QuoteTrade("shop.town.general", resource, "buy", quantity);
+        var result = world.Trade(new(Id(), "player", quote.ShopId, resource, "buy", quantity, quote.UnitPrice));
+        commands.Add(result); if (!result.Succeeded) throw new Exception("Purchase: " + result.Code);
+    }
+    void Produce(string target, string action)
+    {
+        var result = world.Produce(new(Id(), "player", target, action));
+        commands.Add(result); if (!result.Succeeded) throw new Exception("Production: " + result.Code);
+    }
+    Walk("shop"); Buy("feed.chicken", 2); Buy("seed.carrot", 1);
+    Walk("coop"); Produce("animal.hen_01", "feed");
+    Walk("farm.plot.01");
+    var planted = world.Farm(new(Id(), "player", "plot.01", "plant", "crop_definition.carrot"));
+    commands.Add(planted); if (!planted.Succeeded) throw new Exception("Plant: " + planted.Code);
+    for (int day = 0; day < 2; day++)
+    {
+        if (day < 1)
+        {
+            Walk("farm.plot.01"); var water = world.Farm(new(Id(), "player", "plot.01", "water"));
+            commands.Add(water); if (!water.Succeeded) throw new Exception("Water: " + water.Code);
+        }
+        var counts = content.Definitions.Residents.ToDictionary(r => r.Id, _ => 0);
+        double from = world.WorldMinute;
+        for (int tick = 0; tick < 1800; tick++)
+        {
+            world.Advance(.05, .1); simulatedSeconds += .1;
+            foreach (var request in world.GetDecisionRequests())
+            {
+                var attempt = "fixed-" + Id();
+                if (!world.MarkDispatched(request.LogicalRequestId, attempt)) throw new Exception("Dispatch rejected");
+                if (!world.ReceiveResult(new(world.SessionId, request.LogicalRequestId, attempt, request.ResidentId, world.CreateRuleCandidate(request), "rules", null))) throw new Exception("Result rejected");
+                counts[request.ResidentId]++;
+            }
+        }
+        world.Advance(0,0);
+        windows.Add(new { day, fromMinute=from, toMinute=world.WorldMinute, simulatedSeconds=180, requestsByResident=counts });
+        if (counts.Values.Any(n=>n==0)) throw new Exception("Resident opportunity missing");
+        if (day == 1) break;
+        Walk("bed.player");
+        for (int sleep = 0; sleep < 2; sleep++)
+        {
+            var result = world.Sleep(new(Id(), "player", 12)); commands.Add(result);
+            if (!result.Succeeded) throw new Exception("Sleep: " + result.Code);
+            if (day == 0 && sleep == 0)
+            {
+                world = TownWorld.RestoreCandidate(content, world.CaptureJson()); restores++;
+            }
+        }
+        Walk("coop"); Produce("animal.hen_01", "collect");
+        if (day == 0) Produce("animal.hen_01", "feed");
+    }
+    var final = world.State;
+    reports.Add(new { scenario, contentFingerprint=content.Fingerprint, windows, commands, simulatedSeconds, implementationSeconds=watch.Elapsed.TotalSeconds, restores,
+        finalMinute=final.WorldMinute, morningDays=final.Farming.Mornings.Select(m=>m.Day), coins=final.Economy.Player.Coins,
+        inventory=final.Economy.Player.Inventory, plot=final.Farming.Plots.Single(p=>p.Id=="plot.01"), chicken=final.Production.Chickens.Single(),
+        events=final.Events.Count, acceptedChoices=final.Events.Count(e=>e.Kind=="candidate_adopted") });
+}
+Console.WriteLine(TownJson.Serialize(new { schemaVersion=1, sourceCommit="29c3c1c55fa63a3d09f049f1d43a4450314afa42", scope="Core fixed rules with scene-extracted content; simulated monotonic time; no Godot motion, player model dialogue, replay executor or real provider", passed=true, reports }));
