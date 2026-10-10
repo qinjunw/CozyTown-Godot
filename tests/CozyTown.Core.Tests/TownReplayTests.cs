@@ -84,6 +84,52 @@ public sealed class TownReplayTests
     }
 
     [Test]
+    public void SceneReplayStopsAtTheFirstActualCollisionAndChecksTheSavedParentWithTheSameQuery()
+    {
+        var content = Content(); var world = new TownWorld(content); var recording = new TownRecording(content, world);
+        world.SetPlayerPosition(new(65, 60));
+        var saved = world.CaptureSnapshot();
+        var child = TownWorld.RestoreCandidate(content, TownJson.Serialize(saved));
+        var childRecording = new TownRecording(content, child, parent: new(recording.Complete(), saved, null));
+        child.SetPlayerPosition(new(66, 60));
+        int queries = 0;
+        var adapter = new TownReplaySceneAdapter((id, from, to, radius) =>
+        {
+            queries++;
+            return new(false, false, 0, TownSpatialConfiguration.Current);
+        });
+        var report = TownReplay.Run(childRecording.Complete(), adapter);
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Field, Does.Contain("queries[0].clear"));
+        Assert.That(report.Boundary, Is.EqualTo(1));
+        Assert.That(report.Command, Is.EqualTo("move"));
+        Assert.That(queries, Is.EqualTo(1));
+        Assert.That(TownReplay.Run(childRecording.Complete()).Passed, Is.True);
+    }
+
+    [Test]
+    public void SceneReplayComparesActualMotionEvidenceInsteadOfTrustingRecordedFractions()
+    {
+        var content = Content();
+        var world = new TownWorld(content)
+        {
+            DetailedMovementQuery = (_, _, _) => new(true, true, 1, TownSpatialConfiguration.Current)
+        };
+        var recording = new TownRecording(content, world);
+        world.SetPlayerPosition(new(65, 60));
+        var package = recording.Complete();
+        var adapter = new TownReplaySceneAdapter((_, _, _, _) => new(true, true, 1, TownSpatialConfiguration.Current));
+        Assert.That(TownReplay.Run(package, adapter).Passed, Is.True);
+        package.Boundaries[0].Queries[0] = package.Boundaries[0].Queries[0] with
+        { Evidence = package.Boundaries[0].Queries[0].Evidence! with { SafeFraction = .25 } };
+        Assert.That(TownReplay.Run(package).Passed, Is.True);
+        var report = TownReplay.Run(package, adapter);
+        Assert.That(report.Field, Is.EqualTo("queries[0].evidence.safeFraction"));
+        Assert.That(report.Boundary, Is.EqualTo(1));
+        Assert.That(report.Mode, Is.EqualTo("godot_scene_replay"));
+    }
+
+    [Test]
     public void RecordedSuccessfulAndRejectedMovesReplayWithExactIdentities()
     {
         var content = Content();

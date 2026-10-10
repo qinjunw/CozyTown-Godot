@@ -13,4 +13,23 @@
     <ProjectReference Include="../src/CozyTown.Core/CozyTown.Core.csproj" />
     <ProjectReference Include="../src/CozyTown.Model/CozyTown.Model.csproj" />
   </ItemGroup>
+  <Target Name="StampSimulationSource" BeforeTargets="GetAssemblyAttributes">
+    <ItemGroup>
+      <SimulationSource Include="Host/**/*.cs;World/**/*.cs;../src/CozyTown.Core/**/*.cs;../src/CozyTown.Model/**/*.cs;CozyTown.Game.csproj;../src/CozyTown.Core/CozyTown.Core.csproj;../src/CozyTown.Model/CozyTown.Model.csproj;../global.json;../tools/windows/toolchain.lock.json;project.godot"
+        Exclude="../src/**/obj/**/*.cs;../src/**/bin/**/*.cs" />
+    </ItemGroup>
+    <GetFileHash Files="@(SimulationSource)" Algorithm="SHA256">
+      <Output TaskParameter="Items" ItemName="SimulationSourceHash" />
+    </GetFileHash>
+    <WriteLinesToFile File="$(IntermediateOutputPath)simulation-source-hashes.txt" Lines="@(SimulationSourceHash->'%(FileHash)')" Overwrite="true" />
+    <GetFileHash Files="$(IntermediateOutputPath)simulation-source-hashes.txt" Algorithm="SHA256">
+      <Output TaskParameter="Items" ItemName="SimulationSourceDigest" />
+    </GetFileHash>
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+        <_Parameter1>SimulationSourceDigest</_Parameter1>
+        <_Parameter2>@(SimulationSourceDigest->'%(FileHash)')</_Parameter2>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
 </Project>

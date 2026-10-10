@@ -40,6 +40,8 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
         WriteArtifact("replay.json", _recording.Complete());
     }
     public TownReplayPackage CaptureReplay() => _recording?.Complete() ?? throw new InvalidOperationException("Replay recording has not started.");
+    public void SetSceneDependencies(TownSceneReplayDependencies dependencies) =>
+        (_recording ?? throw new InvalidOperationException("Replay recording has not started.")).SetSceneDependencies(dependencies);
     public void RecordReplayInput(string command, object input) => _recording?.RecordExternal(command, input);
 
     public TownRunJournal(string root, string branchId, object manifest)
