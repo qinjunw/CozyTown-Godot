@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "code": "passed",
+  "mode": "godot_scene_replay",
+  "headless": true,
+  "test": "scene_replay",
+  "command": [
+    "--scene-replay=<fixtures>/player-dialogue-retired-restore.json",
+    "--report=<reports>/02-source.json"
+  ],
+  "inputSha256": "a3c3709eb5e4215061f3f906d89d3aa7e25176478f29d5b7c7517cfed86efec2",
+  "expectedDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/TownMap.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "07975501034143f014140088b6083abcfb8030628cf43a4ee30f0af3a4b1abfa",
+    "buildVersion": "1.0.0+e37533173619d3d29cee6a09dc0426d16bbd779e",
+    "assemblySha256": "7f3366c655376dd7b6b65536e87d53cb14d6af31f5d9013b128fd7156572eee4",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "actualDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/TownMap.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "07975501034143f014140088b6083abcfb8030628cf43a4ee30f0af3a4b1abfa",
+    "buildVersion": "1.0.0+e37533173619d3d29cee6a09dc0426d16bbd779e",
+    "assemblySha256": "7f3366c655376dd7b6b65536e87d53cb14d6af31f5d9013b128fd7156572eee4",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "motionQueries": 19,
+  "initialBodyQueries": 10,
+  "bodyBoundaries": 32,
+  "intersectShapeCalls": 29,
+  "castMotionCalls": 29,
+  "bodyRepresentation": "authoritative double coordinates, circle queries, rounded Node2D presentation",
+  "runtimeAssemblyLocation": "<runtime>/System.Private.CoreLib.dll",
+  "replay": {
+    "passed": true,
+    "code": "passed",
+    "boundary": 4,
+    "field": null,
+    "expected": null,
+    "actual": null,
+    "rulesVersion": "town-social-player-dialogue-v5",
+    "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+    "finalStateJson": null,
+    "command": null,
+    "inputJson": null,
+    "mode": "godot_scene_replay"
+  }
+}
