@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-10",
+  "issue": "https://github.com/qinjunw/CozyTown-Godot/issues/32",
+  "integrationBase": "c0c1e5b6026a50602b90a874bb272005a9604c10",
+  "verifiedIntegrationTip": "891ca6f7397ff81eeeb1cb897ef08ab27479f11b",
+  "sdk": "10.0.401",
+  "seam": "TownRecording.RecordExternal -> TownReplay.Run",
+  "profiles": ["first-slice-budget-v1", "full-demo-v1"],
+  "red": {
+    "tests": 2,
+    "failed": 2,
+    "expectedPassed": false,
+    "actualPassed": true
+  },
+  "stoppedExternalAppendAfterFix": {
+    "passed": false,
+    "code": "divergence",
+    "boundary": 1,
+    "command": "budget_external",
+    "field": "budget.external.attempts.length",
+    "expected": "0",
+    "actual": "1"
+  },
+  "featureCases": {
+    "stoppedAppendRejected": 2,
+    "stoppedExistingSettlementAccepted": 2,
+    "stoppedExistingUnknownAccepted": 4,
+    "runningExternalAppendAccepted": 2
+  },
+  "coreSuiteAtInitialBase": { "passed": 218, "failed": 0, "skipped": 0 },
+  "coreSuiteAfterIntegration": { "passed": 232, "failed": 0, "skipped": 0 },
+  "realModelCalls": 0
+}
