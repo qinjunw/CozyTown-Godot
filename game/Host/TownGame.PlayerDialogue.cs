@@ -13,7 +13,7 @@ public partial class TownGame
     {
         if (_fatal || DialogueHost.Current is null || !_pauseReasons.Contains("dialogue") || !TownDialogueHost.TextAllowed(_pauseReasons)) return;
         double now = _hostClock.Elapsed.TotalSeconds;
-        double preceding = Math.Max(0, now - _lastHostSeconds);
+        double preceding = _fullDemoFixed ? 0 : Math.Max(0, now - _lastHostSeconds);
         _inputHost.FlushPausedElapsed(preceding);
         _lastHostSeconds = now;
         _elapsed += preceding;
@@ -50,8 +50,19 @@ public partial class TownGame
                 }
                 else
                 {
-                    // The exhausted first-slice profile has no player-dialogue stage. Full-demo evaluation binds that stage separately.
-                    DialogueHost.CompleteFixed(request, "{}", "player_dialogue_profile_unavailable");
+                    if (!_modelRuntime.RealPlayerDialogueEnabled)
+                        DialogueHost.CompleteFixed(request, "{}", "player_dialogue_profile_unavailable");
+                    else if (_activeModelRequests.Count < 2)
+                    {
+                        _frozen.TryGetValue(request.LogicalRequestId, out var old);
+                        bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
+                        var frozen = DialogueHost.Freeze(request, old?.Stage ?? _modelRuntime.NewRequestStage(_scenario, "player_text"),
+                            old?.InputJson, originalRecorded);
+                        _inputHost.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
+                        _frozen[request.LogicalRequestId] = frozen;
+                        _activeModelRequests.Add(key);
+                        _ = SendPlayerDialogueAsync(_model, request, frozen, key);
+                    }
                 }
             }
         }
@@ -90,6 +101,7 @@ public partial class TownGame
                 _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
                 _activeModelRequests.Remove(key);
                 _modelCompletions.Add(result);
+                StopFullDemoAdmission(result.FailureCode);
                 if (result.DispatchedAtUtc is null && _world.SessionId == frozen.Identity.SessionId)
                     _world.MarkPlayerDialogueDispatched(request.PlayerSessionId, request.LogicalRequestId, result.Dispatch.AttemptId);
                 DialogueHost.Complete(request, frozen.Identity.SessionId, result.Dispatch.AttemptId,
@@ -103,6 +115,7 @@ public partial class TownGame
             {
                 _activeModelRequests.Remove(key);
                 if (_world.SessionId != frozen.Identity.SessionId) return;
+                StopFullDemoAdmission(code);
                 if (code is "concurrency_limit" or "budget_concurrency_limit") return;
                 string attempt = "not-sent-" + request.LogicalRequestId;
                 if (_world.MarkPlayerDialogueDispatched(request.PlayerSessionId, request.LogicalRequestId, attempt))
