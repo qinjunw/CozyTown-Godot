@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "code": "divergence",
+  "boundary": 3,
+  "field": "parent.savedHost.unconsumedSeconds",
+  "expected": "0",
+  "actual": "0.7",
+  "rulesVersion": "town-social-player-dialogue-v5",
+  "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+  "finalStateJson": null,
+  "command": "host_move",
+  "inputJson": "{\r\n  \"seconds\": 0.2,\r\n  \"direction\": {\r\n    \"x\": 0,\r\n    \"y\": 0\r\n  }\r\n}",
+  "mode": "core_fact_replay"
+}

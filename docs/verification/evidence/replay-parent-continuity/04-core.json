@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "code": "divergence",
+  "boundary": 4,
+  "field": "parent.budget.external.stopReason",
+  "expected": "authentication_failed",
+  "actual": null,
+  "rulesVersion": "town-social-player-dialogue-v5",
+  "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+  "finalStateJson": null,
+  "command": "budget_stop",
+  "inputJson": "{\"after\":{\"totalAttempts\":0,\"slotsHeld\":0,\"budgetId\":\"cozytown-godot-first-slice-20260920-v1\",\"stopReason\":\"authentication_failed\",\"attempts\":[],\"availableMicros\":5000000,\"limitMicros\":5000000,\"reservedMicros\":0,\"currency\":\"CNY\",\"settledMicros\":0},\"reason\":\"authentication_failed\"}",
+  "mode": "core_fact_replay"
+}
