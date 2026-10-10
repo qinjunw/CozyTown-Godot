@@ -10,6 +10,7 @@ public sealed partial class TownWorld
 
     public PlayerDialogueState? OpenPlayerDialogue(string residentId)
     {
+        using var trace = TraceInput("player_dialogue_open", new { residentId });
         EnsureEconomyNotCommitting();
         var resident = _state.Residents.SingleOrDefault(r => r.Id == residentId);
         if (resident is null || resident.Position.DistanceTo(_state.PlayerPosition) > 42 || !HasSight(resident.Position, _state.PlayerPosition))
@@ -28,6 +29,7 @@ public sealed partial class TownWorld
 
     public PlayerDialogueRequest? RequestPlayerDialogue(string playerSessionId)
     {
+        using var trace = TraceInput("player_dialogue_request", new { playerSessionId });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         if (dialogue is null || dialogue.Request is not null)
@@ -57,6 +59,7 @@ public sealed partial class TownWorld
 
     public bool MarkPlayerDialogueDispatched(string playerSessionId, string logicalRequestId, string attemptId)
     {
+        using var trace = TraceInput("player_dialogue_dispatch", new { playerSessionId, logicalRequestId, attemptId });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         if (dialogue?.Request is not { } request || request.LogicalRequestId != logicalRequestId || request.AttemptId is not null
@@ -68,6 +71,7 @@ public sealed partial class TownWorld
 
     public bool MarkPlayerDialogueResponseArrived(string sessionId, string playerSessionId, string logicalRequestId, string attemptId, double receivedAfterSeconds)
     {
+        using var trace = TraceInput("player_dialogue_arrival", new { sessionId, playerSessionId, logicalRequestId, attemptId, receivedAfterSeconds });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         string? reason = PlayerResultIdentityError(sessionId, dialogue, logicalRequestId, attemptId)
@@ -86,6 +90,7 @@ public sealed partial class TownWorld
 
     public bool ReceivePlayerDialogueResult(PlayerDialogueResult result)
     {
+        using var trace = TraceInput("player_dialogue_result", new { result });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(result.PlayerSessionId);
         string? reason = PlayerResultIdentityError(result.SessionId, dialogue, result.LogicalRequestId, result.AttemptId)
@@ -102,6 +107,7 @@ public sealed partial class TownWorld
 
     public bool DisplayPlayerDialogue(string playerSessionId, bool allowed)
     {
+        using var trace = TraceInput("player_dialogue_display", new { playerSessionId, allowed });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         if (!allowed || dialogue?.SealedResult is not { } result || dialogue.TerminalReason is not null) return false;
@@ -118,6 +124,7 @@ public sealed partial class TownWorld
 
     public bool ClosePlayerDialogue(string playerSessionId)
     {
+        using var trace = TraceInput("player_dialogue_close", new { playerSessionId });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         if (dialogue is null) return false;
@@ -136,6 +143,7 @@ public sealed partial class TownWorld
 
     public bool ApplyPlayerDialogueRetirement(string playerSessionId, string reason)
     {
+        using var trace = TraceInput("player_dialogue_retire", new { playerSessionId, reason });
         EnsureEconomyNotCommitting();
         var dialogue = CurrentPlayerDialogue(playerSessionId);
         if (dialogue?.Request is not { } request || dialogue.TerminalReason is not null) return false;

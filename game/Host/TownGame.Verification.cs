@@ -229,13 +229,16 @@ public partial class TownGame
         for (int step = 0; step < 400 && _playerRoute is not null && _playerRouteCursor < _playerRoute.Count; step++) AdvancePlayer(.1);
         FlushWorldEvents();
         _view = _world.GetView();
-        int previousConversations = _experimentEvents.Count(e => e.Kind == "player_conversation");
+        int previousConversations = _experimentEvents.Count(e => e.Kind == "player_dialogue_opened");
         await SendShortcutAsync(Key.E);
         bool dialogueOpened = _dialogue.Visible && _pauseReasons.Contains("dialogue")
-            && _experimentEvents.Count(e => e.Kind == "player_conversation") == previousConversations + 1;
+            && _experimentEvents.Count(e => e.Kind == "player_dialogue_opened") == previousConversations + 1;
         await SendShortcutAsync(Key.Escape);
-        check("logical_e_shortcut_opens_nearby_dialogue", dialogueOpened && !_dialogue.Visible && !_pauseReasons.Contains("dialogue"),
-            new { injection = "Godot.Input.ParseInputEvent", publicConversationCount = _experimentEvents.Count(e => e.Kind == "player_conversation") });
+        bool menuOverDialogue = _dialogue.Visible && _menu.Visible && _pauseReasons.SetEquals(new[] { "dialogue", "menu" });
+        await SendShortcutAsync(Key.Escape);
+        CloseDialogue();
+        check("logical_e_shortcut_opens_nearby_dialogue", dialogueOpened && menuOverDialogue && !_dialogue.Visible && !_pauseReasons.Contains("dialogue"),
+            new { injection = "Godot.Input.ParseInputEvent", publicConversationCount = _experimentEvents.Count(e => e.Kind == "player_dialogue_opened") });
         _selectedResident = selectedBefore;
     }
 

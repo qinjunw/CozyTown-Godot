@@ -202,6 +202,7 @@ public static class TownReplay
             var arrivals = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
             var completions = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
             var mailbox = new HashSet<string>(StringComparer.Ordinal);
+            var playerArrivals = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
             var checkpoints = new TownCheckpointCursor();
             foreach (TownTrace trace in package.Boundaries)
             {
@@ -235,6 +236,7 @@ public static class TownReplay
                     if (trace.Command == "model_response_arrived")
                     {
                         if (!arrivals.TryAdd(attempt, input.Clone())) throw new ReplayMismatch("model.arrival", "unique response", attempt);
+                        if (playerArrivals.TryGetValue(attempt, out var worldArrival)) ValidatePlayerArrival(worldArrival, input);
                     }
                     else if (trace.Command == "model_completion_persisted")
                     {
@@ -256,12 +258,52 @@ public static class TownReplay
                     else if (trace.Command == "model_mailbox_enqueued" || trace.Command == "model_mailbox_entered")
                     {
                         if (!completions.ContainsKey(attempt)) throw new ReplayMismatch("model.mailbox", "durable completion", "missing");
+                        Compare(JsonNode.Parse(completions[attempt].GetProperty("dispatch").GetRawText()), JsonNode.Parse(input.GetProperty("dispatch").GetRawText()), "model.mailboxDispatch");
                         if (trace.Command == "model_mailbox_entered") mailbox.Add(attempt);
                     }
                     else throw new InvalidDataException("Unsupported model boundary: " + trace.Command);
                 }
                 else
                 {
+                    if (trace.Command == "player_dialogue_arrival")
+                    {
+                        using var playerInput = JsonDocument.Parse(trace.InputJson);
+                        var input = playerInput.RootElement;
+                        string attempt = input.GetProperty("attemptId").GetString()!;
+                        playerArrivals[attempt] = input.Clone();
+                        if (arrivals.TryGetValue(attempt, out var arrival))
+                            ValidatePlayerArrival(input, arrival);
+                    }
+                    if (trace.Command == "player_dialogue_result")
+                    {
+                        using var playerInput = JsonDocument.Parse(trace.InputJson);
+                        var result = playerInput.RootElement.GetProperty("result");
+                        if (result.GetProperty("source").GetString() == "real_model")
+                        {
+                            string attempt = result.GetProperty("attemptId").GetString()!;
+                            if (!mailbox.Contains(attempt)) throw new ReplayMismatch("model.mailbox", "entered completion", attempt);
+                            var completion = completions[attempt];
+                            ValidatePlayerBinding(result, completion.GetProperty("dispatch"));
+                            if (result.GetProperty("sessionId").GetString() == world.SessionId && completion.GetProperty("arrivedAtUtc").ValueKind != JsonValueKind.Null && !playerArrivals.ContainsKey(attempt))
+                                throw new ReplayMismatch("model.playerArrival", "world arrival input before result", "missing");
+                            if (completion.GetProperty("logicalElapsedToArrival").ValueKind != JsonValueKind.Null)
+                                Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(completion.GetProperty("dispatch"), completion.GetProperty("logicalElapsedToArrival"))),
+                                    JsonNode.Parse(result.GetProperty("receivedAfterSeconds").GetRawText()), "model.playerArrivalSeconds");
+                            string? error = completion.GetProperty("failureCode").GetString(), text = null;
+                            if (error is null)
+                            {
+                                try
+                                {
+                                    text = TownJson.Deserialize<ReplayPlayerText>(completion.GetProperty("candidateJson").GetString() ?? "").Text;
+                                    if (string.IsNullOrWhiteSpace(text) || text.Length > 160 || text.Any(char.IsControl)) throw new InvalidDataException("Invalid player text.");
+                                }
+                                catch (Exception invalid) when (invalid is JsonException or InvalidDataException)
+                                { text = null; error = "player_text_schema_invalid"; }
+                            }
+                            Compare(JsonSerializer.SerializeToNode(text), JsonNode.Parse(result.GetProperty("text").GetRawText()), "model.playerText");
+                            Compare(JsonSerializer.SerializeToNode(error), JsonNode.Parse(result.GetProperty("error").GetRawText()), "model.playerError");
+                        }
+                    }
                     if (trace.Command == "result")
                     {
                         using var input = JsonDocument.Parse(trace.InputJson);
@@ -280,7 +322,7 @@ public static class TownReplay
                 if (query != trace.Queries.Length) throw new ReplayMismatch("queries", trace.Queries.Length.ToString(), query.ToString());
                 var checkpoint = checkpoints.ReadWorld(trace);
                 bool needsWorld = !trace.Command.StartsWith("model_", StringComparison.Ordinal) && !trace.Command.StartsWith("budget_", StringComparison.Ordinal)
-                    && (!trace.Command.StartsWith("host_", StringComparison.Ordinal) || trace.Command == "host_move");
+                    && (!trace.Command.StartsWith("host_", StringComparison.Ordinal) || trace.Command is "host_move" or "host_flush_paused_elapsed");
                 if (needsWorld && checkpoint is null) throw new InvalidDataException("World-changing input lacks its complete checkpoint.");
                 var hostCheckpoint = checkpoints.ReadHost(trace);
                 if (trace.Command.StartsWith("host_", StringComparison.Ordinal) && hostCheckpoint is null) throw new InvalidDataException("Host input lacks its complete checkpoint.");
@@ -310,6 +352,14 @@ public static class TownReplay
             case "advance": world.Advance(Read<double>("worldMinutes"), Read<double>("realSeconds"), Read<bool>("paused")); break;
             case "move": world.SetPlayerPosition(Read<TownPoint>("position")); break;
             case "talk": world.TalkToResident(Read<string>("residentId")); break;
+            case "player_dialogue_open": world.OpenPlayerDialogue(Read<string>("residentId")); break;
+            case "player_dialogue_request": world.RequestPlayerDialogue(Read<string>("playerSessionId")); break;
+            case "player_dialogue_dispatch": world.MarkPlayerDialogueDispatched(Read<string>("playerSessionId"), Read<string>("logicalRequestId"), Read<string>("attemptId")); break;
+            case "player_dialogue_arrival": world.MarkPlayerDialogueResponseArrived(Read<string>("sessionId"), Read<string>("playerSessionId"), Read<string>("logicalRequestId"), Read<string>("attemptId"), Read<double>("receivedAfterSeconds")); break;
+            case "player_dialogue_result": world.ReceivePlayerDialogueResult(Read<PlayerDialogueResult>("result")); break;
+            case "player_dialogue_display": world.DisplayPlayerDialogue(Read<string>("playerSessionId"), Read<bool>("allowed")); break;
+            case "player_dialogue_close": world.ClosePlayerDialogue(Read<string>("playerSessionId")); break;
+            case "player_dialogue_retire": world.ApplyPlayerDialogueRetirement(Read<string>("playerSessionId"), Read<string>("reason")); break;
             case "decisions": world.GetDecisionRequests(); break;
             case "dispatch": world.MarkDispatched(Read<string>("logicalRequestId"), Read<string>("attemptId")); break;
             case "arrival": world.MarkResponseArrived(Read<string>("sessionId"), Read<string>("logicalRequestId"), Read<string>("attemptId"), Read<double>("receivedAfterSeconds")); break;
@@ -322,6 +372,26 @@ public static class TownReplay
             case "produce": world.Produce(Read<ProductionRequest>("request")); break;
             default: throw new InvalidDataException("Unsupported recorded command: " + trace.Command);
         }
+    }
+
+    private sealed record ReplayPlayerText(string Text);
+    private static void ValidatePlayerArrival(JsonElement input, JsonElement arrival)
+    {
+        ValidatePlayerBinding(input, arrival.GetProperty("dispatch"));
+        Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(arrival.GetProperty("dispatch"), arrival.GetProperty("elapsed"))),
+            JsonNode.Parse(input.GetProperty("receivedAfterSeconds").GetRawText()), "model.playerArrivalSeconds");
+    }
+    private static double PlayerArrivalSeconds(JsonElement dispatch, JsonElement elapsed) => 60
+        - TownJson.Deserialize<TimeSpan>(dispatch.GetProperty("request").GetProperty("remainingWait").GetRawText()).TotalSeconds
+        + TownJson.Deserialize<TimeSpan>(elapsed.GetRawText()).TotalSeconds;
+    private static void ValidatePlayerBinding(JsonElement input, JsonElement dispatch)
+    {
+        var identity = dispatch.GetProperty("request").GetProperty("identity");
+        if (identity.GetProperty("kind").GetString() != "player_text") throw new ReplayMismatch("model.kind", "player_text", identity.GetProperty("kind").GetString());
+        foreach (string field in new[] { "sessionId", "playerSessionId", "logicalRequestId" })
+            Compare(JsonNode.Parse(identity.GetProperty(field).GetRawText()), JsonNode.Parse(input.GetProperty(field).GetRawText()), "model." + field);
+        if (input.TryGetProperty("residentId", out var resident))
+            Compare(JsonNode.Parse(identity.GetProperty("residentId").GetRawText()), JsonNode.Parse(resident.GetRawText()), "model.residentId");
     }
 
     private static void Compare(JsonNode? expected, JsonNode? actual, string field)

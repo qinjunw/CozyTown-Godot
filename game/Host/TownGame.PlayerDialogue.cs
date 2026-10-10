@@ -11,7 +11,12 @@ public partial class TownGame
 
     private void GeneratePlayerDialogue()
     {
-        if (_fatal) return;
+        if (_fatal || DialogueHost.Current is null || !_pauseReasons.Contains("dialogue") || !TownDialogueHost.TextAllowed(_pauseReasons)) return;
+        double now = _hostClock.Elapsed.TotalSeconds;
+        double preceding = Math.Max(0, now - _lastHostSeconds);
+        _inputHost.FlushPausedElapsed(preceding);
+        _lastHostSeconds = now;
+        _elapsed += preceding;
         DialogueHost.Generate(_pauseReasons);
         FlushWorldEvents();
         RefreshPlayerDialogue();
@@ -77,8 +82,12 @@ public partial class TownGame
         {
             ModelCompletion result = await client.SendAsync(frozen);
             double arrivedAfter = 60 - frozen.RemainingWait.TotalSeconds + (result.LogicalElapsedToArrival ?? clock.Elapsed).TotalSeconds;
+            var responseJournal = _journals.Single(j => Path.GetFileName(j.DirectoryPath) == frozen.Identity.RunId);
+            responseJournal.RecordReplayInput("model_mailbox_enqueued", new { dispatch = result.Dispatch });
             _mainThread.Enqueue(() =>
             {
+                _journal.ImportRetiredCompletion(responseJournal, result);
+                _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
                 _activeModelRequests.Remove(key);
                 _modelCompletions.Add(result);
                 if (result.DispatchedAtUtc is null && _world.SessionId == frozen.Identity.SessionId)
