@@ -1,6 +1,6 @@
 # Godot 场景回放验证：2026-10-10
 
-票 [23](https://github.com/qinjunw/CozyTown-Godot/issues/23) 的 13 个输入包分别通过核心 CLI、Godot 源场景 headless 和 Windows 导出 headless 执行，39 次命令均得到预期结果。正常包完成回放；故障包在预期的依赖或空间边界拒绝继续。机器报告见 [verification.json](evidence/scene-replay/reports/verification.json)。
+[实现 Godot 场景回放与空间分歧验证](https://github.com/qinjunw/CozyTown-Godot/issues/23)的 13 个输入包分别通过核心 CLI、Godot 源场景 headless 和 Windows 导出 headless 执行，39 次命令均得到预期结果。正常包完成回放；故障包在预期的依赖或空间边界拒绝继续。机器报告见 [verification.json](evidence/scene-replay/reports/verification.json)。
 
 ## 冻结输入
 

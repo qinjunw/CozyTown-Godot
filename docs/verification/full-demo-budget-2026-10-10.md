@@ -46,4 +46,4 @@ dotnet build tools/CozyTown.Budget/CozyTown.Budget.csproj -c Release --no-restor
 
 合入集成提交 `1287f35` 后形成 `170d288bf7a0a1187fbc8b0fb3923401aa0c8ec1`。新预算相关 24 项模型测试及 141 项宿主测试再次通过；Godot 游戏执行锁定依赖还原和 Debug 构建，0 警告、0 错误。模型与核心的完整 Demo 配置在版本、身份、金额、预留、总量、并发和四阶段上限上相同；宿主使用的模型快照与核心预算状态保持相同字段。
 
-该检查确认新增模型配置与正式场景回放源码同时编译。模型源码变化会改变场景回放的模拟源码摘要；此前场景矩阵仍属于其原候选。综合入口票 [35](https://github.com/qinjunw/CozyTown-Godot/issues/35)将冻结新候选并重新生成回放输入。
+该检查确认新增模型配置与正式场景回放源码同时编译。模型源码变化会改变场景回放的模拟源码摘要；此前场景矩阵仍属于其原候选。[贯通完整 Demo 宿主阶段与离线评测入口](https://github.com/qinjunw/CozyTown-Godot/issues/35)将冻结新候选并重新生成回放输入。
