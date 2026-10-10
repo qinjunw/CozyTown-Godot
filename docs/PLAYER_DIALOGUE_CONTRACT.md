@@ -1,6 +1,6 @@
 # 玩家模型对话合同
 
-本合同对应[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。2026-10-10 用户确认对话暂停世界、关闭或切人终结旧会话，并恢复保存时的面板与逻辑状态。[实现玩家可选模型对话与会话续接](https://github.com/qinjunw/CozyTown-Godot/issues/21)已进入集成分支，通过固定客户端与核心回放检查，Windows 人工验收待反馈；证据见[验证记录](verification/player-dialogue.md)。真实玩家文本仍待综合评测接入新预算。
+本合同对应[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。2026-10-10 用户确认对话暂停世界、关闭或切人终结旧会话，并恢复保存时的面板与逻辑状态。[实现玩家可选模型对话与会话续接](https://github.com/qinjunw/CozyTown-Godot/issues/21)已进入集成分支，通过固定客户端与核心回放检查，Windows 人工验收待反馈；证据见[验证记录](verification/player-dialogue.md)。真实玩家文本已接通完整 Demo 的独立预算，实际服务样本仍待综合评测；接线与离线证据见[宿主验证](verification/full-demo-host-2026-10-10.md)。
 
 ## 交互范围
 

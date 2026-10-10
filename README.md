@@ -10,7 +10,7 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，待用户操作的项目见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
 
-居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，Windows 画面和键鼠仍待用户按[对话清单](docs/verification/player-dialogue-manual.md)验收；真实玩家文本由后续完整 Demo 评测接入新预算。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
+居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，Windows 画面和键鼠仍待用户按[对话清单](docs/verification/player-dialogue-manual.md)验收；真实玩家文本已接通独立预算，实际服务样本仍待综合评测。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
 
 ## 构建与运行
 
@@ -36,9 +36,9 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 
-保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，当前候选应重新生成并验证。
+保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，修改模拟源码后须重新生成并验证。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo 另获人民币 5 元、96 次的独立授权，[模型适配与独立账本](src/CozyTown.Model/README.md)已支持新配置，宿主接线和本轮真实样本尚未完成；阶段、两天输入和通过标准见[完整 Demo 跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo 另获人民币 5 元、96 次的独立授权，[模型适配与独立账本](src/CozyTown.Model/README.md)、宿主阶段和两天输入已接通，通过[完整离线门](docs/verification/full-demo-host-2026-10-10.md)；本轮真实账本及服务样本尚未创建。执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
 
