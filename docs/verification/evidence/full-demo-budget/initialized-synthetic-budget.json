@@ -1,0 +1,15 @@
+{
+  "profileVersion": "full-demo-v1",
+  "budget": {
+    "budgetId": "cozytown-godot-full-demo-20261010-v1",
+    "currency": "CNY",
+    "limitMicros": 5000000,
+    "settledMicros": 0,
+    "reservedMicros": 0,
+    "totalAttempts": 0,
+    "slotsHeld": 0,
+    "stopReason": null,
+    "attempts": [],
+    "availableMicros": 5000000
+  }
+}
