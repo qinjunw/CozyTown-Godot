@@ -219,7 +219,9 @@ public static class TownReplay
                     T Read<T>(string field) => TownJson.Deserialize<T>(input.GetProperty(field).GetRawText());
                     switch (trace.Command)
                     {
-                        case "budget_reserve": budget.Reserve(Read<string>("stage"), Read<string>("logicalRequestId"), Read<string?>("attemptId") ?? "", Read<bool>("recovery"), Read<string>("admission"), Read<TownReplayBudgetState>("after")); break;
+                        case "budget_reserve": budget.Reserve(Read<string>("stage"), Read<string>("logicalRequestId"),
+                            input.GetProperty("attemptId").ValueKind == JsonValueKind.Null ? "" : Read<string>("attemptId"),
+                            Read<bool>("recovery"), Read<string>("admission"), Read<TownReplayBudgetState>("after")); break;
                         case "budget_external": budget.ApplyExternalState(Read<TownReplayBudgetState>("before"), Read<TownReplayBudgetState>("after")); break;
                         case "budget_settle": budget.Settle(Read<string>("attemptId"), Read<long>("promptTokens"), Read<long>("completionTokens"), Read<TownReplayBudgetState>("after")); break;
                         case "budget_unknown": budget.MarkUnknown(Read<string>("attemptId"), Read<string>("reason"), Read<bool>("generationEnded"), Read<bool>("stopFurther"), Read<TownReplayBudgetState>("after")); break;

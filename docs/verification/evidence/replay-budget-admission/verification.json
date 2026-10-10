@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-10",
+  "issue": "https://github.com/qinjunw/CozyTown-Godot/issues/33",
+  "integrationBase": "f397d9a015e7fd410523abf8f4fe8e54ead85f40",
+  "verifiedIntegrationTip": "5e6e35ad757e8afd74c72911bfd1afecf5da3b2a",
+  "sdk": "10.0.401",
+  "seam": "TownRecording.RecordExternal -> TownReplay.Run",
+  "profiles": ["first-slice-budget-v1", "full-demo-v1"],
+  "red": {
+    "tests": 4,
+    "failed": 4,
+    "expectedPassed": true,
+    "actualPassed": false,
+    "code": "invalid_recording",
+    "boundary": 1,
+    "field": "input",
+    "actual": "JSON root cannot be null."
+  },
+  "featureCases": {
+    "nullRejectionPreservesBudget": 4,
+    "acceptedNullOrEmptyIdentityRejected": 4,
+    "missingOrIncorrectlyTypedAttemptFieldRejected": 6,
+    "incorrectAdmissionRejected": 2
+  },
+  "coreSuite": { "passed": 248, "failed": 0, "skipped": 0 },
+  "existingCliTests": { "passed": 1, "failed": 0, "skipped": 0 },
+  "fixedCli": {
+    "currentGameplayExit": 0,
+    "currentGameplayBoundaries": 399,
+    "tamperedExit": 1,
+    "firstDivergenceBoundary": 2,
+    "firstDivergenceField": "queries[0]"
+  },
+  "realModelCalls": 0
+}
