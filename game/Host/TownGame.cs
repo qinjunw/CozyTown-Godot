@@ -98,6 +98,8 @@ public partial class TownGame : Node2D
             _scenario = Argument("--scenario=") ?? "baseline";
             if (Argument("--scene-replay=") is string replayPath)
                 _scenario = TownReplay.ReadPackage(replayPath).InitialSnapshot.State.InitialStateId;
+            if (Argument("--dialogue-fixture=") is string dialogueFixture && dialogueFixture is not ("success" or "delayed" or "invalid" or "timeout" or "budget"))
+                throw new InvalidDataException("Dialogue fixture must be success, delayed, invalid, timeout or budget.");
             _map = GetNode<Node2D>("Map");
             _camera = GetNode<Camera2D>("Camera");
             _loaded = TownContentLoader.Load(_map, _scenario);
@@ -121,6 +123,8 @@ public partial class TownGame : Node2D
                 return;
             }
             string? modelConfig = Argument("--model-config=");
+            if (modelConfig is not null && Argument("--dialogue-fixture=") is not null)
+                throw new InvalidDataException("Fixed dialogue fixtures require offline rules mode.");
             if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" or "production-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--replay-record-smoke")))
                 throw new InvalidDataException("Economy verification requires offline rules mode.");
             if (modelConfig != null)
@@ -136,6 +140,8 @@ public partial class TownGame : Node2D
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
             _world = new TownWorld(_loaded.Content, _scenario, movementQuery: CheckMotion);
+            string retirementRoot = _modelOptions is null ? _userRoot : Path.GetDirectoryName(_modelOptions.LedgerFile)!;
+            _dialogueRetirements = new TownPlayerDialogueRegistry(Path.Combine(retirementRoot, "player-dialogue-retirements.json"));
             _view = _world.GetView();
             CreateJournal();
             CreateActors();
@@ -205,17 +211,23 @@ public partial class TownGame : Node2D
         {
             string key = session + ":" + dispatch.Request.Identity.LogicalRequestId;
             TimeSpan elapsed = _admissionClocks.TryGetValue(key, out var clock) ? clock.Elapsed : dispatch.Request.RemainingWait;
+            string? playerSession = dispatch.Request.Identity.Kind == "player_text" ? dispatch.Request.Identity.PlayerSessionId : null;
             return _dispatchGate.EnqueueAsync(session,
-                () => _world.MarkDispatched(dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId),
-                dispatch.Request.RemainingWait - elapsed);
+                () => playerSession is null ? _world.MarkDispatched(dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId)
+                    : DialogueHost.Acknowledge(playerSession, dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId),
+                dispatch.Request.RemainingWait - elapsed, playerDialogueId: playerSession);
         };
         _persistedWorldSequence = 0;
         if (_mode == "real" && _modelOptions != null)
         {
             _model = new DeepSeekClient(_modelOptions, _journal);
             _model.ResponseArrived += (dispatch, elapsed) => _mainThread.Enqueue(() =>
-                _world.MarkResponseArrived(dispatch.Request.Identity.SessionId, dispatch.Request.Identity.LogicalRequestId,
-                    dispatch.AttemptId, 60 - dispatch.Request.RemainingWait.TotalSeconds + elapsed.TotalSeconds));
+            {
+                string? playerSession = dispatch.Request.Identity.Kind == "player_text" ? dispatch.Request.Identity.PlayerSessionId : null;
+                double arrivedAfter = 60 - dispatch.Request.RemainingWait.TotalSeconds + elapsed.TotalSeconds;
+                if (playerSession is null) _world.MarkResponseArrived(dispatch.Request.Identity.SessionId, dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId, arrivedAfter);
+                else _world.MarkPlayerDialogueResponseArrived(dispatch.Request.Identity.SessionId, playerSession, dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId, arrivedAfter);
+            });
             _clients.Add(_model);
             _journal.SetReplayBudget(_model.Budget);
             _journal.WriteArtifact("budget-at-start.json", _model.Budget);
@@ -248,7 +260,7 @@ public partial class TownGame : Node2D
         {
             if (_journal.Failed) throw new IOException("Run journal is interrupted.");
             while (_mainThread.TryDequeue(out var work)) work();
-            _dispatchGate.Tick(_world.SessionId, _pauseReasons.Count > 0, _fatal);
+            _dispatchGate.Tick(_world.SessionId, _pauseReasons, _world.GetView().CurrentPlayerDialogueId, _fatal);
             double now = _hostClock.Elapsed.TotalSeconds;
             double elapsed = Math.Max(0, now - _lastHostSeconds);
             _lastHostSeconds = now;
@@ -266,6 +278,7 @@ public partial class TownGame : Node2D
                 _world.Advance(paused ? 0 : StepSeconds * .5, StepSeconds, paused);
                 FlushWorldEvents();
                 if (!paused) DispatchDecisions();
+                ProcessPlayerDialogue();
             }
             _view = _world.GetView();
             SyncActors();
@@ -545,6 +558,9 @@ public partial class TownGame : Node2D
             if (snapshot.DecisionMode == "real" && _modelOptions == null)
                 throw new InvalidDataException("Real-mode restore requires explicit model configuration.");
             TownWorld candidate = TownWorld.RestoreCandidate(_loaded.Content, snapshot.WorldJson, CheckMotion);
+            var restoredDialogue = candidate.GetView().PlayerDialogues.SingleOrDefault(d => d.Id == candidate.GetView().CurrentPlayerDialogueId);
+            string? retirement = restoredDialogue is { Request: not null, TerminalReason: null }
+                ? _dialogueRetirements?.Find(candidate.GetView().BudgetId, restoredDialogue.Request.LogicalRequestId) : null;
             if (snapshot.PlayerRoute != null)
             {
                 TownPoint previous = candidate.GetView().PlayerPosition;
@@ -572,6 +588,10 @@ public partial class TownGame : Node2D
                 _pauseReasons.Order(StringComparer.Ordinal).ToArray(), snapshot.ModelRequests.ToDictionary(pair => pair.Key, pair => TownJson.Serialize(pair.Value)));
             _view = _world.GetView();
             CreateJournal();
+            if (retirement is not null) _world.ApplyPlayerDialogueRetirement(restoredDialogue!.Id, retirement);
+            _view = _world.GetView();
+            SetPause("dialogue", _view.CurrentPlayerDialogueId is not null);
+            RefreshPlayerDialogue();
             _lastHostSeconds = _hostClock.Elapsed.TotalSeconds;
             if (recoveringFault)
             {

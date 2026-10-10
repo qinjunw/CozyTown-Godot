@@ -188,7 +188,7 @@ public partial class TownGame
                 && _view.PlayerPosition.DistanceTo(entrance) < .01 && _residentTalkButton.IsVisibleInTree()
                 && !_residentTalkButton.Disabled && !_economyPanel.Visible && _pauseReasons.Count == 0,
                 new { _view.WorldMinute, shopNeighbor.Id, shopNeighbor.Position, button = _residentTalkButton.Text });
-            int previousConversations = _experimentEvents.Count(e => e.Kind == "player_conversation");
+            int previousConversations = _experimentEvents.Count(e => e.Kind == "player_dialogue_opened");
             _residentTalkButton.EmitSignal(Godot.Button.SignalName.Pressed);
             double conversationMinute = _world.WorldMinute;
             _world.Advance(1, 0, _pauseReasons.Count > 0);
@@ -196,10 +196,10 @@ public partial class TownGame
             Check("shop_neighbor_dialogue_pauses_world", _dialogue.Visible && !_economyPanel.Visible
                 && _pauseReasons.Contains("dialogue") && _world.WorldMinute == conversationMinute
                 && _dialogueName.Text == _loaded.Definitions.Residents.Single(r => r.Id == "mina").DisplayName
-                && _experimentEvents.Count(e => e.Kind == "player_conversation") == previousConversations + 1
-                && _experimentEvents.Last(e => e.Kind == "player_conversation").ResidentId == "mina"
+                && _experimentEvents.Count(e => e.Kind == "player_dialogue_opened") == previousConversations + 1
+                && _experimentEvents.Last(e => e.Kind == "player_dialogue_opened").ResidentId == "mina"
                 && TownJson.Serialize(_world.GetView().Economy) == economyBeforeConversation);
-            await SendEconomyKeyAsync(Key.Escape);
+            CloseDialogue();
             bool neighborDialogueClosed = !_dialogue.Visible && !_pauseReasons.Contains("dialogue") && !_menu.Visible;
             await SendEconomyKeyAsync(Key.E);
             Check("shop_reopens_after_neighbor_dialogue", neighborDialogueClosed && _economyPanel.Visible
