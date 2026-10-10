@@ -8,7 +8,7 @@ public sealed partial class TownWorld
     public TownSnapshot CaptureSnapshot()
     {
         if (HasUncommittedResponses) throw new InvalidOperationException("A received model response is still being persisted; save after its completion is sealed.");
-        return new(4, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
+        return new(5, Guid.NewGuid().ToString("N"), _content.Fingerprint, RulesVersion, NumericVersion, TownJson.Clone(_state));
     }
     public string CaptureJson() => TownJson.Serialize(CaptureSnapshot());
 
@@ -39,6 +39,13 @@ public sealed partial class TownWorld
             else if (pending.Request.AttemptId is not null)
                 pending.Request = pending.Request with { AttemptId = null, IsRecovery = true };
         }
+        foreach (var dialogue in state.PlayerDialogues)
+        {
+            if (dialogue.SealedResult is not null)
+                dialogue.SealedResult = dialogue.SealedResult with { SessionId = world.SessionId };
+            else if (dialogue.IsOpen && dialogue.TerminalReason is null && dialogue.Request is { AttemptId: not null } request)
+                dialogue.Request = request with { AttemptId = null, IsRecovery = true };
+        }
         world.Log("world_restored", null, "host", "snapshot_validated", data: new { snapshot.SnapshotId, parentBranchId = parent, snapshotSequence = state.ForkSequence });
         return world;
     }
@@ -47,7 +54,7 @@ public sealed partial class TownWorld
     {
         void Require([DoesNotReturnIf(false)] bool condition, string field) { if (!condition) throw new InvalidDataException($"Invalid town snapshot: {field}"); }
         bool Id(string? id) => !string.IsNullOrWhiteSpace(id) && id.Length <= 200;
-        Require(snapshot.SchemaVersion == 4, "schemaVersion");
+        Require(snapshot.SchemaVersion == 5, "schemaVersion");
         Require(snapshot.ContentFingerprint == content.Fingerprint, "contentFingerprint");
         Require(snapshot.RulesVersion == RulesVersion && snapshot.NumericVersion == NumericVersion, "simulation versions");
         Require(Id(snapshot.SnapshotId) && snapshot.State is not null, "snapshot identity/state");
@@ -133,6 +140,7 @@ public sealed partial class TownWorld
             else Require(request.RemainingWaitSeconds > 0, "expired request without sealed timeout");
         }
         Require(state.TerminalRequestIds!.All(Id) && state.ExecutedTransferIds!.All(Id), "terminal identities");
+        ValidatePlayerDialogues(content, state);
         Require(state.Events!.Count > 0 && state.Events.Count <= state.Sequence && state.Events.Select((e, i) => e is not null && e.Sequence == state.Sequence - state.Events.Count + i + 1 && e.WorldMinute <= state.WorldMinute && TownContent.Finite(e.WorldMinute) && Id(e.BranchId) && e.Kind is not null && e.Source is not null && e.Reason is not null && e.DataJson is not null).All(valid => valid), "event suffix");
     }
 

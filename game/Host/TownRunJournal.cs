@@ -283,7 +283,7 @@ public static class TownSaveFile
         TownSnapshot world;
         try { world = TownJson.Deserialize<TownSnapshot>(snapshot.WorldJson); }
         catch (JsonException error) { throw new InvalidDataException("World snapshot fields are missing or invalid.", error); }
-        if (world.State is not { } state || state.PendingDecisions is null || state.TerminalRequestIds is null || state.Residents is null
+        if (world.State is not { } state || state.PendingDecisions is null || state.PlayerDialogues is null || state.TerminalRequestIds is null || state.Residents is null
             || state.BranchId != snapshot.SourceRunDirectoryName || state.InitialStateId != snapshot.Stage)
             throw new InvalidDataException("Host snapshot branch or stage differs from its world snapshot.");
         if (snapshot.DecisionMode == "rules" && snapshot.ModelRequests.Count != 0)
@@ -291,6 +291,9 @@ public static class TownSaveFile
         if (snapshot.DecisionMode == "real" && state.PendingDecisions.Any(p => p?.Request is not null
             && (p.Request.AttemptId is not null || p.Request.IsRecovery) && !snapshot.ModelRequests.ContainsKey(p.Request.LogicalRequestId)))
             throw new InvalidDataException("Dispatched or recovering model decision has no frozen provider request.");
+        if (snapshot.DecisionMode == "real" && state.PlayerDialogues.Any(d => d?.Request is { } request
+            && d.TerminalReason is null && (request.AttemptId is not null || request.IsRecovery) && !snapshot.ModelRequests.ContainsKey(request.LogicalRequestId)))
+            throw new InvalidDataException("Dispatched or recovering player dialogue has no frozen provider request.");
         ModelStage stage = snapshot.Stage == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual;
         foreach (var pair in snapshot.ModelRequests)
         {
@@ -302,16 +305,24 @@ public static class TownSaveFile
                 || Encoding.UTF8.GetByteCount(request.InputJson) > 16 * 1024 || !state.Residents.Any(r => r?.Id == identity.ResidentId))
                 throw new InvalidDataException("Frozen model request identity, stage or input is invalid.");
             var pending = state.PendingDecisions.SingleOrDefault(p => p?.Request?.LogicalRequestId == pair.Key);
-            if (pending is null && !state.TerminalRequestIds.Contains(pair.Key))
+            var player = state.PlayerDialogues.SingleOrDefault(d => d?.Request?.LogicalRequestId == pair.Key)?.Request;
+            if (identity.Kind is not ("npc_action" or "player_text")
+                || player is not null && (identity.Kind != "player_text" || identity.PlayerSessionId != player.PlayerSessionId)
+                || pending is not null && (identity.Kind != "npc_action" || identity.PlayerSessionId is not null))
+                throw new InvalidDataException("Frozen request kind or player session differs from its world request.");
+            if (pending is null && player is null && !state.TerminalRequestIds.Contains(pair.Key))
                 throw new InvalidDataException("Frozen model request has no pending or terminal world identity.");
             if (pending is not null && (pending.Request.ResidentId != identity.ResidentId || pending.Request.ActivityRevision != identity.ActivityRevision))
                 throw new InvalidDataException("Frozen model request differs from its world decision.");
+            if (player is not null && (player.ResidentId != identity.ResidentId || player.ActivityRevision != identity.ActivityRevision))
+                throw new InvalidDataException("Frozen model request differs from its player dialogue.");
             try
             {
                 using var body = TownJson.Deserialize<JsonDocument>(request.InputJson);
                 var messages = body.RootElement.GetProperty("messages");
                 var input = messages.EnumerateArray().Where(m => m.GetProperty("role").GetString() == "user").ToArray();
-                if (input.Length != 1 || (pending is not null && input[0].GetProperty("content").GetString() != pending.Request.InputJson))
+                string? expectedInput = pending?.Request.InputJson ?? player?.InputJson;
+                if (input.Length != 1 || (expectedInput is not null && input[0].GetProperty("content").GetString() != expectedInput))
                     throw new InvalidDataException("Frozen provider input differs from its world decision.");
             }
             catch (Exception error) when (error is JsonException or KeyNotFoundException or InvalidOperationException)

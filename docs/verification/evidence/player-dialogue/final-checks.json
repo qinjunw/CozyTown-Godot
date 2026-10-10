@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-10",
+  "candidateCommit": "de520babd9956274605a51852329876b55e730f5",
+  "mergedIntegration": "c0c1e5b",
+  "rulesVersion": "town-social-player-dialogue-v5",
+  "worldSchemaVersion": 5,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "fullSuites": {
+    "model": {
+      "total": 46,
+      "executed": 46,
+      "passed": 46,
+      "failed": 0,
+      "skipped": 0
+    },
+    "host": {
+      "total": 141,
+      "executed": 141,
+      "passed": 141,
+      "failed": 0,
+      "skipped": 0
+    },
+    "core": {
+      "total": 222,
+      "executed": 222,
+      "passed": 222,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "windowsVerification": {
+    "graphical": false,
+    "steps": [
+      {
+        "name": "dotnet-version",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "godot-version",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "restore-host",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "restore-core-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "core-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "restore-model-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "model-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "restore-host-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "host-tests",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "import",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "build-host",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "scene-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "content-baseline",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "content-counterfactual",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "content-economy-fixture",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "content-farming-capacity-fixture",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "content-production-capacity-fixture",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "slice-baseline-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "slice-counterfactual-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "economy-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-windows",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-slice-baseline-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-slice-counterfactual-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-economy-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "scene-farming-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-farming-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "scene-farming-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-farming-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "scene-production-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-production-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "scene-production-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false
+      },
+      {
+        "name": "export-production-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false
+      }
+    ],
+    "passed": true
+  },
+  "fixedReplay": {
+    "tamperedExit": 1,
+    "playerDialogueBoundaries": 123,
+    "firstDivergenceBoundary": 2,
+    "firstDivergenceField": "queries[0]",
+    "currentGameplayBoundaries": 399
+  },
+  "candidate": {
+    "remoteRequests": 0,
+    "sha256": "c5e775848e22c004b774b009a12e85df0f0f1a2b6b1eb94ddf29856ba675ad1f",
+    "defaultLauncher": "Start.cmd",
+    "bytes": 78379895,
+    "relativeArchive": "artifacts/player-dialogue-candidate/de520bab.zip",
+    "selfContained": true,
+    "manualAcceptance": "pending"
+  }
+}

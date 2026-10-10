@@ -95,6 +95,42 @@ public static class FixtureGenerator
         if (failed.Passed) throw new InvalidDataException("Tampered fixture did not diverge.");
         WritePackage(Path.Combine(outputDirectory, "tampered-command.zip"), tampered);
         File.WriteAllText(Path.Combine(outputDirectory, "tampered-command.report.json"), TownJson.Serialize(failed with { FinalStateJson = null }));
+        GeneratePlayerDialogue(content, outputDirectory);
+    }
+
+    private static void GeneratePlayerDialogue(TownContent content, string outputDirectory)
+    {
+        var world = new TownWorld(content, movementQuery: (_, _, _) => true);
+        var host = new TownInputHost(content, world); var recording = new TownRecording(content, world, host);
+        foreach (string residentId in new[] { "mina", "eli", "ren", "sora" })
+        {
+            var target = world.State.Residents.Single(r => r.Id == residentId).Position;
+            foreach (var point in content.FindRoute(world.State.PlayerPosition, target) ?? throw new InvalidDataException("Dialogue fixture route unavailable."))
+            {
+                if (!world.SetPlayerPosition(point)) throw new InvalidDataException("Dialogue fixture movement rejected.");
+                world.AcknowledgeEvents(world.State.Sequence);
+            }
+            var dialogue = world.OpenPlayerDialogue(residentId) ?? throw new InvalidDataException("Dialogue fixture resident is not nearby.");
+            host.Pause("dialogue", true); host.AcceptElapsed(.03); host.FlushPausedElapsed(90);
+            var request = world.RequestPlayerDialogue(dialogue.Id)!;
+            string body = TownJson.Serialize(new { messages = new[] { new { role = "user", content = request.InputJson } } });
+            host.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(new { identity = new { kind = "player_text", playerSessionId = dialogue.Id, residentId, logicalRequestId = request.LogicalRequestId }, inputJson = body }));
+            string attempt = "fixed-" + request.LogicalRequestId;
+            world.MarkPlayerDialogueDispatched(dialogue.Id, request.LogicalRequestId, attempt);
+            world.MarkPlayerDialogueResponseArrived(world.SessionId, dialogue.Id, request.LogicalRequestId, attempt, 2);
+            host.Pause("menu", true); world.Advance(0, 100, true);
+            world.ReceivePlayerDialogueResult(new(world.SessionId, dialogue.Id, request.LogicalRequestId, attempt, residentId,
+                residentId + "的固定客户端单段反馈。", "fixed_model", null, 2));
+            world.DisplayPlayerDialogue(dialogue.Id, false); host.Pause("menu", false); world.DisplayPlayerDialogue(dialogue.Id, true);
+            world.ClosePlayerDialogue(dialogue.Id); host.Pause("dialogue", false); world.Advance(0, 0); host.PruneTerminalRequests();
+        }
+        var current = world.OpenPlayerDialogue("sora")!; host.Pause("dialogue", true);
+        world.RequestPlayerDialogue(current.Id); world.ApplyPlayerDialogueRetirement(current.Id, "closed");
+        world.ClosePlayerDialogue(current.Id); host.Pause("dialogue", false); world.Advance(0, 0);
+        var package = recording.Complete(); var report = TownReplay.Run(package);
+        if (!report.Passed) throw new InvalidDataException(TownJson.Serialize(report));
+        WritePackage(Path.Combine(outputDirectory, "player-dialogue.zip"), package);
+        File.WriteAllText(Path.Combine(outputDirectory, "player-dialogue.report.json"), TownJson.Serialize(report with { FinalStateJson = null }));
     }
 
     private static void WritePackage(string path, TownReplayPackage package)

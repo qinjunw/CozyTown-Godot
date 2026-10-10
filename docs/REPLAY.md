@@ -20,9 +20,9 @@ dotnet run --project tools/CozyTown.Replay -- --input=<replay.json> --metrics=<m
 
 ## 记录内容
 
-`TownReplayPackage` 结构版本为 1，绑定当前 `town-social-production-v4` 规则和 `pixels-double-grid16-radius5-morning-motion-prefix-v3` 数值合同。包内保存内容清单、定义、初态快照、运行会话身份、初始宿主状态及预算视图。未知版本或内容指纹不符会拒绝回放。
+`TownReplayPackage` 结构版本为 1，绑定当前 `town-social-player-dialogue-v5` 规则和 `pixels-double-grid16-radius5-morning-motion-prefix-v3` 数值合同。包内保存内容清单、定义、初态快照、运行会话身份、初始宿主状态及预算视图。未知版本或内容指纹不符会拒绝回放。
 
-每个 `TownTrace` 有连续序号、命令及输入、输入指纹、按调用顺序排列的空间查询和预期检查点。世界入口覆盖推进、移动、交谈、决定请求、派发、到达、候选受理、事件确认、交易、快捷栏、农作、睡眠和生产。宿主入口覆盖点击路线、键盘取消路线、移动、暂停原因、接受的现实时间、固定步消耗与冻结提供者输入。
+每个 `TownTrace` 有连续序号、命令及输入、输入指纹、按调用顺序排列的空间查询和预期检查点。世界入口覆盖推进、移动、交谈、玩家会话打开/生成/派发/到达/封存/展示/关闭/持久终结、决定请求、派发、到达、候选受理、事件确认、交易、快捷栏、农作、睡眠和生产。宿主入口覆盖点击路线、键盘取消路线、移动、暂停原因、接受的现实时间、固定步消耗、创建玩家请求前结清暂停耗时与冻结提供者输入。
 
 睡眠记录原操作、请求小时数、现实等待和暂停输入，实际推进、跨日结算与拒绝结果由规则重新计算。冻结输入按逻辑请求保存；终结后从活跃宿主视图清理，原输入仍留在历史边界中。
 
@@ -51,6 +51,8 @@ dotnet run --project tools/CozyTown.Replay -- --input=docs/verification/evidence
 dotnet run --project tools/CozyTown.Replay -- --input=docs/verification/evidence/replay/tampered-command.zip
 dotnet run --project tools/CozyTown.Replay -- --generate-fixtures --content=docs/verification/evidence/player-production/content-baseline.json --output=<output-directory>
 ```
+
+[四居民玩家对话固定包](verification/evidence/replay/player-dialogue.zip)通过 123 个边界，覆盖附近打开、显式单段、玩家冻结输入、菜单叠加、及时到达后延迟落盘、显示/关闭/一次经历及外部终结事实。两个正常包均为 schema 5；固定空间事实不构成画面或 Godot 碰撞验收。
 
 正常包通过 399 个边界；篡改包把第 2 个边界的无效移动改为正常位置，重算时发生未记录的空间查询，立即报告 `queries[0]` 分歧。
 

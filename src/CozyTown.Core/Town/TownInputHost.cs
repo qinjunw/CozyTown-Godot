@@ -36,6 +36,7 @@ public sealed class TownInputHost(TownContent content, TownWorld world, TownRepl
     public void Move(double seconds, TownPoint direction) => Apply("host_move", new { seconds, direction });
     public void Pause(string reason, bool paused) => Apply("host_pause", new { reason, paused });
     public void AcceptElapsed(double elapsed) => Apply("host_elapsed", new { elapsed });
+    public void FlushPausedElapsed(double elapsed) => Apply("host_flush_paused_elapsed", new { elapsed });
     public void TakeStep() => Apply("host_step", new { });
     public void FreezeRequest(string logicalRequestId, string requestJson) => Apply("host_freeze_request", new { logicalRequestId, requestJson });
     public void PruneTerminalRequests() => Apply("host_prune_requests", new { });
@@ -67,6 +68,12 @@ public sealed class TownInputHost(TownContent content, TownWorld world, TownRepl
                 case "host_step":
                     if (_state.UnconsumedSeconds < StepSeconds) throw new InvalidDataException("Host step has no accepted time.");
                     _state = _state with { UnconsumedSeconds = _state.UnconsumedSeconds - StepSeconds }; break;
+                case "host_flush_paused_elapsed":
+                    double preceding = Read<double>("elapsed");
+                    if (_state.PauseReasons.Length == 0 || !double.IsFinite(preceding) || preceding < 0 || preceding + _state.UnconsumedSeconds > 86400)
+                        throw new InvalidDataException("Paused host elapsed input is invalid.");
+                    world.Advance(0, preceding + _state.UnconsumedSeconds, true);
+                    _state = _state with { UnconsumedSeconds = 0 }; break;
                 case "host_move": MoveCore(Read<double>("seconds"), Read<TownPoint>("direction")); break;
                 case "host_prune_requests":
                     var terminal = world.State.TerminalRequestIds.ToHashSet(StringComparer.Ordinal);
@@ -74,12 +81,23 @@ public sealed class TownInputHost(TownContent content, TownWorld world, TownRepl
                     break;
                 case "host_freeze_request":
                     string id = Read<string>("logicalRequestId"), json = Read<string>("requestJson");
-                    var pending = world.State.PendingDecisions.Single(p => p.Request.LogicalRequestId == id);
+                    var npc = world.State.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == id);
+                    var player = world.State.PlayerDialogues.SingleOrDefault(d => d.Request?.LogicalRequestId == id && d.TerminalReason is null);
+                    string expectedInput = npc?.Request.InputJson ?? player?.Request?.InputJson
+                        ?? throw new InvalidDataException("Frozen input has no active logical request.");
                     using (var request = JsonDocument.Parse(json))
                     {
                         var users = request.RootElement.GetProperty("inputJson").GetString();
+                        if (player is not null)
+                        {
+                            var identity = request.RootElement.GetProperty("identity");
+                            if (identity.GetProperty("kind").GetString() != "player_text" || identity.GetProperty("playerSessionId").GetString() != player.Id
+                                || identity.GetProperty("residentId").GetString() != player.ResidentId || identity.GetProperty("logicalRequestId").GetString() != id)
+                                throw new InvalidDataException("Frozen player input identity differs from the active dialogue.");
+                        }
                         using var provider = JsonDocument.Parse(users!);
-                        if (!provider.RootElement.GetProperty("messages").EnumerateArray().Any(m => m.GetProperty("role").GetString() == "user" && m.GetProperty("content").GetString() == pending.Request.InputJson))
+                        var userInputs = provider.RootElement.GetProperty("messages").EnumerateArray().Where(m => m.GetProperty("role").GetString() == "user").ToArray();
+                        if (userInputs.Length != 1 || userInputs[0].GetProperty("content").GetString() != expectedInput)
                             throw new InvalidDataException("Frozen provider input differs from the pending decision.");
                     }
                     _state.FrozenRequests[id] = json; break;
@@ -87,7 +105,7 @@ public sealed class TownInputHost(TownContent content, TownWorld world, TownRepl
             }
         }
         finally { world.TraceCommitted = previous; }
-        TraceCommitted?.Invoke(new(command, inputJson, queries.ToArray(), command == "host_move" ? world.State : null, State));
+        TraceCommitted?.Invoke(new(command, inputJson, queries.ToArray(), command is "host_move" or "host_flush_paused_elapsed" ? world.State : null, State));
     }
 
     private void MoveCore(double seconds, TownPoint direction)
