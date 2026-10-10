@@ -3,7 +3,8 @@ namespace CozyTown.Model;
 public enum ModelStage { Baseline, Counterfactual }
 
 public sealed record ModelRequestIdentity(
-    string RunId, string SessionId, string LogicalRequestId, string ResidentId, long ActivityRevision);
+    string RunId, string SessionId, string LogicalRequestId, string ResidentId, long ActivityRevision,
+    string Kind = "npc_action", string? PlayerSessionId = null);
 
 // InputJson is the complete, frozen Chat Completions request body, not a mutable world view.
 public sealed record FrozenModelRequest(

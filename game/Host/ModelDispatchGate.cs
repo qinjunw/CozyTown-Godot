@@ -11,13 +11,13 @@ public sealed class ModelDispatchGate : IDisposable
     private bool _stopped;
 
     public Task EnqueueAsync(string sessionId, Func<bool> acknowledge, TimeSpan deadlineRemaining,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default, string? playerDialogueId = null)
     {
         if (string.IsNullOrWhiteSpace(sessionId)) throw new ArgumentException("Dispatch session identity is required.", nameof(sessionId));
         ArgumentNullException.ThrowIfNull(acknowledge);
         if (deadlineRemaining <= TimeSpan.Zero || deadlineRemaining > TimeSpan.FromSeconds(60))
             return Task.FromException(new ModelException("logical_wait_expired"));
-        var pending = new PendingDispatch(sessionId, acknowledge, deadlineRemaining, cancellationToken);
+        var pending = new PendingDispatch(sessionId, acknowledge, deadlineRemaining, cancellationToken, playerDialogueId);
         lock (_gate)
         {
             if (_stopped) pending.Reject("host_unavailable_before_send");
@@ -26,7 +26,10 @@ public sealed class ModelDispatchGate : IDisposable
         return WaitAsync(pending, cancellationToken);
     }
 
-    public void Tick(string currentSessionId, bool paused, bool unavailable)
+    public void Tick(string currentSessionId, bool paused, bool unavailable) =>
+        Tick(currentSessionId, paused ? ["pause"] : [], null, unavailable);
+
+    public void Tick(string currentSessionId, IReadOnlyCollection<string> pauseReasons, string? currentPlayerDialogueId, bool unavailable)
     {
         lock (_gate)
         {
@@ -37,7 +40,8 @@ public sealed class ModelDispatchGate : IDisposable
                 if (pending.Completed) continue;
                 if (_stopped || unavailable) pending.Reject("host_unavailable_before_send");
                 else if (pending.SessionId != currentSessionId) pending.Reject("host_request_retired_before_send");
-                else if (paused) _pending.Enqueue(pending);
+                else if (pending.PlayerDialogueId is not null && pending.PlayerDialogueId != currentPlayerDialogueId) pending.Reject("host_request_terminal_before_send");
+                else if (pauseReasons.Count > 0 && !(pauseReasons.Count == 1 && pauseReasons.Contains("dialogue") && pending.PlayerDialogueId == currentPlayerDialogueId && currentPlayerDialogueId is not null)) _pending.Enqueue(pending);
                 else pending.Acknowledge();
             }
         }
@@ -64,11 +68,12 @@ public sealed class ModelDispatchGate : IDisposable
         await pending.Completion.Task.ConfigureAwait(false);
     }
 
-    private sealed class PendingDispatch(string sessionId, Func<bool> acknowledge, TimeSpan remaining, CancellationToken cancellationToken)
+    private sealed class PendingDispatch(string sessionId, Func<bool> acknowledge, TimeSpan remaining, CancellationToken cancellationToken, string? playerDialogueId)
     {
         private readonly long _started = Stopwatch.GetTimestamp();
         private int _state;
         public string SessionId { get; } = sessionId;
+        public string? PlayerDialogueId { get; } = playerDialogueId;
         public TimeSpan Remaining => remaining - Stopwatch.GetElapsedTime(_started);
         public TaskCompletionSource Completion { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public bool Completed => Volatile.Read(ref _state) == 2;

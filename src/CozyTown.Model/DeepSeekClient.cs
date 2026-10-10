@@ -237,7 +237,9 @@ public sealed class DeepSeekClient : IDisposable
     {
         if (request?.Identity is not { } identity || new[] { identity.RunId, identity.SessionId,
                 identity.LogicalRequestId, identity.ResidentId }.Any(string.IsNullOrWhiteSpace)
-            || identity.ActivityRevision < 0 || request.RemainingWait <= TimeSpan.Zero
+            || identity.ActivityRevision < 0 || identity.Kind is not ("npc_action" or "player_text")
+            || (identity.Kind == "player_text" ? string.IsNullOrWhiteSpace(identity.PlayerSessionId) : identity.PlayerSessionId is not null)
+            || request.RemainingWait <= TimeSpan.Zero
             || request.RemainingWait > TimeSpan.FromSeconds(60)) throw new ModelException("request_identity_invalid");
         if (string.IsNullOrWhiteSpace(request.InputJson) || Encoding.UTF8.GetByteCount(request.InputJson) > 16 * 1024)
             throw new ModelException("request_size_invalid");

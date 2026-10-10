@@ -4,7 +4,7 @@ namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    public const string RulesVersion = "town-social-production-v4";
+    public const string RulesVersion = "town-social-player-dialogue-v5";
     public const string NumericVersion = "pixels-double-grid16-radius5-morning-motion-prefix-v3";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private readonly TownContent _content;
@@ -14,7 +14,8 @@ public sealed partial class TownWorld
     public TownState State => TownJson.Clone(_state);
     public IReadOnlyList<TownEvent> Events => _state.Events.ToArray();
     public double WorldMinute => _state.WorldMinute;
-    public bool HasUncommittedResponses => _state.PendingDecisions.Any(p => p.ResponseArrivalSeconds is not null && p.SealedResult is null);
+    public bool HasUncommittedResponses => _state.PendingDecisions.Any(p => p.ResponseArrivalSeconds is not null && p.SealedResult is null)
+        || _state.PlayerDialogues.Any(d => d.ResponseArrivalSeconds is not null && d.SealedResult is null);
     public TownState GetView()
     {
         var view = new TownState
@@ -25,7 +26,8 @@ public sealed partial class TownWorld
             AcceptedWorldMinutes = _state.AcceptedWorldMinutes, PlayerPosition = _state.PlayerPosition,
             PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Farming = _state.Farming, Production = _state.Production, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
             DecisionCursor = _state.DecisionCursor, Residents = _state.Residents, Commitments = _state.Commitments.Where(IsActive).ToList(),
-            PendingDecisions = _state.PendingDecisions, Events = _state.Events.TakeLast(20).ToList()
+            PendingDecisions = _state.PendingDecisions, ModelQueue = _state.ModelQueue,
+            CurrentPlayerDialogueId = _state.CurrentPlayerDialogueId, PlayerDialogues = _state.PlayerDialogues, Events = _state.Events.TakeLast(20).ToList()
         };
         return TownJson.Clone(view);
     }
@@ -84,6 +86,7 @@ public sealed partial class TownWorld
 
     private void AdvanceCore(double worldMinutes, double realSeconds, bool paused, Action<long>? settlementGuard)
     {
+        AdvancePlayerDialogueWait(realSeconds);
         foreach (var resident in _state.Residents) resident.CooldownSeconds = Math.Max(0, resident.CooldownSeconds - realSeconds);
         foreach (var pending in _state.PendingDecisions.Where(p => p.SealedResult is null && p.ResponseArrivalSeconds is null))
         {
@@ -94,6 +97,7 @@ public sealed partial class TownWorld
         }
         Log("time_input", null, "host", paused ? "paused" : "advance", data: new { worldMinutes, realSeconds, paused });
         if (paused) return;
+        CommitPlayerDialogueMemories();
         UpdateSchedules();
         foreach (var commitment in _state.Commitments.Where(c => IsActive(c) && c.EndsAtMinute <= _state.WorldMinute).ToArray()) EndCommitment(commitment, "window_ended", "world");
         ConsumeMailbox();
@@ -183,6 +187,7 @@ public sealed partial class TownWorld
             });
             var request = new DecisionRequest(id, resident.Id, resident.ActivityRevision, windowEnd, 60, input, TownContent.Hash(input), allowed, targets, false, null);
             _state.PendingDecisions.Add(new PendingDecisionState { Request = request, Observation = observation });
+            _state.ModelQueue.Add(id);
             resident.PendingRequestId = id; resident.LastOpportunityFingerprint = opportunity;
             Log("decision_created", resident.Id, "rules", "opportunity", id, resident.CommitmentId, new { request, observation });
         }
@@ -529,6 +534,7 @@ public sealed partial class TownWorld
     {
         if (!_state.PendingDecisions.Remove(pending)) return;
         _state.TerminalRequestIds.Add(pending.Request.LogicalRequestId);
+        _state.ModelQueue.Remove(pending.Request.LogicalRequestId);
         var resident = FindResident(pending.Request.ResidentId);
         if (resident.PendingRequestId == pending.Request.LogicalRequestId) resident.PendingRequestId = null;
         resident.CooldownSeconds = Math.Max(resident.CooldownSeconds, 30);

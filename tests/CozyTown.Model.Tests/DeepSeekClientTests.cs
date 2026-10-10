@@ -10,6 +10,26 @@ namespace CozyTown.Model.Tests;
 public sealed class DeepSeekClientTests
 {
     [Test]
+    public async Task PlayerTextUsesSameAccountedTransportAndRequiresItsOwnSessionIdentity()
+    {
+        using var fixture = new ModelFixture(); var journal = new MemoryJournal(); var handler = new FakeHandler("success");
+        using var client = Client(fixture, journal, handler);
+        var npcShape = Request();
+        var player = npcShape with { Identity = npcShape.Identity with { Kind = "player_text", PlayerSessionId = "player-session" } };
+        var completion = await client.SendAsync(player);
+        Assert.That(completion.Succeeded, Is.True);
+        Assert.That(completion.BudgetSettled, Is.True);
+        Assert.That(journal.Requests.Single().Request.Identity.Kind, Is.EqualTo("player_text"));
+        Assert.That(journal.Requests.Single().Request.Identity.PlayerSessionId, Is.EqualTo("player-session"));
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(5));
+        Assert.That(client.Budget.SettledMicros, Is.EqualTo(2492));
+        var invalid = player with { Identity = player.Identity with { LogicalRequestId = "unbound-player", PlayerSessionId = null } };
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(invalid))!.Code, Is.EqualTo("request_identity_invalid"));
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(5));
+        Assert.That(handler.ChatCalls, Is.EqualTo(1));
+    }
+
+    [Test]
     public async Task SuccessfulCompletionIsAccountedBeforeHostConsumesIt()
     {
         using var fixture = new ModelFixture();
