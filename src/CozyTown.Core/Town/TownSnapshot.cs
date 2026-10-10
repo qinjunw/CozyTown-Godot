@@ -13,6 +13,13 @@ public sealed partial class TownWorld
     public string CaptureJson() => TownJson.Serialize(CaptureSnapshot());
 
     public static TownWorld RestoreCandidate(TownContent content, string json, Func<string, TownPoint, TownPoint, bool>? movementQuery = null)
+        => RestoreCandidateCore(content, json, movementQuery, null, null);
+
+    internal static TownWorld RestoreReplayFork(TownContent content, TownSnapshot snapshot, string branchId, string sessionId)
+        => RestoreCandidateCore(content, TownJson.Serialize(snapshot), null, branchId, sessionId);
+
+    private static TownWorld RestoreCandidateCore(TownContent content, string json, Func<string, TownPoint, TownPoint, bool>? movementQuery,
+        string? branchId, string? sessionId)
     {
         if (json.Length > 64 * 1024 * 1024) throw new InvalidDataException("Snapshot exceeds 64 MiB.");
         TownSnapshot snapshot;
@@ -21,9 +28,10 @@ public sealed partial class TownWorld
         ValidateSnapshot(content, snapshot, movementQuery);
         var state = snapshot.State;
         var parent = state.BranchId;
-        state.ParentBranchId = parent; state.BranchId = Guid.NewGuid().ToString("N");
+        state.ParentBranchId = parent; state.BranchId = branchId ?? Guid.NewGuid().ToString("N");
         state.SourceSnapshotId = snapshot.SnapshotId; state.ForkSequence = state.Sequence;
         var world = new TownWorld(content, state, movementQuery);
+        if (sessionId is not null) world.SessionId = sessionId;
         foreach (var pending in state.PendingDecisions)
         {
             if (pending.SealedResult is not null)

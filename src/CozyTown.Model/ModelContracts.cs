@@ -22,7 +22,7 @@ public sealed record ModelCompletion(
     TimeSpan Elapsed, int? HttpStatus, string? ProviderRequestId, string? ReturnedModel,
     string? SystemFingerprint, string? FinishReason, string? CandidateJson, ModelUsage? Usage,
     string? FailureCode, bool GenerationEnded, bool BudgetSettled, bool SlotHeld,
-    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null)
+    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null, BudgetSnapshot? BudgetAfter = null)
 {
     public bool Succeeded => FailureCode is null;
 }
@@ -32,7 +32,12 @@ public interface IModelJournal
 {
     Task WriteRequestAsync(ModelDispatch dispatch, CancellationToken cancellationToken);
     Task WriteCompletionAsync(ModelCompletion completion, CancellationToken cancellationToken);
+    Task WriteResponseArrivalAsync(ModelDispatch dispatch, string? responseBody, TimeSpan elapsed, CancellationToken cancellationToken) => Task.CompletedTask;
+    Task WriteBudgetAdmissionAsync(BudgetAdmission admission, CancellationToken cancellationToken) => Task.CompletedTask;
 }
+
+public sealed record BudgetAdmission(string Stage, string LogicalRequestId, bool Recovery, string? AttemptId,
+    string Admission, BudgetSnapshot Before, BudgetSnapshot After);
 
 public sealed record DeepSeekOptions(string CredentialFile, string LedgerFile,
     string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669");

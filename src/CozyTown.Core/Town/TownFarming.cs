@@ -29,6 +29,7 @@ public sealed partial class TownWorld
 
     public FarmResult Farm(FarmRequest request, Action<FarmOperationRecord>? persistBeforeCommit = null)
     {
+        using var trace = TraceInput("farm", new { request });
         EnsureEconomyNotCommitting();
         ArgumentNullException.ThrowIfNull(request);
         RequireCommandText(request.OperationId, request.ActorId, request.PlotId, request.Action);
@@ -112,6 +113,7 @@ public sealed partial class TownWorld
 
     public SleepResult Sleep(SleepRequest request, double realSeconds = 0, bool paused = false, Action<SleepOperationRecord>? persistBeforeCommit = null, Action<long>? settlementGuard = null)
     {
+        using var trace = TraceInput("sleep", new { request, realSeconds, paused });
         EnsureEconomyNotCommitting();
         ArgumentNullException.ThrowIfNull(request);
         RequireCommandText(request.OperationId, request.ActorId);

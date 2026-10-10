@@ -42,10 +42,25 @@ public partial class TownGame : Node2D
     private string _savePath = "";
     private string[] _arguments = [];
     private string? _selectedResident;
-    private List<TownPoint>? _playerRoute;
-    private int _playerRouteCursor;
+    private TownInputHost _inputHost = null!;
+    private TownReplayHostState? _restoredHost;
+    private TownReplayParent? _replayParent;
+    private List<TownPoint>? _playerRoute
+    {
+        get => _inputHost?.State.PlayerRoute?.ToList();
+        set
+        {
+            if (value is null) _inputHost.CancelRoute("interface");
+            else if (value.Count > 0) _inputHost.RouteTo(value[^1]);
+        }
+    }
+    private int _playerRouteCursor
+    {
+        get => _inputHost?.State.PlayerRouteCursor ?? 0;
+        set { if (value != _playerRouteCursor) throw new InvalidOperationException("Route cursor must advance through host input."); }
+    }
     private long _persistedWorldSequence;
-    private double _accumulator;
+    private double _accumulator => _inputHost?.State.UnconsumedSeconds ?? 0;
     private double _uiTimer;
     private double _elapsed;
     private double _lastHostSeconds;
@@ -71,7 +86,7 @@ public partial class TownGame : Node2D
         try
         {
             _headless = DisplayServer.GetName() == "headless";
-            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment");
+            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment") || _arguments.Contains("--replay-record-smoke");
             _scenario = Argument("--scenario=") ?? "baseline";
             if (Argument("--dialogue-fixture=") is string dialogueFixture && dialogueFixture is not ("success" or "delayed" or "invalid" or "timeout" or "budget"))
                 throw new InvalidDataException("Dialogue fixture must be success, delayed, invalid, timeout or budget.");
@@ -95,7 +110,7 @@ public partial class TownGame : Node2D
             string? modelConfig = Argument("--model-config=");
             if (modelConfig is not null && Argument("--dialogue-fixture=") is not null)
                 throw new InvalidDataException("Fixed dialogue fixtures require offline rules mode.");
-            if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" or "production-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke")))
+            if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" or "production-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--replay-record-smoke")))
                 throw new InvalidDataException("Economy verification requires offline rules mode.");
             if (modelConfig != null)
             {
@@ -122,6 +137,7 @@ public partial class TownGame : Node2D
             SyncActors();
             RefreshInterface();
             Toast("欢迎来到榆溪。走近邻居，听听他们今天的打算。", 7);
+            _recordingSmokeInitialMemory = GC.GetTotalMemory(false);
             if (_arguments.Contains("--slice-smoke")) _ = RunSceneSmokeAsync();
             else if (_arguments.Contains("--economy-smoke")) _ = RunEconomySmokeAsync();
             else if (_arguments.Contains("--farming-smoke")) _ = RunFarmingSmokeAsync();
@@ -145,7 +161,7 @@ public partial class TownGame : Node2D
         TownState full = _world.State;
         _journal = new TownRunJournal(Path.Combine(_userRoot, "runs"), full.BranchId, new
         {
-            schemaVersion = 1, branchId = full.BranchId, full.ParentBranchId, full.SourceSnapshotId, full.InitialStateId,
+            schemaVersion = 2, branchId = full.BranchId, full.ParentBranchId, full.SourceSnapshotId, full.InitialStateId,
             decisionMode = _mode, stage = _scenario, budgetId = full.BudgetId,
             contentFingerprint = _loaded.Content.Fingerprint, inputDigest = _loaded.InputDigest,
             presentationDigest = _loaded.PresentationDigest, dependencies = _loaded.Dependencies,
@@ -153,8 +169,13 @@ public partial class TownGame : Node2D
             numericVersion = TownWorld.NumericVersion, engineVersion = Engine.GetVersionInfo()["string"].AsString(),
             buildVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion,
             worldMinutesPerSecond = .5, fixedStepSeconds = StepSeconds, bodyRadius = TownContent.BodyRadius,
-            recordScope = "World events, spatial/model records and versioned player economy, farming, sleep and production inputs/checkpoints; full replay executor is not included."
+            recordScope = "Versioned core and host inputs, ordered spatial facts and complete checkpoints; offline replay v1."
         });
+        _inputHost = new TownInputHost(_loaded.Content, _world, _restoredHost ?? new(0, null, 0,
+            _pauseReasons.Order(StringComparer.Ordinal).ToArray(), new Dictionary<string, string>()));
+        _restoredHost = null;
+        _journal.StartReplay(_loaded.Content, _world, _inputHost, _replayParent);
+        _replayParent = null;
         _journals.Add(_journal);
         _journal.WriteArtifact("content.json", new { _loaded.Manifest, _loaded.Definitions });
         _journal.WriteArtifact("initial-state.json", CaptureHostSnapshot());
@@ -181,6 +202,7 @@ public partial class TownGame : Node2D
                 else _world.MarkPlayerDialogueResponseArrived(dispatch.Request.Identity.SessionId, playerSession, dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId, arrivedAfter);
             });
             _clients.Add(_model);
+            _journal.SetReplayBudget(_model.Budget);
             _journal.WriteArtifact("budget-at-start.json", _model.Budget);
         }
         else _model = null;
@@ -219,11 +241,11 @@ public partial class TownGame : Node2D
             // Simulation catches up only a bounded interval; logical deadlines still include the entire host delay.
             double accepted = Math.Min(elapsed, .25);
             if (elapsed > accepted) _world.Advance(0, elapsed - accepted, true);
-            _accumulator += accepted;
+            _inputHost.AcceptElapsed(elapsed);
             while (_accumulator >= StepSeconds)
             {
                 if (_journal.Failed) throw new IOException("Run journal is interrupted.");
-                _accumulator -= StepSeconds;
+                _inputHost.TakeStep();
                 bool paused = _pauseReasons.Count > 0;
                 if (!paused) AdvancePlayer(StepSeconds);
                 _world.Advance(paused ? 0 : StepSeconds * .5, StepSeconds, paused);
@@ -237,6 +259,7 @@ public partial class TownGame : Node2D
             if (_uiTimer >= .2) { _uiTimer = 0; RefreshInterface(); }
             if (_toastSeconds > 0) { _toastSeconds -= delta; if (_toastSeconds <= 0) _toast.Visible = false; }
             if (_arguments.Contains("--real-experiment")) CheckExperimentCompletion();
+            if (_arguments.Contains("--replay-record-smoke") && _elapsed >= ReplayRecordingSeconds()) FinishReplayRecordingSmoke();
         }
         catch (Exception error) { Fail("runtime_failed", error); }
     }
@@ -246,28 +269,10 @@ public partial class TownGame : Node2D
         Vector2 direction = new(
             (MovementKeyHeld(Key.D) || MovementKeyHeld(Key.Right) ? 1 : 0) - (MovementKeyHeld(Key.A) || MovementKeyHeld(Key.Left) ? 1 : 0),
             (MovementKeyHeld(Key.S) || MovementKeyHeld(Key.Down) ? 1 : 0) - (MovementKeyHeld(Key.W) || MovementKeyHeld(Key.Up) ? 1 : 0));
-        TownPoint current = _world.GetView().PlayerPosition;
-        if (direction.LengthSquared() > 0)
-        {
-            _selectedResident = null;
-            _playerRoute = null;
-            direction = direction.Normalized() * (float)(seconds * 62);
-            if (!_world.SetPlayerPosition(new(current.X + direction.X, current.Y + direction.Y)))
-            {
-                if (Math.Abs(direction.X) > .001) _world.SetPlayerPosition(new(current.X + direction.X, current.Y));
-                if (Math.Abs(direction.Y) > .001) _world.SetPlayerPosition(new(current.X, current.Y + direction.Y));
-            }
-        }
-        else if (_playerRoute != null && _playerRouteCursor < _playerRoute.Count)
-        {
-            TownPoint target = _playerRoute[_playerRouteCursor];
-            double distance = current.DistanceTo(target);
-            double amount = Math.Min(distance, seconds * 62);
-            if (distance < .01) { _playerRouteCursor++; return; }
-            var next = new TownPoint(current.X + (target.X - current.X) / distance * amount, current.Y + (target.Y - current.Y) / distance * amount);
-            if (!_world.SetPlayerPosition(next)) { _playerRoute = null; Toast("这里走不过去，换一条路试试。"); }
-            else if (amount >= distance) _playerRouteCursor++;
-        }
+        if (direction.LengthSquared() > 0) _selectedResident = null;
+        bool followingRoute = _playerRoute is not null;
+        _inputHost.Move(seconds, new(direction.X, direction.Y));
+        if (followingRoute && direction.LengthSquared() == 0 && _playerRoute is null) Toast("这里走不过去，换一条路试试。");
     }
 
     private bool CheckMotion(string id, TownPoint from, TownPoint to)
@@ -296,6 +301,12 @@ public partial class TownGame : Node2D
         {
             _persistedWorldSequence = events[^1].Sequence;
             _world.AcknowledgeEvents(_persistedWorldSequence);
+            var terminal = _world.State.TerminalRequestIds.ToHashSet(StringComparer.Ordinal);
+            if (_frozen.Keys.Any(terminal.Contains))
+            {
+                _inputHost.PruneTerminalRequests();
+                foreach (string key in _frozen.Keys.Where(terminal.Contains).ToArray()) _frozen.Remove(key);
+            }
             if (_automated) _experimentEvents.AddRange(events);
             foreach (TownEvent entry in events)
             {
@@ -332,6 +343,7 @@ public partial class TownGame : Node2D
             bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
             var frozen = new FrozenModelRequest(identity, _scenario == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual,
                 body, request.IsRecovery || originalRecorded, TimeSpan.FromSeconds(request.RemainingWaitSeconds));
+            _inputHost.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
             _frozen[request.LogicalRequestId] = frozen;
             _activeModelRequests.Add(key);
             _ = SendModelAsync(_model, request, frozen, key);
@@ -347,8 +359,12 @@ public partial class TownGame : Node2D
         {
             ModelCompletion result = await client.SendAsync(frozen);
             double arrivedAfter = 60 - frozen.RemainingWait.TotalSeconds + (result.LogicalElapsedToArrival ?? admissionClock.Elapsed).TotalSeconds;
+            var responseJournal = _journals.Single(j => Path.GetFileName(j.DirectoryPath) == frozen.Identity.RunId);
+            responseJournal.RecordReplayInput("model_mailbox_enqueued", new { dispatch = result.Dispatch });
             _mainThread.Enqueue(() =>
             {
+                _journal.ImportRetiredCompletion(responseJournal, result);
+                _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
                 _activeModelRequests.Remove(key);
                 _modelCompletions.Add(result);
                 ActionCandidate? candidate = null;
@@ -373,11 +389,11 @@ public partial class TownGame : Node2D
             {
                 _activeModelRequests.Remove(key);
                 if (_world.SessionId != frozen.Identity.SessionId) return;
+                _journal.Append("dispatch_rejected", new { request.LogicalRequestId, request.ResidentId, code });
                 if (code is "concurrency_limit" or "budget_concurrency_limit") return;
                 string attempt = "not-sent-" + Guid.NewGuid().ToString("N");
                 if (_world.MarkDispatched(request.LogicalRequestId, attempt))
                     _world.ReceiveResult(new(_world.SessionId, request.LogicalRequestId, attempt, request.ResidentId, null, "rule_fallback", code));
-                _journal.Append("dispatch_rejected", new { request.LogicalRequestId, request.ResidentId, code });
                 Toast("真实调用暂不可用，已明确转为规则回退。");
             });
         }
@@ -440,8 +456,7 @@ public partial class TownGame : Node2D
             ResidentState? nearby = _view.Residents.OrderBy(r => r.Position.DistanceTo(target)).FirstOrDefault();
             if (nearby != null && nearby.Position.DistanceTo(target) < 17) { SelectResident(nearby.Id); return; }
             _selectedResident = null;
-            _playerRoute = _loaded.Content.FindRoute(_view.PlayerPosition, target);
-            _playerRouteCursor = 0;
+            _inputHost.RouteTo(target);
             _journal.Append("player_route_requested", new { target, route = _playerRoute });
             if (_playerRoute == null) Toast("这里暂时走不到。");
         }
@@ -457,6 +472,7 @@ public partial class TownGame : Node2D
     private void SetPause(string reason, bool pause)
     {
         if (pause) _pauseReasons.Add(reason); else _pauseReasons.Remove(reason);
+        if (_inputHost is not null) _inputHost.Pause(reason, pause);
         if (_journal != null && !_journal.Failed) _journal.Append("pause_changed", new { reason, pause, activeReasons = _pauseReasons.Order().ToArray() });
         if (_ready) RefreshInterface();
     }
@@ -475,6 +491,8 @@ public partial class TownGame : Node2D
             FlushWorldEvents();
             if (_world.HasUncommittedResponses) { Toast("回复正在落盘，请稍后保存。原存档保持不变。"); return; }
             var snapshot = CaptureHostSnapshot();
+            var worldSnapshot = TownJson.Deserialize<TownSnapshot>(snapshot.WorldJson);
+            _journal.WriteArtifact("prefix-" + worldSnapshot.SnapshotId + ".json", new TownReplayParent(_journal.CaptureReplay(), worldSnapshot, _inputHost.State));
             TownSaveFile.Write(_savePath, snapshot, candidate => _ = TownWorld.RestoreCandidate(_loaded.Content, candidate.WorldJson));
             published = true;
             _journal.Append("snapshot_saved", new { snapshot.JournalRecordCount, worldSequence = _view.Sequence });
@@ -522,15 +540,17 @@ public partial class TownGame : Node2D
             if (!CheckMotion("player", candidate.GetView().PlayerPosition, candidate.GetView().PlayerPosition))
                 throw new InvalidDataException("Saved player overlaps scene geometry.");
             if (!_journal.Failed) FlushWorldEvents();
+            string prefixPath = Path.Combine(_userRoot, "runs", snapshot.SourceRunDirectoryName,
+                "prefix-" + candidate.State.SourceSnapshotId + ".json");
+            _replayParent = File.Exists(prefixPath) ? TownJson.Deserialize<TownReplayParent>(File.ReadAllText(prefixPath)) : null;
             _world = candidate;
             committed = true;
             _recentEvents.Clear();
             _frozen.Clear();
             foreach (var pair in snapshot.ModelRequests) _frozen.Add(pair.Key, pair.Value);
             _mode = snapshot.DecisionMode;
-            _accumulator = snapshot.UnconsumedSeconds;
-            _playerRoute = snapshot.PlayerRoute?.ToList();
-            _playerRouteCursor = snapshot.PlayerRouteCursor;
+            _restoredHost = new(snapshot.UnconsumedSeconds, snapshot.PlayerRoute, snapshot.PlayerRouteCursor,
+                _pauseReasons.Order(StringComparer.Ordinal).ToArray(), snapshot.ModelRequests.ToDictionary(pair => pair.Key, pair => TownJson.Serialize(pair.Value)));
             _view = _world.GetView();
             CreateJournal();
             SetPause("dialogue", _view.CurrentPlayerDialogueId is not null);
@@ -541,7 +561,7 @@ public partial class TownGame : Node2D
                 _dispatchGate = new ModelDispatchGate();
                 _fatal = false;
                 _failure = null;
-                _pauseReasons.Remove("fault");
+                SetPause("fault", false);
             }
             SyncActors();
             string sourceRecords = Path.Combine(_userRoot, "runs", snapshot.SourceRunDirectoryName, "events.jsonl");
@@ -584,6 +604,11 @@ public partial class TownGame : Node2D
         _dispatchGate.Stop();
         GD.PushError(_failure);
         if (_mode == "rules") GD.PrintErr(error.ToString());
+        if (_journal is not null && !_journal.Failed)
+        {
+            try { _journal.WriteArtifact("replay.json", _journal.CaptureReplay()); }
+            catch { }
+        }
         if (!_ready && !_headless)
         {
             var layer = new CanvasLayer();

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "test": "ordinary_source_recording",
+  "passed": true,
+  "mode": "rules",
+  "elapsedSeconds": 2.0072383,
+  "boundaries": 330,
+  "packageBytes": 592293,
+  "archiveBytes": 497198,
+  "journalBytes": 639843,
+  "managedInitialBytes": 7439384,
+  "managedBeforeReplayBytes": 6509040,
+  "managedAfterReplayBytes": 8997560,
+  "workingSetBytes": 360558592,
+  "peakWorkingSetBytes": 360574976,
+  "exportSeconds": 0.0585781,
+  "replaySeconds": 0.8558193,
+  "replay": {
+    "passed": true,
+    "code": "passed",
+    "boundary": 330,
+    "field": null,
+    "expected": null,
+    "actual": null,
+    "rulesVersion": "town-social-production-v4",
+    "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+    "finalStateJson": null,
+    "command": null,
+    "inputJson": null
+  }
+}

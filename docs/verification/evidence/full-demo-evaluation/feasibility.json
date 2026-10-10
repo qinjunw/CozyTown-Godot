@@ -107,7 +107,7 @@
         }
       ],
       "simulatedSeconds": 386.5000000000222,
-      "implementationSeconds": 2.1238952,
+      "implementationSeconds": 1.8893324,
       "restores": 1,
       "finalMinute": 2173.2500000002397,
       "morningDays": [
@@ -134,7 +134,7 @@
         "collectedCount": 1
       },
       "events": 7968,
-      "acceptedChoices": 0
+      "executedRuleChoices": 80
     },
     {
       "scenario": "counterfactual",
@@ -239,7 +239,7 @@
         }
       ],
       "simulatedSeconds": 386.5000000000222,
-      "implementationSeconds": 1.3941737,
+      "implementationSeconds": 1.1847663,
       "restores": 1,
       "finalMinute": 2173.2500000002397,
       "morningDays": [
@@ -266,7 +266,7 @@
         "collectedCount": 1
       },
       "events": 7949,
-      "acceptedChoices": 0
+      "executedRuleChoices": 81
     }
   ]
 }

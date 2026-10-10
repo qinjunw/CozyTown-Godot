@@ -58,7 +58,8 @@ public sealed class DeepSeekClient : IDisposable
             await VerifyAccountAsync(admissionDeadline.Token).ConfigureAwait(false);
         }
         TimeSpan timeout = Remaining(request, logicalWait.Elapsed);
-        var attempt = _ledger.Reserve(request.Stage, request.Identity.LogicalRequestId, request.IsRecovery);
+        var attempt = _ledger.Reserve(request.Stage, request.Identity.LogicalRequestId, request.IsRecovery,
+            admission => _journal.WriteBudgetAdmissionAsync(admission, CancellationToken.None).GetAwaiter().GetResult());
         var dispatch = new ModelDispatch(request, attempt.AttemptId,
             Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(request.InputJson))).ToLowerInvariant(),
             DateTimeOffset.UtcNow, timeout, _ledger.Snapshot());
@@ -91,6 +92,8 @@ public sealed class DeepSeekClient : IDisposable
             logicalElapsedToArrival = logicalWait.Elapsed;
             duration.Stop();
             NotifyArrival(dispatch, logicalElapsedToArrival.Value);
+            await _journal.WriteResponseArrivalAsync(dispatch, ContainsSecret(body) ? null : body,
+                logicalElapsedToArrival.Value, CancellationToken.None).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 failure = httpStatus switch
@@ -151,7 +154,8 @@ public sealed class DeepSeekClient : IDisposable
         }
 
         BudgetAttempt? finalAttempt = null;
-        try { finalAttempt = _ledger.Snapshot().Attempts.Single(a => a.AttemptId == attempt.AttemptId); }
+        BudgetSnapshot? finalBudget = null;
+        try { finalBudget = _ledger.Snapshot(); finalAttempt = finalBudget.Attempts.Single(a => a.AttemptId == attempt.AttemptId); }
         catch { failure = "ledger_read_failed"; }
         // Never export malformed/partial candidate text or unbounded provider metadata.
         candidate = SafeCandidate(candidate);
@@ -161,7 +165,7 @@ public sealed class DeepSeekClient : IDisposable
         finish = SafeMetadata(finish);
         var completion = new ModelCompletion(dispatch, sentAt, arrivedAt, duration.Elapsed,
             httpStatus, providerId, model, fingerprint, finish, candidate, usage, failure,
-            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival);
+            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival, finalBudget);
         try { await _journal.WriteCompletionAsync(completion, CancellationToken.None).ConfigureAwait(false); }
         catch
         {
