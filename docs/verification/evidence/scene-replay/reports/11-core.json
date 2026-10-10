@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "code": "missing_parent_prefix",
+  "boundary": 0,
+  "field": "parent",
+  "expected": "56313850d70f48aab28b6b1211431db7",
+  "actual": null,
+  "rulesVersion": "town-social-player-dialogue-v5",
+  "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+  "finalStateJson": null,
+  "command": null,
+  "inputJson": null,
+  "mode": "core_fact_replay"
+}

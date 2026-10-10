@@ -8,11 +8,15 @@ public sealed record TownReplayPackage(int SchemaVersion, string RulesVersion, s
     TownManifest Manifest, TownDefinitions Definitions, TownSnapshot InitialSnapshot, string SessionId,
     TownTrace[] Boundaries, int BoundaryCount, TownReplayHostState? InitialHost = null, TownReplayParent? Parent = null,
     TownReplayBudgetState? InitialBudget = null, TownReplayBudgetProfile? BudgetProfile = null, string? Interruption = null,
-    bool UnsealedPrefix = false);
+    bool UnsealedPrefix = false, TownSceneReplayDependencies? Scene = null);
+public sealed record TownSceneReplayDependencies(string Version, string Scenario, string EngineVersion,
+    string ScenePath, string MapPath, string ContentFingerprint, string GeometryFingerprint, double BodyRadius,
+    TownSpatialConfiguration Query, string SimulationSourceDigest, string BuildVersion, string AssemblySha256,
+    string EngineBuild, string PhysicsBackend);
 public sealed record TownReplayParent(TownReplayPackage Prefix, TownSnapshot SavedSnapshot, TownReplayHostState? SavedHost);
 public sealed record TownReplayReport(bool Passed, string Code, int Boundary, string? Field,
     string? Expected, string? Actual, string RulesVersion, string NumericVersion, string? FinalStateJson = null,
-    string? Command = null, string? InputJson = null);
+    string? Command = null, string? InputJson = null, string Mode = "core_fact_replay");
 
 public sealed class TownRecording
 {
@@ -64,6 +68,14 @@ public sealed class TownRecording
     }
     private readonly Action<TownTrace> _append;
     public void RecordExternal(string command, object input) => _append(new(command, TownJson.Serialize(input), [], null!));
+    public void SetSceneDependencies(TownSceneReplayDependencies scene)
+    {
+        lock (_gate)
+        {
+            if (_boundaries.Count != 0) throw new InvalidOperationException("Scene dependencies must precede replay inputs.");
+            _start = _start with { Scene = TownJson.Clone(scene) };
+        }
+    }
     public void SetInitialBudget(TownReplayBudgetState budget, TownReplayBudgetProfile? profile = null)
     {
         lock (_gate)
@@ -149,16 +161,18 @@ public static class TownReplay
     private static TownReplayPackage ReadJson(Stream stream) => JsonSerializer.Deserialize<TownReplayPackage>(stream, PackageJson)
         ?? throw new InvalidDataException("Replay package root cannot be null.");
 
-    public static TownReplayReport Run(TownReplayPackage package) => Run(package, 0);
+    public static TownReplayReport Run(TownReplayPackage package, TownReplaySceneAdapter? scene = null) => Run(package, 0, scene);
 
-    private static TownReplayReport Run(TownReplayPackage package, int depth)
+    private static TownReplayReport Run(TownReplayPackage package, int depth, TownReplaySceneAdapter? scene)
     {
         int boundary = 0;
         string? command = null, relatedInput = null;
         TownReplayReport Failure(string code, string? field, string? expected, string? actual) =>
-            new(false, code, boundary, field, expected, actual, package.RulesVersion, package.NumericVersion, Command: command, InputJson: relatedInput);
+            new(false, code, boundary, field, expected, actual, package.RulesVersion, package.NumericVersion, Command: command, InputJson: relatedInput,
+                Mode: scene is null ? "core_fact_replay" : "godot_scene_replay");
         try
         {
+            scene?.ValidateDependencies?.Invoke(package);
             if (depth > 32) return Failure("invalid_parent_prefix", "parent", "at most 32 fork ancestors", depth.ToString());
             if (package.SchemaVersion != 1) return Failure("unsupported_recording", "schemaVersion", "1", package.SchemaVersion.ToString());
             if (package.RulesVersion != TownWorld.RulesVersion || package.NumericVersion != TownWorld.NumericVersion)
@@ -169,8 +183,8 @@ public static class TownReplay
             {
                 if (package.Parent is null) return Failure("missing_parent_prefix", "parent", package.InitialSnapshot.State.ParentBranchId, null);
                 var parent = package.Parent;
-                var result = Run(parent.Prefix, depth + 1);
-                if (!result.Passed) return Failure("invalid_parent_prefix", "parent." + result.Field, result.Expected, result.Actual);
+                var result = Run(parent.Prefix, depth + 1, scene);
+                if (!result.Passed) return result with { Code = "invalid_parent_prefix", Field = "parent." + result.Field, FinalStateJson = null };
                 Compare(JsonNode.Parse(result.FinalStateJson!), JsonSerializer.SerializeToNode(parent.SavedSnapshot.State, TownJson.Options), "parent.savedState");
                 if (parent.SavedSnapshot.SnapshotId != package.InitialSnapshot.State.SourceSnapshotId
                     || parent.SavedSnapshot.State.BranchId != package.InitialSnapshot.State.ParentBranchId
@@ -190,11 +204,17 @@ public static class TownReplay
             {
                 if (expectedTrace is null || query >= expectedTrace.Queries.Length) throw new ReplayMismatch("queries[" + query + "]", "recorded query", "unexpected query");
                 var expected = expectedTrace.Queries[query++];
-                var actual = new TownSpatialQuery(id, "body-motion-v1", from, to, TownContent.BodyRadius, expected.Clear);
+                // Compare query identity before invoking physics; a reordered query must not act on the wrong body.
+                var actual = new TownSpatialQuery(id, "body-motion-v1", from, to, TownContent.BodyRadius, expected.Clear, expected.Evidence);
                 Compare(JsonSerializer.SerializeToNode(expected, TownJson.Options), JsonSerializer.SerializeToNode(actual, TownJson.Options), "queries[" + (query - 1) + "]");
-                return expected.Clear;
+                if (scene is null) return expected.Clear;
+                var result = scene.Query(id, from, to, TownContent.BodyRadius);
+                actual = actual with { Clear = result.Clear, Evidence = expected.Evidence is null ? null : result };
+                Compare(JsonSerializer.SerializeToNode(expected, TownJson.Options), JsonSerializer.SerializeToNode(actual, TownJson.Options), "queries[" + (query - 1) + "]");
+                return result.Clear;
             }
             var world = TownWorld.OpenReplay(content, package.InitialSnapshot, package.SessionId, Motion);
+            scene?.ValidateBodies?.Invoke(world.State, 0);
             var host = new TownInputHost(content, world, package.InitialHost);
             if (package.InitialBudget is not null && package.InitialBudget.BudgetId != package.InitialSnapshot.State.BudgetId)
                 return Failure("invalid_recording", "budget.budgetId", package.InitialSnapshot.State.BudgetId, package.InitialBudget.BudgetId);
@@ -330,16 +350,18 @@ public static class TownReplay
                 if (trace.Command.StartsWith("host_", StringComparison.Ordinal) && hostCheckpoint is null) throw new InvalidDataException("Host input lacks its complete checkpoint.");
                 if (checkpoint is not null) Compare(checkpoint, JsonSerializer.SerializeToNode(world.State, TownJson.Options), "state");
                 if (hostCheckpoint is not null) Compare(hostCheckpoint, JsonSerializer.SerializeToNode(host.State, TownJson.Options), "host");
+                scene?.ValidateBodies?.Invoke(world.State, boundary);
                 string inputFingerprint = TownContent.Hash(trace.Command + "\n" + trace.InputJson);
                 if (trace.InputFingerprint != inputFingerprint) throw new ReplayMismatch("inputFingerprint", trace.InputFingerprint, inputFingerprint);
             }
             if (package.Interruption is not null) return Failure("recording_interrupted", "lastCompleteBoundary", boundary.ToString(), package.Interruption);
             if (package.UnsealedPrefix) return Failure("unsealed_recording", "lastCompleteBoundary", boundary.ToString(), "journal extends beyond the sealed package") with { FinalStateJson = TownJson.Serialize(world.State) };
-            return new(true, "passed", boundary, null, null, null, package.RulesVersion, package.NumericVersion, TownJson.Serialize(world.State));
+            return new(true, "passed", boundary, null, null, null, package.RulesVersion, package.NumericVersion, TownJson.Serialize(world.State),
+                Mode: scene is null ? "core_fact_replay" : "godot_scene_replay");
         }
         catch (ReplayMismatch error) { return Failure("divergence", error.Field, error.Expected, error.Actual); }
         catch (InvalidDataException error) when (error.Data.Contains("field"))
-        { return Failure("divergence", error.Data["field"]?.ToString(), error.Data["expected"]?.ToString(), error.Data["actual"]?.ToString()); }
+        { return Failure(error.Data["code"]?.ToString() ?? "divergence", error.Data["field"]?.ToString(), error.Data["expected"]?.ToString(), error.Data["actual"]?.ToString()); }
         catch (Exception error) when (error is JsonException or InvalidDataException or InvalidOperationException or ArgumentException or KeyNotFoundException or NullReferenceException or FormatException or OverflowException)
         { return Failure("invalid_recording", "input", "complete compatible recording", error.Message); }
     }

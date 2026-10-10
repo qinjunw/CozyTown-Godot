@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "sourceCommit": "377f670c92a1fba022d773f69f9704ac4b3de94e",
+  "checks": [
+    {
+      "name": "zip-gameplay-core",
+      "exitCode": 0,
+      "code": "passed",
+      "report": "<verification-output>\\zip-gameplay-core.json"
+    },
+    {
+      "name": "zip-gameplay-source",
+      "exitCode": 0,
+      "code": "passed",
+      "report": "<verification-output>\\zip-gameplay-source.json"
+    },
+    {
+      "name": "zip-gameplay-export",
+      "exitCode": 0,
+      "code": "passed",
+      "report": "<verification-output>\\zip-gameplay-export.json"
+    },
+    {
+      "name": "zip-runtime-obstacle-source",
+      "exitCode": 1,
+      "code": "divergence",
+      "report": "<verification-output>\\zip-runtime-obstacle-source.json"
+    },
+    {
+      "name": "zip-runtime-obstacle-export",
+      "exitCode": 1,
+      "code": "divergence",
+      "report": "<verification-output>\\zip-runtime-obstacle-export.json"
+    }
+  ]
+}

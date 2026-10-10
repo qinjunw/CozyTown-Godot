@@ -78,6 +78,14 @@ public partial class TownGame : Node2D
     private async Task InitializeAsync()
     {
         _arguments = OS.GetCmdlineUserArgs();
+        if ((Argument("--scene-replay=") is not null || _arguments.Contains("--scene-replay-fixture"))
+            && (Argument("--report=") is not string sceneReport || !Path.IsPathFullyQualified(sceneReport)))
+        {
+            GD.Print(TownJson.Serialize(new { passed = false, mode = "godot_scene_replay", code = "invalid_recording",
+                error = "Scene replay requires --report=<absolute path>." }));
+            GetTree().Quit(2);
+            return;
+        }
         if (_arguments.Contains("--toolchain-smoke"))
         {
             GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "res://Main.tscn");
@@ -88,11 +96,18 @@ public partial class TownGame : Node2D
             _headless = DisplayServer.GetName() == "headless";
             _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment") || _arguments.Contains("--replay-record-smoke");
             _scenario = Argument("--scenario=") ?? "baseline";
+            if (Argument("--scene-replay=") is string replayPath)
+                _scenario = TownReplay.ReadPackage(replayPath).InitialSnapshot.State.InitialStateId;
             if (Argument("--dialogue-fixture=") is string dialogueFixture && dialogueFixture is not ("success" or "delayed" or "invalid" or "timeout" or "budget"))
                 throw new InvalidDataException("Dialogue fixture must be success, delayed, invalid, timeout or budget.");
             _map = GetNode<Node2D>("Map");
             _camera = GetNode<Camera2D>("Camera");
             _loaded = TownContentLoader.Load(_map, _scenario);
+            if (Argument("--scene-replay=") is not null || _arguments.Contains("--scene-replay-fixture"))
+            {
+                await RunSceneReplayCommandAsync();
+                return;
+            }
             if (!_loaded.Definitions.Residents.Select(r => r.Id).Order().SequenceEqual(new[] { "eli", "mina", "ren", "sora" }))
                 throw new InvalidDataException("This slice requires the Mina, Eli, Ren, and Sora content package.");
             _userRoot = Argument("--data-dir=") ?? ProjectSettings.GlobalizePath("user://town");
@@ -147,6 +162,16 @@ public partial class TownGame : Node2D
         }
         catch (Exception error)
         {
+            if (Argument("--scene-replay=") is not null || _arguments.Contains("--scene-replay-fixture"))
+            {
+                string code = error is FileNotFoundException or DirectoryNotFoundException ? "missing_dependency" : "invalid_recording";
+                var replay = new TownReplayReport(false, code, 0, "package", "compatible scene and recording", error.Message,
+                    TownWorld.RulesVersion, TownWorld.NumericVersion, Mode: "godot_scene_replay");
+                WriteReport(new { replay.Passed, replay.Code, replay.Mode, headless = _headless, test = "scene_replay",
+                    runtimeAssemblyLocation = typeof(object).Assembly.Location, replay });
+                GetTree().Quit(2);
+                return;
+            }
             Fail("startup_failed", error);
             if (_automated || _arguments.Contains("--validate-content"))
             {
@@ -175,6 +200,8 @@ public partial class TownGame : Node2D
             _pauseReasons.Order(StringComparer.Ordinal).ToArray(), new Dictionary<string, string>()));
         _restoredHost = null;
         _journal.StartReplay(_loaded.Content, _world, _inputHost, _replayParent);
+        _world.DetailedMovementQuery = QuerySceneMotion;
+        _journal.SetSceneDependencies(SceneDependencies());
         _replayParent = null;
         _journals.Add(_journal);
         _journal.WriteArtifact("content.json", new { _loaded.Manifest, _loaded.Definitions });
@@ -276,19 +303,25 @@ public partial class TownGame : Node2D
     }
 
     private bool CheckMotion(string id, TownPoint from, TownPoint to)
+        => QuerySceneMotion(id, from, to).Clear;
+
+    private TownMotionResult QuerySceneMotion(string id, TownPoint from, TownPoint to)
     {
         using var shape = new CircleShape2D { Radius = (float)TownContent.BodyRadius };
+        var configuration = TownSpatialConfiguration.Current;
         using var query = new PhysicsShapeQueryParameters2D
         {
             Shape = shape, Transform = new Transform2D(0, Vector(from)), Motion = Vector(to) - Vector(from),
-            CollisionMask = 1, CollideWithAreas = false, CollideWithBodies = true, Margin = 0.001f
+            CollisionMask = configuration.Mask, CollideWithAreas = configuration.Areas,
+            CollideWithBodies = configuration.Bodies, Margin = (float)configuration.Margin
         };
         var space = GetWorld2D().DirectSpaceState;
         bool startClear = space.IntersectShape(query, 1).Count == 0;
         float[] motion = space.CastMotion(query);
-        bool clear = startClear && motion.Length >= 2 && motion[0] >= .9999f;
-        _spaceQueries.Add(new { id, from, to, radius = TownContent.BodyRadius, startClear, safeFraction = motion.Length > 0 ? motion[0] : 0, clear });
-        return clear;
+        bool clear = startClear && motion.Length >= 2 && motion[0] >= configuration.MinimumSafeFraction;
+        if (!_sceneReplayCommand) _spaceQueries.Add(new { id, from, to, radius = TownContent.BodyRadius, startClear, safeFraction = motion.Length > 0 ? motion[0] : 0, clear });
+        return new(clear, startClear, motion.Length > 0 ? motion[0] : 0,
+            new(configuration.Version, query.CollisionMask, query.CollideWithAreas, query.CollideWithBodies, query.Margin, configuration.MinimumSafeFraction));
     }
 
     private void FlushWorldEvents()

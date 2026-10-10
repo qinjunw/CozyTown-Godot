@@ -1,0 +1,79 @@
+{
+  "passed": false,
+  "code": "divergence",
+  "mode": "godot_scene_replay",
+  "headless": true,
+  "test": "scene_replay",
+  "command": [
+    "--scene-replay=<verification-output>\\fixtures\\tampered-motion-fraction.json",
+    "--report=<verification-output>\\10-source.json"
+  ],
+  "inputSha256": "e022674b975ee94a15266e29e35b4b0b587f03f90709c501537bb3749a2f3431",
+  "expectedDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/TownMap.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "f62b1db63d11e02ec6f3162b613c6b3cc23a7b018a03db0ddf6b751be9e705d9",
+    "buildVersion": "1.0.0\u002B377f670c92a1fba022d773f69f9704ac4b3de94e",
+    "assemblySha256": "906c2347601d2287e410d51bfab4dd2124938e7251d6a1026c5306971d02afd0",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "actualDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/TownMap.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "f62b1db63d11e02ec6f3162b613c6b3cc23a7b018a03db0ddf6b751be9e705d9",
+    "buildVersion": "1.0.0\u002B377f670c92a1fba022d773f69f9704ac4b3de94e",
+    "assemblySha256": "906c2347601d2287e410d51bfab4dd2124938e7251d6a1026c5306971d02afd0",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "motionQueries": 2,
+  "initialBodyQueries": 10,
+  "bodyBoundaries": 6,
+  "intersectShapeCalls": 12,
+  "castMotionCalls": 12,
+  "bodyRepresentation": "authoritative double coordinates, circle queries, rounded Node2D presentation",
+  "runtimeAssemblyLocation": "<toolchain>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll",
+  "replay": {
+    "passed": false,
+    "code": "divergence",
+    "boundary": 2,
+    "field": "queries[0].evidence.safeFraction",
+    "expected": "0.25",
+    "actual": "1",
+    "rulesVersion": "town-social-player-dialogue-v5",
+    "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+    "finalStateJson": null,
+    "command": "host_move",
+    "inputJson": "{\r\n  \u0022seconds\u0022: 0.05,\r\n  \u0022direction\u0022: {\r\n    \u0022x\u0022: 1,\r\n    \u0022y\u0022: 0\r\n  }\r\n}",
+    "mode": "godot_scene_replay"
+  }
+}
