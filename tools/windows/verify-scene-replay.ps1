@@ -210,6 +210,15 @@ try {
                 $null = Invoke-VerificationProcess $name $executable $arguments -ExpectedExitCode (Get-ExpectedExitCode $package 'Scene' $sceneCode) -WorkingDirectory $windows -Environment $runtimeEnvironment
                 $report = Assert-ReplayReport $reportPath 'godot_scene_replay' $sceneCode $windows
             }
+            $expectedQueries = $package.PSObject.Properties['expectedMotionQueries']
+            if ($null -ne $expectedQueries -and $null -ne $expectedQueries.Value) {
+                if ($report.motionQueries -ne [int] $expectedQueries.Value -or
+                    $report.initialBodyQueries -lt 5 -or
+                    $report.intersectShapeCalls -ne $report.motionQueries + $report.initialBodyQueries -or
+                    $report.castMotionCalls -ne $report.intersectShapeCalls) {
+                    throw "Actual scene query counts differ from the fixture contract: $reportPath"
+                }
+            }
             $result[$target] = [ordered]@{ passed = $report.passed; code = $report.code; report = $reportPath }
         }
         $checks.Add($result)

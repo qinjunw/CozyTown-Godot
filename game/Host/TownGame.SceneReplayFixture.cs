@@ -1,5 +1,6 @@
 using System.Text.Json;
 using CozyTown.Core.Town;
+using CozyTown.Model;
 using File = System.IO.File;
 
 namespace CozyTown.Game;
@@ -96,13 +97,19 @@ public partial class TownGame
 
         var package = recording.Complete();
         var entries = new List<object>();
+        int QueryCount(TownReplayPackage value) => value.Boundaries.Sum(t => t.Queries.Length)
+            + (value.Parent is null ? 0 : QueryCount(value.Parent.Prefix));
         void Write(string name, TownReplayPackage value, string sceneCode = "passed", string coreCode = "passed", string[]? arguments = null)
         {
             File.WriteAllText(Path.Combine(output, name + ".json"), JsonSerializer.Serialize(value,
                 new JsonSerializerOptions(TownJson.Options) { WriteIndented = false }));
-            entries.Add(new { file = name + ".json", expectedCoreCode = coreCode, expectedSceneCode = sceneCode, sceneArguments = arguments ?? [] });
+            entries.Add(new { file = name + ".json", expectedCoreCode = coreCode, expectedSceneCode = sceneCode, sceneArguments = arguments ?? [],
+                expectedMotionQueries = sceneCode == "passed" ? (int?)QueryCount(value) : arguments is ["--scene-replay-obstruct"] ? 1 : null });
         }
         Write("gameplay", package);
+        var dialogue = GenerateSceneDialogueFixture(output);
+        Write("player-dialogue", dialogue.Full);
+        Write("player-dialogue-retired-restore", dialogue.Restored);
         Write("missing-scene", package with { Scene = null }, "missing_dependency");
         Write("wrong-engine", package with { Scene = package.Scene! with { EngineVersion = "missing-engine" } }, "incompatible_dependency");
         Write("wrong-radius", package with { Scene = package.Scene! with { BodyRadius = 6 } }, "incompatible_dependency");
@@ -122,6 +129,60 @@ public partial class TownGame
             recordedQueries = package.Boundaries.Sum(t => t.Queries.Length) + prefix.Prefix.Boundaries.Sum(t => t.Queries.Length),
             conversationStarted = socialEvents.Count(e => e.Kind == "conversation_started"),
             residentsWithDecisions = socialEvents.Where(e => e.Kind == "candidate_executed").Select(e => e.ResidentId).Distinct().Order().ToArray(),
+            playerTextResidents = dialogue.Full.Boundaries.Where(t => t.Command == "player_dialogue_result").Select(t =>
+            {
+                using var input = JsonDocument.Parse(t.InputJson);
+                return input.RootElement.GetProperty("result").GetProperty("residentId").GetString();
+            }).ToArray(),
             dependencies = SceneDependencies() });
+    }
+
+    private (TownReplayPackage Full, TownReplayPackage Restored) GenerateSceneDialogueFixture(string output)
+    {
+        var content = _loaded.Content;
+        var world = new TownWorld(content, _scenario) { DetailedMovementQuery = QuerySceneMotion };
+        var host = new TownInputHost(content, world);
+        var recording = new TownRecording(content, world, host);
+        recording.SetSceneDependencies(SceneDependencies());
+        var registry = new TownPlayerDialogueRegistry(Path.Combine(output, "offline-dialogue-retirements.json"));
+        var dialogue = new TownDialogueHost(world, registry);
+        TownReplayParent? savedWaiting = null;
+        foreach (string residentId in new[] { "mina", "eli", "ren", "sora" })
+        {
+            var position = world.State.Residents.Single(r => r.Id == residentId).Position;
+            foreach (var point in content.FindRoute(world.State.PlayerPosition, position)
+                ?? throw new InvalidDataException("Dialogue fixture route is unavailable."))
+                if (!world.SetPlayerPosition(point)) throw new InvalidDataException("Actual Godot movement rejected dialogue route.");
+            if (!dialogue.Open(residentId, [])) throw new InvalidDataException("Dialogue fixture resident is not nearby.");
+            host.Pause("dialogue", true);
+            host.AcceptElapsed(.03); host.FlushPausedElapsed(90);
+            var request = dialogue.Generate(host.State.PauseReasons)!;
+            var frozen = dialogue.Freeze(request, ModelStage.Baseline);
+            host.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
+            string attempt = "fixed-" + request.LogicalRequestId;
+            dialogue.Acknowledge(request.PlayerSessionId, request.LogicalRequestId, attempt);
+            if (savedWaiting is null) savedWaiting = new(recording.Complete(), world.CaptureSnapshot(), host.State);
+            world.MarkPlayerDialogueResponseArrived(world.SessionId, request.PlayerSessionId, request.LogicalRequestId, attempt, 2);
+            host.Pause("menu", true); host.Pause("focus", true); world.Advance(0, 100, true);
+            dialogue.Complete(request, world.SessionId, attempt, TownPlayerDialogueProtocol.FixedResponse(residentId), "fixed_model", null, 2);
+            if (dialogue.Present(host.State.PauseReasons)) throw new InvalidDataException("Stacked pauses displayed player text.");
+            host.Pause("focus", false);
+            if (dialogue.Present(host.State.PauseReasons)) throw new InvalidDataException("Menu pause displayed player text.");
+            host.Pause("menu", false);
+            if (!dialogue.Present(host.State.PauseReasons)) throw new InvalidDataException("Dialogue-only pause did not display player text.");
+            dialogue.Close(); host.Pause("dialogue", false); world.Advance(0, 0); host.PruneTerminalRequests();
+        }
+        var full = recording.Complete();
+        var restoredWorld = TownWorld.RestoreCandidate(content, TownJson.Serialize(savedWaiting!.SavedSnapshot), CheckMotion);
+        restoredWorld.DetailedMovementQuery = QuerySceneMotion;
+        var restoredHost = new TownInputHost(content, restoredWorld, savedWaiting.SavedHost);
+        var restoredRecording = new TownRecording(content, restoredWorld, restoredHost, savedWaiting);
+        restoredRecording.SetSceneDependencies(SceneDependencies());
+        var restoredDialogue = new TownDialogueHost(restoredWorld, registry);
+        restoredDialogue.ReconcileRestored();
+        if (restoredWorld.GetPlayerDialogueRequest() is not null || restoredDialogue.Current!.Displays.Any(d => d.Source == "fixed_model"))
+            throw new InvalidDataException("Earlier waiting save revived a terminated generation or imported future text.");
+        restoredDialogue.Close(); restoredHost.Pause("dialogue", false); restoredWorld.Advance(0, 0);
+        return (full, restoredRecording.Complete());
     }
 }

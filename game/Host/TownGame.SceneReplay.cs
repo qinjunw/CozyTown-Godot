@@ -1,4 +1,6 @@
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Text.Json;
 using CozyTown.Core.Town;
@@ -18,6 +20,17 @@ public partial class TownGame
         return Convert.ToHexString(SHA256.HashData(file)).ToLowerInvariant();
     }
 
+    private static string SceneAssemblyHash(Assembly assembly, string path)
+    {
+        using var file = File.OpenRead(path);
+        using var executable = new PEReader(file, PEStreamOptions.LeaveOpen);
+        var metadata = executable.GetMetadataReader();
+        if (metadata.GetGuid(metadata.GetModuleDefinition().Mvid) != assembly.ManifestModule.ModuleVersionId)
+            throw new InvalidDataException("The assembly file differs from the loaded game module; restart the frozen build before recording.");
+        file.Position = 0;
+        return Convert.ToHexString(SHA256.HashData(file)).ToLowerInvariant();
+    }
+
     private TownSceneReplayDependencies SceneDependencies()
     {
         var assembly = Assembly.GetExecutingAssembly();
@@ -34,7 +47,7 @@ public partial class TownGame
             _loaded.Dependencies["res://World/TownMap.tscn#extracted-geometry-v1"], TownContent.BodyRadius,
             TownSpatialConfiguration.Current, source.ToLowerInvariant(),
             assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "unknown",
-            SceneFileHash(assemblyPath),
+            SceneAssemblyHash(assembly, assemblyPath),
             Engine.GetVersionInfo()["hash"].AsString(), ProjectSettings.GetSetting("physics/2d/physics_engine", "GodotPhysics2D").AsString());
     }
 

@@ -1,6 +1,6 @@
 # 输入记录与离线核心回放
 
-本页说明[版本化输入记录与离线核心回放](https://github.com/qinjunw/CozyTown-Godot/issues/22)的实现与操作。回放重跑当前 C# 世界和宿主输入规则，使用包内空间事实回答逐次查询，并与每个边界的完整预期状态比较。它验证核心过程；Godot 再次计算碰撞由[场景回放](https://github.com/qinjunw/CozyTown-Godot/issues/23)承接。
+本页说明[版本化输入记录与离线核心回放](https://github.com/qinjunw/CozyTown-Godot/issues/22)的实现与操作。回放重跑当前 C# 世界和宿主输入规则，使用包内空间事实回答逐次查询，并与每个边界的完整预期状态比较。Godot 再次计算碰撞的入口与依赖见[场景回放说明](SCENE_REPLAY.md)。
 
 ## 运行
 
