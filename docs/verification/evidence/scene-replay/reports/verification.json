@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-10-10T07:29:13.8868258Z",
+  "passed": true,
+  "sourceCommit": "377f670c92a1fba022d773f69f9704ac4b3de94e",
+  "sourceDirty": false,
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "steps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 0.299
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 0.138
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 2.881
+    },
+    {
+      "name": "restore-cli",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.126
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 4.366
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 2.71
+    },
+    {
+      "name": "build-cli",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.619
+    },
+    {
+      "name": "generate-fixtures",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 7.445
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 8.677
+    },
+    {
+      "name": "00-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 6.106
+    },
+    {
+      "name": "00-source",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 7.336
+    },
+    {
+      "name": "00-export",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 7.399
+    },
+    {
+      "name": "01-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 0.705
+    },
+    {
+      "name": "01-source",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.762
+    },
+    {
+      "name": "01-export",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.517
+    },
+    {
+      "name": "02-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 0.527
+    },
+    {
+      "name": "02-source",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.17
+    },
+    {
+      "name": "02-export",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 1.057
+    },
+    {
+      "name": "03-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 5.626
+    },
+    {
+      "name": "03-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.234
+    },
+    {
+      "name": "03-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 0.984
+    },
+    {
+      "name": "04-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 5.91
+    },
+    {
+      "name": "04-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.219
+    },
+    {
+      "name": "04-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.034
+    },
+    {
+      "name": "05-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 6.423
+    },
+    {
+      "name": "05-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.142
+    },
+    {
+      "name": "05-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.062
+    },
+    {
+      "name": "06-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 5.865
+    },
+    {
+      "name": "06-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.007
+    },
+    {
+      "name": "06-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 0.962
+    },
+    {
+      "name": "07-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 7.349
+    },
+    {
+      "name": "07-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.469
+    },
+    {
+      "name": "07-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.357
+    },
+    {
+      "name": "08-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 6.546
+    },
+    {
+      "name": "08-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.185
+    },
+    {
+      "name": "08-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 0.961
+    },
+    {
+      "name": "09-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 5.645
+    },
+    {
+      "name": "09-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.601
+    },
+    {
+      "name": "09-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 0.945
+    },
+    {
+      "name": "10-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 5.609
+    },
+    {
+      "name": "10-source",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "timedOut": false,
+      "seconds": 1.38
+    },
+    {
+      "name": "10-export",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "timedOut": false,
+      "seconds": 1.037
+    },
+    {
+      "name": "11-core",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "timedOut": false,
+      "seconds": 0.411
+    },
+    {
+      "name": "11-source",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.095
+    },
+    {
+      "name": "11-export",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "timedOut": false,
+      "seconds": 1.043
+    },
+    {
+      "name": "12-core",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "timedOut": false,
+      "seconds": 0.398
+    },
+    {
+      "name": "12-source",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "timedOut": false,
+      "seconds": 1.121
+    },
+    {
+      "name": "12-export",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "timedOut": false,
+      "seconds": 0.872
+    }
+  ],
+  "packages": [
+    {
+      "file": "gameplay.json",
+      "sha256": "b56845c85fe1ceeaaf9b770c82c3b1efcdf1d2bdae5d8d3e36dd09378caf5703",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\00-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\00-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\00-export.json"
+      }
+    },
+    {
+      "file": "player-dialogue.json",
+      "sha256": "c87428dd0bb714367d0452681d3e014be56d3a7c79d9208be90b0793f83c7b2c",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\01-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\01-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\01-export.json"
+      }
+    },
+    {
+      "file": "player-dialogue-retired-restore.json",
+      "sha256": "07f3fa8a8911ded35fcea48a13d8da66592218bec45873c41c2eff184a18f89f",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\02-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\02-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\02-export.json"
+      }
+    },
+    {
+      "file": "missing-scene.json",
+      "sha256": "dfd7f2f320f036a0cac8c6623c533a3bc65c72b410dedced683c31c8807bca4f",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\03-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<verification-output>\\03-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<verification-output>\\03-export.json"
+      }
+    },
+    {
+      "file": "wrong-engine.json",
+      "sha256": "c9d8725a6d710926457569dc5939b6504b6f1ba1b8969c642023d2dadd5c0110",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\04-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\04-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\04-export.json"
+      }
+    },
+    {
+      "file": "wrong-radius.json",
+      "sha256": "fe45a126257567249ac2f3fed15371883ce0742179a6013d41c192ff525ca4d1",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\05-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\05-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\05-export.json"
+      }
+    },
+    {
+      "file": "wrong-query.json",
+      "sha256": "172992e87d070be72b70e3016190fc796a0281919cba29066373b4e15b6d0b06",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\06-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\06-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\06-export.json"
+      }
+    },
+    {
+      "file": "wrong-geometry.json",
+      "sha256": "d0def3f934ac3b490ecf9afa0fca17f5ee46b31d4c7eb6279e1f91477063a190",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\07-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\07-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\07-export.json"
+      }
+    },
+    {
+      "file": "wrong-source.json",
+      "sha256": "a49e0dc36285d7790e85d8ec52025eafa820e19458d18d2d9251df9422e7a2b4",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\08-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\08-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<verification-output>\\08-export.json"
+      }
+    },
+    {
+      "file": "missing-resource.json",
+      "sha256": "b06f2eebe525891637b2ac6ad18d020af1f97fdb82d7e5c1674f9ea846e978f3",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\09-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<verification-output>\\09-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<verification-output>\\09-export.json"
+      }
+    },
+    {
+      "file": "tampered-motion-fraction.json",
+      "sha256": "e022674b975ee94a15266e29e35b4b0b587f03f90709c501537bb3749a2f3431",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\10-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<verification-output>\\10-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<verification-output>\\10-export.json"
+      }
+    },
+    {
+      "file": "missing-parent.json",
+      "sha256": "953de464d0d99409978c5661e76185a575cb79f531210e29d6dbba0b679ff604",
+      "expectedCoreCode": "missing_parent_prefix",
+      "expectedSceneCode": "missing_parent_prefix",
+      "core": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<verification-output>\\11-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<verification-output>\\11-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<verification-output>\\11-export.json"
+      }
+    },
+    {
+      "file": "runtime-obstacle.json",
+      "sha256": "3d1056ba708a4818336991c5e95f30a1b63870d990ec0f65435927094de1b626",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<verification-output>\\12-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<verification-output>\\12-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<verification-output>\\12-export.json"
+      }
+    }
+  ],
+  "error": null,
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "finishedAtUtc": "2026-10-10T07:31:23.7522253Z"
+}

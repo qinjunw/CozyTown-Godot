@@ -4,7 +4,15 @@ using System.IO.Compression;
 
 namespace CozyTown.Core.Town;
 
-public sealed record TownSpatialQuery(string EntityId, string Kind, TownPoint From, TownPoint To, double Radius, bool Clear);
+public sealed record TownSpatialConfiguration(string Version, uint Mask, bool Areas, bool Bodies, double Margin, double MinimumSafeFraction)
+{
+    public static TownSpatialConfiguration Current { get; } = new("godot-circle-intersect-cast-v1", 1, false, true, .001f, .9999f);
+}
+public sealed record TownMotionResult(bool Clear, bool StartClear, double SafeFraction, TownSpatialConfiguration Configuration);
+public sealed record TownSpatialQuery(string EntityId, string Kind, TownPoint From, TownPoint To, double Radius, bool Clear,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] TownMotionResult? Evidence = null);
+public sealed record TownReplaySceneAdapter(Func<string, TownPoint, TownPoint, double, TownMotionResult> Query,
+    Action<TownState, int>? ValidateBodies = null, Action<TownReplayPackage>? ValidateDependencies = null);
 public sealed record TownTrace
 {
     [JsonRequired] public string Command { get; init; } = "";
@@ -57,6 +65,7 @@ public sealed record TownTrace
 public sealed partial class TownWorld
 {
     public Action<TownTrace>? TraceCommitted { get; set; }
+    public Func<string, TownPoint, TownPoint, TownMotionResult>? DetailedMovementQuery { get; set; }
     private TraceScope? _trace;
 
     private IDisposable TraceInput(string command, object input)
@@ -68,8 +77,9 @@ public sealed partial class TownWorld
 
     private bool QueryMotion(string entityId, TownPoint from, TownPoint to)
     {
-        bool clear = _movementQuery?.Invoke(entityId, from, to) ?? true;
-        _trace?.Queries.Add(new(entityId, "body-motion-v1", from, to, TownContent.BodyRadius, clear));
+        var evidence = DetailedMovementQuery?.Invoke(entityId, from, to);
+        bool clear = evidence?.Clear ?? (_movementQuery?.Invoke(entityId, from, to) ?? true);
+        _trace?.Queries.Add(new(entityId, "body-motion-v1", from, to, TownContent.BodyRadius, clear, evidence));
         return clear;
     }
 
