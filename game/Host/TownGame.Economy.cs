@@ -260,10 +260,15 @@ public partial class TownGame
     private void SubmitTrade()
     {
         if (!EconomyInputAllowed || !_economyPanel.Visible || _activeShopId is null || _tradeResourceId is null) return;
+        try { _tradeQuantity.Apply(); SubmitTrade((int)_tradeQuantity.Value); }
+        catch (Exception error) { Fail("economy_record_failed", error); }
+    }
+
+    private void SubmitTrade(int quantity)
+    {
+        if (!EconomyInputAllowed || !_economyPanel.Visible || _activeShopId is null || _tradeResourceId is null) return;
         try
         {
-            _tradeQuantity.Apply();
-            int quantity = (int)_tradeQuantity.Value;
             var quote = _world.QuoteTrade(_activeShopId, _tradeResourceId, _tradeDirection, quantity);
             var request = new TradeRequest(NewEconomyOperationId(), "player", _activeShopId, _tradeResourceId, _tradeDirection, quantity, quote.UnitPrice);
             FlushWorldEvents();

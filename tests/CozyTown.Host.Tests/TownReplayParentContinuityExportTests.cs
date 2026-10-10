@@ -50,7 +50,10 @@ public sealed class TownReplayParentContinuityExportTests
             string savePath = Path.Combine(root, "save.json");
             TownSaveFile.Write(savePath, new(1, TownJson.Serialize(saved), world.State.BranchId, journal.RecordCount,
                 host.State.UnconsumedSeconds, "real", "baseline", new() { [request.LogicalRequestId] = frozen },
-                host.State.PlayerRoute, host.State.PlayerRouteCursor), candidate => TownWorld.RestoreCandidate(content, candidate.WorldJson));
+                host.State.PlayerRoute, host.State.PlayerRouteCursor,
+                fullDemo ? ModelBudgetProfile.FullDemoVersion : ModelBudgetProfile.FirstSliceVersion,
+                fullDemo ? TownModelRuntimeProfile.Experiment : TownModelRuntimeProfile.Legacy),
+                candidate => TownWorld.RestoreCandidate(content, candidate.WorldJson));
             var source = TownSaveFile.Read(savePath);
             var child = TownWorld.RestoreCandidate(content, source.WorldJson);
             var childHost = new TownInputHost(content, child, new(source.UnconsumedSeconds, source.PlayerRoute, source.PlayerRouteCursor,

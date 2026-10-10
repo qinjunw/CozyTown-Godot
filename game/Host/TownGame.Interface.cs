@@ -236,7 +236,13 @@ public partial class TownGame
         if (_pauseReasons.Count > 0 || _fatal) return;
         ResidentState? resident = _view.Residents.OrderBy(r => r.Position.DistanceTo(_view.PlayerPosition)).FirstOrDefault();
         if (resident == null || resident.Position.DistanceTo(_view.PlayerPosition) > 42) { Toast("走近一位邻居，再按 E 交谈。"); return; }
-        if (!DialogueHost.Open(resident.Id, _pauseReasons)) { Toast("走近这位邻居后再交谈。"); return; }
+        TalkResident(resident.Id);
+    }
+
+    private void TalkResident(string residentId)
+    {
+        if (_pauseReasons.Count > 0 || _fatal) return;
+        if (!DialogueHost.Open(residentId, _pauseReasons)) { Toast("走近这位邻居后再交谈。"); return; }
         FlushWorldEvents();
         _dialogue.Visible = true;
         SetPause("dialogue", true);

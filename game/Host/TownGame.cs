@@ -29,10 +29,12 @@ public partial class TownGame : Node2D
     private readonly List<object> _spaceQueries = [];
     private readonly List<ModelCompletion> _modelCompletions = [];
     private readonly List<TownEvent> _experimentEvents = [];
+    private readonly HashSet<(string BranchId, long Sequence)> _experimentEventIds = [];
     private readonly List<TownEvent> _recentEvents = [];
     private readonly List<DeepSeekClient> _clients = [];
     private DeepSeekClient? _model;
     private DeepSeekOptions? _modelOptions;
+    private TownModelRuntimeProfile _modelRuntime = TownModelRuntimeProfile.Resolve(ModelBudgetProfile.FirstSliceVersion, "legacy");
     private Camera2D _camera = null!;
     private Node2D _map = null!;
     private TownActor _player = null!;
@@ -94,7 +96,7 @@ public partial class TownGame : Node2D
         try
         {
             _headless = DisplayServer.GetName() == "headless";
-            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment") || _arguments.Contains("--replay-record-smoke");
+            _automated = _arguments.Contains("--slice-smoke") || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--real-experiment") || _arguments.Contains("--replay-record-smoke") || Argument("--full-demo-evaluation=") is not null;
             _scenario = Argument("--scenario=") ?? "baseline";
             if (Argument("--scene-replay=") is string replayPath)
                 _scenario = TownReplay.ReadPackage(replayPath).InitialSnapshot.State.InitialStateId;
@@ -123,23 +125,28 @@ public partial class TownGame : Node2D
                 return;
             }
             string? modelConfig = Argument("--model-config=");
+            ConfigureFullDemoInput();
             if (modelConfig is not null && Argument("--dialogue-fixture=") is not null)
                 throw new InvalidDataException("Fixed dialogue fixtures require offline rules mode.");
             if (modelConfig is not null && (_scenario is "economy-fixture" or "farming-capacity-fixture" or "production-capacity-fixture" || _arguments.Contains("--economy-smoke") || _arguments.Contains("--farming-smoke") || _arguments.Contains("--farming-capacity-smoke") || _arguments.Contains("--production-smoke") || _arguments.Contains("--production-capacity-smoke") || _arguments.Contains("--replay-record-smoke")))
                 throw new InvalidDataException("Economy verification requires offline rules mode.");
             if (modelConfig != null)
             {
-                var local = TownJson.Deserialize<LocalModelSettings>(File.ReadAllText(modelConfig));
-                if (!Path.IsPathFullyQualified(local.CredentialFile) || !Path.IsPathFullyQualified(local.LedgerFile))
-                    throw new InvalidDataException("Local model configuration requires absolute credential and ledger paths.");
-                _modelOptions = new(local.CredentialFile, local.LedgerFile);
+                var local = TownJson.Deserialize<TownModelRuntimeSettings>(File.ReadAllText(modelConfig));
+                _modelOptions = local.ToOptions();
                 _mode = "real";
             }
+            _modelRuntime = TownModelRuntimeProfile.Resolve(_modelOptions?.BudgetProfileVersion
+                ?? (_fullDemoPlan is null ? ModelBudgetProfile.FirstSliceVersion : ModelBudgetProfile.FullDemoVersion),
+                Argument("--execution-purpose=") ?? (_fullDemoPlan is null ? "legacy" : "experiment"));
+            ValidateFullDemoMode();
+            if (_modelOptions is not null)
+                _ = PersistentBudgetLedger.OpenExisting(_modelOptions.LedgerFile, _modelRuntime.Profile.Version);
             if (_arguments.Contains("--real-experiment") && _modelOptions == null)
                 throw new InvalidDataException("Real experiment requires an explicit local model configuration.");
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
-            _world = new TownWorld(_loaded.Content, _scenario, movementQuery: CheckMotion);
+            _world = new TownWorld(_loaded.Content, _scenario, budgetId: _modelRuntime.BudgetId, movementQuery: CheckMotion);
             string retirementRoot = _modelOptions is null ? _userRoot : Path.GetDirectoryName(_modelOptions.LedgerFile)!;
             _dialogueRetirements = new TownPlayerDialogueRegistry(Path.Combine(retirementRoot, "player-dialogue-retirements.json"));
             _view = _world.GetView();
@@ -159,6 +166,7 @@ public partial class TownGame : Node2D
             else if (_arguments.Contains("--farming-capacity-smoke")) _ = RunFarmingCapacitySmokeAsync();
             else if (_arguments.Contains("--production-smoke")) _ = RunProductionSmokeAsync();
             else if (_arguments.Contains("--production-capacity-smoke")) _ = RunProductionCapacitySmokeAsync();
+            else if (_fullDemoPlan is not null) _ = RunFullDemoEvaluationAsync();
         }
         catch (Exception error)
         {
@@ -188,6 +196,8 @@ public partial class TownGame : Node2D
         {
             schemaVersion = 2, branchId = full.BranchId, full.ParentBranchId, full.SourceSnapshotId, full.InitialStateId,
             decisionMode = _mode, stage = _scenario, budgetId = full.BudgetId,
+            budgetProfileVersion = _modelRuntime.Profile.Version, executionPurpose = _modelRuntime.ExecutionPurpose,
+            fullDemoInput = _fullDemoPlan, fullDemoInputSha256 = _fullDemoPlanHash,
             contentFingerprint = _loaded.Content.Fingerprint, inputDigest = _loaded.InputDigest,
             presentationDigest = _loaded.PresentationDigest, dependencies = _loaded.Dependencies,
             modelProtocol = TownModelProtocol.Version, rulesVersion = TownWorld.RulesVersion,
@@ -229,10 +239,15 @@ public partial class TownGame : Node2D
                 else _world.MarkPlayerDialogueResponseArrived(dispatch.Request.Identity.SessionId, playerSession, dispatch.Request.Identity.LogicalRequestId, dispatch.AttemptId, arrivedAfter);
             });
             _clients.Add(_model);
-            _journal.SetReplayBudget(_model.Budget);
+            _journal.SetReplayBudget(_model.Budget, _modelRuntime.ReplayProfile);
             _journal.WriteArtifact("budget-at-start.json", _model.Budget);
         }
-        else _model = null;
+        else
+        {
+            _model = null;
+            _journal.SetReplayBudget(new(_modelRuntime.BudgetId, "CNY", _modelRuntime.Profile.LimitMicros,
+                0, 0, 0, 0, null, []), _modelRuntime.ReplayProfile);
+        }
         FlushWorldEvents();
     }
 
@@ -256,32 +271,13 @@ public partial class TownGame : Node2D
     public override void _PhysicsProcess(double delta)
     {
         if (!_ready || _fatal || _finishing) return;
+        if (_fullDemoPlan is not null && _fullDemoFixed) return;
         try
         {
-            if (_journal.Failed) throw new IOException("Run journal is interrupted.");
-            while (_mainThread.TryDequeue(out var work)) work();
-            _dispatchGate.Tick(_world.SessionId, _pauseReasons, _world.GetView().CurrentPlayerDialogueId, _fatal);
             double now = _hostClock.Elapsed.TotalSeconds;
             double elapsed = Math.Max(0, now - _lastHostSeconds);
             _lastHostSeconds = now;
-            _elapsed += elapsed;
-            // Simulation catches up only a bounded interval; logical deadlines still include the entire host delay.
-            double accepted = Math.Min(elapsed, .25);
-            if (elapsed > accepted) _world.Advance(0, elapsed - accepted, true);
-            _inputHost.AcceptElapsed(elapsed);
-            while (_accumulator >= StepSeconds)
-            {
-                if (_journal.Failed) throw new IOException("Run journal is interrupted.");
-                _inputHost.TakeStep();
-                bool paused = _pauseReasons.Count > 0;
-                if (!paused) AdvancePlayer(StepSeconds);
-                _world.Advance(paused ? 0 : StepSeconds * .5, StepSeconds, paused);
-                FlushWorldEvents();
-                if (!paused) DispatchDecisions();
-                ProcessPlayerDialogue();
-            }
-            _view = _world.GetView();
-            SyncActors();
+            AdvanceHostElapsed(elapsed);
             _uiTimer += delta;
             if (_uiTimer >= .2) { _uiTimer = 0; RefreshInterface(); }
             if (_toastSeconds > 0) { _toastSeconds -= delta; if (_toastSeconds <= 0) _toast.Visible = false; }
@@ -289,6 +285,32 @@ public partial class TownGame : Node2D
             if (_arguments.Contains("--replay-record-smoke") && _elapsed >= ReplayRecordingSeconds()) FinishReplayRecordingSmoke();
         }
         catch (Exception error) { Fail("runtime_failed", error); }
+    }
+
+    private void AdvanceHostElapsed(double elapsed)
+    {
+        if (_journal.Failed) throw new IOException("Run journal is interrupted.");
+        while (_mainThread.TryDequeue(out var work)) work();
+        _dispatchGate.Tick(_world.SessionId, _pauseReasons, _world.GetView().CurrentPlayerDialogueId, _fatal);
+        _elapsed += elapsed;
+        _fullDemoWindow?.Advance(elapsed);
+        double accepted = Math.Min(elapsed, .25);
+        if (elapsed > accepted) _world.Advance(0, elapsed - accepted, true);
+        _inputHost.AcceptElapsed(elapsed);
+        while (_accumulator >= StepSeconds)
+        {
+            if (_journal.Failed) throw new IOException("Run journal is interrupted.");
+            _inputHost.TakeStep();
+            bool paused = _pauseReasons.Count > 0;
+            if (!paused) AdvancePlayer(StepSeconds);
+            _world.Advance(paused ? 0 : StepSeconds * .5, StepSeconds, paused);
+            FlushWorldEvents();
+            if (!paused) DispatchDecisions();
+            ProcessPlayerDialogue();
+        }
+        _view = _world.GetView();
+        SyncActors();
+        NoticeFullDemoWindowStop();
     }
 
     private void AdvancePlayer(double seconds)
@@ -340,7 +362,7 @@ public partial class TownGame : Node2D
                 _inputHost.PruneTerminalRequests();
                 foreach (string key in _frozen.Keys.Where(terminal.Contains).ToArray()) _frozen.Remove(key);
             }
-            if (_automated) _experimentEvents.AddRange(events);
+            if (_automated) _experimentEvents.AddRange(events.Where(e => _experimentEventIds.Add((e.BranchId, e.Sequence))));
             foreach (TownEvent entry in events)
             {
                 if (entry.Kind is not ("time_input" or "space_query")) _recentEvents.Add(entry);
@@ -362,6 +384,8 @@ public partial class TownGame : Node2D
         {
             string key = _world.SessionId + ":" + request.LogicalRequestId;
             if (_activeModelRequests.Contains(key)) continue;
+            if (_mode == "real" && _activeModelRequests.Count >= 2) break;
+            if (_fullDemoPlan is not null && !AdmitFullDemoNpc(request)) continue;
             if (_mode != "real" || _model == null)
             {
                 string attempt = "rules-" + Guid.NewGuid().ToString("N");
@@ -370,11 +394,10 @@ public partial class TownGame : Node2D
                         _world.CreateRuleCandidate(request), "rules", null));
                 continue;
             }
-            if (_activeModelRequests.Count >= 2) break;
             var identity = new ModelRequestIdentity(_world.GetView().BranchId, _world.SessionId, request.LogicalRequestId, request.ResidentId, request.ActivityRevision);
             string body = _frozen.TryGetValue(request.LogicalRequestId, out var old) ? old.InputJson : TownModelProtocol.BuildRequest(request);
             bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
-            var frozen = new FrozenModelRequest(identity, _scenario == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual,
+            var frozen = new FrozenModelRequest(identity, old?.Stage ?? _modelRuntime.NewRequestStage(_scenario, "npc_action"),
                 body, request.IsRecovery || originalRecorded, TimeSpan.FromSeconds(request.RemainingWaitSeconds));
             _inputHost.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
             _frozen[request.LogicalRequestId] = frozen;
@@ -402,6 +425,7 @@ public partial class TownGame : Node2D
                 _modelCompletions.Add(result);
                 ActionCandidate? candidate = null;
                 string? error = result.FailureCode;
+                StopFullDemoAdmission(error);
                 if (result.Succeeded && result.CandidateJson != null)
                 {
                     try { candidate = TownModelProtocol.Parse(result.CandidateJson); }
@@ -423,6 +447,7 @@ public partial class TownGame : Node2D
                 _activeModelRequests.Remove(key);
                 if (_world.SessionId != frozen.Identity.SessionId) return;
                 _journal.Append("dispatch_rejected", new { request.LogicalRequestId, request.ResidentId, code });
+                StopFullDemoAdmission(code);
                 if (code is "concurrency_limit" or "budget_concurrency_limit") return;
                 string attempt = "not-sent-" + Guid.NewGuid().ToString("N");
                 if (_world.MarkDispatched(request.LogicalRequestId, attempt))
@@ -512,7 +537,7 @@ public partial class TownGame : Node2D
 
     private TownHostSnapshot CaptureHostSnapshot() => new(1, _world.CaptureJson(), Path.GetFileName(_journal?.DirectoryPath ?? _world.GetView().BranchId),
         _journal?.RecordCount ?? 0, _accumulator, _mode, _scenario, new Dictionary<string, FrozenModelRequest>(_frozen),
-        _playerRoute?.ToArray(), _playerRoute == null ? 0 : _playerRouteCursor);
+        _playerRoute?.ToArray(), _playerRoute == null ? 0 : _playerRouteCursor, _modelRuntime.Profile.Version, _modelRuntime.ExecutionPurpose);
 
     private void SaveWorld()
     {
@@ -554,6 +579,7 @@ public partial class TownGame : Node2D
             if (!recoveringFault) while (_mainThread.TryDequeue(out var work)) work();
             else _spaceQueries.Clear();
             var snapshot = TownSaveFile.Read(_savePath);
+            TownSaveFile.ValidateForRuntime(snapshot, _modelRuntime);
             if (snapshot.Stage != _scenario) throw new InvalidDataException("Saved initial state differs from the current content.");
             if (snapshot.DecisionMode == "real" && _modelOptions == null)
                 throw new InvalidDataException("Real-mode restore requires explicit model configuration.");
@@ -688,5 +714,4 @@ public partial class TownGame : Node2D
         File.WriteAllText(path, JsonSerializer.Serialize(report, TownJson.Options));
     }
 
-    private sealed record LocalModelSettings(string CredentialFile, string LedgerFile);
 }

@@ -241,12 +241,21 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
     private static readonly JsonSerializerOptions CompactJson = new(TownJson.Options) { WriteIndented = false };
 }
 
+// Missing runtime fields retain the first-slice save contract; full-demo saves must persist both.
 public sealed record TownHostSnapshot(int SchemaVersion, string WorldJson, string SourceRunDirectoryName,
     long JournalRecordCount, double UnconsumedSeconds, string DecisionMode, string Stage,
-    Dictionary<string, FrozenModelRequest> ModelRequests, TownPoint[]? PlayerRoute = null, int PlayerRouteCursor = 0);
+    Dictionary<string, FrozenModelRequest> ModelRequests, TownPoint[]? PlayerRoute = null, int PlayerRouteCursor = 0,
+    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion, string ExecutionPurpose = TownModelRuntimeProfile.Legacy);
 
 public static class TownSaveFile
 {
+    public static void ValidateForRuntime(TownHostSnapshot snapshot, TownModelRuntimeProfile runtime)
+    {
+        ValidateHostSnapshot(snapshot);
+        if (snapshot.BudgetProfileVersion != runtime.Profile.Version || snapshot.ExecutionPurpose != runtime.ExecutionPurpose)
+            throw new InvalidDataException("Saved budget profile or execution purpose differs from the current runtime.");
+    }
+
     public static void Write(string path, TownHostSnapshot snapshot, Action<TownHostSnapshot> validate)
     {
         ValidateHostSnapshot(snapshot);
@@ -288,6 +297,10 @@ public static class TownSaveFile
         if (world.State is not { } state || state.PendingDecisions is null || state.PlayerDialogues is null || state.TerminalRequestIds is null || state.Residents is null
             || state.BranchId != snapshot.SourceRunDirectoryName || state.InitialStateId != snapshot.Stage)
             throw new InvalidDataException("Host snapshot branch or stage differs from its world snapshot.");
+        var runtime = TownModelRuntimeProfile.Resolve(snapshot.BudgetProfileVersion, snapshot.ExecutionPurpose);
+        if (state.BudgetId != runtime.BudgetId
+            || runtime.Profile.Version == ModelBudgetProfile.FullDemoVersion && snapshot.Stage is not ("baseline" or "counterfactual"))
+            throw new InvalidDataException("Host snapshot budget identity or scenario differs from its registered profile.");
         if (snapshot.DecisionMode == "rules" && snapshot.ModelRequests.Count != 0)
             throw new InvalidDataException("Rules-mode snapshot contains real model requests.");
         if (snapshot.DecisionMode == "real" && state.PendingDecisions.Any(p => p?.Request is not null
@@ -296,22 +309,25 @@ public static class TownSaveFile
         if (snapshot.DecisionMode == "real" && state.PlayerDialogues.Any(d => d?.Request is { } request
             && d.TerminalReason is null && (request.AttemptId is not null || request.IsRecovery) && !snapshot.ModelRequests.ContainsKey(request.LogicalRequestId)))
             throw new InvalidDataException("Dispatched or recovering player dialogue has no frozen provider request.");
-        ModelStage stage = snapshot.Stage == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual;
         foreach (var pair in snapshot.ModelRequests)
         {
             var request = pair.Value;
             if (request?.Identity is not { } identity || pair.Key != identity.LogicalRequestId
                 || new[] { identity.RunId, identity.SessionId, identity.LogicalRequestId, identity.ResidentId }.Any(id => string.IsNullOrWhiteSpace(id) || id.Length > 200)
-                || identity.ActivityRevision < 0 || request.Stage != stage || request.RemainingWait <= TimeSpan.Zero
+                || identity.ActivityRevision < 0 || request.RemainingWait <= TimeSpan.Zero
                 || request.RemainingWait > TimeSpan.FromSeconds(60) || string.IsNullOrWhiteSpace(request.InputJson)
                 || Encoding.UTF8.GetByteCount(request.InputJson) > 16 * 1024 || !state.Residents.Any(r => r?.Id == identity.ResidentId))
                 throw new InvalidDataException("Frozen model request identity, stage or input is invalid.");
             var pending = state.PendingDecisions.SingleOrDefault(p => p?.Request?.LogicalRequestId == pair.Key);
             var player = state.PlayerDialogues.SingleOrDefault(d => d?.Request?.LogicalRequestId == pair.Key)?.Request;
             if (identity.Kind is not ("npc_action" or "player_text")
+                || identity.Kind == "npc_action" && identity.PlayerSessionId is not null
+                || identity.Kind == "player_text" && player is null
                 || player is not null && (identity.Kind != "player_text" || identity.PlayerSessionId != player.PlayerSessionId)
                 || pending is not null && (identity.Kind != "npc_action" || identity.PlayerSessionId is not null))
                 throw new InvalidDataException("Frozen request kind or player session differs from its world request.");
+            if (request.Stage != runtime.NewRequestStage(snapshot.Stage, identity.Kind))
+                throw new InvalidDataException("Frozen request stage differs from its saved profile, purpose or kind.");
             if (pending is null && player is null && !state.TerminalRequestIds.Contains(pair.Key))
                 throw new InvalidDataException("Frozen model request has no pending or terminal world identity.");
             if (pending is not null && (pending.Request.ResidentId != identity.ResidentId || pending.Request.ActivityRevision != identity.ActivityRevision))
