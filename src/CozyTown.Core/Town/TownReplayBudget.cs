@@ -94,7 +94,11 @@ public sealed class TownReplayBudget
         Validate(recordedAfter);
         Require("budget.external.attempts.length", recordedAfter.Attempts.Count >= _state.Attempts.Count,
             "existing attempts retained", recordedAfter.Attempts.Count);
-        if (_state.StopReason is not null) Match("budget.external.stopReason", _state.StopReason, recordedAfter.StopReason);
+        if (_state.StopReason is not null)
+        {
+            Match("budget.external.stopReason", _state.StopReason, recordedAfter.StopReason);
+            Match("budget.external.attempts.length", _state.Attempts.Count, recordedAfter.Attempts.Count);
+        }
         for (int i = 0; i < _state.Attempts.Count; i++)
         {
             var before = _state.Attempts[i];
