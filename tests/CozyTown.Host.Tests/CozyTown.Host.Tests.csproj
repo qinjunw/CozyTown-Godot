@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="../../src/CozyTown.Core/CozyTown.Core.csproj" />
     <ProjectReference Include="../../src/CozyTown.Model/CozyTown.Model.csproj" />
+    <ProjectReference Include="../../tools/CozyTown.Replay/CozyTown.Replay.csproj" />
     <Compile Include="../../game/Host/TownRunJournal.cs" Link="TownRunJournal.cs" />
     <Compile Include="../../game/Host/ModelDispatchGate.cs" Link="ModelDispatchGate.cs" />
   </ItemGroup>

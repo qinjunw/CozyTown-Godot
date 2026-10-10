@@ -104,6 +104,12 @@
       },
       "cozytown.model": {
         "type": "Project"
+      },
+      "cozytown.replay": {
+        "type": "Project",
+        "dependencies": {
+          "CozyTown.Core": "[1.0.0, )"
+        }
       }
     }
   }
