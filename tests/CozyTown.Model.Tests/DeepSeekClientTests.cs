@@ -10,6 +10,55 @@ namespace CozyTown.Model.Tests;
 public sealed class DeepSeekClientTests
 {
     [Test]
+    public async Task FullDemoClientExplicitlySelectsItsLedgerAndAccountsPlayerAndManualStages()
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+            BudgetProfileVersion: "full-demo-v1"), new MemoryJournal(), handler);
+        var npc = Request("manual-npc") with { Stage = ModelStage.Manual };
+        var player = Request("player-text") with { Stage = ModelStage.PlayerDialogue,
+            Identity = new("run", "session", "player-text", "mina", 7, "player_text", "player-session") };
+        Assert.That((await client.SendAsync(npc)).Succeeded, Is.True);
+        Assert.That((await client.SendAsync(player)).Succeeded, Is.True);
+        Assert.That(client.Budget.BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
+        Assert.That(client.Budget.SettledMicros, Is.EqualTo(560));
+        Assert.That(client.Budget.Attempts.Select(a => a.Stage), Is.EqualTo(new[] { "manual", "player_dialogue" }));
+    }
+
+    [TestCase(ModelStage.Manual)]
+    [TestCase(ModelStage.PlayerDialogue)]
+    [TestCase((ModelStage)99)]
+    public void UnregisteredStageCannotReachTheAccountEndpoint(ModelStage stage)
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        using var client = Client(fixture, new MemoryJournal(), handler);
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(Request() with { Stage = stage }))!.Code,
+            Is.EqualTo("stage_invalid"));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(4));
+    }
+
+    [Test]
+    public void WrongClientProfileFailsBeforeCredentialsOrHttpAreUsed()
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        File.Delete(fixture.CredentialPath);
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, fixture.LedgerPath, BudgetProfileVersion: "full-demo-v1"), new MemoryJournal(), handler));
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path), new MemoryJournal(), handler));
+        BudgetLedgerTests.AssertCode("budget_profile_not_registered", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path, BudgetProfileVersion: "unregistered"), new MemoryJournal(), handler));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(PersistentBudgetLedger.OpenExisting(path, "full-demo-v1").Snapshot().TotalAttempts, Is.Zero);
+        Assert.That(PersistentBudgetLedger.OpenExisting(fixture.LedgerPath).Snapshot().TotalAttempts, Is.EqualTo(4));
+    }
+
+    [Test]
     public async Task PlayerTextUsesSameAccountedTransportAndRequiresItsOwnSessionIdentity()
     {
         using var fixture = new ModelFixture(); var journal = new MemoryJournal(); var handler = new FakeHandler("success");

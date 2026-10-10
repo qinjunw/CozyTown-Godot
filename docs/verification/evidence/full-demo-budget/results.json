@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-10",
+  "sourceCommit": "4014c635e5788ce1c594544e67c83c57ff38fa54",
+  "budgetProfile": "full-demo-v1",
+  "mode": "offline-temporary-ledgers-and-fixed-http",
+  "externalRequests": 0,
+  "checks": [
+    {
+      "name": "model-suite",
+      "passed": 70,
+      "failed": 0,
+      "skipped": 0,
+      "trx": "artifacts/budget-verification/model-budget.trx"
+    },
+    {
+      "name": "host-compatibility-suite",
+      "passed": 141,
+      "failed": 0,
+      "skipped": 0,
+      "trx": "artifacts/budget-verification/host-budget-compatibility.trx"
+    },
+    {
+      "name": "legacy-probe-self-test",
+      "passed": 21,
+      "failed": 0,
+      "remoteRequests": 0
+    },
+    {
+      "name": "budget-cli-build",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "name": "budget-cli-initialization",
+      "results": "cli-results.json"
+    }
+  ],
+  "realModelSamples": 0,
+  "manualWindowsAcceptance": "not-in-scope",
+  "postSceneIntegration": {
+    "integrationBase": "1287f35",
+    "mergeCommit": "170d288bf7a0a1187fbc8b0fb3923401aa0c8ec1",
+    "modelTargetedPassed": 24,
+    "hostPassed": 141,
+    "failures": 0,
+    "gameConfiguration": "Debug",
+    "gameRestore": "locked",
+    "gameWarnings": 0,
+    "gameErrors": 0,
+    "fullProfileAlignedWithCore": true,
+    "budgetSnapshotShapeUnchanged": true,
+    "sceneMatrixRerun": false,
+    "externalRequests": 0
+  }
+}

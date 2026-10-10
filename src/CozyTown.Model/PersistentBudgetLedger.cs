@@ -12,18 +12,50 @@ public sealed class PersistentBudgetLedger
     public const long ReserveMicros = 2_110_000;
     public const int TotalLimit = 48;
     public const int ConcurrentLimit = 2;
-    private static readonly Dictionary<string, int> StageLimits = new(StringComparer.Ordinal)
-        { ["probe"] = 4, ["baseline"] = 22, ["counterfactual"] = 22 };
+    public ModelBudgetProfile Profile { get; }
     private readonly string _path;
 
-    private PersistentBudgetLedger(string path)
+    private PersistentBudgetLedger(string path, ModelBudgetProfile profile)
     {
         _path = Path.GetFullPath(path);
+        Profile = profile;
         using var held = AcquireLock();
         _ = Read();
     }
 
-    public static PersistentBudgetLedger OpenExisting(string path) => new(path);
+    public static PersistentBudgetLedger OpenExisting(string path, string profileVersion = ModelBudgetProfile.FirstSliceVersion) =>
+        new(path, ModelBudgetProfile.Get(profileVersion));
+
+    public static PersistentBudgetLedger InitializeNew(string path, string profileVersion)
+    {
+        var profile = ModelBudgetProfile.Get(profileVersion);
+        if (profile != ModelBudgetProfile.FullDemo) throw new ModelException("ledger_initialization_profile_invalid");
+        path = Path.GetFullPath(path);
+        if (File.Exists(path) || File.Exists(path + ".lock") || File.Exists(path + ".previous"))
+            throw new ModelException("ledger_already_exists");
+        try
+        {
+            // The durable marker remains after an interrupted initialization; ordinary opens never repair it.
+            using var held = new FileStream(path + ".lock", FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None,
+                4096, FileOptions.WriteThrough);
+            held.Write(System.Text.Encoding.UTF8.GetBytes(profile.BudgetId));
+            held.Flush(true);
+            var document = new LedgerDocument
+            {
+                SchemaVersion = profile.SchemaVersion, ProfileVersion = profile.Version, BudgetId = profile.BudgetId,
+                LimitMicros = profile.LimitMicros, ReserveMicros = profile.ReserveMicros,
+                TotalLimit = profile.TotalLimit, ConcurrentLimit = profile.ConcurrentLimit,
+                StageLimits = new(profile.StageLimits, StringComparer.Ordinal)
+            };
+            using var output = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None,
+                4096, FileOptions.WriteThrough);
+            output.Write(JsonSerializer.SerializeToUtf8Bytes(document, JsonData.Options));
+            output.Flush(true);
+        }
+        catch (IOException) { throw new ModelException("ledger_initialization_failed"); }
+        catch (UnauthorizedAccessException) { throw new ModelException("ledger_access_failed"); }
+        return new(path, profile);
+    }
 
     public BudgetSnapshot Snapshot()
     {
@@ -32,20 +64,16 @@ public sealed class PersistentBudgetLedger
         return ToBudgetSnapshot(ledger);
     }
 
-    private static BudgetSnapshot ToBudgetSnapshot(LedgerDocument ledger)
+    private BudgetSnapshot ToBudgetSnapshot(LedgerDocument ledger)
     {
         var attempts = ledger.Attempts.Select(ToSnapshot).ToArray();
-        return new(BudgetId, "CNY", LimitMicros,
+        return new(Profile.BudgetId, "CNY", Profile.LimitMicros,
             attempts.Sum(a => a.SettledCostMicros), attempts.Sum(a => a.ReservedCostMicros),
             attempts.Length, attempts.Count(a => a.SlotHeld), ledger.StopReason, Array.AsReadOnly(attempts));
     }
 
     public BudgetAttempt Reserve(ModelStage stage, string logicalRequestId, bool recovery = false, Action<BudgetAdmission>? recordAdmission = null) =>
-        ReserveCore(stage switch
-        {
-            ModelStage.Baseline => "baseline", ModelStage.Counterfactual => "counterfactual",
-            _ => throw new ModelException("stage_invalid")
-        }, logicalRequestId, recovery, recordAdmission);
+        ReserveCore(ModelBudgetProfile.StageName(stage), logicalRequestId, recovery, recordAdmission);
 
     private BudgetAttempt ReserveCore(string stage, string logicalRequestId, bool recovery, Action<BudgetAdmission>? recordAdmission)
     {
@@ -58,26 +86,26 @@ public sealed class PersistentBudgetLedger
             throw new ModelException(reason);
         }
         if (ledger.StopReason != null) Reject("ledger_stopped");
-        if (!StageLimits.ContainsKey(stage) || string.IsNullOrWhiteSpace(logicalRequestId))
+        if (!Profile.StageLimits.ContainsKey(stage) || string.IsNullOrWhiteSpace(logicalRequestId))
             Reject("attempt_identity_invalid");
         var originals = ledger.Attempts.Where(a => a.LogicalRequestId == logicalRequestId && !a.Recovery).ToArray();
         if (!recovery && originals.Length != 0) Reject("logical_request_already_sent");
         if (recovery && (originals.Length != 1 || originals[0].Stage != stage))
             Reject("recovery_original_missing_or_wrong_stage");
-        if (ledger.Attempts.Count >= TotalLimit) Reject("total_limit");
-        if (ledger.Attempts.Count(a => a.Stage == stage) >= StageLimits[stage])
+        if (ledger.Attempts.Count >= Profile.TotalLimit) Reject("total_limit");
+        if (ledger.Attempts.Count(a => a.Stage == stage) >= Profile.StageLimits[stage])
             Reject("stage_limit");
         if (recovery && ledger.Attempts.Any(a => a.LogicalRequestId == logicalRequestId && a.Recovery))
             Reject("recovery_limit");
-        if (ledger.Attempts.Count(a => a.SlotHeld) >= ConcurrentLimit)
+        if (ledger.Attempts.Count(a => a.SlotHeld) >= Profile.ConcurrentLimit)
             Reject("concurrency_limit");
         long occupied = ledger.Attempts.Sum(a => checked(a.SettledCostMicros + a.ReservedCostMicros));
-        if (checked(occupied + ReserveMicros) > LimitMicros) Reject("money_limit");
+        if (checked(occupied + Profile.ReserveMicros) > Profile.LimitMicros) Reject("money_limit");
         var attempt = new AttemptRecord
         {
             AttemptId = Guid.NewGuid().ToString("D"), Stage = stage, LogicalRequestId = logicalRequestId,
             Recovery = recovery, CreatedAtUtc = DateTimeOffset.UtcNow,
-            ReservedCostMicros = ReserveMicros, SlotHeld = true, Status = "reserved"
+            ReservedCostMicros = Profile.ReserveMicros, SlotHeld = true, Status = "reserved"
         };
         ledger.Attempts.Add(attempt);
         Write(ledger);
@@ -155,7 +183,7 @@ public sealed class PersistentBudgetLedger
             {
                 var held = new FileStream(_path + ".lock", FileMode.Open, FileAccess.ReadWrite, FileShare.None);
                 using var reader = new StreamReader(held, System.Text.Encoding.UTF8, leaveOpen: true);
-                if (held.Length > 1024 || reader.ReadToEnd() != BudgetId)
+                if (held.Length > 1024 || reader.ReadToEnd() != Profile.BudgetId)
                 {
                     held.Dispose();
                     throw new ModelException("ledger_lock_invalid");
@@ -185,21 +213,22 @@ public sealed class PersistentBudgetLedger
         catch { throw new ModelException("ledger_invalid"); }
     }
 
-    private static void Validate(LedgerDocument ledger)
+    private void Validate(LedgerDocument ledger)
     {
-        if (ledger.SchemaVersion != 1 || ledger.BudgetId != BudgetId || ledger.Currency != "CNY"
-            || ledger.LimitMicros != LimitMicros || ledger.ReserveMicros != ReserveMicros
-            || ledger.TotalLimit != TotalLimit || ledger.ConcurrentLimit != ConcurrentLimit
-            || ledger.StageLimits == null || ledger.StageLimits.Count != StageLimits.Count
-            || StageLimits.Any(kv => !ledger.StageLimits.TryGetValue(kv.Key, out int value) || value != kv.Value)
-            || ledger.Attempts == null || ledger.Attempts.Count > TotalLimit)
+        if (ledger.SchemaVersion != Profile.SchemaVersion || ledger.BudgetId != Profile.BudgetId
+            || ledger.ProfileVersion != (Profile == ModelBudgetProfile.FirstSlice ? null : Profile.Version) || ledger.Currency != "CNY"
+            || ledger.LimitMicros != Profile.LimitMicros || ledger.ReserveMicros != Profile.ReserveMicros
+            || ledger.TotalLimit != Profile.TotalLimit || ledger.ConcurrentLimit != Profile.ConcurrentLimit
+            || ledger.StageLimits == null || ledger.StageLimits.Count != Profile.StageLimits.Count
+            || Profile.StageLimits.Any(kv => !ledger.StageLimits.TryGetValue(kv.Key, out int value) || value != kv.Value)
+            || ledger.Attempts == null || ledger.Attempts.Count > Profile.TotalLimit)
             throw new ModelException("ledger_contract_mismatch");
         var ids = new HashSet<string>(StringComparer.Ordinal);
         foreach (var a in ledger.Attempts)
         {
             if (a == null || !Guid.TryParse(a.AttemptId, out _) || !ids.Add(a.AttemptId)
-                || !StageLimits.ContainsKey(a.Stage) || string.IsNullOrWhiteSpace(a.LogicalRequestId)
-                || a.CreatedAtUtc == default || a.SettledCostMicros < 0 || a.SettledCostMicros > ReserveMicros)
+                || !Profile.StageLimits.ContainsKey(a.Stage) || string.IsNullOrWhiteSpace(a.LogicalRequestId)
+                || a.CreatedAtUtc == default || a.SettledCostMicros < 0 || a.SettledCostMicros > Profile.ReserveMicros)
                 throw new ModelException("ledger_attempt_invalid");
             if (a.Status == "settled")
             {
@@ -207,14 +236,14 @@ public sealed class PersistentBudgetLedger
                     || CalculateCost(a.PromptTokens.Value, a.CompletionTokens.Value) != a.SettledCostMicros)
                     throw new ModelException("ledger_settlement_invalid");
             }
-            else if ((a.Status != "reserved" && a.Status != "unknown") || a.ReservedCostMicros != ReserveMicros
+            else if ((a.Status != "reserved" && a.Status != "unknown") || a.ReservedCostMicros != Profile.ReserveMicros
                 || a.SettledCostMicros != 0 || a.PromptTokens != null || a.CompletionTokens != null
                 || (a.Status == "reserved" && !a.SlotHeld))
                 throw new ModelException("ledger_reservation_invalid");
         }
-        if (StageLimits.Any(kv => ledger.Attempts.Count(a => a.Stage == kv.Key) > kv.Value)
-            || ledger.Attempts.Count(a => a.SlotHeld) > ConcurrentLimit
-            || ledger.Attempts.Sum(a => checked(a.SettledCostMicros + a.ReservedCostMicros)) > LimitMicros
+        if (Profile.StageLimits.Any(kv => ledger.Attempts.Count(a => a.Stage == kv.Key) > kv.Value)
+            || ledger.Attempts.Count(a => a.SlotHeld) > Profile.ConcurrentLimit
+            || ledger.Attempts.Sum(a => checked(a.SettledCostMicros + a.ReservedCostMicros)) > Profile.LimitMicros
             || ledger.Attempts.Where(a => a.Recovery).GroupBy(a => a.LogicalRequestId).Any(g => g.Count() > 1)
             || ledger.Attempts.Where(a => !a.Recovery).GroupBy(a => a.LogicalRequestId).Any(g => g.Count() > 1)
             || ledger.Attempts.Where(a => a.Recovery).Any(a => !ledger.Attempts.Any(o =>
@@ -241,6 +270,7 @@ public sealed class PersistentBudgetLedger
 internal sealed class LedgerDocument
 {
     [JsonRequired] public int SchemaVersion { get; set; } = 1;
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public string? ProfileVersion { get; set; }
     [JsonRequired] public string BudgetId { get; set; } = PersistentBudgetLedger.BudgetId;
     [JsonRequired] public string Currency { get; set; } = "CNY";
     [JsonRequired] public long LimitMicros { get; set; } = PersistentBudgetLedger.LimitMicros;

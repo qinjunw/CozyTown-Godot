@@ -1,6 +1,6 @@
 namespace CozyTown.Model;
 
-public enum ModelStage { Baseline, Counterfactual }
+public enum ModelStage { Baseline, Counterfactual, PlayerDialogue, Manual }
 
 public sealed record ModelRequestIdentity(
     string RunId, string SessionId, string LogicalRequestId, string ResidentId, long ActivityRevision,
@@ -40,7 +40,8 @@ public sealed record BudgetAdmission(string Stage, string LogicalRequestId, bool
     string Admission, BudgetSnapshot Before, BudgetSnapshot After);
 
 public sealed record DeepSeekOptions(string CredentialFile, string LedgerFile,
-    string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669");
+    string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669",
+    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion);
 
 public sealed record BudgetAttempt(string AttemptId, string Stage, string LogicalRequestId,
     bool Recovery, string Status, bool SlotHeld, long ReservedCostMicros,

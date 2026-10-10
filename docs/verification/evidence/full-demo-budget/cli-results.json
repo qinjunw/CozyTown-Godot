@@ -1,0 +1,9 @@
+{
+  "initializeExit": 0,
+  "repeatExit": 1,
+  "repeatError": "budget_initialization_failed:ledger_already_exists",
+  "repeatedFileUnchanged": true,
+  "relativePathExit": 1,
+  "relativePathError": "budget_initialization_failed:initialization_arguments_required",
+  "externalRequests": 0
+}

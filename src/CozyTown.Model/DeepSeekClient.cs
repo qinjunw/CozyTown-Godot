@@ -33,7 +33,7 @@ public sealed class DeepSeekClient : IDisposable
             throw new ModelException("explicit_configuration_required");
         if (Path.GetFullPath(options.CredentialFile).Equals(Path.GetFullPath(options.LedgerFile), StringComparison.OrdinalIgnoreCase))
             throw new ModelException("credential_ledger_path_conflict");
-        _ledger = PersistentBudgetLedger.OpenExisting(options.LedgerFile);
+        _ledger = PersistentBudgetLedger.OpenExisting(options.LedgerFile, options.BudgetProfileVersion);
         _key = CredentialReader.Read(options.CredentialFile);
         _expectedFingerprint = options.ExpectedSystemFingerprint;
         _http = new(testHandler ?? new HttpClientHandler
@@ -239,6 +239,8 @@ public sealed class DeepSeekClient : IDisposable
 
     private void ValidateRequest(FrozenModelRequest request)
     {
+        if (request is not null && !_ledger.Profile.StageLimits.ContainsKey(ModelBudgetProfile.StageName(request.Stage)))
+            throw new ModelException("stage_invalid");
         if (request?.Identity is not { } identity || new[] { identity.RunId, identity.SessionId,
                 identity.LogicalRequestId, identity.ResidentId }.Any(string.IsNullOrWhiteSpace)
             || identity.ActivityRevision < 0 || identity.Kind is not ("npc_action" or "player_text")

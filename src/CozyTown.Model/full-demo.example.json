@@ -1,0 +1,6 @@
+{
+  "credentialFile": "<private-credentials.json>",
+  "ledgerFile": "<full-demo-ledger.json>",
+  "expectedSystemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "budgetProfileVersion": "full-demo-v1"
+}

@@ -1,0 +1,14 @@
+{
+  "sourceCommit": "4014c635e5788ce1c594544e67c83c57ff38fa54",
+  "integrationBase": "61c852f5f427d9b078df4fe65337d900a5a477c9",
+  "sha256": {
+    "src/CozyTown.Model/ModelBudgetProfile.cs": "87ccf6beb8b163b852e8183aa500e397f6ed2c798e12f6b41cf2b706c8ab4db5",
+    "src/CozyTown.Model/PersistentBudgetLedger.cs": "f832adaecf51c806b5a51179dd384ad6f2f1b78ca4db5632d466b61b829fd128",
+    "src/CozyTown.Model/ModelContracts.cs": "e88f96c63b0cd8d4cf29de6e11970077ced3638e51a3224c165b7e78e493c1df",
+    "src/CozyTown.Model/DeepSeekClient.cs": "8463c68dc5cd50238491f843296fff5debaf05d00bc289241e84c9cee467a908",
+    "tests/CozyTown.Model.Tests/FullDemoBudgetTests.cs": "4dc7230664c03caf563da704db128969b532e23c20553ac930ce8e9eb6261428",
+    "tests/CozyTown.Model.Tests/DeepSeekClientTests.cs": "26f08bfadd9db939a64c73e09d45fa3eaa357c2fd08d61a3b6e2df69ebf843e2",
+    "tests/CozyTown.Model.Tests/Program.cs": "26162f2c30ed22063097a986e947ad72288d21516dcb71cbfcb74d8b69cdfe2c",
+    "tools/CozyTown.Budget/Program.cs": "27b4be6223abd16ec2093c3532d906e4d76bce38225812787c3de2017f0d163c"
+  }
+}
