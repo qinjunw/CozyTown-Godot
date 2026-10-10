@@ -162,8 +162,8 @@ function Assert-FixedReport {
     $requests = @($report.events | Where-Object kind -eq 'player_dialogue_requested')
     foreach ($display in $shown) {
         if (@($sessions | Where-Object { $_.activityId -eq $display.activityId -and $_.residentId -eq $display.residentId }).Count -ne 1 -or
-            @($requests | Where-Object { $_.activityId -eq $display.activityId -and $_.residentId -eq $display.residentId
-                -and $_.logicalRequestId -eq $display.logicalRequestId }).Count -ne 1 -or
+            @($requests | Where-Object { $_.activityId -eq $display.activityId -and $_.residentId -eq $display.residentId -and
+                $_.logicalRequestId -eq $display.logicalRequestId }).Count -ne 1 -or
             [string]::IsNullOrWhiteSpace($display.logicalRequestId)) { throw 'Player text was displayed in the wrong session.' }
     }
     foreach ($kind in @('candidate_executed', 'player_dialogue_memory_committed')) {
