@@ -30,17 +30,23 @@ public sealed class TownNpcChoiceContractTests
         world.Advance(0, 0);
     }
 
-    [TestCase('聊')]
-    [TestCase('<')]
-    [TestCase('"')]
-    [TestCase('\\')]
-    public void FullProviderBodyKeepsLongConversationFactsWithinTransportLimit(char dialogueCharacter)
+    [TestCase("聊")]
+    [TestCase("<")]
+    [TestCase("\"")]
+    [TestCase("\\")]
+    [TestCase("\u2028")]
+    [TestCase("\u2029")]
+    [TestCase("\uE000")]
+    [TestCase("😀")]
+    [TestCase("\\u2028")]
+    [TestCase("\u2028\\u2028\\")]
+    public void FullProviderBodyKeepsLongConversationFactsWithinTransportLimit(string dialogueUnit)
     {
         var world = new TownWorld(Content()); world.Advance(.001, 0);
         Decide(world, "mina", new("invite", "eli", "mina", null, 0, 0, null, "一起聊聊。"));
         Decide(world, "eli", new("respond", "mina", null, null, 0, 0, true, "好呀。"));
         world.Advance(8, 0);
-        string text = new(dialogueCharacter, 160);
+        string text = string.Concat(Enumerable.Repeat(dialogueUnit, 160 / dialogueUnit.Length)).PadRight(160, 'x');
         for (int i = 0; i < 6; i++)
             Decide(world, i % 2 == 0 ? "mina" : "eli", new("speak", i % 2 == 0 ? "eli" : "mina", null, null, 0, 0, null, text));
         var request = Request(world, "mina");
@@ -52,6 +58,8 @@ public sealed class TownNpcChoiceContractTests
         var context = JsonNode.Parse(request.InputJson)!;
         Assert.That(context["memories"]!.AsArray(), Has.Count.EqualTo(6));
         Assert.That(context["commitment"]!["dialogue"]!.AsArray(), Has.Count.EqualTo(6));
+        Assert.That(context["memories"]!.AsArray().All(m => m!["text"]!.GetValue<string>().EndsWith(text, StringComparison.Ordinal)), Is.True);
+        Assert.That(context["commitment"]!["dialogue"]!.AsArray().All(d => d!.GetValue<string>().EndsWith(text, StringComparison.Ordinal)), Is.True);
         Assert.That(context["actionConstraints"]!.AsArray(), Has.Count.EqualTo(3));
         Assert.That(provider["max_tokens"]!.GetValue<int>(), Is.EqualTo(512));
     }
