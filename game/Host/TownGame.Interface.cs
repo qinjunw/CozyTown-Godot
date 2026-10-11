@@ -308,7 +308,9 @@ public partial class TownGame
         if (_model != null)
         {
             var budget = _model.Budget;
-            text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / 48 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+            text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+            if (_modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual)
+                text.AppendLine($"人工试玩 {budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual)} / {_modelRuntime.Profile.StageLimits[TownModelRuntimeProfile.Manual]} 次 · NPC 与玩家共享");
             if (budget.StopReason != null) text.AppendLine("派发已停：" + budget.StopReason);
         }
         double scroll = _inspectorBody.GetVScrollBar().Value;

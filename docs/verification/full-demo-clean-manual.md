@@ -1,8 +1,8 @@
 # 完整 Demo Windows 候选人工清单
 
-对应[准备完整 Demo 干净构建与人工验收包](https://github.com/qinjunw/CozyTown-Godot/issues/42)。本候选运行时固定在 `f9551c19eb1866ba79cc1312ca7821004fbb7fa1`；以下项目均待人工执行。旧生产与对话候选的通过记录不代填本候选反馈。最终完整验收归[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
+当前用户候选对应[显示实际预算上限与人工阶段用量](https://github.com/qinjunw/CozyTown-Godot/issues/43)，运行时固定在 `576ae64e38f854bb22b13186e6a9d2ecc9799d72`，模拟源码摘要为 `301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf`。以下项目均待人工执行，旧生产与对话候选的通过记录不代填本候选反馈。最终完整验收归[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
 
-已知显示问题：冻结版观察手册把总调用次数分母写成 48，实际 v2 总上限为 96，用户 `manual` 阶段共享 8 次。[显示实际预算上限与人工阶段用量](https://github.com/qinjunw/CozyTown-Godot/issues/43)完成后再做最终完整验收；本候选保留冻结构建与回放来源。
+本候选修复观察手册的预算显示：完整 Demo 总上限为 96，`manual` 用途另列实际人工已用 / 8，NPC 与玩家共享。原 f955 的真实评测及[干净构建](https://github.com/qinjunw/CozyTown-Godot/blob/07dc210c3549939314b3e4da49619885b1b8b1e9/docs/verification/full-demo-clean-2026-10-11.md)保持原归属；最终只对当前新版做这份综合人工验收。
 
 ## 准备与反馈
 
@@ -34,4 +34,4 @@
 & '<package>/CozyTown.exe' -- --model-config='<absolute-local-config.json>' --execution-purpose=manual --data-dir='<new-absolute-manual-data>'
 ```
 
-`manual` 最多 8 次，NPC 自主决定、玩家文本、失败与恢复补发共用；走动时 NPC 已可能消耗次数。读取不返还额度，不补样或扩额。此项可填未测；本包没有真实启动脚本，代理不执行该命令。冻结版的“48 次”文案不改变实际账本限制。
+`manual` 最多 8 次，NPC 自主决定、玩家文本、失败与恢复补发共用；走动时 NPC 已可能消耗次数。读取不返还额度，不补样或扩额。此项可填未测；本包没有真实启动脚本，代理不执行该命令。选择真实模式时按 M01 核对总分母 96、人工已用 / 8、共用说明、预留、保守扣减与停止原因；普通离线入口不显示真实预算，不能据此代填该项通过。

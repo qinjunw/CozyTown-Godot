@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "baseIntegrationCommit": "829aaa0d1348369e2e7dc2bdb970733a4ff39758",
+  "changedRuntimeFiles": [
+    "game/Host/TownGame.Interface.cs"
+  ],
+  "runtimeDiffSha256": "2ffce3a403611e75a3d684228ce4cf09c6aec3a92a6f123c50b1915d7b9a9f8c",
+  "runtimeDiffBytes": 1247,
+  "simulatedRulesRequestsBudgetLedgerContentChanged": false,
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "verificationCommand": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "tools/windows/verify-full-demo.ps1",
+    "-ExpectedCommit",
+    "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "-ToolsRoot",
+    "<locked-toolchain-root>"
+  ],
+  "cleanCheckoutMethod": "git worktree add --detach <new-empty-worktree> 576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "copiedGodotOrBuildCaches": false,
+  "sharedLockedToolchainAndNugetPackages": true
+}
