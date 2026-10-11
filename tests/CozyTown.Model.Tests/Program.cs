@@ -27,7 +27,7 @@ internal static class Program
             var budget = PersistentBudgetLedger.OpenExisting(ledger, profile);
             _ = mode == "manual-original"
                 ? budget.Reserve(ModelStage.Manual, ready)
-                : budget.Reserve(profile == ModelBudgetProfile.FullDemoVersion ? ModelStage.PlayerDialogue : ModelStage.Baseline,
+                : budget.Reserve(profile is ModelBudgetProfile.FullDemoVersion or ModelBudgetProfile.FullDemoV2Version ? ModelStage.PlayerDialogue : ModelStage.Baseline,
                     "shared-original", recovery: mode != "original");
             if (mode == "hold")
             {

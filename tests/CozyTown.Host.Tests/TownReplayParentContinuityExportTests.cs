@@ -9,19 +9,25 @@ namespace CozyTown.Host.Tests;
 [TestFixture]
 public sealed class TownReplayParentContinuityExportTests
 {
-    [TestCase(false, "valid")]
-    [TestCase(true, "valid")]
-    [TestCase(false, "changed-host")]
-    [TestCase(true, "changed-host")]
-    [TestCase(false, "missing-saved-host")]
-    [TestCase(true, "missing-saved-host")]
-    [TestCase(false, "missing-initial-host")]
-    [TestCase(true, "missing-initial-host")]
-    [TestCase(false, "rewound-budget")]
-    [TestCase(true, "rewound-budget")]
-    [TestCase(false, "missing-budget")]
-    [TestCase(true, "missing-budget")]
-    public void ExportedSaveForkAndCliVerifyParentHostAndBudgetContinuity(bool fullDemo, string variant)
+    [TestCase("first-slice-v1", "valid")]
+    [TestCase("full-demo-v1", "valid")]
+    [TestCase("full-demo-v2", "valid")]
+    [TestCase("first-slice-v1", "changed-host")]
+    [TestCase("full-demo-v1", "changed-host")]
+    [TestCase("full-demo-v2", "changed-host")]
+    [TestCase("first-slice-v1", "missing-saved-host")]
+    [TestCase("full-demo-v1", "missing-saved-host")]
+    [TestCase("full-demo-v2", "missing-saved-host")]
+    [TestCase("first-slice-v1", "missing-initial-host")]
+    [TestCase("full-demo-v1", "missing-initial-host")]
+    [TestCase("full-demo-v2", "missing-initial-host")]
+    [TestCase("first-slice-v1", "rewound-budget")]
+    [TestCase("full-demo-v1", "rewound-budget")]
+    [TestCase("full-demo-v2", "rewound-budget")]
+    [TestCase("first-slice-v1", "missing-budget")]
+    [TestCase("full-demo-v1", "missing-budget")]
+    [TestCase("full-demo-v2", "missing-budget")]
+    public void ExportedSaveForkAndCliVerifyParentHostAndBudgetContinuity(string profileVersion, string variant)
     {
         string root = Path.Combine(Path.GetTempPath(), "cozytown-parent-continuity-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -30,7 +36,8 @@ public sealed class TownReplayParentContinuityExportTests
             string credential = Path.Combine(root, "credential-sentinel.json"), ledger = Path.Combine(root, "budget-sentinel.json");
             File.WriteAllText(credential, "synthetic credential sentinel"); File.WriteAllText(ledger, "synthetic budget sentinel");
             var content = Content();
-            var profile = fullDemo ? TownReplayBudgetProfile.FullDemo : TownReplayBudgetProfile.FirstSlice;
+            var runtime = TownModelRuntimeProfile.Resolve(profileVersion, profileVersion == "first-slice-v1" ? "legacy" : "experiment");
+            var profile = runtime.ReplayProfile;
             var world = new TownWorld(content, budgetId: profile.BudgetId); world.Advance(.001, 0);
             var host = new TownInputHost(content, world);
             using var journal = new TownRunJournal(Path.Combine(root, "runs"), world.State.BranchId, new { schemaVersion = 2 });
@@ -51,8 +58,7 @@ public sealed class TownReplayParentContinuityExportTests
             TownSaveFile.Write(savePath, new(1, TownJson.Serialize(saved), world.State.BranchId, journal.RecordCount,
                 host.State.UnconsumedSeconds, "real", "baseline", new() { [request.LogicalRequestId] = frozen },
                 host.State.PlayerRoute, host.State.PlayerRouteCursor,
-                fullDemo ? ModelBudgetProfile.FullDemoVersion : ModelBudgetProfile.FirstSliceVersion,
-                fullDemo ? TownModelRuntimeProfile.Experiment : TownModelRuntimeProfile.Legacy),
+                profileVersion, runtime.ExecutionPurpose),
                 candidate => TownWorld.RestoreCandidate(content, candidate.WorldJson));
             var source = TownSaveFile.Read(savePath);
             var child = TownWorld.RestoreCandidate(content, source.WorldJson);

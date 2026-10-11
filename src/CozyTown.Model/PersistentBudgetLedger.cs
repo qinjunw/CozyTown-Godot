@@ -29,7 +29,8 @@ public sealed class PersistentBudgetLedger
     public static PersistentBudgetLedger InitializeNew(string path, string profileVersion)
     {
         var profile = ModelBudgetProfile.Get(profileVersion);
-        if (profile != ModelBudgetProfile.FullDemo) throw new ModelException("ledger_initialization_profile_invalid");
+        if (profile != ModelBudgetProfile.FullDemo && profile != ModelBudgetProfile.FullDemoV2)
+            throw new ModelException("ledger_initialization_profile_invalid");
         path = Path.GetFullPath(path);
         if (File.Exists(path) || File.Exists(path + ".lock") || File.Exists(path + ".previous"))
             throw new ModelException("ledger_already_exists");
