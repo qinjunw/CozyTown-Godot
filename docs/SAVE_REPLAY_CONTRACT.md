@@ -1,6 +1,6 @@
 # 新存档、状态续接与实验回放合同
 
-本文件记录[确定新存档、状态续接与实验回放的合同](https://github.com/qinjunw/CozyTown-Godot/issues/6)中的协议与验收。小镇逻辑快照、宿主存档与记录导出已在切片实现，操作见[切片说明](PLAYABLE_SLICE.md)，执行结果见[验证记录](verification/four-resident-slice.md)。集成分支已实现[离线核心回放](REPLAY.md)、[Godot 场景回放](SCENE_REPLAY.md)和[玩家对话续接](verification/player-dialogue.md)。场景回放通过源场景及 Windows 导出的实际碰撞检查，玩家对话的画面和键鼠仍待用户验收。
+本文件记录[确定新存档、状态续接与实验回放的合同](https://github.com/qinjunw/CozyTown-Godot/issues/6)中的协议与验收。小镇逻辑快照、宿主存档与记录导出已在切片实现，操作见[切片说明](PLAYABLE_SLICE.md)，执行结果见[验证记录](verification/four-resident-slice.md)。集成分支已实现[离线核心回放](REPLAY.md)、[Godot 场景回放](SCENE_REPLAY.md)和[玩家对话续接](verification/player-dialogue.md)。场景回放通过源场景及 Windows 导出的实际碰撞检查。用户于 2026-10-11 确认 `de520bab` 离线对话候选的[人工操作清单](verification/player-dialogue-manual.md)通过，候选与归档哈希见[玩家对话验证记录](verification/player-dialogue.md#固定候选)；最终综合 Demo 的真实评测与整体验收由[综合评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)和[最终验收](https://github.com/qinjunw/CozyTown-Godot/issues/26)承接。
 
 2026-09-20 用户确认：不兼容存档明确拒绝且保护当前世界，纯表现修改不因此阻止读取；未完成的真实模型请求在剩余预算内自动续接，最多补发一次，追加费用如实记录。首版创建新档、完整恢复已实现状态的目标保持不变。范围见[首切片合同](FIRST_PLAYABLE_SLICE.md)，内容来源见[内容合同](CONTENT_AUTHORING.md)。
 

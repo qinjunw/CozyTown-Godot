@@ -62,7 +62,12 @@ public sealed class TownPlayerDialogueReplayTests
         var dialogue = new TownDialogueHost(world); dialogue.Open("mina", []); input.Pause("dialogue", true);
         var request = dialogue.Generate(input.State.PauseReasons)!; var frozen = dialogue.Freeze(request, ModelStage.Baseline);
         input.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
-        var dispatch = new ModelDispatch(frozen, "synthetic-player-attempt", "fixture", DateTimeOffset.UnixEpoch, TimeSpan.FromSeconds(60), empty);
+        string attemptId = "00000000-0000-0000-0000-000000000001";
+        var admitted = new BudgetAttempt(attemptId, "baseline", request.LogicalRequestId, false, "reserved", true, 2110000, 0, null, null, null);
+        var reserved = empty with { Attempts = [admitted], TotalAttempts = 1, SlotsHeld = 1, ReservedMicros = 2110000 };
+        recording.RecordExternal("budget_reserve", new { stage = "baseline", logicalRequestId = request.LogicalRequestId,
+            attemptId, recovery = false, admission = "accepted", after = reserved });
+        var dispatch = new ModelDispatch(frozen, attemptId, "fixture", DateTimeOffset.UnixEpoch, TimeSpan.FromSeconds(60), reserved);
         dialogue.Acknowledge(request.PlayerSessionId, request.LogicalRequestId, dispatch.AttemptId);
         string json = TownPlayerDialogueProtocol.FixedResponse("mina");
         if (worldArrivalFirst) world.MarkPlayerDialogueResponseArrived(world.SessionId, request.PlayerSessionId, request.LogicalRequestId, dispatch.AttemptId, 2);
@@ -71,6 +76,9 @@ public sealed class TownPlayerDialogueReplayTests
         input.Pause("menu", true); world.Advance(0, 100, true);
         var completion = new ModelCompletion(dispatch, DateTimeOffset.UnixEpoch, DateTimeOffset.UnixEpoch.AddSeconds(2), TimeSpan.FromSeconds(2), 200,
             "fixture", "fixed", "fixed", "stop", json, new(100, 10, 110, 0, 100), null, true, true, false, 280, TimeSpan.FromSeconds(2), null);
+        var settled = reserved with { Attempts = [admitted with { Status = "settled", SlotHeld = false, ReservedCostMicros = 0,
+            SettledCostMicros = 280, PromptTokens = 100, CompletionTokens = 10 }], SlotsHeld = 0, ReservedMicros = 0, SettledMicros = 280 };
+        recording.RecordExternal("budget_settle", new { attemptId, promptTokens = 100L, completionTokens = 10L, after = settled });
         recording.RecordExternal("model_completion_persisted", completion);
         recording.RecordExternal("model_mailbox_enqueued", new { dispatch }); recording.RecordExternal("model_mailbox_entered", new { dispatch });
         dialogue.Complete(request, world.SessionId, dispatch.AttemptId, json, "real_model", null, 2);

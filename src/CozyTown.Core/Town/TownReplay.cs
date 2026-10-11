@@ -163,7 +163,7 @@ public static class TownReplay
 
     public static TownReplayReport Run(TownReplayPackage package, TownReplaySceneAdapter? scene = null) => Run(package, 0, scene, out _);
 
-    private sealed record ReplayEnd(TownReplayHostState? Host, TownReplayBudgetState? Budget);
+    private sealed record ReplayEnd(TownReplayHostState? Host, TownReplayBudgetState? Budget, Dictionary<string, JsonElement> Dispatches);
 
     private static TownReplayReport Run(TownReplayPackage package, int depth, TownReplaySceneAdapter? scene, out ReplayEnd? end)
     {
@@ -182,12 +182,14 @@ public static class TownReplay
                 return Failure("incompatible_version", "simulation", TownWorld.RulesVersion + "/" + TownWorld.NumericVersion, package.RulesVersion + "/" + package.NumericVersion);
             if (package.Boundaries.Length != package.BoundaryCount) return Failure("record_gap", "boundaryCount", package.BoundaryCount.ToString(), package.Boundaries.Length.ToString());
             var content = TownContent.Create(package.Manifest, package.Definitions);
+            var dispatches = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
             if (package.InitialSnapshot.State.ParentBranchId is not null)
             {
                 if (package.Parent is null) return Failure("missing_parent_prefix", "parent", package.InitialSnapshot.State.ParentBranchId, null);
                 var parent = package.Parent;
                 var result = Run(parent.Prefix, depth + 1, scene, out var parentEnd);
                 if (!result.Passed) return result with { Code = "invalid_parent_prefix", Field = "parent." + result.Field, FinalStateJson = null };
+                dispatches = new(parentEnd!.Dispatches, StringComparer.Ordinal);
                 boundary = result.Boundary;
                 command = parent.Prefix.Boundaries.LastOrDefault()?.Command;
                 relatedInput = parent.Prefix.Boundaries.LastOrDefault()?.InputJson;
@@ -256,6 +258,29 @@ public static class TownReplay
             var completions = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
             var mailbox = new HashSet<string>(StringComparer.Ordinal);
             var playerArrivals = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+            var npcArrivals = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+            var requestIdentities = new Dictionary<string, JsonElement>(StringComparer.Ordinal);
+            var frozenRequests = new Dictionary<(string? Session, string? Logical), JsonElement>();
+            void RememberFrozen(string json)
+            {
+                using var frozen = JsonDocument.Parse(json);
+                if (!frozen.RootElement.TryGetProperty("identity", out var id)) return;
+                frozenRequests[(id.GetProperty("sessionId").GetString(), id.GetProperty("logicalRequestId").GetString())] = frozen.RootElement.Clone();
+            }
+            foreach (string frozen in host.State.FrozenRequests.Values) RememberFrozen(frozen);
+            void RememberRequests()
+            {
+                var state = world.State;
+                void Add(string logical, string resident, int revision, string kind, string? playerSession) =>
+                    requestIdentities.TryAdd(logical, JsonSerializer.SerializeToElement(new { runId = state.BranchId,
+                        sessionId = world.SessionId, logicalRequestId = logical, residentId = resident,
+                        activityRevision = revision, kind, playerSessionId = playerSession }, TownJson.Options));
+                foreach (var pending in state.PendingDecisions)
+                    Add(pending.Request.LogicalRequestId, pending.Request.ResidentId, pending.Request.ActivityRevision, "npc_action", null);
+                foreach (var dialogue in state.PlayerDialogues.Where(d => d.Request is not null))
+                    Add(dialogue.Request!.LogicalRequestId, dialogue.ResidentId, dialogue.Request.ActivityRevision, "player_text", dialogue.Id);
+            }
+            RememberRequests();
             var checkpoints = new TownCheckpointCursor();
             foreach (TownTrace trace in package.Boundaries)
             {
@@ -263,7 +288,15 @@ public static class TownReplay
                 boundary++;
                 if (trace.Sequence != boundary) throw new ReplayMismatch("sequence", boundary.ToString(), trace.Sequence.ToString());
                 expectedTrace = trace; query = 0;
-                if (trace.Command.StartsWith("host_", StringComparison.Ordinal)) host.ApplyJson(trace.Command, trace.InputJson);
+                if (trace.Command.StartsWith("host_", StringComparison.Ordinal))
+                {
+                    host.ApplyJson(trace.Command, trace.InputJson);
+                    if (trace.Command == "host_freeze_request")
+                    {
+                        using var frozen = JsonDocument.Parse(trace.InputJson);
+                        RememberFrozen(frozen.RootElement.GetProperty("requestJson").GetString()!);
+                    }
+                }
                 else if (trace.Command.StartsWith("budget_", StringComparison.Ordinal))
                 {
                     if (budget is null) throw new InvalidDataException("Budget inputs require the recorded initial budget view.");
@@ -288,10 +321,27 @@ public static class TownReplay
                     using var doc = JsonDocument.Parse(trace.InputJson);
                     var input = doc.RootElement;
                     string attempt = input.GetProperty("dispatch").GetProperty("attemptId").GetString()!;
+                    ValidateBudgetBinding(input.GetProperty("dispatch"), budget.Snapshot(), package.BudgetProfile);
+                    var dispatch = input.GetProperty("dispatch");
+                    if (dispatches.TryGetValue(attempt, out var originalDispatch))
+                        Compare(JsonNode.Parse(originalDispatch.GetRawText()), JsonNode.Parse(dispatch.GetRawText()), "model.dispatch");
+                    else dispatches.Add(attempt, dispatch.Clone());
+                    var identity = input.GetProperty("dispatch").GetProperty("request").GetProperty("identity");
+                    if (identity.GetProperty("sessionId").GetString() == world.SessionId)
+                    {
+                        string logical = identity.GetProperty("logicalRequestId").GetString()!;
+                        if (!requestIdentities.TryGetValue(logical, out var expectedIdentity))
+                            throw new ReplayMismatch("model.logicalRequestId", "recorded world request", logical);
+                        foreach (var field in expectedIdentity.EnumerateObject())
+                            Compare(JsonNode.Parse(field.Value.GetRawText()), JsonNode.Parse(identity.GetProperty(field.Name).GetRawText()), "model." + field.Name);
+                    }
+                    if (frozenRequests.TryGetValue((identity.GetProperty("sessionId").GetString(), identity.GetProperty("logicalRequestId").GetString()), out var frozenRequest))
+                        Compare(JsonNode.Parse(frozenRequest.GetRawText()), JsonNode.Parse(input.GetProperty("dispatch").GetProperty("request").GetRawText()), "model.frozenRequest");
                     if (trace.Command == "model_response_arrived")
                     {
                         if (!arrivals.TryAdd(attempt, input.Clone())) throw new ReplayMismatch("model.arrival", "unique response", attempt);
                         if (playerArrivals.TryGetValue(attempt, out var worldArrival)) ValidatePlayerArrival(worldArrival, input);
+                        if (npcArrivals.TryGetValue(attempt, out var npcArrival)) ValidateNpcArrival(npcArrival, input);
                     }
                     else if (trace.Command == "model_completion_persisted")
                     {
@@ -320,6 +370,14 @@ public static class TownReplay
                 }
                 else
                 {
+                    if (trace.Command == "arrival")
+                    {
+                        using var npcInput = JsonDocument.Parse(trace.InputJson);
+                        var input = npcInput.RootElement;
+                        string attempt = input.GetProperty("attemptId").GetString()!;
+                        npcArrivals[attempt] = input.Clone();
+                        if (arrivals.TryGetValue(attempt, out var arrival)) ValidateNpcArrival(input, arrival);
+                    }
                     if (trace.Command == "player_dialogue_arrival")
                     {
                         using var playerInput = JsonDocument.Parse(trace.InputJson);
@@ -363,16 +421,23 @@ public static class TownReplay
                     {
                         using var input = JsonDocument.Parse(trace.InputJson);
                         var result = input.RootElement.GetProperty("result");
-                        if (result.GetProperty("source").GetString() == "real_model" && result.GetProperty("sessionId").GetString() == world.SessionId)
+                        if (result.GetProperty("source").GetString() == "real_model")
                         {
                             string attempt = result.GetProperty("attemptId").GetString()!;
                             if (!mailbox.Contains(attempt)) throw new ReplayMismatch("model.mailbox", "entered completion", attempt);
                             var completion = completions[attempt];
+                            ValidateNpcBinding(result, completion.GetProperty("dispatch"));
+                            if (result.GetProperty("sessionId").GetString() == world.SessionId && completion.GetProperty("arrivedAtUtc").ValueKind != JsonValueKind.Null && !npcArrivals.ContainsKey(attempt))
+                                throw new ReplayMismatch("model.npcArrival", "world arrival input before result", "missing");
+                            if (completion.GetProperty("logicalElapsedToArrival").ValueKind != JsonValueKind.Null)
+                                Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(completion.GetProperty("dispatch"), completion.GetProperty("logicalElapsedToArrival"))),
+                                    JsonNode.Parse(result.GetProperty("receivedAfterSeconds").GetRawText()), "model.npcArrivalSeconds");
                             if (completion.GetProperty("failureCode").ValueKind == JsonValueKind.Null && result.GetProperty("error").ValueKind == JsonValueKind.Null)
                                 Compare(JsonNode.Parse(completion.GetProperty("candidateJson").GetString()!), JsonNode.Parse(result.GetProperty("candidate").GetRawText()), "model.worldCandidate");
                         }
                     }
                     Execute(world, trace);
+                    if (trace.Command is "decisions" or "player_dialogue_request") RememberRequests();
                 }
                 if (query != trace.Queries.Length) throw new ReplayMismatch("queries", trace.Queries.Length.ToString(), query.ToString());
                 var checkpoint = checkpoints.ReadWorld(trace);
@@ -389,7 +454,7 @@ public static class TownReplay
             }
             if (package.Interruption is not null) return Failure("recording_interrupted", "lastCompleteBoundary", boundary.ToString(), package.Interruption);
             if (package.UnsealedPrefix) return Failure("unsealed_recording", "lastCompleteBoundary", boundary.ToString(), "journal extends beyond the sealed package") with { FinalStateJson = TownJson.Serialize(world.State) };
-            end = new(hasHost ? host.State : null, budget?.Snapshot());
+            end = new(hasHost ? host.State : null, budget?.Snapshot(), dispatches);
             return new(true, "passed", boundary, null, null, null, package.RulesVersion, package.NumericVersion, TownJson.Serialize(world.State),
                 Mode: scene is null ? "core_fact_replay" : "godot_scene_replay");
         }
@@ -433,11 +498,46 @@ public static class TownReplay
     }
 
     private sealed record ReplayPlayerText(string Text);
+    private static void ValidateBudgetBinding(JsonElement dispatch, TownReplayBudgetState budget, TownReplayBudgetProfile? profile)
+    {
+        string attemptId = dispatch.GetProperty("attemptId").GetString()!;
+        var attempt = budget.Attempts.SingleOrDefault(a => a.AttemptId == attemptId);
+        if (attempt is null) throw new ReplayMismatch("model.budgetAttempt", "admitted budget attempt", attemptId);
+        var dispatchBudget = new TownReplayBudget(TownJson.Deserialize<TownReplayBudgetState>(dispatch.GetProperty("budget").GetRawText()), profile).Snapshot();
+        var dispatchAttempt = dispatchBudget.Attempts.SingleOrDefault(a => a.AttemptId == attemptId);
+        if (dispatchAttempt is null) throw new ReplayMismatch("model.dispatchBudgetAttempt", "admitted dispatch attempt", attemptId);
+        Compare(JsonSerializer.SerializeToNode(attempt.LogicalRequestId), JsonSerializer.SerializeToNode(dispatchAttempt.LogicalRequestId), "model.dispatchBudget.logicalRequestId");
+        Compare(JsonSerializer.SerializeToNode(attempt.Stage), JsonSerializer.SerializeToNode(dispatchAttempt.Stage), "model.dispatchBudget.stage");
+        Compare(JsonSerializer.SerializeToNode(attempt.Recovery), JsonSerializer.SerializeToNode(dispatchAttempt.Recovery), "model.dispatchBudget.isRecovery");
+        var request = dispatch.GetProperty("request");
+        Compare(JsonSerializer.SerializeToNode(attempt.LogicalRequestId), JsonNode.Parse(request.GetProperty("identity").GetProperty("logicalRequestId").GetRawText()), "model.logicalRequestId");
+        var stage = request.GetProperty("stage");
+        string? stageName = stage.ValueKind == JsonValueKind.String ? stage.GetString() : stage.GetInt32() switch
+        { 0 => "baseline", 1 => "counterfactual", 2 => "player_dialogue", 3 => "manual", _ => null };
+        Compare(JsonSerializer.SerializeToNode(attempt.Stage), JsonSerializer.SerializeToNode(stageName), "model.stage");
+        Compare(JsonSerializer.SerializeToNode(attempt.Recovery), JsonNode.Parse(request.GetProperty("isRecovery").GetRawText()), "model.isRecovery");
+    }
+
     private static void ValidatePlayerArrival(JsonElement input, JsonElement arrival)
     {
         ValidatePlayerBinding(input, arrival.GetProperty("dispatch"));
         Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(arrival.GetProperty("dispatch"), arrival.GetProperty("elapsed"))),
             JsonNode.Parse(input.GetProperty("receivedAfterSeconds").GetRawText()), "model.playerArrivalSeconds");
+    }
+    private static void ValidateNpcArrival(JsonElement input, JsonElement arrival)
+    {
+        ValidateNpcBinding(input, arrival.GetProperty("dispatch"));
+        Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(arrival.GetProperty("dispatch"), arrival.GetProperty("elapsed"))),
+            JsonNode.Parse(input.GetProperty("receivedAfterSeconds").GetRawText()), "model.npcArrivalSeconds");
+    }
+    private static void ValidateNpcBinding(JsonElement input, JsonElement dispatch)
+    {
+        var identity = dispatch.GetProperty("request").GetProperty("identity");
+        if (identity.GetProperty("kind").GetString() != "npc_action") throw new ReplayMismatch("model.kind", "npc_action", identity.GetProperty("kind").GetString());
+        foreach (string field in new[] { "sessionId", "logicalRequestId" })
+            Compare(JsonNode.Parse(identity.GetProperty(field).GetRawText()), JsonNode.Parse(input.GetProperty(field).GetRawText()), "model." + field);
+        if (input.TryGetProperty("residentId", out var resident))
+            Compare(JsonNode.Parse(identity.GetProperty("residentId").GetRawText()), JsonNode.Parse(resident.GetRawText()), "model.residentId");
     }
     private static double PlayerArrivalSeconds(JsonElement dispatch, JsonElement elapsed) => 60
         - TownJson.Deserialize<TimeSpan>(dispatch.GetProperty("request").GetProperty("remainingWait").GetRawText()).TotalSeconds
