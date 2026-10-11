@@ -200,6 +200,7 @@ public sealed class FullDemoBudgetTests
             string childOutput = await one.StandardOutput.ReadToEndAsync() + await one.StandardError.ReadToEndAsync()
                 + await two.StandardOutput.ReadToEndAsync() + await two.StandardError.ReadToEndAsync();
             Assert.That(new[] { one.ExitCode, two.ExitCode }, Is.EquivalentTo(new[] { 0, 10 }), childOutput);
+            if (mode == "manual-original") Assert.That(childOutput, Does.Contain("concurrency_limit"));
             var snapshot = PersistentBudgetLedger.OpenExisting(path, profileVersion).Snapshot();
             Assert.That(snapshot.TotalAttempts, Is.EqualTo(mode == "initialize" ? 0 : 2));
             Assert.That(snapshot.SlotsHeld, Is.EqualTo(mode == "initialize" ? 0 : 2));

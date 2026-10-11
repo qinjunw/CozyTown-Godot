@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "93f6ea946ad9113aeee1b9f89e7e1d66ee8e2c24",
+  "archive": "raw-evidence.zip",
+  "bytes": 61677,
+  "sha256": "01b82130dfc2a847d9d1fe6c27ea36423bbe36574f95574afae28cf11a073e98",
+  "originalFileCount": 16,
+  "embeddedMetadata": [
+    "results.json",
+    "raw-manifest.json"
+  ],
+  "allOriginalFilesVerified": true
+}

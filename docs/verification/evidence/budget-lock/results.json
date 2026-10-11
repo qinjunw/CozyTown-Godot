@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "ticket": "https://github.com/qinjunw/CozyTown-Godot/issues/41",
+  "sourceCommit": "93f6ea946ad9113aeee1b9f89e7e1d66ee8e2c24",
+  "baseCommit": "4eda1e7f9ab6096cbfaccaf202ac82843fa73044",
+  "originalFailureSourceCommit": "c8255f50937cf0b38c3224f5039fea69aa3b0b65",
+  "passed": true,
+  "scope": [
+    "PersistentBudgetLedger public operations",
+    "real OS exclusive lock and synthetic live-ledger replacement window",
+    "existing fixed-client Model regressions"
+  ],
+  "simulation": {
+    "profiles": [
+      "first-slice-v1",
+      "full-demo-v1",
+      "full-demo-v2"
+    ],
+    "operations": [
+      "OpenExisting",
+      "Reserve"
+    ],
+    "writerHoldsExclusiveMarker": true,
+    "liveFileTemporarilyMoved": true,
+    "waitingObservationMilliseconds": 200,
+    "actualFileReplaceWindowProven": false
+  },
+  "reports": [
+    {
+      "path": "lock-final-cleanup.trx",
+      "sha256": "f2f22e61d427e12df149e0cca8410e2737df51c625f4910ee6ff13346453c18c",
+      "counts": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "lock-preservation.trx",
+      "sha256": "1eb285a0e35f7fff672ef26ee4b746ec851321fe6a7e6cb539c2b64033d86e0d",
+      "counts": {
+        "total": "9",
+        "executed": "9",
+        "passed": "9",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "lock-window-green.trx",
+      "sha256": "8b378b5d6f807b9b8b84a7c25b620760ad6513e930a3d9a1a6b2fe2e9bf241e9",
+      "counts": {
+        "total": "6",
+        "executed": "6",
+        "passed": "6",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "lock-window-red.trx",
+      "sha256": "b016b4d8f28d0a457f00db96702509e5559b6f2c8ae9bfb6b1fb1aa279679221",
+      "counts": {
+        "total": "6",
+        "executed": "6",
+        "passed": "0",
+        "failed": "6",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"first-slice-v1\",True)",
+          "ledgerMissingRecorded": true
+        },
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"full-demo-v2\",True)",
+          "ledgerMissingRecorded": true
+        },
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"first-slice-v1\",False)",
+          "ledgerMissingRecorded": true
+        },
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"full-demo-v1\",True)",
+          "ledgerMissingRecorded": true
+        },
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"full-demo-v2\",False)",
+          "ledgerMissingRecorded": true
+        },
+        {
+          "name": "ReaderWaitsForTheWriterLockBeforeJudgingTheLiveLedgerMissing(\"full-demo-v1\",False)",
+          "ledgerMissingRecorded": true
+        }
+      ]
+    },
+    {
+      "path": "manual-original-one-recheck.trx",
+      "sha256": "069d6319d4c2bdd7cce0404aff0ffa274768ebab919de275ef3ced8343ade82e",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "model-complete.trx",
+      "sha256": "aef09d2fdf06c56194d2046ece1e028098f7678039a06dad9c556ba5a5cd40dd",
+      "counts": {
+        "total": "92",
+        "executed": "92",
+        "passed": "92",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "original-failures/model-final.trx",
+      "sha256": "65ac9cf6a3e29528a068715779ba7782f6dc0d4f9e18d747e5fafd497506f487",
+      "counts": {
+        "total": "83",
+        "executed": "83",
+        "passed": "82",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        {
+          "name": "TwoProcessesCannotDuplicateInitializationSlotsOrRecovery(\"manual-original\",\"full-demo-v1\")",
+          "ledgerMissingRecorded": true
+        }
+      ]
+    },
+    {
+      "path": "original-failures/model-manual-original-diagnostic.trx",
+      "sha256": "80d195d9cb86b7f46ebeee9df9014cd265a4808b5259105e48204084c1f74699",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "1",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "failedTests": [
+        {
+          "name": "TwoProcessesCannotDuplicateInitializationSlotsOrRecovery(\"manual-original\",\"full-demo-v1\")",
+          "ledgerMissingRecorded": true
+        }
+      ]
+    }
+  ],
+  "originalFailureRecheck": {
+    "dedicatedRuns": 1,
+    "cases": 2,
+    "passed": 2,
+    "requiredChildExitCodes": [
+      0,
+      10
+    ],
+    "requiredRejectionCode": "concurrency_limit",
+    "fullModelRegressionRuns": 1
+  },
+  "finalTestCleanupRecheck": {
+    "reason": "Added using declarations to release writer locks if test setup fails. Production code unchanged.",
+    "cases": 9,
+    "passed": 9
+  },
+  "realHttpSends": 0,
+  "privateCredentialRead": false,
+  "actualLedgerTouched": false,
+  "fullOfflineGateRun": false
+}

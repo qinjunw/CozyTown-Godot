@@ -178,18 +178,20 @@ public sealed class PersistentBudgetLedger
         var watch = Stopwatch.StartNew();
         while (true)
         {
-            if (!File.Exists(_path)) throw new ModelException("ledger_missing");
-            if (!File.Exists(_path + ".lock")) throw new ModelException("ledger_lock_missing");
+            if (!File.Exists(_path + ".lock"))
+                throw new ModelException(File.Exists(_path) ? "ledger_lock_missing" : "ledger_missing");
             try
             {
                 var held = new FileStream(_path + ".lock", FileMode.Open, FileAccess.ReadWrite, FileShare.None);
-                using var reader = new StreamReader(held, System.Text.Encoding.UTF8, leaveOpen: true);
-                if (held.Length > 1024 || reader.ReadToEnd() != Profile.BudgetId)
+                try
                 {
-                    held.Dispose();
-                    throw new ModelException("ledger_lock_invalid");
+                    if (!File.Exists(_path)) throw new ModelException("ledger_missing");
+                    using var reader = new StreamReader(held, System.Text.Encoding.UTF8, leaveOpen: true);
+                    if (held.Length > 1024 || reader.ReadToEnd() != Profile.BudgetId)
+                        throw new ModelException("ledger_lock_invalid");
+                    return held;
                 }
-                return held;
+                catch { held.Dispose(); throw; }
             }
             catch (IOException) when (watch.Elapsed < TimeSpan.FromSeconds(5)) { Thread.Sleep(20); }
             catch (IOException) { throw new ModelException("ledger_busy"); }
