@@ -1,6 +1,6 @@
 # 玩家模型对话合同
 
-本合同对应[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。2026-10-10 用户确认对话暂停世界、关闭或切人终结旧会话，并恢复保存时的面板与逻辑状态。[实现玩家可选模型对话与会话续接](https://github.com/qinjunw/CozyTown-Godot/issues/21)已进入集成分支，通过固定客户端与核心回放检查，用户已于 2026-10-11 通过 Windows 人工验收；证据见[验证记录](verification/player-dialogue.md)。冻结候选 `f9551c1` 的[第二轮真实评测](verification/full-demo-real-v2-2026-10-11.md)已展示 8 段玩家文本，错误会话展示为零；用户另已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。样本和人工反馈保留各自源码归属，后续回放绑定修复另核离线证据。
+本合同对应[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。2026-10-10 用户确认对话暂停世界、关闭或切人终结旧会话，并恢复保存时的面板与逻辑状态。[实现玩家可选模型对话与会话续接](https://github.com/qinjunw/CozyTown-Godot/issues/21)已进入集成分支，通过固定客户端与核心回放检查，用户已于 2026-10-11 通过 Windows 人工验收；证据见[验证记录](verification/player-dialogue.md)。冻结候选 `f9551c1` 的[第二轮真实评测](verification/full-demo-real-v2-2026-10-11.md)已展示 8 段玩家文本，错误会话展示为零；用户另已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。样本和人工反馈保留各自源码归属，回放绑定修复见[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)。
 
 ## 交互范围
 

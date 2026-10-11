@@ -1,8 +1,8 @@
 # 完整 Demo Windows 候选人工清单
 
-当前用户候选对应[显示实际预算上限与人工阶段用量](https://github.com/qinjunw/CozyTown-Godot/issues/43)，运行时固定在 `576ae64e38f854bb22b13186e6a9d2ecc9799d72`，模拟源码摘要为 `301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf`。以下项目均待人工执行，旧生产与对话候选的通过记录不代填本候选反馈。最终完整验收归[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
+当前复核候选对应[修复最终审查的模型回放绑定与验收说明](https://github.com/qinjunw/CozyTown-Godot/issues/44)，运行时固定在 `df624084ee7baafa61162733ac4323442d359e11`，模拟源码摘要为 `03cc1a819e8ae1d7f9adfe38faf13f3defc514265637444283432afc93c88ea1`。用户已确认原 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过；反馈保留原源码归属。此次仅修复 NPC 回放结果绑定，游戏/UI 和在线行为未改，重核受影响的离线入口，不要求重复七组人工操作。最终完整验收归[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
 
-本候选修复观察手册的预算显示：完整 Demo 总上限为 96，`manual` 用途另列实际人工已用 / 8，NPC 与玩家共享。原 f955 的真实评测及[干净构建](https://github.com/qinjunw/CozyTown-Godot/blob/07dc210c3549939314b3e4da49619885b1b8b1e9/docs/verification/full-demo-clean-2026-10-11.md)保持原归属；最终只对当前新版做这份综合人工验收。
+完整 Demo 总上限为 96，`manual` 用途另列实际人工已用 / 8，NPC 与玩家共享。原 f955 的真实评测及[干净构建](https://github.com/qinjunw/CozyTown-Godot/blob/07dc210c3549939314b3e4da49619885b1b8b1e9/docs/verification/full-demo-clean-2026-10-11.md)保持原归属。下列操作步骤作为使用参考和故障定位清单保留，不把旧反馈记为新源码实机通过，也不授权新增真实调用。
 
 ## 准备与反馈
 

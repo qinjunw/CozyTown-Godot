@@ -4,7 +4,7 @@
 
 冻结候选 `f9551c19eb1866ba79cc1312ca7821004fbb7fa1` 已通过完整离线门、两组 v2 真实评测及四份真实包的 12 次离线回放，结果见[第二轮报告](verification/full-demo-real-v2-2026-10-11.md)。用户已于 2026-10-11 通过[玩家对话人工验收](verification/player-dialogue-manual.md)，并确认 `576ae64` 候选的[七组综合离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过；CI 制品上传仍受配额阻塞。[旧宿主记录](verification/full-demo-host-2026-10-10.md)和 [v1 未达标结果](verification/full-demo-real-2026-10-11.md)保留原候选与样本归属。
 
-冻结版另有[独立干净构建与四份真实记录的新 Windows 回放](verification/full-demo-clean-2026-10-11.md)。用户已验收修复预算显示的 [576ae64 候选](verification/budget-ui-candidate-2026-10-12.md)；该候选的[七组人工主路径](verification/full-demo-clean-manual.md)、离线门与摘要保护证据保留原归属。后续回放绑定修复重核受影响的离线入口，不将旧人工反馈或真实样本记为新源码通过。
+冻结版另有[独立干净构建与四份真实记录的新 Windows 回放](verification/full-demo-clean-2026-10-11.md)。用户已验收修复预算显示的 [576ae64 候选](verification/budget-ui-candidate-2026-10-12.md)；人工反馈、离线门与摘要保护证据保留原归属。回放绑定修复另有[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)和匹配 Windows 包，[七组操作清单](verification/full-demo-clean-manual.md)作为使用参考保留，不重复整套人工操作，也不将旧人工反馈或真实样本记为新源码通过。
 
 输入版本为 `full-demo-input-v1`。外部输入只允许与已注册命令和参数相同的内容，不能通过修改 JSON 扩大窗口、调用数或改变操作。默认输入使用 Godot 资源路径，源工程和 Windows 导出包都能读取。
 

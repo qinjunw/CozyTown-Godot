@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "manualCandidateCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "scope": [
+    "src",
+    "game",
+    "tools"
+  ],
+  "changedRuntimeFiles": [
+    "src/CozyTown.Core/Town/TownReplay.cs"
+  ],
+  "unchangedTrackedFiles": 172,
+  "method": "Compare Git object identity and executable modes for all tracked runtime/content/tool files except TownReplay.cs.",
+  "newSourceManualRepeated": false,
+  "originalManualFeedback": "https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458",
+  "realHttpSends": 0,
+  "graphicalRequested": false
+}

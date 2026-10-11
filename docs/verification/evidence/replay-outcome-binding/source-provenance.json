@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "baseIntegrationCommit": "20ebfba2186d59112d8efba5c85b66dda11ab18f",
+  "previousManualCandidateCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "simulationSourceDigest": "03cc1a819e8ae1d7f9adfe38faf13f3defc514265637444283432afc93c88ea1",
+  "changedRuntimeFiles": [
+    "src/CozyTown.Core/Town/TownReplay.cs"
+  ],
+  "runtimeDiffSha256": "bd1f6ef977ffa10aef056515ceec63f115c6e07798707a36aaab3bf3f6220b0b",
+  "runtimeDiffBytes": 2492,
+  "replayOutcomeValidationChanged": true,
+  "gameUiWorldRulesRequestsBudgetLedgerContentChanged": false,
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "verificationCommand": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "tools/windows/verify-full-demo.ps1",
+    "-ExpectedCommit",
+    "df624084ee7baafa61162733ac4323442d359e11",
+    "-ToolsRoot",
+    "<locked-toolchain-root>"
+  ],
+  "cleanCheckoutMethod": "git worktree add --detach <new-empty-worktree> df624084ee7baafa61162733ac4323442d359e11",
+  "copiedGodotOrBuildCaches": false,
+  "sharedLockedToolchainAndNugetPackages": true,
+  "manualAcceptance": {
+    "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "sevenOfflineGroups": "passed",
+    "optionalRealM01": "passed",
+    "feedback": "https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458",
+    "newSourceManualRepeated": false
+  },
+  "originalRealSourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "originalRealSamplesReassigned": false
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "releaseId": 409812159,
+  "tag": "full-demo-replay-binding-candidate-20261012",
+  "draft": true,
+  "prerelease": true,
+  "releaseList": "https://github.com/qinjunw/CozyTown-Godot/releases",
+  "capturedAtUtc": "2026-10-11T17:31:55.5360423+00:00",
+  "expectedAssets": 18,
+  "actualAssets": 18,
+  "assets": [
+    {
+      "name": "CozyTown-df62408-offline-evidence.tar.gz",
+      "id": 631352554,
+      "bytes": 1537789490,
+      "digest": "sha256:a1e9c9a89f5c57e5b1b9d367f60809328e29d0ef473ebb6fdfca82ab18b509a1",
+      "expectedBytes": 1537789490,
+      "expectedSha256": "a1e9c9a89f5c57e5b1b9d367f60809328e29d0ef473ebb6fdfca82ab18b509a1",
+      "passed": true
+    },
+    {
+      "name": "CozyTown-df62408-windows-candidate.zip",
+      "id": 631343033,
+      "bytes": 81649404,
+      "digest": "sha256:0322748e44d02f84eb727019cfd5d938e3db3b4d90a587517878046acbc148b4",
+      "expectedBytes": 81649404,
+      "expectedSha256": "0322748e44d02f84eb727019cfd5d938e3db3b4d90a587517878046acbc148b4",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-archive-receipt.json",
+      "id": 631352546,
+      "bytes": 227040,
+      "digest": "sha256:9d88e9ca9e7cb60ff23b32f1cabf8d1596a8af7a43f968475b72c3a68795e1e9",
+      "expectedBytes": 227040,
+      "expectedSha256": "9d88e9ca9e7cb60ff23b32f1cabf8d1596a8af7a43f968475b72c3a68795e1e9",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-candidate-secret-scan.json",
+      "id": 631352545,
+      "bytes": 377,
+      "digest": "sha256:20a5a9f12689e06cdd6d3ef5b61d9cdc70e22b991d415542f346a8e5b8227484",
+      "expectedBytes": 377,
+      "expectedSha256": "20a5a9f12689e06cdd6d3ef5b61d9cdc70e22b991d415542f346a8e5b8227484",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-candidate-summary.json",
+      "id": 631352547,
+      "bytes": 2918,
+      "digest": "sha256:aa8cb2200d7d637efc833b6d97a1a7efc0bcfe211d62e6501286564ffca13131",
+      "expectedBytes": 2918,
+      "expectedSha256": "aa8cb2200d7d637efc833b6d97a1a7efc0bcfe211d62e6501286564ffca13131",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-entry-smoke-verification.json",
+      "id": 631352552,
+      "bytes": 4903,
+      "digest": "sha256:88c2dba4ee3d86c4342d485c156bcbd158e9538ee20e71f4c753e6e6cd95821c",
+      "expectedBytes": 4903,
+      "expectedSha256": "88c2dba4ee3d86c4342d485c156bcbd158e9538ee20e71f4c753e6e6cd95821c",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-extra-secret-scan.json",
+      "id": 631352589,
+      "bytes": 374,
+      "digest": "sha256:3d4b5e0325fffd7b32735a3d1d06224864a0eb0456dda1856d46ab08d48a51da",
+      "expectedBytes": 374,
+      "expectedSha256": "3d4b5e0325fffd7b32735a3d1d06224864a0eb0456dda1856d46ab08d48a51da",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-full-verification.json",
+      "id": 631352587,
+      "bytes": 74748,
+      "digest": "sha256:c47eb74137ccca84d89ea9c1ec3e44673cf23f1538ea8d594d88013784a6f3bf",
+      "expectedBytes": 74748,
+      "expectedSha256": "c47eb74137ccca84d89ea9c1ec3e44673cf23f1538ea8d594d88013784a6f3bf",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-gate-secret-scan.json",
+      "id": 631352591,
+      "bytes": 379,
+      "digest": "sha256:c19040c226ff3a0506348e0c4177ad9f57c6744199fb09427978c1ced00d5fc9",
+      "expectedBytes": 379,
+      "expectedSha256": "c19040c226ff3a0506348e0c4177ad9f57c6744199fb09427978c1ced00d5fc9",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-old-real-rejection-verification.json",
+      "id": 631352608,
+      "bytes": 1747,
+      "digest": "sha256:454773f180f7468eddc4f2b242750f34780abf6ecc8a2182eacb97406cb4310a",
+      "expectedBytes": 1747,
+      "expectedSha256": "454773f180f7468eddc4f2b242750f34780abf6ecc8a2182eacb97406cb4310a",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-package-manifest.json",
+      "id": 631352628,
+      "bytes": 45815,
+      "digest": "sha256:b3b36d9ffc2af2dcf4d000c80cb3b94791928cbcec450e1167cca4e20a4e379d",
+      "expectedBytes": 45815,
+      "expectedSha256": "b3b36d9ffc2af2dcf4d000c80cb3b94791928cbcec450e1167cca4e20a4e379d",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-package-receipt.json",
+      "id": 631352645,
+      "bytes": 46896,
+      "digest": "sha256:c0e59a4e10b4b058927473714e1b0c5ffcb34d9caa65699337ff3c85a12aa129",
+      "expectedBytes": 46896,
+      "expectedSha256": "c0e59a4e10b4b058927473714e1b0c5ffcb34d9caa65699337ff3c85a12aa129",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-raw-manifest.json",
+      "id": 631352646,
+      "bytes": 207331,
+      "digest": "sha256:eea9606a8d68516457a7e95d9c91e7d44c2cde99b33725ac090b7564a1f45b32",
+      "expectedBytes": 207331,
+      "expectedSha256": "eea9606a8d68516457a7e95d9c91e7d44c2cde99b33725ac090b7564a1f45b32",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-scene-matrix-verification.json",
+      "id": 631352659,
+      "bytes": 20856,
+      "digest": "sha256:68829ac720af0b047dc13f460532e5bad2a9721d5a22855e0aee571f5b4131c5",
+      "expectedBytes": 20856,
+      "expectedSha256": "68829ac720af0b047dc13f460532e5bad2a9721d5a22855e0aee571f5b4131c5",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-secret-scan-binding.json",
+      "id": 631352697,
+      "bytes": 2599,
+      "digest": "sha256:4f297a7eb2e8ed5210de75a4dc8dfa702a3fe5b268c0f95051d57376a20fd3a6",
+      "expectedBytes": 2599,
+      "expectedSha256": "4f297a7eb2e8ed5210de75a4dc8dfa702a3fe5b268c0f95051d57376a20fd3a6",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-source-provenance.json",
+      "id": 631352700,
+      "bytes": 1533,
+      "digest": "sha256:811854ba88fb066ccf32f4ef3fc25816b966088bd843a52eb11658abf6176911",
+      "expectedBytes": 1533,
+      "expectedSha256": "811854ba88fb066ccf32f4ef3fc25816b966088bd843a52eb11658abf6176911",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-summary.json",
+      "id": 631352702,
+      "bytes": 35613,
+      "digest": "sha256:813dae4fc9a68fedb347a11818bd94e84bb2ebc521a2c2d4a06befb521153020",
+      "expectedBytes": 35613,
+      "expectedSha256": "813dae4fc9a68fedb347a11818bd94e84bb2ebc521a2c2d4a06befb521153020",
+      "passed": true
+    },
+    {
+      "name": "replay-binding-unified-verification.json",
+      "id": 631352705,
+      "bytes": 10448,
+      "digest": "sha256:f462620a9e7864fcd9c14b983f68a50593e4cbf8ce0cb4c9e6c274f074aadffe",
+      "expectedBytes": 10448,
+      "expectedSha256": "f462620a9e7864fcd9c14b983f68a50593e4cbf8ce0cb4c9e6c274f074aadffe",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "simulationSourceDigest": "03cc1a819e8ae1d7f9adfe38faf13f3defc514265637444283432afc93c88ea1",
+  "package": {
+    "zip": "CozyTown-df62408-windows-candidate.zip",
+    "bytes": 81649404,
+    "sha256": "0322748e44d02f84eb727019cfd5d938e3db3b4d90a587517878046acbc148b4",
+    "members": 215,
+    "manifestSha256": "b3b36d9ffc2af2dcf4d000c80cb3b94791928cbcec450e1167cca4e20a4e379d",
+    "runtimeFiles": 198
+  },
+  "packageFilesUnchangedAfterOfflineEntrySmoke": true,
+  "zipMembersReverified": 215,
+  "offlineEntrySmoke": {
+    "passed": true,
+    "entries": [
+      {
+        "file": "Start.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Start-1920.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Start-counterfactual.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-delayed.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-invalid.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-timeout.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-budget.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-farming-capacity.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-production-capacity.cmd",
+        "exitCode": 0,
+        "passed": true
+      }
+    ],
+    "reportSha256": "88c2dba4ee3d86c4342d485c156bcbd158e9538ee20e71f4c753e6e6cd95821c",
+    "boundary": "exported game CLI with packaged offline arguments",
+    "launcherCmdExecuted": false
+  },
+  "packagedLocalMarkdownLinks": [
+    {
+      "file": "README.md",
+      "target": "MANUAL.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "MANUAL-DETAILS.md",
+      "exists": true
+    },
+    {
+      "file": "MANUAL.md",
+      "target": "MANUAL-DETAILS.md",
+      "exists": true
+    },
+    {
+      "file": "MANUAL-DETAILS.md",
+      "target": "MANUAL.md",
+      "exists": true
+    }
+  ],
+  "sceneExamples": {
+    "examples/scene-gameplay.json": {
+      "file": "examples/scene-gameplay.json",
+      "bytes": 9186644,
+      "sha256": "5e6b80078dd3cdf57f80c4303c5d1cec13ef78cdf88af4a8c7330b0b76f22a98",
+      "passed": true
+    },
+    "examples/scene-player-dialogue.json": {
+      "file": "examples/scene-player-dialogue.json",
+      "bytes": 465265,
+      "sha256": "6a7319289b5574468a714c174fde6b0c91dab35bdcac31f5d56e215f2d0d2e2b",
+      "passed": true
+    }
+  },
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "manualAcceptance": {
+    "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "sevenOfflineGroups": "passed",
+    "optionalRealM01": "passed",
+    "newSourceManualRepeated": false
+  }
+}

@@ -1,0 +1,28 @@
+diff --git a/src/CozyTown.Core/Town/TownReplay.cs b/src/CozyTown.Core/Town/TownReplay.cs
+index 7ded3d5..c4fa221 100644
+--- a/src/CozyTown.Core/Town/TownReplay.cs
++++ b/src/CozyTown.Core/Town/TownReplay.cs
+@@ -432,8 +432,21 @@ public static class TownReplay
+                             if (completion.GetProperty("logicalElapsedToArrival").ValueKind != JsonValueKind.Null)
+                                 Compare(JsonSerializer.SerializeToNode(PlayerArrivalSeconds(completion.GetProperty("dispatch"), completion.GetProperty("logicalElapsedToArrival"))),
+                                     JsonNode.Parse(result.GetProperty("receivedAfterSeconds").GetRawText()), "model.npcArrivalSeconds");
+-                            if (completion.GetProperty("failureCode").ValueKind == JsonValueKind.Null && result.GetProperty("error").ValueKind == JsonValueKind.Null)
+-                                Compare(JsonNode.Parse(completion.GetProperty("candidateJson").GetString()!), JsonNode.Parse(result.GetProperty("candidate").GetRawText()), "model.worldCandidate");
++                            string? error = completion.GetProperty("failureCode").GetString();
++                            ActionCandidate? candidate = null;
++                            if (error is null && completion.GetProperty("candidateJson").GetString() is { } json)
++                            {
++                                try
++                                {
++                                    candidate = TownJson.Deserialize<ActionCandidate>(json);
++                                    if (candidate.Text == null || candidate.Text.Length > 200 || candidate.Text.Any(char.IsControl))
++                                        throw new InvalidDataException("Candidate dialogue must be a single short line.");
++                                }
++                                catch (Exception invalid) when (invalid is JsonException or InvalidDataException)
++                                { candidate = null; error = "candidate_schema_invalid"; }
++                            }
++                            Compare(JsonSerializer.SerializeToNode(error), JsonNode.Parse(result.GetProperty("error").GetRawText()), "model.npcError");
++                            Compare(JsonSerializer.SerializeToNode(candidate, TownJson.Options), JsonNode.Parse(result.GetProperty("candidate").GetRawText()), "model.worldCandidate");
+                         }
+                     }
+                     Execute(world, trace);
