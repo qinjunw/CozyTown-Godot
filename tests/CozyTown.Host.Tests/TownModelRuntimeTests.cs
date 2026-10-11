@@ -8,31 +8,35 @@ namespace CozyTown.Host.Tests;
 [TestFixture]
 public sealed class TownModelRuntimeTests
 {
-    [Test]
-    public void CompleteExperimentSelectsItsOwnIdentityAndBothReplayAndRequestStages()
+    [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
+    [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
+    public void CompleteExperimentSelectsItsOwnIdentityAndBothReplayAndRequestStages(string version, string budgetId)
     {
-        var runtime = TownModelRuntimeProfile.Resolve("full-demo-v1", "experiment");
-        Assert.That(runtime.BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
-        Assert.That(runtime.ReplayProfile.Version, Is.EqualTo("full-demo-v1"));
+        var runtime = TownModelRuntimeProfile.Resolve(version, "experiment");
+        Assert.That(runtime.BudgetId, Is.EqualTo(budgetId));
+        Assert.That(runtime.ReplayProfile.Version, Is.EqualTo(version));
         Assert.That(runtime.NewRequestStage("baseline", "npc_action"), Is.EqualTo(ModelStage.Baseline));
         Assert.That(runtime.NewRequestStage("counterfactual", "npc_action"), Is.EqualTo(ModelStage.Counterfactual));
         Assert.That(runtime.NewRequestStage("baseline", "player_text"), Is.EqualTo(ModelStage.PlayerDialogue));
         Assert.That(runtime.RealPlayerDialogueEnabled, Is.True);
     }
 
-    [Test]
-    public void FinalManualPlayRoutesBothKindsToReservedManualStage()
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public void FinalManualPlayRoutesBothKindsToReservedManualStage(string version)
     {
-        var runtime = TownModelRuntimeProfile.Resolve("full-demo-v1", "manual");
+        var runtime = TownModelRuntimeProfile.Resolve(version, "manual");
         Assert.That(runtime.NewRequestStage("baseline", "npc_action"), Is.EqualTo(ModelStage.Manual));
         Assert.That(runtime.NewRequestStage("counterfactual", "player_text"), Is.EqualTo(ModelStage.Manual));
     }
 
     [TestCase("full-demo-v1", "legacy")]
+    [TestCase("full-demo-v2", "legacy")]
+    [TestCase("full-demo-v2", "other")]
     [TestCase("first-slice-v1", "experiment")]
     [TestCase("first-slice-v1", "manual")]
     [TestCase("full-demo-v1", "other")]
-    [TestCase("full-demo-v2", "experiment")]
+    [TestCase("full-demo-v3", "experiment")]
     [TestCase("first-slice-budget-v1", "legacy")]
     public void UnregisteredOrCrossedProfileAndPurposeAreRejected(string profile, string purpose)
     {

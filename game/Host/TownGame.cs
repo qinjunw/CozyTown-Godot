@@ -137,7 +137,7 @@ public partial class TownGame : Node2D
                 _mode = "real";
             }
             _modelRuntime = TownModelRuntimeProfile.Resolve(_modelOptions?.BudgetProfileVersion
-                ?? (_fullDemoPlan is null ? ModelBudgetProfile.FirstSliceVersion : ModelBudgetProfile.FullDemoVersion),
+                ?? (_fullDemoPlan is null ? ModelBudgetProfile.FirstSliceVersion : ModelBudgetProfile.FullDemoV2Version),
                 Argument("--execution-purpose=") ?? (_fullDemoPlan is null ? "legacy" : "experiment"));
             ValidateFullDemoMode();
             if (_modelOptions is not null)

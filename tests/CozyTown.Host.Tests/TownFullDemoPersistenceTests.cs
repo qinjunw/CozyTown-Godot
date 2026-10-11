@@ -6,9 +6,34 @@ using System.Text.Json.Nodes;
 
 namespace CozyTown.Host.Tests;
 
-[TestFixture]
-public sealed class TownFullDemoPersistenceTests
+[TestFixture("full-demo-v1")]
+[TestFixture("full-demo-v2")]
+public sealed class TownFullDemoPersistenceTests(string profileVersion)
 {
+    [Test]
+    public void OtherFullDemoProfileIsRejectedBeforePublishingASave()
+    {
+        var saved = Snapshot("experiment", "player_text");
+        string other = profileVersion == "full-demo-v1" ? "full-demo-v2" : "full-demo-v1";
+        Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateForRuntime(saved, TownModelRuntimeProfile.Resolve(other, "experiment")));
+        Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateHostSnapshot(saved with { BudgetProfileVersion = other }));
+    }
+
+    [Test]
+    public void FullDemoSaveCannotImportAnOfflineFixtureScenario()
+    {
+        var runtime = TownModelRuntimeProfile.Resolve(profileVersion, "experiment");
+        var world = new TownWorld(Content(), budgetId: runtime.BudgetId);
+        var snapshot = world.CaptureSnapshot();
+        snapshot.State.InitialStateId = "economy-fixture";
+        var saved = new TownHostSnapshot(1, TownJson.Serialize(snapshot), world.State.BranchId, 0, 0, "rules", "economy-fixture", [],
+            BudgetProfileVersion: profileVersion, ExecutionPurpose: "experiment");
+        Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateHostSnapshot(saved));
+    }
+
+    private string ExpectedBudgetId => profileVersion == "full-demo-v1"
+        ? "cozytown-godot-full-demo-20261010-v1" : "cozytown-godot-full-demo-20261011-v2";
+
     private static TownContent Content()
     {
         string[] ids = ["mina", "eli", "ren", "sora"];
@@ -18,9 +43,9 @@ public sealed class TownFullDemoPersistenceTests
                 [new("free", 0, 1440, id, "free", true)])).ToArray(), [new("apple", "Apple")]));
     }
 
-    private static TownHostSnapshot Snapshot(string purpose, string kind, string scenario = "baseline")
+    private TownHostSnapshot Snapshot(string purpose, string kind, string scenario = "baseline")
     {
-        var runtime = TownModelRuntimeProfile.Resolve("full-demo-v1", purpose);
+        var runtime = TownModelRuntimeProfile.Resolve(profileVersion, purpose);
         var world = new TownWorld(Content(), scenario, runtime.BudgetId);
         FrozenModelRequest frozen;
         if (kind == "player_text")
@@ -60,9 +85,9 @@ public sealed class TownFullDemoPersistenceTests
             TownSaveFile.Write(path, saved, s => _ = TownWorld.RestoreCandidate(Content(), s.WorldJson));
             var read = TownSaveFile.Read(path);
             Assert.That(TownJson.Serialize(read), Is.EqualTo(TownJson.Serialize(saved)));
-            TownSaveFile.ValidateForRuntime(read, TownModelRuntimeProfile.Resolve("full-demo-v1", purpose));
+            TownSaveFile.ValidateForRuntime(read, TownModelRuntimeProfile.Resolve(profileVersion, purpose));
             var restored = TownWorld.RestoreCandidate(Content(), read.WorldJson);
-            Assert.That(restored.State.BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
+            Assert.That(restored.State.BudgetId, Is.EqualTo(ExpectedBudgetId));
             if (kind == "player_text") Assert.That(restored.GetPlayerDialogueRequest()!.IsRecovery, Is.True);
             else Assert.That(restored.GetDecisionRequests().Single(r => r.LogicalRequestId == read.ModelRequests.Keys.Single()).IsRecovery, Is.True);
         }
@@ -75,7 +100,7 @@ public sealed class TownFullDemoPersistenceTests
     public void CandidateFromAnotherRuntimeIsRejectedBeforePublication(string savedPurpose, string runtimePurpose)
     {
         var saved = Snapshot(savedPurpose, "npc_action");
-        var runtime = TownModelRuntimeProfile.Resolve(runtimePurpose == "legacy" ? "first-slice-v1" : "full-demo-v1", runtimePurpose);
+        var runtime = TownModelRuntimeProfile.Resolve(runtimePurpose == "legacy" ? "first-slice-v1" : profileVersion, runtimePurpose);
         Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateForRuntime(saved, runtime));
     }
 
@@ -140,16 +165,16 @@ public sealed class TownFullDemoPersistenceTests
         Assert.That(read.BudgetProfileVersion, Is.EqualTo("first-slice-v1"));
         Assert.That(read.ExecutionPurpose, Is.EqualTo("legacy"));
         TownSaveFile.ValidateForRuntime(read, TownModelRuntimeProfile.Resolve("first-slice-v1", "legacy"));
-        Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateForRuntime(read, TownModelRuntimeProfile.Resolve("full-demo-v1", "experiment")));
+        Assert.Throws<InvalidDataException>(() => TownSaveFile.ValidateForRuntime(read, TownModelRuntimeProfile.Resolve(profileVersion, "experiment")));
     }
 
     [TestCase("experiment")]
     [TestCase("manual")]
     public void FixedFullDemoSaveKeepsTheSameProfileAndPurposeWithoutProviderRequests(string purpose)
     {
-        var world = new TownWorld(Content(), budgetId: "cozytown-godot-full-demo-20261010-v1");
+        var world = new TownWorld(Content(), budgetId: ExpectedBudgetId);
         var saved = new TownHostSnapshot(1, world.CaptureJson(), world.State.BranchId, 0, 0, "rules", "baseline", [],
-            BudgetProfileVersion: "full-demo-v1", ExecutionPurpose: purpose);
-        TownSaveFile.ValidateForRuntime(saved, TownModelRuntimeProfile.Resolve("full-demo-v1", purpose));
+            BudgetProfileVersion: profileVersion, ExecutionPurpose: purpose);
+        TownSaveFile.ValidateForRuntime(saved, TownModelRuntimeProfile.Resolve(profileVersion, purpose));
     }
 }

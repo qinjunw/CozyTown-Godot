@@ -8,6 +8,27 @@ namespace CozyTown.Model.Tests;
 public sealed class FullDemoBudgetTests
 {
     [Test]
+    public void RepairedDemoInitializationUsesANewRegisteredIdentityAndCannotBorrowV1Ledger()
+    {
+        using var fixture = new ModelFixture();
+        string oldPath = Path.Combine(fixture.Root, "v1.json"), newPath = Path.Combine(fixture.Root, "v2.json");
+        var oldBudget = PersistentBudgetLedger.InitializeNew(oldPath, "full-demo-v1");
+        var budget = PersistentBudgetLedger.InitializeNew(newPath, "full-demo-v2");
+        Assert.That(budget.Profile.Version, Is.EqualTo("full-demo-v2"));
+        Assert.That(budget.Snapshot().BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261011-v2"));
+        Assert.That(budget.Profile.TotalLimit, Is.EqualTo(96));
+        Assert.That(budget.Profile.LimitMicros, Is.EqualTo(5_000_000));
+        Assert.That(budget.Profile.ReserveMicros, Is.EqualTo(2_110_000));
+        Assert.That(budget.Profile.ConcurrentLimit, Is.EqualTo(2));
+        Assert.That(budget.Profile.StageLimits, Is.EquivalentTo(new Dictionary<string, int>
+            { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 }));
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => PersistentBudgetLedger.OpenExisting(oldPath, "full-demo-v2"));
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => PersistentBudgetLedger.OpenExisting(newPath, "full-demo-v1"));
+        Assert.That(oldBudget.Snapshot().BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
+        Assert.That(PersistentBudgetLedger.OpenExisting(newPath, "full-demo-v2").Snapshot().TotalAttempts, Is.Zero);
+    }
+
+    [Test]
     public void ExplicitInitializationCreatesAnIndependentFullDemoBudget()
     {
         using var fixture = new ModelFixture();
@@ -23,12 +44,13 @@ public sealed class FullDemoBudgetTests
         Assert.That(PersistentBudgetLedger.OpenExisting(fixture.LedgerPath).Snapshot().TotalAttempts, Is.EqualTo(4));
     }
 
-    [Test]
-    public void FullDemoStagesStopAtTheirOwnLimitsAndNinetySixTotalAttempts()
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public void FullDemoStagesStopAtTheirOwnLimitsAndNinetySixTotalAttempts(string profileVersion)
     {
         using var fixture = new ModelFixture();
         string path = Path.Combine(fixture.Root, "full-demo.json");
-        var budget = PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        var budget = PersistentBudgetLedger.InitializeNew(path, profileVersion);
         foreach (var (stage, limit) in new[] { (ModelStage.Baseline, 40), (ModelStage.Counterfactual, 40),
                      (ModelStage.PlayerDialogue, 8), (ModelStage.Manual, 8) })
         {
@@ -40,7 +62,7 @@ public sealed class FullDemoBudgetTests
             BudgetLedgerTests.AssertCode(stage == ModelStage.Manual ? "total_limit" : "stage_limit",
                 () => budget.Reserve(stage, "excess-" + stage));
         }
-        var restored = PersistentBudgetLedger.OpenExisting(path, "full-demo-v1").Snapshot();
+        var restored = PersistentBudgetLedger.OpenExisting(path, profileVersion).Snapshot();
         Assert.That(restored.TotalAttempts, Is.EqualTo(96));
         Assert.That(restored.SettledMicros, Is.EqualTo(960));
         Assert.That(restored.Attempts.Count(a => a.Stage == "player_dialogue"), Is.EqualTo(8));
@@ -59,7 +81,7 @@ public sealed class FullDemoBudgetTests
         BudgetLedgerTests.AssertCode("ledger_initialization_profile_invalid", () =>
             PersistentBudgetLedger.InitializeNew(path, "first-slice-v1"));
         BudgetLedgerTests.AssertCode("budget_profile_not_registered", () =>
-            PersistentBudgetLedger.InitializeNew(path, "full-demo-v2"));
+            PersistentBudgetLedger.InitializeNew(path, "full-demo-v3"));
         File.WriteAllText(path + ".lock", "cozytown-godot-full-demo-20261010-v1");
         BudgetLedgerTests.AssertCode("ledger_already_exists", () => PersistentBudgetLedger.InitializeNew(path, "full-demo-v1"));
         BudgetLedgerTests.AssertCode("ledger_missing", () => PersistentBudgetLedger.OpenExisting(path, "full-demo-v1"));
@@ -110,15 +132,16 @@ public sealed class FullDemoBudgetTests
         Assert.That(PersistentBudgetLedger.OpenExisting(fixture.LedgerPath).Snapshot().TotalAttempts, Is.EqualTo(4));
     }
 
-    [Test]
-    public void FullDemoUnknownAttemptsShareMoneyAndPhysicalSlotsAcrossAllStages()
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public void FullDemoUnknownAttemptsShareMoneyAndPhysicalSlotsAcrossAllStages(string profileVersion)
     {
         using var fixture = new ModelFixture(); string path = Path.Combine(fixture.Root, "full-demo.json");
-        var budget = PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        var budget = PersistentBudgetLedger.InitializeNew(path, profileVersion);
         var npc = budget.Reserve(ModelStage.Baseline, "npc"); budget.MarkUnknown(npc.AttemptId, "transport_timeout", false);
         var player = budget.Reserve(ModelStage.PlayerDialogue, "player");
         BudgetLedgerTests.AssertCode("concurrency_limit", () => budget.Reserve(ModelStage.Manual, "manual"));
-        var reopened = PersistentBudgetLedger.OpenExisting(path, "full-demo-v1");
+        var reopened = PersistentBudgetLedger.OpenExisting(path, profileVersion);
         Assert.That(reopened.Snapshot().ReservedMicros, Is.EqualTo(4_220_000));
         Assert.That(reopened.Snapshot().SlotsHeld, Is.EqualTo(2));
         reopened.MarkUnknown(player.AttemptId, "usage_invalid_or_missing", true, stopFurther: true);
@@ -131,15 +154,16 @@ public sealed class FullDemoBudgetTests
         Assert.That(reopened.Snapshot().StopReason, Is.EqualTo("usage_invalid_or_missing"));
     }
 
-    [Test]
-    public void FullDemoMoneyAndRecoverySurviveReopeningWithoutTransferringStages()
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public void FullDemoMoneyAndRecoverySurviveReopeningWithoutTransferringStages(string profileVersion)
     {
         using var fixture = new ModelFixture(); string path = Path.Combine(fixture.Root, "full-demo.json");
-        var budget = PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        var budget = PersistentBudgetLedger.InitializeNew(path, profileVersion);
         var original = budget.Reserve(ModelStage.PlayerDialogue, "same-player");
         budget.Settle(original.AttemptId, 1_048_576, 512);
         BudgetLedgerTests.AssertCode("recovery_original_missing_or_wrong_stage", () => budget.Reserve(ModelStage.Manual, "same-player", true));
-        var restored = PersistentBudgetLedger.OpenExisting(path, "full-demo-v1");
+        var restored = PersistentBudgetLedger.OpenExisting(path, profileVersion);
         var recovery = restored.Reserve(ModelStage.PlayerDialogue, "same-player", true);
         BudgetLedgerTests.AssertCode("money_limit", () => restored.Reserve(ModelStage.Manual, "manual"));
         budget.Settle(recovery.AttemptId, 100, 10);
@@ -149,29 +173,34 @@ public sealed class FullDemoBudgetTests
         Assert.That(restored.Snapshot().Attempts.All(a => a.Stage == "player_dialogue"), Is.True);
     }
 
-    [TestCase("initialize")]
-    [TestCase("manual-original")]
-    [TestCase("recovery")]
-    public async Task TwoProcessesCannotDuplicateInitializationSlotsOrRecovery(string mode)
+    [TestCase("initialize", "full-demo-v1")]
+    [TestCase("initialize", "full-demo-v2")]
+    [TestCase("manual-original", "full-demo-v1")]
+    [TestCase("manual-original", "full-demo-v2")]
+    [TestCase("recovery", "full-demo-v1")]
+    [TestCase("recovery", "full-demo-v2")]
+    public async Task TwoProcessesCannotDuplicateInitializationSlotsOrRecovery(string mode, string profileVersion)
     {
         using var fixture = new ModelFixture(); string path = Path.Combine(fixture.Root, "full-demo.json");
         if (mode != "initialize")
         {
-            var budget = PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+            var budget = PersistentBudgetLedger.InitializeNew(path, profileVersion);
             var original = budget.Reserve(ModelStage.PlayerDialogue, "shared-original");
             budget.MarkUnknown(original.AttemptId, "process_lost", false);
         }
         string gate = Path.Combine(fixture.Root, "gate");
-        using var one = StartChild(fixture, path, "one", gate, mode);
-        using var two = StartChild(fixture, path, "two", gate, mode);
+        using var one = StartChild(fixture, path, "one", gate, mode, profileVersion);
+        using var two = StartChild(fixture, path, "two", gate, mode, profileVersion);
         try
         {
             await WaitForFile(Path.Combine(fixture.Root, "one"));
             await WaitForFile(Path.Combine(fixture.Root, "two"));
             File.WriteAllText(gate, "go");
             await Task.WhenAll(one.WaitForExitAsync(), two.WaitForExitAsync()).WaitAsync(TimeSpan.FromSeconds(20));
-            Assert.That(new[] { one.ExitCode, two.ExitCode }, Is.EquivalentTo(new[] { 0, 10 }));
-            var snapshot = PersistentBudgetLedger.OpenExisting(path, "full-demo-v1").Snapshot();
+            string childOutput = await one.StandardOutput.ReadToEndAsync() + await one.StandardError.ReadToEndAsync()
+                + await two.StandardOutput.ReadToEndAsync() + await two.StandardError.ReadToEndAsync();
+            Assert.That(new[] { one.ExitCode, two.ExitCode }, Is.EquivalentTo(new[] { 0, 10 }), childOutput);
+            var snapshot = PersistentBudgetLedger.OpenExisting(path, profileVersion).Snapshot();
             Assert.That(snapshot.TotalAttempts, Is.EqualTo(mode == "initialize" ? 0 : 2));
             Assert.That(snapshot.SlotsHeld, Is.EqualTo(mode == "initialize" ? 0 : 2));
             Assert.That(snapshot.Attempts.Count(a => a.Recovery), Is.EqualTo(mode == "recovery" ? 1 : 0));
@@ -179,30 +208,32 @@ public sealed class FullDemoBudgetTests
         finally { Kill(one); Kill(two); }
     }
 
-    [Test]
-    public async Task KilledFullDemoRecoveryRetainsItsStageCostAndSlot()
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public async Task KilledFullDemoRecoveryRetainsItsStageCostAndSlot(string profileVersion)
     {
         using var fixture = new ModelFixture(); string path = Path.Combine(fixture.Root, "full-demo.json");
-        var budget = PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        var budget = PersistentBudgetLedger.InitializeNew(path, profileVersion);
         var original = budget.Reserve(ModelStage.PlayerDialogue, "shared-original"); budget.Settle(original.AttemptId, 100, 10);
         string gate = Path.Combine(fixture.Root, "gate"); File.WriteAllText(gate, "go");
-        using var child = StartChild(fixture, path, "killed", gate, "hold");
+        using var child = StartChild(fixture, path, "killed", gate, "hold", profileVersion);
         try { await WaitForFile(Path.Combine(fixture.Root, "killed.reserved")); }
         finally { Kill(child); }
         await child.WaitForExitAsync();
-        var restored = PersistentBudgetLedger.OpenExisting(path, "full-demo-v1");
+        var restored = PersistentBudgetLedger.OpenExisting(path, profileVersion);
         Assert.That(restored.Snapshot().ReservedMicros, Is.EqualTo(2_110_000));
         Assert.That(restored.Snapshot().SlotsHeld, Is.EqualTo(1));
         Assert.That(restored.Snapshot().SettledMicros, Is.EqualTo(280));
         BudgetLedgerTests.AssertCode("recovery_limit", () => restored.Reserve(ModelStage.PlayerDialogue, "shared-original", true));
     }
 
-    private static Process StartChild(ModelFixture fixture, string path, string ready, string gate, string mode)
+    private static Process StartChild(ModelFixture fixture, string path, string ready, string gate, string mode, string profileVersion)
     {
         string host = Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? "dotnet";
-        var start = new ProcessStartInfo(host) { UseShellExecute = false, CreateNoWindow = true };
+        var start = new ProcessStartInfo(host) { UseShellExecute = false, CreateNoWindow = true,
+            RedirectStandardOutput = true, RedirectStandardError = true };
         start.ArgumentList.Add(typeof(Program).Assembly.Location);
-        foreach (string argument in new[] { "--child-reserve", path, Path.Combine(fixture.Root, ready), gate, mode, "full-demo-v1" })
+        foreach (string argument in new[] { "--child-reserve", path, Path.Combine(fixture.Root, ready), gate, mode, profileVersion })
             start.ArgumentList.Add(argument);
         return Process.Start(start) ?? throw new InvalidOperationException("child_start_failed");
     }

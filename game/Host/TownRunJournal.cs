@@ -299,7 +299,7 @@ public static class TownSaveFile
             throw new InvalidDataException("Host snapshot branch or stage differs from its world snapshot.");
         var runtime = TownModelRuntimeProfile.Resolve(snapshot.BudgetProfileVersion, snapshot.ExecutionPurpose);
         if (state.BudgetId != runtime.BudgetId
-            || runtime.Profile.Version == ModelBudgetProfile.FullDemoVersion && snapshot.Stage is not ("baseline" or "counterfactual"))
+            || runtime.IsFullDemo && snapshot.Stage is not ("baseline" or "counterfactual"))
             throw new InvalidDataException("Host snapshot budget identity or scenario differs from its registered profile.");
         if (snapshot.DecisionMode == "rules" && snapshot.ModelRequests.Count != 0)
             throw new InvalidDataException("Rules-mode snapshot contains real model requests.");
