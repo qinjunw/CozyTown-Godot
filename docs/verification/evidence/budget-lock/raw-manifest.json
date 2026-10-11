@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "93f6ea946ad9113aeee1b9f89e7e1d66ee8e2c24",
+  "root": "artifacts/budget-lock",
+  "files": [
+    {
+      "path": "lock-final-cleanup.log",
+      "bytes": 981,
+      "sha256": "74910c319461ce40c2b7df7ec09d065d9016fbd0bd6ff4d632cd950a9ebaf8b9"
+    },
+    {
+      "path": "lock-final-cleanup.trx",
+      "bytes": 15040,
+      "sha256": "f2f22e61d427e12df149e0cca8410e2737df51c625f4910ee6ff13346453c18c"
+    },
+    {
+      "path": "lock-preservation.log",
+      "bytes": 980,
+      "sha256": "2adc4a0461c4b8d10c69c290bca7d8ddc029df6cbabc1e24c4dd6c0792033754"
+    },
+    {
+      "path": "lock-preservation.trx",
+      "bytes": 15040,
+      "sha256": "1eb285a0e35f7fff672ef26ee4b746ec851321fe6a7e6cb539c2b64033d86e0d"
+    },
+    {
+      "path": "lock-window-green.log",
+      "bytes": 980,
+      "sha256": "c546be0dbbd68120ecae61223fa9ce53878b5a8fa11da3dd9e806f1c28e08d62"
+    },
+    {
+      "path": "lock-window-green.trx",
+      "bytes": 10489,
+      "sha256": "8b378b5d6f807b9b8b84a7c25b620760ad6513e930a3d9a1a6b2fe2e9bf241e9"
+    },
+    {
+      "path": "lock-window-red.log",
+      "bytes": 10950,
+      "sha256": "ce54bf81a8c888c098f079090d3c639e3649df51624ba6be6a7da95682e7c9aa"
+    },
+    {
+      "path": "lock-window-red.trx",
+      "bytes": 20548,
+      "sha256": "b016b4d8f28d0a457f00db96702509e5559b6f2c8ae9bfb6b1fb1aa279679221"
+    },
+    {
+      "path": "manual-original-one-recheck.log",
+      "bytes": 990,
+      "sha256": "278dccdf0a673b1634186ceb2d574e42d3eefd625dae12e0c6510bda35361aa0"
+    },
+    {
+      "path": "manual-original-one-recheck.trx",
+      "bytes": 4710,
+      "sha256": "069d6319d4c2bdd7cce0404aff0ffa274768ebab919de275ef3ced8343ade82e"
+    },
+    {
+      "path": "model-complete.log",
+      "bytes": 978,
+      "sha256": "aa36dcd10a840b9f13dfbe5186cd8c8e8c9957767deea731d72404d712b02895"
+    },
+    {
+      "path": "model-complete.trx",
+      "bytes": 135625,
+      "sha256": "aef09d2fdf06c56194d2046ece1e028098f7678039a06dad9c556ba5a5cd40dd"
+    },
+    {
+      "path": "original-failures/model-final.log",
+      "bytes": 2971,
+      "sha256": "698aabc2241e8506929b504de866f7df936d96c0980808eeee5d61e44d27e7ed"
+    },
+    {
+      "path": "original-failures/model-final.trx",
+      "bytes": 125379,
+      "sha256": "65ac9cf6a3e29528a068715779ba7782f6dc0d4f9e18d747e5fafd497506f487"
+    },
+    {
+      "path": "original-failures/model-manual-original-diagnostic.log",
+      "bytes": 2757,
+      "sha256": "3e4d9f12ddecac413e413f9217285aacc681e43ea998e974d6977f6e80bd10de"
+    },
+    {
+      "path": "original-failures/model-manual-original-diagnostic.trx",
+      "bytes": 6623,
+      "sha256": "80d195d9cb86b7f46ebeee9df9014cd265a4808b5259105e48204084c1f74699"
+    }
+  ]
+}
