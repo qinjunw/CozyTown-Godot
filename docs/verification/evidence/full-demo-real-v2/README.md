@@ -10,7 +10,7 @@ gh release download full-demo-evaluation-v2-20261011 --repo qinjunw/CozyTown-God
 
 先按 `remote-assets.json` 与两份归档收据核对文件名、长度和 SHA-256，再解压到独立目录。真实 tar 根目录保留 `full-demo-real/20261011-v2/`，因此下文 `<evidence-root>` 是 `<unpack-directory>/full-demo-real/20261011-v2`；158 个原始文件的清单路径相对于该目录。冻结 Windows 离线回放程序位于其中的 `windows-replay-program.zip`，198 个文件须匹配 `windows-manifest.json`。
 
-离线 tar 根目录保留 `artifacts/full-demo-verification/`、`artifacts/verification/`、`artifacts/scene-replay/` 三棵原始目录，以及 `raw-manifest.json` 和 `secret-scan-binding.json`。其清单路径相对于解压根目录；重复 Windows 目录省略，匹配的程序由真实 tar 提供。两个归档分别核对，不将 v1 包混入 v2 复算输入。
+离线 tar 根目录保留 `artifacts/full-demo-verification/`、`artifacts/verification/`、`artifacts/scene-replay/` 三棵原始目录，以及 `archive-metadata/raw-manifest.json` 和 `archive-metadata/secret-scan-binding.json`。其清单路径相对于解压根目录；重复 Windows 目录省略，匹配的程序由真实 tar 提供。两个归档分别核对，不将 v1 包混入 v2 复算输入。
 
 `analysis.json` 由既有 `full-demo-real/summarize.py` 生成，脚本 SHA-256 为 `9e69c986c7847164a6dfd5202669c5a1a8ca433622c93525e01539dc5b78439b`。它读取两组完整公开宿主报告和四份 ZIP，核对 ZIP 哈希，递归裁切活动祖先保存前缀，保留全部物理尝试，重建居民资产。`protocol-input.json` 包含全部 71 次预算尝试；公开 parser 通过 69 条，另两条分别是 HTTP 无效 JSON 及 HTTP 前取消的空候选。空候选不算完整响应或结构成功。
 
