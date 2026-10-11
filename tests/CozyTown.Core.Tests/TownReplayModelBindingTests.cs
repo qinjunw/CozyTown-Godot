@@ -9,6 +9,122 @@ public sealed class TownReplayModelBindingTests
 {
     private const string Attempt = "00000000-0000-0000-0000-000000000001";
 
+    [Test]
+    public void NpcCompletionFailureCannotRetainTheRecordedSuccessfulWorldResult()
+    {
+        var fixture = new Fixture(); fixture.Complete();
+        var package = AlterInput(fixture.Recording.Complete(), "model_completion_persisted",
+            node => node["failureCode"] = "request_timeout");
+
+        var report = TownReplay.Run(package);
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("result"));
+        Assert.That(report.Field, Is.EqualTo("model.npcError"));
+        Assert.That(report.Expected, Is.EqualTo("\"request_timeout\""));
+        Assert.That(report.Actual, Is.EqualTo("null"));
+    }
+
+    [Test]
+    public void NpcResponseWithAnInvalidCandidateSchemaReplaysItsRecordedFailure()
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse("{\"action\":\"wait\"}", null, "candidate_schema_invalid");
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [TestCase("request_timeout")]
+    [TestCase("candidate_schema_invalid")]
+    public void SuccessfulNpcCompletionCannotInventAWorldFailure(string error)
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse(TownJson.Serialize(fixture.Candidate), null, error);
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("result"));
+        Assert.That(report.Field, Is.EqualTo("model.npcError"));
+    }
+
+    [TestCase("usage_invalid_or_missing")]
+    [TestCase("response_late")]
+    public void FailedNpcCompletionCanRetainUnusedCandidateJson(string failure)
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse(TownJson.Serialize(fixture.Candidate), null, failure, failure);
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [Test]
+    public void FailedNpcCompletionCannotPassItsCandidateToTheWorld()
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse(TownJson.Serialize(fixture.Candidate), fixture.Candidate, "response_late", "response_late");
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("result"));
+        Assert.That(report.Field, Is.EqualTo("model.worldCandidate"));
+    }
+
+    [Test]
+    public void NpcCompletionWithoutCandidateJsonReplaysTheMissingCandidateResult()
+    {
+        var fixture = new Fixture(); fixture.CompleteResponse(null, null, null);
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [TestCase(161, true)]
+    [TestCase(200, true)]
+    [TestCase(201, false)]
+    public void NpcReplayKeepsTheProtocolTextLimitSeparateFromWorldValidation(int length, bool parses)
+    {
+        var fixture = new Fixture();
+        var candidate = fixture.Candidate with { Text = new string('字', length) };
+        fixture.CompleteResponse(TownJson.Serialize(candidate), parses ? candidate : null, parses ? null : "candidate_schema_invalid");
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [TestCase(null)]
+    [TestCase("invalid\nline")]
+    public void NpcResponseWithInvalidDialogueReplaysItsSchemaFailure(string? text)
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse(TownJson.Serialize(fixture.Candidate with { Text = text! }), null, "candidate_schema_invalid");
+
+        var report = TownReplay.Run(fixture.Recording.Complete());
+
+        Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [Test]
+    public void NpcCompletionCannotChangeTheRecordedFailureCode()
+    {
+        var fixture = new Fixture(); fixture.CompleteFailure(true, "authentication_failed");
+        var package = AlterInput(fixture.Recording.Complete(), "model_completion_persisted",
+            node => node["failureCode"] = "request_timeout");
+
+        var report = TownReplay.Run(package);
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("result"));
+        Assert.That(report.Field, Is.EqualTo("model.npcError"));
+    }
+
     [TestCase(null)]
     [TestCase("authentication_failed")]
     public void RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(string? stopReason)
@@ -171,6 +287,18 @@ public sealed class TownReplayModelBindingTests
         return copy;
     }
 
+    private static TownReplayPackage AlterInput(TownReplayPackage package, string command, Action<JsonNode> change)
+    {
+        var copy = TownJson.Clone(package);
+        int index = Array.FindIndex(copy.Boundaries, trace => trace.Command == command);
+        var trace = copy.Boundaries[index];
+        var node = JsonNode.Parse(trace.InputJson)!; change(node);
+        string json = node.ToJsonString();
+        copy.Boundaries[index] = trace with { InputJson = json, InputFingerprint = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+            System.Text.Encoding.UTF8.GetBytes(trace.Command + "\n" + json))).ToLowerInvariant() };
+        return copy;
+    }
+
     private sealed class Fixture
     {
         public TownWorld World { get; }
@@ -245,6 +373,22 @@ public sealed class TownReplayModelBindingTests
             Recording.RecordExternal("model_mailbox_enqueued", new { dispatch = Dispatch });
             Recording.RecordExternal("model_mailbox_entered", new { dispatch = Dispatch });
             World.ReceiveResult(new(World.SessionId, Request.LogicalRequestId, Attempt, Request.ResidentId, null, "real_model", failure, 2));
+            World.Advance(.1, 0);
+        }
+
+        public void CompleteResponse(string? candidateJson, ActionCandidate? candidate, string? error, string? failureCode = null)
+        {
+            Recording.RecordExternal("model_response_arrived", new { dispatch = Dispatch,
+                responseBody = TownJson.Serialize(new { choices = new[] { new { message = new { content = candidateJson } } } }),
+                elapsed = TimeSpan.FromSeconds(2) });
+            World.MarkResponseArrived(World.SessionId, Request.LogicalRequestId, Attempt, 2);
+            Recording.RecordExternal("model_completion_persisted", new { dispatch = Dispatch,
+                dispatchedAtUtc = DateTimeOffset.UnixEpoch, arrivedAtUtc = DateTimeOffset.UnixEpoch.AddSeconds(2),
+                logicalElapsedToArrival = TimeSpan.FromSeconds(2), candidateJson, failureCode });
+            Recording.RecordExternal("model_mailbox_enqueued", new { dispatch = Dispatch });
+            Recording.RecordExternal("model_mailbox_entered", new { dispatch = Dispatch });
+            World.ReceiveResult(new(World.SessionId, Request.LogicalRequestId, Attempt, Request.ResidentId,
+                candidate, "real_model", error, 2));
             World.Advance(.1, 0);
         }
     }

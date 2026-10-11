@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "developmentBaseCommit": "20ebfba2186d59112d8efba5c85b66dda11ab18f",
+  "publicBoundary": "TownReplay.Run",
+  "originalFailureRunsPreserved": true,
+  "originalRunCommandsNotFullyCaptured": true,
+  "reproductionCommand": [
+    "<locked-dotnet>/dotnet.exe",
+    "test",
+    "tests/CozyTown.Core.Tests/CozyTown.Core.Tests.csproj",
+    "--no-restore",
+    "--filter",
+    "FullyQualifiedName~TownReplayModelBindingTests"
+  ],
+  "reproductionCommandIsOriginalReceipt": false,
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "runs": [
+    {
+      "directory": "red-green/red-transport-failure",
+      "sourceState": "Original 20ebfba runtime plus the new failing public test",
+      "exitCode": 1,
+      "counts": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "results": [
+        {
+          "name": "NpcCompletionFailureCannotRetainTheRecordedSuccessfulWorldResult",
+          "outcome": "Failed"
+        }
+      ],
+      "files": [
+        {
+          "file": "exit.json",
+          "bytes": 23,
+          "sha256": "c34bc644b4dfc96082e294ccb49ac40bdf34a3c659c956ffef43981ed30b2234"
+        },
+        {
+          "file": "red.trx",
+          "bytes": 3885,
+          "sha256": "aab74b319ce9570961176cd8fd104582c74ae60ac35178d504d89056ca068950"
+        },
+        {
+          "file": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "stdout.log",
+          "bytes": 1962,
+          "sha256": "8243d2d196c7067734efb46e428b68a253f0a109160cdc306d2e41e7cdda3c0f"
+        }
+      ]
+    },
+    {
+      "directory": "red-green/green-transport-failure",
+      "sourceState": "Intermediate direct error comparison; schema regression not yet added",
+      "exitCode": 0,
+      "counts": {
+        "total": 24,
+        "executed": 24,
+        "passed": 24,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "results": [
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"activityRevision\",999)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"stage\",1,\"model.stage\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"kind\",\"player_text\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcDispatchCannotReplaceTheHostFrozenProviderInput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DispatchBudgetSnapshotMustBelongToTheReplayedLedger",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"logicalRequestId\",\"another-request\",\"model.logicalRequestId\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(False,\"request_timeout\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v2\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"residentId\",\"eli\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(True,\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalCannotReplaceALateTransportArrivalWithATimelyWorldArrival",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"isRecovery\",True,\"model.isRecovery\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"playerSessionId\",\"invented-player-session\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"runId\",\"wrong-run\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResultMustKeepTheRecordedTransportArrivalTime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcCompletionFailureCannotRetainTheRecordedSuccessfulWorldResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcResultWithACompleteTransportBodyRequiresTheWorldArrivalBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(\"authentication_failed\")",
+          "outcome": "Passed"
+        }
+      ],
+      "files": [
+        {
+          "file": "exit.json",
+          "bytes": 23,
+          "sha256": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6"
+        },
+        {
+          "file": "green.trx",
+          "bytes": 37068,
+          "sha256": "039f4ae9491117f6c123d972c8a6dfe786ee636636db9601a940bee051d4981c"
+        },
+        {
+          "file": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "stdout.log",
+          "bytes": 850,
+          "sha256": "8e012c74d024afe118ff266bdb728561d29cbe74e26f6573b0b3b67390b5613d"
+        }
+      ]
+    },
+    {
+      "directory": "red-green/red-schema-failure",
+      "sourceState": "Intermediate direct error comparison plus the valid schema-failure test",
+      "exitCode": 1,
+      "counts": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "results": [
+        {
+          "name": "NpcResponseWithAnInvalidCandidateSchemaReplaysItsRecordedFailure",
+          "outcome": "Failed"
+        }
+      ],
+      "files": [
+        {
+          "file": "exit.json",
+          "bytes": 23,
+          "sha256": "c34bc644b4dfc96082e294ccb49ac40bdf34a3c659c956ffef43981ed30b2234"
+        },
+        {
+          "file": "red.trx",
+          "bytes": 4880,
+          "sha256": "4db3440342a40ffdee7c9da9586452b09467a9cfb78cc0ff73d7bdcb9efb93f8"
+        },
+        {
+          "file": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "stdout.log",
+          "bytes": 2535,
+          "sha256": "3efa7e73f2959d231afc6cf972d4a0f167eb8f5c7b207a2aba3881fac46c0eab"
+        }
+      ]
+    },
+    {
+      "directory": "red-green/green-schema-failure",
+      "sourceState": "Host-compatible NPC outcome mapping plus the two new public tests",
+      "exitCode": 0,
+      "counts": {
+        "total": 25,
+        "executed": 25,
+        "passed": 25,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "results": [
+        {
+          "name": "NpcDispatchCannotReplaceTheHostFrozenProviderInput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResultMustKeepTheRecordedTransportArrivalTime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalCannotReplaceALateTransportArrivalWithATimelyWorldArrival",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DispatchBudgetSnapshotMustBelongToTheReplayedLedger",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v2\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"stage\",1,\"model.stage\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"isRecovery\",True,\"model.isRecovery\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"logicalRequestId\",\"another-request\",\"model.logicalRequestId\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"playerSessionId\",\"invented-player-session\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"runId\",\"wrong-run\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResponseWithAnInvalidCandidateSchemaReplaysItsRecordedFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"kind\",\"player_text\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(False,\"request_timeout\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"activityRevision\",999)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcCompletionFailureCannotRetainTheRecordedSuccessfulWorldResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(True,\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"residentId\",\"eli\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcResultWithACompleteTransportBodyRequiresTheWorldArrivalBoundary",
+          "outcome": "Passed"
+        }
+      ],
+      "files": [
+        {
+          "file": "exit.json",
+          "bytes": 23,
+          "sha256": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6"
+        },
+        {
+          "file": "green.trx",
+          "bytes": 38486,
+          "sha256": "a16abf54fb9ff542f3973ed8f45902fa547f04b823d56f095d266269581e53d3"
+        },
+        {
+          "file": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "stdout.log",
+          "bytes": 847,
+          "sha256": "4d1e07c4866d90ce00b287fcc6ff0399791e924f734de6e662216e14e7e0a1cc"
+        }
+      ]
+    },
+    {
+      "directory": "red-green/regression-outcomes",
+      "sourceState": "Final df62408 source and all 14 added test cases before commit",
+      "exitCode": 0,
+      "counts": {
+        "total": 37,
+        "executed": 37,
+        "passed": 37,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "results": [
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResponseWithInvalidDialogueReplaysItsSchemaFailure(\"invalid\\nline\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalCannotReplaceALateTransportArrivalWithATimelyWorldArrival",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"residentId\",\"eli\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionCannotPassItsCandidateToTheWorld",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"runId\",\"wrong-run\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcCompletionCannotChangeTheRecordedFailureCode",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionCanRetainUnusedCandidateJson(\"usage_invalid_or_missing\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionCanRetainUnusedCandidateJson(\"response_late\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcCompletionFailureCannotRetainTheRecordedSuccessfulWorldResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(True,\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"playerSessionId\",\"invented-player-session\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcArrivalAndPersistenceAcceptBothRecordedArrivalOrders(False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"logicalRequestId\",\"another-request\",\"model.logicalRequestId\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcReplayKeepsTheProtocolTextLimitSeparateFromWorldValidation(200,True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SuccessfulNpcCompletionCannotInventAWorldFailure(\"request_timeout\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v1\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(\"full-demo-v2\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcResultWithACompleteTransportBodyRequiresTheWorldArrivalBoundary",
+          "outcome": "Passed"
+        },
+        {
+          "name": "DispatchBudgetSnapshotMustBelongToTheReplayedLedger",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(\"authentication_failed\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcDispatchCannotReplaceTheHostFrozenProviderInput",
+          "outcome": "Passed"
+        },
+        {
+          "name": "SuccessfulNpcCompletionCannotInventAWorldFailure(\"candidate_schema_invalid\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"isRecovery\",True,\"model.isRecovery\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcReplayKeepsTheProtocolTextLimitSeparateFromWorldValidation(201,False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FrozenRequestMustKeepTheAdmittedAttemptOwnership(\"stage\",1,\"model.stage\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResultMustKeepTheRecordedTransportArrivalTime",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResponseWithAnInvalidCandidateSchemaReplaysItsRecordedFailure",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcReplayKeepsTheProtocolTextLimitSeparateFromWorldValidation(161,True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"activityRevision\",999)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(False,\"request_timeout\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "AlreadyAdmittedNpcResponseCanFinishAfterTheLedgerHasStopped(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcResponseWithInvalidDialogueReplaysItsSchemaFailure(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "NpcCompletionWithoutCandidateJsonReplaysTheMissingCandidateResult",
+          "outcome": "Passed"
+        },
+        {
+          "name": "CurrentNpcDispatchMustDescribeTheRecordedWorldRequest(\"kind\",\"player_text\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "RealResponseWithoutAnAdmittedBudgetAttemptStopsAtItsFirstModelBoundary(null)",
+          "outcome": "Passed"
+        }
+      ],
+      "files": [
+        {
+          "file": "exit.json",
+          "bytes": 138,
+          "sha256": "30113c057957094ceb5894827806bb879b828738b05e308e70ab67d4ff5b31b5"
+        },
+        {
+          "file": "regression.trx",
+          "bytes": 55712,
+          "sha256": "c6b128edd484c610fb84c419753b6c11eda96abe26cccc24a178af83a30d49eb"
+        },
+        {
+          "file": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "stdout.log",
+          "bytes": 851,
+          "sha256": "fce4e89bbc883ec533cf81113c35a28dcb7b5b375698f0acb11e6e99e916d1d8"
+        }
+      ]
+    }
+  ]
+}

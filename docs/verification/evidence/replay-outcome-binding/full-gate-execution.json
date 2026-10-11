@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "df624084ee7baafa61162733ac4323442d359e11",
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "tools/windows/verify-full-demo.ps1",
+    "-ExpectedCommit",
+    "df624084ee7baafa61162733ac4323442d359e11",
+    "-ToolsRoot",
+    "<locked-toolchain-root>"
+  ],
+  "startedAtUtc": "2026-10-11T17:05:19.5656844Z",
+  "finishedAtUtc": "2026-10-11T17:19:50.1908567Z",
+  "exitCode": 0,
+  "rawReportSha256": "c47eb74137ccca84d89ea9c1ec3e44673cf23f1538ea8d594d88013784a6f3bf",
+  "stdoutEvidence": "Original orchestration stdout/stderr and wrapper exit receipt preserved in preparation/",
+  "stdoutSha256": "c0de6d78649f158c1edf63bf2fcbc33792fcbd02ae742c0c7825c90f372c31cc",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "commandReceiptSha256": "20ca29d57123ef2dd7ee5fe4d24d8f36b8aa44f892f30974f2b7ab2f88678ee7",
+  "realHttpSends": 0,
+  "graphicalRequested": false
+}

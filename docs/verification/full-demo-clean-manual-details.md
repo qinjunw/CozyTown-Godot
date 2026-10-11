@@ -1,6 +1,6 @@
 # 完整 Demo Windows 人工步骤附录
 
-以下步骤配合[七组主清单](full-demo-clean-manual.md)使用，均待人工执行，不是本候选的通过证据。运行时固定为 `576ae64e38f854bb22b13186e6a9d2ecc9799d72`，模拟源码摘要为 `301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf`。最终反馈归 [验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
+以下步骤配合[七组主清单](full-demo-clean-manual.md)使用，作为操作参考保留。当前回放修复候选固定为 `df624084ee7baafa61162733ac4323442d359e11`，模拟源码摘要为 `03cc1a819e8ae1d7f9adfe38faf13f3defc514265637444283432afc93c88ea1`。原 `576ae64` 的七组及 M01 人工通过保持原源码归属，本次仅重核受影响的离线入口，不重复整套人工操作或新增真实调用。最终反馈归 [验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
 
 ## 启动与失败记录约定
 

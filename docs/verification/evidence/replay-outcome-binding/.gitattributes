@@ -1,0 +1,2 @@
+*.json -text whitespace=cr-at-eol
+runtime-source.diff -text whitespace=cr-at-eol
