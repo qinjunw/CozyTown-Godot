@@ -1,6 +1,8 @@
 # 玩家对话 Windows 人工验收
 
-状态：待用户执行。使用同一候选导出包，在 PowerShell 7 中运行以下入口；`Executable` 指向包内的 `CozyTown.exe`，保留它旁边的导出数据文件。
+状态：用户已于 2026-10-11 反馈“对话验收通过了，按规范关票并继续推进真实评测吧。”验收对象为 `de520bab` 离线候选及下列四组操作，候选与归档哈希见[验证记录](player-dialogue.md)。此反馈作为人工通过依据；用户未提供逐项观察或截图。
+
+复测时使用同一候选导出包，在 PowerShell 7 中运行以下入口；`Executable` 指向包内的 `CozyTown.exe`，保留它旁边的导出数据文件。
 
 ```powershell
 pwsh -File tools/windows/run-dialogue-fixture.ps1 -Executable '<absolute-path-to-CozyTown.exe>' -Fixture success

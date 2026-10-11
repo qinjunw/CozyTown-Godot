@@ -10,7 +10,7 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，待用户操作的项目见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
 
-居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，Windows 画面和键鼠仍待用户按[对话清单](docs/verification/player-dialogue-manual.md)验收；真实玩家文本已接通独立预算，实际服务样本仍待综合评测。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
+居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，用户已于 2026-10-11 通过[Windows 对话清单](docs/verification/player-dialogue-manual.md)验收；真实玩家文本已接通独立预算，实际服务样本仍待综合评测。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
 
 ## 构建与运行
 

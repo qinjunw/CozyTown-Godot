@@ -28,7 +28,9 @@ dotnet build game/CozyTown.Game.csproj
 
 ## Windows 用户操作清单
 
-状态：待用户执行。使用同一候选构建的普通入口，保留运行记录目录与使用的 `--dialogue-fixture`。
+状态：2026-10-11 用户反馈“对话验收通过了，按规范关票并继续推进真实评测吧。”此前交付的 `de520bab` 离线候选及[四组人工清单](player-dialogue-manual.md)据此记为通过。用户未提供逐项观察或截图；本记录不补写这些信息。真实服务样本由完整 Demo 综合评测承接。
+
+以下保留复测步骤，使用同一候选构建的普通入口，保留运行记录目录与使用的 `--dialogue-fixture`。
 
 1. 普通规则模式下依次靠近 Mina、Eli、Ren、Sora，按 E 打开，确认姓名、肖像、固定回应与暂停时钟。点击生成，确认固定客户端来源、一段文本和禁用的生成按钮；点击继续散步后世界恢复。
 2. 使用 `delayed` 样例。生成后立即 Esc 打开菜单，再关闭菜单；重复一次生成后切出应用、两秒后切回。确认等待状态可读、叠加暂停期间新文本不出现、恢复后才出现当前居民文本。
@@ -40,7 +42,7 @@ dotnet build game/CozyTown.Game.csproj
 
 ## 新评测预算接线
 
-完整 Demo 预算的 `player_dialogue` 阶段尚由综合评测接线承接。接线点是 `TownGame.PlayerDialogue.cs` 的真实模式分支与 `SendPlayerDialogueAsync`，以及 `TownDialogueHost.Freeze` 的阶段参数和 `TownSaveFile.ValidateHostSnapshot` 的阶段校验。玩家传输必须继续使用 `player_text` 身份、同一客户端/账本/两物理槽及持久终结 registry。当前首切片旧 profile 的真实玩家入口明确回退。
+完整 Demo 的 `player_dialogue` 阶段已接通 `TownGame.PlayerDialogue.cs` 的真实模式分支与 `SendPlayerDialogueAsync`、`TownDialogueHost.Freeze` 的阶段参数及 `TownSaveFile.ValidateHostSnapshot` 的阶段校验。玩家传输使用 `player_text` 身份、同一客户端/账本/两物理槽及持久终结 registry；接线和离线证据见[宿主验证记录](full-demo-host-2026-10-10.md)。实际服务样本待综合评测。首切片旧 profile 的真实玩家入口明确回退。
 
 ## 固定候选
 

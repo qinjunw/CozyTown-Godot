@@ -2,7 +2,7 @@
 
 完整 Demo 驱动使用[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)和注册输入 [full-demo-input.json](../game/Content/full-demo-input.json)。`fixed` 与 `real` 执行同一顺序：购买种子和饲料、种植浇水、喂鸡、首日窗口、两次 12 小时睡眠、领蛋再喂食、次日窗口中的保存读取，以及依次与 Mina、Eli、Ren、Sora 交谈。
 
-代码候选 `71be140d24ade8e78d96ab68113221dfa760e08e` 已通过完整离线门，结果与完整包哈希见[宿主验证记录](verification/full-demo-host-2026-10-10.md)。真实评测和玩家对话人工验收仍未完成。
+代码候选 `71be140d24ade8e78d96ab68113221dfa760e08e` 已通过完整离线门，结果与完整包哈希见[宿主验证记录](verification/full-demo-host-2026-10-10.md)。用户已于 2026-10-11 通过[玩家对话人工验收](verification/player-dialogue-manual.md)，真实评测仍待执行。
 
 输入版本为 `full-demo-input-v1`。外部输入只允许与已注册命令和参数相同的内容，不能通过修改 JSON 扩大窗口、调用数或改变操作。默认输入使用 Godot 资源路径，源工程和 Windows 导出包都能读取。
 

@@ -42,7 +42,7 @@
 
 ## 已确认的边界与待验收项
 
-玩家对话暂停、窄范围生成/展示、关闭/切人及恢复流程已经用户确认，见[玩家对话合同](PLAYER_DIALOGUE_CONTRACT.md)。固定检查已通过，画面与键鼠仍待用户按[人工清单](verification/player-dialogue-manual.md)验收。范围为一次交互的一段反馈。
+玩家对话暂停、窄范围生成/展示、关闭/切人及恢复流程已经用户确认，见[玩家对话合同](PLAYER_DIALOGUE_CONTRACT.md)。固定检查已通过，用户已于 2026-10-11 通过[人工清单](verification/player-dialogue-manual.md)验收。范围为一次交互的一段反馈。
 
 原首轮模型预算的发送数已达 **48/48**，保守结算为 **人民币 0.300418 元**，见[实测记录](verification/four-resident-real-model-2026-09-20.md)。完整 Demo 的独立预算、两天规模及指标已获批准，见[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。预算配置与宿主离线门已通过，本轮真实账本和样本仍未创建；实际评测及最终 Windows 验收由对应后继票承接。
 
