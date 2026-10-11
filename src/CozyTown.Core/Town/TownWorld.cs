@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
@@ -179,13 +177,44 @@ public sealed partial class TownWorld
             var targets = commitment is null ? observation.Residents.Select(r => r.Id).ToArray() : new[] { Other(commitment, resident.Id) };
             var windowEnd = Math.Min(ScheduleEnd(resident), commitment?.EndsAtMinute ?? double.MaxValue);
             var id = NewIdentity("decision");
-            var input = TownJson.Serialize(new
+            var input = TownNpcJson.Serialize(new
             {
                 protocol = "town-candidate-v1", resident = new { resident.Id, definition = _content.ResidentData(resident.Id).Personality, desiredResourceId = _content.ResidentData(resident.Id).DesiredResourceId, inventory = resident.Inventory, resident.Coins },
                 localObservation = observation, memories = resident.Memories.TakeLast(6),
                 freeWindow = new { startsAtMinute = _state.WorldMinute, endsAtMinute = windowEnd },
                 commitment = commitment is null ? null : new { commitment.Id, commitment.Stage, commitment.InitiatorId, commitment.InviteeId, commitment.PlaceId, commitment.TurnNumber, commitment.OfferResourceId, commitment.OfferQuantity, commitment.OfferPrice, commitment.OfferFromResidentId, dialogue = commitment.Dialogue.TakeLast(6) },
                 allowedActions = allowed, allowedTargets = targets,
+                actionConstraints = allowed.Select(action => new
+                {
+                    action,
+                    nullFields = action switch
+                    {
+                        "wait" => new[] { "targetId", "placeId", "resourceId", "accept" },
+                        "invite" => ["resourceId", "accept"],
+                        "respond" => ["placeId", "resourceId"],
+                        "propose_exchange" => ["placeId", "accept"],
+                        _ => ["placeId", "resourceId", "accept"]
+                    },
+                    zeroFields = action == "propose_exchange" ? Array.Empty<string>() : ["quantity", "price"]
+                }),
+                tradeConstraints = new
+                {
+                    proposingSellerId = resident.Id,
+                    priceIsTotalCoinsPaidByBuyer = true,
+                    barterAllowed = false,
+                    availableSales = resident.Inventory.Where(p => p.Value > 0).OrderBy(p => p.Key, StringComparer.Ordinal)
+                        .Select(p => new { resourceId = p.Key, maximumQuantity = Math.Min(p.Value, 1000) }),
+                    pendingOffer = commitment?.Stage == "exchange_offered" ? new
+                    {
+                        sellerId = commitment.OfferFromResidentId,
+                        buyerId = Other(commitment, commitment.OfferFromResidentId!),
+                        resourceId = commitment.OfferResourceId,
+                        quantity = commitment.OfferQuantity,
+                        totalCoinPrice = commitment.OfferPrice,
+                        selfCanPay = resident.Id != commitment.OfferFromResidentId && resident.Coins >= commitment.OfferPrice
+                    } : null,
+                    previousOfferIsHistorical = commitment?.OfferResourceId is not null && commitment.Stage != "exchange_offered"
+                },
                 rules = "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets.",
                 candidateFields = new { action = "one allowed action", targetId = "legal resident ID or null", placeId = "visible place ID for invite, otherwise null", resourceId = "own resource ID for propose_exchange, otherwise null", quantity = "positive integer for exchange, otherwise 0", price = "nonnegative total coins for exchange, otherwise 0", accept = "boolean for respond, otherwise null", text = "brief in-character Chinese speech, maximum 160 characters" }
             });

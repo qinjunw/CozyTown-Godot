@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/CozyTown.Core/CozyTown.Core.csproj" />
+    <None Include="../../docs/verification/evidence/full-demo-real/rejected-samples.json" Link="Fixtures/rejected-samples.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
