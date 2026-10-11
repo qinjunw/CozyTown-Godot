@@ -144,6 +144,18 @@ public sealed class TownReplayModelBindingTests
         Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
     }
 
+    [TestCase("full-demo-v1")]
+    [TestCase("full-demo-v2")]
+    public void RegisteredFullDemoProfilesBindTheirOwnAdmittedModelAttempt(string version)
+    {
+        var fixture = new Fixture(profile: version == "full-demo-v1" ? TownReplayBudgetProfile.FullDemo : TownReplayBudgetProfile.FullDemoV2);
+        fixture.Complete();
+        Assert.That(TownReplay.Run(fixture.Recording.Complete()).Passed, Is.True);
+        var noAttempt = fixture.Recording.Complete() with { InitialBudget = fixture.Recording.Complete().InitialBudget! with
+            { Attempts = [], TotalAttempts = 0, SlotsHeld = 0, ReservedMicros = 0 } };
+        Assert.That(TownReplay.Run(noAttempt).Field, Is.EqualTo("model.budgetAttempt"));
+    }
+
     private static TownReplayPackage AlterDispatches(TownReplayPackage package, Action<JsonNode> change)
     {
         var copy = TownJson.Clone(package);
@@ -167,18 +179,19 @@ public sealed class TownReplayModelBindingTests
         public object Dispatch { get; }
         public ActionCandidate Candidate { get; }
 
-        public Fixture(bool admitted = true, string? stopReason = null, bool freeze = false)
+        public Fixture(bool admitted = true, string? stopReason = null, bool freeze = false, TownReplayBudgetProfile? profile = null)
         {
             var content = TownReplayParentContinuityTests.Content();
-            World = new TownWorld(content); World.Advance(.001, 0);
+            profile ??= TownReplayBudgetProfile.FirstSlice;
+            World = new TownWorld(content, budgetId: profile.BudgetId); World.Advance(.001, 0);
             Request = World.GetDecisionRequests().Single();
             var host = freeze ? new TownInputHost(content, World) : null;
             Recording = new TownRecording(content, World, host);
             var attempts = admitted ? new[] { new TownReplayBudgetAttempt(Attempt, "baseline", Request.LogicalRequestId,
                 false, "reserved", true, 2_110_000, 0, null, null, null) } : [];
-            var budget = new TownReplayBudgetState(TownWorld.DefaultBudgetId, "CNY", 5_000_000, 0,
+            var budget = new TownReplayBudgetState(profile.BudgetId, "CNY", 5_000_000, 0,
                 admitted ? 2_110_000 : 0, attempts.Length, attempts.Length, stopReason, attempts);
-            Recording.SetInitialBudget(budget);
+            Recording.SetInitialBudget(budget, profile);
             var frozenRequest = new
             {
                 identity = new { runId = World.State.BranchId, sessionId = World.SessionId,
