@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "archive": "raw-evidence.zip",
+  "archiveSha256": "b3fb92dd94fce2d718686ee2447781c3f4905700674173f2cc4b8494f49f3854",
+  "entries": 1003,
+  "hashedRawFiles": 1001,
+  "rawBytes": 2832170877,
+  "embeddedManifests": 2,
+  "checkedAtUtc": "2026-10-11T13:03:04.2974139Z"
+}
