@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "509e4a34a05815f480f0f0f72e3b5bf5ff892762",
+  "baseCommit": "90b009a3576502737dca382d3dae7d5208ab361c",
+  "ticket": "https://github.com/qinjunw/CozyTown-Godot/issues/39",
+  "passed": true,
+  "unitTotal": 634,
+  "unitReports": [
+    {
+      "path": "unit/core-complete.trx",
+      "sha256": "946415776710371e4bad423815a3bf4471d3832671d11cd7c78227d4cc52a7e8",
+      "counts": {
+        "total": "301",
+        "executed": "301",
+        "passed": "301",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:28:27.5596602+08:00",
+        "queuing": "2026-10-11T21:28:27.5596615+08:00",
+        "start": "2026-10-11T21:28:25.2451657+08:00",
+        "finish": "2026-10-11T21:28:44.6610458+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "unit/model-complete.trx",
+      "sha256": "07d806bfc6d5498156c790abd6d941151957918410ec55951d53c089898603e7",
+      "counts": {
+        "total": "83",
+        "executed": "83",
+        "passed": "83",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:25:44.4821272+08:00",
+        "queuing": "2026-10-11T21:25:44.4821284+08:00",
+        "start": "2026-10-11T21:25:41.7304291+08:00",
+        "finish": "2026-10-11T21:26:15.8597471+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "unit/host-complete.trx",
+      "sha256": "253d6b82d04caf511086378c3e9a3b7aeacbb4f4db615752ecd7070016d6836d",
+      "counts": {
+        "total": "250",
+        "executed": "250",
+        "passed": "250",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:26:43.6205581+08:00",
+        "queuing": "2026-10-11T21:26:43.6205594+08:00",
+        "start": "2026-10-11T21:26:41.3053106+08:00",
+        "finish": "2026-10-11T21:27:13.4821081+08:00"
+      },
+      "failedTests": []
+    }
+  ],
+  "redGreenReports": [
+    {
+      "path": "red-green/budget-stop-green.trx",
+      "sha256": "bb90f9ec51781185b2f85fd1ff6d9a0e7035b59ac9fd149b3a0c24c3bf364af6",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:19:27.0051415+08:00",
+        "queuing": "2026-10-11T21:19:27.0051425+08:00",
+        "start": "2026-10-11T21:19:24.2272068+08:00",
+        "finish": "2026-10-11T21:19:27.0171439+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "red-green/core-profile-green.trx",
+      "sha256": "e83e753f9f3f745554d6741f555e9d2890f2678e901d988b7ecc3ba7137bb100",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:20:50.9813760+08:00",
+        "queuing": "2026-10-11T21:20:50.9813773+08:00",
+        "start": "2026-10-11T21:20:48.7931508+08:00",
+        "finish": "2026-10-11T21:20:50.9970731+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "red-green/core-profile-red.trx",
+      "sha256": "9afaca4f6ff1cd9288948def3cb5267db132537f4e84cdbc6e528dda4bbf858b",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "1",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:20:26.7018293+08:00",
+        "queuing": "2026-10-11T21:20:26.7018304+08:00",
+        "start": "2026-10-11T21:20:23.9925686+08:00",
+        "finish": "2026-10-11T21:20:26.7157839+08:00"
+      },
+      "failedTests": [
+        "FullDemoRecordingUsesItsOwnStageAndTotalLimits(\"full-demo-v2\",\"cozytown-godot-full-demo-20261011-v2\")"
+      ]
+    },
+    {
+      "path": "red-green/host-routing-green.trx",
+      "sha256": "781e1d1e9aab1148038867a69785f1a51bda14650d63a5e9f0d1265495abc777",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "2",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:21:52.5319199+08:00",
+        "queuing": "2026-10-11T21:21:52.5319213+08:00",
+        "start": "2026-10-11T21:21:50.1944785+08:00",
+        "finish": "2026-10-11T21:21:52.5478359+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "red-green/host-routing-red.trx",
+      "sha256": "166f2a72a1a2c05e540855a6bf669896b03290a91ebcd6b3256cdfdc17885324",
+      "counts": {
+        "total": "2",
+        "executed": "2",
+        "passed": "1",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:21:20.9803154+08:00",
+        "queuing": "2026-10-11T21:21:20.9803166+08:00",
+        "start": "2026-10-11T21:21:18.5905581+08:00",
+        "finish": "2026-10-11T21:21:21.0004652+08:00"
+      },
+      "failedTests": [
+        "CompleteExperimentSelectsItsOwnIdentityAndBothReplayAndRequestStages(\"full-demo-v2\",\"cozytown-godot-full-demo-20261011-v2\")"
+      ]
+    },
+    {
+      "path": "red-green/host-save-scenario-green.trx",
+      "sha256": "442eb311fe97aba4eb370e6fc378e90e6b346335a4c3180e46906e7d123133b9",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:22:59.7238202+08:00",
+        "queuing": "2026-10-11T21:22:59.7238215+08:00",
+        "start": "2026-10-11T21:22:57.2478764+08:00",
+        "finish": "2026-10-11T21:22:59.7435158+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "red-green/host-save-scenario-red.trx",
+      "sha256": "a4ad0efff9554e4d472fba03806219820a20cfcea58be6e9b5d5826edc2e3a62",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:22:40.0828839+08:00",
+        "queuing": "2026-10-11T21:22:40.0828852+08:00",
+        "start": "2026-10-11T21:22:37.3748159+08:00",
+        "finish": "2026-10-11T21:22:40.0969714+08:00"
+      },
+      "failedTests": [
+        "RepairedDemoSaveCannotImportAnOfflineFixtureScenario"
+      ]
+    },
+    {
+      "path": "red-green/model-registration-green.trx",
+      "sha256": "2f3fc8ec742b9231b55987c5c4d3e3647ff15a0a92612c27ad8157c758ff3d06",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "1",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:17:20.4906743+08:00",
+        "queuing": "2026-10-11T21:17:20.4906753+08:00",
+        "start": "2026-10-11T21:17:19.1026946+08:00",
+        "finish": "2026-10-11T21:17:20.4992916+08:00"
+      },
+      "failedTests": []
+    },
+    {
+      "path": "red-green/model-registration-red.trx",
+      "sha256": "a04b26572476f548a735750544af26156bdb18978a35416e9a1e34291a87ecfc",
+      "counts": {
+        "total": "1",
+        "executed": "1",
+        "passed": "0",
+        "failed": "1",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "times": {
+        "creation": "2026-10-11T21:16:58.6340928+08:00",
+        "queuing": "2026-10-11T21:16:58.6340936+08:00",
+        "start": "2026-10-11T21:16:57.1026550+08:00",
+        "finish": "2026-10-11T21:16:58.6434918+08:00"
+      },
+      "failedTests": [
+        "RepairedDemoInitializationUsesANewRegisteredIdentityAndCannotBorrowV1Ledger"
+      ]
+    }
+  ],
+  "cliStopRed": {
+    "path": "red-green/budget-stop-red.log",
+    "sha256": "d48507956a47711ab13aedb070e907cfa8d6d210954b2d78c168d0e9997e408c",
+    "outcome": "compile_failed",
+    "code": "CS0234",
+    "missingInterface": "CozyTown.Budget.BudgetCommand"
+  },
+  "gameBuild": {
+    "path": "unit/game-build.log",
+    "sha256": "ba7db87b1885d1f1dc42107c0092af9eb67f215e187321f230ba08f5f20e15be",
+    "warnings": 0,
+    "errors": 0
+  },
+  "powerShellSyntaxPassed": true,
+  "cliProcess": {
+    "sourceCommit": "509e4a34a05815f480f0f0f72e3b5bf5ff892762",
+    "passed": true,
+    "initExit": 0,
+    "stopExit": 0,
+    "budgetId": "cozytown-godot-full-demo-20261011-v2",
+    "totalAttempts": 0,
+    "settledMicros": 0,
+    "reservedMicros": 0,
+    "slotsHeld": 0,
+    "realHttpSends": 0,
+    "privateCredentialRead": false,
+    "actualLedgerTouched": false
+  },
+  "registeredProfile": "full-demo-v2",
+  "budgetId": "cozytown-godot-full-demo-20261011-v2",
+  "limitMicros": 5000000,
+  "reserveMicros": 2110000,
+  "totalLimit": 96,
+  "concurrentLimit": 2,
+  "stageLimits": {
+    "baseline": 40,
+    "counterfactual": 40,
+    "player_dialogue": 8,
+    "manual": 8
+  },
+  "fullOfflineGateRun": false,
+  "actualV1Stopped": false,
+  "actualV2Initialized": false,
+  "realEvaluationRun": false,
+  "limitations": [
+    "Final integration candidate requires the full offline scene/export/replay gate before real execution.",
+    "The root executor must stop actual v1 and initialize one actual v2 ledger, preserving separate receipts.",
+    "Existing v1 records retain their matching archived source/program dependencies."
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "509e4a34a05815f480f0f0f72e3b5bf5ff892762",
+  "root": "artifacts/budget-v2",
+  "files": [
+    {
+      "path": "cli-6e3fabf01ea24dcf97000e317dad7aaa/initialize-receipt.json",
+      "bytes": 378,
+      "sha256": "cab9fe8e8f15b8bec8599e44f4449d0bafc7736aee8920cc95da3bc1fe7d3b61"
+    },
+    {
+      "path": "cli-6e3fabf01ea24dcf97000e317dad7aaa/stop-receipt.json",
+      "bytes": 701,
+      "sha256": "faeec71b3c316f165586ec70b7a0109e9abcd6691b8c2fd41d2ab2fb62de8e3b"
+    },
+    {
+      "path": "cli-6e3fabf01ea24dcf97000e317dad7aaa/synthetic-v2.json",
+      "bytes": 426,
+      "sha256": "dc7514eb87d3a4c12fafee168b4ec2d2b643e1eb12f21a6dbfefef4d6d3806a2"
+    },
+    {
+      "path": "cli-6e3fabf01ea24dcf97000e317dad7aaa/synthetic-v2.json.lock",
+      "bytes": 36,
+      "sha256": "c4a461e1900a0224c6ad6d5e7c214e4218c10e1400e8db28e6f4e4230a3eed88"
+    },
+    {
+      "path": "cli-6e3fabf01ea24dcf97000e317dad7aaa/synthetic-v2.json.previous",
+      "bytes": 402,
+      "sha256": "149880f9e0810ff58452d81b0263cba19e2015951c14838951ddcda68226de80"
+    },
+    {
+      "path": "cli-result.json",
+      "bytes": 358,
+      "sha256": "273da64d25e294c52d9ffd3cb85f03a4ffde3f5d54b2881c58e9690b55a8fb7a"
+    },
+    {
+      "path": "red-green/budget-stop-green.trx",
+      "bytes": 3058,
+      "sha256": "bb90f9ec51781185b2f85fd1ff6d9a0e7035b59ac9fd149b3a0c24c3bf364af6"
+    },
+    {
+      "path": "red-green/budget-stop-red.log",
+      "bytes": 1077,
+      "sha256": "d48507956a47711ab13aedb070e907cfa8d6d210954b2d78c168d0e9997e408c"
+    },
+    {
+      "path": "red-green/core-profile-green.trx",
+      "bytes": 4758,
+      "sha256": "e83e753f9f3f745554d6741f555e9d2890f2678e901d988b7ecc3ba7137bb100"
+    },
+    {
+      "path": "red-green/core-profile-red.trx",
+      "bytes": 6547,
+      "sha256": "9afaca4f6ff1cd9288948def3cb5267db132537f4e84cdbc6e528dda4bbf858b"
+    },
+    {
+      "path": "red-green/host-routing-green.trx",
+      "bytes": 4890,
+      "sha256": "781e1d1e9aab1148038867a69785f1a51bda14650d63a5e9f0d1265495abc777"
+    },
+    {
+      "path": "red-green/host-routing-red.trx",
+      "bytes": 6126,
+      "sha256": "166f2a72a1a2c05e540855a6bf669896b03290a91ebcd6b3256cdfdc17885324"
+    },
+    {
+      "path": "red-green/host-save-scenario-green.trx",
+      "bytes": 3001,
+      "sha256": "442eb311fe97aba4eb370e6fc378e90e6b346335a4c3180e46906e7d123133b9"
+    },
+    {
+      "path": "red-green/host-save-scenario-red.trx",
+      "bytes": 3802,
+      "sha256": "a4ad0efff9554e4d472fba03806219820a20cfcea58be6e9b5d5826edc2e3a62"
+    },
+    {
+      "path": "red-green/model-registration-green.trx",
+      "bytes": 3068,
+      "sha256": "2f3fc8ec742b9231b55987c5c4d3e3647ff15a0a92612c27ad8157c758ff3d06"
+    },
+    {
+      "path": "red-green/model-registration-red.trx",
+      "bytes": 5028,
+      "sha256": "a04b26572476f548a735750544af26156bdb18978a35416e9a1e34291a87ecfc"
+    },
+    {
+      "path": "unit/core-complete.log",
+      "bytes": 1058,
+      "sha256": "44426069181071d22fa947ba86401e2c2cd2e13077ddc4cbf36b7b2cad828dc7"
+    },
+    {
+      "path": "unit/core-complete.trx",
+      "bytes": 429672,
+      "sha256": "946415776710371e4bad423815a3bf4471d3832671d11cd7c78227d4cc52a7e8"
+    },
+    {
+      "path": "unit/game-build.log",
+      "bytes": 738,
+      "sha256": "ba7db87b1885d1f1dc42107c0092af9eb67f215e187321f230ba08f5f20e15be"
+    },
+    {
+      "path": "unit/host-complete.log",
+      "bytes": 1656,
+      "sha256": "090ce1db94b70e83838ea6911b77bbb80e92d02a268b1e74bad88f1618d4ee9a"
+    },
+    {
+      "path": "unit/host-complete.trx",
+      "bytes": 368512,
+      "sha256": "253d6b82d04caf511086378c3e9a3b7aeacbb4f4db615752ecd7070016d6836d"
+    },
+    {
+      "path": "unit/model-command-error.log",
+      "bytes": 1712,
+      "sha256": "2fe4e42f0957d0aa8fbaa47b89418a15845c735ddb7cc28b8edeee8391f6695c"
+    },
+    {
+      "path": "unit/model-complete.log",
+      "bytes": 1467,
+      "sha256": "a7aee2f6c1aa80c867f8a2c12d376a51294f0f23660a759b47bcd06423d25faa"
+    },
+    {
+      "path": "unit/model-complete.trx",
+      "bytes": 121899,
+      "sha256": "07d806bfc6d5498156c790abd6d941151957918410ec55951d53c089898603e7"
+    }
+  ]
+}
