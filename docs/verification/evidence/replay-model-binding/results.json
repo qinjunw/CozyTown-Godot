@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "ticket": "https://github.com/qinjunw/CozyTown-Godot/issues/40",
+  "reviewBase": "7221d3157818aac3cb16c984b99332ade924f58b",
+  "reviewHead": "90b009a3576502737dca382d3dae7d5208ab361c",
+  "implementationCommit": "77a5a67",
+  "verifiedSource": "c8255f50937cf0b38c3224f5039fea69aa3b0b65",
+  "sdkVersion": "10.0.401",
+  "seams": [
+    "Core input/snapshot/replay",
+    "Host record export and offline CLI"
+  ],
+  "originalProgramSha256": "687030ce09137041dce798437dd484d9197917bb664a9467b0aa3e9c41828295",
+  "originalProgramUnchanged": true,
+  "originalReproductionsOnRepairedCore": [
+    {
+      "test": "real_result_without_budget_admission",
+      "stopReason": null,
+      "budgetAttempts": 0,
+      "transportArrival": null,
+      "worldArrival": null,
+      "passed": false,
+      "code": "divergence",
+      "boundary": 3,
+      "field": "model.budgetAttempt",
+      "command": "model_response_arrived"
+    },
+    {
+      "test": "real_result_without_budget_admission",
+      "stopReason": "authentication_failed",
+      "budgetAttempts": 0,
+      "transportArrival": null,
+      "worldArrival": null,
+      "passed": false,
+      "code": "divergence",
+      "boundary": 3,
+      "field": "model.budgetAttempt",
+      "command": "model_response_arrived"
+    },
+    {
+      "test": "npc_transport_arrival63_world_arrival2",
+      "stopReason": null,
+      "budgetAttempts": 1,
+      "transportArrival": 63,
+      "worldArrival": 2,
+      "passed": false,
+      "code": "divergence",
+      "boundary": 2,
+      "field": "model.npcArrivalSeconds",
+      "command": "arrival"
+    }
+  ],
+  "core": {
+    "total": 324,
+    "executed": 324,
+    "passed": 324,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "host": {
+    "total": 251,
+    "executed": 251,
+    "passed": 251,
+    "failed": 0,
+    "notExecuted": 0
+  },
+  "modelRegression": {
+    "total": 83,
+    "executed": 83,
+    "passed": 82,
+    "failed": 1,
+    "notExecuted": 0
+  },
+  "modelDiagnostic": {
+    "total": 2,
+    "executed": 2,
+    "passed": 1,
+    "failed": 1,
+    "notExecuted": 0
+  },
+  "modelFailure": {
+    "test": "TwoProcessesCannotDuplicateInitializationSlotsOrRecovery(\"manual-original\",\"full-demo-v1\")",
+    "childError": "ledger_missing",
+    "actualExitCodes": [
+      11,
+      0
+    ],
+    "expectedExitCodes": [
+      10,
+      0
+    ],
+    "followupTicket": "https://github.com/qinjunw/CozyTown-Godot/issues/41",
+    "productionLedgerChangedByThisTicket": false
+  },
+  "gameBuild": {
+    "passed": true,
+    "warnings": 0,
+    "errors": 0,
+    "log": "game-build.log"
+  },
+  "redGreen": [
+    {
+      "slice": 1,
+      "red": {
+        "total": 2,
+        "executed": 2,
+        "passed": 0,
+        "failed": 2,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 2,
+        "executed": 2,
+        "passed": 2,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 2,
+      "red": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 3,
+        "executed": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 3,
+      "red": {
+        "total": 2,
+        "executed": 2,
+        "passed": 0,
+        "failed": 2,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 5,
+        "executed": 5,
+        "passed": 5,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 4,
+      "red": {
+        "total": 5,
+        "executed": 5,
+        "passed": 0,
+        "failed": 5,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 10,
+        "executed": 10,
+        "passed": 10,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 5,
+      "red": {
+        "total": 2,
+        "executed": 2,
+        "passed": 0,
+        "failed": 2,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 12,
+        "executed": 12,
+        "passed": 12,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 6,
+      "red": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 13,
+        "executed": 13,
+        "passed": 13,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 7,
+      "red": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 14,
+        "executed": 14,
+        "passed": 14,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    {
+      "slice": 8,
+      "red": {
+        "total": 1,
+        "executed": 1,
+        "passed": 0,
+        "failed": 1,
+        "notExecuted": 0
+      },
+      "green": {
+        "total": 1,
+        "executed": 1,
+        "passed": 1,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    }
+  ],
+  "realHttpRequests": 0,
+  "actualCredentialRead": false,
+  "actualLedgerReadOrWritten": false,
+  "fullSceneAndExportGateRun": false,
+  "completeIntegratedValidationPassed": false,
+  "scopeLimit": "Core and Host regression and C# build passed; Model lock race remains for ticket 41. Source and Windows full gate follows integration."
+}

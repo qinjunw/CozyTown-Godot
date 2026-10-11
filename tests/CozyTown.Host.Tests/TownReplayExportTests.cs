@@ -9,6 +9,55 @@ namespace CozyTown.Host.Tests;
 public sealed class TownReplayExportTests
 {
     [Test]
+    public async Task RetiredRequestCreatedAfterTheSavedParentPrefixUsesItsContinuedBudgetAttempt()
+    {
+        string root = Path.Combine(Path.GetTempPath(), "cozytown-retired-replay-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(root);
+        try
+        {
+            var content = TownPlayerDialogueReplayTests.TownPlayerDialogueTestsContent();
+            var world = new TownWorld(content); var host = new TownInputHost(content, world);
+            using var journal = new TownRunJournal(Path.Combine(root, "runs"), world.State.BranchId, new { schemaVersion = 2 });
+            journal.StartReplay(content, world, host);
+            var empty = new BudgetSnapshot(TownWorld.DefaultBudgetId, "CNY", 5000000, 0, 0, 0, 0, null, []);
+            journal.SetReplayBudget(empty);
+            var saved = world.CaptureSnapshot(); var prefix = journal.CaptureReplay();
+            world.Advance(.001, 0); var request = world.GetDecisionRequests()[0];
+            string attemptId = Guid.NewGuid().ToString();
+            var attempt = new BudgetAttempt(attemptId, "baseline", request.LogicalRequestId, false, "reserved", true, 2110000, 0, null, null, null);
+            var reserved = empty with { Attempts = [attempt], TotalAttempts = 1, SlotsHeld = 1, ReservedMicros = 2110000 };
+            await journal.WriteBudgetAdmissionAsync(new("baseline", request.LogicalRequestId, false, attemptId, "accepted", empty, reserved), CancellationToken.None);
+            var frozen = new FrozenModelRequest(new(world.State.BranchId, world.SessionId, request.LogicalRequestId, request.ResidentId, request.ActivityRevision),
+                ModelStage.Baseline, "{}", false, TimeSpan.FromSeconds(60));
+            var dispatch = new ModelDispatch(frozen, attemptId, "fixture", DateTimeOffset.UnixEpoch, TimeSpan.FromSeconds(60), reserved);
+            string json = TownJson.Serialize(world.CreateRuleCandidate(request));
+            await journal.WriteResponseArrivalAsync(dispatch, TownJson.Serialize(new { choices = new[] { new { message = new { content = json } } } }), TimeSpan.FromSeconds(2), CancellationToken.None);
+            var settled = reserved with { Attempts = [attempt with { Status = "settled", SlotHeld = false, ReservedCostMicros = 0,
+                SettledCostMicros = 280, PromptTokens = 100, CompletionTokens = 10 }], SlotsHeld = 0, ReservedMicros = 0, SettledMicros = 280 };
+            var completion = new ModelCompletion(dispatch, DateTimeOffset.UnixEpoch, DateTimeOffset.UnixEpoch.AddSeconds(2), TimeSpan.FromSeconds(2), 200,
+                "fixture", "fixed", "fixed", "stop", json, new(100, 10, 110, 0, 100), null, true, true, false, 280, TimeSpan.FromSeconds(2), settled);
+            await journal.WriteCompletionAsync(completion, CancellationToken.None);
+            var child = TownWorld.RestoreCandidate(content, TownJson.Serialize(saved));
+            var childHost = new TownInputHost(content, child, host.State);
+            using var childJournal = new TownRunJournal(Path.Combine(root, "runs"), child.State.BranchId, new { schemaVersion = 2 });
+            childJournal.StartReplay(content, child, childHost, new(prefix, saved, host.State));
+            childJournal.SetReplayBudget(settled);
+            childJournal.ImportRetiredCompletion(journal, completion);
+            childJournal.RecordReplayInput("model_mailbox_entered", new { dispatch });
+            child.ReceiveResult(new(world.SessionId, request.LogicalRequestId, attemptId, request.ResidentId,
+                TownJson.Deserialize<ActionCandidate>(json), "real_model", null, 2));
+            var report = TownReplay.Run(childJournal.CaptureReplay());
+            Assert.That(report.Passed, Is.True, TownJson.Serialize(report with { FinalStateJson = null }));
+            Assert.That(child.State.Events.Any(e => e.Kind == "response_rejected" && e.Reason == "retired_session"), Is.True);
+        }
+        finally
+        {
+            if (Path.GetDirectoryName(Path.GetFullPath(root)) != Path.GetTempPath().TrimEnd(Path.DirectorySeparatorChar) || !Path.GetFileName(root).StartsWith("cozytown-retired-replay-", StringComparison.Ordinal)) throw new InvalidOperationException("Unexpected cleanup target.");
+            Directory.Delete(root, true);
+        }
+    }
+
+    [Test]
     public async Task ExportSealsTheSameReplayPrefixWhileResponsesKeepArriving()
     {
         string root = Path.Combine(Path.GetTempPath(), "cozytown-replay-concurrent-" + Guid.NewGuid().ToString("N"));
@@ -20,17 +69,23 @@ public sealed class TownReplayExportTests
             var world = new TownWorld(content); var host = new TownInputHost(content, world);
             using var journal = new TownRunJournal(Path.Combine(root, "runs"), world.State.BranchId, new { schemaVersion = 2 });
             journal.StartReplay(content, world, host);
-            journal.SetReplayBudget(new(TownWorld.DefaultBudgetId, "CNY", 5000000, 0, 0, 0, 0, null, []));
+            var attempts = Enumerable.Range(0, 44).Select(i => new BudgetAttempt(Guid.NewGuid().ToString(),
+                i < 22 ? "baseline" : "counterfactual", "retired-request-" + i, false, "settled", false, 0, 0, 0, 0, null)).ToArray();
+            var budget = new BudgetSnapshot(TownWorld.DefaultBudgetId, "CNY", 5000000, 0, 0, 44, 0, "experiment_finished", attempts);
+            journal.SetReplayBudget(budget);
+            var dispatches = attempts.Select(a => new ModelDispatch(new(new("retired-run", "retired-session", a.LogicalRequestId, "mina", 2),
+                a.Stage == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual, "{}", false, TimeSpan.FromSeconds(60)),
+                a.AttemptId, "fixture", DateTimeOffset.UnixEpoch, TimeSpan.FromSeconds(60), budget)).ToArray();
             string body = new('x', 64000);
-            for (int i = 0; i < 30; i++) journal.RecordReplayInput("model_response_arrived", new { dispatch = new { attemptId = "seed-" + i }, responseBody = body, elapsed = TimeSpan.Zero });
+            for (int i = 0; i < 30; i++) journal.RecordReplayInput("model_response_arrived", new { dispatch = dispatches[i], responseBody = body, elapsed = TimeSpan.Zero });
             using var stop = new CancellationTokenSource();
             var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             var writer = Task.Factory.StartNew(() =>
             {
-                int id = 0;
-                while (!stop.IsCancellationRequested && id < 100)
+                int id = 30;
+                while (!stop.IsCancellationRequested && id < dispatches.Length)
                 {
-                    journal.RecordReplayInput("model_response_arrived", new { dispatch = new { attemptId = (++id).ToString() }, responseBody = body, elapsed = TimeSpan.Zero });
+                    journal.RecordReplayInput("model_response_arrived", new { dispatch = dispatches[id++], responseBody = body, elapsed = TimeSpan.Zero });
                     started.TrySetResult();
                 }
             }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
@@ -112,7 +167,7 @@ public sealed class TownReplayExportTests
             int arrivalIndex = Array.FindIndex(delayed.Boundaries, b => b.Command == "model_response_arrived");
             delayed.Boundaries[arrivalIndex] = delayed.Boundaries[arrivalIndex] with { InputJson = alteredArrival.ToJsonString(),
                 InputFingerprint = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes("model_response_arrived\n" + alteredArrival.ToJsonString()))).ToLowerInvariant() };
-            Assert.That(TownReplay.Run(delayed).Field, Is.EqualTo("model.logicalElapsedToArrival"));
+            Assert.That(TownReplay.Run(delayed).Field, Is.EqualTo("model.npcArrivalSeconds"));
             var snapshot = world.CaptureSnapshot();
             var child = TownWorld.RestoreCandidate(content, TownJson.Serialize(snapshot));
             var childHost = new TownInputHost(content, child, host.State);
@@ -125,6 +180,18 @@ public sealed class TownReplayExportTests
             child.Advance(.1, 0);
             Assert.That(TownReplay.Run(childJournal.CaptureReplay()).Passed, Is.True);
             Assert.That(childJournal.CaptureReplay().Boundaries.Any(b => b.Command == "model_response_arrived" && b.InputJson.Contains("responseBody")), Is.True);
+            var changedDispatch = TownJson.Clone(childJournal.CaptureReplay());
+            for (int i = 0; i < changedDispatch.Boundaries.Length; i++)
+            {
+                var trace = changedDispatch.Boundaries[i];
+                if (!trace.Command.StartsWith("model_", StringComparison.Ordinal)) continue;
+                var changed = System.Text.Json.Nodes.JsonNode.Parse(trace.InputJson)!;
+                changed["dispatch"]!["inputFingerprint"] = "changed after fork";
+                string json = changed.ToJsonString();
+                changedDispatch.Boundaries[i] = trace with { InputJson = json,
+                    InputFingerprint = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(trace.Command + "\n" + json))).ToLowerInvariant() };
+            }
+            Assert.That(TownReplay.Run(changedDispatch).Field, Is.EqualTo("model.dispatch.inputFingerprint"));
         }
         finally
         {
