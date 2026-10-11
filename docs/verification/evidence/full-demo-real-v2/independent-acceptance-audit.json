@@ -1,0 +1,274 @@
+{
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "analysisSha256": "82dc250aa4164db16c94c4c39f3f39bbcc2f8c598dee3009e2601b35e3cdb85d",
+  "protocolSha256": "bf8ca606f5680c5f4ec900a59546f4a16983adc5e2332174c7989999ab077d71",
+  "budgetReceiptSha256": "24b8670fc65533b6f5321f5ba4c1cca97b9e6e8f636696d34d62be567c859f5b",
+  "scope": "Independent arithmetic and selected public record checks; no game, build, provider, or private-ledger access.",
+  "scenarios": [
+    {
+      "scenario": "baseline",
+      "reportSha256": "4a56fedaa81e2fe87acbea6307c3f43bc06f5400030115b9eb9b6ed3a596f807",
+      "metrics": {
+        "npc_action": {
+          "httpAttempts": 36,
+          "completeResponses": 36,
+          "parsedResponses": 36,
+          "parsedLogicalRequests": 36,
+          "adoptedLogicalRequests": 34,
+          "adoptionAllHttp": 0.9444444444444444,
+          "adoptionParsedLogical": 0.9444444444444444
+        },
+        "player_text": {
+          "httpAttempts": 4,
+          "completeResponses": 4,
+          "parsedResponses": 4,
+          "parsedLogicalRequests": 4,
+          "adoptedLogicalRequests": 4,
+          "adoptionAllHttp": 1.0,
+          "adoptionParsedLogical": 1.0
+        },
+        "total": {
+          "httpAttempts": 40,
+          "completeResponses": 40,
+          "parsedResponses": 40,
+          "parsedLogicalRequests": 40,
+          "adoptedLogicalRequests": 38,
+          "adoptionAllHttp": 0.95,
+          "adoptionParsedLogical": 0.95
+        }
+      },
+      "windows": [
+        {
+          "day": 1,
+          "counts": {
+            "mina": 4,
+            "eli": 5,
+            "ren": 4,
+            "sora": 5
+          },
+          "elapsedSeconds": 113.66725550000001,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit"
+        },
+        {
+          "day": 2,
+          "counts": {
+            "mina": 2,
+            "eli": 2,
+            "ren": 6,
+            "sora": 6
+          },
+          "elapsedSeconds": 84.8288143,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit"
+        }
+      ],
+      "physicalAdmissions": 41,
+      "journalDispatches": 41,
+      "journalCompletions": 41,
+      "journalArrivals": 40,
+      "activeEvents": 7756,
+      "excludedPublicEvents": 0,
+      "cutoffs": {
+        "7b2ba6e1b6e04893af887dbae1de7ffc": 7201
+      },
+      "zipChecks": [
+        {
+          "file": "baseline/data/exports/7b2ba6e1b6e04893af887dbae1de7ffc.zip",
+          "bytes": 110443623,
+          "sha256": "b6d4f36167d903d25f312163ece400a3eb5cc208cf2ea789f2f0d0da070e213e",
+          "initialBranch": "7b2ba6e1b6e04893af887dbae1de7ffc"
+        },
+        {
+          "file": "baseline/data/exports/bbbc5c7ee4b44b6ca62546bd15e19085.zip",
+          "bytes": 48990840,
+          "sha256": "69a87520f9c13be644a1228b3be4a48c4bc2563f9746c330875b1babcb5fb746",
+          "initialBranch": "bbbc5c7ee4b44b6ca62546bd15e19085"
+        }
+      ],
+      "transfers": 3,
+      "allFourAssetsReconstructed": true,
+      "duplicateExecutions": 0,
+      "wrongPlayerSessions": 0,
+      "failureSamplesRetained": [
+        {
+          "attemptId": "ab145e36-0419-40e4-ac54-91c426ea36dc",
+          "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:26",
+          "http": true,
+          "failure": null,
+          "parsed": true,
+          "logicalAdopted": false,
+          "recovery": false
+        },
+        {
+          "attemptId": "c93545e2-869b-4e37-86ad-a6925cb39bfb",
+          "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:41",
+          "http": true,
+          "failure": null,
+          "parsed": true,
+          "logicalAdopted": false,
+          "recovery": false
+        },
+        {
+          "attemptId": "8b0226ea-7b6c-4395-82a9-ed2a5228421f",
+          "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:46",
+          "http": false,
+          "failure": "host_request_retired_before_send",
+          "parsed": false,
+          "logicalAdopted": true,
+          "recovery": false
+        }
+      ]
+    },
+    {
+      "scenario": "counterfactual",
+      "reportSha256": "af10cd301d3a7f6a5ba9636593f7678166804d7dc4dfe2a30855775934139e4f",
+      "metrics": {
+        "npc_action": {
+          "httpAttempts": 26,
+          "completeResponses": 26,
+          "parsedResponses": 25,
+          "parsedLogicalRequests": 25,
+          "adoptedLogicalRequests": 23,
+          "adoptionAllHttp": 0.8846153846153846,
+          "adoptionParsedLogical": 0.92
+        },
+        "player_text": {
+          "httpAttempts": 4,
+          "completeResponses": 4,
+          "parsedResponses": 4,
+          "parsedLogicalRequests": 4,
+          "adoptedLogicalRequests": 4,
+          "adoptionAllHttp": 1.0,
+          "adoptionParsedLogical": 1.0
+        },
+        "total": {
+          "httpAttempts": 30,
+          "completeResponses": 30,
+          "parsedResponses": 29,
+          "parsedLogicalRequests": 29,
+          "adoptedLogicalRequests": 27,
+          "adoptionAllHttp": 0.9,
+          "adoptionParsedLogical": 0.9310344827586207
+        }
+      },
+      "windows": [
+        {
+          "day": 1,
+          "counts": {
+            "mina": 3,
+            "eli": 3,
+            "ren": 2,
+            "sora": 3
+          },
+          "elapsedSeconds": 180,
+          "ordinaryAdmissions": 12,
+          "stopReason": "duration_limit"
+        },
+        {
+          "day": 2,
+          "counts": {
+            "mina": 4,
+            "eli": 4,
+            "ren": 2,
+            "sora": 2
+          },
+          "elapsedSeconds": 180,
+          "ordinaryAdmissions": 14,
+          "stopReason": "duration_limit"
+        }
+      ],
+      "physicalAdmissions": 30,
+      "journalDispatches": 30,
+      "journalCompletions": 30,
+      "journalArrivals": 30,
+      "activeEvents": 11792,
+      "excludedPublicEvents": 0,
+      "cutoffs": {
+        "ebfa1776d193495f9c1838c32e3c62a6": 8855
+      },
+      "zipChecks": [
+        {
+          "file": "counterfactual/data/exports/ebfa1776d193495f9c1838c32e3c62a6.zip",
+          "bytes": 100252072,
+          "sha256": "277e6c00e33651f7a73ae1c748475a70f90d79882e0df4542c1f4385318d5034",
+          "initialBranch": "ebfa1776d193495f9c1838c32e3c62a6"
+        },
+        {
+          "file": "counterfactual/data/exports/f63f7df7a15843f58019721aa4aabe85.zip",
+          "bytes": 56164325,
+          "sha256": "aee9cfe06cddc7e17b87dcfe76acee9f04536fda5d76e9f2a650601272f2fe21",
+          "initialBranch": "f63f7df7a15843f58019721aa4aabe85"
+        }
+      ],
+      "transfers": 1,
+      "allFourAssetsReconstructed": true,
+      "duplicateExecutions": 0,
+      "wrongPlayerSessions": 0,
+      "failureSamplesRetained": [
+        {
+          "attemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+          "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:1",
+          "http": true,
+          "failure": "invalid_json",
+          "parsed": false,
+          "logicalAdopted": false,
+          "recovery": false
+        },
+        {
+          "attemptId": "e8d51ddc-9dfd-41b2-83ea-c3613922be64",
+          "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:17",
+          "http": true,
+          "failure": null,
+          "parsed": true,
+          "logicalAdopted": false,
+          "recovery": false
+        },
+        {
+          "attemptId": "a83d198a-eb48-4c93-b3a6-6e4c1492bce2",
+          "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:28",
+          "http": true,
+          "failure": null,
+          "parsed": true,
+          "logicalAdopted": false,
+          "recovery": false
+        }
+      ]
+    }
+  ],
+  "counterfactualPublicInitialChecks": {
+    "residentsEqualExceptInventory": true,
+    "resourceTotalsEqual": true
+  },
+  "publicBudgetChecks": {
+    "totalAttempts": 71,
+    "httpAttempts": 70,
+    "settledMicroCny": 290836,
+    "stageCounts": {
+      "baseline": 37,
+      "player_dialogue": 8,
+      "counterfactual": 26,
+      "manual": 0
+    },
+    "reservedMicroCny": 0,
+    "slotsHeld": 0,
+    "manualRemaining": 8,
+    "operatorReceiptClaimsPublicFinalBudgetMatchesLedger": true,
+    "privateLedgerIndependentlyInspected": false
+  },
+  "protocolFailures": [
+    {
+      "attemptId": "8b0226ea-7b6c-4395-82a9-ed2a5228421f",
+      "kind": "npc_action",
+      "passed": false,
+      "error": "JsonReaderException"
+    },
+    {
+      "attemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+      "kind": "npc_action",
+      "passed": false,
+      "error": "JsonReaderException"
+    }
+  ],
+  "passed": true
+}

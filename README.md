@@ -10,7 +10,7 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，待用户操作的项目见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
 
-居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，用户已于 2026-10-11 通过[Windows 对话清单](docs/verification/player-dialogue-manual.md)验收。完整 Demo 真实评测已取得 8 段正确玩家文本，但资源对照的 NPC 合法采用率未达标，见[真实评测报告](docs/verification/full-demo-real-2026-10-11.md)。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
+居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，用户已于 2026-10-11 通过[Windows 对话清单](docs/verification/player-dialogue-manual.md)验收。完整 Demo v2 的两组真实指标、8 段正确玩家文本及四包 12 次回放均通过，见[第二轮真实评测](docs/verification/full-demo-real-v2-2026-10-11.md)；[v1 未达标结果](docs/verification/full-demo-real-2026-10-11.md)及失败样本保持原归属。最终 Windows 与 CI 制品交付仍待验收。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
 
 ## 构建与运行
 
@@ -38,7 +38,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，修改模拟源码后须重新生成并验证。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 已完成两组真实评测，资源对照采用率未达标，[全部结果和失败样本](docs/verification/full-demo-real-2026-10-11.md)保留。用户另行授权修复后独立 `full-demo-v2` 人民币 5 元、96 次；旧账本须显式停止，新候选重新冻结并通过完整离线门后才执行。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 的[未达标结果和全部失败样本](docs/verification/full-demo-real-2026-10-11.md)保留，旧账本已停止且余量未转移。独立 `full-demo-v2` 在冻结候选通过完整离线门后完成两组真实评测，71 次预算尝试、70 次 HTTP 共保守扣减 CNY 0.290836；`manual` 八次未使用，留给用户最终 Windows 试玩。指标、失败、回放及交付限制见[第二轮报告](docs/verification/full-demo-real-v2-2026-10-11.md)。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
 

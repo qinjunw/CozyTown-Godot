@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "fileName": "full-demo-real-v2-20261011.tar.gz",
+  "bytes": 709710553,
+  "sha256": "e39d87e0a52dd90342e1891dea34495444be59becd2d8ea9510d80ce675ec6f3",
+  "manifestSha256": "298c71359010ba22388d589602f18e7b90eaba52066f9cae508c39e7d4a4b2c5",
+  "rawFileCount": 158,
+  "tarFileCount": 159,
+  "membersVerified": true,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+  "releaseTag": "full-demo-evaluation-v2-20261011",
+  "releaseUrl": "https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-f311139ec8e4b0da5d59",
+  "privateLedgerIncluded": false,
+  "realHttpSends": 0
+}

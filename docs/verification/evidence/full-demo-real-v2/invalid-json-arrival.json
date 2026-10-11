@@ -1,0 +1,40 @@
+{
+  "journalSequence": 2547,
+  "journalKind": "model_response_arrived",
+  "dispatchAttemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+  "providerResponse": {
+    "id": "cd069ea8-6ed7-48fb-8fd8-03ced1a03a89",
+    "object": "chat.completion",
+    "created": 1791729703,
+    "model": "deepseek-flash",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"action\":\"approach\",\"targetId\":\"mina\",\"placeId\":null,\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"米娜，听说你有多余的浆果？我正想找些浆果，方便聊聊怎么交换吗？\""
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 1574,
+      "completion_tokens": 60,
+      "total_tokens": 1634,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 1190
+    },
+    "system_fingerprint": "aeb56401ca74e127821c4f9126dcb669"
+  },
+  "candidateContent": "{\"action\":\"approach\",\"targetId\":\"mina\",\"placeId\":null,\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"米娜，听说你有多余的浆果？我正想找些浆果，方便聊聊怎么交换吗？\"",
+  "jsonParseError": {
+    "message": "Expecting ',' delimiter",
+    "line": 1,
+    "column": 150,
+    "position": 149
+  }
+}
