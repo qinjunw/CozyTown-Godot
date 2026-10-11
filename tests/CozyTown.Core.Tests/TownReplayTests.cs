@@ -251,7 +251,7 @@ public sealed class TownReplayTests
         {
             var restored = TownWorld.RestoreCandidate(content, TownJson.Serialize(snapshot));
             var child = new TownRecording(content, restored, parent: prefix);
-            restored.ReceiveResult(new(world.SessionId, request.LogicalRequestId, "rules-attempt", request.ResidentId, null, "real_model", null, 2));
+            restored.ReceiveResult(new(world.SessionId, request.LogicalRequestId, "rules-attempt", request.ResidentId, null, "rules", null, 2));
             restored.Advance(.1, .2);
             Assert.That(TownReplay.Run(child.Complete()).Passed, Is.True);
             Assert.That(restored.State.TerminalRequestIds, Does.Contain(request.LogicalRequestId));
