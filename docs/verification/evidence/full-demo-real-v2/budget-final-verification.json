@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "verifiedAtUtc": "2026-10-11T14:50:38.2697289Z",
+  "passed": true,
+  "oldStoppedLedgerUnchanged": true,
+  "oldLedgerSha256": "897f0ef049c60c5fccf6a83cbb2aeca8fe994171749b151fb305acad2f541c77",
+  "v2LedgerSha256": "9a08f23cdddd71d475f01aae11703e80845d9500df56c22380be4561271ee66c",
+  "publicFinalBudgetMatchesLedger": true,
+  "budgetId": "cozytown-godot-full-demo-20261011-v2",
+  "profileVersion": "full-demo-v2",
+  "totalAttempts": 71,
+  "stageAttempts": {
+    "baseline": 37,
+    "counterfactual": 26,
+    "player_dialogue": 8,
+    "manual": 0
+  },
+  "settledMicroCny": 290836,
+  "reservedMicroCny": 0,
+  "slotsHeld": 0,
+  "stopReason": null,
+  "manualRemaining": 8,
+  "agentManualSends": 0,
+  "realHttpSends": 70,
+  "verificationHttpSends": 0,
+  "privateLedgerIncluded": false
+}

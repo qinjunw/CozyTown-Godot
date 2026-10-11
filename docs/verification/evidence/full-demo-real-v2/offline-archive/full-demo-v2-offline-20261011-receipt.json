@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+  "offlineGateSha256": "713793834b40915056cbbf46a53fb56cb7cb4188c20584dfcaf7897e08375163",
+  "passed": true,
+  "membersVerified": true,
+  "archive": "full-demo-v2-offline-20261011.tar.gz",
+  "archiveBytes": 1612417468,
+  "archiveSha256": "fb253cc4971c21571801ac498c9a75c75d86ee0967f98b79def84c6085f5bad2",
+  "maximumExclusiveBytes": 1900000000,
+  "manifest": "raw-manifest.json",
+  "manifestSha256": "79ff0f304d28e639f8beb489da259b505c6da10fbc47db7b157ff6714e4f7772",
+  "sourceFileCount": 926,
+  "tarFileCount": 928,
+  "noExtraTarMembers": true,
+  "secretScanBindingSha256": "dc24473cdf373ef51898c56e03b9c1be76caab8a8a3e8fe483482bb36eb59f09",
+  "realHttpSends": 0
+}

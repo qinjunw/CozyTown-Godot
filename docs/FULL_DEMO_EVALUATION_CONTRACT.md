@@ -1,8 +1,10 @@
 # 完整 Demo 跨日评测合同
 
-本合同对应[确定跨日真实模型评测与玩家对话共用预算](https://github.com/qinjunw/CozyTown-Godot/issues/24)。2026-10-10 用户批准新增人民币 5 元、96 次发送，并确认基准与资源对照各覆盖相邻两天、一次晨间结算。实际执行由[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接；本文件记录授权和验收要求。2026-10-11 两组各执行一次，资源对照采用率未达标，见[失败结果及全部样本](verification/full-demo-real-2026-10-11.md)；原授权不包含自动重跑或补样。
+本合同对应[确定跨日真实模型评测与玩家对话共用预算](https://github.com/qinjunw/CozyTown-Godot/issues/24)。2026-10-10 用户批准新增人民币 5 元、96 次发送，并确认基准与资源对照各覆盖相邻两天、一次晨间结算。实际执行由[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接；本文件记录授权和验收要求。2026-10-11 v1 两组各执行一次，资源对照采用率未达标，见[失败结果及全部样本](verification/full-demo-real-2026-10-11.md)；原授权不包含自动重跑或补样。
 
 2026-10-11 用户另行授权修复后的 `full-demo-v2`：独立人民币 5 元、96 次，仍按 40＋40＋8＋8 分阶段，每组仅执行一轮。v1 账本须保留并显式停止，全部旧余量（含未使用的人工阶段）不转移；v2 的 `manual` 八次只供用户最终试玩。登记与离线验证由[登记修复后真实评测预算并保留旧账本](https://github.com/qinjunw/CozyTown-Godot/issues/39)承接。v2 须重新冻结并通过完整离线门，不能复用旧源码摘要或把旧样本改名为新结果。
+
+v2 两组真实指标及同包回放的结果、全部失败与交付限制见[第二轮评测报告](verification/full-demo-real-v2-2026-10-11.md)。
 
 ## 已有证据
 
