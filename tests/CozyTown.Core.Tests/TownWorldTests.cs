@@ -89,6 +89,70 @@ public sealed class TownWorldTests
     }
 
     [Test]
+    public void DecisionInputListsUnusedFieldsForEachAllowedAction()
+    {
+        var world = World();
+        var inputs = new List<string> { Request(world, "mina").InputJson };
+        Decide(world, "mina", Invite());
+        inputs.Add(Request(world, "eli").InputJson);
+        Decide(world, "eli", Accept()); world.Advance(8, 0);
+        inputs.Add(Request(world, "mina").InputJson);
+        Decide(world, "mina", new("propose_exchange", "eli", null, "apple", 1, 2, null, "一份苹果两币。"));
+        inputs.Add(Request(world, "eli").InputJson);
+        var expectedNull = new Dictionary<string, string[]>
+        {
+            ["wait"] = ["targetId", "placeId", "resourceId", "accept"],
+            ["approach"] = ["placeId", "resourceId", "accept"],
+            ["invite"] = ["resourceId", "accept"],
+            ["respond"] = ["placeId", "resourceId"],
+            ["speak"] = ["placeId", "resourceId", "accept"],
+            ["propose_exchange"] = ["placeId", "accept"],
+            ["end"] = ["placeId", "resourceId", "accept"]
+        };
+        var seen = new HashSet<string>();
+        foreach (string input in inputs)
+        {
+            var context = JsonNode.Parse(input)!;
+            var contracts = context["actionConstraints"]!.AsArray();
+            Assert.That(contracts.Select(c => c!["action"]!.GetValue<string>()),
+                Is.EqualTo(context["allowedActions"]!.AsArray().Select(a => a!.GetValue<string>())));
+            foreach (var contract in contracts)
+            {
+                string action = contract!["action"]!.GetValue<string>(); seen.Add(action);
+                Assert.That(contract["nullFields"]!.AsArray().Select(f => f!.GetValue<string>()), Is.EqualTo(expectedNull[action]));
+                Assert.That(contract["zeroFields"]!.AsArray().Select(f => f!.GetValue<string>()),
+                    Is.EqualTo(action == "propose_exchange" ? Array.Empty<string>() : ["quantity", "price"]));
+            }
+        }
+        Assert.That(seen, Is.EquivalentTo(expectedNull.Keys));
+    }
+
+    [Test]
+    public void DecisionInputDistinguishesOwnSalePendingPaymentAndHistoricalOffer()
+    {
+        var world = World(); Meet(world);
+        var own = JsonNode.Parse(Request(world, "mina").InputJson)!["tradeConstraints"]!;
+        Assert.That(own["proposingSellerId"]!.GetValue<string>(), Is.EqualTo("mina"));
+        Assert.That(own["priceIsTotalCoinsPaidByBuyer"]!.GetValue<bool>(), Is.True);
+        Assert.That(own["barterAllowed"]!.GetValue<bool>(), Is.False);
+        Assert.That(own["availableSales"]!.ToJsonString(), Is.EqualTo("[{\"resourceId\":\"apple\",\"maximumQuantity\":3}]"));
+        Assert.That(own["pendingOffer"], Is.Null);
+        Decide(world, "mina", new("propose_exchange", "eli", null, "apple", 1, 2, null, "一份苹果两币。"));
+        var payment = JsonNode.Parse(Request(world, "eli").InputJson)!["tradeConstraints"]!["pendingOffer"]!;
+        Assert.That(payment["sellerId"]!.GetValue<string>(), Is.EqualTo("mina"));
+        Assert.That(payment["buyerId"]!.GetValue<string>(), Is.EqualTo("eli"));
+        Assert.That(payment["resourceId"]!.GetValue<string>(), Is.EqualTo("apple"));
+        Assert.That(payment["quantity"]!.GetValue<int>(), Is.EqualTo(1));
+        Assert.That(payment["totalCoinPrice"]!.GetValue<int>(), Is.EqualTo(2));
+        Assert.That(payment["selfCanPay"]!.GetValue<bool>(), Is.True);
+        Decide(world, "eli", Accept());
+        var historical = JsonNode.Parse(Request(world, "mina").InputJson)!["tradeConstraints"]!;
+        Assert.That(historical["pendingOffer"], Is.Null);
+        Assert.That(historical["previousOfferIsHistorical"]!.GetValue<bool>(), Is.True);
+        Assert.That(historical["availableSales"]!.ToJsonString(), Is.EqualTo("[{\"resourceId\":\"apple\",\"maximumQuantity\":2}]"));
+    }
+
+    [Test]
     public void CanonicalFingerprintDoesNotDependOnAuthorTraversalOrder()
     {
         var content = Content(); var m = content.Manifest; var d = content.Definitions;
