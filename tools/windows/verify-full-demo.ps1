@@ -117,8 +117,8 @@ function Assert-FixedReport {
         $report.passed -isnot [bool] -or -not $report.passed -or $report.mode -ne 'fixed' -or
         $report.realAcceptanceEvaluated -isnot [bool] -or $report.realAcceptanceEvaluated -ne $false -or
         $report.scenario -ne $Scenario -or $report.realHttpSends -ne 0 -or $null -ne $report.budget -or
-        $report.budgetProfileVersion -ne 'full-demo-v1' -or $report.executionPurpose -ne 'experiment' -or
-        $report.budgetId -ne 'cozytown-godot-full-demo-20261010-v1' -or
+        $report.budgetProfileVersion -ne 'full-demo-v2' -or $report.executionPurpose -ne 'experiment' -or
+        $report.budgetId -ne 'cozytown-godot-full-demo-20261011-v2' -or
         $report.mornings -ne 1 -or $report.sleeps -ne 2 -or @($report.windows).Count -ne 2 -or
         @($report.branches).Count -ne 2 -or $report.inputSha256 -notmatch '^[0-9a-f]{64}$' -or
         $report.acceptedRealSeconds -le 0 -or $report.wallSeconds -le 0) { throw "Fixed full-demo identity or outcome failed: $Path" }
@@ -172,7 +172,7 @@ function Assert-FixedReport {
         })
         if (@($identities | Sort-Object -Unique).Count -ne $identities.Count) { throw "Duplicate $kind identity in full-demo record." }
     }
-    if ($report.finalState.decisionMode -ne 'rules' -or $report.finalState.budgetProfileVersion -ne 'full-demo-v1' -or
+    if ($report.finalState.decisionMode -ne 'rules' -or $report.finalState.budgetProfileVersion -ne 'full-demo-v2' -or
         $report.finalState.executionPurpose -ne 'experiment') { throw 'Fixed final save lost its runtime binding.' }
     $prefix = [IO.Path]::GetFullPath($DataRoot).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
     foreach ($branch in $report.branches) {

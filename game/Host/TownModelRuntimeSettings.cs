@@ -30,9 +30,15 @@ public sealed class TownModelRuntimeProfile
     public ModelBudgetProfile Profile { get; }
     public string ExecutionPurpose { get; }
     public string BudgetId => Profile.BudgetId;
-    public TownReplayBudgetProfile ReplayProfile => Profile.Version == ModelBudgetProfile.FullDemoVersion
-        ? TownReplayBudgetProfile.FullDemo : TownReplayBudgetProfile.FirstSlice;
-    public bool RealPlayerDialogueEnabled => Profile.Version == ModelBudgetProfile.FullDemoVersion;
+    public bool IsFullDemo => Profile.Version is ModelBudgetProfile.FullDemoVersion or ModelBudgetProfile.FullDemoV2Version;
+    public TownReplayBudgetProfile ReplayProfile => Profile.Version switch
+    {
+        ModelBudgetProfile.FirstSliceVersion => TownReplayBudgetProfile.FirstSlice,
+        ModelBudgetProfile.FullDemoVersion => TownReplayBudgetProfile.FullDemo,
+        ModelBudgetProfile.FullDemoV2Version => TownReplayBudgetProfile.FullDemoV2,
+        _ => throw new InvalidDataException("Replay budget profile is not registered.")
+    };
+    public bool RealPlayerDialogueEnabled => IsFullDemo;
 
     public static TownModelRuntimeProfile Resolve(string profileVersion, string executionPurpose)
     {
@@ -50,7 +56,7 @@ public sealed class TownModelRuntimeProfile
         if (scenario is not ("baseline" or "counterfactual") || kind is not ("npc_action" or "player_text"))
             throw new InvalidDataException("Model request requires a registered scenario and request kind.");
         return ExecutionPurpose == Manual ? ModelStage.Manual
-            : Profile.Version == ModelBudgetProfile.FullDemoVersion && kind == "player_text"
+            : IsFullDemo && kind == "player_text"
                 ? ModelStage.PlayerDialogue : scenario == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual;
     }
 }

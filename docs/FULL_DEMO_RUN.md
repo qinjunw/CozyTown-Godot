@@ -6,6 +6,8 @@
 
 输入版本为 `full-demo-input-v1`。外部输入只允许与已注册命令和参数相同的内容，不能通过修改 JSON 扩大窗口、调用数或改变操作。默认输入使用 Godot 资源路径，源工程和 Windows 导出包都能读取。
 
+用户于 2026-10-11 另行授权修复后的 `full-demo-v2` 一轮评测。当前完整固定入口默认绑定 v2；原输入计划保持不变。新预算登记改变模拟源码摘要，须在最终候选重新运行下述完整门。旧 v1 真实包继续使用其归档匹配程序复验，不能用新程序跳过摘要检查。
+
 ## 固定客户端验证
 
 在待验证提交的干净检出中，从仓库根目录运行：
@@ -42,16 +44,26 @@ pwsh -NoProfile -File tools/windows/verify-full-demo.ps1 `
 
 ## 真实评测与最终试玩配置
 
-真实模式需要仓库外的显式本机配置；模板见 [full-demo.example.json](../src/CozyTown.Model/full-demo.example.json)。配置包含 `credentialFile`、`ledgerFile`、`expectedSystemFingerprint`、`budgetProfileVersion`，其中路径必须为绝对路径，完整 Demo profile 必须为 `full-demo-v1`。凭据、实际路径和真实账本不进入输入包或 Git。
+真实模式需要仓库外的显式本机配置；模板见 [full-demo.example.json](../src/CozyTown.Model/full-demo.example.json)。配置包含 `credentialFile`、`ledgerFile`、`expectedSystemFingerprint`、`budgetProfileVersion`，其中路径必须为绝对路径，本次 profile 为 `full-demo-v2`。旧 v1 仍可显式选择，但必须使用自己的账本、世界身份和存档；两个版本互相拒绝串用。凭据、实际路径和真实账本不进入输入包或 Git。
 
-独立账本的创建是单独的显式操作。仅在离线门、人工验收和真实执行条件满足后，使用一个尚不存在的路径：
+先确认旧评测进程已经退出，通过预算 CLI 显式停止 v1，保留其独立收据：
 
 ```powershell
 dotnet run --project tools/CozyTown.Budget -- `
-    --initialize --profile full-demo-v1 --ledger-file '<new-absolute-ledger.json>'
+    --stop --profile full-demo-v1 --ledger-file '<existing-v1-absolute-ledger.json>' `
+    --reason superseded_by_full_demo_v2
 ```
 
-父目录须已存在。账本、锁标记或历史文件已经存在时，初始化拒绝覆盖；游戏只打开现有账本。离线验证脚本不执行该命令，也不创建本轮真实预算。
+成功收据包含 `operation`、`profileVersion` 和 `before`／`after` 完整预算视图；核对尝试、费用、预留和槽位不变，仅增加停止原因。重复停止保留第一次原因，不退还任何占用。收据不包含凭据和本机路径；错误返回非零退出码及 JSON `code`。此操作不发送 HTTP。
+
+独立 v2 账本的创建是单独的显式操作。仅在最终候选完整离线门、用户授权及真实执行条件满足后，使用一个尚不存在的唯一位置：
+
+```powershell
+dotnet run --project tools/CozyTown.Budget -- `
+    --initialize --profile full-demo-v2 --ledger-file '<new-v2-absolute-ledger.json>'
+```
+
+父目录须已存在。账本、锁标记或历史文件已经存在时，初始化拒绝覆盖；游戏只打开现有账本。初始化收据的身份须为 `cozytown-godot-full-demo-20261011-v2`，尝试、费用、预留和槽位均为零。离线验证脚本不执行停止或初始化，也不创建本轮真实预算。
 
 完成冻结后，单组真实评测入口为：
 
@@ -69,4 +81,4 @@ dotnet run --project tools/CozyTown.Budget -- `
 
 该用途中的 NPC 与玩家新请求均计入保留的 `manual` 阶段，最多 8 次。实验不能用它补样；普通无配置启动仍使用固定客户端。旧 `first-slice-v1` 配置保持旧预算及玩家真实生成保护，不自动升级为完整 Demo。
 
-真实评测需另外报告 HTTP 发送、传输、结构解析、合法采用、覆盖、失败和费用。未达到合同标准时保留原候选及全部失败，不自动付费重跑或补样。本轮共享账本已记录 82 次预算占用、80 次 HTTP，`manual` 未使用；后续不得将这些命令当作已批准的再次付费执行入口。
+真实评测需另外报告 HTTP 发送、传输、结构解析、合法采用、覆盖、失败和费用。v1 的 82 次预算占用、80 次 HTTP 和失败样本保持原样，未使用的 `manual` 随旧账本停止。新授权只允许 v2 每组执行一轮；仍未达标时保留全部失败，不自动付费重跑或补样。

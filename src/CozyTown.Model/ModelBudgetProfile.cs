@@ -7,11 +7,15 @@ public sealed class ModelBudgetProfile
 {
     public const string FirstSliceVersion = "first-slice-v1";
     public const string FullDemoVersion = "full-demo-v1";
+    public const string FullDemoV2Version = "full-demo-v2";
     public static ModelBudgetProfile FirstSlice { get; } = new(FirstSliceVersion,
         "cozytown-godot-first-slice-20260920-v1", 1, 48,
         new() { ["probe"] = 4, ["baseline"] = 22, ["counterfactual"] = 22 });
     public static ModelBudgetProfile FullDemo { get; } = new(FullDemoVersion,
         "cozytown-godot-full-demo-20261010-v1", 2, 96,
+        new() { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 });
+    public static ModelBudgetProfile FullDemoV2 { get; } = new(FullDemoV2Version,
+        "cozytown-godot-full-demo-20261011-v2", 2, 96,
         new() { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 });
 
     private ModelBudgetProfile(string version, string budgetId, int schemaVersion, int totalLimit,
@@ -37,6 +41,7 @@ public sealed class ModelBudgetProfile
     {
         FirstSliceVersion => FirstSlice,
         FullDemoVersion => FullDemo,
+        FullDemoV2Version => FullDemoV2,
         _ => throw new ModelException("budget_profile_not_registered")
     };
 

@@ -9,20 +9,35 @@ namespace CozyTown.Model.Tests;
 [TestFixture]
 public sealed class DeepSeekClientTests
 {
-    [Test]
-    public async Task FullDemoClientExplicitlySelectsItsLedgerAndAccountsPlayerAndManualStages()
+    [TestCase("full-demo-v1", "full-demo-v2")]
+    [TestCase("full-demo-v2", "full-demo-v1")]
+    public void FullDemoClientRejectsTheOtherAuthorizedLedgerBeforeReadingCredentials(string ledgerProfile, string clientProfile)
     {
         using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
         string path = Path.Combine(fixture.Root, "full-demo.json");
-        PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        var ledger = PersistentBudgetLedger.InitializeNew(path, ledgerProfile);
+        File.Delete(fixture.CredentialPath);
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path, BudgetProfileVersion: clientProfile), new MemoryJournal(), handler));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(ledger.Snapshot().TotalAttempts, Is.Zero);
+    }
+
+    [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
+    [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
+    public async Task FullDemoClientExplicitlySelectsItsLedgerAndAccountsPlayerAndManualStages(string profileVersion, string budgetId)
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        PersistentBudgetLedger.InitializeNew(path, profileVersion);
         using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
-            BudgetProfileVersion: "full-demo-v1"), new MemoryJournal(), handler);
+            BudgetProfileVersion: profileVersion), new MemoryJournal(), handler);
         var npc = Request("manual-npc") with { Stage = ModelStage.Manual };
         var player = Request("player-text") with { Stage = ModelStage.PlayerDialogue,
             Identity = new("run", "session", "player-text", "mina", 7, "player_text", "player-session") };
         Assert.That((await client.SendAsync(npc)).Succeeded, Is.True);
         Assert.That((await client.SendAsync(player)).Succeeded, Is.True);
-        Assert.That(client.Budget.BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
+        Assert.That(client.Budget.BudgetId, Is.EqualTo(budgetId));
         Assert.That(client.Budget.SettledMicros, Is.EqualTo(560));
         Assert.That(client.Budget.Attempts.Select(a => a.Stage), Is.EqualTo(new[] { "manual", "player_dialogue" }));
     }

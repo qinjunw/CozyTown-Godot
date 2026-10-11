@@ -38,7 +38,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，修改模拟源码后须重新生成并验证。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo 另获人民币 5 元、96 次的独立授权，[模型适配与独立账本](src/CozyTown.Model/README.md)、宿主阶段和两天输入已接通，通过[完整离线门](docs/verification/full-demo-host-2026-10-10.md)；本轮真实账本及服务样本尚未创建。执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 已完成两组真实评测，资源对照采用率未达标，[全部结果和失败样本](docs/verification/full-demo-real-2026-10-11.md)保留。用户另行授权修复后独立 `full-demo-v2` 人民币 5 元、96 次；旧账本须显式停止，新候选重新冻结并通过完整离线门后才执行。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
 

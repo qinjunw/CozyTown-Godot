@@ -63,7 +63,7 @@ public partial class TownGame
                 throw new InvalidDataException("First-slice experiment requires its original budget profile.");
             return;
         }
-        if (_modelRuntime.Profile.Version != ModelBudgetProfile.FullDemoVersion || _modelRuntime.ExecutionPurpose != "experiment"
+        if (!_modelRuntime.IsFullDemo || _modelRuntime.ExecutionPurpose != "experiment"
             || _fullDemoFixed && _modelOptions is not null || !_fullDemoFixed && _modelOptions is null)
             throw new InvalidDataException("Full-demo fixed mode requires an isolated profile; real mode requires explicit full-demo experiment configuration.");
         if (Argument("--report=") is not string report || !Path.IsPathFullyQualified(report))

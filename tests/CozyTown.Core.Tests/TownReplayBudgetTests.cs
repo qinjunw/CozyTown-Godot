@@ -6,17 +6,21 @@ namespace CozyTown.Core.Tests;
 [TestFixture]
 public sealed class TownReplayBudgetTests
 {
-    [Test]
-    public void FullDemoRecordingUsesItsOwnStageAndTotalLimits()
+    [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
+    [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
+    public void FullDemoRecordingUsesItsOwnStageAndTotalLimits(string version, string budgetId)
     {
-        var profile = TownReplayBudgetProfile.FullDemo;
+        var profile = new TownReplayBudgetProfile(version, budgetId, "CNY", 5_000_000, 2_110_000, 96, 2,
+            new() { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 });
         var initial = Empty() with { BudgetId = profile.BudgetId };
         var budget = new TownReplayBudget(initial, profile);
         var expected = initial with { TotalAttempts = 1, SlotsHeld = 1, ReservedMicros = 2_110_000,
             Attempts = [Reserved(FirstAttempt, "player-request") with { Stage = "player_dialogue" }] };
         budget.Reserve("player_dialogue", "player-request", FirstAttempt, false, "accepted", expected);
-        Assert.That(budget.Snapshot().BudgetId, Is.EqualTo("cozytown-godot-full-demo-20261010-v1"));
+        Assert.That(budget.Snapshot().BudgetId, Is.EqualTo(budgetId));
         Assert.Throws<InvalidDataException>(() => new TownReplayBudget(initial));
+        var crossed = profile with { Version = version == "full-demo-v1" ? "full-demo-v2" : "full-demo-v1" };
+        Assert.Throws<InvalidDataException>(() => new TownReplayBudget(initial, crossed));
     }
 
     private const string BudgetId = "cozytown-godot-first-slice-20260920-v1";
