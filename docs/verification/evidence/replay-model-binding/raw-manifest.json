@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "collect_evidence.py",
+      "bytes": 5002,
+      "sha256": "7fe8d2fda62ac095b65021887487f4aef583877b7cfd1b1cf9fad09608735fe0"
+    },
+    {
+      "path": "core-final.trx",
+      "bytes": 470201,
+      "sha256": "be305ad95dc97b3a3e30ef828b807f66fcfa8dd834abdf91de2edaf08e764089"
+    },
+    {
+      "path": "core-first-regression.trx",
+      "bytes": 463283,
+      "sha256": "a412a851b24f716fc79398db07e75d8328b814acf789ff8a4640189f566cace4"
+    },
+    {
+      "path": "game-build.log",
+      "bytes": 782,
+      "sha256": "37834c7e27b2bafe07d41125800bd39295d537b531dfbe4dee6d23c65681009b"
+    },
+    {
+      "path": "host-binding-regression.trx",
+      "bytes": 15780,
+      "sha256": "c0e49c87122cc1358db55585853d0dbe0365b3e3d44523162cb4fd8c2ba7113e"
+    },
+    {
+      "path": "host-final.log",
+      "bytes": 1825,
+      "sha256": "8800a59cbce22387fe08b14f7c6cb70b0f0a047d25bc34f5c0151f361a8e52f6"
+    },
+    {
+      "path": "host-final.trx",
+      "bytes": 375464,
+      "sha256": "a3fefa58862fca4bf6e44ebffe050150aa957e0fcd7939c8ff85add1c48f41b9"
+    },
+    {
+      "path": "host-first-regression.trx",
+      "bytes": 339881,
+      "sha256": "0770770f81ce28bbe5d50bd70a7d9a21b966ba5819972fac3f12929301def78d"
+    },
+    {
+      "path": "model-final.log",
+      "bytes": 2971,
+      "sha256": "698aabc2241e8506929b504de866f7df936d96c0980808eeee5d61e44d27e7ed"
+    },
+    {
+      "path": "model-final.trx",
+      "bytes": 125379,
+      "sha256": "65ac9cf6a3e29528a068715779ba7782f6dc0d4f9e18d747e5fafd497506f487"
+    },
+    {
+      "path": "model-manual-original-diagnostic.log",
+      "bytes": 2757,
+      "sha256": "3e4d9f12ddecac413e413f9217285aacc681e43ea998e974d6977f6e80bd10de"
+    },
+    {
+      "path": "model-manual-original-diagnostic.trx",
+      "bytes": 6623,
+      "sha256": "80d195d9cb86b7f46ebeee9df9014cd265a4808b5259105e48204084c1f74699"
+    },
+    {
+      "path": "repaired-repro/bin/Release/net10.0/late-npc.json",
+      "bytes": 44421,
+      "sha256": "66160dc02d516195d530ec8bb961d425377a385011f3bd37ceba4771dd631b21"
+    },
+    {
+      "path": "repaired-repro/bin/Release/net10.0/stopped.json",
+      "bytes": 37442,
+      "sha256": "8a4c682804af2142da6d4bb857dc422f1c01983b8767f396ef97adf61c70fc02"
+    },
+    {
+      "path": "repaired-repro/bin/Release/net10.0/unreserved.json",
+      "bytes": 37212,
+      "sha256": "8b097fb716ba9a03c949fd5b8f7c2cc3107409fc4b0a10c487101285c450c3ae"
+    },
+    {
+      "path": "repaired-repro/Program.cs",
+      "bytes": 5761,
+      "sha256": "687030ce09137041dce798437dd484d9197917bb664a9467b0aa3e9c41828295"
+    },
+    {
+      "path": "repaired-repro/RepairedRepro.csproj",
+      "bytes": 383,
+      "sha256": "9f2ddb482f1ce1fe92f78d7de18c14a3988f26d1f593e267fe3c3e0cd84b5f14"
+    },
+    {
+      "path": "repaired-repro/results.txt",
+      "bytes": 6650,
+      "sha256": "b2d788f4b75015f25abb0172100e88493062d0d7c7cf34a4a7dc4ec72824f5da"
+    },
+    {
+      "path": "results.json",
+      "bytes": 5595,
+      "sha256": "aa8622342f4d10ad30a13dfff33fcede2e3e66057aa8ff55fe4b8e722cc96093"
+    },
+    {
+      "path": "slice1-green.trx",
+      "bytes": 4642,
+      "sha256": "129223a1d980907de057f17adbbf49c44bb6504159a10a2373d0a3aee6b848dc"
+    },
+    {
+      "path": "slice1-red.trx",
+      "bytes": 6623,
+      "sha256": "abaab7ffe89996c24c47d034be9b5a6337d8e98d16599eb5ad8bf643483f4fd7"
+    },
+    {
+      "path": "slice2-green.trx",
+      "bytes": 6065,
+      "sha256": "14066978891cae6982bd67731f3f344c5c480bea6c04255e5ab18c1373d57ecc"
+    },
+    {
+      "path": "slice2-red.trx",
+      "bytes": 3890,
+      "sha256": "b71bb2520c99f41e8117a6afb37539cd564ce7dfd2e3c403ae55f567d2e115f7"
+    },
+    {
+      "path": "slice3-green.trx",
+      "bytes": 8986,
+      "sha256": "af8fdac98d0c1c0ae79f6ab09489dd02a823141609087a32e5288e010c3ad34b"
+    },
+    {
+      "path": "slice3-red.trx",
+      "bytes": 13242,
+      "sha256": "d19b12a0e2ea66e83fa28bb664ae92d140bc48899e4890e25801b01158a93025"
+    },
+    {
+      "path": "slice4-green.trx",
+      "bytes": 16562,
+      "sha256": "a783f0d2647ae8a4e7238d3a63e92a07833db3a919039f9c3c6771f4e7f2812f"
+    },
+    {
+      "path": "slice4-red.trx",
+      "bytes": 14378,
+      "sha256": "98021755318248fbd186595cb1c0b716ab357b252a171fac73afbcc9f8feab9a"
+    },
+    {
+      "path": "slice5-green.trx",
+      "bytes": 19369,
+      "sha256": "14e11dc88dab13f894a8d1f599932085e61fe0b1b92beef09afce99710862866"
+    },
+    {
+      "path": "slice5-red.trx",
+      "bytes": 6063,
+      "sha256": "ade98d977220678987dc7d61d59ea14188b03e363d906f559806c0f34762562f"
+    },
+    {
+      "path": "slice6-green.trx",
+      "bytes": 20741,
+      "sha256": "e5843a04978fea0ba58409a0e42c2f800f4c6fc1b065c408640b5a8e4cb42180"
+    },
+    {
+      "path": "slice6-red.trx",
+      "bytes": 3805,
+      "sha256": "33c7ca57df166f0800a80f824e8491f36153b1a849cb790b76c0f86d17f67be5"
+    },
+    {
+      "path": "slice7-green.trx",
+      "bytes": 22116,
+      "sha256": "f6020046ef3d7978c3d594f99a82121b55691d4c6246de8bc31420b5c503892f"
+    },
+    {
+      "path": "slice7-red.trx",
+      "bytes": 3812,
+      "sha256": "d7a727d67b12fbacf46e9f0784b348afd3d26c610427ff7aee42ed141af728be"
+    },
+    {
+      "path": "slice8-green.trx",
+      "bytes": 3117,
+      "sha256": "851ffd0d73090ec52e28f22d35251a823c372c345e37230f2ba0d953986ff8d1"
+    },
+    {
+      "path": "slice8-red.trx",
+      "bytes": 5020,
+      "sha256": "28125e8aeecd1ddd719416889177de34229f107d282838599026ed6cf8231b6d"
+    }
+  ]
+}
