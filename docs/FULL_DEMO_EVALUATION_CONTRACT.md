@@ -1,10 +1,10 @@
 # 完整 Demo 跨日评测合同
 
-本合同对应[确定跨日真实模型评测与玩家对话共用预算](https://github.com/qinjunw/CozyTown-Godot/issues/24)。2026-10-10 用户批准新增人民币 5 元、96 次发送，并确认基准与资源对照各覆盖相邻两天、一次晨间结算。实际执行由[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接；本文件记录授权和验收要求，尚无本轮付费样本。
+本合同对应[确定跨日真实模型评测与玩家对话共用预算](https://github.com/qinjunw/CozyTown-Godot/issues/24)。2026-10-10 用户批准新增人民币 5 元、96 次发送，并确认基准与资源对照各覆盖相邻两天、一次晨间结算。实际执行由[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)承接；本文件记录授权和验收要求。2026-10-11 两组各执行一次，资源对照采用率未达标，见[失败结果及全部样本](verification/full-demo-real-2026-10-11.md)；原授权不包含自动重跑或补样。
 
 ## 已有证据
 
-[离线可行性记录](verification/full-demo-evaluation-feasibility-2026-10-10.md)使用 `29c3c1c` 的核心规则与 Godot 场景提取内容，分别运行两个日间窗口、买料、种植浇水、喂鸡、睡眠、领蛋和存读档。两组四人每天均取得规则客户端的决定机会。该诊断未验证玩家模型对话或完整回放；后续实现证据见[玩家对话](verification/player-dialogue.md)、[核心回放](REPLAY.md)及[场景回放](SCENE_REPLAY.md)。完整固定流程及同包双回放现已通过[宿主离线门](verification/full-demo-host-2026-10-10.md)；真实评测仍须冻结候选，并核对任何后续变更影响的验证项。
+[离线可行性记录](verification/full-demo-evaluation-feasibility-2026-10-10.md)使用 `29c3c1c` 的核心规则与 Godot 场景提取内容，分别运行两个日间窗口、买料、种植浇水、喂鸡、睡眠、领蛋和存读档。两组四人每天均取得规则客户端的决定机会。该诊断未验证玩家模型对话或完整回放；后续实现证据见[玩家对话](verification/player-dialogue.md)、[核心回放](REPLAY.md)及[场景回放](SCENE_REPLAY.md)。完整固定流程及同包双回放已通过[宿主离线门](verification/full-demo-host-2026-10-10.md)；2026-10-11 真实候选保留同一模拟源码摘要与注册输入，任何后续变更均须核对受影响的验证项。
 
 [首切片真实运行](verification/four-resident-real-model-2026-09-20.md)已使用原实验的 48 次发送，保守扣减人民币 0.300418 元。原金额余量不授权额外发送，原账本及样本继续保留。当前服务事实见[2026-10-10 官方资料核验](research/deepseek-provider-2026-10-10.md)。
 
@@ -25,7 +25,7 @@
 
 阶段上限之和为 96。恢复补发计入原逻辑请求的所属阶段；阶段间不转移额度，不为用完预算增加样本。代理不得使用 `manual` 额度补齐综合评测覆盖。用户试玩中的 NPC 自主请求与玩家请求均计入 `manual`；默认固定客户端启动，真实试玩使用显式本机配置。
 
-新配置使用独立账本文件和预算身份。修改旧账本上限、复制旧账本成为空账本、换目录刷新计数、读档退还费用均不允许。[独立预算配置与持久账本](https://github.com/qinjunw/CozyTown-Godot/issues/34)已实现显式配置、schema 2 初始化与原子预算操作，通过临时账本及固定服务验证，见[预算检查](verification/full-demo-budget-2026-10-10.md)。[宿主阶段与离线评测入口](https://github.com/qinjunw/CozyTown-Godot/issues/35)已接通世界身份、四阶段路由和两天输入，通过固定客户端及完整包回放检查；当前仍未创建本轮真实账本或发送付费样本。
+新配置使用独立账本文件和预算身份。修改旧账本上限、复制旧账本成为空账本、换目录刷新计数、读档退还费用均不允许。[独立预算配置与持久账本](https://github.com/qinjunw/CozyTown-Godot/issues/34)已实现显式配置、schema 2 初始化与原子预算操作，通过临时账本及固定服务验证，见[预算检查](verification/full-demo-budget-2026-10-10.md)。[宿主阶段与离线评测入口](https://github.com/qinjunw/CozyTown-Godot/issues/35)已接通世界身份、四阶段路由和两天输入，通过固定客户端及完整包回放检查。本轮真实执行已使用新账本，保守扣减 CNY 0.595154、预算占用 82 次，未知占用为零；`manual` 仍为零，旧实验账本未修改。
 
 仍使用 `deepseek-flash`、关闭思考、JSON object、`stream=false`、最多 512 输出 token，完整请求体上限 16 KiB。按官方 1,048,576 输入 token 上界、全部输入未命中峰时价 CNY 2/百万、输出峰时价 CNY 8/百万，单次金额上界为 CNY 2.101248，预留向上取 CNY 2.11。保守扣减不预支缓存或空闲时段折扣。两槽预留 CNY 4.22，因此未知项可能在实际消费低于 5 元时阻止后续发送。
 

@@ -1,0 +1,768 @@
+{
+  "schemaVersion": 1,
+  "samples": [
+    {
+      "scenario": "baseline",
+      "residentId": "eli",
+      "logicalRequestId": "3da515a1623f4f349da1e35cf6e21b61:decision:15",
+      "attemptId": "9d11f06b-f1e7-4bb5-8ef9-32af7ec07e20",
+      "reason": "insufficient_assets",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "mina",
+        "placeId": null,
+        "resourceId": "grain",
+        "quantity": 3,
+        "price": 0,
+        "accept": null,
+        "text": "米娜，我带的麦粒有点多，想用三份麦粒换你手头的浆果，正好我也在广场北边。"
+      },
+      "unexpectedFields": {},
+      "frozenResident": {
+        "id": "eli",
+        "definition": "照看麦田，耐心随和。想找些浆果，愿意分享多余麦粒；工作时间会回农场。",
+        "desiredResourceId": "berries",
+        "inventory": {
+          "berries": 0,
+          "fish": 1,
+          "grain": 1,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 0,
+          "fish": 1,
+          "grain": 1,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "3da515a1623f4f349da1e35cf6e21b61:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "eli",
+        "inviteeId": "mina",
+        "placeId": "plaza.north",
+        "turnNumber": 2,
+        "offerResourceId": "grain",
+        "offerQuantity": 3,
+        "offerPrice": 0,
+        "offerFromResidentId": "eli",
+        "dialogue": [
+          "eli: 米娜，我在广场北边，想用麦粒换你的浆果，方便过来聊聊吗？",
+          "mina: 好呀艾里！我这就过去广场北边，用浆果换你的麦粒，顺便聊聊中午吃啥。",
+          "eli: 米娜，我用三份麦粒换你的浆果，行吗？",
+          "mina: 好呀艾里，三份麦粒换我的浆果，我这就到广场北边来！"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "quantity exceeds frozen and execution stock"
+    },
+    {
+      "scenario": "baseline",
+      "residentId": "ren",
+      "logicalRequestId": "3da515a1623f4f349da1e35cf6e21b61:decision:16",
+      "attemptId": "99a7ee63-c93b-424f-9d21-43b326b15841",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "speak",
+        "targetId": "sora",
+        "placeId": "plaza.east",
+        "resourceId": null,
+        "quantity": 0,
+        "price": 0,
+        "accept": null,
+        "text": "小空，鱼已给你，我在这儿等你那碗热汤。"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.east"
+      },
+      "frozenResident": {
+        "id": "ren",
+        "definition": "喜欢钓鱼，话不多但愿意帮忙。想喝一碗热汤，愿意分享多余鲜鱼；可拒绝不合适的邀请。",
+        "desiredResourceId": "soup",
+        "inventory": {
+          "berries": 1,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 1,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "3da515a1623f4f349da1e35cf6e21b61:meeting:7",
+        "stage": "conversation",
+        "initiatorId": "ren",
+        "inviteeId": "sora",
+        "placeId": "plaza.east",
+        "turnNumber": 2,
+        "offerResourceId": "fish",
+        "offerQuantity": 4,
+        "offerPrice": 0,
+        "offerFromResidentId": "ren",
+        "dialogue": [
+          "ren: 小空，我这儿有4条鲜鱼，换你一碗热汤如何？来广场东边聊聊。",
+          "sora: 阿仁，好呀！我用一碗热汤换你四条鲜鱼，就去广场东边见你。",
+          "ren: 小空，我按约带4条鲜鱼来广场东边，换你那碗热汤吧。",
+          "sora: 阿仁，我马上到广场东边，一锅热汤换四条鲜鱼，成交！"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "baseline",
+      "residentId": "eli",
+      "logicalRequestId": "3da515a1623f4f349da1e35cf6e21b61:decision:17",
+      "attemptId": "be72dfd1-1e21-495b-b536-1aed2fafffbe",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "mina",
+        "placeId": "plaza.north",
+        "resourceId": "grain",
+        "quantity": 1,
+        "price": 0,
+        "accept": null,
+        "text": "米娜，我还有一份麦粒，能再换你一份浆果吗？就在广场北边。"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.north"
+      },
+      "frozenResident": {
+        "id": "eli",
+        "definition": "照看麦田，耐心随和。想找些浆果，愿意分享多余麦粒；工作时间会回农场。",
+        "desiredResourceId": "berries",
+        "inventory": {
+          "berries": 0,
+          "fish": 1,
+          "grain": 1,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 0,
+          "fish": 1,
+          "grain": 1,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "3da515a1623f4f349da1e35cf6e21b61:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "eli",
+        "inviteeId": "mina",
+        "placeId": "plaza.north",
+        "turnNumber": 2,
+        "offerResourceId": "grain",
+        "offerQuantity": 3,
+        "offerPrice": 0,
+        "offerFromResidentId": "eli",
+        "dialogue": [
+          "eli: 米娜，我在广场北边，想用麦粒换你的浆果，方便过来聊聊吗？",
+          "mina: 好呀艾里！我这就过去广场北边，用浆果换你的麦粒，顺便聊聊中午吃啥。",
+          "eli: 米娜，我用三份麦粒换你的浆果，行吗？",
+          "mina: 好呀艾里，三份麦粒换我的浆果，我这就到广场北边来！"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "baseline",
+      "residentId": "mina",
+      "logicalRequestId": "3da515a1623f4f349da1e35cf6e21b61:decision:53",
+      "attemptId": "33c5300c-5424-4ce8-a332-9ec71a6ce093",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "respond",
+        "targetId": "eli",
+        "placeId": "plaza.north",
+        "resourceId": null,
+        "quantity": 0,
+        "price": 0,
+        "accept": true,
+        "text": "艾里，十枚硬币我接受，浆果这就带到广场北边，顺便聊聊麦粒的路子。"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.north"
+      },
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 4,
+          "fish": 4,
+          "grain": 4,
+          "soup": 2
+        },
+        "coins": 3
+      },
+      "worldResidentAtOutcome": {
+        "coins": 3,
+        "inventory": {
+          "berries": 4,
+          "fish": 4,
+          "grain": 4,
+          "soup": 2
+        }
+      },
+      "frozenCommitment": {
+        "id": "3da515a1623f4f349da1e35cf6e21b61:meeting:49",
+        "stage": "exchange_offered",
+        "initiatorId": "eli",
+        "inviteeId": "mina",
+        "placeId": "plaza.north",
+        "turnNumber": 1,
+        "offerResourceId": "grain",
+        "offerQuantity": 1,
+        "offerPrice": 10,
+        "offerFromResidentId": "eli",
+        "dialogue": [
+          "eli: 米娜，我还在广场北边，能带些浆果来吗？我有麦粒可以换。",
+          "mina: 艾里，我正想找人换麦粒，浆果我带来，这就去广场北边！",
+          "eli: 米娜，我有一份麦粒想换浆果，十枚硬币可以吗？我在广场北边等你。"
+        ]
+      },
+      "allowedActions": [
+        "respond",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "sora",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:6",
+      "attemptId": "b9d25923-3f31-4d64-8cc5-3abe4ad67710",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "respond",
+        "targetId": "mina",
+        "placeId": "plaza.west",
+        "resourceId": null,
+        "quantity": 0,
+        "price": 0,
+        "accept": true,
+        "text": "米娜，我来广场西边！我正好有五条鱼，带过去看看你的果酱。"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.west"
+      },
+      "frozenResident": {
+        "id": "sora",
+        "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+        "desiredResourceId": "grain",
+        "inventory": {
+          "berries": 0,
+          "fish": 5,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 0,
+          "fish": 5,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "offered",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 0,
+        "offerResourceId": null,
+        "offerQuantity": 0,
+        "offerPrice": 0,
+        "offerFromResidentId": null,
+        "dialogue": [
+          "mina: 小空，我店里有果酱，你带着鱼，来广场西边聊聊换点东西？"
+        ]
+      },
+      "allowedActions": [
+        "respond",
+        "wait"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:8",
+      "attemptId": "e8ae8c4f-ed62-44f0-a453-d7b369a68ee0",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": "plaza.west",
+        "resourceId": "berries",
+        "quantity": 2,
+        "price": 3,
+        "accept": null,
+        "text": "小空，你带鱼来了吗？我拿2份浆果换3枚硬币，你看行不行？"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.west"
+      },
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 4,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 4,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 0,
+        "offerResourceId": null,
+        "offerQuantity": 0,
+        "offerPrice": 0,
+        "offerFromResidentId": null,
+        "dialogue": [
+          "mina: 小空，我店里有果酱，你带着鱼，来广场西边聊聊换点东西？",
+          "sora: 米娜，好呀，我带鱼去广场西边，咱们换点东西聊聊。"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "sora",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:11",
+      "attemptId": "90dcf806-8a6b-4cec-8e46-9e964f3a7f2c",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "respond",
+        "targetId": "mina",
+        "placeId": "plaza.west",
+        "resourceId": "fish",
+        "quantity": 3,
+        "price": 1,
+        "accept": true,
+        "text": "米娜，我到了，带鱼换你的浆果和果酱，成交。"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.west",
+        "resourceId": "fish",
+        "quantity": 3,
+        "price": 1
+      },
+      "frozenResident": {
+        "id": "sora",
+        "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+        "desiredResourceId": "grain",
+        "inventory": {
+          "berries": 0,
+          "fish": 5,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 12
+      },
+      "worldResidentAtOutcome": {
+        "coins": 12,
+        "inventory": {
+          "berries": 0,
+          "fish": 5,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "exchange_offered",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 1,
+        "offerResourceId": "berries",
+        "offerQuantity": 2,
+        "offerPrice": 1,
+        "offerFromResidentId": "mina",
+        "dialogue": [
+          "mina: 小空，我店里有果酱，你带着鱼，来广场西边聊聊换点东西？",
+          "sora: 米娜，好呀，我带鱼去广场西边，咱们换点东西聊聊。",
+          "mina: 小空，我到广场西边了。果酱之外再给你两盒浆果，一币，换你带来的鱼，好吗？"
+        ]
+      },
+      "allowedActions": [
+        "respond",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:13",
+      "attemptId": "7c131f61-2620-4fbe-9974-753238713dfc",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": "plaza.west",
+        "resourceId": "berries",
+        "quantity": 2,
+        "price": 1,
+        "accept": null,
+        "text": "小空，两盒浆果一币，换你带来的鱼，好吗？"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.west"
+      },
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 2,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        },
+        "coins": 13
+      },
+      "worldResidentAtOutcome": {
+        "coins": 13,
+        "inventory": {
+          "berries": 2,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 2,
+        "offerResourceId": "berries",
+        "offerQuantity": 2,
+        "offerPrice": 1,
+        "offerFromResidentId": "mina",
+        "dialogue": [
+          "mina: 小空，我店里有果酱，你带着鱼，来广场西边聊聊换点东西？",
+          "sora: 米娜，好呀，我带鱼去广场西边，咱们换点东西聊聊。",
+          "mina: 小空，我到广场西边了。果酱之外再给你两盒浆果，一币，换你带来的鱼，好吗？",
+          "sora: 米娜，好呀，我带鱼来了。两盒浆果一币换鱼，我同意，咱们边聊边换。"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:14",
+      "attemptId": "b1e4d038-94b0-4b60-b763-11a165a0e9e7",
+      "reason": "unexpected_action_fields",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": "plaza.west",
+        "resourceId": "berries",
+        "quantity": 2,
+        "price": 1,
+        "accept": null,
+        "text": "小空，说好的两盒浆果一币换鱼，现在就成交吧！"
+      },
+      "unexpectedFields": {
+        "placeId": "plaza.west"
+      },
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 2,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        },
+        "coins": 13
+      },
+      "worldResidentAtOutcome": {
+        "coins": 13,
+        "inventory": {
+          "berries": 2,
+          "fish": 0,
+          "grain": 1,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 2,
+        "offerResourceId": "berries",
+        "offerQuantity": 2,
+        "offerPrice": 1,
+        "offerFromResidentId": "mina",
+        "dialogue": [
+          "mina: 小空，我店里有果酱，你带着鱼，来广场西边聊聊换点东西？",
+          "sora: 米娜，好呀，我带鱼去广场西边，咱们换点东西聊聊。",
+          "mina: 小空，我到广场西边了。果酱之外再给你两盒浆果，一币，换你带来的鱼，好吗？",
+          "sora: 米娜，好呀，我带鱼来了。两盒浆果一币换鱼，我同意，咱们边聊边换。"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "unused action fields present in model output"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:21",
+      "attemptId": "af7a598b-ddf6-4161-ab5f-e3efcb331879",
+      "reason": "insufficient_assets",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": null,
+        "resourceId": "berries",
+        "quantity": 2,
+        "price": 1,
+        "accept": null,
+        "text": "小空，抱歉我刚把酱果给了你，手头没余货了；下次有酱果再按两盒一币换你的鱼，好吗？"
+      },
+      "unexpectedFields": {},
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 15
+      },
+      "worldResidentAtOutcome": {
+        "coins": 15,
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:5",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.west",
+        "turnNumber": 6,
+        "offerResourceId": "grain",
+        "offerQuantity": 1,
+        "offerPrice": 1,
+        "offerFromResidentId": "mina",
+        "dialogue": [
+          "mina: 小空，我到广场西边了。果酱之外再给你两盒浆果，一币，换你带来的鱼，好吗？",
+          "sora: 米娜，好呀，我带鱼来了。两盒浆果一币换鱼，我同意，咱们边聊边换。",
+          "mina: 小空，两盒浆果一币换你的鱼，可以吗？",
+          "sora: 米娜，好呀，两盒浆果一币换我的鱼，我同意，咱们边聊边换。",
+          "mina: 小空，鱼换到了吗？我这儿还有一袋粮食，一币卖你，要吗？",
+          "sora: 米娜，好呀，一袋粮食一币我买了，正好小馆要用。谢谢！"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "quantity exceeds frozen and execution stock"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:40",
+      "attemptId": "47843e7a-e94c-4d9b-8988-3c6d4cabea8b",
+      "reason": "insufficient_assets",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": null,
+        "resourceId": "soup",
+        "quantity": 1,
+        "price": 3,
+        "accept": null,
+        "text": "小空，我带的汤可以换你一条鲜鱼吗？三枚硬币，汤鲜得很，午饭正合适。"
+      },
+      "unexpectedFields": {},
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 15
+      },
+      "worldResidentAtOutcome": {
+        "coins": 15,
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:38",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.south",
+        "turnNumber": 0,
+        "offerResourceId": null,
+        "offerQuantity": 0,
+        "offerPrice": 0,
+        "offerFromResidentId": null,
+        "dialogue": [
+          "mina: 小空，我午餐想吃鲜鱼，能聊聊你多余的鱼吗？广场南边见。",
+          "sora: 米娜，好呀，我这就带两条鲜鱼去广场南边，咱们边吃边聊。"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "quantity exceeds frozen and execution stock"
+    },
+    {
+      "scenario": "counterfactual",
+      "residentId": "mina",
+      "logicalRequestId": "a85bac88bdb747e3a8053c127ff3c9ab:decision:41",
+      "attemptId": "91dd4446-74ef-44c7-ac75-b3b24429d319",
+      "reason": "insufficient_assets",
+      "candidate": {
+        "action": "propose_exchange",
+        "targetId": "sora",
+        "placeId": null,
+        "resourceId": "berries",
+        "quantity": 1,
+        "price": 3,
+        "accept": null,
+        "text": "小空，谢谢你的鲜鱼！我这儿有些多余浆果，一袋三币卖你，要吗？"
+      },
+      "unexpectedFields": {},
+      "frozenResident": {
+        "id": "mina",
+        "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+        "desiredResourceId": "fish",
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        },
+        "coins": 15
+      },
+      "worldResidentAtOutcome": {
+        "coins": 15,
+        "inventory": {
+          "berries": 0,
+          "fish": 0,
+          "grain": 0,
+          "soup": 0
+        }
+      },
+      "frozenCommitment": {
+        "id": "a85bac88bdb747e3a8053c127ff3c9ab:meeting:38",
+        "stage": "conversation",
+        "initiatorId": "mina",
+        "inviteeId": "sora",
+        "placeId": "plaza.south",
+        "turnNumber": 0,
+        "offerResourceId": null,
+        "offerQuantity": 0,
+        "offerPrice": 0,
+        "offerFromResidentId": null,
+        "dialogue": [
+          "mina: 小空，我午餐想吃鲜鱼，能聊聊你多余的鱼吗？广场南边见。",
+          "sora: 米娜，好呀，我这就带两条鲜鱼去广场南边，咱们边吃边聊。"
+        ]
+      },
+      "allowedActions": [
+        "speak",
+        "propose_exchange",
+        "end"
+      ],
+      "classification": "quantity exceeds frozen and execution stock"
+    }
+  ]
+}

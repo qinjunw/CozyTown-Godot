@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../../src/CozyTown.Core/CozyTown.Core.csproj" />
+    <Compile Include="../../../../../game/Host/TownModelProtocol.cs" Link="TownModelProtocol.cs" />
+    <Compile Include="../../../../../game/Host/TownPlayerDialogueProtocol.cs" Link="TownPlayerDialogueProtocol.cs" />
+  </ItemGroup>
+</Project>
