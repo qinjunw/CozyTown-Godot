@@ -44,7 +44,11 @@
 
 玩家对话暂停、窄范围生成/展示、关闭/切人及恢复流程已经用户确认，见[玩家对话合同](PLAYER_DIALOGUE_CONTRACT.md)。固定检查已通过，用户已于 2026-10-11 通过[人工清单](verification/player-dialogue-manual.md)验收。范围为一次交互的一段反馈。
 
-原首轮模型预算的发送数已达 **48/48**，保守结算为 **人民币 0.300418 元**，见[实测记录](verification/four-resident-real-model-2026-09-20.md)。完整 Demo 的独立预算、两天规模及指标已获批准，见[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。2026-10-11 两组完成 80 次 HTTP 及 12 次同包回放，8 段玩家文本均正确显示，但资源对照 NPC 合法采用率为 69.44%，评测票保持开放，见[真实结果](verification/full-demo-real-2026-10-11.md)。最终 Windows 验收仍由后继票承接。
+原首轮模型预算的发送数已达 **48/48**，保守结算为 **人民币 0.300418 元**，见[实测记录](verification/four-resident-real-model-2026-09-20.md)。完整 Demo 的独立预算、两天规模及指标已获批准，见[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。2026-10-11 完整 Demo v1 两组完成 80 次 HTTP 及 12 次同包回放，8 段玩家文本均正确显示，但资源对照 NPC 合法采用率为 69.44%；该轮未达标结果作为[历史记录](verification/full-demo-real-2026-10-11.md)保留。
+
+独立 v2 的冻结源码为 `f9551c1`，两组两天的真实指标均达标，四份真实包的 12 次离线回放通过，见[第二轮真实评测](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/full-demo-real-v2-2026-10-11.md)；[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)已关闭。用户已确认 `576ae64` 候选的[七组人工操作及可选真实 M01 通过](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)。后续 `df62408` 仅改变 NPC 离线回放实现，其余 172 个运行代码、内容及工具文件与 `576ae64` 相同；681 项测试、33 步、39 项场景矩阵预期结果、12 次固定包回放及九组离线 CLI 参数入口通过，见[回放修复复核](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/replay-outcome-binding-2026-10-12.md)。真实样本和人工反馈保留各自版本归属。
+
+[限制 Windows CI 成功制品体积并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)仍待线上上传成功证据，[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)继续承接最终交付；当前成果已合入集成分支，尚未合入 main。
 
 ## 候选与证据规则
 
