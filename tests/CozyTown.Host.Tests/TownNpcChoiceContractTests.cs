@@ -30,14 +30,17 @@ public sealed class TownNpcChoiceContractTests
         world.Advance(0, 0);
     }
 
-    [Test]
-    public void FullProviderBodyKeepsLongConversationFactsWithinTransportLimit()
+    [TestCase('聊')]
+    [TestCase('<')]
+    [TestCase('"')]
+    [TestCase('\\')]
+    public void FullProviderBodyKeepsLongConversationFactsWithinTransportLimit(char dialogueCharacter)
     {
         var world = new TownWorld(Content()); world.Advance(.001, 0);
         Decide(world, "mina", new("invite", "eli", "mina", null, 0, 0, null, "一起聊聊。"));
         Decide(world, "eli", new("respond", "mina", null, null, 0, 0, true, "好呀。"));
         world.Advance(8, 0);
-        string text = new('聊', 160);
+        string text = new(dialogueCharacter, 160);
         for (int i = 0; i < 6; i++)
             Decide(world, i % 2 == 0 ? "mina" : "eli", new("speak", i % 2 == 0 ? "eli" : "mina", null, null, 0, 0, null, text));
         var request = Request(world, "mina");

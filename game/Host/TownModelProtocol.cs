@@ -1,6 +1,5 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 using CozyTown.Core.Town;
 
 namespace CozyTown.Game;
@@ -8,7 +7,7 @@ namespace CozyTown.Game;
 public static class TownModelProtocol
 {
     public const string Version = "town-choice-v1";
-    private static readonly JsonSerializerOptions RequestJson = new() { Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
+    private static readonly JsonSerializerOptions RequestJson = new() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
     public static string BuildRequest(DecisionRequest request) => JsonSerializer.Serialize(new
     {
         model = "deepseek-flash", thinking = new { type = "disabled" }, stream = false, max_tokens = 512,

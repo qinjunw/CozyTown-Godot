@@ -152,6 +152,19 @@ public sealed class TownWorldTests
         Assert.That(historical["availableSales"]!.ToJsonString(), Is.EqualTo("[{\"resourceId\":\"apple\",\"maximumQuantity\":2}]"));
     }
 
+    [TestCase(1001)]
+    [TestCase(100000)]
+    public void DecisionInputCapsSaleQuantityAtTheActionLimit(int inventoryQuantity)
+    {
+        var content = Content();
+        var residents = content.Definitions.Residents.Select(r => r.Id == "mina"
+            ? r with { Inventory = new Dictionary<string, int> { ["apple"] = inventoryQuantity } }
+            : r).ToArray();
+        var world = World(TownContent.Create(content.Manifest, content.Definitions with { Residents = residents }));
+        var sales = JsonNode.Parse(Request(world, "mina").InputJson)!["tradeConstraints"]!["availableSales"]!;
+        Assert.That(sales.ToJsonString(), Is.EqualTo("[{\"resourceId\":\"apple\",\"maximumQuantity\":1000}]"));
+    }
+
     [Test]
     public void CanonicalFingerprintDoesNotDependOnAuthorTraversalOrder()
     {

@@ -1,6 +1,5 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 
 namespace CozyTown.Core.Town;
 
@@ -10,7 +9,7 @@ public sealed partial class TownWorld
     public const string NumericVersion = "pixels-double-grid16-radius5-morning-motion-prefix-v3";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private static readonly JsonSerializerOptions DecisionInputJson = new(TownJson.Options)
-        { WriteIndented = false, Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
+        { WriteIndented = false, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
     private readonly TownContent _content;
     private readonly Func<string, TownPoint, TownPoint, bool>? _movementQuery;
     private TownState _state;
@@ -209,7 +208,7 @@ public sealed partial class TownWorld
                     priceIsTotalCoinsPaidByBuyer = true,
                     barterAllowed = false,
                     availableSales = resident.Inventory.Where(p => p.Value > 0).OrderBy(p => p.Key, StringComparer.Ordinal)
-                        .Select(p => new { resourceId = p.Key, maximumQuantity = p.Value }),
+                        .Select(p => new { resourceId = p.Key, maximumQuantity = Math.Min(p.Value, 1000) }),
                     pendingOffer = commitment?.Stage == "exchange_offered" ? new
                     {
                         sellerId = commitment.OfferFromResidentId,
