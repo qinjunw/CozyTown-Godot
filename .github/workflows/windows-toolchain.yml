@@ -27,11 +27,24 @@ jobs:
           & ./.local/tools/dotnet/dotnet.exe run --project tools/experiments/CozyTown.ModelProbe --configuration Release -- --self-test
           if ($LASTEXITCODE -ne 0) { throw 'Model probe offline checks failed.' }
       - name: Build, test, and run the Windows export
+        id: verification
         run: ./tools/windows/verify.ps1
-      - name: Upload export and verification evidence
-        if: always()
+      - name: Upload verified Windows candidate and reports
+        if: success()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: windows-toolchain-${{ github.sha }}
+          path: |
+            artifacts/verification/*/windows/**
+            artifacts/verification/*/*.json
+            artifacts/verification/*/*.trx
+            artifacts/verification/*/*.log
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload complete failed verification evidence
+        if: always() && steps.verification.outcome == 'failure'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: windows-toolchain-failure-${{ github.sha }}
           path: artifacts/verification/
           retention-days: 14
