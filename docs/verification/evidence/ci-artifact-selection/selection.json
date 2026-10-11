@@ -1,0 +1,4016 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "runId": "20261010T083841Z-80f1068d",
+  "sourceCommit": "71be140d24ade8e78d96ab68113221dfa760e08e",
+  "sourceVerificationPassed": true,
+  "graphicalRequested": false,
+  "workflowSha256": "41783757695d59041b230518dd42d079f313d76cb9e343cfd6c4ff3548c972e5",
+  "globPackage": {
+    "name": "@actions/glob",
+    "version": "0.6.1"
+  },
+  "success": {
+    "condition": "success()",
+    "patterns": [
+      "artifacts/verification/*/windows/**",
+      "artifacts/verification/*/*.json",
+      "artifacts/verification/*/*.trx",
+      "artifacts/verification/*/*.log"
+    ]
+  },
+  "failure": {
+    "condition": "always() && steps.verification.outcome == 'failure'",
+    "patterns": [
+      "artifacts/verification/"
+    ]
+  },
+  "windowsFiles": 198,
+  "topLevelFiles": {
+    "json": 24,
+    "trx": 3,
+    "log": 66
+  },
+  "full": {
+    "files": 661,
+    "uncompressedBytes": 2146193556
+  },
+  "candidate": {
+    "files": 291,
+    "uncompressedBytes": 198549173
+  },
+  "excluded": {
+    "files": 370,
+    "uncompressedBytes": 1947644383
+  },
+  "failureSelectionFiles": 661,
+  "remoteUploadVerified": false,
+  "manifest": [
+    {
+      "file": "build-host.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "build-host.stdout.log",
+      "bytes": 551,
+      "sha256": "d9447905b381468a1effad9a3480b571209790322cec6dc8e6bedc4d21843fd0",
+      "candidate": true
+    },
+    {
+      "file": "content-baseline.json",
+      "bytes": 43866,
+      "sha256": "61d0a3e7ff3cea692a527e59e1cc16de3c319c601ae96c6a22df594292468d2d",
+      "candidate": true
+    },
+    {
+      "file": "content-baseline.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "content-baseline.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "content-counterfactual.json",
+      "bytes": 43872,
+      "sha256": "d3b299fc0eb4a6d3820f2d20703fde7a2d4657eedbeca51ea947f8a0feaa4e73",
+      "candidate": true
+    },
+    {
+      "file": "content-counterfactual.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "content-counterfactual.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "content-economy-fixture.json",
+      "bytes": 44009,
+      "sha256": "64080c4b3ca79c894d098483b7523e6f9d14aea07dd87d881b42988d81159157",
+      "candidate": true
+    },
+    {
+      "file": "content-economy-fixture.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "content-economy-fixture.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "content-farming-capacity-fixture.json",
+      "bytes": 44045,
+      "sha256": "80d5b06dc9d8a900eb83889cde232caebecce767cef3966d783aed65aab1c35a",
+      "candidate": true
+    },
+    {
+      "file": "content-farming-capacity-fixture.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "content-farming-capacity-fixture.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "content-production-capacity-fixture.json",
+      "bytes": 44048,
+      "sha256": "2db3cd2668fc782b6a7f20eeb2cb90f9eb6052fbb9cb9b2cd5345263df35c7c1",
+      "candidate": true
+    },
+    {
+      "file": "content-production-capacity-fixture.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "content-production-capacity-fixture.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "core-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "core-tests.stdout.log",
+      "bytes": 918,
+      "sha256": "1e0844a1e32b1ec5336034213ca3d9f64e02d666703ecb46ee28e861bb5d3025",
+      "candidate": true
+    },
+    {
+      "file": "core.trx",
+      "bytes": 409374,
+      "sha256": "adfb29d0c285de5156364ca289f72b3bdf1f976e4135d7770f70d21584da7b55",
+      "candidate": true
+    },
+    {
+      "file": "data/economy-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/content.json",
+      "bytes": 40660,
+      "sha256": "90ecaeddf009c1c0507706bfc37cd4dbfb355925356e6bb1ea13ba2946c6b2e7",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/economy-verification-report.json",
+      "bytes": 6399,
+      "sha256": "145aa775fae9d5cbd47a66bfa4b175d1b9e733b34988afe4e7b0f71b34ab849b",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/events.jsonl",
+      "bytes": 269705823,
+      "sha256": "5e810ce395a406173005846151d4576865d29392d5ca7d1f76ea9025dc5d40e7",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/initial-state.json",
+      "bytes": 94590,
+      "sha256": "2574bb12adf4afd80ecaee2d18899cfc577d4b81fa34d0b2bcdb0b67643fa03b",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/manifest.json",
+      "bytes": 4218,
+      "sha256": "569825ee2738bd85b10a8980f2e4ab9b1f035d9f17d3c8f3ea75ec36ce548152",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/prefix-e8a05f9440814af8a6024f9fafd72adf.json",
+      "bytes": 268636905,
+      "sha256": "a0979c3152a53b309546706ffd130a5fcce9ae0e922ba60724ccf2973dcbf27e",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/ad6efbdc33f74b93ab9952a349d74eb1/replay.json",
+      "bytes": 628312,
+      "sha256": "322909212fcb90547bf6e23df923c87524f4f7c29246de469fbef31f9be5d7f1",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/content.json",
+      "bytes": 40660,
+      "sha256": "90ecaeddf009c1c0507706bfc37cd4dbfb355925356e6bb1ea13ba2946c6b2e7",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/events.jsonl",
+      "bytes": 461433,
+      "sha256": "5a2720a7c47b06affdb1b3511d89fe11650e4dc2b1637d4f97488c20c8075f12",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/initial-state.json",
+      "bytes": 15410,
+      "sha256": "d00c7add68b1e3beaaa00c5f76e3da77949429bb5b1183a8ea8cbc7d3f511fb7",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/manifest.json",
+      "bytes": 4158,
+      "sha256": "20b755962775f24a742ffc66091cc21ef4f1f77308f10f765c7ce7dd76d7358d",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/prefix-ffb64164ff094e56afc85666c4c03638.json",
+      "bytes": 499100,
+      "sha256": "f9ff567d8e8876f7299e7db960bfdd821d9f4a72c80b278148325fb859fe50d6",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/runs/f570b0fae6da44f8bf8e6ffc338b1ffb/replay.json",
+      "bytes": 54155,
+      "sha256": "0287794f640546e84f397c19dd4a058e289c3bdf0bf325fcaff9462e86f45d1f",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/save.json",
+      "bytes": 125205,
+      "sha256": "be84821cde779dbf541cd507b0e92910ea039a3aaccc14ba3e3735e0cde0ff49",
+      "candidate": false
+    },
+    {
+      "file": "data/economy-headless/save.json.previous",
+      "bytes": 93771,
+      "sha256": "de9f5ef015c598805ccd8a6684fc97bf1df5e598e9b207d8cad8960210e6ee30",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/content.json",
+      "bytes": 40660,
+      "sha256": "90ecaeddf009c1c0507706bfc37cd4dbfb355925356e6bb1ea13ba2946c6b2e7",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/economy-verification-report.json",
+      "bytes": 6481,
+      "sha256": "cb5fa24a63eadfa445f4eab6ed07ecef6c49167558d9d0d8a6df9d8096db72c5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/events.jsonl",
+      "bytes": 269504737,
+      "sha256": "89fdaf73715402ecb8182788d75fab13f647a7a64e734bbf36ea57354aa95a14",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/initial-state.json",
+      "bytes": 94590,
+      "sha256": "336433df1e7047ce87516c4611c051ee506459717d35c000e1f5b3cf597f48fe",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/manifest.json",
+      "bytes": 4218,
+      "sha256": "67675904c5bf9c6722d8f20bb0030a434e40077eab7c6cada825f4fa67881b59",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/prefix-d6e4eefa08f142bfabb9c90dc5115936.json",
+      "bytes": 268434815,
+      "sha256": "b3dd74ac9f9896524ba04ea14066f6fd526d2f0fc53b01a52d0b543d9977d8aa",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/4d47c29828084e11a7a1396fac3c51f4/replay.json",
+      "bytes": 627418,
+      "sha256": "5020d3ce30a3d4d55fa4e9d0e8138041baa1393f5588f6cc62792dfff3a5a374",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/content.json",
+      "bytes": 40660,
+      "sha256": "90ecaeddf009c1c0507706bfc37cd4dbfb355925356e6bb1ea13ba2946c6b2e7",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/events.jsonl",
+      "bytes": 460499,
+      "sha256": "928b15990241da0515df4789ca3fdb7fd067aca574219e7e1b399677a50cfe1c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/initial-state.json",
+      "bytes": 15410,
+      "sha256": "9b9fc327c35f6f5502d7b9204e69a791b7827189c1798a6db9db18a10fedb058",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/manifest.json",
+      "bytes": 4158,
+      "sha256": "39f43544162a6120f25f95410498d4c2103b5cc4891a8b628c621f5a08904cd1",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/prefix-d29a44d6e8424b75bab0517ac41456f9.json",
+      "bytes": 498206,
+      "sha256": "4c9a2054093653af21f95735b05f17b8cf1e51ce7caebf7b36e524a2a44b170f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/runs/5b7042bde24340e2b4cc665dbd702664/replay.json",
+      "bytes": 54155,
+      "sha256": "f1b17213deec3a008a1cc343370eff7819b9a69109f2c6ad0c3e5681591e8667",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/save.json",
+      "bytes": 125205,
+      "sha256": "37f306ee17f8870faeae6adc44d80fe5cdbd5fc2705e6421f950b0c148bcd569",
+      "candidate": false
+    },
+    {
+      "file": "data/export-economy-headless/save.json.previous",
+      "bytes": 93771,
+      "sha256": "210373fe312028523d0e21c29717375df2a5f8af33f1e0649f6bee183c624b4f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/content.json",
+      "bytes": 40687,
+      "sha256": "4751aeecb1ffbab853a9a272ee9115d48dcdeba513f8a2a93e66cc50bae8e257",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/events.jsonl",
+      "bytes": 2927732,
+      "sha256": "0ad9e34459e11d54fadc9f7ba6fb1e721916631fc3d5a3692f6b666848f6bcbc",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/farming-capacity-input-checkpoints.json",
+      "bytes": 3050580,
+      "sha256": "f873fc26b9bcf50c07067dd31e55b213f261389e5dbd505ff073292c6ad796d3",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/farming-capacity-verification-report.json",
+      "bytes": 3029,
+      "sha256": "64de00ca9e63cd1e61cdf49bf5022d834eaf970d30f64612a34b152e229ec413",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/initial-state.json",
+      "bytes": 119433,
+      "sha256": "6b8571e23887c5014f8d3c50c61b463a4b40962448fd93056ddf720704c938d6",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/manifest.json",
+      "bytes": 4236,
+      "sha256": "c99f462a4e16ef811e580f48b79ffb552f79ac2638bfa77d85b89d2be61c3886",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/70b4fa02a4924ab1b943e0f8b396bb03/replay.json",
+      "bytes": 10256399,
+      "sha256": "cfcf1d95a2151d8e1b3610afe28197286737b65aaba23f175010fce8d3e193a4",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/content.json",
+      "bytes": 40687,
+      "sha256": "4751aeecb1ffbab853a9a272ee9115d48dcdeba513f8a2a93e66cc50bae8e257",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/events.jsonl",
+      "bytes": 12508352,
+      "sha256": "a81e76e02718bfe6c637e7552fde95ca4ca85b4f08c1f7e748e0a900f382b159",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/initial-state.json",
+      "bytes": 15476,
+      "sha256": "6b7d614e1a7aa5b08279f998979cebe4dfd37bfce16cdfcb58c8220cf43572ec",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/manifest.json",
+      "bytes": 4176,
+      "sha256": "a0145b4dc990d25673b06504ef186d6974f72d87e382ed168b0e936db560035c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/prefix-2800f3d348ee414c9792275b9db486f0.json",
+      "bytes": 9897813,
+      "sha256": "a94bed62da2ee5efddf56e7366e9621fe115981c1cf5d56c058b35d8059f77b4",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/runs/dfa9e8f5bc99413bade4ca66af82941d/replay.json",
+      "bytes": 54238,
+      "sha256": "4b0325774304c5a1fbd4af6fe2ff0aa2d12a6550cf146d4ece4b5100ef086697",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-capacity-headless/save.json",
+      "bytes": 118608,
+      "sha256": "a73752a68d1053d299ac3e5221a036e7163a9e7ff854b0fc12526b3f7f53831b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/events.jsonl",
+      "bytes": 3270274,
+      "sha256": "7237e58e2e93d64d1b3acd2dec266075043e0dbb3d58e8da3a0941c9a0b63937",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/farming-input-checkpoints.json",
+      "bytes": 4329513,
+      "sha256": "d88dfa85d27f5b380fcfb9d3e0b72949f296e2759131ec33d973b768b6734b2f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/farming-verification-report.json",
+      "bytes": 3766,
+      "sha256": "feb60a31e2d72d368824b8dedd230fda08a257615090f1655848d269bceeb720",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/initial-state.json",
+      "bytes": 124023,
+      "sha256": "7cc7717d95efc397ee122fc298da603f0032726704f34776122f254df20a7224",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/manifest.json",
+      "bytes": 4204,
+      "sha256": "cf5c073339d28ac2e33b9b091fe209b8a7d3506e95e2bf5fd54cc6aaf950851a",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/0b53cb00f9ed4738944307aa70a9cafc/replay.json",
+      "bytes": 16665440,
+      "sha256": "87de5ba7116a07c7fb0ec5ed2d4107cff893132e9f40b75e147fc4519e700ba0",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/events.jsonl",
+      "bytes": 19846013,
+      "sha256": "8c6d9b86b63a0fa799cdc15f82a2c58515de1e4bb955295676390a7f10a01ac0",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/initial-state.json",
+      "bytes": 15203,
+      "sha256": "7a98601537d1a119b194a8307c2e10e3027a046802840ba47652e49942ebf7f4",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/manifest.json",
+      "bytes": 4144,
+      "sha256": "e7f6407c78d36e95655412de9d102cf2eb8e0d760eb3174430ffe4d3b472a748",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/prefix-c6140b0b80484650b812065a1dcd7bc2.json",
+      "bytes": 16206541,
+      "sha256": "da944081874f271225b874a46857494a3ec34dec92f09fb05d888ed00e22e82e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/runs/3c9b1f407dbf41e590597ad381ecaba9/replay.json",
+      "bytes": 53852,
+      "sha256": "a3f3a88e3e11a45b8df502bda3175891bea6e883801a8145dfdba4289a2bdb3c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-farming-headless/save.json",
+      "bytes": 123198,
+      "sha256": "5270fd1a3d3cfb071f13cfb77da79372f88f89c4bb387a91a665952d659a6e37",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/events.jsonl",
+      "bytes": 6367011,
+      "sha256": "20c7e55d22e8c342e8360315e72f20de26da0ea9bd726b8a5c6117173cfe1547",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/initial-state.json",
+      "bytes": 128942,
+      "sha256": "dc8ea24e77a632f75f03a9afb0fb4972038a3c7aaa5393c4cccb829ec03797c6",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/manifest.json",
+      "bytes": 4242,
+      "sha256": "6d8ca6366a709e31079cc5b9966046436c2d8aa3e50e54de1395c7756ef41611",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/production-capacity-final-state.json",
+      "bytes": 127865,
+      "sha256": "560dbdcdd59c86e8b444fe4afcc7cb441e8b4133e20fbe4d74cf5ff513319413",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/production-capacity-input-checkpoints.json",
+      "bytes": 3285300,
+      "sha256": "04af2aca9a85f45672a7e34ebca88658d525e3b30b6c81d05802cbd77aa1c85c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/production-capacity-spatial-samples.json",
+      "bytes": 233517,
+      "sha256": "1fc938a84618a2cf3a9f0ad97640be78c4be9b0f34561a366c3f1b172dfe66fb",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/production-capacity-verification-report.json",
+      "bytes": 4514,
+      "sha256": "f86979c92b8a3bda1d4e3c611a8dc699a6cbfcb7adf4b59076d2f74f2ff04b63",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/41ea73007ce245fb96c0925e1be5928e/replay.json",
+      "bytes": 4237436,
+      "sha256": "179afe6b132516d621c19eee1df632a391b8eda65298b586a2a82b1080df2156",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/events.jsonl",
+      "bytes": 6434242,
+      "sha256": "cc4e631816bd5c818f62321b084123adf8dfafd921330a47e9c577fbf5c6d11e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/initial-state.json",
+      "bytes": 15485,
+      "sha256": "9006536d993fdd7f7ff7bc88c781fa675cc64a314cf74d25138d5084f9524f5a",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/manifest.json",
+      "bytes": 4182,
+      "sha256": "84754b40ba0141afcc7d600dd90f67a1385a2a946c743823606d39cb64dac714",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/prefix-73f5ce95ef0d4e839063dcd9353f7dcf.json",
+      "bytes": 3927554,
+      "sha256": "754704d9c89b9bd99728b43bbd21d6d3bb140eaa95d06dd5b5c8190417b99112",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/runs/8f5205207b234fa3a0adc4462530dfb4/replay.json",
+      "bytes": 54247,
+      "sha256": "4551a061aeaf4123bedd811fecb75d53048950ca0b215f005c5b854ee5256caa",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-capacity-headless/save.json",
+      "bytes": 128116,
+      "sha256": "27e291df32968b42f31b56c65dd5316c880a475d7fd35820d81af5b7964b2436",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/events.jsonl",
+      "bytes": 19085017,
+      "sha256": "ecb30bd770cfae237eb5627590ec75ad7f1ddc0d1606cb611e0458a237c565e5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/initial-state.json",
+      "bytes": 124775,
+      "sha256": "ede580c15557f42557261ae60e4f4c59afb6ce111c17087bde853c3520852529",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/manifest.json",
+      "bytes": 4204,
+      "sha256": "fd95dd5bdea9fbee39a2d2d2dc0558c20655512e3a41264826c47b5cdc8e909d",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/prefix-aa5445d7616b42a793b5c6f3e3f67471.json",
+      "bytes": 19342836,
+      "sha256": "93fe03e0529c97690b842afa271df1b00e4c632282e55b700e0166237b2a8356",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/production-ready-save.json",
+      "bytes": 151595,
+      "sha256": "749371578b3215843e9314901533fee109c66264496e299fef1403050cd8c8f8",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/72ae2f6fe1b4439bbfa72ee8d1c725de/replay.json",
+      "bytes": 4474050,
+      "sha256": "e78cc214f7450517754221a95eb2bc238b9f6a22e7e4b3b81fb5f972f5f564d5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/events.jsonl",
+      "bytes": 4598863,
+      "sha256": "d67288feba5e782a37dc48e0dcd7bce88c528fa7ffb4d0e248783707336e520d",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/initial-state.json",
+      "bytes": 15203,
+      "sha256": "879309c2417f37f43fb73ee3625714524b60a8bba87df4c109551a9006619d44",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/manifest.json",
+      "bytes": 4144,
+      "sha256": "9aa9bf70dd0297b4e88fe61fa103b58d268b11a4229d369f6d2653bb03ab3c5b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/prefix-81a9446f88c642d58ca68d9e73dd5b6c.json",
+      "bytes": 4281672,
+      "sha256": "f7f2fdabeb691619656e9d8ee3a3981627488e8a30ea0a164622b734d398a67c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/production-fed-save.json",
+      "bytes": 123953,
+      "sha256": "51ed1e11fa16fbe2210ffdb8a9ddabfbb4f6f6a967cc02119c185381c5bf8e77",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/95bc56013af346b79498daab5a74f6c2/replay.json",
+      "bytes": 53852,
+      "sha256": "ce0ee2df6bfa23867def721137ea2776438c00cf523dcd56fb59809fb393a383",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/events.jsonl",
+      "bytes": 1564700,
+      "sha256": "8722f375f606de25b6b84bae4ca92d9013cad089b8d8c384d5b515cb827316bc",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/initial-state.json",
+      "bytes": 190536,
+      "sha256": "7affa8d371fbd4044326ce17d418d96b6b3765376ca0d42cb0447dc3b1d71e90",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/manifest.json",
+      "bytes": 4204,
+      "sha256": "3d70d4579d635dd3c29f1af0cf2560ba3d524e3f0ce4da12cd0eda6637fd7dda",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/production-input-checkpoints.json",
+      "bytes": 10933020,
+      "sha256": "c13f32d01234555b89d430054765de039fa9b26e22eab566910ba1333e754859",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/production-space-samples.json",
+      "bytes": 5854897,
+      "sha256": "079ccc622a5c40bd49988c7c560154d070062fa330e3f9ae012850d111af6ef4",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/production-verification-report.json",
+      "bytes": 5176,
+      "sha256": "27b7207d8761145e861ddd18c33ded7e163b9e31a50eb45a14c1cbec258f44b2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/ad62facd287a414099e79671f2afc28d/replay.json",
+      "bytes": 26857984,
+      "sha256": "7a955f8d25012c871b99c903316a9ea9520c307aa16af842c219dab0a42233a0",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/events.jsonl",
+      "bytes": 4747544,
+      "sha256": "e50d9b8f4f96300c0253ee5637ce8db92994afe3777e1b5a01c0e4d02cb3146f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/initial-state.json",
+      "bytes": 147420,
+      "sha256": "ea6a6c0147c2658506acbbde45dc4bc4072f217ef295083763cee30d25b311ac",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/manifest.json",
+      "bytes": 4204,
+      "sha256": "bbe75e782ed0620fac95d633f7f0f2ec57bdec51c3d4f7539ee2c65dabc7003f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/prefix-3971955da0b64f138dee7e843df0b472.json",
+      "bytes": 26154011,
+      "sha256": "9c5584c9de9a337769341c64c4fb69d97751d1afe9fe0543c3a2fe0792b1d4df",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/prefix-d7f8df613d014c5da29b244767bc32a3.json",
+      "bytes": 26231203,
+      "sha256": "cc11b197a8fd27c4d96986a07340329e7452cafd860a67e628de1d92d8a51866",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/production-cooked-save.json",
+      "bytes": 189793,
+      "sha256": "e173540ce7a6f6fc19a5d66189459c01edfcc8cb281d048203b0eabee927a039",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/production-materials-save.json",
+      "bytes": 180677,
+      "sha256": "cd150e901c11d7ebd58b1289bbeef7765decbf14739f79b2cccff68ba793dc67",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/b46e9232a4f74a01a4489020ab994dde/replay.json",
+      "bytes": 24061995,
+      "sha256": "a6a8dd4430d74079cdbf8a024c035d0dcf2cba04171a006800f12f7d54bd1bd9",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/events.jsonl",
+      "bytes": 3747799,
+      "sha256": "5bf8552904d59a4e37db154dd61b4ba89819a07e399741d0ded1977533e83dd1",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/initial-state.json",
+      "bytes": 152338,
+      "sha256": "aa07f6a6ab0b7ef38736bb5a0cc07fd19c7e5c6401e258c61179861ab77e9889",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/manifest.json",
+      "bytes": 4204,
+      "sha256": "63fe16aa74e211f9e3da2f41eec288721028e82192018a464d77445a808ccf8b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/prefix-d47bedd516704b3291b1e1f86522a0ca.json",
+      "bytes": 23496848,
+      "sha256": "6afe459d9bd1cba79f7032225a561628f6b9cd2accb5b4dc19482a2e9ad06293",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/production-before-fishing-save.json",
+      "bytes": 146677,
+      "sha256": "bf233091f954bde4fa87d7a3bdf997c308da682f28a05c824fe078428247c91a",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/runs/d071363913b548ab98d466f8943110fa/replay.json",
+      "bytes": 19871645,
+      "sha256": "2b035edbe6df3a6a56a4c693c09878a4e6590b1742a74da3cfd57430e50b19f3",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/save.json",
+      "bytes": 189793,
+      "sha256": "e173540ce7a6f6fc19a5d66189459c01edfcc8cb281d048203b0eabee927a039",
+      "candidate": false
+    },
+    {
+      "file": "data/export-production-headless/save.json.previous",
+      "bytes": 180677,
+      "sha256": "cd150e901c11d7ebd58b1289bbeef7765decbf14739f79b2cccff68ba793dc67",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/events.jsonl",
+      "bytes": 6732205,
+      "sha256": "9b3ddfe66e4b38761db2a27d87696841efd7b4ceb72f1182edb23a6e605ae7d3",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/initial-state.json",
+      "bytes": 140703,
+      "sha256": "b34085679bc94c4374915c8aec4611a183a17ad5d6ffef7bc407a2d4ae2b4e87",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/manifest.json",
+      "bytes": 4204,
+      "sha256": "2991ca37be7d53fc7eb4cbaa1e72a5baf05adc52640c3b34937567fcda607671",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/prefix-382004a583b44a41afdf4d5dbaa2e2ed.json",
+      "bytes": 7032326,
+      "sha256": "6424d45f3c2e21714db661f9d24657cb7ef18d6b132e6f8ae8870afb217fa600",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/49b265943f1b4ec597aba74006ab07c4/replay.json",
+      "bytes": 783742,
+      "sha256": "21f98805921524248a6e790f1a7d05f9f9f9368fb30fbb7a90be481b0373726b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/events.jsonl",
+      "bytes": 104843,
+      "sha256": "b607f4d5b9f2b0c6b5e669404360ea971d9a197316b9743792aba3755372cf5d",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/initial-state.json",
+      "bytes": 121939,
+      "sha256": "8eeda3a4fe1fb4314148fb3200500292599ea968f0dedd87059ee22ea98dbcbf",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/manifest.json",
+      "bytes": 4204,
+      "sha256": "29689606ccfd358a5d201344c994accdcef071785798d0acb93be6319ca482cb",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/prefix-52a1993d5f1e4683a2cb299455304c99.json",
+      "bytes": 7437138,
+      "sha256": "0bc4de1b4db7b9d745c2974c43140b87f587791aef5c8419e2d61a0dfe79867b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/5086319c82dd4d1887cd857a6ecf70c3/replay.json",
+      "bytes": 7224215,
+      "sha256": "ed4dac142b4fb4ba574896cdd18289d04ebfbbb1f7db80f232bdcaf3d904db96",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/events.jsonl",
+      "bytes": 378783,
+      "sha256": "0ab518ae80f8600beae6828cec0aca3636272bfd0d51b9c9524409006df25710",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/initial-state.json",
+      "bytes": 32032,
+      "sha256": "f561c3bdc77d6e45724184a5cbd93b69542f9bba6fe5a3a71c04c6203d16c9ea",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/manifest.json",
+      "bytes": 4204,
+      "sha256": "21f958f18b107f6c093660c242c21c92fd8625c5ca2201d844f9cbbf7eaeef80",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/prefix-97ee4d3907434d25a69fc57aeb0d8a20.json",
+      "bytes": 608757,
+      "sha256": "097410962867d7bd83c812e676c9a1ab2646453390f360a8d143244c77d69891",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/7dccbf1bb2614d94b864078414d2a390/replay.json",
+      "bytes": 180970,
+      "sha256": "cc05aa93a793f0d025b3f08aa173c215a5f3f85d97217f05cfaaf4eda020b74c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/events.jsonl",
+      "bytes": 77651,
+      "sha256": "073e8e5d3e9847c7e1a294aef72fb4a44ab616cb755335e00c0c2496bb5bf443",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/initial-state.json",
+      "bytes": 128929,
+      "sha256": "e5b08ebb69a5a4fa9085957ef9d8bd4e7425a6b77c5e84d8d95824137c01f60b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/manifest.json",
+      "bytes": 4204,
+      "sha256": "5e05114d4f2d824c8f4fcd1adf2f718f4cea8b7f7482a2c49a921855045f8e2e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/replay.json",
+      "bytes": 7648693,
+      "sha256": "4701203e08f47fc64d65d94dadbbc192c3b47b634e340f71adbd30dd32036b26",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/verification-final-state.json",
+      "bytes": 129941,
+      "sha256": "7b6114ebedf1da6a0dd7e0ad67ee9a87aa30513c4d837b269db1bab38e7d1b43",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/b3abf67ed96942749abd89d9191105a4/verification-report.json",
+      "bytes": 15313,
+      "sha256": "c631b47e0a47324e39f8071ee68678d1118a1def6f638e4ebaba072fddd82920",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/events.jsonl",
+      "bytes": 89423,
+      "sha256": "195ce8863567a1432f4e96c670e91689adb7a56c82d5a51b57e750dd3a4544a6",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/initial-state.json",
+      "bytes": 15203,
+      "sha256": "f9a10db921cd3e224ffd17e3af5fd6a1f2bc06cd515f8a265142e22d9f996338",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/manifest.json",
+      "bytes": 4144,
+      "sha256": "95897eb9c83d24777d8ed2fe53ea7c3131de714e5fe12895740c095dc1af5cd2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/prefix-c28f94f0c9974cc7a15a1183d4cb8732.json",
+      "bytes": 107512,
+      "sha256": "c39f9f0a091474d56ee83d815fae8611f9b093684a9a2a93246cd033c991f989",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/runs/c1eb230e058146e3a27abd0c1708fae6/replay.json",
+      "bytes": 53852,
+      "sha256": "84befab4e80df89e90a67926990c4a86d58891ab5b06b9edbcf328ca3bdbc759",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/save.json",
+      "bytes": 128185,
+      "sha256": "f71b7185c819015be794f55d3b031bc15674a8ff3644ac011df131fd1a84cd6e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-baseline-headless/save.json.previous",
+      "bytes": 121185,
+      "sha256": "0708f88cf6ac73fb75648405b540c424ecaf2308a6334b09e022ab510e07b454",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/events.jsonl",
+      "bytes": 378777,
+      "sha256": "7a67ce5ce75da4a8192bd890c33a5ab0e28e378435d0de2d67d55d300477cd2e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/initial-state.json",
+      "bytes": 32050,
+      "sha256": "4ce2a217c8c0d828dc0fe6643bd5dfe5fcc0eb278d6dc2a2c2635a19adb57bc8",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/manifest.json",
+      "bytes": 4216,
+      "sha256": "9444a08841b453fb48b4515c34c813abddfe0fe1c92f0675623d8b60c52570d9",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/prefix-5fb98b2c6e684be6a246036ad90e4fc7.json",
+      "bytes": 608974,
+      "sha256": "6ad93f93b1d3c492557094e496075da0bd50b5f7712bf50b6a3c92504964b4ca",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/16f272f38a75470881dcc2f57787b843/replay.json",
+      "bytes": 181188,
+      "sha256": "6cd192c367f2e90b1e9c51b1c1d768284216ada66c1426f1fa08b1a116f13a42",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/events.jsonl",
+      "bytes": 77752,
+      "sha256": "c2e809668af8b83bc74ff1a207857188494bdb7d92cf2a1b11f7f2093f2ea104",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/initial-state.json",
+      "bytes": 129016,
+      "sha256": "1416579f10480f6e7ddbf5a41277519e9df11f87cc6024cf6d4cd0542bc52705",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/manifest.json",
+      "bytes": 4216,
+      "sha256": "96ebfc7ffe56e459cba49416438f2461aabf60d47d6ab444d893f96f4e621ed2",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/replay.json",
+      "bytes": 7979909,
+      "sha256": "e60c4189a5e31e6b149cd98c393a6a7534ae792fd540c4916bdac88fd8f0d62b",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/verification-final-state.json",
+      "bytes": 130026,
+      "sha256": "0df18342425937fc7474d917d16eafbba7c57185357c0192b29dbe85d1bfaf4a",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/8da8524803df4efab16162bc037bfc07/verification-report.json",
+      "bytes": 15356,
+      "sha256": "98badcba2c235d0001923699444587d46774405c40be0f9ae3908f5710163ec4",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/events.jsonl",
+      "bytes": 7087657,
+      "sha256": "e1cb533755dc26e6dd9f422344757b9e3fafe15d2511a84cabe61b700ac27b22",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/initial-state.json",
+      "bytes": 140717,
+      "sha256": "8974d9c3eae8499bc4a56f6295b749571d58651d40d5b4d1e7be0b716dcc02f1",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/manifest.json",
+      "bytes": 4216,
+      "sha256": "ed84b64f3ab7adf6fde78a2c9547195baab4b9c9f4ddfda8a9c84f7ce7559e4e",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/prefix-4967b42e928e4231b7b5a3a647e9f854.json",
+      "bytes": 7362583,
+      "sha256": "fa0392cc8e9583606df43318b5698e533f1b8179be6f9b48fc1f57c9d0015abc",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/a717d0d675da423db11231e187b93062/replay.json",
+      "bytes": 783973,
+      "sha256": "ef6c950b851f2216985ae3f1970e54fce4b6e986b6bb709bb9083720c5eb006f",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/events.jsonl",
+      "bytes": 89574,
+      "sha256": "8c15a2db9214d4948f115d51bde3d536126798490e20c930df0d9b008746ae60",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/initial-state.json",
+      "bytes": 15221,
+      "sha256": "f1d637cbc31d0382ea822cef569343a96c429b0daccbf01fd5612815c2ee6674",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/manifest.json",
+      "bytes": 4156,
+      "sha256": "50fd10354d831bc29bcf5d898e26bb7f863735ebcf3a87b913c191fb67df60c7",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/prefix-000903554dbd4051af8cfa27ae22bce2.json",
+      "bytes": 107712,
+      "sha256": "ff27ef8c71e73f8f6895c91a81d56e701fd768642aba177b7d4abb51699f9712",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/cc88ce58676b4b57888782a720044d03/replay.json",
+      "bytes": 53870,
+      "sha256": "5c9c3e240b600b5235460f86201a3f86d1a09b0b2efe40ffd2aa79c3854bfb5c",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/events.jsonl",
+      "bytes": 105249,
+      "sha256": "6b732ea7639e4e8f7284a53ac9c7d3e026e002a02fca7093c6bde95fd9beb206",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/initial-state.json",
+      "bytes": 122241,
+      "sha256": "4a567ae53691bc39bd02379cdff430fe7acedfde6d6a264dc41f9596eb4c8fc3",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/manifest.json",
+      "bytes": 4216,
+      "sha256": "af175b6b2996792b96d7135edcd13ffb1e8d4316f64309b32e278dbde0c00a57",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/prefix-3bba06033c474664ab433ade8df0fb90.json",
+      "bytes": 7768165,
+      "sha256": "c0d3ed117b73cef635b53fe5161c6deb4ce89f637a6b982e1336feb34b438be3",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/runs/ed7b05afbcbe411595ad648e2c358027/replay.json",
+      "bytes": 7554838,
+      "sha256": "d4d8839744f5312f4d4d9d42580e6144fd6b84201f6c2838da66cf504fd158be",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/save.json",
+      "bytes": 128272,
+      "sha256": "0fea84aa62fce1a570ecee2e7e44b5f480b95ff3609ca14305760da055b23f30",
+      "candidate": false
+    },
+    {
+      "file": "data/export-slice-counterfactual-headless/save.json.previous",
+      "bytes": 121487,
+      "sha256": "0210ff8f7b6c55b85a8fddaae7287bcfe2078b9cb468c20b9e4a8a6f3040c733",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/content.json",
+      "bytes": 40687,
+      "sha256": "4751aeecb1ffbab853a9a272ee9115d48dcdeba513f8a2a93e66cc50bae8e257",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/events.jsonl",
+      "bytes": 12512111,
+      "sha256": "56ff2dc5141cd747e7a32d9778aa7c40d5ba40441f4cdeb9736a57b3581324c3",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/initial-state.json",
+      "bytes": 15476,
+      "sha256": "d595afe983fba3cff50ebbf969bc14051cc6ecc6739c9786bb3fb081fbb00127",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/manifest.json",
+      "bytes": 4176,
+      "sha256": "5ce29d060fb14dc699664fdcc76b3c7151e47c270d749c369f321ee17fa681e2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/prefix-07028eedfecc4c9ba40cbef47a88d258.json",
+      "bytes": 9901580,
+      "sha256": "5354df884ad262e7c15183621f174ba7106535fc595e827bf27cf6d9affe4ea7",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/9d0f5a4ed3cc4d41add6c43517a436fd/replay.json",
+      "bytes": 54238,
+      "sha256": "904b8f66493be2a3edb58e56eab68ffdc75640b509932ca04bc7d4c9873b37d5",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/content.json",
+      "bytes": 40687,
+      "sha256": "4751aeecb1ffbab853a9a272ee9115d48dcdeba513f8a2a93e66cc50bae8e257",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/events.jsonl",
+      "bytes": 2925604,
+      "sha256": "3190eef5cafd4d95933657c23889bb85abec0e1dc6494a1e870e42c18da543f5",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/farming-capacity-input-checkpoints.json",
+      "bytes": 3050580,
+      "sha256": "a9f0f6e0aa688dc77b32732287cdc16c735e08813a5565aba2539f79146335d0",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/farming-capacity-verification-report.json",
+      "bytes": 2959,
+      "sha256": "91ed5980467c2cf2308f508e78e38a6f450ed61dfe9ee9b1f92de38b3d133c41",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/initial-state.json",
+      "bytes": 119433,
+      "sha256": "fcb68dca979ad58f7aff426805c79c0127e6b2e8f5efc3b8fe9abfc11555e66a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/manifest.json",
+      "bytes": 4236,
+      "sha256": "d8c43270e066027d3967bcd076f165f53434ad68d6f5e9870f6e6b4b063ad3e6",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/runs/add5a785e40946dab17f8b0d93704712/replay.json",
+      "bytes": 10260166,
+      "sha256": "2422b7890e97bf3fe16ee7d692b6f6c288451ee5714155b7f0f0afa534163b91",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-capacity-headless/save.json",
+      "bytes": 118608,
+      "sha256": "048f732d092b9b4b897280709aa99ae63e5db2fe22e613b5d1143c0bbb4d3017",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/events.jsonl",
+      "bytes": 3271179,
+      "sha256": "a07c8c9efcfe2b5af9f0f7ea104d2c0cfea1a739e069889c74468406a7046ba7",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/farming-input-checkpoints.json",
+      "bytes": 4329511,
+      "sha256": "5d775e7a6efb4ebeab0fa515272bb6507a2fa35ef49aaaa5de89b5718a05783c",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/farming-verification-report.json",
+      "bytes": 3696,
+      "sha256": "18980c7d1f65786f412112f02877a94ee265ae4ea081903932a19f80fbaab5b5",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/initial-state.json",
+      "bytes": 124023,
+      "sha256": "5e7e576effd08a4326610e4d4098a04ce121777e2ee3d9c246e7f06dc390f459",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/manifest.json",
+      "bytes": 4204,
+      "sha256": "fc3ed0827d0c4e8398801bc2e8da6d71ca40cbe6568499c5c78d3b1d7a391335",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/5bcf1e1539b74c0fb0982ebfb1060c67/replay.json",
+      "bytes": 16660922,
+      "sha256": "171a0e79fda04596b1013e4bb660ec549a6aa546629e0b3031da51a0d7d3f86e",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/events.jsonl",
+      "bytes": 19841527,
+      "sha256": "a2b42a6007e2add61e528731a59226c6f7025f771d951328e60d648da99dad6e",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/initial-state.json",
+      "bytes": 15203,
+      "sha256": "b4601d25af5856b1a56f2374892d3e139fc4b5c180e007623bb1821773d6f051",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/manifest.json",
+      "bytes": 4144,
+      "sha256": "a4e48515a8c00b7f22e0d08f5a689e2930756a85581e09820d68977e63328ae8",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/prefix-b7cd3dc406ba43a8a177f67df1e41f3d.json",
+      "bytes": 16202023,
+      "sha256": "55cbf1505819a9afc10a419c8ba14759582a83b54366519eacc0580cdf51de12",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/runs/ea6d489402d1435187cd8d865e13e45b/replay.json",
+      "bytes": 53852,
+      "sha256": "b2deed19ce0d69053dfecd7cb60545b3d37c63d955916be8c25bdb9ec6758308",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-farming-headless/save.json",
+      "bytes": 123198,
+      "sha256": "078261b16d42dba024d43076103352cf54c2978d737dd4b36ff34b80d3a88a17",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/events.jsonl",
+      "bytes": 6372712,
+      "sha256": "50dc53d028bef2e3f8408c546d6066da22237133eb4411163e8815c70706a386",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/initial-state.json",
+      "bytes": 128942,
+      "sha256": "358a437d730e256da1fe8f83d68e206295f1d45d72a6d4d3591e3ffaf953dc39",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/manifest.json",
+      "bytes": 4242,
+      "sha256": "f8d2e6e7ff7c9b8788a6bd9aa1147ea6e1099e18fb6e3a71fe331380d2b56470",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/production-capacity-final-state.json",
+      "bytes": 127865,
+      "sha256": "f5f72d8eee97560395228c59e2f573ae531e7c47e3b4b889751e165d89a69f7c",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/production-capacity-input-checkpoints.json",
+      "bytes": 3285297,
+      "sha256": "2d79bccb81111e08074823aa582260f196a8df3e0d03ff6a21536e17e8c7ab44",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/production-capacity-spatial-samples.json",
+      "bytes": 233517,
+      "sha256": "f5cfebfd85673c4f5aec7eb493af2bfc3fe94c3e687d66b04940d2413a35f965",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/production-capacity-verification-report.json",
+      "bytes": 4444,
+      "sha256": "3246392610f6008cc8376b608b29bd410ae2920788e6dc5456fb1f7bc45b986f",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/0fb1df943ee342ef8239c1fe169637b5/replay.json",
+      "bytes": 4239069,
+      "sha256": "5697a78d84bf83831ad81e1eb75bd63ba5240a7a90a14fa0740621531c812666",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/content.json",
+      "bytes": 40687,
+      "sha256": "16cf738b0c062bd2e42c124acc97ef16338d520928e252dfcf4f726c29c2fae2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/events.jsonl",
+      "bytes": 6435869,
+      "sha256": "b04064285c033b5289d0721c509a1736f0d4ebe2190c2c81c4b683bf6dac9a72",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/initial-state.json",
+      "bytes": 15485,
+      "sha256": "52965262ff94a165f53e6aefda2d6b31cffaaf722af6622ec94022582013e5f6",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/manifest.json",
+      "bytes": 4182,
+      "sha256": "f2f137659d7d62330b32d3045f75829c35c42c70f02c612f70d81ba649da9cd5",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/prefix-e1a5b07b90b24b3db844ed4c5177c7cd.json",
+      "bytes": 3929187,
+      "sha256": "60a04aa45e25b5cd8bf88e984744f932ba89b723d5ce42a4660bc8cb47d74a0e",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/runs/f2fe6f3e86d94ce08e5b4a5fe2eb7937/replay.json",
+      "bytes": 54247,
+      "sha256": "d642f2289ddc9dc0cf5759dbbac1e2de3ea76e29010294fce0a0db43b98bacc1",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-capacity-headless/save.json",
+      "bytes": 128116,
+      "sha256": "a528ccd04f5ffb2fc9627a14e7b9eae5b3a163a08420b36e5b74dfb1e327fc4a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/events.jsonl",
+      "bytes": 4603274,
+      "sha256": "bd7b7b22979f1e31d4be872406fb70b2082203ee616b570e576bb3537b161aa2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/initial-state.json",
+      "bytes": 15203,
+      "sha256": "55c0d9bc1b0ac8e50482e0d6ff75a0cc8537e1e6df254a04b99a61b183e38b15",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/manifest.json",
+      "bytes": 4144,
+      "sha256": "11a0c5465113e3ae04546a263264427508350fc77a376a70211f92503776e782",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/prefix-03aa3a5b63cc40c1923db94380aacdcd.json",
+      "bytes": 4286082,
+      "sha256": "24974c8bdefb3cf915f722a506218bfe1f2b30b5675bf42d222308322d54fd9a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/production-fed-save.json",
+      "bytes": 123953,
+      "sha256": "57e604902b49bf7a3b7c9144a441fe19085f803d10b3c3dc50a37e23adcfdff0",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4006de617fbb4f1bae6afc4d3c2bd2f6/replay.json",
+      "bytes": 53852,
+      "sha256": "028be91f321b7bbfc1db9f195cc55e24da97391e3ceddda3287cf9bb83b22097",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/events.jsonl",
+      "bytes": 3741973,
+      "sha256": "76b26c4a7b9c4fc822c01f88bf29bbbf4ec176d23d3751ec8e21430dd8e1b98d",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/initial-state.json",
+      "bytes": 152338,
+      "sha256": "57a05143d4a964fd221a81677c50a534c76efa9592da2c3ba14af52c48eb916e",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/manifest.json",
+      "bytes": 4204,
+      "sha256": "0312768971ef18c955a79ca733a04774f1c59ec489b33624be7db08ceb5ca38a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/prefix-a8ef1db949ed427b8973bfd2a082721c.json",
+      "bytes": 23491542,
+      "sha256": "cb897a0fa92a16f657d11636251cf5516e17d0687a6a5b25d70dcfe5ed9ce05d",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/production-before-fishing-save.json",
+      "bytes": 146677,
+      "sha256": "40cd0c38b30faafcdc6f68bd486e71af0fe1f38edfd5141eecf948925df9bed9",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/4ff4a00bba1d4e6da101a902cacab542/replay.json",
+      "bytes": 19872148,
+      "sha256": "ca8ff942a4b95f6a8e82b371129ea0693d8b640f9926bcb8a232723c12337d26",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/events.jsonl",
+      "bytes": 4745294,
+      "sha256": "fccafdce88bb759f2844b01579f7c7c674dee3f4e25b0aaa70e5737854728cf4",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/initial-state.json",
+      "bytes": 147420,
+      "sha256": "4365e56981a45dd2ee9e085e6ffd5656d98565e3eb958b96c613284dfb01cdc4",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/manifest.json",
+      "bytes": 4204,
+      "sha256": "3af5957e18165db3c36390400949e0e13c68adeafe72722bb14f3db98a76d688",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/prefix-89146898a6264c5198da04bb67f7bc23.json",
+      "bytes": 26146552,
+      "sha256": "2446013fabff45aa8f13bb0db620ce8b81558651a51a088a989c5ce559799766",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/prefix-e3c19dfbba98422b85a05b73ffcae60f.json",
+      "bytes": 26223639,
+      "sha256": "df6720bb08a43c0345a182aee18da7642a114c3389056d1088a21480c5fc5566",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/production-cooked-save.json",
+      "bytes": 189793,
+      "sha256": "6843e993dba17b5a86258a823b2c362b5e140544c29d660f7c1008700ab0382a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/production-materials-save.json",
+      "bytes": 180677,
+      "sha256": "ffcd9d3dd717ee78e28b7f525d0e2eee4fd4fd6002b39e387ff0cffe9291fc31",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/503ae1af592a4ab3a3260f323cd57895/replay.json",
+      "bytes": 24056689,
+      "sha256": "fabf2eedbb25cfa0cc6c03285dc548eab276ee4182ba136d65cb6ed1b2b09f9b",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/events.jsonl",
+      "bytes": 19081087,
+      "sha256": "2cb02600d516552e9a5c919898be9d42b9977b19c553dc8c60ab22e085c6e1ce",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/initial-state.json",
+      "bytes": 124775,
+      "sha256": "4187dcd6c642ec7d6315ffdf53b2e3ea483af4621ad07c78907e5065e8929fff",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/manifest.json",
+      "bytes": 4204,
+      "sha256": "f1332a254e4260cc0c80f1e994b0ef3999e98ce6b5d0c6ad03eadad0f862250a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/prefix-2a1250a8b02944839ebf4d4b79527175.json",
+      "bytes": 19343339,
+      "sha256": "aa0c83019f0d5459b8a029f0a59a940a2c73b72afad237ff1c84a4c7497942dd",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/production-ready-save.json",
+      "bytes": 151595,
+      "sha256": "a747d48ccd82ed5228d00353dc7c9b7027c7671d1145723a7448cbd39726b9b5",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/aa610ac963f5438099c3fd7771223937/replay.json",
+      "bytes": 4478460,
+      "sha256": "c4abdddbb94f130792c135f2f44763529009926fe521dfa1d05f707bb806551c",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/events.jsonl",
+      "bytes": 1560068,
+      "sha256": "c4b87f76aacc4b9b228f7e64c799dc8a872e2f61f84bbc0541812af1fccccb40",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/initial-state.json",
+      "bytes": 190536,
+      "sha256": "7aa95b3bbbb4d95729f0a0adaac14f80c0e2f9301e2fab7e457a76e74bcf4a8a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/manifest.json",
+      "bytes": 4204,
+      "sha256": "ea0276236103f54e0ed89d1e326db88323689b151f0157f1995a15fd0f64a589",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/production-input-checkpoints.json",
+      "bytes": 10933019,
+      "sha256": "1cf4c6b5d9b53c5bb4a370a71c8778d288bd8d3f357cb32282e34a24febcbc0c",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/production-space-samples.json",
+      "bytes": 5854904,
+      "sha256": "6c5d0277bd57036b0e0fcad4f4ef42f0dfffed9bd1eb62b73f7e4309c72c3834",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/production-verification-report.json",
+      "bytes": 5103,
+      "sha256": "e760c31b48c043727ab0ec9844df4794b6c046000307ad375da408464ace909b",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/runs/e21d95bab92645898f79ca5ad7bda197/replay.json",
+      "bytes": 26850420,
+      "sha256": "2dcd0e7bd4274d922d5beb7f066d539e3a8932bb438cc49b4e387852e5167ef0",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/save.json",
+      "bytes": 189793,
+      "sha256": "6843e993dba17b5a86258a823b2c362b5e140544c29d660f7c1008700ab0382a",
+      "candidate": false
+    },
+    {
+      "file": "data/scene-production-headless/save.json.previous",
+      "bytes": 180677,
+      "sha256": "ffcd9d3dd717ee78e28b7f525d0e2eee4fd4fd6002b39e387ff0cffe9291fc31",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/events.jsonl",
+      "bytes": 104932,
+      "sha256": "2f1a6a3612c0cf20208353d3087527a4d824736134f3ce02190b7f70c01d93b3",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/initial-state.json",
+      "bytes": 121939,
+      "sha256": "42db261a89f463c61494da219e15213ad130cd4aebd4c70ad024f69960fbfd76",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/manifest.json",
+      "bytes": 4204,
+      "sha256": "14d93c34dd54e6711e8d34ddc9f8b3b21f545cfe7ebb91bc9ed5ce3307675bc3",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/prefix-befcd6211c8148088384df72d5ac5541.json",
+      "bytes": 7430231,
+      "sha256": "5c2dbe7b9e0788d8d181083514e5e9130520367c5916d76e582d25dce5b5326a",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/15e9c50fdf40458abec2ef54aa193712/replay.json",
+      "bytes": 7217224,
+      "sha256": "8e803e262148b0c5fefb7260b72377ee71fa333ae7c161cda3b5ac05d5289a59",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/events.jsonl",
+      "bytes": 89400,
+      "sha256": "3481893704be51722f0192b0ac06a8b8a7d732c2325dc9c4cde1afdaa3daa396",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/initial-state.json",
+      "bytes": 15203,
+      "sha256": "fdba9ce98a60310b35b60d131c56570a1e9326dcc4c9e795986a1f65f562b03f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/manifest.json",
+      "bytes": 4144,
+      "sha256": "edb9659c4096259d582f7fd9987240b1a0bd312c6738c58ddc220ce7839852df",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/prefix-9d981fd94b414e2f937a3c998171dbf1.json",
+      "bytes": 107493,
+      "sha256": "5a487a4dacfd942fbe086391e1c23caed92e480020930b0e1055bfe7f2e69e1e",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4bb08f286c564e059d1bcb02e95a4536/replay.json",
+      "bytes": 53852,
+      "sha256": "6e78050da792d9c35cb100cf28cdfd42250c67c9af32f80caf2cc8d1f826875f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/events.jsonl",
+      "bytes": 6725239,
+      "sha256": "a3adc2d39d279361f4f58218786566182cbf1542ac9f9c282dcca588d135d177",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/initial-state.json",
+      "bytes": 140703,
+      "sha256": "ba00f2d744c9e8e4722ac5ec201c5ba8dc40b5c3c3354ad3555e7cbb369db2b7",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/manifest.json",
+      "bytes": 4204,
+      "sha256": "a00077a278e3c32970e808cd9ddfb9c28b3da95f55c1cafc23abc71108c52a9d",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/prefix-2e9e8685037443c0bbb2399b9dc1a7ee.json",
+      "bytes": 7025335,
+      "sha256": "13b5dfbb45b2151f57065c417fe404ff4e4f1ecc8ae1e91cc7c9a7a82d703b06",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/4d7033e138bb47e8ab8f3dd930144ec4/replay.json",
+      "bytes": 783706,
+      "sha256": "1e393b89a935bb67a8a79a1988064f76ff0e64c3c997c2cd75bce6149634c2f3",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/events.jsonl",
+      "bytes": 378757,
+      "sha256": "e0dd92842c5fc823a95b9d59e56e50dfa6bb3286ff8256d2d2df55daa9a61686",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/initial-state.json",
+      "bytes": 32032,
+      "sha256": "b39d4e1bf1bb1fda7f4cfd522b30e51c87984a4517ee2e9f8702f0b8564edc5d",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/manifest.json",
+      "bytes": 4204,
+      "sha256": "464c7a8b7bc2ebc2045c6ebfe99bbeb52e15dfb2da44b129e859b420b5d7a4a9",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/prefix-68047af50f304c6385a151d25dc8a11b.json",
+      "bytes": 608721,
+      "sha256": "b14fe04b9af74ce3d7971d1e94a38e39bcee002f93c9a2f5d23fdfd7ef895006",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/a15aecd44c8a45998755ddc8d6d26fa6/replay.json",
+      "bytes": 180951,
+      "sha256": "6967b187157dfd92a2ef31661f763388f76d5808a3d0f2706740f0b7791cc207",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/content.json",
+      "bytes": 40524,
+      "sha256": "d35fffa7a9f02b16d33bb92115dc3e788b7e0bc4f4092fa6c0d75bb59672f1d2",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/events.jsonl",
+      "bytes": 77687,
+      "sha256": "37adf2020bb28bb5fdd0d76013f5b0abfb0ca37eb7613d6d90b7a97f7fcab78f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/initial-state.json",
+      "bytes": 128929,
+      "sha256": "c56e75dc8550fcaf03c0e5aecc04dd5bb4e69ddfbdece939136f9ef6b9399a7d",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/manifest.json",
+      "bytes": 4204,
+      "sha256": "fdfe4c911302a83d08621d6907c87c6a732ae198ca52f44e9d3a0c1669b55a7b",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/replay.json",
+      "bytes": 7641786,
+      "sha256": "95e41ba0de54acf8629fcfa9dd232172128f84cf931137149ae4b58da191ff9f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/verification-final-state.json",
+      "bytes": 129941,
+      "sha256": "ab0ff33b9bf6009b93b107ac1c86a0d634ecaf9c065c052bbd6c2ca65fd98a97",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/runs/b2d0223bc22542c0a505ae675ecbde10/verification-report.json",
+      "bytes": 15210,
+      "sha256": "141390a20e7aa7c1d963cb411032a76594e4a990aa9d4873b02ac26b426316ca",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/save.json",
+      "bytes": 128185,
+      "sha256": "9a57b4bbe3231b22923711560600131fa6deaac9f8633a7265dab3e7061a4cea",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-baseline-headless/save.json.previous",
+      "bytes": 121185,
+      "sha256": "a4e43bd49d48647e31a8b0df39cc6ba08a4cef7fb6a47f21d9acf690c847334e",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/player-dialogue-retirements.json",
+      "bytes": 44,
+      "sha256": "c40efc7e8ee3c991c02a48b1ffc3feb3f427f070ba62faa88e56bd964764ea0f",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/player-dialogue-retirements.json.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/events.jsonl",
+      "bytes": 379139,
+      "sha256": "0168018640a06fe1d327a1f43d99992f31748131b22d5bf4b01a4382d7063ad4",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/initial-state.json",
+      "bytes": 32050,
+      "sha256": "3008f9d416e020e974e3dec857a253edaeec85adf69d343091f6fae65da42d47",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/manifest.json",
+      "bytes": 4216,
+      "sha256": "451351d3bb34d6f7078ac4ecbd4df6f869a2db03f1377cace656f47cfee1299a",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/prefix-658ad4cda4204482a62ca5d2ab55e051.json",
+      "bytes": 609247,
+      "sha256": "66947378518cd3a2342cf0a938cbab93acbbd9e9f7111c504aa1e40d02e2cec5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/1ed22a23f4184bb59cb4a6e8489d91ff/replay.json",
+      "bytes": 181099,
+      "sha256": "a9d3067285f74fe7e09849fd94361f9bd138126e9223a3ec5daac1c062ee9e81",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/events.jsonl",
+      "bytes": 7067605,
+      "sha256": "7ad672137b8575ecc8ffd20eab57aab1211f72cbf01f3f0f33fa5c9f2d27554b",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/initial-state.json",
+      "bytes": 140717,
+      "sha256": "34125c52e7fed8fa4125aa507b3a1d2ae00fbb0d954c11cdbe8076deb23fc20d",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/manifest.json",
+      "bytes": 4216,
+      "sha256": "68feed2a898b7834541a72be0272a982135e7b0f41079d240671bb22714e061b",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/prefix-8d2f709082ff4eb7ae97eb0abc8e4f1a.json",
+      "bytes": 7342771,
+      "sha256": "fea2ad638c2f906a2239a0c50e34b3870669ddf46dccf75837591ba8c328cb59",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/53e56f7299c7491daea086e7b69646fe/replay.json",
+      "bytes": 784246,
+      "sha256": "246123df45f866f093dd0d10b6387c2605c2226998a9ebd9e91b44077c58e721",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/events.jsonl",
+      "bytes": 77699,
+      "sha256": "57f3bf7e4479441f6ca0c2091727c065e46408193a03c326da3e3bf0f8ef0c24",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/initial-state.json",
+      "bytes": 129016,
+      "sha256": "3778399e0d8a9aff0d441a422bf5f367853cb7dabcb0757306639ed87d5f6859",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/manifest.json",
+      "bytes": 4216,
+      "sha256": "26f49d8b7e1b0563f42b8577a786c73a04b6388ff60fceac616eb945478636fa",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/replay.json",
+      "bytes": 7960035,
+      "sha256": "3b1dc552413efe552c7add5c2c325e63e813d87bb6c5669f1e382624bb7edadb",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/verification-final-state.json",
+      "bytes": 130026,
+      "sha256": "fa6a251925c56604bad6b46ad3b024e75031546f2330e11bdb788d581889b3bc",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/6f5fbe03a49b43d78ea678ac86377e7e/verification-report.json",
+      "bytes": 15253,
+      "sha256": "7e272d77c5cc5369d8b08d3021c65a710f416ea72446579324f5d5ae6c9dd8e1",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/events.jsonl",
+      "bytes": 105189,
+      "sha256": "0b40f31a62002b941d5061e6e75f6be4168aa8f07ae489308c5d50fde7a6273a",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/initial-state.json",
+      "bytes": 122241,
+      "sha256": "eac39703052aacf862db18ca581f6ca991427a60f90174112875e83c6b20d82d",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/manifest.json",
+      "bytes": 4216,
+      "sha256": "899f5ec9ef6ab5bd5707b512fc8bce2db5be6024f9e04c9ec6dba7256ef8b384",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/prefix-e2eefc8c8a184498a7f784056559883e.json",
+      "bytes": 7748291,
+      "sha256": "ace5058674cc59b15955f3ec3d92c0a9f25e3569baf5b85479522a60501c41bd",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/7ab22c9c08524df398cef57a149ab211/replay.json",
+      "bytes": 7535026,
+      "sha256": "96b7d5fc8a9c48c572dd201020a45aecd0b7d685cf64357ac0fc84530e9e3a01",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/content.json",
+      "bytes": 40524,
+      "sha256": "43b2e6fb254123a26c0a6b5446031fcbc402ad1af956e38da2ca6f283dac47b5",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/events.jsonl",
+      "bytes": 89523,
+      "sha256": "9c9a0d5880581aefda1660b8fd80883bd5affe6f51904b84885e270d5ac44f70",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/initial-state.json",
+      "bytes": 15221,
+      "sha256": "3b0a62f718a262b9839c39755e3b11ab03fb818a77abba4302e006248ffed8b8",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/manifest.json",
+      "bytes": 4156,
+      "sha256": "a319dc5bdd6a3e26983c84a82f3f9e2ee829ec5e5a9534b4bb0ba000cf215ce1",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/prefix-169a2c3a757e4e82b7bf12c0a6674faa.json",
+      "bytes": 107623,
+      "sha256": "75f1629397f0d65d823dd40f0b3ac03386eb4240ccf00a9677146522a83ce624",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/runs/d4ca68a8d2b04bfb993e6937d6a3bc89/replay.json",
+      "bytes": 53870,
+      "sha256": "3ad2390abf9e978be4d8f8754372367aae548d52ba7435551d07fb49694a8141",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/save.json",
+      "bytes": 128272,
+      "sha256": "57471936f4d404f3af836fa8edfdacea70787da8428cda08a32736e7949c7892",
+      "candidate": false
+    },
+    {
+      "file": "data/slice-counterfactual-headless/save.json.previous",
+      "bytes": 121487,
+      "sha256": "d6436ad0693e3829c84e138d5d94740eb846535f70c56ff14deb6f8d5ae705bf",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/2be555fdc23d940f2f23460e92204a72_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/2be555fdc23d940f2f23460e92204a72_ExportRelease/msbuild_log.txt",
+      "bytes": 265896,
+      "sha256": "8053f32e7c48ad14b426204749f8441bd0264ff022a3b4be81af86381a3b56d7",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/3cf933dcc6c3a5e1c809e72d06249645_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/3cf933dcc6c3a5e1c809e72d06249645_ExportRelease/msbuild_log.txt",
+      "bytes": 74465,
+      "sha256": "37e9f0350657e3d15ebf50fc057f70da5c8f1f46c21b958321fafb424b5924f5",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/477cdb78eafcffa09ff77f44cf7e5a3a_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/477cdb78eafcffa09ff77f44cf7e5a3a_ExportRelease/msbuild_log.txt",
+      "bytes": 334018,
+      "sha256": "ca6c8438c65b8c1be29195969ad8a7c66169690b18d8c0da9439cd89018f4e5a",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/71b873db1e421f2beec212bdb3a2708b_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/71b873db1e421f2beec212bdb3a2708b_ExportRelease/msbuild_log.txt",
+      "bytes": 331559,
+      "sha256": "8f7c650b72242429bee9214fbd8553e1d507f4d1ee236e3f7592129b4aeb8a2e",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/7b16ca7888532039cb3f0ed024112821_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/7b16ca7888532039cb3f0ed024112821_ExportRelease/msbuild_log.txt",
+      "bytes": 256799,
+      "sha256": "21cedef6d5ba7c8a868796ef39d36a5ff50d1a5377fa4dc5dd09115b9f8e3c16",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/93471e2920a003978723088382961d2c_ExportRelease/msbuild_issues.csv",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-export-logs/93471e2920a003978723088382961d2c_ExportRelease/msbuild_log.txt",
+      "bytes": 331472,
+      "sha256": "5d400be2295a6f42c5b0e82a8bd501a476aff8659efdde043f51226888986e08",
+      "candidate": false
+    },
+    {
+      "file": "dotnet-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "dotnet-version.stdout.log",
+      "bytes": 10,
+      "sha256": "3db6bca4b50618b2e0d2d55d23b3d0541fe039ab6f731df0e9c47317b400ce52",
+      "candidate": true
+    },
+    {
+      "file": "economy-headless.json",
+      "bytes": 6399,
+      "sha256": "145aa775fae9d5cbd47a66bfa4b175d1b9e733b34988afe4e7b0f71b34ab849b",
+      "candidate": true
+    },
+    {
+      "file": "economy-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "economy-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-economy-headless.json",
+      "bytes": 6481,
+      "sha256": "cb5fa24a63eadfa445f4eab6ed07ecef6c49167558d9d0d8a6df9d8096db72c5",
+      "candidate": true
+    },
+    {
+      "file": "export-economy-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-economy-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-capacity-headless.json",
+      "bytes": 3029,
+      "sha256": "64de00ca9e63cd1e61cdf49bf5022d834eaf970d30f64612a34b152e229ec413",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-capacity-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-capacity-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-headless.json",
+      "bytes": 3766,
+      "sha256": "feb60a31e2d72d368824b8dedd230fda08a257615090f1655848d269bceeb720",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-farming-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-headless.json",
+      "bytes": 1048,
+      "sha256": "4a33d07830f1002ea3b75f455b85ad29eb5278ffafcedb85e33c2e4165f8624c",
+      "candidate": true
+    },
+    {
+      "file": "export-headless.json.snapshot.json",
+      "bytes": 36,
+      "sha256": "aceaa63721afeb7fc852c572411e39084bbc0a886900610385844d4d9d1a30d2",
+      "candidate": true
+    },
+    {
+      "file": "export-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-headless.stdout.log",
+      "bytes": 258,
+      "sha256": "9b6ba96b22c0e95a80cfa3564cf74395298c7680599fbc7ae332b8c71c03cc9e",
+      "candidate": true
+    },
+    {
+      "file": "export-production-capacity-headless.json",
+      "bytes": 4514,
+      "sha256": "f86979c92b8a3bda1d4e3c611a8dc699a6cbfcb7adf4b59076d2f74f2ff04b63",
+      "candidate": true
+    },
+    {
+      "file": "export-production-capacity-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-production-capacity-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-production-headless.json",
+      "bytes": 5176,
+      "sha256": "27b7207d8761145e861ddd18c33ded7e163b9e31a50eb45a14c1cbec258f44b2",
+      "candidate": true
+    },
+    {
+      "file": "export-production-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-production-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-baseline-headless.json",
+      "bytes": 15313,
+      "sha256": "c631b47e0a47324e39f8071ee68678d1118a1def6f638e4ebaba072fddd82920",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-baseline-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-baseline-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-counterfactual-headless.json",
+      "bytes": 15356,
+      "sha256": "98badcba2c235d0001923699444587d46774405c40be0f9ae3908f5710163ec4",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-counterfactual-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-slice-counterfactual-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "export-windows.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "export-windows.stdout.log",
+      "bytes": 11299,
+      "sha256": "22937c90ceb4ab9a4fd723dfbfddb34766bd5b727857362f1a4666163b0029d7",
+      "candidate": true
+    },
+    {
+      "file": "godot-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "godot-version.stdout.log",
+      "bytes": 38,
+      "sha256": "5d7f7a4d142ab8d22b2d814b7b14bf46616bbf3de695409479541ac536c9161d",
+      "candidate": true
+    },
+    {
+      "file": "host-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "host-tests.stdout.log",
+      "bytes": 1232,
+      "sha256": "ca3d09796cfc4240fdc75e0d644b380e5fdcc058919a7240b789f3ab983008bf",
+      "candidate": true
+    },
+    {
+      "file": "host.trx",
+      "bytes": 294959,
+      "sha256": "c418630a6eef81434d9931e240e57ccd16621946dc5f127c7209efdac6d8594f",
+      "candidate": true
+    },
+    {
+      "file": "import.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "import.stdout.log",
+      "bytes": 6694,
+      "sha256": "405f4acc74fab35960de5442972fc9a2b144e46ca18011904831d283320b80bc",
+      "candidate": true
+    },
+    {
+      "file": "model-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "model-tests.stdout.log",
+      "bytes": 929,
+      "sha256": "14d87649f167bef55db1bae610ce9fc2a975adc9a09c5f21723ae38894374a4e",
+      "candidate": true
+    },
+    {
+      "file": "model.trx",
+      "bytes": 102776,
+      "sha256": "39b8f8f6b303d0170cc5a1027e2034d55b3d2be303b1d921394cd6f3171f7f71",
+      "candidate": true
+    },
+    {
+      "file": "restore-core-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "restore-core-tests.stdout.log",
+      "bytes": 125,
+      "sha256": "7587612cabc0f4774a785f2a5768312df327e2d487f235347a8de564a9d05e85",
+      "candidate": true
+    },
+    {
+      "file": "restore-host-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "restore-host-tests.stdout.log",
+      "bytes": 125,
+      "sha256": "7587612cabc0f4774a785f2a5768312df327e2d487f235347a8de564a9d05e85",
+      "candidate": true
+    },
+    {
+      "file": "restore-host.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "restore-host.stdout.log",
+      "bytes": 125,
+      "sha256": "7587612cabc0f4774a785f2a5768312df327e2d487f235347a8de564a9d05e85",
+      "candidate": true
+    },
+    {
+      "file": "restore-model-tests.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "restore-model-tests.stdout.log",
+      "bytes": 125,
+      "sha256": "7587612cabc0f4774a785f2a5768312df327e2d487f235347a8de564a9d05e85",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-capacity-headless.json",
+      "bytes": 2959,
+      "sha256": "91ed5980467c2cf2308f508e78e38a6f450ed61dfe9ee9b1f92de38b3d133c41",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-capacity-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-capacity-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-headless.json",
+      "bytes": 3696,
+      "sha256": "18980c7d1f65786f412112f02877a94ee265ae4ea081903932a19f80fbaab5b5",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "scene-farming-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "scene-headless.json",
+      "bytes": 979,
+      "sha256": "2fd195c55a22d93c6a181281f55cb0926da0c997b68269ac80db9a9116818c51",
+      "candidate": true
+    },
+    {
+      "file": "scene-headless.json.snapshot.json",
+      "bytes": 36,
+      "sha256": "aceaa63721afeb7fc852c572411e39084bbc0a886900610385844d4d9d1a30d2",
+      "candidate": true
+    },
+    {
+      "file": "scene-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "scene-headless.stdout.log",
+      "bytes": 257,
+      "sha256": "25edd84f9e825d218dbd72fef3a5342898b7f90cb8a87b706973705e958a54a7",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-capacity-headless.json",
+      "bytes": 4444,
+      "sha256": "3246392610f6008cc8376b608b29bd410ae2920788e6dc5456fb1f7bc45b986f",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-capacity-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-capacity-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-headless.json",
+      "bytes": 5103,
+      "sha256": "e760c31b48c043727ab0ec9844df4794b6c046000307ad375da408464ace909b",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "scene-production-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "slice-baseline-headless.json",
+      "bytes": 15210,
+      "sha256": "141390a20e7aa7c1d963cb411032a76594e4a990aa9d4873b02ac26b426316ca",
+      "candidate": true
+    },
+    {
+      "file": "slice-baseline-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "slice-baseline-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "slice-counterfactual-headless.json",
+      "bytes": 15253,
+      "sha256": "7e272d77c5cc5369d8b08d3021c65a710f416ea72446579324f5d5ae6c9dd8e1",
+      "candidate": true
+    },
+    {
+      "file": "slice-counterfactual-headless.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate": true
+    },
+    {
+      "file": "slice-counterfactual-headless.stdout.log",
+      "bytes": 80,
+      "sha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+      "candidate": true
+    },
+    {
+      "file": "verification.json",
+      "bytes": 10450,
+      "sha256": "77c066a8a6c346ecf94142ba3e6d18117c9c5b41ea26e0f67ef7c18fca6084a0",
+      "candidate": true
+    },
+    {
+      "file": "windows/CozyTown.exe",
+      "bytes": 109513728,
+      "sha256": "16e0ec3cfd398b938f514de95ff2474b532b5061ada78f92226dba3f7584d55d",
+      "candidate": true
+    },
+    {
+      "file": "windows/CozyTown.pck",
+      "bytes": 98560,
+      "sha256": "e9064531826f0a25e4ff832c4bda4a705c99b24b8be277c87fa50855faed9032",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Core.dll",
+      "bytes": 486400,
+      "sha256": "cc91dbbef48f1fda42bf6d60f82e22cd2ece1e24b5a748f14b29d2cbcc4ecd57",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Core.pdb",
+      "bytes": 104768,
+      "sha256": "b8a000352eab2c09bc5bf96ad8a854c00aa75197b134dec98bf47023fff92652",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Game.deps.json",
+      "bytes": 29352,
+      "sha256": "92ae67169b6f9f4da4ab3655fe8fc1379b7aadb97c3d35c79622a3e8e6cb9723",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Game.dll",
+      "bytes": 600576,
+      "sha256": "56e59dbfaff71b3b7c2f7981ace7997c9b3f81911f4696ea163ab500f9c18649",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Game.pdb",
+      "bytes": 151196,
+      "sha256": "71b4c71124ac5a07bb8c81d4906703d03a85e437d8745df7eb1f1442526bf452",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Game.runtimeconfig.json",
+      "bytes": 374,
+      "sha256": "5f8fa34afd7f3e5a94948944eeda37e8d1bfa294aaf4001c9c0f24d1ed83a2c7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Model.dll",
+      "bytes": 79872,
+      "sha256": "92e30acfcced818c81aa2b8df2f280a8a4cc09f79a0d65bb5151234f79e8c23e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/CozyTown.Model.pdb",
+      "bytes": 28248,
+      "sha256": "3ef36f2e7d671a4ea8d14b7de18039510b12cafd7414f9d2150b17cd79dde6b1",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/GodotSharp.dll",
+      "bytes": 5928960,
+      "sha256": "2afe2686aacfefac36da6601b59aeb05e560f06e4970cd5036100acd2ca4249d",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.CSharp.dll",
+      "bytes": 980776,
+      "sha256": "2000912f2fc52e0c64ed893d79f4e7b143502540fb7170b5ae5fcea7099ba431",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.DiaSymReader.Native.amd64.dll",
+      "bytes": 2377016,
+      "sha256": "70e4b89978ce57ef87b28f4921f3140c383b04aa96e7f3bdb3c4ebb898fd8a72",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.VisualBasic.Core.dll",
+      "bytes": 1193768,
+      "sha256": "2666b24eb6e295476b44abd057ea250fd5957db9c1c7adee6a223a747ddfe3d2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.VisualBasic.dll",
+      "bytes": 17192,
+      "sha256": "e192508adde6a758138a5a8e28998dccb64e7f45eaf30d8ab3564f87749028b1",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.Win32.Primitives.dll",
+      "bytes": 15656,
+      "sha256": "6c21472b0ae2f9b484a97614fad5485a22f18f9f19ee1adb9ceb3ed8ddb072d7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/Microsoft.Win32.Registry.dll",
+      "bytes": 116520,
+      "sha256": "76849cfde4369f3ae93e28261fe5e1010dbf1332f7da95c98543cba9b03961c0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.AppContext.dll",
+      "bytes": 15144,
+      "sha256": "d9dd9fa44e019f27172d6b2662e2b6038f48c270912ac8aae53d4d909da7e9be",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Buffers.dll",
+      "bytes": 15144,
+      "sha256": "a1a35f5524e2f831d08ca55f702fbddcb8c6dfecd264f0f563d81a1c8b8280bd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Collections.Concurrent.dll",
+      "bytes": 231248,
+      "sha256": "082f4bc0da1141eb65111b6da633d75624adfb7bb067d7ee90c5622c8b30885b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Collections.Immutable.dll",
+      "bytes": 976680,
+      "sha256": "b527dd7b2beb82c22aa39787298cbeb33f3eac9eb9b83a0f0271353421db28db",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Collections.NonGeneric.dll",
+      "bytes": 104232,
+      "sha256": "aa4d5216d066c91cb489f63c6cbfcaf1f47b6e74e070db45639d3460454fc60b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Collections.Specialized.dll",
+      "bytes": 104272,
+      "sha256": "e31af1f866e880844e027be59f545b9a6b34108e0b0680ebe3fbc19a53070819",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Collections.dll",
+      "bytes": 296744,
+      "sha256": "df6f2037eabee28100184e92f7536427ba2f086c1110629804d466b124bc4d54",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.Annotations.dll",
+      "bytes": 198480,
+      "sha256": "e3be2d35d81e6475c64110cfc099895b71df22c8b46a18c2d7c76a913b8ba903",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.DataAnnotations.dll",
+      "bytes": 16720,
+      "sha256": "d40e8c7062e6b9ce11ba83eab3d26be0eec8066b99970ea88b8e87fb75f411bd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.EventBasedAsync.dll",
+      "bytes": 46888,
+      "sha256": "cc84fe814ef5e58271d83193e328f8ec220efd4696d90af9a7c4690c10451495",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.Primitives.dll",
+      "bytes": 79656,
+      "sha256": "1e2451184c287409ea25acde3c90f25950bf34d16458a6e52a94ca4292434f62",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.TypeConverter.dll",
+      "bytes": 767784,
+      "sha256": "10dae312a6697718f8ce3dfcdb17d6ae4b74687c765d74d50de8a8e69e08f5e7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ComponentModel.dll",
+      "bytes": 30544,
+      "sha256": "e3b6f75864ee944898540937c1f300e04f44a1b2729516f0bbf948589a8b14b2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Configuration.dll",
+      "bytes": 19240,
+      "sha256": "3952a72e1f18774f16952b46c20e80ed2bc601a06eca01f33fa924c738022a9c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Console.dll",
+      "bytes": 169808,
+      "sha256": "3b85daf02a3d9ed99b84bb1c639fe8b1ced46d8d157fa56f525f6b8c5be43b3e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Core.dll",
+      "bytes": 23336,
+      "sha256": "ac23faf1b37fa49f1b117baad951a65609e799a6e669a6df06d3552677e0c086",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Data.Common.dll",
+      "bytes": 2770728,
+      "sha256": "66bdd62047ee460e2ce2c33d15dd1173ac97997b2745864a905179594f821acc",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Data.DataSetExtensions.dll",
+      "bytes": 15656,
+      "sha256": "aeeae0755c8c7f6747765cdf82fa43182e320e97f2035e3a0a19f21905e6c113",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Data.dll",
+      "bytes": 25424,
+      "sha256": "49f52958a2a6e461d0fd7a47e54a199eb263c69ecfcc0fc684b73b5918ebf466",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.Contracts.dll",
+      "bytes": 16208,
+      "sha256": "6c05cacd9b61b08ae75f2d783cc402b0b5fc848e3d68c29c10b93897cc083e8b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.Debug.dll",
+      "bytes": 15656,
+      "sha256": "8b160ffe7518588bf64e13c01c6dcb2ef504d64f38bbf0f198d31e7b698db92c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.DiagnosticSource.dll",
+      "bytes": 501544,
+      "sha256": "6267c1bd1bdf2bdd4b5748b885b0adcda10f18697adfea8488a19a009ad44fdb",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.FileVersionInfo.dll",
+      "bytes": 46928,
+      "sha256": "e94f158142e93834dec3100bde3313935517d549ff36c65819a06d3104dec427",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.Process.dll",
+      "bytes": 329552,
+      "sha256": "51a57fbe918f8b68930c090792b718fc0850ea12da869d50b97a3796af29a740",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.StackTrace.dll",
+      "bytes": 46888,
+      "sha256": "8f6397c1e2ba9b8b8bfa317962151b5035049ce8d6b3575e5027a0d0eeacc797",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.TextWriterTraceListener.dll",
+      "bytes": 67368,
+      "sha256": "1bf165cee916a854e1150f489e4348ce94755359d5fcdcc0bc2bbbe6a7102bdd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.Tools.dll",
+      "bytes": 15144,
+      "sha256": "841c5e2b6c171fa9aaff0fc6295f3fbc93dc5dcab44118b62f1c942bb674aff2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.TraceSource.dll",
+      "bytes": 141096,
+      "sha256": "8445c7f1bbaae6cffde60e2c9a8753faaa5100255fbe31d0a1927d9d9bb7f194",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Diagnostics.Tracing.dll",
+      "bytes": 16208,
+      "sha256": "9563d5eec35f94d13a5e62eaa9535dbe0e9ea474f055da132fb8af46b0b01263",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Drawing.Primitives.dll",
+      "bytes": 132944,
+      "sha256": "17585b32ca91bac8ccff2ef1c6ddf62ee9ea5efc552928c3a9d1b868394246e9",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Drawing.dll",
+      "bytes": 20304,
+      "sha256": "585a8da9952d715f8de7a7b1879b59d68ff8608b92f6ed1c5f0e1d251180d3c6",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Dynamic.Runtime.dll",
+      "bytes": 16168,
+      "sha256": "c0eac30c791db8c1a2b50b61c50d029f4ddd0eadfdd35433745001688a3e7466",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Formats.Asn1.dll",
+      "bytes": 239440,
+      "sha256": "a163fe5f96d1689f1bc1ac531b38c3aba95792ac7dd52231d325d658947fbcfd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Formats.Tar.dll",
+      "bytes": 272168,
+      "sha256": "44c9984f269a158915195fd32007f22c3bb692dcfeb933cda8ea45a3ac6cd1ce",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Globalization.Calendars.dll",
+      "bytes": 15656,
+      "sha256": "e0f3f3f6e4acc7b6755782fed5cb075ecf70beee4fc5d404579ae99bc0883ef2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Globalization.Extensions.dll",
+      "bytes": 15144,
+      "sha256": "be0390557cc72078a7217cf94fd44b9ab66aa30838c00a92aa78c62469c44aa0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Globalization.dll",
+      "bytes": 15696,
+      "sha256": "66902cffd057673b4b77aa68faf80d33ffa4c94510e61db2a067943cc53b7702",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Compression.Brotli.dll",
+      "bytes": 83752,
+      "sha256": "0a59a95787ee15784d73079fdd5dc555b78659a6c560b6cbbf0d7452e638df89",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Compression.FileSystem.dll",
+      "bytes": 15184,
+      "sha256": "4aeec2c0189f73ba8122f05c0d759008ddae1a8873b167cc8a558d53f2af80e1",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Compression.Native.dll",
+      "bytes": 937256,
+      "sha256": "4d174b78aa8b3516c7e3cec0355dfe9ae570894055c377d2e5565d077a9a7a1e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Compression.ZipFile.dll",
+      "bytes": 100176,
+      "sha256": "2da76eb281740be485b5637da8c60fe0ce12bc2848d1a1a81ce144fa74313e18",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Compression.dll",
+      "bytes": 419624,
+      "sha256": "c942747f84b730887090f5e0cf86d164c0ee402e524dce2750e06a6df48513fb",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.FileSystem.AccessControl.dll",
+      "bytes": 104232,
+      "sha256": "f7f9ed6cdab35274711e9345266784ec332ae8040db184d141c70e7941fbbec5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.FileSystem.DriveInfo.dll",
+      "bytes": 55120,
+      "sha256": "0a7f3dd2fb6147a3fc046aeac8501d764effe5a3d8cfa56d2b244aa50b874b98",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.FileSystem.Primitives.dll",
+      "bytes": 15144,
+      "sha256": "d3b21b8b38e48c6b4d1cb5cfe9adfe4abad7b3353601febd3c7e4027f9ef9c6b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.FileSystem.Watcher.dll",
+      "bytes": 87848,
+      "sha256": "8ab1704e4bd171056ec5a11e886d5199d05a641c6d0233c53d4766bf30328dd3",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.FileSystem.dll",
+      "bytes": 15656,
+      "sha256": "c251f33b29382c47b773d907463edd9fe978a06e39efd5670ef3b3b1d4f8c2b7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.IsolatedStorage.dll",
+      "bytes": 87848,
+      "sha256": "2272a8bde18ed0e7c9e54ece9b849b9be76c90b978909d2b2fc94cf0ccbce427",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.MemoryMappedFiles.dll",
+      "bytes": 83752,
+      "sha256": "6e8b281ecb2f0f5e7aad3980f61d8812caa6b37884737f542f95410a76663e0e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Pipelines.dll",
+      "bytes": 190248,
+      "sha256": "ee9f0fd6c659f50799afd103c6ed9c5e408967e28dfa059bddf4b0a3fd2557dd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Pipes.AccessControl.dll",
+      "bytes": 15656,
+      "sha256": "1102f25a6e88f2fae81e4cd3628d8ef826f847b9c9b6a4d32ff8b37e0300da35",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.Pipes.dll",
+      "bytes": 165712,
+      "sha256": "3804f9992861122e60990b0765d0b50b33cdc2e4d89d26d9dbf8641d1d0134a2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.UnmanagedMemoryStream.dll",
+      "bytes": 15696,
+      "sha256": "ad6a5f859589e1951103a00f45566da079cf87bd8b03f0c6ad985a6f39f19c5a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.IO.dll",
+      "bytes": 15656,
+      "sha256": "388400ccb189b819d6ec5f1ef70710a39641d93ed5b870fc9324866b75dfb78b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Linq.AsyncEnumerable.dll",
+      "bytes": 1292072,
+      "sha256": "925208e8ac40ac3f7b988aba6ccbbb58adac38ad1876a7d97ee137be6c21a653",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Linq.Expressions.dll",
+      "bytes": 3639080,
+      "sha256": "8830f4a6a6982f53cfbb54f992858ee36b4994a6ff6e6078c39627e77bef282f",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Linq.Parallel.dll",
+      "bytes": 775976,
+      "sha256": "aa6068e3d8f6b2e492cc63dcaad6b02942edbae445cb2b88c24f1850b25c49f5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Linq.Queryable.dll",
+      "bytes": 182056,
+      "sha256": "b3b3a9c1b87a51dacd46a3f9ec392c5d05e449152d44d6bd495df0994350e2fa",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Linq.dll",
+      "bytes": 698192,
+      "sha256": "284d38945b6e92e847129bd28af458b19818d0f2181f79882888ab2003f4c519",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Memory.dll",
+      "bytes": 161576,
+      "sha256": "f8f9d38efd6b0de30954d6bf1f353e9617bfb36d3d245c013a3b12be9f6bd88a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Http.Json.dll",
+      "bytes": 128848,
+      "sha256": "a9fe81ba3c048f9977e0099800eefd570a49be723c555725da57ba797c92b4e0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Http.dll",
+      "bytes": 1746768,
+      "sha256": "b98ed0cb80dd54c33fc049f33af5448710752155bbd5cc8cbcd932e01f066801",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.HttpListener.dll",
+      "bytes": 534312,
+      "sha256": "3dfe11fb30c5f84c911d9562be6c2037113cd8976ef2def3550ac415ae58955b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Mail.dll",
+      "bytes": 481064,
+      "sha256": "b585a55ee67c80d7f02a84d50d626d279c7aa77fd3e38206b434bd20c181eedc",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.NameResolution.dll",
+      "bytes": 124712,
+      "sha256": "e786c0940f5322f0ad6e8e34e7b582e5b050df0fb2230329325307e61bfd994c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.NetworkInformation.dll",
+      "bytes": 157520,
+      "sha256": "7e8791833eb2d0aea77b119fed3cab8bf501f6a553155cc1c4e5b1c02f65593b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Ping.dll",
+      "bytes": 91984,
+      "sha256": "06bb307343db955a312634d00ba5e097cf5168a901284437592c28d780804e33",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Primitives.dll",
+      "bytes": 210728,
+      "sha256": "4dbb41a178ef013a898327152eccd146228dd2eb83859b9bb36078333b41f0f1",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Quic.dll",
+      "bytes": 358224,
+      "sha256": "af5b52cdee62d014af677c411530a3fde5c1c368adecb8f83dcfe9246e8bbe73",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Requests.dll",
+      "bytes": 374568,
+      "sha256": "ed82d9d0b7942b2b02c5744a4591fbe2316879618adfc5660c9f111f814155f2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Security.dll",
+      "bytes": 665424,
+      "sha256": "a78bd713e807729f15b0e085c67fd6cbfefa85736a2618512d4ff1212759eba5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.ServerSentEvents.dll",
+      "bytes": 83752,
+      "sha256": "c0b1944020d0e5688b90fba9f29209e367674e29d2020f700c302994d5417eda",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.ServicePoint.dll",
+      "bytes": 15144,
+      "sha256": "84fa83cd96e62fda02991b8a8e99fa1c7b3ac08807b04f7486a896cfe6b4a760",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.Sockets.dll",
+      "bytes": 530216,
+      "sha256": "645c56d637ce15976998119e50722a911315682ce141b4aab98874ce1b063f3a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.WebClient.dll",
+      "bytes": 165672,
+      "sha256": "defa7bbf90c77ed01d6add53f678e4adfbcf97f3b1152affec06e652d327f1a2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.WebHeaderCollection.dll",
+      "bytes": 63312,
+      "sha256": "74d66f776b4c15936a7b887f47ceb8bf277dbe82e71a78dd3ea5d02502b081e7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.WebProxy.dll",
+      "bytes": 42832,
+      "sha256": "408e3daabb3f42b4f1b72a1e1def38f12ba58eb9d23dca620086819cf7484195",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.WebSockets.Client.dll",
+      "bytes": 104232,
+      "sha256": "f308a69b9ee1ac982f53d1d94374f4972a7e3c700742901ff7c2bbfb570019d2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.WebSockets.dll",
+      "bytes": 243496,
+      "sha256": "c014a074d408c71011e26eac69be85003a852cfe115e8608bb5d4fd70536eb2e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Net.dll",
+      "bytes": 17192,
+      "sha256": "481b38c912f8779b3510cd00f079e45096ea22b6defdaab66780d5ac3ae6986a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Numerics.Vectors.dll",
+      "bytes": 15656,
+      "sha256": "a9a980ee33ed0c798a5e1960c4557521f465ac9e0987dfd2c3049d53b1f2fa5a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Numerics.dll",
+      "bytes": 15184,
+      "sha256": "35adc9360421b3b7a3d50399cb2c651c160158d7e8c302907acbce5f61f4a4f7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ObjectModel.dll",
+      "bytes": 79656,
+      "sha256": "2179bb19f335b4fcacd0994ad2ccfdac6840deff09c7889debfe9dbb5b88a3e6",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll",
+      "bytes": 16033576,
+      "sha256": "1125acc8106c43fc8bad2d203c4c4485df6182d292846c2fff415c1040c54678",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Private.DataContractSerialization.dll",
+      "bytes": 2062120,
+      "sha256": "8c07a5333c4e938cad8ac8f24b5965121bc0622442a352cbe81c58f17c2349a8",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Private.Uri.dll",
+      "bytes": 255824,
+      "sha256": "b15c84d2120e1ec9612c66ba59bc3d7e67d841e2bce7b7d0478cb212537539b4",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Private.Xml.Linq.dll",
+      "bytes": 390952,
+      "sha256": "c832b73de9783e6929ca5ff4863fc313e13ef7cfb5965c52587c4f77f6e037a7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Private.Xml.dll",
+      "bytes": 7788328,
+      "sha256": "d71e72a7a9de324352edd281a46466b51bd0bdd2831b1573f8d3bae8bd2dd4a6",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.DispatchProxy.dll",
+      "bytes": 75600,
+      "sha256": "bf93a361c0bba8497889c9f7713add5968ba39394f9e6bda27e86294c6c43560",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Emit.ILGeneration.dll",
+      "bytes": 15656,
+      "sha256": "6b42ddd05b0ca1c7342d73ea9f401fe588044215d65c67b756deb780f0894a26",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Emit.Lightweight.dll",
+      "bytes": 15656,
+      "sha256": "d2724a2b7b46146877ec1f6e400c49ea05f84bdd31f3bba52ae139ee68a4f779",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Emit.dll",
+      "bytes": 309032,
+      "sha256": "09059981bbeea0fdc5df589be5d7e3937d57e22bec4d78ceb492c587926fc238",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Extensions.dll",
+      "bytes": 15144,
+      "sha256": "ceb1b81e1eb488d87bd43d16dc54450b2a78e0b653c44c988aae2a20abc162bc",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Metadata.dll",
+      "bytes": 1156904,
+      "sha256": "82973e772017944a0548e445f30757595d95fe99e1f5c4a446df8c4db04b1c18",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.Primitives.dll",
+      "bytes": 15656,
+      "sha256": "c2bbd885d03da5e880667c228ac1f56a5f3a72ea37d43f010ada000adc33da28",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.TypeExtensions.dll",
+      "bytes": 42792,
+      "sha256": "7cac73ed746ce05a4a2f1e61dd52d41322ecc6ba84cfec463380f49487031459",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Reflection.dll",
+      "bytes": 16168,
+      "sha256": "95059346d6271dd6d0322cc321e5fb8cceab662f550c67aee7615059e41739bb",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Resources.Reader.dll",
+      "bytes": 15144,
+      "sha256": "20bdb5d302b5e28f6042c9f281cfa3ae2f2358544cc40783052fe5abf6aa859b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Resources.ResourceManager.dll",
+      "bytes": 15696,
+      "sha256": "f709eb5cf16e26679782784c428825019785fcc7085562092425d4999bece03d",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Resources.Writer.dll",
+      "bytes": 50984,
+      "sha256": "684836486b9ba2817efa3099118860d259fd16db0c4c0533d42cad8c6c165b62",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.CompilerServices.Unsafe.dll",
+      "bytes": 15184,
+      "sha256": "6e685ec0477b21a688cd38bfcafc673888cdf186c99df3c96fab352e96d6fdc8",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.CompilerServices.VisualC.dll",
+      "bytes": 30504,
+      "sha256": "5fd85d3d7b47a921bdf48bf938c6615a49a4a3d493e1ea199f1b997c709618f4",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Extensions.dll",
+      "bytes": 17704,
+      "sha256": "3d7b517d4fd89ee58c53e0f642cc9be42e7a8669b51a85e861dafe118067cbfd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Handles.dll",
+      "bytes": 15656,
+      "sha256": "985457a3e6a67e96a445ee0fb69b2d58bcdadc4c964253fb63e2d5061a36b050",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.InteropServices.JavaScript.dll",
+      "bytes": 50984,
+      "sha256": "5ba32bcde2d72362db2d6e02763ece79fa35bc878b50493e956ce594307e997f",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.InteropServices.RuntimeInformation.dll",
+      "bytes": 15656,
+      "sha256": "c26d9f94329422bd000f28f6c65fdc162bf9397a6d29e418a189d4ca49c5c3ec",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.InteropServices.dll",
+      "bytes": 112464,
+      "sha256": "e5eb1679f3579c9141e2bb9dbdce62624a623f38d299805cc1de07bacd21841f",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Intrinsics.dll",
+      "bytes": 17192,
+      "sha256": "b07694ec91f3a200acf0f8b37c6ce5fcf05126a9198ae156d839fa5ca8439dc5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Loader.dll",
+      "bytes": 15656,
+      "sha256": "9b9b2a4f0358d9146e76178ddb87d019be380c78baa7dac853493d45df089f03",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Numerics.dll",
+      "bytes": 354128,
+      "sha256": "8ac94fb810c092a9297a903762e79a75ae07d7229d0721540c391f86d3d5d220",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Serialization.Formatters.dll",
+      "bytes": 124712,
+      "sha256": "5e8e957c6b7a63132555ede5bcf5fe6a59934c83300e28074ec6e9845ecdd17f",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Serialization.Json.dll",
+      "bytes": 15656,
+      "sha256": "2fd71e3545dab4fc89b3fe54d13a1142f26a0cf187ebe375b3f7fa210fcb2596",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Serialization.Primitives.dll",
+      "bytes": 38696,
+      "sha256": "f96093940e64d8eead98c86de9773d3c9d12c2b033bc6b1312ac88398303fdf3",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Serialization.Xml.dll",
+      "bytes": 16680,
+      "sha256": "eedb66ea2cd1a26cc45a46d6631209ccbec959af82208872a93b3ae52f189222",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.Serialization.dll",
+      "bytes": 17192,
+      "sha256": "d565fc261ca98cbd14833821f777860291e8a0f775de7aee91778a9f6647f6f4",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Runtime.dll",
+      "bytes": 44840,
+      "sha256": "76be53624f64b23d0249dfa0bbe85390086de7c44bfd490642ea86c6faaf44af",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.AccessControl.dll",
+      "bytes": 227112,
+      "sha256": "cdc304f9ddb32023adb8db8953e56711c9b64462e4341d0b62e87ccd19dc7b10",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Claims.dll",
+      "bytes": 100176,
+      "sha256": "c53c8a7e95d8296f951872fdd2e6334d11c20bffd4322f1a088773bf9dcaa3c2",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.Algorithms.dll",
+      "bytes": 17232,
+      "sha256": "eb99ae7dbe058a1b015aba6769ce1f65155b7ff51ff9a7203fcf6d7cdea5fef7",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.Cng.dll",
+      "bytes": 16168,
+      "sha256": "7319f97896d92a7d0729cf28dc6c4d1f797c1520b656ee01a780eec726ec2c16",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.Csp.dll",
+      "bytes": 16208,
+      "sha256": "4002af141e9cb29875b677841adf64a9681e5672c2595492dcbc161460d4e121",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.Encoding.dll",
+      "bytes": 15656,
+      "sha256": "994494aec7760f40fade2264aa7c13eebae36360f0b1399a7134bb19c9d58fda",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.OpenSsl.dll",
+      "bytes": 15656,
+      "sha256": "1a8902bbad1b577a98bec62a8472105dc1e9a253e390f69fbe3d167e93206968",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.Primitives.dll",
+      "bytes": 15656,
+      "sha256": "194cccea9354bb248e44c954b5373f9069163f8f21524b3ee4b3185fe436bc15",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.X509Certificates.dll",
+      "bytes": 16680,
+      "sha256": "7439c3b90bc2ee49a9275b28ed29052b4d48b45999ac1b7d25593033b1bb8dd6",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Cryptography.dll",
+      "bytes": 2549544,
+      "sha256": "e0a839a540e47343b53a936b32d91599a3470005228d50fd0b896f8bbdcc65b0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Principal.Windows.dll",
+      "bytes": 178000,
+      "sha256": "2311a3f92971de918943573dfb66e04e25c1d543663951eb24e8eb1a0dcd4251",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.Principal.dll",
+      "bytes": 15144,
+      "sha256": "1d3e351058be3a33214b23b308fe57f78cd6fd4d8fad448fc84cbbe7376129f9",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.SecureString.dll",
+      "bytes": 15696,
+      "sha256": "73aac97072b7deefa4de9647bf822162224f1452ad467841b989ff89d4d94595",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Security.dll",
+      "bytes": 18256,
+      "sha256": "d8efd304765e859369698efef9b3ca707defa8e142721fe5605d7a2de7d38375",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ServiceModel.Web.dll",
+      "bytes": 16680,
+      "sha256": "ce91013ee3a9a9d69a85e258f7749e6ece488295d7cb66f7c1079f2e8678fc5e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ServiceProcess.dll",
+      "bytes": 15696,
+      "sha256": "63fc498c9d04e3c4345dfdb8016ad0639d54562dd7d8c707c072792c854df944",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.Encoding.CodePages.dll",
+      "bytes": 862032,
+      "sha256": "226e216e33c94ef7594bdffe670ba4dc5907151c113cb41ac9e9d570227e1765",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.Encoding.Extensions.dll",
+      "bytes": 15656,
+      "sha256": "8f51b9535db64fe027a40d6076200b1a6b0889bf05f62bb8e68c3eb083c7f113",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.Encoding.dll",
+      "bytes": 15696,
+      "sha256": "5e347db6b4f9b2746d50e1ac85be2d9cc7dc4038fde98ac4295bc7030c83cda9",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.Encodings.Web.dll",
+      "bytes": 124752,
+      "sha256": "d20431f20d992e71a4e82e5f25c822474e2f4097d8527972d3d78ea1f26e47c3",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.Json.dll",
+      "bytes": 1890128,
+      "sha256": "fa99f413be21ed5f484a09093fe5f0beba7de3062cf9cc9f847dbf8108dba55a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Text.RegularExpressions.dll",
+      "bytes": 1034064,
+      "sha256": "060bcc88a688e687ff1404b83b5fb5cf17e19ec57f33d5b8a48ab494da83c134",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.AccessControl.dll",
+      "bytes": 75560,
+      "sha256": "66d618b5522b3e4f7a3c7f2bd872fc378fa6f9bbdca3636854eb1a8cb948e631",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Channels.dll",
+      "bytes": 157480,
+      "sha256": "afc5deb3c32b3f64bced2025d0b01b316d41b691ebc6ccb1a2ec445ad4c15e39",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Overlapped.dll",
+      "bytes": 15696,
+      "sha256": "89fde15f8e520c4bcbc6cbfdceba2baed8670cdf52399a4cd7a21c6efb276c1a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Tasks.Dataflow.dll",
+      "bytes": 472872,
+      "sha256": "a895b0c73d3a1afc4d89c1d9e445ed447af12864c25aad2c4cb7398ff50aa934",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Tasks.Extensions.dll",
+      "bytes": 15696,
+      "sha256": "f148e3a1414b7c2763ae21529ad79ad759f7cfd3c885256b64b0d2209dec2613",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Tasks.Parallel.dll",
+      "bytes": 132904,
+      "sha256": "6fa359bdbebb56be96339f244ed41658afcead5e010074da470df1115d1e7699",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Tasks.dll",
+      "bytes": 16680,
+      "sha256": "f80b21f7dae04377b73945456cabe25e2ab1f4b564095aed546c2aa571644567",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Thread.dll",
+      "bytes": 15696,
+      "sha256": "ce71949bb1ea67b686e799128582015ebf8758f1107e59e43f342ece3f662930",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.ThreadPool.dll",
+      "bytes": 15656,
+      "sha256": "58fbc6c4b9c72087152fd0f0670a527098c00b0c19ba8d0979d3ca5ce07c6936",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.Timer.dll",
+      "bytes": 15144,
+      "sha256": "9e4620846572f49aeb476aa99405071b4bbd0df4323e4e232787ed73642b1ee5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Threading.dll",
+      "bytes": 83792,
+      "sha256": "6c32ed1bf8067e4169e8feddd15e6489b89d19d1c7aae1520a551b57745d0a60",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Transactions.Local.dll",
+      "bytes": 640808,
+      "sha256": "8d0283a311a16333ffb6f966d9765e4d8b866777ad99291a93b30db349a15bc4",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Transactions.dll",
+      "bytes": 16720,
+      "sha256": "56abfca0350c111d077b3d86a2469ea3da4fccc1871f7c51a8b4fdb664bb0ede",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.ValueTuple.dll",
+      "bytes": 15696,
+      "sha256": "07a5347f6a597e5e0d72109efa1a525697e8c3f74fb0029005500f8ebbf9187a",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Web.HttpUtility.dll",
+      "bytes": 63272,
+      "sha256": "2cedef51b0a2c2b84240583339ecf2422c650e3388aa46f3494160b93b673887",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Web.dll",
+      "bytes": 15144,
+      "sha256": "bc260b3db247ad9a6e4a82a275da85c3691a41272cc745cb7eaefcf1f31cc817",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Windows.dll",
+      "bytes": 15696,
+      "sha256": "716eee98ceee87d38f0b301224462f8442aa793f4b1b9c3ffac315753320ab37",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.Linq.dll",
+      "bytes": 15696,
+      "sha256": "ae04903b25717fa4695e7e63489091f0d461e791e0bd264c6c85250d668f540d",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.ReaderWriter.dll",
+      "bytes": 21840,
+      "sha256": "8e48fed4d12bcffff01e8059caafb564697275797d2f5ec6823fdd82b87fe938",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.Serialization.dll",
+      "bytes": 16208,
+      "sha256": "489694401c60905cb6dca8ef0bf738cb609cd45b337126a01c825b913086ba43",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.XDocument.dll",
+      "bytes": 15696,
+      "sha256": "3ff858607de5146051498a7124ef983bea280d86e165f993516c6c26af81cfb5",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.XPath.XDocument.dll",
+      "bytes": 30504,
+      "sha256": "5bcd27a7e93515b745993f6dda51391033883cb8a1a8a2e3dad5caed3548f0da",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.XPath.dll",
+      "bytes": 15656,
+      "sha256": "c817b11c58d95fa942fbc62a4cfa8219e16dafa5641eb004cb2be424028ed5d8",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.XmlDocument.dll",
+      "bytes": 15656,
+      "sha256": "a50b9b3a03596e36e73e7a7d54f4d018e8dcfaa7fe79e8cf900af8838ef3ec36",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.XmlSerializer.dll",
+      "bytes": 17744,
+      "sha256": "0b7d057c2b5b2272e8d4096a755edfd96f3cf03ab9aaa3fef54b462bf48d517e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.Xml.dll",
+      "bytes": 23376,
+      "sha256": "277a84ba155fe7808a514f32694a8157ec9f0eeeef00ef9643e5250004054ff0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/System.dll",
+      "bytes": 50472,
+      "sha256": "ef135f0bda0c41e142fdbd67b93e5aa7911916cb250f7df302f4151a3bbfa380",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/WindowsBase.dll",
+      "bytes": 16208,
+      "sha256": "0ec46a38f29a234b9a4d0ae9364c8322f661a47c831c5b948f2787b7ca12dbbd",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/clretwrc.dll",
+      "bytes": 317736,
+      "sha256": "7a2186201c87bbc597a1b8b26facd88e68f03be4c4a4211fd65cc6595c72e45b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/clrgc.dll",
+      "bytes": 674088,
+      "sha256": "65e2f97d263824bfb9f75f92e66ebd22229aaf3a5faddef9345811d856c8840e",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/clrgcexp.dll",
+      "bytes": 711464,
+      "sha256": "23a8050ec68542989b6da6cc906a90faf8a14e6416fd2871a260b781b1c374ae",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/clrjit.dll",
+      "bytes": 2092328,
+      "sha256": "0749d8fc8e944d0576e1bb47120f87add8f875e5cd8968995633063fc79256f6",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/coreclr.dll",
+      "bytes": 4614992,
+      "sha256": "128aee8c62a673d64739e585e3876b61133571cec83a46240a62581d5465639b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/createdump.exe",
+      "bytes": 71552,
+      "sha256": "315307159925d33eb604186a512901d080ecfc4cd8b8198030a7d398c6af2b0b",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/hostfxr.dll",
+      "bytes": 379688,
+      "sha256": "838591885c5396fb0588a3aedc2f3e841d3afc67570868b1bce615264005a44c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/hostpolicy.dll",
+      "bytes": 378664,
+      "sha256": "e92a2e71eeeaf7c574e905935b3e3724ef29bade44317659dbe06f505e99dbe0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/mscordaccore.dll",
+      "bytes": 1356640,
+      "sha256": "86c29a7b945525135de16c3dcb71e3b8517848c459cbb21395b352d4e6bba09c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/mscordaccore_amd64_amd64_10.0.1226.42308.dll",
+      "bytes": 1356640,
+      "sha256": "86c29a7b945525135de16c3dcb71e3b8517848c459cbb21395b352d4e6bba09c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/mscordbi.dll",
+      "bytes": 1237888,
+      "sha256": "753e92805f3886221f56dcfc07191ad7ee44235bf689db0490bdf777f25e9175",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/mscorlib.dll",
+      "bytes": 59728,
+      "sha256": "b698595367a7d4fa57ccacab73751fde0bb8f2415345c62cdfe7ced890da2c0c",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/mscorrc.dll",
+      "bytes": 133968,
+      "sha256": "f0d8c7491d4659a4c5a4c00615255a60e05634f311162c2775a51e03c070c9e0",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/msquic.dll",
+      "bytes": 536344,
+      "sha256": "b7158d427b01c70483bb3d80c5211e387dd98e9471c8a70e4484d449de9157e8",
+      "candidate": true
+    },
+    {
+      "file": "windows/data_CozyTown.Game_windows_x86_64/netstandard.dll",
+      "bytes": 100648,
+      "sha256": "3dc81dbc9dacd28261632c94410859eda24c2db50cd6c14309cbb2a434b50c57",
+      "candidate": true
+    }
+  ]
+}
