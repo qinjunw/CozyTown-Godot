@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "fileName": "full-demo-real-20261011.tar.gz",
+  "bytes": 544049982,
+  "sha256": "dab8dc0e278f1137971134ab97029de877b0b663cbd8fc80edb8ceb94384a28c",
+  "manifestSha256": "357ceff59ebf8bfcd661faf6f5adcf7ee96c354fb39d46928301646926a790f5",
+  "rawFileCount": 97,
+  "sourceCommit": "99dbe5e28492d3b6504969cbdc472dff8658adfc",
+  "releaseTag": "full-demo-evaluation-20261011",
+  "releaseUrl": "https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-3e5be443785a429ee127"
+}
