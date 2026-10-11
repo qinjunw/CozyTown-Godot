@@ -1,0 +1,1093 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "simulationSourceDigest": "301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf",
+  "mode": "fixed",
+  "realHttpSends": 0,
+  "realAcceptanceEvaluated": false,
+  "graphicalRequested": false,
+  "sourceDirty": false,
+  "startedAtUtc": "2026-10-11T15:52:11.3626278Z",
+  "finishedAtUtc": "2026-10-11T16:10:35.4992776Z",
+  "rawReportSha256": "12a847200654902d37684237535516e9f4de1c9009cbfc5684fd7a5e4db02527",
+  "unifiedReportSha256": "b74e153821c447820904bb95da2fdf58a9ba480e1751638b1d2f38c46fc7e685",
+  "matrixReportSha256": "3f01e9ef2df75949f27253d9a28cb19021d662ac4ad99093ba179aa52adbbb50",
+  "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+  "dotnetSdk": "10.0.401",
+  "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+  "inputFileSha256": "8665d50350cdc5de71b042ff9a49ce0bd56c3a888f3ede453d1c5ecb7e8d15e6",
+  "inputSha256": "b543a4405f749313044eae707f61a52f0bc9e1f1802297746b067e48ea17f4fe",
+  "tests": {
+    "core": {
+      "total": 324,
+      "executed": 324,
+      "passed": 324,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "model": {
+      "total": 92,
+      "executed": 92,
+      "passed": 92,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "host": {
+      "total": 251,
+      "executed": 251,
+      "passed": 251,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  },
+  "totalTests": 667,
+  "unifiedSteps": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.486
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.221
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.831
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.659
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 22.211
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.205
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 43.417
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.43
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 38.792
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 10.162
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 6.251
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.911
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.949
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.771
+    },
+    {
+      "name": "content-economy-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.966
+    },
+    {
+      "name": "content-farming-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.812
+    },
+    {
+      "name": "content-production-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.704
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 14.319
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 14.367
+    },
+    {
+      "name": "economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 129.564
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 14.596
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.035
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.456
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.661
+    },
+    {
+      "name": "export-economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 93.141
+    },
+    {
+      "name": "scene-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.505
+    },
+    {
+      "name": "export-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.1
+    },
+    {
+      "name": "scene-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.31
+    },
+    {
+      "name": "export-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.738
+    },
+    {
+      "name": "scene-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 21.183
+    },
+    {
+      "name": "export-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 21.076
+    },
+    {
+      "name": "scene-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.511
+    },
+    {
+      "name": "export-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 8.509
+    }
+  ],
+  "matrix": [
+    {
+      "file": "gameplay.json",
+      "sha256": "3bbefb28d81e69db3c2a7c6462e512f965687790d406870c1fc31bea7ea71400",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "0268d4083c476cfc03fbc19be2e5516c0c30baf20f777a4670599ebe109dc4db"
+        },
+        "export": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "35f5f4de0bf26d2afaf1e61e7d612dbfb38ccb60658de4968f4ccf35dd8f0287"
+        }
+      }
+    },
+    {
+      "file": "player-dialogue.json",
+      "sha256": "2f53fc4b49ef71595e69680ce8028ec8e6ae09590e340c9e27edec02c1fac184",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "a34211032b8c575c2a760b38a38103d9fe48ad3af890bf66c614837587aa5671"
+        },
+        "source": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "c5898056539ca1735211aa8b3249d50a2d9d257eccc479baa356347e16d5c27a"
+        },
+        "export": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "03e4e3dff2251896dd813feedb4b88aa53b2c9259989b9a7f61b58a2efaf4063"
+        }
+      }
+    },
+    {
+      "file": "player-dialogue-retired-restore.json",
+      "sha256": "078a4df44e9f6d27bb175630de94f77894edd4831dd14a2941c1270024c9c67d",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "f7371d05f96be4c376e8ce2943d1c1285e06acd262f18859a2998ee552d141b2"
+        },
+        "source": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "89598dbb743f3bed265e334d51e0e177039cb23868183236f13fc1f96e69a4df"
+        },
+        "export": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "ea6c636286e4506c4c9b2851ec4679dc217eaa7b62ad9260aaf0812c8eb4ddd6"
+        }
+      }
+    },
+    {
+      "file": "missing-scene.json",
+      "sha256": "1815868bcfc6c76e72c874f9e22db586d120a017fe1e7a4e245e8a180e2794e0",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "missing_dependency",
+          "code": "missing_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "193aae6bfc20e1b041223b6831ebadae1006499bc58edad054308ed648d903c0"
+        },
+        "export": {
+          "expectedCode": "missing_dependency",
+          "code": "missing_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "5d9fa9f27003feea2057a20e4e2018c87903213904e1a721765bea3679c10738"
+        }
+      }
+    },
+    {
+      "file": "wrong-engine.json",
+      "sha256": "7544e08c1667dd1004e46c8c30fa595c2903a5be0aefbf6885b0b525be8b40d2",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "a996a733d4493f801a282e9802ecf3ee06c9b598e38e9fabd7168f0fd921dbdd"
+        },
+        "export": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "98b559b4f0404aa16419a1258fc2fbe6aabff560847139d87eef0842d1d3b4a1"
+        }
+      }
+    },
+    {
+      "file": "wrong-radius.json",
+      "sha256": "92220a4fd6c0a73f2e334126c91381e562662c86a5e5cd777b10a0e4b3424331",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "0e1d64fe3b73c9e4413b21699eb4a9d683f6f6104bf4ab51ae70a612dc57f9d6"
+        },
+        "export": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "01615605a50d164aad3621d89ec673d63489b42018186baf09128704fe73b3e8"
+        }
+      }
+    },
+    {
+      "file": "wrong-query.json",
+      "sha256": "2cb9452ee275886df95fb226d874b62ac68cbfd94a89f57f84703975a46bef9a",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "bb6bbba5f5fcc6c7c331d94777d48f0a64f6dc3eabf36ebfa9353c23ce124e0f"
+        },
+        "export": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "e2d6dcfb772d9e6f83fd80c68a71b97be1c6eedcadfd402e3e4d8440d337f833"
+        }
+      }
+    },
+    {
+      "file": "wrong-geometry.json",
+      "sha256": "a0f83ae25a82247d3670773e32b41ac2c73146b3d0abd032cde8c8478bd40f64",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "67c92ef1407a1d14e353a67a4b0b4fa94712a3dfafd7daa3af6c1cc24c5b4648"
+        },
+        "export": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "2fffc885f020e4803aceecebd0e91f39ffed8936c00a498b234542c60e831c26"
+        }
+      }
+    },
+    {
+      "file": "wrong-source.json",
+      "sha256": "1ba38a6468b337e3ade72b93162cb94f636c57082c4d8a58d31e78e2ebae9e88",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "743f47420d1fdcb3efeea5058f9240785276f4dc37c5558d4e13f4b1c33f3950"
+        },
+        "export": {
+          "expectedCode": "incompatible_dependency",
+          "code": "incompatible_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "02f328b4b8b0ba76c5135e90d14c29a465fa6b7d264bd45ebfb043eef5f037d9"
+        }
+      }
+    },
+    {
+      "file": "missing-resource.json",
+      "sha256": "fc3cfab05cc704108def77ae131309f0c1f0eb677e71d7cd76d0a580b52a7678",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "missing_dependency",
+          "code": "missing_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "84c9caeeb718e29f6cca28f364ab8ab4057598a709cbd55e30293672f8b6e977"
+        },
+        "export": {
+          "expectedCode": "missing_dependency",
+          "code": "missing_dependency",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "b1091fce7d0b85d6442156a8a60bd919fa02a245d6522b6b5df697eed049ec33"
+        }
+      }
+    },
+    {
+      "file": "tampered-motion-fraction.json",
+      "sha256": "73056a62ae6f951d09ae86727c3e6fcb506283f2ba3c975e2789056e933174c5",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "4ac9d0b2793bcf9d09f92dcdb864c51522e14134825cca448c6189361fe78517"
+        },
+        "source": {
+          "expectedCode": "divergence",
+          "code": "divergence",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "7ba69e526d63d97b034be0a402e37327810f26eba1593af0d36ebfb056ca995a"
+        },
+        "export": {
+          "expectedCode": "divergence",
+          "code": "divergence",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "2728658768375863b7ee586736b26ddc4286ee33ee68d33b39e4daca0321f624"
+        }
+      }
+    },
+    {
+      "file": "missing-parent.json",
+      "sha256": "33e2a2cd4d03adda57be712d9fad38eeab342d6a5e43357b50af858d9ba22667",
+      "targets": {
+        "core": {
+          "expectedCode": "missing_parent_prefix",
+          "code": "missing_parent_prefix",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "1c1e9b0100789d757045eb5628972f0ac85a6a41bbb7e29a2bbe1a78691e6d89"
+        },
+        "source": {
+          "expectedCode": "missing_parent_prefix",
+          "code": "missing_parent_prefix",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "aee39053cdfbae9804f06e6eba9b0075d84e1feee87080090ffa83999670675b"
+        },
+        "export": {
+          "expectedCode": "missing_parent_prefix",
+          "code": "missing_parent_prefix",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "90a05a38e3db2087b171df15ca2bf4c059a88005e047a792fb8a90ed504e5ff1"
+        }
+      }
+    },
+    {
+      "file": "runtime-obstacle.json",
+      "sha256": "49e7f13844e8f27f26c0bd8aace1abf9b4e5b50087b703b754da3f748e0bfa16",
+      "targets": {
+        "core": {
+          "expectedCode": "passed",
+          "code": "passed",
+          "passed": true,
+          "matched": true,
+          "reportSha256": "245887ad82a66b51a4143d2267662050748a17aaf72f0eea68f37e4ae6cce841"
+        },
+        "source": {
+          "expectedCode": "divergence",
+          "code": "divergence",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "f6adc9e0e36828bbd30b0c44d1a478eaf11ee6e0e4e4cdc87242645561e82d84"
+        },
+        "export": {
+          "expectedCode": "divergence",
+          "code": "divergence",
+          "passed": false,
+          "matched": true,
+          "reportSha256": "992d6eecd731a51a5be647f88329f35f55bacd2178d1450d032942c841983bef"
+        }
+      }
+    }
+  ],
+  "matrixExpectedResultsMatched": 39,
+  "fixedReplay": [
+    {
+      "scenario": "baseline",
+      "branchId": "2d02e560ceb44ded9c50b48ebf467054",
+      "sha256": "11b4a82f5367ce960eaa86d38732e69411697e90594f078a7878b10fbf774949",
+      "archiveBytes": 50209205,
+      "counts": {
+        "boundaryCount": 9563,
+        "allBoundaries": 9563,
+        "motionQueries": 2039,
+        "segments": 1,
+        "packageBytes": 30357634
+      },
+      "targets": {
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "1ea5e3da56c39f02908a345b810a2ff117abba41f830a77ceff033e62f1c940b",
+          "metrics": {
+            "elapsedSeconds": 22.0371669,
+            "peakWorkingSetBytes": 195641344,
+            "managedAfterCollectionBytes": 14146440,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "14ae143fcf4334557eb6a9555220147e7b7e04b420ee8076634978082164e9bf",
+          "motionQueries": 2039,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 9564,
+          "intersectShapeCalls": 2044,
+          "castMotionCalls": 2044
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "720fc1d2643d87095c394dcb5e617080ee9c17b0393df11d1375ff54ad010978",
+          "motionQueries": 2039,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 9564,
+          "intersectShapeCalls": 2044,
+          "castMotionCalls": 2044
+        }
+      }
+    },
+    {
+      "scenario": "baseline",
+      "branchId": "ca8fa4d7c59c420a9041494f81b663a8",
+      "sha256": "cfa515786a9b687da20d0f90b07cb421c8de40cd22b56ae241483bf9b4c474b8",
+      "archiveBytes": 24968554,
+      "counts": {
+        "boundaryCount": 852,
+        "allBoundaries": 10414,
+        "motionQueries": 2162,
+        "segments": 2,
+        "packageBytes": 37799563
+      },
+      "targets": {
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "713f9dc7c74fdef9ce5e7bae4868786bbe9a501c87541b1b0b8bf4e111a38f56",
+          "metrics": {
+            "elapsedSeconds": 23.3959851,
+            "peakWorkingSetBytes": 215486464,
+            "managedAfterCollectionBytes": 12300400,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "576a902658bf4d22c350e0c7d98d58fa97b2f439c5027b51c65ddac2969d37e3",
+          "motionQueries": 2162,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 10416,
+          "intersectShapeCalls": 2172,
+          "castMotionCalls": 2172
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "ca652bf35385fac829a109513fc79c4c1003793a85bd8a44c69c90c87b1367a3",
+          "motionQueries": 2162,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 10416,
+          "intersectShapeCalls": 2172,
+          "castMotionCalls": 2172
+        }
+      }
+    },
+    {
+      "scenario": "counterfactual",
+      "branchId": "6d8fa0fdf3094e8eb7b18f9efd4cf8da",
+      "sha256": "1b3ea850df60f10c7ff42ca352a66e7ae912a6a2ff31111d7531a45ac7ad6028",
+      "archiveBytes": 38348858,
+      "counts": {
+        "boundaryCount": 6010,
+        "allBoundaries": 6010,
+        "motionQueries": 1893,
+        "segments": 1,
+        "packageBytes": 22607695
+      },
+      "targets": {
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "f03280bced58f9ad4cac940160829449e6bb5109858dc1b020f95729fc9ea21d",
+          "metrics": {
+            "elapsedSeconds": 16.9514232,
+            "peakWorkingSetBytes": 170651648,
+            "managedAfterCollectionBytes": 13215512,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "19c7be19f3a734de5857f2a5f1478fe1afbb32aef729a991615a6a217e189d87",
+          "motionQueries": 1893,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 6011,
+          "intersectShapeCalls": 1898,
+          "castMotionCalls": 1898
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "c75a5624d027cb91c22f6d0ebd31c433a8856efaedd8444f0b7368747e7d1098",
+          "motionQueries": 1893,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 6011,
+          "intersectShapeCalls": 1898,
+          "castMotionCalls": 1898
+        }
+      }
+    },
+    {
+      "scenario": "counterfactual",
+      "branchId": "e688cf6e4c064d6ba5604b5fbc44afa2",
+      "sha256": "c86a9f10eb8b2015ee34f7a5cfe6adb2af5b3d53e9aedfffa82418641c2bf509",
+      "archiveBytes": 20805573,
+      "counts": {
+        "boundaryCount": 996,
+        "allBoundaries": 7005,
+        "motionQueries": 2052,
+        "segments": 2,
+        "packageBytes": 30025482
+      },
+      "targets": {
+        "core": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "86665eec5f3f41910a84ff4f9ef6e9ba70516f864eebb490078a6143c6315427",
+          "metrics": {
+            "elapsedSeconds": 18.5624724,
+            "peakWorkingSetBytes": 195624960,
+            "managedAfterCollectionBytes": 13414312,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "4ed6fc288a16c6229eeb90198b190d6870deff0f8b24668c804340e79d834558",
+          "motionQueries": 2052,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 7007,
+          "intersectShapeCalls": 2062,
+          "castMotionCalls": 2062
+        },
+        "export": {
+          "passed": true,
+          "code": "passed",
+          "reportSha256": "5335f4aa9c31712e092213ad8779273f88e3a2dc93abe70506a2f68a5e8d162d",
+          "motionQueries": 2052,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 7007,
+          "intersectShapeCalls": 2062,
+          "castMotionCalls": 2062
+        }
+      }
+    }
+  ],
+  "fixedReplayPassed": 12,
+  "scenarios": [
+    {
+      "scenario": "baseline",
+      "report": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\baseline.json",
+      "mode": "fixed",
+      "realHttpSends": 0,
+      "acceptedRealSeconds": 84.79999999999733,
+      "wallSeconds": 36.9122761,
+      "windows": [
+        {
+          "day": 1,
+          "startMinute": 546.8749999999937,
+          "endMinute": 548.0499999999927,
+          "elapsedSeconds": 2.3,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit",
+          "dispatchStopReason": null,
+          "drainSeconds": 0.05000000000000071,
+          "drained": true,
+          "coverage": [
+            {
+              "residentId": "mina",
+              "adopted": 3,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "eli",
+              "adopted": 3,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "ren",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "sora",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            }
+          ],
+          "requiredSaveCompleted": true
+        },
+        {
+          "day": 2,
+          "startMinute": 1990.399999999995,
+          "endMinute": 2019.1250000000996,
+          "elapsedSeconds": 57.399999999998876,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit",
+          "dispatchStopReason": null,
+          "drainSeconds": 0.04999999999999716,
+          "drained": true,
+          "coverage": [
+            {
+              "residentId": "mina",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "eli",
+              "adopted": 3,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "ren",
+              "adopted": 7,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "sora",
+              "adopted": 2,
+              "ruleFallbacks": 1
+            }
+          ],
+          "requiredSaveCompleted": true
+        }
+      ],
+      "mornings": 1,
+      "sleeps": 2,
+      "peakWorkingSetBytes": 1322127360,
+      "branches": [
+        {
+          "branchId": "2d02e560ceb44ded9c50b48ebf467054",
+          "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\baseline\\exports\\2d02e560ceb44ded9c50b48ebf467054.zip",
+          "sha256": "11b4a82f5367ce960eaa86d38732e69411697e90594f078a7878b10fbf774949",
+          "archiveBytes": 50209205,
+          "packageBytes": 30357634,
+          "journalBytes": 33392912,
+          "boundaries": 9563,
+          "parentBoundaries": 0
+        },
+        {
+          "branchId": "ca8fa4d7c59c420a9041494f81b663a8",
+          "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\baseline\\exports\\ca8fa4d7c59c420a9041494f81b663a8.zip",
+          "sha256": "cfa515786a9b687da20d0f90b07cb421c8de40cd22b56ae241483bf9b4c474b8",
+          "archiveBytes": 24968554,
+          "packageBytes": 37799563,
+          "journalBytes": 6695686,
+          "boundaries": 852,
+          "parentBoundaries": 9562
+        }
+      ],
+      "sha256": "bc4e8f5b9ab3509f05e4870c4d08714ab86b9db9a75c627bb6ca475379afeba6"
+    },
+    {
+      "scenario": "counterfactual",
+      "report": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\counterfactual.json",
+      "mode": "fixed",
+      "realHttpSends": 0,
+      "acceptedRealSeconds": 56.39999999999893,
+      "wallSeconds": 27.0971486,
+      "windows": [
+        {
+          "day": 1,
+          "startMinute": 546.8749999999937,
+          "endMinute": 548.0499999999927,
+          "elapsedSeconds": 2.3,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit",
+          "dispatchStopReason": null,
+          "drainSeconds": 0.05000000000000071,
+          "drained": true,
+          "coverage": [
+            {
+              "residentId": "mina",
+              "adopted": 3,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "eli",
+              "adopted": 3,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "ren",
+              "adopted": 5,
+              "ruleFallbacks": 1
+            },
+            {
+              "residentId": "sora",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            }
+          ],
+          "requiredSaveCompleted": true
+        },
+        {
+          "day": 2,
+          "startMinute": 1990.399999999995,
+          "endMinute": 2004.3250000000457,
+          "elapsedSeconds": 27.80000000000026,
+          "ordinaryAdmissions": 18,
+          "stopReason": "ordinary_limit",
+          "dispatchStopReason": null,
+          "drainSeconds": 0.04999999999999716,
+          "drained": true,
+          "coverage": [
+            {
+              "residentId": "mina",
+              "adopted": 4,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "eli",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "ren",
+              "adopted": 5,
+              "ruleFallbacks": 0
+            },
+            {
+              "residentId": "sora",
+              "adopted": 4,
+              "ruleFallbacks": 0
+            }
+          ],
+          "requiredSaveCompleted": true
+        }
+      ],
+      "mornings": 1,
+      "sleeps": 2,
+      "peakWorkingSetBytes": 929656832,
+      "branches": [
+        {
+          "branchId": "6d8fa0fdf3094e8eb7b18f9efd4cf8da",
+          "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\counterfactual\\exports\\6d8fa0fdf3094e8eb7b18f9efd4cf8da.zip",
+          "sha256": "1b3ea850df60f10c7ff42ca352a66e7ae912a6a2ff31111d7531a45ac7ad6028",
+          "archiveBytes": 38348858,
+          "packageBytes": 22607695,
+          "journalBytes": 25335886,
+          "boundaries": 6010,
+          "parentBoundaries": 0
+        },
+        {
+          "branchId": "e688cf6e4c064d6ba5604b5fbc44afa2",
+          "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\counterfactual\\exports\\e688cf6e4c064d6ba5604b5fbc44afa2.zip",
+          "sha256": "c86a9f10eb8b2015ee34f7a5cfe6adb2af5b3d53e9aedfffa82418641c2bf509",
+          "archiveBytes": 20805573,
+          "packageBytes": 30025482,
+          "journalBytes": 6731681,
+          "boundaries": 996,
+          "parentBoundaries": 6009
+        }
+      ],
+      "sha256": "3513d165ad57154123150b42ae48ff7763d3f573366eb9ff4d292a0043f26d13"
+    }
+  ],
+  "exportDefaultInput": {
+    "report": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\export-default-input.json",
+    "inputSha256": "b543a4405f749313044eae707f61a52f0bc9e1f1802297746b067e48ea17f4fe",
+    "mode": "fixed",
+    "realHttpSends": 0,
+    "branches": [
+      {
+        "branchId": "07e2a1e62166435b9e63c73243bd5d78",
+        "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\export-default-input\\exports\\07e2a1e62166435b9e63c73243bd5d78.zip",
+        "sha256": "64c0f389573087fcfaaa799baaa9ce34629b28e56daf888dd049233bb7bfd216",
+        "archiveBytes": 50246985,
+        "packageBytes": 30377649,
+        "journalBytes": 33412891,
+        "boundaries": 9563,
+        "parentBoundaries": 0
+      },
+      {
+        "branchId": "966af94970484e1c99616acdad1db507",
+        "export": "<clean-source-root>\\artifacts\\full-demo-verification\\20261011T155211Z-fbadc093\\data\\export-default-input\\exports\\966af94970484e1c99616acdad1db507.zip",
+        "sha256": "2c84217842b8624453718999c5d6f2a4e3f3648769196f3e75194b408fae1839",
+        "archiveBytes": 24996650,
+        "packageBytes": 37811862,
+        "journalBytes": 6687996,
+        "boundaries": 852,
+        "parentBoundaries": 9562
+      }
+    ],
+    "sha256": "b410b73b7ed71f0b58fcc43ba644cce7cfe4086edae785f8b5b02bfc2890b59c"
+  },
+  "windowsFiles": 198,
+  "windowsBytes": 197401726,
+  "sourceProvenance": {
+    "schemaVersion": 1,
+    "baselineCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+    "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "baseIntegrationCommit": "829aaa0d1348369e2e7dc2bdb970733a4ff39758",
+    "changedRuntimeFiles": [
+      "game/Host/TownGame.Interface.cs"
+    ],
+    "runtimeDiffSha256": "2ffce3a403611e75a3d684228ce4cf09c6aec3a92a6f123c50b1915d7b9a9f8c",
+    "runtimeDiffBytes": 1247,
+    "simulatedRulesRequestsBudgetLedgerContentChanged": false,
+    "realHttpSends": 0,
+    "graphicalRequested": false,
+    "verificationCommand": [
+      "pwsh",
+      "-NoProfile",
+      "-File",
+      "tools/windows/verify-full-demo.ps1",
+      "-ExpectedCommit",
+      "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+      "-ToolsRoot",
+      "<locked-toolchain-root>"
+    ],
+    "cleanCheckoutMethod": "git worktree add --detach <new-empty-worktree> 576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "copiedGodotOrBuildCaches": false,
+    "sharedLockedToolchainAndNugetPackages": true
+  },
+  "oldRealRejection": {
+    "schemaVersion": 1,
+    "passed": true,
+    "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "simulationSourceDigest": "301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf",
+    "originalRealSourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+    "originalRealSimulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+    "packageSha256": "b6d4f36167d903d25f312163ece400a3eb5cc208cf2ea789f2f0d0da070e213e",
+    "command": [
+      "<clean-source-root>\\artifacts\\verification\\20261011T155213Z-90a0482a\\windows\\CozyTown.exe",
+      "--headless",
+      "--",
+      "--scene-replay=<original-evidence-root>\\artifacts\\full-demo-real\\20261011-v2\\baseline\\data\\exports\\7b2ba6e1b6e04893af887dbae1de7ffc.zip",
+      "--report=<external-evidence-root>\\old-real-rejection\\old-real-rejected.json"
+    ],
+    "startedAtUtc": "2026-10-11T16:01:01.147614+00:00",
+    "seconds": 4.790424400009215,
+    "exitCode": 2,
+    "realHttpSends": 0,
+    "graphicalRequested": false,
+    "checks": {
+      "exit2": true,
+      "incompatible_dependency": true,
+      "not_passed": true,
+      "headless_scene": true,
+      "old_package_exact": true,
+      "old_digest": true,
+      "new_digest": true,
+      "new_build": true,
+      "no_physics_executed": true,
+      "bundled_runtime": true,
+      "no_engine_error": true
+    },
+    "reportSha256": "00d43d88d3ad1cbb39c0d113ce4e3483b32bba5c993d9d68a045c7040d844f37",
+    "stdoutSha256": "6038ffebd796e5e276b58f03c28cf3eba2bbe6d85eea3592e6d3c3d87f0fe143",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "manualAcceptance": "pending",
+  "ciArtifactUploadAcceptance": "pending"
+}

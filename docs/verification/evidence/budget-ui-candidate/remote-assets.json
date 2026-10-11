@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUtc": "2026-10-11T16:36:52.4206589Z",
+  "passed": true,
+  "releaseId": 409783424,
+  "tag": "full-demo-budget-ui-candidate-20261011",
+  "draft": true,
+  "prerelease": true,
+  "targetCommitish": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "releaseListUrl": "https://github.com/qinjunw/CozyTown-Godot/releases",
+  "observedHtmlUrl": "https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-cecd0e103cdd5f54cc10",
+  "assets": [
+    {
+      "name": "CozyTown-576ae64-windows-candidate.zip",
+      "assetId": 631220986,
+      "bytes": 81616378,
+      "localSha256": "cb5d9eecd8b07b849822c08833b9de7d542a91d83b2aba9598cd713713e4aea6",
+      "remoteDigest": "sha256:cb5d9eecd8b07b849822c08833b9de7d542a91d83b2aba9598cd713713e4aea6",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631220986"
+    },
+    {
+      "name": "CozyTown-576ae64-offline-evidence.tar.gz",
+      "assetId": 631228197,
+      "bytes": 1537671877,
+      "localSha256": "ffd938d334bd0645ae02b3e8d65dab24b78867d0a6f1f9d1af82953682ed61c1",
+      "remoteDigest": "sha256:ffd938d334bd0645ae02b3e8d65dab24b78867d0a6f1f9d1af82953682ed61c1",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228197"
+    },
+    {
+      "name": "budget-ui-raw-manifest.json",
+      "assetId": 631228153,
+      "bytes": 203121,
+      "localSha256": "c00354a2a4c2c32b3f48f2536f6022628c7f5eab90d1ec34755edd0672bacefa",
+      "remoteDigest": "sha256:c00354a2a4c2c32b3f48f2536f6022628c7f5eab90d1ec34755edd0672bacefa",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228153"
+    },
+    {
+      "name": "budget-ui-package-manifest.json",
+      "assetId": 631228151,
+      "bytes": 45814,
+      "localSha256": "5cbbffa2b9243c715bfdb5f1f9788a42ebf309b3e0e2e0230b5e207db3b800d7",
+      "remoteDigest": "sha256:5cbbffa2b9243c715bfdb5f1f9788a42ebf309b3e0e2e0230b5e207db3b800d7",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228151"
+    },
+    {
+      "name": "budget-ui-package-receipt.json",
+      "assetId": 631228156,
+      "bytes": 46895,
+      "localSha256": "79904ee8d5eca630c57ea499b9eabd75d8d2b6150397c78c556afd807022b95b",
+      "remoteDigest": "sha256:79904ee8d5eca630c57ea499b9eabd75d8d2b6150397c78c556afd807022b95b",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228156"
+    },
+    {
+      "name": "budget-ui-archive-receipt.json",
+      "assetId": 631228114,
+      "bytes": 222361,
+      "localSha256": "0c8c669eb6135c6d7b4ecb655970e3c71aeec881211cd5c85a8fdc798794d02b",
+      "remoteDigest": "sha256:0c8c669eb6135c6d7b4ecb655970e3c71aeec881211cd5c85a8fdc798794d02b",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228114"
+    },
+    {
+      "name": "budget-ui-secret-scan-binding.json",
+      "assetId": 631228179,
+      "bytes": 2602,
+      "localSha256": "8bd340a6b8cc583a0ae0cc533ee9424ef5e60454d5ca6809cd7a34feb4264f8a",
+      "remoteDigest": "sha256:8bd340a6b8cc583a0ae0cc533ee9424ef5e60454d5ca6809cd7a34feb4264f8a",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228179"
+    },
+    {
+      "name": "budget-ui-gate-secret-scan.json",
+      "assetId": 631228135,
+      "bytes": 379,
+      "localSha256": "36d3670b7a93f143f501976007ecf4c363e80aa1339aa9325a78073f8149b4fe",
+      "remoteDigest": "sha256:36d3670b7a93f143f501976007ecf4c363e80aa1339aa9325a78073f8149b4fe",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228135"
+    },
+    {
+      "name": "budget-ui-candidate-secret-scan.json",
+      "assetId": 631228130,
+      "bytes": 377,
+      "localSha256": "20a5a9f12689e06cdd6d3ef5b61d9cdc70e22b991d415542f346a8e5b8227484",
+      "remoteDigest": "sha256:20a5a9f12689e06cdd6d3ef5b61d9cdc70e22b991d415542f346a8e5b8227484",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228130"
+    },
+    {
+      "name": "budget-ui-extra-secret-scan.json",
+      "assetId": 631228115,
+      "bytes": 374,
+      "localSha256": "932590b6d0358df32b12093acbd476ebefe5de0e5ba48c42790f0747df3eed7b",
+      "remoteDigest": "sha256:932590b6d0358df32b12093acbd476ebefe5de0e5ba48c42790f0747df3eed7b",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228115"
+    },
+    {
+      "name": "budget-ui-summary.json",
+      "assetId": 631228187,
+      "bytes": 34749,
+      "localSha256": "f3bf72471c480211aea901c86f46c5f44550ced7c60b7eb25981c7cd720142f2",
+      "remoteDigest": "sha256:f3bf72471c480211aea901c86f46c5f44550ced7c60b7eb25981c7cd720142f2",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228187"
+    },
+    {
+      "name": "budget-ui-candidate-summary.json",
+      "assetId": 631228113,
+      "bytes": 3530,
+      "localSha256": "38307c42cd746b9196164fc1ee116994b1a065c0ff8b71c0a29db397cb6a136d",
+      "remoteDigest": "sha256:38307c42cd746b9196164fc1ee116994b1a065c0ff8b71c0a29db397cb6a136d",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228113"
+    },
+    {
+      "name": "budget-ui-source-provenance.json",
+      "assetId": 631228182,
+      "bytes": 963,
+      "localSha256": "08985b9333b18309d2ed6a78bb30f5b9fa1b4b453a875d668d5d78135b1b21ae",
+      "remoteDigest": "sha256:08985b9333b18309d2ed6a78bb30f5b9fa1b4b453a875d668d5d78135b1b21ae",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228182"
+    },
+    {
+      "name": "budget-ui-entry-smoke-verification.json",
+      "assetId": 631228108,
+      "bytes": 4786,
+      "localSha256": "51046c44c991e3ed26d381de49064c72950c6f6d3db0e6564769c2675252f47b",
+      "remoteDigest": "sha256:51046c44c991e3ed26d381de49064c72950c6f6d3db0e6564769c2675252f47b",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228108"
+    },
+    {
+      "name": "budget-ui-old-real-rejection-verification.json",
+      "assetId": 631228136,
+      "bytes": 1727,
+      "localSha256": "3365b4a98d94a8cd191c4567257a0c597697dfa3cb3f23e15f872b1a051d0629",
+      "remoteDigest": "sha256:3365b4a98d94a8cd191c4567257a0c597697dfa3cb3f23e15f872b1a051d0629",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228136"
+    },
+    {
+      "name": "budget-ui-full-verification.json",
+      "assetId": 631228132,
+      "bytes": 74201,
+      "localSha256": "12a847200654902d37684237535516e9f4de1c9009cbfc5684fd7a5e4db02527",
+      "remoteDigest": "sha256:12a847200654902d37684237535516e9f4de1c9009cbfc5684fd7a5e4db02527",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228132"
+    },
+    {
+      "name": "budget-ui-unified-verification.json",
+      "assetId": 631228188,
+      "bytes": 10450,
+      "localSha256": "b74e153821c447820904bb95da2fdf58a9ba480e1751638b1d2f38c46fc7e685",
+      "remoteDigest": "sha256:b74e153821c447820904bb95da2fdf58a9ba480e1751638b1d2f38c46fc7e685",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228188"
+    },
+    {
+      "name": "budget-ui-scene-matrix-verification.json",
+      "assetId": 631228164,
+      "bytes": 20583,
+      "localSha256": "3f01e9ef2df75949f27253d9a28cb19021d662ac4ad99093ba179aa52adbbb50",
+      "remoteDigest": "sha256:3f01e9ef2df75949f27253d9a28cb19021d662ac4ad99093ba179aa52adbbb50",
+      "state": "uploaded",
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/631228164"
+    }
+  ]
+}
