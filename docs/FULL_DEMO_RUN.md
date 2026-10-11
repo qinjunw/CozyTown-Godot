@@ -2,7 +2,7 @@
 
 完整 Demo 驱动使用[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)和注册输入 [full-demo-input.json](../game/Content/full-demo-input.json)。`fixed` 与 `real` 执行同一顺序：购买种子和饲料、种植浇水、喂鸡、首日窗口、两次 12 小时睡眠、领蛋再喂食、次日窗口中的保存读取，以及依次与 Mina、Eli、Ren、Sora 交谈。
 
-代码候选 `71be140d24ade8e78d96ab68113221dfa760e08e` 已通过完整离线门，结果与完整包哈希见[宿主验证记录](verification/full-demo-host-2026-10-10.md)。用户已于 2026-10-11 通过[玩家对话人工验收](verification/player-dialogue-manual.md)，真实评测仍待执行。
+代码候选 `71be140d24ade8e78d96ab68113221dfa760e08e` 已通过完整离线门，结果与完整包哈希见[宿主验证记录](verification/full-demo-host-2026-10-10.md)。用户已于 2026-10-11 通过[玩家对话人工验收](verification/player-dialogue-manual.md)。同源码的 `99dbe5e` 已执行两组真实评测并完成 12 次同包回放；资源对照的 NPC 合法采用率未达标，完整评测票保持开放，见[真实结果](verification/full-demo-real-2026-10-11.md)。
 
 输入版本为 `full-demo-input-v1`。外部输入只允许与已注册命令和参数相同的内容，不能通过修改 JSON 扩大窗口、调用数或改变操作。默认输入使用 Godot 资源路径，源工程和 Windows 导出包都能读取。
 
@@ -69,4 +69,4 @@ dotnet run --project tools/CozyTown.Budget -- `
 
 该用途中的 NPC 与玩家新请求均计入保留的 `manual` 阶段，最多 8 次。实验不能用它补样；普通无配置启动仍使用固定客户端。旧 `first-slice-v1` 配置保持旧预算及玩家真实生成保护，不自动升级为完整 Demo。
 
-真实评测需另外报告 HTTP 发送、传输、结构解析、合法采用、覆盖、失败和费用。未达到合同标准时保留原候选及全部失败，不自动付费重跑或补样。本文提供操作入口，不声明已初始化真实账本或通过真实模型评测。
+真实评测需另外报告 HTTP 发送、传输、结构解析、合法采用、覆盖、失败和费用。未达到合同标准时保留原候选及全部失败，不自动付费重跑或补样。本轮共享账本已记录 82 次预算占用、80 次 HTTP，`manual` 未使用；后续不得将这些命令当作已批准的再次付费执行入口。

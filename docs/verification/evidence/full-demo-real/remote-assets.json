@@ -1,0 +1,48 @@
+{
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/630668565",
+      "contentType": "application/json",
+      "createdAt": "2026-10-11T12:15:40Z",
+      "digest": "sha256:9f8901c5317e2605320c0a8effcd0b39af383152104822908958549dcb6dba51",
+      "downloadCount": 0,
+      "id": "RA_kwDOUhZ_Ts4llz0V",
+      "label": "",
+      "name": "archive-receipt.json",
+      "size": 509,
+      "state": "uploaded",
+      "updatedAt": "2026-10-11T12:15:41Z",
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-3e5be443785a429ee127/archive-receipt.json"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/630668567",
+      "contentType": "application/x-gtar",
+      "createdAt": "2026-10-11T12:15:40Z",
+      "digest": "sha256:dab8dc0e278f1137971134ab97029de877b0b663cbd8fc80edb8ceb94384a28c",
+      "downloadCount": 0,
+      "id": "RA_kwDOUhZ_Ts4llz0X",
+      "label": "",
+      "name": "full-demo-real-20261011.tar.gz",
+      "size": 544049982,
+      "state": "uploaded",
+      "updatedAt": "2026-10-11T12:16:53Z",
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-3e5be443785a429ee127/full-demo-real-20261011.tar.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/qinjunw/CozyTown-Godot/releases/assets/630668570",
+      "contentType": "application/json",
+      "createdAt": "2026-10-11T12:15:41Z",
+      "digest": "sha256:357ceff59ebf8bfcd661faf6f5adcf7ee96c354fb39d46928301646926a790f5",
+      "downloadCount": 0,
+      "id": "RA_kwDOUhZ_Ts4llz0a",
+      "label": "",
+      "name": "raw-manifest.json",
+      "size": 18342,
+      "state": "uploaded",
+      "updatedAt": "2026-10-11T12:15:41Z",
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-3e5be443785a429ee127/raw-manifest.json"
+    }
+  ],
+  "isDraft": true,
+  "url": "https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-3e5be443785a429ee127"
+}
