@@ -2,7 +2,7 @@
 
 本目录归属冻结源码 `f9551c19eb1866ba79cc1312ca7821004fbb7fa1` 和预算 `full-demo-v2`／`cozytown-godot-full-demo-20261011-v2`。两组真实指标及真实包的 12 次离线回放通过，完整结果及限制见[评测报告](../../full-demo-real-v2-2026-10-11.md)。两个完整原始归档已逐成员及远端 SHA-256 核对；旧 v1 目录保持原样。
 
-仓库授权账号可在[私人 Release 草稿](https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-f311139ec8e4b0da5d59)下载附件，或执行：
+仓库授权账号可在[私人仓库 Releases 列表](https://github.com/qinjunw/CozyTown-Godot/releases)查找草稿，tag 为 `full-demo-evaluation-v2-20261011`，Release ID 为 `409716833`。也可执行：
 
 ```powershell
 gh release download full-demo-evaluation-v2-20261011 --repo qinjunw/CozyTown-Godot --dir '<download-directory>'
