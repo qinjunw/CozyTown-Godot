@@ -85,7 +85,7 @@ NPC 合计传输为 `62/62 = 100%`，结构为 `61/62 = 98.39%`，合同采用�
 
 真实运行的[归档收据](evidence/full-demo-real-v2/archive-receipt.json)记录 `full-demo-real-v2-20261011.tar.gz`：709,710,553 字节，SHA-256 为 `e39d87e0a52dd90342e1891dea34495444be59becd2d8ea9510d80ce675ec6f3`。[158 文件清单](evidence/full-demo-real-v2/raw-manifest.json)的 SHA-256 为 `298c71359010ba22388d589602f18e7b90eaba52066f9cae508c39e7d4a4b2c5`；归档另含清单自身，共 159 个文件，逐项长度与哈希核对通过。[实际凭据扫描结果](evidence/full-demo-real-v2/secret-scan.json)记录 157 个原始输入、232 个 ZIP 解压成员及 857764 份检查点载荷通过，扫描报告作为第 158 个文件保存，清单在扫描后生成。归档保留两组报告、全部尝试、四份 ZIP、保存、回放、分析输入与原始构建输出、独立审计和匹配 198 文件清单的 Windows 离线回放程序；没有私密配置或账本。
 
-[远端资产回执](evidence/full-demo-real-v2/remote-assets.json)确认全部 15 份附件长度与 SHA-256 与本地相同，包括两个完整归档、清单、收据、冻结及预算登记材料。[私人 Release 草稿](https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-f311139ec8e4b0da5d59)仍为 draft，目标是冻结 `f9551c1`，需有权限的 GitHub 账号访问。远端证据归档可取与 CI 制品上传状态分别记录。
+[远端资产回执](evidence/full-demo-real-v2/remote-assets.json)确认全部 15 份附件长度与 SHA-256 与本地相同，包括两个完整归档、清单、收据、冻结及预算登记材料。[私人仓库 Releases 列表](https://github.com/qinjunw/CozyTown-Godot/releases)中的草稿 tag 为 `full-demo-evaluation-v2-20261011`，Release ID 为 `409716833`，目标是冻结 `f9551c1`，需有权限的 GitHub 账号访问。远端证据归档可取与 CI 制品上传状态分别记录。
 
 复算入口见[证据说明](evidence/full-demo-real-v2/README.md)，只处理公开报告和完整 ZIP；本次统计不发送 HTTP，不读取凭据或私密账本。v1 和 v2 使用各自冻结源码及归档，不能用新的源码摘要重标或复验旧包。
 
