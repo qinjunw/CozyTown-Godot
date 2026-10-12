@@ -2,10 +2,12 @@
 
 import hashlib
 import json
+import os
 import pathlib
 import random
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -15,6 +17,46 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 COMMAND = ROOT / "tools/windows/ci-release.ps1"
 PWSH = shutil.which("pwsh")
 COMMIT = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+
+
+def draft_release_fixture(arguments):
+    """Model GitHub's published-only by-tag API and ID-addressed drafts."""
+    root = pathlib.Path(os.environ["COZYTOWN_RELEASE_FIXTURE_ROOT"])
+    release = {"id": 410408646, "draft": True, "author": {"login": "github-actions[bot]"}, "assets": []}
+    if arguments[:2] == ["api", "repos/qinjunw/CozyTown-Godot"]:
+        print(json.dumps({"private": True}))
+    elif arguments[:3] == ["api", "--method", "POST"] and arguments[3].endswith("/git/refs"):
+        print(json.dumps({"ref": "refs/tags/ci-windows-12345-2"}))
+    elif arguments[:2] == ["release", "create"]:
+        print("https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-fixture")
+    elif arguments[:3] == ["api", "--method", "POST"] and arguments[3].endswith("/releases"):
+        payload = json.loads(pathlib.Path(arguments[arguments.index("--input") + 1]).read_text(encoding="utf-8-sig"))
+        if payload["draft"] is not True or payload["tag_name"] != "ci-windows-12345-2" or "target_commitish" in payload:
+            raise RuntimeError("Draft creation must use its existing unique tag.")
+        print(json.dumps(release))
+    elif arguments[:2] == ["release", "upload"]:
+        for source in arguments[5:]:
+            shutil.copy2(source, root / pathlib.Path(source).name)
+    elif arguments[0] == "api" and "/releases/tags/" in arguments[1]:
+        print("gh: Not Found (HTTP 404)", file=sys.stderr)
+        return 1
+    elif arguments[:2] == ["api", "repos/qinjunw/CozyTown-Godot/releases/410408646"]:
+        for asset in sorted(root.iterdir()):
+            if asset.name == "event.json":
+                continue
+            contents = asset.read_bytes()
+            release["assets"].append({
+                "name": asset.name, "size": len(contents), "digest": "sha256:" + hashlib.sha256(contents).hexdigest(),
+            })
+        print(json.dumps(release))
+    elif arguments[:2] == ["release", "download"]:
+        destination = pathlib.Path(arguments[arguments.index("--dir") + 1])
+        for asset in root.iterdir():
+            if asset.name != "event.json":
+                shutil.copy2(asset, destination / asset.name)
+    else:
+        raise RuntimeError(f"Unexpected offline GitHub command: {arguments}")
+    return 0
 
 
 class ReleaseCommandTests(unittest.TestCase):
@@ -172,6 +214,38 @@ class ReleaseCommandTests(unittest.TestCase):
         with zipfile.ZipFile(self.package / "windows-toolchain-failure.zip") as archive:
             self.assertEqual(b"{}", archive.read("fixed-run/verification.json"))
 
+    def test_private_draft_publishes_and_downloads_when_by_tag_api_returns_404(self):
+        self.report()
+        self.write("windows/CozyTown.exe", b"fixed executable")
+        self.assertEqual(0, self.command().returncode)
+        server = self.root / "server"
+        server.mkdir()
+        event = server / "event.json"
+        event.write_text(json.dumps({"pull_request": {"head": {
+            "repo": {"full_name": "qinjunw/CozyTown-Godot"}, "sha": COMMIT,
+        }}}), encoding="utf-8")
+        executable = self.root / "fixture-bin"
+        executable.mkdir()
+        (executable / "gh.cmd").write_text(
+            f'@"{sys.executable}" "{pathlib.Path(__file__).resolve()}" --gh-fixture %*\n', encoding="utf-8",
+        )
+        environment = dict(os.environ, PATH=str(executable) + os.pathsep + os.environ["PATH"],
+                           COZYTOWN_RELEASE_FIXTURE_ROOT=str(server), GITHUB_ACTIONS="true",
+                           GITHUB_REPOSITORY="qinjunw/CozyTown-Godot", GITHUB_RUN_ID="12345",
+                           GITHUB_RUN_ATTEMPT="2", GITHUB_EVENT_NAME="pull_request", GITHUB_SHA=COMMIT,
+                           GITHUB_EVENT_PATH=str(event), GH_TOKEN="offline-fixture-token")
+        result = subprocess.run([
+            PWSH, "-NoProfile", "-File", str(COMMAND), "-Mode", "Publish", "-PackageRoot", str(self.package),
+        ], cwd=ROOT, env=environment, capture_output=True, encoding="utf-8")
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual((self.package / "manifest.json").read_bytes(),
+                         (self.package / "downloaded/manifest.json").read_bytes())
+        with zipfile.ZipFile(self.package / "downloaded/windows-toolchain.zip") as archive:
+            self.assertEqual(b"fixed executable", archive.read("fixed-run/windows/CozyTown.exe"))
+            self.assertIsNone(archive.testzip())
+
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--gh-fixture":
+        sys.exit(draft_release_fixture(sys.argv[2:]))
     unittest.main()

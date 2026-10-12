@@ -131,11 +131,20 @@ Run: $($manifest.runUrl)
 
 Download manifest.json and every asset listed in its assets array. Verify using tools/windows/ci-release.ps1 -Mode Verify -PackageRoot <download-directory>. Split assets are concatenated in manifest order before ZIP members are checked.
 "@ | Set-Content -LiteralPath $notesPath -Encoding utf8
-    $null = Invoke-Gh @('release', 'create', $tag, '--repo', $manifest.repository, '--draft', '--verify-tag',
-        '--title', "Windows CI $($manifest.runId) / $($manifest.runAttempt) ($($manifest.outcome))", '--notes-file', $notesPath)
+    $requestPath = Join-Path $packagePath 'release-request.json'
+    [ordered]@{
+        tag_name = $tag; draft = $true
+        name = "Windows CI $($manifest.runId) / $($manifest.runAttempt) ($($manifest.outcome))"
+        body = Get-Content -LiteralPath $notesPath -Raw
+    } | ConvertTo-Json | Set-Content -LiteralPath $requestPath -Encoding utf8
+    $createdRelease = Invoke-Gh @('api', '--method', 'POST', "repos/$($manifest.repository)/releases",
+        '--input', $requestPath) | ConvertFrom-Json
+    if ($createdRelease.id -notmatch '^[1-9][0-9]*$' -or $createdRelease.draft -ne $true) {
+        throw 'GitHub did not return a newly created Draft Release ID.'
+    }
     $uploads = @((Join-Path $packagePath 'manifest.json')) + @($manifest.assets | ForEach-Object { Join-Path $packagePath $_.name })
     $null = Invoke-Gh (@('release', 'upload', $tag, '--repo', $manifest.repository) + $uploads)
-    $release = Invoke-Gh @('api', "repos/$($manifest.repository)/releases/tags/$tag") | ConvertFrom-Json
+    $release = Invoke-Gh @('api', "repos/$($manifest.repository)/releases/$($createdRelease.id)") | ConvertFrom-Json
     if ($release.draft -ne $true -or $release.author.login -ne 'github-actions[bot]') {
         throw 'The uploaded release is not a Draft Release authored by this Actions publisher.'
     }
