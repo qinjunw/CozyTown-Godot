@@ -11,6 +11,11 @@ permissions:
 
 jobs:
   verify:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    # This job needs its verification files on the same runner as the publisher.
+    # Only same-repository events receive write permission; forks use verify-fork.
+    permissions:
+      contents: write
     runs-on: windows-2025
     timeout-minutes: 30
     defaults:
@@ -20,6 +25,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - name: Check CI release packaging with offline fixtures
+        run: |
+          python tools/windows/test-ci-release.py
+          if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
       - name: Install pinned portable tools
         run: ./tools/windows/install-toolchain.ps1
       - name: Check model probe with offline fixtures
@@ -29,22 +39,42 @@ jobs:
       - name: Build, test, and run the Windows export
         id: verification
         run: ./tools/windows/verify.ps1
-      - name: Upload verified Windows candidate and reports
-        if: success()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+      - name: Package Windows verification evidence
+        id: package
+        if: always() && (steps.verification.outcome == 'success' || steps.verification.outcome == 'failure')
+        env:
+          CI_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CI_VERIFICATION_OUTCOME: ${{ steps.verification.outcome }}
+        run: |
+          ./tools/windows/ci-release.ps1 -Mode Package -VerificationRoot artifacts/verification -PackageRoot artifacts/ci-release -Repository $env:GITHUB_REPOSITORY -RunId $env:GITHUB_RUN_ID -RunAttempt $env:GITHUB_RUN_ATTEMPT -HeadSha $env:CI_HEAD_SHA -Event $env:GITHUB_EVENT_NAME -Outcome $env:CI_VERIFICATION_OUTCOME
+      - name: Publish and verify private Draft Release
+        if: always() && steps.package.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./tools/windows/ci-release.ps1 -Mode Publish -PackageRoot artifacts/ci-release
+
+  verify-fork:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+    permissions:
+      contents: read
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          name: windows-toolchain-${{ github.sha }}
-          path: |
-            artifacts/verification/*/windows/**
-            artifacts/verification/*/*.json
-            artifacts/verification/*/*.trx
-            artifacts/verification/*/*.log
-          if-no-files-found: error
-          retention-days: 14
-      - name: Upload complete failed verification evidence
-        if: always() && steps.verification.outcome == 'failure'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-        with:
-          name: windows-toolchain-failure-${{ github.sha }}
-          path: artifacts/verification/
-          retention-days: 14
+          persist-credentials: false
+      - name: Check CI release packaging with offline fixtures
+        run: |
+          python tools/windows/test-ci-release.py
+          if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
+      - name: Install pinned portable tools
+        run: ./tools/windows/install-toolchain.ps1
+      - name: Check model probe with offline fixtures
+        run: |
+          & ./.local/tools/dotnet/dotnet.exe run --project tools/experiments/CozyTown.ModelProbe --configuration Release -- --self-test
+          if ($LASTEXITCODE -ne 0) { throw 'Model probe offline checks failed.' }
+      - name: Build, test, and run the Windows export
+        run: ./tools/windows/verify.ps1

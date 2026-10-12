@@ -48,7 +48,7 @@
 
 独立 v2 的冻结源码为 `f9551c1`，两组两天的真实指标均达标，四份真实包的 12 次离线回放通过，见[第二轮真实评测](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/full-demo-real-v2-2026-10-11.md)；[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)已关闭。用户已确认 `576ae64` 候选的[七组人工操作及可选真实 M01 通过](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)。后续 `df62408` 仅改变 NPC 离线回放实现，其余 172 个运行代码、内容及工具文件与 `576ae64` 相同；681 项测试、33 步、39 项场景矩阵预期结果、12 次固定包回放及九组离线 CLI 参数入口通过，见[回放修复复核](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/replay-outcome-binding-2026-10-12.md)。真实样本和人工反馈保留各自版本归属。
 
-[限制 Windows CI 成功制品体积并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)仍待线上上传成功证据，[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)继续承接最终交付；当前成果已合入集成分支，尚未合入 main。
+制品渠道、线上运行和实际附件验收以[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)的 Resolution 为准；最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)及[完整 Demo 集成 PR](https://github.com/qinjunw/CozyTown-Godot/pull/31)。
 
 ## 候选与证据规则
 
