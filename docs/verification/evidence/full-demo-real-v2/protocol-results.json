@@ -1,0 +1,428 @@
+[
+  {
+    "attemptId": "b2c03d3b-ba27-4558-b874-4779f3f072fd",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "d0035929-c1c6-497b-a5de-78d9789028bf",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "b67ac4ee-203e-4be2-bb0b-4c527aaf5e36",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "908389ac-7490-4bed-b5ea-ca4ed1511dc0",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "2d379b58-6081-4fe5-84dd-4d19ab33ef64",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c080689c-655a-4e90-ab67-5105288dbaaf",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "f26c97c6-4925-4613-a054-bbfbb8b2840a",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "3c4cf436-feb6-4491-9e6d-4b1d16051258",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "512e0d07-c45a-417a-9e75-b76779d5c450",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c3f209ef-a26d-4408-8a7f-3dd98b52cbcb",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "b1a557bf-f984-4059-bc94-054da3fa04db",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "0033bb15-5779-4f42-a6fe-cc93466a2ed8",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "a6fcaf1b-2c05-4067-aa4c-d1388f1f1ed2",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "81dc05b8-642a-492f-b82c-5d9f65a71874",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "bb5496bf-69a2-437d-b151-1a4b1d587afb",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "7fcefe55-5dfc-461f-abe3-a4f137e6d82b",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "af7a5542-3cbc-4a08-b18c-bc4ab71050b9",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "aa39431d-811d-43b3-93f8-2c53fb8761fa",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c9ff4c87-01ef-4418-8ad3-9d9dc1c5d0db",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "654d404b-5567-4298-85bb-488cd3d01619",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "ab145e36-0419-40e4-ac54-91c426ea36dc",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "6c9e3a59-66dd-4b9b-ae8a-c42721f25511",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "98cdd8b4-5aea-4c0a-b65b-20c92951fef8",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "0ec56743-583d-4126-bd7b-5d03e572cc90",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "4fa16c2f-dcf9-4390-90d0-bd47afc29a76",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "611b1100-6635-40d1-81a2-5b123f2f1acf",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "a45173c1-83a9-44e8-80fd-98109b91ea66",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "137a5001-3520-485d-9a50-12e78c729194",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "96acb8e4-43d1-4822-9dfd-f214dd5b89f0",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "aa4ca0a9-be39-4633-b270-0cee261b851a",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "53912ca7-5a59-4b95-94e1-92ab0ac226f4",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "e9585c18-db18-4f0d-84e9-da29f001fd2b",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c93545e2-869b-4e37-86ad-a6925cb39bfb",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "67ff03f7-408f-4c7f-a7f7-397aebb78f70",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "21362df5-1c84-4704-90ea-0b4cca31ffb8",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "f493058b-4c03-46d8-92e0-ecbc17cf1949",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "8b0226ea-7b6c-4395-82a9-ed2a5228421f",
+    "kind": "npc_action",
+    "passed": false,
+    "error": "JsonReaderException"
+  },
+  {
+    "attemptId": "aabb7c96-e80f-4ca8-b1dd-cca087efbf35",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "942f7ff6-b0b2-458c-ba27-3922d3b4562f",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "511971f4-f398-49c5-bb48-7512d1280692",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "06aeb38a-277f-43d1-b33d-e478cc0b9d4d",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+    "kind": "npc_action",
+    "passed": false,
+    "error": "JsonReaderException"
+  },
+  {
+    "attemptId": "ef7e90af-447b-459c-8806-847a421f3cc3",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "156bf1b5-2e9e-4ca2-b86e-722c5ad3bf6e",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "7b3eaeac-ee0e-477a-bfd7-1ed7f241f1b1",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "22a9a403-7b9b-42eb-92ad-f2a6c79e3eea",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "02555c6a-1181-4a0a-a4f1-b8da90ee49e1",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "f256e80d-62d2-4f9d-a582-9d7624c30d2b",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "ae738ec6-3220-4289-abde-d30c76a1ae0a",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "cb8a9539-19df-4d39-ba6c-5e85c5d0824a",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "ed861ee5-d434-470a-9d84-ba50b7a75b0f",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c76a376b-5c9b-4e5c-86cd-3c50b00afb29",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "f1c0e026-4cf9-4434-a7a2-b47520cda2ae",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "e8d51ddc-9dfd-41b2-83ea-c3613922be64",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "49dbcf25-f93b-4391-99d8-c886aa2b8330",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "0cf465e9-2d2d-45b3-9258-8c805672e12e",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "22e34154-36b8-4bcd-b233-21001114776e",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "10586dea-166e-4df5-99d7-a8425cb3433d",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "74ea7187-54f3-4bc4-b2b1-87e801a28aa6",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c86a639a-7ca8-4e54-98ba-01cf5110592e",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "7df21045-1a36-4f10-8aca-031032367b11",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "303b93d3-b614-44ef-937b-5d6dc8f32a21",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "185456d5-5f59-40a0-87ec-9588ed731d30",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "a83d198a-eb48-4c93-b3a6-6e4c1492bce2",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "8fe68104-a0b1-4b94-8fcc-ca1335f2aae9",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "4dec43a3-4141-4ef3-abc6-1a5028e3d4bc",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "aae5c804-7466-482f-ac45-081f7bd1198a",
+    "kind": "npc_action",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "130c0538-56cd-433f-a8dd-e53e42ec6627",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "ce49f233-0688-4a65-b273-25c8caa46efe",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "c0d8f349-81b3-4568-b03c-85ec8892d5e1",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  },
+  {
+    "attemptId": "f42b201e-196f-4cf2-8cbf-c0933909cd13",
+    "kind": "player_text",
+    "passed": true,
+    "error": null
+  }
+]

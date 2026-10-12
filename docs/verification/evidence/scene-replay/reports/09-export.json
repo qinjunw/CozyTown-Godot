@@ -1,0 +1,79 @@
+{
+  "passed": false,
+  "code": "missing_dependency",
+  "mode": "godot_scene_replay",
+  "headless": true,
+  "test": "scene_replay",
+  "command": [
+    "--scene-replay=<verification-output>\\fixtures\\missing-resource.json",
+    "--report=<verification-output>\\09-export.json"
+  ],
+  "inputSha256": "b06f2eebe525891637b2ac6ad18d020af1f97fdb82d7e5c1674f9ea846e978f3",
+  "expectedDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/Missing.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "f62b1db63d11e02ec6f3162b613c6b3cc23a7b018a03db0ddf6b751be9e705d9",
+    "buildVersion": "1.0.0\u002B377f670c92a1fba022d773f69f9704ac4b3de94e",
+    "assemblySha256": "906c2347601d2287e410d51bfab4dd2124938e7251d6a1026c5306971d02afd0",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "actualDependencies": {
+    "version": "godot-town-scene-v1",
+    "scenario": "baseline",
+    "engineVersion": "4.7.2-stable (official)",
+    "scenePath": "res://Town.tscn",
+    "mapPath": "res://World/TownMap.tscn",
+    "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+    "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+    "bodyRadius": 5,
+    "query": {
+      "version": "godot-circle-intersect-cast-v1",
+      "mask": 1,
+      "areas": false,
+      "bodies": true,
+      "margin": 0.0010000000474974513,
+      "minimumSafeFraction": 0.9998999834060669
+    },
+    "simulationSourceDigest": "f62b1db63d11e02ec6f3162b613c6b3cc23a7b018a03db0ddf6b751be9e705d9",
+    "buildVersion": "1.0.0\u002B377f670c92a1fba022d773f69f9704ac4b3de94e",
+    "assemblySha256": "91b8d2a17917eba13e63b579f49006794be1ef11cb459e222129e583b41bd35a",
+    "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "physicsBackend": "DEFAULT"
+  },
+  "motionQueries": 0,
+  "initialBodyQueries": 0,
+  "bodyBoundaries": 0,
+  "intersectShapeCalls": 0,
+  "castMotionCalls": 0,
+  "bodyRepresentation": "authoritative double coordinates, circle queries, rounded Node2D presentation",
+  "runtimeAssemblyLocation": "<windows-export>\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll",
+  "replay": {
+    "passed": false,
+    "code": "missing_dependency",
+    "boundary": 0,
+    "field": "scene.resource",
+    "expected": "res://World/Missing.tscn",
+    "actual": "missing from loaded scene bundle",
+    "rulesVersion": "town-social-player-dialogue-v5",
+    "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+    "finalStateJson": null,
+    "command": null,
+    "inputJson": null,
+    "mode": "godot_scene_replay"
+  }
+}

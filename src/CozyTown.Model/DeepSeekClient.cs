@@ -33,7 +33,7 @@ public sealed class DeepSeekClient : IDisposable
             throw new ModelException("explicit_configuration_required");
         if (Path.GetFullPath(options.CredentialFile).Equals(Path.GetFullPath(options.LedgerFile), StringComparison.OrdinalIgnoreCase))
             throw new ModelException("credential_ledger_path_conflict");
-        _ledger = PersistentBudgetLedger.OpenExisting(options.LedgerFile);
+        _ledger = PersistentBudgetLedger.OpenExisting(options.LedgerFile, options.BudgetProfileVersion);
         _key = CredentialReader.Read(options.CredentialFile);
         _expectedFingerprint = options.ExpectedSystemFingerprint;
         _http = new(testHandler ?? new HttpClientHandler
@@ -58,7 +58,8 @@ public sealed class DeepSeekClient : IDisposable
             await VerifyAccountAsync(admissionDeadline.Token).ConfigureAwait(false);
         }
         TimeSpan timeout = Remaining(request, logicalWait.Elapsed);
-        var attempt = _ledger.Reserve(request.Stage, request.Identity.LogicalRequestId, request.IsRecovery);
+        var attempt = _ledger.Reserve(request.Stage, request.Identity.LogicalRequestId, request.IsRecovery,
+            admission => _journal.WriteBudgetAdmissionAsync(admission, CancellationToken.None).GetAwaiter().GetResult());
         var dispatch = new ModelDispatch(request, attempt.AttemptId,
             Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(request.InputJson))).ToLowerInvariant(),
             DateTimeOffset.UtcNow, timeout, _ledger.Snapshot());
@@ -91,6 +92,8 @@ public sealed class DeepSeekClient : IDisposable
             logicalElapsedToArrival = logicalWait.Elapsed;
             duration.Stop();
             NotifyArrival(dispatch, logicalElapsedToArrival.Value);
+            await _journal.WriteResponseArrivalAsync(dispatch, ContainsSecret(body) ? null : body,
+                logicalElapsedToArrival.Value, CancellationToken.None).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 failure = httpStatus switch
@@ -151,7 +154,8 @@ public sealed class DeepSeekClient : IDisposable
         }
 
         BudgetAttempt? finalAttempt = null;
-        try { finalAttempt = _ledger.Snapshot().Attempts.Single(a => a.AttemptId == attempt.AttemptId); }
+        BudgetSnapshot? finalBudget = null;
+        try { finalBudget = _ledger.Snapshot(); finalAttempt = finalBudget.Attempts.Single(a => a.AttemptId == attempt.AttemptId); }
         catch { failure = "ledger_read_failed"; }
         // Never export malformed/partial candidate text or unbounded provider metadata.
         candidate = SafeCandidate(candidate);
@@ -161,7 +165,7 @@ public sealed class DeepSeekClient : IDisposable
         finish = SafeMetadata(finish);
         var completion = new ModelCompletion(dispatch, sentAt, arrivedAt, duration.Elapsed,
             httpStatus, providerId, model, fingerprint, finish, candidate, usage, failure,
-            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival);
+            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival, finalBudget);
         try { await _journal.WriteCompletionAsync(completion, CancellationToken.None).ConfigureAwait(false); }
         catch
         {
@@ -235,9 +239,13 @@ public sealed class DeepSeekClient : IDisposable
 
     private void ValidateRequest(FrozenModelRequest request)
     {
+        if (request is not null && !_ledger.Profile.StageLimits.ContainsKey(ModelBudgetProfile.StageName(request.Stage)))
+            throw new ModelException("stage_invalid");
         if (request?.Identity is not { } identity || new[] { identity.RunId, identity.SessionId,
                 identity.LogicalRequestId, identity.ResidentId }.Any(string.IsNullOrWhiteSpace)
-            || identity.ActivityRevision < 0 || request.RemainingWait <= TimeSpan.Zero
+            || identity.ActivityRevision < 0 || identity.Kind is not ("npc_action" or "player_text")
+            || (identity.Kind == "player_text" ? string.IsNullOrWhiteSpace(identity.PlayerSessionId) : identity.PlayerSessionId is not null)
+            || request.RemainingWait <= TimeSpan.Zero
             || request.RemainingWait > TimeSpan.FromSeconds(60)) throw new ModelException("request_identity_invalid");
         if (string.IsNullOrWhiteSpace(request.InputJson) || Encoding.UTF8.GetByteCount(request.InputJson) > 16 * 1024)
             throw new ModelException("request_size_invalid");

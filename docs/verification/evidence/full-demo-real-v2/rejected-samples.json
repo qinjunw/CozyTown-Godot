@@ -1,0 +1,790 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "analysisSha256": "82dc250aa4164db16c94c4c39f3f39bbcc2f8c598dee3009e2601b35e3cdb85d",
+  "meaning": "All non-HTTP admissions, unparsed HTTP responses, and parsed logical requests without a real-model adoption. World outcomes are shared by physical attempts with the same logical ID; a successful recovery does not make its retired original a second execution.",
+  "sampleCount": 6,
+  "samples": [
+    {
+      "category": "parsed_logical_result_not_adopted",
+      "scenario": "baseline",
+      "attemptId": "ab145e36-0419-40e4-ac54-91c426ea36dc",
+      "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:26",
+      "residentId": "sora",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": true,
+      "recovery": false,
+      "failureCode": null,
+      "httpStatus": 200,
+      "finishReason": "stop",
+      "generationEnded": true,
+      "usage": {
+        "promptTokens": 1826,
+        "completionTokens": 70,
+        "totalTokens": 1896,
+        "cacheHitTokens": 384,
+        "cacheMissTokens": 1442
+      },
+      "conservativeCostMicros": 4212,
+      "transportComplete": true,
+      "protocolParsed": true,
+      "protocolParse": {
+        "attemptId": "ab145e36-0419-40e4-ac54-91c426ea36dc",
+        "kind": "npc_action",
+        "passed": true,
+        "error": null
+      },
+      "candidateJson": "{\"action\":\"invite\",\"targetId\":\"eli\",\"placeId\":\"plaza.north\",\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"艾里，听说你有麦粒。我正好缺麦粒，想用热汤和你谈谈，能来榆树广场北边聊聊吗？\"}",
+      "frozenContext": {
+        "resident": {
+          "id": "sora",
+          "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+          "desiredResourceId": "grain",
+          "inventory": {
+            "berries": 0,
+            "fish": 1,
+            "grain": 0,
+            "soup": 4
+          },
+          "coins": 12
+        },
+        "allowedActions": [
+          "wait",
+          "approach",
+          "invite"
+        ],
+        "allowedTargets": [
+          "eli",
+          "mina",
+          "ren"
+        ],
+        "commitment": null,
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 5807,
+          "worldMinute": 2062.199999999996,
+          "kind": "response_arrived",
+          "source": "host",
+          "reason": "awaiting_durable_completion",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 5825,
+          "worldMinute": 2062.5749999999975,
+          "kind": "response_received",
+          "source": "real_model",
+          "reason": "complete",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 5827,
+          "worldMinute": 2062.5749999999975,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 1,
+              "grain": 0,
+              "soup": 4
+            }
+          }
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 5828,
+          "worldMinute": 2062.5749999999975,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 5833,
+          "worldMinute": 2062.5749999999975,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "activity_changed",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 1,
+              "grain": 0,
+              "soup": 4
+            }
+          }
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "ab145e36-0419-40e4-ac54-91c426ea36dc"
+      ],
+      "logicalRealResultAdopted": false
+    },
+    {
+      "category": "parsed_logical_result_not_adopted",
+      "scenario": "baseline",
+      "attemptId": "c93545e2-869b-4e37-86ad-a6925cb39bfb",
+      "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:41",
+      "residentId": "sora",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": true,
+      "recovery": false,
+      "failureCode": null,
+      "httpStatus": 200,
+      "finishReason": "stop",
+      "generationEnded": true,
+      "usage": {
+        "promptTokens": 1811,
+        "completionTokens": 73,
+        "totalTokens": 1884,
+        "cacheHitTokens": 384,
+        "cacheMissTokens": 1427
+      },
+      "conservativeCostMicros": 4206,
+      "transportComplete": true,
+      "protocolParsed": true,
+      "protocolParse": {
+        "attemptId": "c93545e2-869b-4e37-86ad-a6925cb39bfb",
+        "kind": "npc_action",
+        "passed": true,
+        "error": null
+      },
+      "candidateJson": "{\"action\":\"invite\",\"targetId\":\"eli\",\"placeId\":\"plaza.south\",\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"艾里，我在广场南边，听说你有麦粒。来我河畔小馆坐坐，喝碗热汤，边吃边聊聊交换的事？\"}",
+      "frozenContext": {
+        "resident": {
+          "id": "sora",
+          "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+          "desiredResourceId": "grain",
+          "inventory": {
+            "berries": 0,
+            "fish": 3,
+            "grain": 0,
+            "soup": 3
+          },
+          "coins": 12
+        },
+        "allowedActions": [
+          "wait",
+          "approach",
+          "invite"
+        ],
+        "allowedTargets": [
+          "eli",
+          "mina",
+          "ren"
+        ],
+        "commitment": null,
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 7003,
+          "worldMinute": 2086.600000000085,
+          "kind": "response_arrived",
+          "source": "host",
+          "reason": "awaiting_durable_completion",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 7013,
+          "worldMinute": 2086.8000000000857,
+          "kind": "response_received",
+          "source": "real_model",
+          "reason": "complete",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 7015,
+          "worldMinute": 2086.8000000000857,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 3,
+              "grain": 0,
+              "soup": 3
+            }
+          }
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 7016,
+          "worldMinute": 2086.8000000000857,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "7b2ba6e1b6e04893af887dbae1de7ffc",
+          "sequence": 7021,
+          "worldMinute": 2086.8000000000857,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "activity_changed",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 3,
+              "grain": 0,
+              "soup": 3
+            }
+          }
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "c93545e2-869b-4e37-86ad-a6925cb39bfb"
+      ],
+      "logicalRealResultAdopted": false
+    },
+    {
+      "category": "retired_before_http",
+      "scenario": "baseline",
+      "attemptId": "8b0226ea-7b6c-4395-82a9-ed2a5228421f",
+      "logicalRequestId": "7b2ba6e1b6e04893af887dbae1de7ffc:decision:46",
+      "residentId": "sora",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": false,
+      "recovery": false,
+      "failureCode": "host_request_retired_before_send",
+      "httpStatus": null,
+      "finishReason": null,
+      "generationEnded": false,
+      "usage": null,
+      "conservativeCostMicros": 0,
+      "transportComplete": false,
+      "protocolParsed": false,
+      "protocolParse": {
+        "attemptId": "8b0226ea-7b6c-4395-82a9-ed2a5228421f",
+        "kind": "npc_action",
+        "passed": false,
+        "error": "JsonReaderException"
+      },
+      "candidateJson": null,
+      "frozenContext": {
+        "resident": {
+          "id": "sora",
+          "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+          "desiredResourceId": "grain",
+          "inventory": {
+            "berries": 0,
+            "fish": 3,
+            "grain": 0,
+            "soup": 3
+          },
+          "coins": 12
+        },
+        "allowedActions": [
+          "respond",
+          "end"
+        ],
+        "allowedTargets": [
+          "ren"
+        ],
+        "commitment": {
+          "id": "7b2ba6e1b6e04893af887dbae1de7ffc:meeting:42",
+          "stage": "exchange_offered",
+          "initiatorId": "ren",
+          "inviteeId": "sora",
+          "placeId": "plaza",
+          "turnNumber": 1,
+          "offerResourceId": "fish",
+          "offerQuantity": 2,
+          "offerPrice": 4,
+          "offerFromResidentId": "ren",
+          "dialogue": [
+            "ren: 小空，刚喝了你的热汤，我这儿还有多余鲜鱼，来广场坐坐聊聊？",
+            "sora: 好呀，我马上来广场。刚卖了汤，正想歇歇听听你的新鲜事。",
+            "ren: 小空，既然来了，两尾鲜鱼四枚硬币给你，回去煮汤也成，收下吧？"
+          ]
+        },
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "bbbc5c7ee4b44b6ca62546bd15e19085",
+          "sequence": 7229,
+          "worldMinute": 2090.3000000000984,
+          "kind": "response_arrived",
+          "source": "host",
+          "reason": "awaiting_durable_completion",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "bbbc5c7ee4b44b6ca62546bd15e19085",
+          "sequence": 7236,
+          "worldMinute": 2090.450000000099,
+          "kind": "response_received",
+          "source": "real_model",
+          "reason": "complete",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "bbbc5c7ee4b44b6ca62546bd15e19085",
+          "sequence": 7240,
+          "worldMinute": 2090.450000000099,
+          "kind": "candidate_executed",
+          "source": "real_model",
+          "reason": "respond",
+          "residentAssetsAtOutcome": {
+            "coins": 8,
+            "inventory": {
+              "berries": 0,
+              "fish": 5,
+              "grain": 0,
+              "soup": 3
+            }
+          }
+        },
+        {
+          "branchId": "bbbc5c7ee4b44b6ca62546bd15e19085",
+          "sequence": 7241,
+          "worldMinute": 2090.450000000099,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "consumed",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "bbbc5c7ee4b44b6ca62546bd15e19085",
+          "sequence": 7283,
+          "worldMinute": 2091.350000000102,
+          "kind": "response_rejected",
+          "source": "real_model",
+          "reason": "retired_session",
+          "residentAssetsAtOutcome": null
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "f493058b-4c03-46d8-92e0-ecbc17cf1949",
+        "8b0226ea-7b6c-4395-82a9-ed2a5228421f"
+      ],
+      "logicalRealResultAdopted": true
+    },
+    {
+      "category": "response_not_parsed",
+      "scenario": "counterfactual",
+      "attemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+      "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:1",
+      "residentId": "eli",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": true,
+      "recovery": false,
+      "failureCode": "invalid_json",
+      "httpStatus": 200,
+      "finishReason": "stop",
+      "generationEnded": true,
+      "usage": {
+        "promptTokens": 1574,
+        "completionTokens": 60,
+        "totalTokens": 1634,
+        "cacheHitTokens": 384,
+        "cacheMissTokens": 1190
+      },
+      "conservativeCostMicros": 3628,
+      "transportComplete": true,
+      "protocolParsed": false,
+      "protocolParse": {
+        "attemptId": "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09",
+        "kind": "npc_action",
+        "passed": false,
+        "error": "JsonReaderException"
+      },
+      "candidateJson": null,
+      "frozenContext": {
+        "resident": {
+          "id": "eli",
+          "definition": "照看麦田，耐心随和。想找些浆果，愿意分享多余麦粒；工作时间会回农场。",
+          "desiredResourceId": "berries",
+          "inventory": {
+            "berries": 0,
+            "fish": 1,
+            "grain": 0,
+            "soup": 4
+          },
+          "coins": 12
+        },
+        "allowedActions": [
+          "wait",
+          "approach",
+          "invite"
+        ],
+        "allowedTargets": [
+          "mina",
+          "ren",
+          "sora"
+        ],
+        "commitment": null,
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 984,
+          "worldMinute": 547.5499999999931,
+          "kind": "response_arrived",
+          "source": "host",
+          "reason": "awaiting_durable_completion",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 987,
+          "worldMinute": 547.5999999999931,
+          "kind": "response_received",
+          "source": "real_model",
+          "reason": "invalid_json",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 989,
+          "worldMinute": 547.5999999999931,
+          "kind": "rule_fallback",
+          "source": "rule_fallback",
+          "reason": "invalid_json",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 994,
+          "worldMinute": 547.5999999999931,
+          "kind": "candidate_executed",
+          "source": "rule_fallback",
+          "reason": "invite",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 1,
+              "grain": 0,
+              "soup": 4
+            }
+          }
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 995,
+          "worldMinute": 547.5999999999931,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "consumed",
+          "residentAssetsAtOutcome": null
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "3cef07ed-5aac-4e2e-92d6-b8976b6f0e09"
+      ],
+      "logicalRealResultAdopted": false,
+      "rawArrivalEvidence": "invalid-json-arrival.json",
+      "observedMalformedContent": "The provider content ends after the text string; the enclosing JSON object is not closed."
+    },
+    {
+      "category": "parsed_logical_result_not_adopted",
+      "scenario": "counterfactual",
+      "attemptId": "e8d51ddc-9dfd-41b2-83ea-c3613922be64",
+      "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:17",
+      "residentId": "mina",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": true,
+      "recovery": false,
+      "failureCode": null,
+      "httpStatus": 200,
+      "finishReason": "stop",
+      "generationEnded": true,
+      "usage": {
+        "promptTokens": 1930,
+        "completionTokens": 59,
+        "totalTokens": 1989,
+        "cacheHitTokens": 384,
+        "cacheMissTokens": 1546
+      },
+      "conservativeCostMicros": 4332,
+      "transportComplete": true,
+      "protocolParsed": true,
+      "protocolParse": {
+        "attemptId": "e8d51ddc-9dfd-41b2-83ea-c3613922be64",
+        "kind": "npc_action",
+        "passed": true,
+        "error": null
+      },
+      "candidateJson": "{\"action\":\"approach\",\"targetId\":\"sora\",\"placeId\":null,\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"小空，你那边有鲜鱼？我铺里有浆果和谷物，想聊聊换点吃的。\"}",
+      "frozenContext": {
+        "resident": {
+          "id": "mina",
+          "definition": "经营杂货铺，爽朗健谈。午餐想吃鲜鱼，愿意分享多余浆果；选择是否交往由自己决定。",
+          "desiredResourceId": "fish",
+          "inventory": {
+            "berries": 4,
+            "fish": 1,
+            "grain": 1,
+            "soup": 0
+          },
+          "coins": 9
+        },
+        "allowedActions": [
+          "wait",
+          "approach",
+          "invite"
+        ],
+        "allowedTargets": [
+          "eli",
+          "ren",
+          "sora"
+        ],
+        "commitment": null,
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 6087,
+          "worldMinute": 2080.1249999999177,
+          "kind": "response_arrived",
+          "source": "host",
+          "reason": "awaiting_durable_completion",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 6095,
+          "worldMinute": 2080.2749999999182,
+          "kind": "response_received",
+          "source": "real_model",
+          "reason": "complete",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 6098,
+          "worldMinute": 2080.2749999999182,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": {
+            "coins": 9,
+            "inventory": {
+              "berries": 4,
+              "fish": 1,
+              "grain": 1,
+              "soup": 0
+            }
+          }
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 6099,
+          "worldMinute": 2080.2749999999182,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "invitation_received",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 6104,
+          "worldMinute": 2080.2749999999182,
+          "kind": "candidate_rejected",
+          "source": "real_model",
+          "reason": "activity_changed",
+          "residentAssetsAtOutcome": {
+            "coins": 9,
+            "inventory": {
+              "berries": 4,
+              "fish": 1,
+              "grain": 1,
+              "soup": 0
+            }
+          }
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "e8d51ddc-9dfd-41b2-83ea-c3613922be64"
+      ],
+      "logicalRealResultAdopted": false
+    },
+    {
+      "category": "parsed_logical_result_not_adopted",
+      "scenario": "counterfactual",
+      "attemptId": "a83d198a-eb48-4c93-b3a6-6e4c1492bce2",
+      "logicalRequestId": "ebfa1776d193495f9c1838c32e3c62a6:decision:28",
+      "residentId": "sora",
+      "kind": "npc_action",
+      "httpDispatchedConfirmed": true,
+      "recovery": false,
+      "failureCode": null,
+      "httpStatus": 200,
+      "finishReason": "stop",
+      "generationEnded": true,
+      "usage": {
+        "promptTokens": 1474,
+        "completionTokens": 54,
+        "totalTokens": 1528,
+        "cacheHitTokens": 384,
+        "cacheMissTokens": 1090
+      },
+      "conservativeCostMicros": 3380,
+      "transportComplete": true,
+      "protocolParsed": true,
+      "protocolParse": {
+        "attemptId": "a83d198a-eb48-4c93-b3a6-6e4c1492bce2",
+        "kind": "npc_action",
+        "passed": true,
+        "error": null
+      },
+      "candidateJson": "{\"action\":\"approach\",\"targetId\":\"ren\",\"placeId\":null,\"resourceId\":null,\"quantity\":0,\"price\":0,\"accept\":null,\"text\":\"阿仁，你好！我听说你有麦粒，我正需要呢。要不要聊聊？\"}",
+      "frozenContext": {
+        "resident": {
+          "id": "sora",
+          "definition": "经营河畔小馆，喜欢听邻居讲故事。需要麦粒，愿意分享多余热汤；交谈和交换都须对方同意。",
+          "desiredResourceId": "grain",
+          "inventory": {
+            "berries": 0,
+            "fish": 5,
+            "grain": 0,
+            "soup": 0
+          },
+          "coins": 12
+        },
+        "allowedActions": [
+          "wait",
+          "approach",
+          "invite"
+        ],
+        "allowedTargets": [
+          "eli",
+          "mina",
+          "ren"
+        ],
+        "commitment": null,
+        "candidateFields": {
+          "action": "one allowed action",
+          "targetId": "legal resident ID or null",
+          "placeId": "visible place ID for invite, otherwise null",
+          "resourceId": "own resource ID for propose_exchange, otherwise null",
+          "quantity": "positive integer for exchange, otherwise 0",
+          "price": "nonnegative total coins for exchange, otherwise 0",
+          "accept": "boolean for respond, otherwise null",
+          "text": "brief in-character Chinese speech, maximum 160 characters"
+        },
+        "rules": "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets."
+      },
+      "worldOutcomes": [
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 7189,
+          "worldMinute": 2100,
+          "kind": "candidate_rejected",
+          "source": "world",
+          "reason": "schedule_boundary",
+          "residentAssetsAtOutcome": {
+            "coins": 12,
+            "inventory": {
+              "berries": 0,
+              "fish": 5,
+              "grain": 0,
+              "soup": 0
+            }
+          }
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 7190,
+          "worldMinute": 2100,
+          "kind": "decision_terminal",
+          "source": "world",
+          "reason": "schedule_boundary",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 7226,
+          "worldMinute": 2100.1749999999906,
+          "kind": "response_arrival_rejected",
+          "source": "host",
+          "reason": "terminal_request",
+          "residentAssetsAtOutcome": null
+        },
+        {
+          "branchId": "ebfa1776d193495f9c1838c32e3c62a6",
+          "sequence": 7232,
+          "worldMinute": 2100.1999999999907,
+          "kind": "response_rejected",
+          "source": "real_model",
+          "reason": "terminal_request",
+          "residentAssetsAtOutcome": null
+        }
+      ],
+      "physicalAttemptsForLogicalRequest": [
+        "a83d198a-eb48-4c93-b3a6-6e4c1492bce2"
+      ],
+      "logicalRealResultAdopted": false
+    }
+  ]
+}

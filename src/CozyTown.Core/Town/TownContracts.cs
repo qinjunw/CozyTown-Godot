@@ -103,6 +103,9 @@ public sealed class TownState
     [JsonRequired] public List<ResidentState> Residents { get; set; } = [];
     [JsonRequired] public List<CommitmentState> Commitments { get; set; } = [];
     [JsonRequired] public List<PendingDecisionState> PendingDecisions { get; set; } = [];
+    [JsonRequired] public List<string> ModelQueue { get; set; } = [];
+    [JsonRequired] public string? CurrentPlayerDialogueId { get; set; }
+    [JsonRequired] public List<PlayerDialogueState> PlayerDialogues { get; set; } = [];
     [JsonRequired] public HashSet<string> TerminalRequestIds { get; set; } = [];
     [JsonRequired] public HashSet<string> ExecutedTransferIds { get; set; } = [];
     [JsonRequired] public List<TownEvent> Events { get; set; } = [];

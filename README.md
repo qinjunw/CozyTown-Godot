@@ -8,7 +8,9 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 玩家现可查看钱包、背包与五格快捷栏，并在杂货铺买卖物品；双方资产及操作去重随存档恢复。初态、报价和验证入口见[玩家资产与商店操作](docs/PLAYER_ECONOMY.md)。六块菜地支持三种作物的种植、浇水和收获，每日 05:00 结算成长与商店补给；玩家可在家选择休息 1～12 小时，见[种植与睡眠操作](docs/PLAYER_FARMING.md)。
 
-鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，待用户操作的项目见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
+鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，操作步骤见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
+
+居民交谈面板可显式生成一段反馈，支持对话暂停、关闭或切人终结，以及等待和已显示文本的保存恢复。固定客户端与回放检查已通过，用户已于 2026-10-11 通过[Windows 对话清单](docs/verification/player-dialogue-manual.md)验收。冻结 `f955` 候选的完整 Demo v2 两组真实指标、8 段正确玩家文本及四包 12 次回放均通过，见[第二轮真实评测](docs/verification/full-demo-real-v2-2026-10-11.md)；[v1 未达标结果](docs/verification/full-demo-real-2026-10-11.md)及失败样本保持原归属。用户另已确认 `576ae64` 的[七组 Windows 操作与可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过，回放绑定修复另有 [df62408 离线复核](docs/verification/replay-outcome-binding-2026-10-12.md)。当前制品渠道与验收证据见[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)，最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)及[完整 Demo 集成 PR](https://github.com/qinjunw/CozyTown-Godot/pull/31)。行为与自动证据见[玩家对话合同](docs/PLAYER_DIALOGUE_CONTRACT.md)及[验证记录](docs/verification/player-dialogue.md)。
 
 ## 构建与运行
 
@@ -34,9 +36,9 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 内容采用 Godot 场景与独立 JSON 分工编辑，固定身份连接地图、居民和日程；提取器与联合校验执行[内容来源与一致性合同](docs/CONTENT_AUTHORING.md)。
 
-保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)；完整回放执行器尚未交付。
+保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，修改模拟源码后须重新生成并验证。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验共用人民币 5 元、48 次发送上限。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。真实服务验证与离线测试分开统计。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 的[未达标结果和全部失败样本](docs/verification/full-demo-real-2026-10-11.md)保留，旧账本已停止且余量未转移。独立 `full-demo-v2` 已在冻结 `f955` 候选上完成两组真实评测，71 次预算尝试、70 次 HTTP 共保守扣减 CNY 0.290836；该评测封存时 `manual` 已用 0/8。后续 `576ae64` 的 M01 已由用户确认通过，当前人工用量以现存共享账本和观察手册为准，不据旧报告刷新额度或新增授权。指标、失败、回放及交付限制见[第二轮报告](docs/verification/full-demo-real-v2-2026-10-11.md)。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
 

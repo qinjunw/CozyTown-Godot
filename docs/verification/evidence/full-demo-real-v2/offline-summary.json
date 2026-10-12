@@ -1,0 +1,1186 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+  "passed": true,
+  "scope": "Completed fixed-client gate before real execution. This is separate from real response rates and real-package replay.",
+  "rawReportSha256": "713793834b40915056cbbf46a53fb56cb7cb4188c20584dfcaf7897e08375163",
+  "rawUnifiedReportSha256": "cc79f1c41e8dbfa1dcf7123d004af83455883311e4b113c62237f180a50d0a3e",
+  "rawMatrixReportSha256": "ca97aebdbb0f91cf05a11156949b2d28c667d07de5623580944cd239a0970268",
+  "redaction": "Machine-specific source, artifacts, tools and PowerShell paths are replaced by placeholders. Raw reports are retained in the associated evidence archive.",
+  "unitTests": {
+    "coreTests": {
+      "total": 324,
+      "executed": 324,
+      "passed": 324,
+      "failed": 0,
+      "skipped": 0
+    },
+    "modelTests": {
+      "total": 92,
+      "executed": 92,
+      "passed": 92,
+      "failed": 0,
+      "skipped": 0
+    },
+    "hostTests": {
+      "total": 251,
+      "executed": 251,
+      "passed": 251,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "unitTotal": 667,
+  "unifiedBusinessSteps": 33,
+  "unifiedStepResults": [
+    {
+      "name": "dotnet-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.561
+    },
+    {
+      "name": "godot-version",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.325
+    },
+    {
+      "name": "restore-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.361
+    },
+    {
+      "name": "restore-core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.991
+    },
+    {
+      "name": "core-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 24.501
+    },
+    {
+      "name": "restore-model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 3.231
+    },
+    {
+      "name": "model-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 39.789
+    },
+    {
+      "name": "restore-host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 4.491
+    },
+    {
+      "name": "host-tests",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 34.794
+    },
+    {
+      "name": "import",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 11.474
+    },
+    {
+      "name": "build-host",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 6.266
+    },
+    {
+      "name": "scene-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.777
+    },
+    {
+      "name": "content-baseline",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.784
+    },
+    {
+      "name": "content-counterfactual",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.92
+    },
+    {
+      "name": "content-economy-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.766
+    },
+    {
+      "name": "content-farming-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.865
+    },
+    {
+      "name": "content-production-capacity-fixture",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 1.672
+    },
+    {
+      "name": "slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.865
+    },
+    {
+      "name": "slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.203
+    },
+    {
+      "name": "economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 105.284
+    },
+    {
+      "name": "export-windows",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 13.56
+    },
+    {
+      "name": "export-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 0.934
+    },
+    {
+      "name": "export-slice-baseline-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.356
+    },
+    {
+      "name": "export-slice-counterfactual-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 9.565
+    },
+    {
+      "name": "export-economy-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 109.268
+    },
+    {
+      "name": "scene-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 15.915
+    },
+    {
+      "name": "export-farming-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 18.614
+    },
+    {
+      "name": "scene-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 31.974
+    },
+    {
+      "name": "export-farming-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 30.055
+    },
+    {
+      "name": "scene-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 56.26
+    },
+    {
+      "name": "export-production-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 56.38
+    },
+    {
+      "name": "scene-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 18.272
+    },
+    {
+      "name": "export-production-capacity-headless",
+      "exitCode": 0,
+      "timedOut": false,
+      "seconds": 16.234
+    }
+  ],
+  "matrixPackages": [
+    {
+      "file": "gameplay.json",
+      "sha256": "2ae3d95a62abb705e3f7e45d0a23f052657d2b1a8a5fa905602a4404138c61fe",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\00-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\00-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\00-export.json"
+      }
+    },
+    {
+      "file": "player-dialogue.json",
+      "sha256": "228ece42e5221410ca1e9478e8c74d8eef1bebc4c470ab739929e6149455a12d",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\01-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\01-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\01-export.json"
+      }
+    },
+    {
+      "file": "player-dialogue-retired-restore.json",
+      "sha256": "2e568988923d6c99acd43cea1019661a7d4fb663cb3f9a373dd91c11a70c49b1",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "passed",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\02-core.json"
+      },
+      "source": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\02-source.json"
+      },
+      "export": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\02-export.json"
+      }
+    },
+    {
+      "file": "missing-scene.json",
+      "sha256": "2454e01f75ee4d9fbabd7a2e7f1faae23baeaeba15cc0ba12f013c4e58423079",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\03-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\03-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\03-export.json"
+      }
+    },
+    {
+      "file": "wrong-engine.json",
+      "sha256": "5885500eedaca8d1f65c661da735f07861a06ab335411968cb96134d7f7e4405",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\04-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\04-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\04-export.json"
+      }
+    },
+    {
+      "file": "wrong-radius.json",
+      "sha256": "2aa61fdd983cfd4e9c5976036a01cba72b59a216ed7f8956baec4256aa2e5fdd",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\05-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\05-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\05-export.json"
+      }
+    },
+    {
+      "file": "wrong-query.json",
+      "sha256": "db54499b0bf8b9646ed0b7e617b690f419c106e597ab9caa135d6b6a2675ab2a",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\06-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\06-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\06-export.json"
+      }
+    },
+    {
+      "file": "wrong-geometry.json",
+      "sha256": "89af312f057f2aed847ddccb82daa483eff041e74fa28cfa00a6cf1713032029",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\07-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\07-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\07-export.json"
+      }
+    },
+    {
+      "file": "wrong-source.json",
+      "sha256": "0ca7c913392c01b8eab114518c4c51d726d277c98c50030fecbf4fc0c2fbdda8",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "incompatible_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\08-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\08-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "incompatible_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\08-export.json"
+      }
+    },
+    {
+      "file": "missing-resource.json",
+      "sha256": "f015c31a80e9e967d75c7b7598eaff6d9c907c76e4c98d18c313186ab4aa3d71",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "missing_dependency",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\09-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\09-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_dependency",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\09-export.json"
+      }
+    },
+    {
+      "file": "tampered-motion-fraction.json",
+      "sha256": "bc6ba80a70264027082759a9dd84f9b5335a0fe724b8a68d81fb0658b3f747da",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\10-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\10-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\10-export.json"
+      }
+    },
+    {
+      "file": "missing-parent.json",
+      "sha256": "0b59d4335176a240b167fc87660c72702fd42d48080a28240ddb8cae11ddce47",
+      "expectedCoreCode": "missing_parent_prefix",
+      "expectedSceneCode": "missing_parent_prefix",
+      "core": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\11-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\11-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "missing_parent_prefix",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\11-export.json"
+      }
+    },
+    {
+      "file": "runtime-obstacle.json",
+      "sha256": "0366e511968c10796ca99353c4bfe25d96295c7f0bc7f751106c568f481014f3",
+      "expectedCoreCode": "passed",
+      "expectedSceneCode": "divergence",
+      "core": {
+        "passed": true,
+        "code": "passed",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\12-core.json"
+      },
+      "source": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\12-source.json"
+      },
+      "export": {
+        "passed": false,
+        "code": "divergence",
+        "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\12-export.json"
+      }
+    }
+  ],
+  "matrixExpectedChecksMatched": 39,
+  "fixedScenarioReplayPackages": 4,
+  "fixedScenarioReplayBoundaries": 12,
+  "windowsFiles": 198,
+  "windowsBytes": 197400770,
+  "windowsManifestSha256": "4df6f13988a5d4e945ab10789ff6f8fbbbeda9f10935930e7b0977ea5a400217",
+  "gate": {
+    "schemaVersion": 1,
+    "passed": true,
+    "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+    "startedAtUtc": "2026-10-11T13:59:39.9714645Z",
+    "mode": "fixed",
+    "realHttpSends": 0,
+    "graphicalRequested": false,
+    "realAcceptanceEvaluated": false,
+    "inputFileSha256": "8665d50350cdc5de71b042ff9a49ce0bd56c3a888f3ede453d1c5ecb7e8d15e6",
+    "explicitInput": false,
+    "toolchainLockSha256": "d743b7f66af0db06cca87b4f11bdd381f6319e3afef9a4333695d1839cb1c4ee",
+    "steps": [
+      {
+        "name": "unified-verification",
+        "file": "<locked-pwsh>",
+        "arguments": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<source-root>\\tools\\windows\\verify.ps1",
+          "-ToolsRoot",
+          "<tools-root>"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 666.158
+      },
+      {
+        "name": "scene-replay-matrix",
+        "file": "<locked-pwsh>",
+        "arguments": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<source-root>\\tools\\windows\\verify-scene-replay.ps1",
+          "-ToolsRoot",
+          "<tools-root>"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 257.339
+      },
+      {
+        "name": "fixed-baseline",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--full-demo-evaluation=fixed",
+          "--scenario=baseline",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline.json",
+          "--data-dir=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 76.705
+      },
+      {
+        "name": "baseline-0-core",
+        "file": "<tools-root>\\dotnet\\dotnet.exe",
+        "arguments": [
+          "<source-root>\\tools\\CozyTown.Replay\\bin\\Release\\net10.0\\CozyTown.Replay.dll",
+          "--input=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\bb90410658cc4cedb2ab7d169d9a67ef.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-core.json",
+          "--metrics=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-core-metrics.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 43.438
+      },
+      {
+        "name": "baseline-0-source",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\bb90410658cc4cedb2ab7d169d9a67ef.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-source.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 79.677
+      },
+      {
+        "name": "baseline-0-export",
+        "file": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\CozyTown.exe",
+        "arguments": [
+          "--headless",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\bb90410658cc4cedb2ab7d169d9a67ef.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-export.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 74.068
+      },
+      {
+        "name": "baseline-1-core",
+        "file": "<tools-root>\\dotnet\\dotnet.exe",
+        "arguments": [
+          "<source-root>\\tools\\CozyTown.Replay\\bin\\Release\\net10.0\\CozyTown.Replay.dll",
+          "--input=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\5fd2fecc68a14d6c8bd6068fe73c1880.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-core.json",
+          "--metrics=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-core-metrics.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 50.705
+      },
+      {
+        "name": "baseline-1-source",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\5fd2fecc68a14d6c8bd6068fe73c1880.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-source.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 81.318
+      },
+      {
+        "name": "baseline-1-export",
+        "file": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\CozyTown.exe",
+        "arguments": [
+          "--headless",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\5fd2fecc68a14d6c8bd6068fe73c1880.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-export.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 79.193
+      },
+      {
+        "name": "fixed-counterfactual",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--full-demo-evaluation=fixed",
+          "--scenario=counterfactual",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual.json",
+          "--data-dir=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 61.3
+      },
+      {
+        "name": "counterfactual-0-core",
+        "file": "<tools-root>\\dotnet\\dotnet.exe",
+        "arguments": [
+          "<source-root>\\tools\\CozyTown.Replay\\bin\\Release\\net10.0\\CozyTown.Replay.dll",
+          "--input=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\a7269b25c871493781929461e1cdf576.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-core.json",
+          "--metrics=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-core-metrics.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 39.631
+      },
+      {
+        "name": "counterfactual-0-source",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\a7269b25c871493781929461e1cdf576.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-source.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 54.974
+      },
+      {
+        "name": "counterfactual-0-export",
+        "file": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\CozyTown.exe",
+        "arguments": [
+          "--headless",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\a7269b25c871493781929461e1cdf576.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-export.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 50.047
+      },
+      {
+        "name": "counterfactual-1-core",
+        "file": "<tools-root>\\dotnet\\dotnet.exe",
+        "arguments": [
+          "<source-root>\\tools\\CozyTown.Replay\\bin\\Release\\net10.0\\CozyTown.Replay.dll",
+          "--input=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\66db612fe05c43008bc2c6a42e5dfd0c.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-core.json",
+          "--metrics=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-core-metrics.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 38.808
+      },
+      {
+        "name": "counterfactual-1-source",
+        "file": "<tools-root>\\godot\\Godot_v4.7.2-stable_mono_win64\\Godot_v4.7.2-stable_mono_win64_console.exe",
+        "arguments": [
+          "--headless",
+          "--path",
+          "game",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\66db612fe05c43008bc2c6a42e5dfd0c.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-source.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 60.62
+      },
+      {
+        "name": "counterfactual-1-export",
+        "file": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\CozyTown.exe",
+        "arguments": [
+          "--headless",
+          "--",
+          "--scene-replay=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\66db612fe05c43008bc2c6a42e5dfd0c.zip",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-export.json"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 63.065
+      },
+      {
+        "name": "export-default-input",
+        "file": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\CozyTown.exe",
+        "arguments": [
+          "--headless",
+          "--",
+          "--full-demo-evaluation=fixed",
+          "--scenario=baseline",
+          "--report=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\export-default-input.json",
+          "--data-dir=<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\export-default-input"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 79.723
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "baseline",
+        "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline.json",
+        "mode": "fixed",
+        "realHttpSends": 0,
+        "acceptedRealSeconds": 84.79999999999733,
+        "wallSeconds": 74.1062977,
+        "windows": [
+          {
+            "day": 1,
+            "startMinute": 546.8749999999937,
+            "endMinute": 548.0499999999927,
+            "elapsedSeconds": 2.3,
+            "ordinaryAdmissions": 18,
+            "stopReason": "ordinary_limit",
+            "dispatchStopReason": null,
+            "drainSeconds": 0.05000000000000071,
+            "drained": true,
+            "coverage": [
+              {
+                "residentId": "mina",
+                "adopted": 3,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "eli",
+                "adopted": 3,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "ren",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "sora",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              }
+            ],
+            "requiredSaveCompleted": true
+          },
+          {
+            "day": 2,
+            "startMinute": 1990.399999999995,
+            "endMinute": 2019.1250000000996,
+            "elapsedSeconds": 57.399999999998876,
+            "ordinaryAdmissions": 18,
+            "stopReason": "ordinary_limit",
+            "dispatchStopReason": null,
+            "drainSeconds": 0.04999999999999716,
+            "drained": true,
+            "coverage": [
+              {
+                "residentId": "mina",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "eli",
+                "adopted": 3,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "ren",
+                "adopted": 7,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "sora",
+                "adopted": 2,
+                "ruleFallbacks": 1
+              }
+            ],
+            "requiredSaveCompleted": true
+          }
+        ],
+        "mornings": 1,
+        "sleeps": 2,
+        "peakWorkingSetBytes": 1325174784,
+        "branches": [
+          {
+            "branchId": "bb90410658cc4cedb2ab7d169d9a67ef",
+            "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\bb90410658cc4cedb2ab7d169d9a67ef.zip",
+            "sha256": "ce2fb96c80efc6526b01ae333c8a80314b4ad902c017baf76c5befc69b3dbff7",
+            "archiveBytes": 50285537,
+            "packageBytes": 30379803,
+            "journalBytes": 33415071,
+            "boundaries": 9563,
+            "parentBoundaries": 0
+          },
+          {
+            "branchId": "5fd2fecc68a14d6c8bd6068fe73c1880",
+            "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\5fd2fecc68a14d6c8bd6068fe73c1880.zip",
+            "sha256": "c18e43eb7804d58f846dde8a80ecefb6f2f1b5fcfd530fb6a751efe749249460",
+            "archiveBytes": 24991849,
+            "packageBytes": 37813063,
+            "journalBytes": 6687035,
+            "boundaries": 852,
+            "parentBoundaries": 9562
+          }
+        ],
+        "sha256": "d545eb8a6a526298eead58e8a7ae9a154d919eebc1b7b5757d6078664adf902f"
+      },
+      {
+        "scenario": "counterfactual",
+        "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual.json",
+        "mode": "fixed",
+        "realHttpSends": 0,
+        "acceptedRealSeconds": 56.39999999999893,
+        "wallSeconds": 58.7076868,
+        "windows": [
+          {
+            "day": 1,
+            "startMinute": 546.8749999999937,
+            "endMinute": 548.0499999999927,
+            "elapsedSeconds": 2.3,
+            "ordinaryAdmissions": 18,
+            "stopReason": "ordinary_limit",
+            "dispatchStopReason": null,
+            "drainSeconds": 0.05000000000000071,
+            "drained": true,
+            "coverage": [
+              {
+                "residentId": "mina",
+                "adopted": 3,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "eli",
+                "adopted": 3,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "ren",
+                "adopted": 5,
+                "ruleFallbacks": 1
+              },
+              {
+                "residentId": "sora",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              }
+            ],
+            "requiredSaveCompleted": true
+          },
+          {
+            "day": 2,
+            "startMinute": 1990.399999999995,
+            "endMinute": 2004.3250000000457,
+            "elapsedSeconds": 27.80000000000026,
+            "ordinaryAdmissions": 18,
+            "stopReason": "ordinary_limit",
+            "dispatchStopReason": null,
+            "drainSeconds": 0.04999999999999716,
+            "drained": true,
+            "coverage": [
+              {
+                "residentId": "mina",
+                "adopted": 4,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "eli",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "ren",
+                "adopted": 5,
+                "ruleFallbacks": 0
+              },
+              {
+                "residentId": "sora",
+                "adopted": 4,
+                "ruleFallbacks": 0
+              }
+            ],
+            "requiredSaveCompleted": true
+          }
+        ],
+        "mornings": 1,
+        "sleeps": 2,
+        "peakWorkingSetBytes": 976584704,
+        "branches": [
+          {
+            "branchId": "a7269b25c871493781929461e1cdf576",
+            "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\a7269b25c871493781929461e1cdf576.zip",
+            "sha256": "b005d0c8329bb4140986b225c8bf7d296edd91134f672f17eb1cf1757e55c221",
+            "archiveBytes": 38322550,
+            "packageBytes": 22605075,
+            "journalBytes": 25333299,
+            "boundaries": 6010,
+            "parentBoundaries": 0
+          },
+          {
+            "branchId": "66db612fe05c43008bc2c6a42e5dfd0c",
+            "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\66db612fe05c43008bc2c6a42e5dfd0c.zip",
+            "sha256": "f7125265d43634cdc1f06103c19683e760c1fd94f7b2538d46bb8c39e106a4e9",
+            "archiveBytes": 20761957,
+            "packageBytes": 29991430,
+            "journalBytes": 6700281,
+            "boundaries": 996,
+            "parentBoundaries": 6009
+          }
+        ],
+        "sha256": "843ddbaa578f4c79b2dc0d0d289e8e3fdec0959ad46067651bed7d4601c48c77"
+      }
+    ],
+    "replays": [
+      {
+        "scenario": "baseline",
+        "branchId": "bb90410658cc4cedb2ab7d169d9a67ef",
+        "package": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\bb90410658cc4cedb2ab7d169d9a67ef.zip",
+        "archiveBytes": 50285537,
+        "sha256": "ce2fb96c80efc6526b01ae333c8a80314b4ad902c017baf76c5befc69b3dbff7",
+        "counts": {
+          "boundaryCount": 9563,
+          "allBoundaries": 9563,
+          "motionQueries": 2039,
+          "segments": 1,
+          "packageBytes": 30379803
+        },
+        "core": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-core.json",
+          "metrics": {
+            "elapsedSeconds": 43.1317048,
+            "peakWorkingSetBytes": 196186112,
+            "managedAfterCollectionBytes": 12410848,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-source.json",
+          "boundary": 9563,
+          "motionQueries": 2039,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 9564,
+          "runtimeAssemblyLocation": "<tools-root>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll"
+        },
+        "export": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-0-export.json",
+          "boundary": 9563,
+          "motionQueries": 2039,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 9564,
+          "runtimeAssemblyLocation": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll"
+        }
+      },
+      {
+        "scenario": "baseline",
+        "branchId": "5fd2fecc68a14d6c8bd6068fe73c1880",
+        "package": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\baseline\\exports\\5fd2fecc68a14d6c8bd6068fe73c1880.zip",
+        "archiveBytes": 24991849,
+        "sha256": "c18e43eb7804d58f846dde8a80ecefb6f2f1b5fcfd530fb6a751efe749249460",
+        "counts": {
+          "boundaryCount": 852,
+          "allBoundaries": 10414,
+          "motionQueries": 2162,
+          "segments": 2,
+          "packageBytes": 37813063
+        },
+        "core": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-core.json",
+          "metrics": {
+            "elapsedSeconds": 50.3866927,
+            "peakWorkingSetBytes": 218996736,
+            "managedAfterCollectionBytes": 10667464,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-source.json",
+          "boundary": 852,
+          "motionQueries": 2162,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 10416,
+          "runtimeAssemblyLocation": "<tools-root>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll"
+        },
+        "export": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\baseline-1-export.json",
+          "boundary": 852,
+          "motionQueries": 2162,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 10416,
+          "runtimeAssemblyLocation": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll"
+        }
+      },
+      {
+        "scenario": "counterfactual",
+        "branchId": "a7269b25c871493781929461e1cdf576",
+        "package": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\a7269b25c871493781929461e1cdf576.zip",
+        "archiveBytes": 38322550,
+        "sha256": "b005d0c8329bb4140986b225c8bf7d296edd91134f672f17eb1cf1757e55c221",
+        "counts": {
+          "boundaryCount": 6010,
+          "allBoundaries": 6010,
+          "motionQueries": 1893,
+          "segments": 1,
+          "packageBytes": 22605075
+        },
+        "core": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-core.json",
+          "metrics": {
+            "elapsedSeconds": 39.3158126,
+            "peakWorkingSetBytes": 172077056,
+            "managedAfterCollectionBytes": 12546112,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-source.json",
+          "boundary": 6010,
+          "motionQueries": 1893,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 6011,
+          "runtimeAssemblyLocation": "<tools-root>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll"
+        },
+        "export": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-0-export.json",
+          "boundary": 6010,
+          "motionQueries": 1893,
+          "initialBodyQueries": 5,
+          "bodyBoundaries": 6011,
+          "runtimeAssemblyLocation": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll"
+        }
+      },
+      {
+        "scenario": "counterfactual",
+        "branchId": "66db612fe05c43008bc2c6a42e5dfd0c",
+        "package": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\counterfactual\\exports\\66db612fe05c43008bc2c6a42e5dfd0c.zip",
+        "archiveBytes": 20761957,
+        "sha256": "f7125265d43634cdc1f06103c19683e760c1fd94f7b2538d46bb8c39e106a4e9",
+        "counts": {
+          "boundaryCount": 996,
+          "allBoundaries": 7005,
+          "motionQueries": 2052,
+          "segments": 2,
+          "packageBytes": 29991430
+        },
+        "core": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-core.json",
+          "metrics": {
+            "elapsedSeconds": 38.5143471,
+            "peakWorkingSetBytes": 200577024,
+            "managedAfterCollectionBytes": 12650632,
+            "exitCode": 0
+          }
+        },
+        "source": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-source.json",
+          "boundary": 996,
+          "motionQueries": 2052,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 7007,
+          "runtimeAssemblyLocation": "<tools-root>\\dotnet\\shared\\Microsoft.NETCore.App\\10.0.12\\System.Private.CoreLib.dll"
+        },
+        "export": {
+          "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\counterfactual-1-export.json",
+          "boundary": 996,
+          "motionQueries": 2052,
+          "initialBodyQueries": 10,
+          "bodyBoundaries": 7007,
+          "runtimeAssemblyLocation": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\windows\\data_CozyTown.Game_windows_x86_64\\System.Private.CoreLib.dll"
+        }
+      }
+    ],
+    "error": null,
+    "unifiedVerification": {
+      "directory": "<artifacts-root>\\verification\\20261011T135942Z-53468768",
+      "report": "<artifacts-root>\\verification\\20261011T135942Z-53468768\\verification.json",
+      "sha256": "cc79f1c41e8dbfa1dcf7123d004af83455883311e4b113c62237f180a50d0a3e"
+    },
+    "sceneReplayVerification": {
+      "directory": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb",
+      "report": "<artifacts-root>\\scene-replay\\20261011T141048Z-a9b69deb\\verification.json",
+      "sha256": "ca97aebdbb0f91cf05a11156949b2d28c667d07de5623580944cd239a0970268"
+    },
+    "exportDefaultInput": {
+      "report": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\export-default-input.json",
+      "inputSha256": "b543a4405f749313044eae707f61a52f0bc9e1f1802297746b067e48ea17f4fe",
+      "mode": "fixed",
+      "realHttpSends": 0,
+      "branches": [
+        {
+          "branchId": "eeb7ba9aff354986af041acbd0da37ca",
+          "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\export-default-input\\exports\\eeb7ba9aff354986af041acbd0da37ca.zip",
+          "sha256": "2c4cad78848d4685acdb9761f81dc29d5f1f6e575c23fcbfe88257338a62161e",
+          "archiveBytes": 50188389,
+          "packageBytes": 30362409,
+          "journalBytes": 33397686,
+          "boundaries": 9563,
+          "parentBoundaries": 0
+        },
+        {
+          "branchId": "d55f82e69a4446d29ebea93c31f57c0c",
+          "export": "<artifacts-root>\\full-demo-verification\\20261011T135939Z-55b13677\\data\\export-default-input\\exports\\d55f82e69a4446d29ebea93c31f57c0c.zip",
+          "sha256": "8a853c8cecf8c9a53d4046252f39a9fe6bd99f56b2a2545e5f929bcd7a312496",
+          "archiveBytes": 24972643,
+          "packageBytes": 37803717,
+          "journalBytes": 6695071,
+          "boundaries": 852,
+          "parentBoundaries": 9562
+        }
+      ],
+      "sha256": "65333e41deeb5b289c9eaa6dc0f61bebef33c1d941fe03a35837a674b541fd0e"
+    },
+    "inputSha256": "b543a4405f749313044eae707f61a52f0bc9e1f1802297746b067e48ea17f4fe",
+    "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+    "finishedAtUtc": "2026-10-11T14:30:51.2109389Z"
+  }
+}

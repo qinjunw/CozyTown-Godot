@@ -63,4 +63,29 @@ foreach ($configuration in @('Debug', 'ExportDebug', 'ExportRelease')) {
 if ($LASTEXITCODE -ne 0) { throw 'Test restore failed.' }
 ```
 
-正常验证设置 `RestoreLockedMode=true`，导出中的隐式 restore 也受约束。GitHub Actions 的 Windows toolchain 工作流在 Windows runner 上执行相同的无界面流程，并保留导出包和日志 14 天。具体运行结论以对应提交的 Actions 结果和验证报告为准。
+正常验证设置 `RestoreLockedMode=true`，导出中的隐式 restore 也受约束。GitHub Actions 的 Windows toolchain 工作流在 Windows runner 上执行相同的无界面流程。具体运行结论以对应提交的 Actions 结果、验证报告和[制品验收票](https://github.com/qinjunw/CozyTown-Godot/issues/38)为准。
+
+## CI 私有 Release 制品
+
+同仓库 PR、main 推送和手动运行使用唯一标签 `ci-windows-<run-id>-<attempt>`，将验证输出上传到本私有仓库的 Draft Release。每次运行创建新标签和草稿，不覆盖旧归档。验证成功时，`windows-toolchain.zip` 包含每次运行的完整 `windows/`，以及全部顶层 JSON、TRX 和日志；验证失败时，`windows-toolchain-failure.zip` 包含完整 `artifacts/verification/`。构建、测试、导出、打包、上传或下载校验失败均使工作流失败。
+
+`manifest.json` 记录仓库、工作流、run ID、attempt、事件、实际验证源码提交和树、Release 目标提交和树、验证报告摘要及全部 ZIP 成员的路径、长度和 SHA-256。PR 使用实际合成提交作为 `sourceCommit`，Release 标签指向 PR head；两者树摘要不一致时拒绝打包。不能把标签目标改写成验证源码身份。
+
+单个附件最大为 1,900,000,000 字节。压缩包超过此值时，按字节拆为 `.part001` 等附件；manifest 的 `assets` 保留顺序、各段长度和摘要，`archive` 保留原 ZIP 的总长度和摘要。成功包省去逐边界 `data/`，失败包保留全部诊断文件。归档拒绝符号链接、重复或不安全的 ZIP 路径。
+
+使用具有本仓库 write/push 权限的 GitHub 账号打开 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)，选择对应 run/attempt 的 Draft Release，下载 `manifest.json` 及其 `assets` 中的全部附件到一个新目录；仅有读取权限的账号不能列出草稿，见[GitHub 草稿列表权限](https://docs.github.com/en/rest/releases/releases#list-releases)。也可以使用登录同一有权账号的 GitHub CLI：
+
+```powershell
+gh release download ci-windows-<run-id>-<attempt> --repo qinjunw/CozyTown-Godot --dir <download-directory>
+pwsh -File tools/windows/ci-release.ps1 -Mode Verify -PackageRoot <download-directory>
+```
+
+校验命令先检查各附件，再按 manifest 顺序重组分段，核对完整 ZIP 和每个解压成员的长度、SHA-256 与清单。CI 发布步骤还核对服务器返回的附件长度和 digest，并实际下载同一草稿后执行此校验。取用程序时解压 ZIP，保留 `<verification-run>/windows/` 的全部文件。
+
+发布 job 的 `contents: write` 是 job 级权限，因需读取同一 runner 的验证文件而与构建共处；仅同仓库事件进入该 job，`GH_TOKEN` 仅注入最后发布步骤，checkout 不保留凭据。脚本在创建标签前复核 GitHub run/attempt/event、PR head 归属及仓库 private 状态。fork PR 使用独立的 `contents: read` job 执行完整验证，不能发布草稿。固定验证不加载私人模型凭据，也不消耗真实模型预算。
+
+离线命令边界检查使用小型固定输出，覆盖成功收集、完整失败诊断、分段重组、无效输入和损坏附件：
+
+```powershell
+python tools/windows/test-ci-release.py
+```

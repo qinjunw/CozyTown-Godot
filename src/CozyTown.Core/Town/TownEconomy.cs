@@ -84,6 +84,7 @@ public sealed partial class TownWorld
     // The synchronous callback may persist the record but must not mutate this world.
     public TradeResult Trade(TradeRequest request, Action<EconomyOperationRecord>? persistBeforeCommit = null)
     {
+        using var trace = TraceInput("trade", new { request });
         EnsureEconomyNotCommitting();
         ArgumentNullException.ThrowIfNull(request);
         RequireCommandText(request.OperationId, request.ActorId, request.ShopId, request.ResourceId, request.Direction);
@@ -118,6 +119,7 @@ public sealed partial class TownWorld
 
     public QuickbarSelectionResult SelectQuickbar(string operationId, int index, Action<EconomyOperationRecord>? persistBeforeCommit = null)
     {
+        using var trace = TraceInput("quickbar", new { operationId, index });
         EnsureEconomyNotCommitting();
         RequireCommandText(operationId);
         var request = new QuickbarSelectionRequest(operationId, "player", index);

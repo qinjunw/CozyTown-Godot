@@ -8,6 +8,24 @@ namespace CozyTown.Host.Tests;
 public sealed class ModelDispatchGateTests
 {
     [Test]
+    public async Task DialogueOnlyDispatchesCurrentPlayerAndPreservesNpcQueueAcrossOverlayPause()
+    {
+        using var gate = new ModelDispatchGate();
+        var order = new List<string>();
+        Task npc = gate.EnqueueAsync("world", () => { order.Add("npc"); return true; }, TimeSpan.FromSeconds(10));
+        Task player = gate.EnqueueAsync("world", () => { order.Add("player"); return true; }, TimeSpan.FromSeconds(10), playerDialogueId: "current");
+        gate.Tick("world", new[] { "dialogue", "menu" }, "current", false);
+        Assert.That(order, Is.Empty);
+        gate.Tick("world", new[] { "dialogue" }, "current", false);
+        await player;
+        Assert.That(order, Is.EqualTo(new[] { "player" }));
+        Assert.That(npc.IsCompleted, Is.False);
+        gate.Tick("world", Array.Empty<string>(), null, false);
+        await npc;
+        Assert.That(order, Is.EqualTo(new[] { "player", "npc" }));
+    }
+
+    [Test]
     public async Task PausedGateAcknowledgesOnlyDuringUnpausedTick()
     {
         using var gate = new ModelDispatchGate();

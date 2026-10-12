@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-10",
+  "integrationBase": "54d65c1",
+  "sdk": "10.0.401",
+  "godot": "4.7.2.stable.mono",
+  "fullSuites": {
+    "CozyTown.Core.Tests": {
+      "passed": 208,
+      "failed": 0
+    },
+    "CozyTown.Host.Tests": {
+      "passed": 110,
+      "failed": 0
+    },
+    "CozyTown.Model.Tests": {
+      "passed": 45,
+      "failed": 0
+    }
+  },
+  "finalChangedInitialHostValidation": {
+    "coreReplayBudgetPassed": 33,
+    "hostReplayCliPassed": 5
+  },
+  "gameBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "headlessSlice": {
+    "passed": true,
+    "checks": 38
+  },
+  "fixedCli": {
+    "currentGameplayExit": 0,
+    "currentGameplayBoundaries": 399,
+    "tamperedExit": 1,
+    "firstDivergenceBoundary": 2,
+    "firstDivergenceField": "queries[0]"
+  },
+  "longRun": {
+    "wallClockSeconds": 360.0037175,
+    "boundaries": 57054,
+    "streamingCliExit": 0
+  }
+}

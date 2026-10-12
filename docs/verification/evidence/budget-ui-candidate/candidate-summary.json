@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "simulationSourceDigest": "301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf",
+  "package": {
+    "zip": "CozyTown-576ae64-windows-candidate.zip",
+    "bytes": 81616378,
+    "sha256": "cb5d9eecd8b07b849822c08833b9de7d542a91d83b2aba9598cd713713e4aea6",
+    "members": 215,
+    "manifestSha256": "5cbbffa2b9243c715bfdb5f1f9788a42ebf309b3e0e2e0230b5e207db3b800d7",
+    "runtimeFiles": 198
+  },
+  "packageFilesUnchangedAfterOfflineEntrySmoke": true,
+  "zipMembersReverified": 215,
+  "offlineEntrySmoke": {
+    "passed": true,
+    "entries": [
+      {
+        "file": "Start.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Start-1920.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Start-counterfactual.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-delayed.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-invalid.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-timeout.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-budget.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-farming-capacity.cmd",
+        "exitCode": 0,
+        "passed": true
+      },
+      {
+        "file": "Run-production-capacity.cmd",
+        "exitCode": 0,
+        "passed": true
+      }
+    ],
+    "reportSha256": "51046c44c991e3ed26d381de49064c72950c6f6d3db0e6564769c2675252f47b",
+    "boundary": "exported game CLI with packaged offline arguments",
+    "launcherCmdExecuted": false
+  },
+  "packagedLocalMarkdownLinks": [
+    {
+      "file": "README.md",
+      "target": "MANUAL.md",
+      "exists": true
+    },
+    {
+      "file": "README.md",
+      "target": "MANUAL-DETAILS.md",
+      "exists": true
+    },
+    {
+      "file": "MANUAL.md",
+      "target": "MANUAL-DETAILS.md",
+      "exists": true
+    },
+    {
+      "file": "MANUAL-DETAILS.md",
+      "target": "MANUAL.md",
+      "exists": true
+    }
+  ],
+  "sceneExamples": {
+    "examples/scene-gameplay.json": {
+      "file": "examples/scene-gameplay.json",
+      "bytes": 9165737,
+      "sha256": "3bbefb28d81e69db3c2a7c6462e512f965687790d406870c1fc31bea7ea71400",
+      "passed": true
+    },
+    "examples/scene-player-dialogue.json": {
+      "file": "examples/scene-player-dialogue.json",
+      "bytes": 466400,
+      "sha256": "2f53fc4b49ef71595e69680ce8028ec8e6ae09590e340c9e27edec02c1fac184",
+      "passed": true
+    }
+  },
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "manualAcceptance": "pending",
+  "initialPackageLinkFinding": {
+    "schemaVersion": 1,
+    "passed": false,
+    "code": "missing_packaged_document_link",
+    "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "zip": "CozyTown-576ae64-windows-candidate.zip",
+    "zipSha256": "a117af11148d6bf62bfbdf7e32ae4b5984862cfee16bde5126cac807586dd17f",
+    "manifestSha256": "ebf9d848d26e451da5b19af46580fb4695398face0c0dca1495680c9eec3d44b",
+    "file": "MANUAL.md",
+    "fileSha256": "e083ad707e5383ad3c30169775ac3a8daa7f4a64ded9ec05e8bdcc12ce10ab87",
+    "missingTarget": "full-demo-clean-2026-10-11.md",
+    "detectedBy": "packaged Markdown link self-review",
+    "resolution": "Keep this preliminary package unchanged; use a fixed GitHub commit link in the separately packaged final candidate."
+  }
+}

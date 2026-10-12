@@ -188,17 +188,23 @@ public partial class TownGame
     private void SubmitSleep()
     {
         if (_fatal || !_farmingPanel.Visible || _activePlotId is not null) return;
+        try { _sleepHours.Apply(); SubmitSleep((int)_sleepHours.Value); }
+        catch (Exception error) { Fail("sleep_record_failed", error); }
+    }
+
+    private void SubmitSleep(int hours)
+    {
+        if (_fatal || !_farmingPanel.Visible || _activePlotId is not null) return;
         try
         {
-            _sleepHours.Apply();
             FlushWorldEvents();
-            var result = _world.Sleep(new SleepRequest(NewEconomyOperationId(), "player", (int)_sleepHours.Value),
+            var result = _world.Sleep(new SleepRequest(NewEconomyOperationId(), "player", hours),
                 realSeconds: 0, paused: _pauseReasons.Any(r => r != "farming"),
                 persistBeforeCommit: record => PersistFarmingOperation("player_sleep_command", record));
             FlushWorldEvents();
             _view = _world.GetView();
             SyncActors();
-            _farmingFeedback.Text = result.Succeeded ? $"休息了 {_sleepHours.Value:0} 小时。现在是第 {(long)_view.WorldMinute / 1440 + 1} 天 {(int)_view.WorldMinute % 1440 / 60:00}:{(int)_view.WorldMinute % 60:00}。" : FarmingReason(result.Code);
+            _farmingFeedback.Text = result.Succeeded ? $"休息了 {hours} 小时。现在是第 {(long)_view.WorldMinute / 1440 + 1} 天 {(int)_view.WorldMinute % 1440 / 60:00}:{(int)_view.WorldMinute % 60:00}。" : FarmingReason(result.Code);
             RefreshInterface();
         }
         catch (Exception error) { Fail("sleep_record_failed", error); }

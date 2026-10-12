@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+  "realHttpSends": 0,
+  "graphicalRequested": false,
+  "manualAccepted": false,
+  "cleanBuild": {
+    "startedAtUtc": "2026-10-11T15:40:50.0055666Z",
+    "finishedAtUtc": "2026-10-11T15:51:20.4036792Z",
+    "sourceDirtyBeforeBuild": false,
+    "generatedCachesCopied": false,
+    "dotnetSdk": "10.0.401",
+    "godotVersion": "4.7.2.stable.mono.official.ed1daf0bf",
+    "rawReport": "<archive>/clean-verification/verification.json",
+    "rawReportSha256": "0ac6c2154a1384db0c07e981fedaf4464a74c4ed02258cb22a365147f6839102",
+    "coreTests": {
+      "total": 324,
+      "executed": 324,
+      "passed": 324,
+      "failed": 0,
+      "skipped": 0
+    },
+    "modelTests": {
+      "total": 92,
+      "executed": 92,
+      "passed": 92,
+      "failed": 0,
+      "skipped": 0
+    },
+    "hostTests": {
+      "total": 251,
+      "executed": 251,
+      "passed": 251,
+      "failed": 0,
+      "skipped": 0
+    },
+    "steps": [
+      {
+        "name": "dotnet-version",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.402
+      },
+      {
+        "name": "godot-version",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 0.24
+      },
+      {
+        "name": "restore-host",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 5.282
+      },
+      {
+        "name": "restore-core-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 2.335
+      },
+      {
+        "name": "core-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 23.857
+      },
+      {
+        "name": "restore-model-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 2.358
+      },
+      {
+        "name": "model-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 35.263
+      },
+      {
+        "name": "restore-host-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 3.465
+      },
+      {
+        "name": "host-tests",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 36.311
+      },
+      {
+        "name": "import",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 11.9
+      },
+      {
+        "name": "build-host",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 5.667
+      },
+      {
+        "name": "scene-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.319
+      },
+      {
+        "name": "content-baseline",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.217
+      },
+      {
+        "name": "content-counterfactual",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.333
+      },
+      {
+        "name": "content-economy-fixture",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.324
+      },
+      {
+        "name": "content-farming-capacity-fixture",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.361
+      },
+      {
+        "name": "content-production-capacity-fixture",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.294
+      },
+      {
+        "name": "slice-baseline-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.106
+      },
+      {
+        "name": "slice-counterfactual-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.56
+      },
+      {
+        "name": "economy-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 131.698
+      },
+      {
+        "name": "export-windows",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 22.071
+      },
+      {
+        "name": "export-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 1.053
+      },
+      {
+        "name": "export-slice-baseline-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 13.188
+      },
+      {
+        "name": "export-slice-counterfactual-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 9.772
+      },
+      {
+        "name": "export-economy-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 107.313
+      },
+      {
+        "name": "scene-farming-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 16.664
+      },
+      {
+        "name": "export-farming-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 15.183
+      },
+      {
+        "name": "scene-farming-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 22.151
+      },
+      {
+        "name": "export-farming-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 21.741
+      },
+      {
+        "name": "scene-production-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 35.282
+      },
+      {
+        "name": "export-production-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 43.667
+      },
+      {
+        "name": "scene-production-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 18.62
+      },
+      {
+        "name": "export-production-capacity-headless",
+        "exitCode": 0,
+        "timedOut": false,
+        "seconds": 17.539
+      }
+    ]
+  },
+  "windows": {
+    "files": 198,
+    "bytes": 197401682,
+    "manifestSha256": "1baf44353db15eb54b35a898fb38ca33cb258722fcac6eca7f4d089f5b893d1b"
+  },
+  "sceneReplay": {
+    "rawReportSha256": "0d1c505885d9bb7a1caf54d1449ed6bc184f31c4b268d544193b6ebb04191a9e",
+    "target": "new_clean_windows_export_only",
+    "packages": [
+      {
+        "name": "baseline-0",
+        "inputSha256": "b6d4f36167d903d25f312163ece400a3eb5cc208cf2ea789f2f0d0da070e213e",
+        "rawReport": "<archive>/replay/baseline-0.json",
+        "rawReportSha256": "ca747663ee14a8a7cd83d140978a2c4960a0bc83dc6a4e9dd19929b48ac1c62e",
+        "exitCode": 0,
+        "seconds": 197.455,
+        "counts": {
+          "boundaryCount": 32428,
+          "allBoundaries": 32428,
+          "motionQueries": 2463,
+          "segments": 1,
+          "packageBytes": 75820520
+        },
+        "motionQueries": 2463,
+        "initialBodyQueries": 5,
+        "bodyBoundaries": 32429,
+        "intersectShapeCalls": 2468,
+        "castMotionCalls": 2468,
+        "actualDependencies": {
+          "version": "godot-town-scene-v1",
+          "scenario": "baseline",
+          "engineVersion": "4.7.2-stable (official)",
+          "scenePath": "res://Town.tscn",
+          "mapPath": "res://World/TownMap.tscn",
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+          "bodyRadius": 5,
+          "query": {
+            "version": "godot-circle-intersect-cast-v1",
+            "mask": 1,
+            "areas": false,
+            "bodies": true,
+            "margin": 0.0010000000474974513,
+            "minimumSafeFraction": 0.9998999834060669
+          },
+          "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+          "buildVersion": "1.0.0+f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+          "assemblySha256": "9553e29f88a538aefb7a23ad5179002df335257310847d33fa434270711c8390",
+          "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "physicsBackend": "DEFAULT"
+        },
+        "runtimeAssemblyLocation": "<new-windows>/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll"
+      },
+      {
+        "name": "baseline-1",
+        "inputSha256": "69a87520f9c13be644a1228b3be4a48c4bc2563f9746c330875b1babcb5fb746",
+        "rawReport": "<archive>/replay/baseline-1.json",
+        "rawReportSha256": "a5456023ce025e49dd8ef5978813ee72a18a4747dc3b2415bc82076aa6bf8755",
+        "exitCode": 0,
+        "seconds": 167.984,
+        "counts": {
+          "boundaryCount": 1823,
+          "allBoundaries": 34246,
+          "motionQueries": 2586,
+          "segments": 2,
+          "packageBytes": 89029227
+        },
+        "motionQueries": 2586,
+        "initialBodyQueries": 10,
+        "bodyBoundaries": 34248,
+        "intersectShapeCalls": 2596,
+        "castMotionCalls": 2596,
+        "actualDependencies": {
+          "version": "godot-town-scene-v1",
+          "scenario": "baseline",
+          "engineVersion": "4.7.2-stable (official)",
+          "scenePath": "res://Town.tscn",
+          "mapPath": "res://World/TownMap.tscn",
+          "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+          "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+          "bodyRadius": 5,
+          "query": {
+            "version": "godot-circle-intersect-cast-v1",
+            "mask": 1,
+            "areas": false,
+            "bodies": true,
+            "margin": 0.0010000000474974513,
+            "minimumSafeFraction": 0.9998999834060669
+          },
+          "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+          "buildVersion": "1.0.0+f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+          "assemblySha256": "9553e29f88a538aefb7a23ad5179002df335257310847d33fa434270711c8390",
+          "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "physicsBackend": "DEFAULT"
+        },
+        "runtimeAssemblyLocation": "<new-windows>/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll"
+      },
+      {
+        "name": "counterfactual-0",
+        "inputSha256": "277e6c00e33651f7a73ae1c748475a70f90d79882e0df4542c1f4385318d5034",
+        "rawReport": "<archive>/replay/counterfactual-0.json",
+        "rawReportSha256": "09c24218facf3449d70de2598257d1bd518667aaa97d64a184e623d4802e556d",
+        "exitCode": 0,
+        "seconds": 124.191,
+        "counts": {
+          "boundaryCount": 45775,
+          "allBoundaries": 45775,
+          "motionQueries": 2866,
+          "segments": 1,
+          "packageBytes": 79547189
+        },
+        "motionQueries": 2866,
+        "initialBodyQueries": 5,
+        "bodyBoundaries": 45776,
+        "intersectShapeCalls": 2871,
+        "castMotionCalls": 2871,
+        "actualDependencies": {
+          "version": "godot-town-scene-v1",
+          "scenario": "counterfactual",
+          "engineVersion": "4.7.2-stable (official)",
+          "scenePath": "res://Town.tscn",
+          "mapPath": "res://World/TownMap.tscn",
+          "contentFingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+          "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+          "bodyRadius": 5,
+          "query": {
+            "version": "godot-circle-intersect-cast-v1",
+            "mask": 1,
+            "areas": false,
+            "bodies": true,
+            "margin": 0.0010000000474974513,
+            "minimumSafeFraction": 0.9998999834060669
+          },
+          "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+          "buildVersion": "1.0.0+f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+          "assemblySha256": "9553e29f88a538aefb7a23ad5179002df335257310847d33fa434270711c8390",
+          "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "physicsBackend": "DEFAULT"
+        },
+        "runtimeAssemblyLocation": "<new-windows>/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll"
+      },
+      {
+        "name": "counterfactual-1",
+        "inputSha256": "aee9cfe06cddc7e17b87dcfe76acee9f04536fda5d76e9f2a650601272f2fe21",
+        "rawReport": "<archive>/replay/counterfactual-1.json",
+        "rawReportSha256": "4761eea2c6955a54012c6c6b859ff683c7462e8dddfbffabb3bd58131b42f686",
+        "exitCode": 0,
+        "seconds": 139.46,
+        "counts": {
+          "boundaryCount": 14802,
+          "allBoundaries": 60576,
+          "motionQueries": 3785,
+          "segments": 2,
+          "packageBytes": 109616469
+        },
+        "motionQueries": 3785,
+        "initialBodyQueries": 10,
+        "bodyBoundaries": 60578,
+        "intersectShapeCalls": 3795,
+        "castMotionCalls": 3795,
+        "actualDependencies": {
+          "version": "godot-town-scene-v1",
+          "scenario": "counterfactual",
+          "engineVersion": "4.7.2-stable (official)",
+          "scenePath": "res://Town.tscn",
+          "mapPath": "res://World/TownMap.tscn",
+          "contentFingerprint": "e3e4dd8cd3a6ce3d2178badcc94595626befb1bfc8da8de5275c029fe2a9dcc1",
+          "geometryFingerprint": "0a879e8e3a35e9ad038211abb49fa79b0b5b7a5a1faaa5d23efa83419b919d4e",
+          "bodyRadius": 5,
+          "query": {
+            "version": "godot-circle-intersect-cast-v1",
+            "mask": 1,
+            "areas": false,
+            "bodies": true,
+            "margin": 0.0010000000474974513,
+            "minimumSafeFraction": 0.9998999834060669
+          },
+          "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+          "buildVersion": "1.0.0+f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+          "assemblySha256": "9553e29f88a538aefb7a23ad5179002df335257310847d33fa434270711c8390",
+          "engineBuild": "ed1daf0bf001b61586d9930840f2f1394092c079",
+          "physicsBackend": "DEFAULT"
+        },
+        "runtimeAssemblyLocation": "<new-windows>/data_CozyTown.Game_windows_x86_64/System.Private.CoreLib.dll"
+      }
+    ]
+  },
+  "offlineEntrySmoke": {
+    "entries": 9,
+    "passed": true,
+    "launcherCmdExecuted": false,
+    "boundary": "exported game CLI with packaged offline arguments",
+    "rawReportSha256": "e616e52880a63396b8644c3b5b79862f0d6b06cefb628d2f13c44c0aceaaa483"
+  },
+  "package": {
+    "schemaVersion": 1,
+    "passed": true,
+    "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+    "zip": "CozyTown-f9551c1-clean-windows.zip",
+    "bytes": 76040927,
+    "sha256": "006c7c0051332e211d9c612bb47117d774c7208928d23c62f9ad3a5a138a0a95",
+    "members": 212,
+    "manifestSha256": "a5018e338af8b80d1739a66bab7eeecf9f11706f47387f980a88b760f17ddbb6",
+    "runtimeFiles": 198,
+    "realHttpSends": 0,
+    "graphicalRequested": false
+  }
+}

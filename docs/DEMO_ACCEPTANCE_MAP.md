@@ -8,7 +8,7 @@
 - Unity 参考：`68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`。只采用明确登记的行为、内容和测试意图；其运行结果不计入 Godot 验收。
 - 2026-09-22 用户同意按建议拆分剩余工作。最终目标继续采用[产品基线](PRODUCT_BASELINE.md)，首切片的演示反馈不代替完整候选反馈。
 
-当前 Godot 尚无玩家钱包/背包、独立商店经济状态、可操作的生产状态与用例及晨间结算状态；玩家交谈为固定内容。现有导出还缺完整离线回放入口，不能据导出成功声称过程可复现。后继票据扩展现有模块，不重新声明日程、保存或内容工具全部未实现。
+上述 2026-09-22 核查版本尚无玩家钱包/背包、独立商店经济状态、可操作的生产状态与用例及晨间结算状态，玩家交谈为固定内容，导出缺完整离线回放入口。后继票据按下表扩展现有模块；各功能的当前证据从 [README](../README.md)进入，票据状态以 GitHub 地图为准。
 
 ## 目标与责任
 
@@ -22,6 +22,8 @@
 | 核心过程复现 | [实现版本化输入记录与离线核心回放](https://github.com/qinjunw/CozyTown-Godot/issues/22) | 完整版本化输入、内容/父分支依赖、隔离模拟账本和权威检查点；逐边界重跑规则，首分歧停止 |
 | 引擎空间复现 | [实现 Godot 场景回放与空间分歧验证](https://github.com/qinjunw/CozyTown-Godot/issues/23) | Godot 重新执行空间查询并比较身体/核心状态；固定引擎/场景配置，缺依赖或空间不一致明确失败 |
 | 跨日实验规模与费用 | [确定跨日真实模型评测与玩家对话共用预算](https://github.com/qinjunw/CozyTown-Godot/issues/24) | 用户确定新场景、时长、样本、指标阈值、金额/次数、阶段分配与停止条件 |
+| 独立预算配置 | [实现完整 Demo 的独立预算配置与持久账本](https://github.com/qinjunw/CozyTown-Godot/issues/34) | 新旧配置隔离、显式初始化、四阶段共享持久账本、恢复和停止边界 |
+| 宿主与完整离线流程 | [贯通完整 Demo 宿主阶段与离线评测入口](https://github.com/qinjunw/CozyTown-Godot/issues/35) | 绑定世界和预算身份，固定与真实共用两天输入；完整固定门、同包核心与场景回放及失败报告 |
 | 完整共同负载的证据 | [执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25) | 同一候选通过固定输入、两类回放和已批准跨日真实运行；四人和玩家模型对话分别覆盖，全部失败入报告 |
 | 最终 Windows 交付 | [验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26) | 干净构建、导出独立运行、完整玩法/四人/恢复/观察导出/回放与实际键鼠画面证据，取得这份候选的用户反馈 |
 
@@ -38,11 +40,15 @@
 
 回放线可与玩家资产线并行。核心回放完成后即可验证 Godot 场景，无须等待全部生产玩法；合并时以当时已实现的命令和状态为准。完整综合评测等全部功能及两类回放就绪，不接受遗漏新功能的旧样例通过。
 
-## 仍需人类回答的边界
+## 已确认的边界与待验收项
 
-玩家对话参考行为与当前暂停合同存在差别：固定 Unity 在模态界面暂停世界时仍直接生成并显示文本；Godot 当前暂停会阻止新派发，结果只进入邮箱。对话票须明确前台生成是否有窄范围例外，以及菜单、失焦、读档、故障暂停如何叠加；不得通过调用顺序偶然绕过门控。范围仍是一次交互的一段反馈，自由输入与多轮聊天没有自动加入。
+玩家对话暂停、窄范围生成/展示、关闭/切人及恢复流程已经用户确认，见[玩家对话合同](PLAYER_DIALOGUE_CONTRACT.md)。固定检查已通过，用户已于 2026-10-11 通过[人工清单](verification/player-dialogue-manual.md)验收。范围为一次交互的一段反馈。
 
-原首轮模型预算的发送数已达 **48/48**，保守结算为 **人民币 0.300418 元**，见[实测记录](verification/four-resident-real-model-2026-09-20.md)。剩余金额不授权新发送。新预算、规模及质量阈值由评测决策票取得明确回答；本路线的同意不替代该回答。
+原首轮模型预算的发送数已达 **48/48**，保守结算为 **人民币 0.300418 元**，见[实测记录](verification/four-resident-real-model-2026-09-20.md)。完整 Demo 的独立预算、两天规模及指标已获批准，见[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。2026-10-11 完整 Demo v1 两组完成 80 次 HTTP 及 12 次同包回放，8 段玩家文本均正确显示，但资源对照 NPC 合法采用率为 69.44%；该轮未达标结果作为[历史记录](verification/full-demo-real-2026-10-11.md)保留。
+
+独立 v2 的冻结源码为 `f9551c1`，两组两天的真实指标均达标，四份真实包的 12 次离线回放通过，见[第二轮真实评测](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/full-demo-real-v2-2026-10-11.md)；[执行完整 Demo 固定输入、回放与跨日真实评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)已关闭。用户已确认 `576ae64` 候选的[七组人工操作及可选真实 M01 通过](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)。后续 `df62408` 仅改变 NPC 离线回放实现，其余 172 个运行代码、内容及工具文件与 `576ae64` 相同；681 项测试、33 步、39 项场景矩阵预期结果、12 次固定包回放及九组离线 CLI 参数入口通过，见[回放修复复核](https://github.com/qinjunw/CozyTown-Godot/blob/ad41ed2268a537ef97b2f1f6f3e26a2c0e8f3e7f/docs/verification/replay-outcome-binding-2026-10-12.md)。真实样本和人工反馈保留各自版本归属。
+
+制品渠道、线上运行和实际附件验收以[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)的 Resolution 为准；最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)及[完整 Demo 集成 PR](https://github.com/qinjunw/CozyTown-Godot/pull/31)。
 
 ## 候选与证据规则
 

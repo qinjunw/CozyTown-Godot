@@ -1,0 +1,11 @@
+{
+  "source": "Godot 4.7.2 headless, ordinary rules host, 360 wall-clock seconds",
+  "sdk": "10.0.401",
+  "archiveFile": "source-360s-delta.zip",
+  "archiveSha256": "804e4f5b186cdb178286951293e279174cd3743c45ad5dd5fcf65590bc1727f3",
+  "archiveBytes": 84362883,
+  "replayJsonBytes": 89962909,
+  "journalBytes": 95903094,
+  "contentFingerprint": "659112976f925aedd7b442aaae2258790e91d2d99b1b87194cf05f11aed572a7",
+  "boundaries": 57054
+}

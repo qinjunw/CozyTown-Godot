@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "checkedAtUtc": "2026-10-11T15:12:08.7649366Z",
+  "releaseId": 409716833,
+  "releaseUrl": "https://github.com/qinjunw/CozyTown-Godot/releases/tag/untagged-f311139ec8e4b0da5d59",
+  "releaseTag": "full-demo-evaluation-v2-20261011",
+  "draft": true,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "assetCount": 15,
+  "assets": [
+    {
+      "name": "full-demo-v2-budget-registration.json",
+      "id": 630968246,
+      "bytes": 791,
+      "sha256": "4a6e15e5bea60ffe4790780332e540c1c9f2f1996adfc80100982ca17e4b2f95",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-budget-registration.json"
+    },
+    {
+      "name": "full-demo-v2-freeze.json",
+      "id": 630968250,
+      "bytes": 3112,
+      "sha256": "6a93f64f6d10496b24426a208acbf6e904482c8a8c7b64c37cca739348889452",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-freeze.json"
+    },
+    {
+      "name": "full-demo-v2-initialize.json",
+      "id": 630968242,
+      "bytes": 378,
+      "sha256": "cab9fe8e8f15b8bec8599e44f4449d0bafc7736aee8920cc95da3bc1fe7d3b61",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-initialize.json"
+    },
+    {
+      "name": "full-demo-v2-offline-archive-receipt.json",
+      "id": 631035793,
+      "bytes": 848,
+      "sha256": "e6089cf168a8e4b85444e67a23fbe8efea6dd0215e1efee7c19184e06c93322b",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-archive-receipt.json"
+    },
+    {
+      "name": "full-demo-v2-offline-assets.json",
+      "id": 630961832,
+      "bytes": 667,
+      "sha256": "2670316904adfa7954d1e9b65bb63fe9ad807d8adf10684f0715e4ecbc5bd334",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-assets.json"
+    },
+    {
+      "name": "full-demo-v2-offline-gate.json",
+      "id": 630961829,
+      "bytes": 70923,
+      "sha256": "713793834b40915056cbbf46a53fb56cb7cb4188c20584dfcaf7897e08375163",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-gate.json"
+    },
+    {
+      "name": "full-demo-v2-offline-manifest.json",
+      "id": 631035796,
+      "bytes": 229436,
+      "sha256": "79ff0f304d28e639f8beb489da259b505c6da10fbc47db7b157ff6714e4f7772",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-manifest.json"
+    },
+    {
+      "name": "full-demo-v2-offline-secret-scan.json",
+      "id": 631035797,
+      "bytes": 1037,
+      "sha256": "dc24473cdf373ef51898c56e03b9c1be76caab8a8a3e8fe483482bb36eb59f09",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-secret-scan.json"
+    },
+    {
+      "name": "full-demo-v2-real-archive-receipt.json",
+      "id": 631047920,
+      "bytes": 727,
+      "sha256": "e4852a9eb6d26969bd26d1e96afdd5a64b4817ac15a77986b326f84d584e1539",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-real-archive-receipt.json"
+    },
+    {
+      "name": "full-demo-v2-real-manifest.json",
+      "id": 631047926,
+      "bytes": 28352,
+      "sha256": "298c71359010ba22388d589602f18e7b90eaba52066f9cae508c39e7d4a4b2c5",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-real-manifest.json"
+    },
+    {
+      "name": "full-demo-v2-scene-replay-verification.json",
+      "id": 630961819,
+      "bytes": 18960,
+      "sha256": "ca97aebdbb0f91cf05a11156949b2d28c667d07de5623580944cd239a0970268",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-scene-replay-verification.json"
+    },
+    {
+      "name": "full-demo-v2-unified-verification.json",
+      "id": 630961833,
+      "bytes": 10455,
+      "sha256": "cc79f1c41e8dbfa1dcf7123d004af83455883311e4b113c62237f180a50d0a3e",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-unified-verification.json"
+    },
+    {
+      "name": "full-demo-v2-v1-stop.json",
+      "id": 630968245,
+      "bytes": 72935,
+      "sha256": "9d98720ff9c9725d41b4c33f98bf042d8244ae43c890617ee0c85648753cce52",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-v1-stop.json"
+    },
+    {
+      "name": "full-demo-real-v2-20261011.tar.gz",
+      "id": 631047925,
+      "bytes": 709710553,
+      "sha256": "e39d87e0a52dd90342e1891dea34495444be59becd2d8ea9510d80ce675ec6f3",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-real-v2-20261011.tar.gz"
+    },
+    {
+      "name": "full-demo-v2-offline-20261011.tar.gz",
+      "id": 631035794,
+      "bytes": 1612417468,
+      "sha256": "fb253cc4971c21571801ac498c9a75c75d86ee0967f98b79def84c6085f5bad2",
+      "remoteVerified": true,
+      "url": "https://github.com/qinjunw/CozyTown-Godot/releases/download/untagged-f311139ec8e4b0da5d59/full-demo-v2-offline-20261011.tar.gz"
+    }
+  ],
+  "realHttpSends": 0
+}

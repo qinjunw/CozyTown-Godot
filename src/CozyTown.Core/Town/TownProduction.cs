@@ -23,6 +23,7 @@ public sealed partial class TownWorld
     public ProductionResult Produce(ProductionRequest request, Action<ProductionOperationRecord>? persistBeforeCommit = null,
         Action<string>? mutationGuard = null)
     {
+        using var trace = TraceInput("produce", new { request });
         EnsureEconomyNotCommitting();
         ArgumentNullException.ThrowIfNull(request);
         RequireCommandText(request.OperationId, request.ActorId, request.TargetId, request.Action);

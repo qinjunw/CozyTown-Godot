@@ -20,6 +20,8 @@ public partial class TownGame
     private PanelContainer _dialogue = null!;
     private Label _dialogueName = null!;
     private Label _dialogueText = null!;
+    private Label _dialogueStatus = null!;
+    private Button _generateDialogue = null!;
     private TextureRect _dialoguePortrait = null!;
     private readonly Dictionary<string, Button> _residentButtons = new(StringComparer.Ordinal);
     private readonly Color _ink = new("364a43");
@@ -130,7 +132,7 @@ public partial class TownGame
 
         _dialogue = Panel();
         _ui.AddChild(_dialogue);
-        Place(_dialogue, -340, -278, 340, -94, leftAnchor: .5f, rightAnchor: .5f, topAnchor: 1, bottomAnchor: 1);
+        Place(_dialogue, -360, -346, 360, -94, leftAnchor: .5f, rightAnchor: .5f, topAnchor: 1, bottomAnchor: 1);
         var dialogueRow = new HBoxContainer();
         dialogueRow.AddThemeConstantOverride("separation", 18);
         _dialogue.AddChild(Margin(dialogueRow, 22, 18));
@@ -144,7 +146,16 @@ public partial class TownGame
         _dialogueText.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
         dialogueColumn.AddChild(_dialogueName);
         dialogueColumn.AddChild(_dialogueText);
-        dialogueColumn.AddChild(Button("继续散步", CloseDialogue));
+        _dialogueStatus = Label("固定回应", 13, _muted);
+        _dialogueStatus.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+        dialogueColumn.AddChild(_dialogueStatus);
+        var dialogueActions = new HBoxContainer();
+        dialogueActions.AddThemeConstantOverride("separation", 10);
+        _generateDialogue = Button("生成一段反馈", GeneratePlayerDialogue);
+        _generateDialogue.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+        dialogueActions.AddChild(_generateDialogue);
+        dialogueActions.AddChild(Button("继续散步", CloseDialogue));
+        dialogueColumn.AddChild(dialogueActions);
         _dialogue.Visible = false;
         CreateEconomyInterface(top, bottom);
         CreateFarmingInterface();
@@ -187,7 +198,7 @@ public partial class TownGame
         if (_productionPanel.Visible) { CloseProduction(); return; }
         if (_farmingPanel.Visible) { CloseFarming(); return; }
         if (_economyPanel.Visible) { CloseEconomy(); return; }
-        if (_dialogue.Visible) { CloseDialogue(); return; }
+        if (_dialogue.Visible && !_menu.Visible) { _menu.Visible = true; SetPause("menu", true); return; }
         _menu.Visible = !_menu.Visible;
         SetPause("menu", _menu.Visible);
     }
@@ -202,7 +213,19 @@ public partial class TownGame
 
     private void SelectResident(string id)
     {
-        if (_pauseReasons.Count > 0 || _fatal) return;
+        if (_fatal) return;
+        if (_dialogue.Visible && TownDialogueHost.TextAllowed(_pauseReasons))
+        {
+            try
+            {
+                if (!DialogueHost.Open(id, _pauseReasons)) { Toast("走近这位邻居后再交谈。"); return; }
+                FlushWorldEvents();
+                RefreshPlayerDialogue();
+            }
+            catch (Exception error) { Fail("dialogue_persistence_failed", error); }
+            return;
+        }
+        if (_pauseReasons.Count > 0) return;
         _selectedResident = id;
         _inspector.Visible = true;
         RefreshInterface();
@@ -213,19 +236,29 @@ public partial class TownGame
         if (_pauseReasons.Count > 0 || _fatal) return;
         ResidentState? resident = _view.Residents.OrderBy(r => r.Position.DistanceTo(_view.PlayerPosition)).FirstOrDefault();
         if (resident == null || resident.Position.DistanceTo(_view.PlayerPosition) > 42) { Toast("走近一位邻居，再按 E 交谈。"); return; }
-        string text = _world.TalkToResident(resident.Id);
+        TalkResident(resident.Id);
+    }
+
+    private void TalkResident(string residentId)
+    {
+        if (_pauseReasons.Count > 0 || _fatal) return;
+        if (!DialogueHost.Open(residentId, _pauseReasons)) { Toast("走近这位邻居后再交谈。"); return; }
         FlushWorldEvents();
-        _dialogueName.Text = _loaded.Definitions.Residents.Single(r => r.Id == resident.Id).DisplayName;
-        _dialogueText.Text = text;
-        _dialoguePortrait.Texture = Portrait(resident.Id);
         _dialogue.Visible = true;
         SetPause("dialogue", true);
+        RefreshPlayerDialogue();
     }
 
     private void CloseDialogue()
     {
-        _dialogue.Visible = false;
-        SetPause("dialogue", false);
+        try
+        {
+            DialogueHost.Close();
+            FlushWorldEvents();
+            _dialogue.Visible = false;
+            SetPause("dialogue", false);
+        }
+        catch (Exception error) { Fail("dialogue_persistence_failed", error); }
     }
 
     private void RefreshInterface()
@@ -245,6 +278,7 @@ public partial class TownGame
         RefreshEconomyInterface();
         RefreshFarmingInterface();
         RefreshProductionInterface();
+        RefreshPlayerDialogue();
         if (!_inspector.Visible || _selectedResident == null) return;
         ResidentState resident = _view.Residents.Single(r => r.Id == _selectedResident);
         ResidentDefinition definition = _loaded.Definitions.Residents.Single(r => r.Id == resident.Id);
@@ -274,7 +308,9 @@ public partial class TownGame
         if (_model != null)
         {
             var budget = _model.Budget;
-            text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / 48 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+            text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+            if (_modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual)
+                text.AppendLine($"人工试玩 {budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual)} / {_modelRuntime.Profile.StageLimits[TownModelRuntimeProfile.Manual]} 次 · NPC 与玩家共享");
             if (budget.StopReason != null) text.AppendLine("派发已停：" + budget.StopReason);
         }
         double scroll = _inspectorBody.GetVScrollBar().Value;

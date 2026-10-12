@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-File",
+    "tools/windows/verify-full-demo.ps1",
+    "-ExpectedCommit",
+    "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+    "-ToolsRoot",
+    "<locked-toolchain-root>"
+  ],
+  "startedAtUtc": "2026-10-11T15:52:11.3626278Z",
+  "finishedAtUtc": "2026-10-11T16:10:35.4992776Z",
+  "exitCode": 0,
+  "rawReportSha256": "12a847200654902d37684237535516e9f4de1c9009cbfc5684fd7a5e4db02527",
+  "stdoutEvidence": "child stdout/stderr files preserved by the full verification script; orchestration Running/Passed lines observed via terminal session",
+  "realHttpSends": 0,
+  "graphicalRequested": false
+}

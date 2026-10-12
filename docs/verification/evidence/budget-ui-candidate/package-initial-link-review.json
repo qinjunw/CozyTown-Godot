@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "passed": false,
+  "code": "missing_packaged_document_link",
+  "sourceCommit": "576ae64e38f854bb22b13186e6a9d2ecc9799d72",
+  "zip": "CozyTown-576ae64-windows-candidate.zip",
+  "zipSha256": "a117af11148d6bf62bfbdf7e32ae4b5984862cfee16bde5126cac807586dd17f",
+  "manifestSha256": "ebf9d848d26e451da5b19af46580fb4695398face0c0dca1495680c9eec3d44b",
+  "file": "MANUAL.md",
+  "fileSha256": "e083ad707e5383ad3c30169775ac3a8daa7f4a64ded9ec05e8bdcc12ce10ab87",
+  "missingTarget": "full-demo-clean-2026-10-11.md",
+  "detectedBy": "packaged Markdown link self-review",
+  "resolution": "Keep this preliminary package unchanged; use a fixed GitHub commit link in the separately packaged final candidate."
+}

@@ -1,20 +1,19 @@
-using System.Text.Json;
-
 namespace CozyTown.Core.Town;
 
 public sealed partial class TownWorld
 {
-    public const string RulesVersion = "town-social-production-v4";
+    public const string RulesVersion = "town-social-player-dialogue-v5";
     public const string NumericVersion = "pixels-double-grid16-radius5-morning-motion-prefix-v3";
     public const string DefaultBudgetId = "cozytown-godot-first-slice-20260920-v1";
     private readonly TownContent _content;
     private readonly Func<string, TownPoint, TownPoint, bool>? _movementQuery;
     private TownState _state;
-    public string SessionId { get; } = Guid.NewGuid().ToString("N");
+    public string SessionId { get; private set; } = Guid.NewGuid().ToString("N");
     public TownState State => TownJson.Clone(_state);
     public IReadOnlyList<TownEvent> Events => _state.Events.ToArray();
     public double WorldMinute => _state.WorldMinute;
-    public bool HasUncommittedResponses => _state.PendingDecisions.Any(p => p.ResponseArrivalSeconds is not null && p.SealedResult is null);
+    public bool HasUncommittedResponses => _state.PendingDecisions.Any(p => p.ResponseArrivalSeconds is not null && p.SealedResult is null)
+        || _state.PlayerDialogues.Any(d => d.ResponseArrivalSeconds is not null && d.SealedResult is null);
     public TownState GetView()
     {
         var view = new TownState
@@ -25,7 +24,8 @@ public sealed partial class TownWorld
             AcceptedWorldMinutes = _state.AcceptedWorldMinutes, PlayerPosition = _state.PlayerPosition,
             PlayerFacing = _state.PlayerFacing, Economy = _state.Economy, Farming = _state.Farming, Production = _state.Production, Sequence = _state.Sequence, IdentitySequence = _state.IdentitySequence,
             DecisionCursor = _state.DecisionCursor, Residents = _state.Residents, Commitments = _state.Commitments.Where(IsActive).ToList(),
-            PendingDecisions = _state.PendingDecisions, Events = _state.Events.TakeLast(20).ToList()
+            PendingDecisions = _state.PendingDecisions, ModelQueue = _state.ModelQueue,
+            CurrentPlayerDialogueId = _state.CurrentPlayerDialogueId, PlayerDialogues = _state.PlayerDialogues, Events = _state.Events.TakeLast(20).ToList()
         };
         return TownJson.Clone(view);
     }
@@ -72,6 +72,7 @@ public sealed partial class TownWorld
 
     public void Advance(double worldMinutes, double realSeconds, bool paused = false, Action<long>? settlementGuard = null)
     {
+        using var trace = TraceInput("advance", new { worldMinutes, realSeconds, paused });
         EnsureEconomyNotCommitting();
         if (!TownContent.Finite(worldMinutes) || worldMinutes < 0 || worldMinutes > MaximumAdvanceMinutes || !TownContent.Finite(realSeconds) || realSeconds < 0 || realSeconds > 86400) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
         if (!paused && (_state.AcceptedWorldMinutes + worldMinutes > MaximumAdvanceMinutes || _state.WorldMinute + _state.AcceptedWorldMinutes + worldMinutes >= 1440 * 1_000_000)) throw new ArgumentOutOfRangeException(nameof(worldMinutes));
@@ -84,6 +85,7 @@ public sealed partial class TownWorld
 
     private void AdvanceCore(double worldMinutes, double realSeconds, bool paused, Action<long>? settlementGuard)
     {
+        AdvancePlayerDialogueWait(realSeconds);
         foreach (var resident in _state.Residents) resident.CooldownSeconds = Math.Max(0, resident.CooldownSeconds - realSeconds);
         foreach (var pending in _state.PendingDecisions.Where(p => p.SealedResult is null && p.ResponseArrivalSeconds is null))
         {
@@ -94,6 +96,7 @@ public sealed partial class TownWorld
         }
         Log("time_input", null, "host", paused ? "paused" : "advance", data: new { worldMinutes, realSeconds, paused });
         if (paused) return;
+        CommitPlayerDialogueMemories();
         UpdateSchedules();
         foreach (var commitment in _state.Commitments.Where(c => IsActive(c) && c.EndsAtMinute <= _state.WorldMinute).ToArray()) EndCommitment(commitment, "window_ended", "world");
         ConsumeMailbox();
@@ -125,8 +128,9 @@ public sealed partial class TownWorld
 
     public bool SetPlayerPosition(TownPoint position)
     {
+        using var trace = TraceInput("move", new { position });
         EnsureEconomyNotCommitting();
-        if (!_content.CanMove(_state.PlayerPosition, position) || (_movementQuery is not null && !_movementQuery("player", _state.PlayerPosition, position))) return false;
+        if (!_content.CanMove(_state.PlayerPosition, position) || !QueryMotion("player", _state.PlayerPosition, position)) return false;
         var distance = _state.PlayerPosition.DistanceTo(position);
         if (distance > .00001) _state.PlayerFacing = new TownPoint((position.X - _state.PlayerPosition.X) / distance, (position.Y - _state.PlayerPosition.Y) / distance);
         Log("player_moved", "player", "player", "accepted", data: new { from = _state.PlayerPosition, to = position });
@@ -135,6 +139,7 @@ public sealed partial class TownWorld
 
     public string TalkToResident(string residentId)
     {
+        using var trace = TraceInput("talk", new { residentId });
         EnsureEconomyNotCommitting();
         var resident = FindResident(residentId);
         if (resident.Position.DistanceTo(_state.PlayerPosition) > 42 || !HasSight(resident.Position, _state.PlayerPosition)) return "请走近一些再交谈。";
@@ -147,6 +152,7 @@ public sealed partial class TownWorld
 
     public IReadOnlyList<DecisionRequest> GetDecisionRequests()
     {
+        using var trace = TraceInput("decisions", new { });
         EnsureEconomyNotCommitting();
         UpdateSchedules();
         var order = Enumerable.Range(0, _state.Residents.Count).Select(i => _state.Residents[(_state.DecisionCursor + i) % _state.Residents.Count]).ToArray();
@@ -171,18 +177,50 @@ public sealed partial class TownWorld
             var targets = commitment is null ? observation.Residents.Select(r => r.Id).ToArray() : new[] { Other(commitment, resident.Id) };
             var windowEnd = Math.Min(ScheduleEnd(resident), commitment?.EndsAtMinute ?? double.MaxValue);
             var id = NewIdentity("decision");
-            var input = TownJson.Serialize(new
+            var input = TownNpcJson.Serialize(new
             {
                 protocol = "town-candidate-v1", resident = new { resident.Id, definition = _content.ResidentData(resident.Id).Personality, desiredResourceId = _content.ResidentData(resident.Id).DesiredResourceId, inventory = resident.Inventory, resident.Coins },
                 localObservation = observation, memories = resident.Memories.TakeLast(6),
                 freeWindow = new { startsAtMinute = _state.WorldMinute, endsAtMinute = windowEnd },
                 commitment = commitment is null ? null : new { commitment.Id, commitment.Stage, commitment.InitiatorId, commitment.InviteeId, commitment.PlaceId, commitment.TurnNumber, commitment.OfferResourceId, commitment.OfferQuantity, commitment.OfferPrice, commitment.OfferFromResidentId, dialogue = commitment.Dialogue.TakeLast(6) },
                 allowedActions = allowed, allowedTargets = targets,
+                actionConstraints = allowed.Select(action => new
+                {
+                    action,
+                    nullFields = action switch
+                    {
+                        "wait" => new[] { "targetId", "placeId", "resourceId", "accept" },
+                        "invite" => ["resourceId", "accept"],
+                        "respond" => ["placeId", "resourceId"],
+                        "propose_exchange" => ["placeId", "accept"],
+                        _ => ["placeId", "resourceId", "accept"]
+                    },
+                    zeroFields = action == "propose_exchange" ? Array.Empty<string>() : ["quantity", "price"]
+                }),
+                tradeConstraints = new
+                {
+                    proposingSellerId = resident.Id,
+                    priceIsTotalCoinsPaidByBuyer = true,
+                    barterAllowed = false,
+                    availableSales = resident.Inventory.Where(p => p.Value > 0).OrderBy(p => p.Key, StringComparer.Ordinal)
+                        .Select(p => new { resourceId = p.Key, maximumQuantity = Math.Min(p.Value, 1000) }),
+                    pendingOffer = commitment?.Stage == "exchange_offered" ? new
+                    {
+                        sellerId = commitment.OfferFromResidentId,
+                        buyerId = Other(commitment, commitment.OfferFromResidentId!),
+                        resourceId = commitment.OfferResourceId,
+                        quantity = commitment.OfferQuantity,
+                        totalCoinPrice = commitment.OfferPrice,
+                        selfCanPay = resident.Id != commitment.OfferFromResidentId && resident.Coins >= commitment.OfferPrice
+                    } : null,
+                    previousOfferIsHistorical = commitment?.OfferResourceId is not null && commitment.Stage != "exchange_offered"
+                },
                 rules = "Choose your own useful social action using only these observations. Public offered resource kinds mean that person has announced a surplus, not permission to take it. Invite a visible person to a visible place, or approach first. You may decline or wait. During a conversation you may offer one of your own resources for a nonnegative coin price; the other person must accept. Schedules take priority. Never invent identities or assets.",
                 candidateFields = new { action = "one allowed action", targetId = "legal resident ID or null", placeId = "visible place ID for invite, otherwise null", resourceId = "own resource ID for propose_exchange, otherwise null", quantity = "positive integer for exchange, otherwise 0", price = "nonnegative total coins for exchange, otherwise 0", accept = "boolean for respond, otherwise null", text = "brief in-character Chinese speech, maximum 160 characters" }
             });
             var request = new DecisionRequest(id, resident.Id, resident.ActivityRevision, windowEnd, 60, input, TownContent.Hash(input), allowed, targets, false, null);
             _state.PendingDecisions.Add(new PendingDecisionState { Request = request, Observation = observation });
+            _state.ModelQueue.Add(id);
             resident.PendingRequestId = id; resident.LastOpportunityFingerprint = opportunity;
             Log("decision_created", resident.Id, "rules", "opportunity", id, resident.CommitmentId, new { request, observation });
         }
@@ -191,6 +229,7 @@ public sealed partial class TownWorld
 
     public bool MarkDispatched(string logicalRequestId, string attemptId)
     {
+        using var trace = TraceInput("dispatch", new { logicalRequestId, attemptId });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == logicalRequestId);
         if (pending is null || pending.Request.AttemptId is not null || pending.SealedResult is not null || string.IsNullOrWhiteSpace(attemptId)) return false;
@@ -204,6 +243,7 @@ public sealed partial class TownWorld
 
     public bool MarkResponseArrived(string sessionId, string logicalRequestId, string attemptId, double receivedAfterSeconds)
     {
+        using var trace = TraceInput("arrival", new { sessionId, logicalRequestId, attemptId, receivedAfterSeconds });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == logicalRequestId);
         string? reason = sessionId != SessionId ? "retired_session"
@@ -229,6 +269,7 @@ public sealed partial class TownWorld
 
     public bool ReceiveResult(DecisionResult result)
     {
+        using var trace = TraceInput("result", new { result });
         EnsureEconomyNotCommitting();
         var pending = _state.PendingDecisions.SingleOrDefault(p => p.Request.LogicalRequestId == result.LogicalRequestId);
         var reason = result.SessionId != SessionId ? "retired_session" : _state.TerminalRequestIds.Contains(result.LogicalRequestId) ? "terminal_request" : pending is null ? "unknown_request" : pending.SealedResult is not null ? "duplicate_result" : pending.Request.ResidentId != result.ResidentId ? "wrong_resident" : pending.Request.AttemptId != result.AttemptId ? "wrong_attempt" : pending.ResponseArrivalSeconds is double arrived && Math.Abs(arrived - result.ReceivedAfterSeconds) > .000001 ? "arrival_time_conflict" : null;
@@ -500,7 +541,7 @@ public sealed partial class TownWorld
 
     private bool QueryMovement(ResidentState resident, TownPoint next)
     {
-        bool allowed = _content.CanMove(resident.Position, next) && (_movementQuery?.Invoke(resident.Id, resident.Position, next) ?? true);
+        bool allowed = _content.CanMove(resident.Position, next) && QueryMotion(resident.Id, resident.Position, next);
         Log("space_query", resident.Id, "world", allowed ? "clear" : "blocked", data: new { from = resident.Position, to = next, radius = TownContent.BodyRadius, allowed });
         return allowed;
     }
@@ -529,6 +570,7 @@ public sealed partial class TownWorld
     {
         if (!_state.PendingDecisions.Remove(pending)) return;
         _state.TerminalRequestIds.Add(pending.Request.LogicalRequestId);
+        _state.ModelQueue.Remove(pending.Request.LogicalRequestId);
         var resident = FindResident(pending.Request.ResidentId);
         if (resident.PendingRequestId == pending.Request.LogicalRequestId) resident.PendingRequestId = null;
         resident.CooldownSeconds = Math.Max(resident.CooldownSeconds, 30);
@@ -578,6 +620,7 @@ public sealed partial class TownWorld
 
     public void AcknowledgeEvents(long persistedSequence)
     {
+        using var trace = TraceInput("acknowledge", new { persistedSequence });
         EnsureEconomyNotCommitting();
         if (persistedSequence < 0 || persistedSequence > _state.Sequence) throw new ArgumentOutOfRangeException(nameof(persistedSequence));
         if (_state.Events.Count > 128) _state.Events.RemoveAll(e => e.Sequence <= persistedSequence && e.Sequence <= _state.Sequence - 128);

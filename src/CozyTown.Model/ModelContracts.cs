@@ -1,9 +1,10 @@
 namespace CozyTown.Model;
 
-public enum ModelStage { Baseline, Counterfactual }
+public enum ModelStage { Baseline, Counterfactual, PlayerDialogue, Manual }
 
 public sealed record ModelRequestIdentity(
-    string RunId, string SessionId, string LogicalRequestId, string ResidentId, long ActivityRevision);
+    string RunId, string SessionId, string LogicalRequestId, string ResidentId, long ActivityRevision,
+    string Kind = "npc_action", string? PlayerSessionId = null);
 
 // InputJson is the complete, frozen Chat Completions request body, not a mutable world view.
 public sealed record FrozenModelRequest(
@@ -21,7 +22,7 @@ public sealed record ModelCompletion(
     TimeSpan Elapsed, int? HttpStatus, string? ProviderRequestId, string? ReturnedModel,
     string? SystemFingerprint, string? FinishReason, string? CandidateJson, ModelUsage? Usage,
     string? FailureCode, bool GenerationEnded, bool BudgetSettled, bool SlotHeld,
-    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null)
+    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null, BudgetSnapshot? BudgetAfter = null)
 {
     public bool Succeeded => FailureCode is null;
 }
@@ -31,10 +32,16 @@ public interface IModelJournal
 {
     Task WriteRequestAsync(ModelDispatch dispatch, CancellationToken cancellationToken);
     Task WriteCompletionAsync(ModelCompletion completion, CancellationToken cancellationToken);
+    Task WriteResponseArrivalAsync(ModelDispatch dispatch, string? responseBody, TimeSpan elapsed, CancellationToken cancellationToken) => Task.CompletedTask;
+    Task WriteBudgetAdmissionAsync(BudgetAdmission admission, CancellationToken cancellationToken) => Task.CompletedTask;
 }
 
+public sealed record BudgetAdmission(string Stage, string LogicalRequestId, bool Recovery, string? AttemptId,
+    string Admission, BudgetSnapshot Before, BudgetSnapshot After);
+
 public sealed record DeepSeekOptions(string CredentialFile, string LedgerFile,
-    string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669");
+    string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669",
+    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion);
 
 public sealed record BudgetAttempt(string AttemptId, string Stage, string LogicalRequestId,
     bool Recovery, string Status, bool SlotHeld, long ReservedCostMicros,

@@ -1,0 +1,32 @@
+{
+  "version": "full-demo-input-v1",
+  "stepSeconds": 0.05,
+  "windowSeconds": 180,
+  "ordinaryNpcLimit": 18,
+  "drainSeconds": 60,
+  "saveAtSeconds": 90,
+  "walkTimeoutSeconds": 60,
+  "commands": [
+    { "kind": "walk", "target": "shop" },
+    { "kind": "buy", "target": "shop.town.general", "resource": "feed.chicken", "quantity": 2 },
+    { "kind": "buy", "target": "shop.town.general", "resource": "seed.carrot", "quantity": 1 },
+    { "kind": "walk", "target": "farm.plot.01" },
+    { "kind": "plant", "target": "plot.01", "resource": "crop_definition.carrot" },
+    { "kind": "water", "target": "plot.01" },
+    { "kind": "walk", "target": "coop" },
+    { "kind": "feed", "target": "animal.hen_01" },
+    { "kind": "window", "quantity": 1 },
+    { "kind": "walk", "target": "bed.player" },
+    { "kind": "sleep", "quantity": 12 },
+    { "kind": "sleep", "quantity": 12 },
+    { "kind": "walk", "target": "coop" },
+    { "kind": "collect", "target": "animal.hen_01" },
+    { "kind": "feed", "target": "animal.hen_01" },
+    { "kind": "window", "quantity": 2 },
+    { "kind": "player_dialogue", "target": "mina" },
+    { "kind": "player_dialogue", "target": "eli" },
+    { "kind": "player_dialogue", "target": "ren" },
+    { "kind": "player_dialogue", "target": "sora" },
+    { "kind": "finish" }
+  ]
+}

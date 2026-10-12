@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "99dbe5e28492d3b6504969cbdc472dff8658adfc",
+  "offlineCodeCommit": "71be140d24ade8e78d96ab68113221dfa760e08e",
+  "simulationSourceDigest": "24b65004e6376211c3742b081c767d83f8397f337102e9d96d4ea9dc29fe8416",
+  "inputFileSha256": "8665d50350cdc5de71b042ff9a49ce0bd56c3a888f3ede453d1c5ecb7e8d15e6",
+  "canonicalInputSha256": "b543a4405f749313044eae707f61a52f0bc9e1f1802297746b067e48ea17f4fe",
+  "model": "deepseek-flash",
+  "expectedSystemFingerprint": "aeb56401ca74e127821c4f9126dcb669",
+  "budgetProfileVersion": "full-demo-v1",
+  "budgetId": "cozytown-godot-full-demo-20261010-v1",
+  "stages": {
+    "manual": 8,
+    "player_dialogue": 8,
+    "counterfactual": 40,
+    "baseline": 40
+  },
+  "costLimitMicroCny": 5000000,
+  "reservedMicroCnyPerAttempt": 2110000,
+  "manualAgentSends": 0,
+  "officialPricingCheckedDate": "2026-10-11",
+  "officialPricingUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "inputMicroCnyPerToken": 2,
+  "outputMicroCnyPerToken": 8,
+  "godotVersion": "4.7.2-stable-mono",
+  "sdkVersion": "10.0.401",
+  "contentFiles": [
+    {
+      "name": "counterfactual.json",
+      "sha256": "66c894329e588ad91c5a3f6e27b71be96d8ab320162e93c72ef3afb2c3d8db88"
+    },
+    {
+      "name": "economy-fixture.json",
+      "sha256": "1c3de05348690ea1eb5e135a07a269470ed40b40e32d91d133f57a7cdd525284"
+    },
+    {
+      "name": "farming-capacity-fixture.json",
+      "sha256": "e35931f92277f0b72d4de3d1e1360c752853f55f770286a814f88f29d853f5a9"
+    },
+    {
+      "name": "full-demo-input.json",
+      "sha256": "8665d50350cdc5de71b042ff9a49ce0bd56c3a888f3ede453d1c5ecb7e8d15e6"
+    },
+    {
+      "name": "local-model.example.json",
+      "sha256": "6063372d2151958541b681f266d6eede952ad89947e13a0be925ff25e3da9c8f"
+    },
+    {
+      "name": "production-capacity-fixture.json",
+      "sha256": "c149d652573a13adcf1dff7a196ebd3264bb937a7866620e4d99d804cb75bd4e"
+    },
+    {
+      "name": "town.json",
+      "sha256": "12ee363edf104768998b4936ad91c143c619fade91af09f30df03dd38b3ff259"
+    }
+  ],
+  "offlineEvidence": "docs/verification/evidence/full-demo-host/results.json",
+  "userDialogueAcceptanceDate": "2026-10-11",
+  "noAutomaticPaidRerun": true
+}

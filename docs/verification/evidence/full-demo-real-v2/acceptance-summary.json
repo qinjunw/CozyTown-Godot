@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "f9551c19eb1866ba79cc1312ca7821004fbb7fa1",
+  "simulationSourceDigest": "bb54adc96757808ef36220c46c85539635faa244c92744b9a19bb9277df946c6",
+  "budgetId": "cozytown-godot-full-demo-20261011-v2",
+  "budgetProfileVersion": "full-demo-v2",
+  "analysisSha256": "82dc250aa4164db16c94c4c39f3f39bbcc2f8c598dee3009e2601b35e3cdb85d",
+  "protocolResultsSha256": "bf8ca606f5680c5f4ec900a59546f4a16983adc5e2332174c7989999ab077d71",
+  "freezeSha256": "6a93f64f6d10496b24426a208acbf6e904482c8a8c7b64c37cca739348889452",
+  "publicRealAcceptancePassed": true,
+  "meaning": "Contract legal adoption uses unique parsed logical requests. The additional HTTP proportion keeps all actual sends in its denominator, including invalid JSON. Both use the same adopted logical results.",
+  "scenarios": [
+    {
+      "scenario": "baseline",
+      "passed": true,
+      "metrics": {
+        "npc_action": {
+          "httpAttempts": 36,
+          "completeResponses": 36,
+          "parsedResponses": 36,
+          "parsedLogicalRequests": 36,
+          "adoptedLogicalRequests": 34,
+          "transmission": {
+            "numerator": 36,
+            "denominator": 36,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 36,
+            "denominator": 36,
+            "fraction": 1.0
+          },
+          "legalAdoption": {
+            "numerator": 34,
+            "denominator": 36,
+            "fraction": 0.9444444444444444
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 34,
+            "denominator": 36,
+            "fraction": 0.9444444444444444
+          }
+        },
+        "player_text": {
+          "httpAttempts": 4,
+          "completeResponses": 4,
+          "parsedResponses": 4,
+          "parsedLogicalRequests": 4,
+          "adoptedLogicalRequests": 4,
+          "transmission": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "legalAdoption": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          }
+        },
+        "total": {
+          "httpAttempts": 40,
+          "completeResponses": 40,
+          "parsedResponses": 40,
+          "parsedLogicalRequests": 40,
+          "adoptedLogicalRequests": 38,
+          "transmission": {
+            "numerator": 40,
+            "denominator": 40,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 40,
+            "denominator": 40,
+            "fraction": 1.0
+          },
+          "legalAdoption": {
+            "numerator": 38,
+            "denominator": 40,
+            "fraction": 0.95
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 38,
+            "denominator": 40,
+            "fraction": 0.95
+          }
+        }
+      }
+    },
+    {
+      "scenario": "counterfactual",
+      "passed": true,
+      "metrics": {
+        "npc_action": {
+          "httpAttempts": 26,
+          "completeResponses": 26,
+          "parsedResponses": 25,
+          "parsedLogicalRequests": 25,
+          "adoptedLogicalRequests": 23,
+          "transmission": {
+            "numerator": 26,
+            "denominator": 26,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 25,
+            "denominator": 26,
+            "fraction": 0.9615384615384616
+          },
+          "legalAdoption": {
+            "numerator": 23,
+            "denominator": 25,
+            "fraction": 0.92
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 23,
+            "denominator": 26,
+            "fraction": 0.8846153846153846
+          }
+        },
+        "player_text": {
+          "httpAttempts": 4,
+          "completeResponses": 4,
+          "parsedResponses": 4,
+          "parsedLogicalRequests": 4,
+          "adoptedLogicalRequests": 4,
+          "transmission": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "legalAdoption": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 4,
+            "denominator": 4,
+            "fraction": 1.0
+          }
+        },
+        "total": {
+          "httpAttempts": 30,
+          "completeResponses": 30,
+          "parsedResponses": 29,
+          "parsedLogicalRequests": 29,
+          "adoptedLogicalRequests": 27,
+          "transmission": {
+            "numerator": 30,
+            "denominator": 30,
+            "fraction": 1.0
+          },
+          "structure": {
+            "numerator": 29,
+            "denominator": 30,
+            "fraction": 0.9666666666666667
+          },
+          "legalAdoption": {
+            "numerator": 27,
+            "denominator": 29,
+            "fraction": 0.9310344827586207
+          },
+          "adoptedLogicalResultsPerHttpAttempt": {
+            "numerator": 27,
+            "denominator": 30,
+            "fraction": 0.9
+          }
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "npc_action": {
+      "httpAttempts": 62,
+      "completeResponses": 62,
+      "parsedResponses": 61,
+      "parsedLogicalRequests": 61,
+      "adoptedLogicalRequests": 57,
+      "transmission": {
+        "numerator": 62,
+        "denominator": 62,
+        "fraction": 1.0
+      },
+      "structure": {
+        "numerator": 61,
+        "denominator": 62,
+        "fraction": 0.9838709677419355
+      },
+      "legalAdoption": {
+        "numerator": 57,
+        "denominator": 61,
+        "fraction": 0.9344262295081968
+      },
+      "adoptedLogicalResultsPerHttpAttempt": {
+        "numerator": 57,
+        "denominator": 62,
+        "fraction": 0.9193548387096774
+      }
+    },
+    "player_text": {
+      "httpAttempts": 8,
+      "completeResponses": 8,
+      "parsedResponses": 8,
+      "parsedLogicalRequests": 8,
+      "adoptedLogicalRequests": 8,
+      "transmission": {
+        "numerator": 8,
+        "denominator": 8,
+        "fraction": 1.0
+      },
+      "structure": {
+        "numerator": 8,
+        "denominator": 8,
+        "fraction": 1.0
+      },
+      "legalAdoption": {
+        "numerator": 8,
+        "denominator": 8,
+        "fraction": 1.0
+      },
+      "adoptedLogicalResultsPerHttpAttempt": {
+        "numerator": 8,
+        "denominator": 8,
+        "fraction": 1.0
+      }
+    },
+    "total": {
+      "httpAttempts": 70,
+      "completeResponses": 70,
+      "parsedResponses": 69,
+      "parsedLogicalRequests": 69,
+      "adoptedLogicalRequests": 65,
+      "transmission": {
+        "numerator": 70,
+        "denominator": 70,
+        "fraction": 1.0
+      },
+      "structure": {
+        "numerator": 69,
+        "denominator": 70,
+        "fraction": 0.9857142857142858
+      },
+      "legalAdoption": {
+        "numerator": 65,
+        "denominator": 69,
+        "fraction": 0.9420289855072463
+      },
+      "adoptedLogicalResultsPerHttpAttempt": {
+        "numerator": 65,
+        "denominator": 70,
+        "fraction": 0.9285714285714286
+      }
+    }
+  },
+  "protocolAudit": {
+    "records": 71,
+    "passed": 69,
+    "failed": 2,
+    "failures": "One HTTP response had invalid JSON; one admission was retired before HTTP with a null candidate. Both records remain in the audit."
+  }
+}

@@ -9,6 +9,90 @@ namespace CozyTown.Model.Tests;
 [TestFixture]
 public sealed class DeepSeekClientTests
 {
+    [TestCase("full-demo-v1", "full-demo-v2")]
+    [TestCase("full-demo-v2", "full-demo-v1")]
+    public void FullDemoClientRejectsTheOtherAuthorizedLedgerBeforeReadingCredentials(string ledgerProfile, string clientProfile)
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        var ledger = PersistentBudgetLedger.InitializeNew(path, ledgerProfile);
+        File.Delete(fixture.CredentialPath);
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path, BudgetProfileVersion: clientProfile), new MemoryJournal(), handler));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(ledger.Snapshot().TotalAttempts, Is.Zero);
+    }
+
+    [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
+    [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
+    public async Task FullDemoClientExplicitlySelectsItsLedgerAndAccountsPlayerAndManualStages(string profileVersion, string budgetId)
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        PersistentBudgetLedger.InitializeNew(path, profileVersion);
+        using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+            BudgetProfileVersion: profileVersion), new MemoryJournal(), handler);
+        var npc = Request("manual-npc") with { Stage = ModelStage.Manual };
+        var player = Request("player-text") with { Stage = ModelStage.PlayerDialogue,
+            Identity = new("run", "session", "player-text", "mina", 7, "player_text", "player-session") };
+        Assert.That((await client.SendAsync(npc)).Succeeded, Is.True);
+        Assert.That((await client.SendAsync(player)).Succeeded, Is.True);
+        Assert.That(client.Budget.BudgetId, Is.EqualTo(budgetId));
+        Assert.That(client.Budget.SettledMicros, Is.EqualTo(560));
+        Assert.That(client.Budget.Attempts.Select(a => a.Stage), Is.EqualTo(new[] { "manual", "player_dialogue" }));
+    }
+
+    [TestCase(ModelStage.Manual)]
+    [TestCase(ModelStage.PlayerDialogue)]
+    [TestCase((ModelStage)99)]
+    public void UnregisteredStageCannotReachTheAccountEndpoint(ModelStage stage)
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        using var client = Client(fixture, new MemoryJournal(), handler);
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(Request() with { Stage = stage }))!.Code,
+            Is.EqualTo("stage_invalid"));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(4));
+    }
+
+    [Test]
+    public void WrongClientProfileFailsBeforeCredentialsOrHttpAreUsed()
+    {
+        using var fixture = new ModelFixture(); var handler = new FakeHandler("success");
+        string path = Path.Combine(fixture.Root, "full-demo.json");
+        PersistentBudgetLedger.InitializeNew(path, "full-demo-v1");
+        File.Delete(fixture.CredentialPath);
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, fixture.LedgerPath, BudgetProfileVersion: "full-demo-v1"), new MemoryJournal(), handler));
+        BudgetLedgerTests.AssertCode("ledger_lock_invalid", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path), new MemoryJournal(), handler));
+        BudgetLedgerTests.AssertCode("budget_profile_not_registered", () => new DeepSeekClient(
+            new(fixture.CredentialPath, path, BudgetProfileVersion: "unregistered"), new MemoryJournal(), handler));
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(PersistentBudgetLedger.OpenExisting(path, "full-demo-v1").Snapshot().TotalAttempts, Is.Zero);
+        Assert.That(PersistentBudgetLedger.OpenExisting(fixture.LedgerPath).Snapshot().TotalAttempts, Is.EqualTo(4));
+    }
+
+    [Test]
+    public async Task PlayerTextUsesSameAccountedTransportAndRequiresItsOwnSessionIdentity()
+    {
+        using var fixture = new ModelFixture(); var journal = new MemoryJournal(); var handler = new FakeHandler("success");
+        using var client = Client(fixture, journal, handler);
+        var npcShape = Request();
+        var player = npcShape with { Identity = npcShape.Identity with { Kind = "player_text", PlayerSessionId = "player-session" } };
+        var completion = await client.SendAsync(player);
+        Assert.That(completion.Succeeded, Is.True);
+        Assert.That(completion.BudgetSettled, Is.True);
+        Assert.That(journal.Requests.Single().Request.Identity.Kind, Is.EqualTo("player_text"));
+        Assert.That(journal.Requests.Single().Request.Identity.PlayerSessionId, Is.EqualTo("player-session"));
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(5));
+        Assert.That(client.Budget.SettledMicros, Is.EqualTo(2492));
+        var invalid = player with { Identity = player.Identity with { LogicalRequestId = "unbound-player", PlayerSessionId = null } };
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(invalid))!.Code, Is.EqualTo("request_identity_invalid"));
+        Assert.That(client.Budget.TotalAttempts, Is.EqualTo(5));
+        Assert.That(handler.ChatCalls, Is.EqualTo(1));
+    }
+
     [Test]
     public async Task SuccessfulCompletionIsAccountedBeforeHostConsumesIt()
     {

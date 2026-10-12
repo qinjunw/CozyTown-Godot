@@ -19,6 +19,30 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
     public bool Failed { get { lock (_gate) return _failed; } }
     public string? FailureCode { get { lock (_gate) return _failureCode; } }
     public Func<ModelDispatch, Task>? BeforeSendOnHost { get; set; }
+    private TownRecording? _recording;
+    private readonly object _budgetGate = new();
+    private TownReplayBudgetState? _lastBudget;
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, object> _arrivalInputs = new(StringComparer.Ordinal);
+    public void SetReplayBudget(BudgetSnapshot budget, TownReplayBudgetProfile? profile = null)
+    {
+        lock (_budgetGate)
+        {
+            _lastBudget = TownJson.Deserialize<TownReplayBudgetState>(TownJson.Serialize(budget));
+            _recording?.SetInitialBudget(_lastBudget, profile);
+            if (_recording is not null) WriteArtifact("replay.json", _recording.Complete());
+        }
+    }
+    public void StartReplay(TownContent content, TownWorld world, TownInputHost host, TownReplayParent? parent = null)
+    {
+        if (_recording is not null) throw new InvalidOperationException("Replay recording has already started.");
+        _recording = new TownRecording(content, world, host, parent);
+        _recording.BoundaryCommitted = trace => Append("replay_boundary", trace);
+        WriteArtifact("replay.json", _recording.Complete());
+    }
+    public TownReplayPackage CaptureReplay() => _recording?.Complete() ?? throw new InvalidOperationException("Replay recording has not started.");
+    public void SetSceneDependencies(TownSceneReplayDependencies dependencies) =>
+        (_recording ?? throw new InvalidOperationException("Replay recording has not started.")).SetSceneDependencies(dependencies);
+    public void RecordReplayInput(string command, object input) => _recording?.RecordExternal(command, input);
 
     public TownRunJournal(string root, string branchId, object manifest)
     {
@@ -64,8 +88,82 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
 
     public Task WriteCompletionAsync(ModelCompletion completion, CancellationToken cancellationToken)
     {
+        RecordCompletionBudget(completion);
         Append("model_arrived", completion);
+        RecordReplayInput("model_completion_persisted", completion);
+        Append("model_completion_persisted", new { completion.Dispatch.AttemptId });
         return Task.CompletedTask;
+    }
+
+    public Task WriteBudgetAdmissionAsync(BudgetAdmission admission, CancellationToken cancellationToken)
+    {
+        lock (_budgetGate)
+        {
+            ObserveBudget(TownJson.Deserialize<TownReplayBudgetState>(TownJson.Serialize(admission.Before)));
+            RecordReplayInput("budget_reserve", new { stage = admission.Stage, logicalRequestId = admission.LogicalRequestId,
+                attemptId = admission.AttemptId, recovery = admission.Recovery, admission = admission.Admission, after = admission.After });
+            _lastBudget = TownJson.Deserialize<TownReplayBudgetState>(TownJson.Serialize(admission.After));
+            Append("budget_admission", admission);
+        }
+        return Task.CompletedTask;
+    }
+
+    private void ObserveBudget(TownReplayBudgetState observed)
+    {
+        if (_lastBudget is null) { SetReplayBudget(new(observed.BudgetId, observed.Currency, observed.LimitMicros, observed.SettledMicros,
+            observed.ReservedMicros, observed.TotalAttempts, observed.SlotsHeld, observed.StopReason,
+            observed.Attempts.Select(a => new BudgetAttempt(a.AttemptId, a.Stage, a.LogicalRequestId, a.Recovery, a.Status, a.SlotHeld,
+                a.ReservedCostMicros, a.SettledCostMicros, a.PromptTokens, a.CompletionTokens, a.FailureCode)).ToArray())); return; }
+        if (TownJson.Serialize(_lastBudget) == TownJson.Serialize(observed)) return;
+        RecordReplayInput("budget_external", new { before = _lastBudget, after = observed });
+        _lastBudget = observed;
+    }
+
+    private void RecordCompletionBudget(ModelCompletion completion)
+    {
+        if (completion.BudgetAfter is null || _lastBudget is null) return;
+        lock (_budgetGate)
+        {
+            var after = TownJson.Deserialize<TownReplayBudgetState>(TownJson.Serialize(completion.BudgetAfter));
+            string id = completion.Dispatch.AttemptId;
+            var prior = _lastBudget.Attempts.SingleOrDefault(a => a.AttemptId == id);
+            if (prior is null) throw new InvalidDataException("Completion has no recorded budget reservation.");
+            var otherAttempts = after.Attempts.Select(a => a.AttemptId == id ? prior : a).ToArray();
+            var before = after with { Attempts = otherAttempts, SettledMicros = otherAttempts.Sum(a => a.SettledCostMicros),
+                ReservedMicros = otherAttempts.Sum(a => a.ReservedCostMicros), SlotsHeld = otherAttempts.Count(a => a.SlotHeld), StopReason = _lastBudget.StopReason };
+            ObserveBudget(before);
+            if (completion.BudgetSettled)
+            {
+                var actual = after.Attempts.Single(a => a.AttemptId == id);
+                var withoutStop = after with { StopReason = _lastBudget!.StopReason };
+                RecordReplayInput("budget_settle", new { attemptId = id, promptTokens = actual.PromptTokens ?? 0,
+                    completionTokens = actual.CompletionTokens ?? 0, after = withoutStop });
+                if (after.StopReason != withoutStop.StopReason) RecordReplayInput("budget_stop", new { reason = after.StopReason, after });
+            }
+            else RecordReplayInput("budget_unknown", new { attemptId = id, reason = completion.FailureCode ?? "unknown",
+                generationEnded = !after.Attempts.Single(a => a.AttemptId == id).SlotHeld,
+                stopFurther = after.StopReason != _lastBudget!.StopReason, after });
+            _lastBudget = after;
+        }
+    }
+
+    public Task WriteResponseArrivalAsync(ModelDispatch dispatch, string? responseBody, TimeSpan elapsed, CancellationToken cancellationToken)
+    {
+        var arrival = new { dispatch, responseBody, elapsed, redaction = responseBody is null ? "credential_echo" : null };
+        Append("model_response_arrived", arrival);
+        RecordReplayInput("model_response_arrived", arrival);
+        _arrivalInputs[dispatch.AttemptId] = arrival;
+        return Task.CompletedTask;
+    }
+
+    public void ImportRetiredCompletion(TownRunJournal source, ModelCompletion completion)
+    {
+        if (ReferenceEquals(source, this)) return;
+        if (source._arrivalInputs.TryGetValue(completion.Dispatch.AttemptId, out var arrival)) RecordReplayInput("model_response_arrived", arrival);
+        RecordCompletionBudget(completion);
+        RecordReplayInput("model_completion_persisted", completion);
+        RecordReplayInput("model_mailbox_enqueued", new { dispatch = completion.Dispatch });
+        Append("retired_model_completion", completion);
     }
 
     public void WriteArtifact(string name, object data)
@@ -77,8 +175,7 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
             if (name is "events.jsonl" or "journal-export.json") throw new InvalidDataException("Artifact name is reserved for journal records.");
             try
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data, TownJson.Options));
-                TownSaveFile.PublishBytes(Path.Combine(DirectoryPath, name), bytes, null);
+                TownSaveFile.PublishJson(Path.Combine(DirectoryPath, name), data);
             }
             catch { throw Interrupt(); }
         }
@@ -86,11 +183,18 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
 
     public void ExportSnapshotZip(string path)
     {
+        if (_recording is null) ExportSnapshotZipCore(path, null);
+        else _recording.WithSnapshot(package => ExportSnapshotZipCore(path, package));
+    }
+
+    private void ExportSnapshotZipCore(string path, TownReplayPackage? package)
+    {
         string destination = Path.GetFullPath(path);
         if (destination.StartsWith(DirectoryPath + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
             throw new InvalidDataException("Export destination must be outside the run directory.");
         Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
         string temporary = destination + ".tmp." + Guid.NewGuid().ToString("N");
+        if (package is not null) WriteArtifact("replay.json", package);
         lock (_gate)
         {
             RequireWritable();
@@ -137,12 +241,21 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
     private static readonly JsonSerializerOptions CompactJson = new(TownJson.Options) { WriteIndented = false };
 }
 
+// Missing runtime fields retain the first-slice save contract; full-demo saves must persist both.
 public sealed record TownHostSnapshot(int SchemaVersion, string WorldJson, string SourceRunDirectoryName,
     long JournalRecordCount, double UnconsumedSeconds, string DecisionMode, string Stage,
-    Dictionary<string, FrozenModelRequest> ModelRequests, TownPoint[]? PlayerRoute = null, int PlayerRouteCursor = 0);
+    Dictionary<string, FrozenModelRequest> ModelRequests, TownPoint[]? PlayerRoute = null, int PlayerRouteCursor = 0,
+    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion, string ExecutionPurpose = TownModelRuntimeProfile.Legacy);
 
 public static class TownSaveFile
 {
+    public static void ValidateForRuntime(TownHostSnapshot snapshot, TownModelRuntimeProfile runtime)
+    {
+        ValidateHostSnapshot(snapshot);
+        if (snapshot.BudgetProfileVersion != runtime.Profile.Version || snapshot.ExecutionPurpose != runtime.ExecutionPurpose)
+            throw new InvalidDataException("Saved budget profile or execution purpose differs from the current runtime.");
+    }
+
     public static void Write(string path, TownHostSnapshot snapshot, Action<TownHostSnapshot> validate)
     {
         ValidateHostSnapshot(snapshot);
@@ -181,35 +294,53 @@ public static class TownSaveFile
         TownSnapshot world;
         try { world = TownJson.Deserialize<TownSnapshot>(snapshot.WorldJson); }
         catch (JsonException error) { throw new InvalidDataException("World snapshot fields are missing or invalid.", error); }
-        if (world.State is not { } state || state.PendingDecisions is null || state.TerminalRequestIds is null || state.Residents is null
+        if (world.State is not { } state || state.PendingDecisions is null || state.PlayerDialogues is null || state.TerminalRequestIds is null || state.Residents is null
             || state.BranchId != snapshot.SourceRunDirectoryName || state.InitialStateId != snapshot.Stage)
             throw new InvalidDataException("Host snapshot branch or stage differs from its world snapshot.");
+        var runtime = TownModelRuntimeProfile.Resolve(snapshot.BudgetProfileVersion, snapshot.ExecutionPurpose);
+        if (state.BudgetId != runtime.BudgetId
+            || runtime.IsFullDemo && snapshot.Stage is not ("baseline" or "counterfactual"))
+            throw new InvalidDataException("Host snapshot budget identity or scenario differs from its registered profile.");
         if (snapshot.DecisionMode == "rules" && snapshot.ModelRequests.Count != 0)
             throw new InvalidDataException("Rules-mode snapshot contains real model requests.");
         if (snapshot.DecisionMode == "real" && state.PendingDecisions.Any(p => p?.Request is not null
             && (p.Request.AttemptId is not null || p.Request.IsRecovery) && !snapshot.ModelRequests.ContainsKey(p.Request.LogicalRequestId)))
             throw new InvalidDataException("Dispatched or recovering model decision has no frozen provider request.");
-        ModelStage stage = snapshot.Stage == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual;
+        if (snapshot.DecisionMode == "real" && state.PlayerDialogues.Any(d => d?.Request is { } request
+            && d.TerminalReason is null && (request.AttemptId is not null || request.IsRecovery) && !snapshot.ModelRequests.ContainsKey(request.LogicalRequestId)))
+            throw new InvalidDataException("Dispatched or recovering player dialogue has no frozen provider request.");
         foreach (var pair in snapshot.ModelRequests)
         {
             var request = pair.Value;
             if (request?.Identity is not { } identity || pair.Key != identity.LogicalRequestId
                 || new[] { identity.RunId, identity.SessionId, identity.LogicalRequestId, identity.ResidentId }.Any(id => string.IsNullOrWhiteSpace(id) || id.Length > 200)
-                || identity.ActivityRevision < 0 || request.Stage != stage || request.RemainingWait <= TimeSpan.Zero
+                || identity.ActivityRevision < 0 || request.RemainingWait <= TimeSpan.Zero
                 || request.RemainingWait > TimeSpan.FromSeconds(60) || string.IsNullOrWhiteSpace(request.InputJson)
                 || Encoding.UTF8.GetByteCount(request.InputJson) > 16 * 1024 || !state.Residents.Any(r => r?.Id == identity.ResidentId))
                 throw new InvalidDataException("Frozen model request identity, stage or input is invalid.");
             var pending = state.PendingDecisions.SingleOrDefault(p => p?.Request?.LogicalRequestId == pair.Key);
-            if (pending is null && !state.TerminalRequestIds.Contains(pair.Key))
+            var player = state.PlayerDialogues.SingleOrDefault(d => d?.Request?.LogicalRequestId == pair.Key)?.Request;
+            if (identity.Kind is not ("npc_action" or "player_text")
+                || identity.Kind == "npc_action" && identity.PlayerSessionId is not null
+                || identity.Kind == "player_text" && player is null
+                || player is not null && (identity.Kind != "player_text" || identity.PlayerSessionId != player.PlayerSessionId)
+                || pending is not null && (identity.Kind != "npc_action" || identity.PlayerSessionId is not null))
+                throw new InvalidDataException("Frozen request kind or player session differs from its world request.");
+            if (request.Stage != runtime.NewRequestStage(snapshot.Stage, identity.Kind))
+                throw new InvalidDataException("Frozen request stage differs from its saved profile, purpose or kind.");
+            if (pending is null && player is null && !state.TerminalRequestIds.Contains(pair.Key))
                 throw new InvalidDataException("Frozen model request has no pending or terminal world identity.");
             if (pending is not null && (pending.Request.ResidentId != identity.ResidentId || pending.Request.ActivityRevision != identity.ActivityRevision))
                 throw new InvalidDataException("Frozen model request differs from its world decision.");
+            if (player is not null && (player.ResidentId != identity.ResidentId || player.ActivityRevision != identity.ActivityRevision))
+                throw new InvalidDataException("Frozen model request differs from its player dialogue.");
             try
             {
                 using var body = TownJson.Deserialize<JsonDocument>(request.InputJson);
                 var messages = body.RootElement.GetProperty("messages");
                 var input = messages.EnumerateArray().Where(m => m.GetProperty("role").GetString() == "user").ToArray();
-                if (input.Length != 1 || (pending is not null && input[0].GetProperty("content").GetString() != pending.Request.InputJson))
+                string? expectedInput = pending?.Request.InputJson ?? player?.InputJson;
+                if (input.Length != 1 || (expectedInput is not null && input[0].GetProperty("content").GetString() != expectedInput))
                     throw new InvalidDataException("Frozen provider input differs from its world decision.");
             }
             catch (Exception error) when (error is JsonException or KeyNotFoundException or InvalidOperationException)
@@ -225,7 +356,13 @@ public static class TownSaveFile
             throw new InvalidDataException("Run and artifact names must be single file names.");
     }
 
-    internal static void PublishBytes(string path, byte[] bytes, Action<string>? validate, string? backup = null)
+    internal static void PublishBytes(string path, byte[] bytes, Action<string>? validate, string? backup = null) =>
+        PublishFile(path, file => file.Write(bytes), validate, backup);
+
+    internal static void PublishJson(string path, object data) =>
+        PublishFile(path, file => JsonSerializer.Serialize(file, data, TownJson.Options), null, null);
+
+    private static void PublishFile(string path, Action<FileStream> write, Action<string>? validate, string? backup)
     {
         string destination = Path.GetFullPath(path);
         Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
@@ -233,7 +370,7 @@ public static class TownSaveFile
         try
         {
             using (var file = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096, FileOptions.WriteThrough))
-            { file.Write(bytes); file.Flush(true); }
+            { write(file); file.Flush(true); }
             validate?.Invoke(temporary);
             if (File.Exists(destination)) File.Replace(temporary, destination, backup, true);
             else File.Move(temporary, destination);

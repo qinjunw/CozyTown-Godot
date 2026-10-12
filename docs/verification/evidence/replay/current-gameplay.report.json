@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "code": "passed",
+  "boundary": 399,
+  "field": null,
+  "expected": null,
+  "actual": null,
+  "rulesVersion": "town-social-player-dialogue-v5",
+  "numericVersion": "pixels-double-grid16-radius5-morning-motion-prefix-v3",
+  "finalStateJson": null,
+  "command": null,
+  "inputJson": null
+}
