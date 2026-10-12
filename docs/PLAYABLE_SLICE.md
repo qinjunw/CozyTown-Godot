@@ -32,7 +32,7 @@
 
 ## 真实模型运行
 
-以下配置对应原首切片预算，其 48 次发送已经用尽。完整 Demo 的配置和用户试玩入口见[完整 Demo 运行说明](FULL_DEMO_RUN.md)。冻结候选 `f9551c1` 已完成[两组 v2 真实评测](verification/full-demo-real-v2-2026-10-11.md)；用户已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。回放绑定修复另有[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)；CI 制品上传仍受配额阻塞。
+以下配置对应原首切片预算，其 48 次发送已经用尽。完整 Demo 的配置和用户试玩入口见[完整 Demo 运行说明](FULL_DEMO_RUN.md)。冻结候选 `f9551c1` 已完成[两组 v2 真实评测](verification/full-demo-real-v2-2026-10-11.md)；用户已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。回放绑定修复另有[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)。当前制品渠道与验收证据见[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)，最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
 
 复制 `game/Content/local-model.example.json` 到忽略的 `.local/` 目录，填入仓库外凭据文件和**现有**预算账本的绝对路径。凭据 JSON 必须有且只有一个 `Todo=CozyTown` 项及其 `testingAPIKey`。模板不能直接用于运行，程序不会创建新预算账本。
 
