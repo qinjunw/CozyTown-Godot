@@ -7,6 +7,30 @@ namespace CozyTown.Core.Tests;
 public sealed class TownReplayTests
 {
     [Test]
+    public void EventAppendAndAcknowledgedTrimmingKeepEveryBoundaryInACompactReplay()
+    {
+        var content = Content(); var world = new TownWorld(content); var recording = new TownRecording(content, world);
+        for (int i = 0; i < 1000; i++)
+        {
+            world.Advance(0, .05, true);
+            world.AcknowledgeEvents(world.State.Sequence);
+        }
+        var package = recording.Complete();
+        Assert.That(package.BoundaryCount, Is.EqualTo(2000));
+        Assert.That(package.Boundaries.Count(t => t.Command == "advance"), Is.EqualTo(1000));
+        Assert.That(package.Boundaries.Count(t => t.Command == "acknowledge"), Is.EqualTo(1000));
+        Assert.That(System.Text.Encoding.UTF8.GetByteCount(TownJson.Serialize(package)), Is.LessThan(2000000));
+        var cursor = new TownCheckpointCursor();
+        System.Text.Json.Nodes.JsonNode? expected = null;
+        foreach (var trace in package.Boundaries) expected = cursor.ReadWorld(trace) ?? expected;
+        Assert.That(System.Text.Json.Nodes.JsonNode.DeepEquals(expected,
+            System.Text.Json.JsonSerializer.SerializeToNode(world.State, TownJson.Options)), Is.True);
+        var replay = TownReplay.Run(package);
+        Assert.That(replay.Passed, Is.True, TownJson.Serialize(replay with { FinalStateJson = null }));
+        Assert.That(TownJson.Deserialize<TownState>(replay.FinalStateJson!).Events.Count, Is.EqualTo(128));
+    }
+
+    [Test]
     public void SealingKeepsTheInputPrefixFixedUntilItsExportCallbackFinishes()
     {
         var content = Content(); var world = new TownWorld(content); var recording = new TownRecording(content, world);
