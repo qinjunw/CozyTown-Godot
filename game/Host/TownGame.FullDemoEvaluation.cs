@@ -23,11 +23,11 @@ public partial class TownGame
     private double? _fullDemoWindowStoppedAt;
     private string? _fullDemoDispatchStopReason;
 
-    private void StopFullDemoAdmission(string? code)
+    private void StopFullDemoAdmission(string? code, bool ledgerStopped = false)
     {
-        if (_fullDemoPlan is null || !TownFullDemoWindow.StopsDispatch(code)) return;
+        if (_fullDemoPlan is null || code is null || !ledgerStopped && !TownFullDemoWindow.StopsDispatch(code)) return;
         _fullDemoDispatchStopReason ??= code;
-        _fullDemoWindow?.RejectAdmission(code);
+        _fullDemoWindow?.RejectAdmission(code, ledgerStopped);
         NoticeFullDemoWindowStop();
         _journal.Append("full_demo_dispatch_stopped", new { reason = code, day = _fullDemoWindow?.Day,
             cursor = _fullDemoCursor, acceptedRealSeconds = _elapsed });

@@ -358,6 +358,16 @@ public static class TownReplay
                                 var candidate = body.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
                                 if (candidate != input.GetProperty("candidateJson").GetString()) throw new ReplayMismatch("model.candidateJson", candidate, input.GetProperty("candidateJson").GetString());
                             }
+                            if (arrival.GetProperty("responseBody").ValueKind == JsonValueKind.String)
+                            {
+                                using var body = JsonDocument.Parse(arrival.GetProperty("responseBody").GetString()!);
+                                if (input.TryGetProperty("responseProjectionVersion", out var projectionVersion) && projectionVersion.ValueKind != JsonValueKind.Null
+                                    && (projectionVersion.GetInt32() != 1 || !body.RootElement.TryGetProperty("projectionVersion", out _)))
+                                    throw new ReplayMismatch("model.responseProjectionVersion", "versioned response projection", "missing or unsupported");
+                                if (body.RootElement.TryGetProperty("projectionVersion", out _)) ValidateResponseProjection(body.RootElement, input);
+                            }
+                            else if (input.TryGetProperty("responseProjectionVersion", out var projectionVersion) && projectionVersion.ValueKind != JsonValueKind.Null)
+                                throw new ReplayMismatch("model.responseProjectionVersion", "versioned response projection", "missing");
                         }
                     }
                     else if (trace.Command == "model_mailbox_enqueued" || trace.Command == "model_mailbox_entered")
@@ -511,6 +521,35 @@ public static class TownReplay
     }
 
     private sealed record ReplayPlayerText(string Text);
+
+    private static void ValidateResponseProjection(JsonElement projection, JsonElement completion)
+    {
+        if (projection.GetProperty("projectionVersion").GetInt32() != 1) throw new InvalidDataException("Response projection version is not supported.");
+        void Bind(string projected, string recorded) => Compare(JsonNode.Parse(projection.GetProperty(projected).GetRawText()),
+            JsonNode.Parse(completion.GetProperty(recorded).GetRawText()), "model." + recorded);
+        Bind("httpStatus", "httpStatus"); Bind("generationEnded", "generationEnded"); Bind("id", "providerRequestId");
+        Bind("model", "returnedModel"); Bind("system_fingerprint", "systemFingerprint");
+        Bind("executionPurpose", "executionPurpose"); Bind("expectedSystemFingerprint", "expectedSystemFingerprint");
+        var choice = projection.GetProperty("choices")[0];
+        Compare(JsonNode.Parse(choice.GetProperty("finish_reason").GetRawText()), JsonNode.Parse(completion.GetProperty("finishReason").GetRawText()), "model.finishReason");
+        Compare(JsonNode.Parse(choice.GetProperty("message").GetProperty("content").GetRawText()), JsonNode.Parse(completion.GetProperty("candidateJson").GetRawText()), "model.candidateJson");
+        var projectedUsage = projection.GetProperty("usage"); var usage = completion.GetProperty("usage");
+        if (projectedUsage.ValueKind == JsonValueKind.Null || usage.ValueKind == JsonValueKind.Null)
+            Compare(JsonNode.Parse(projectedUsage.GetRawText()), JsonNode.Parse(usage.GetRawText()), "model.usage");
+        else
+            foreach (var (projected, recorded) in new[] { ("prompt_tokens", "promptTokens"), ("completion_tokens", "completionTokens"),
+                ("total_tokens", "totalTokens"), ("prompt_cache_hit_tokens", "cacheHitTokens"), ("prompt_cache_miss_tokens", "cacheMissTokens") })
+                Compare(JsonNode.Parse(projectedUsage.GetProperty(projected).GetRawText()), JsonNode.Parse(usage.GetProperty(recorded).GetRawText()), "model.usage." + recorded);
+        string? validation = projection.GetProperty("validationFailure").GetString(), failure = completion.GetProperty("failureCode").GetString();
+        bool accountingFailure = failure is "file_io_failure" or "completion_journal_failed" or "settlement_conflict"
+            || failure?.StartsWith("ledger_", StringComparison.Ordinal) == true;
+        if (!accountingFailure
+            && failure != validation && !(failure == "response_late" && projectedUsage.ValueKind != JsonValueKind.Null))
+            throw new ReplayMismatch("model.failureCode", validation, failure);
+        bool changed = projection.GetProperty("executionPurpose").GetString() == "manual" && projectedUsage.ValueKind != JsonValueKind.Null
+            && projection.GetProperty("system_fingerprint").GetString() != projection.GetProperty("expectedSystemFingerprint").GetString();
+        Compare(JsonSerializer.SerializeToNode(changed ? "fingerprint_changed" : null), JsonNode.Parse(completion.GetProperty("providerWarningCode").GetRawText()), "model.providerWarningCode");
+    }
     private static void ValidateBudgetBinding(JsonElement dispatch, TownReplayBudgetState budget, TownReplayBudgetProfile? profile)
     {
         string attemptId = dispatch.GetProperty("attemptId").GetString()!;

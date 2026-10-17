@@ -34,6 +34,9 @@ public partial class TownGame : Node2D
     private readonly List<DeepSeekClient> _clients = [];
     private DeepSeekClient? _model;
     private DeepSeekOptions? _modelOptions;
+    private readonly TownModelDispatchState _modelDispatchState = new();
+    private string? _providerWarning;
+    private BudgetSnapshot? _modelBudgetView;
     private TownModelRuntimeProfile _modelRuntime = TownModelRuntimeProfile.Resolve(ModelBudgetProfile.FirstSliceVersion, "legacy");
     private Camera2D _camera = null!;
     private Node2D _map = null!;
@@ -139,6 +142,7 @@ public partial class TownGame : Node2D
             _modelRuntime = TownModelRuntimeProfile.Resolve(_modelOptions?.BudgetProfileVersion
                 ?? (_fullDemoPlan is null ? ModelBudgetProfile.FirstSliceVersion : ModelBudgetProfile.FullDemoV2Version),
                 Argument("--execution-purpose=") ?? (_fullDemoPlan is null ? "legacy" : "experiment"));
+            if (_modelOptions is not null) _modelOptions = _modelRuntime.ConfigureProvider(_modelOptions);
             ValidateFullDemoMode();
             if (_modelOptions is not null)
                 _ = PersistentBudgetLedger.OpenExisting(_modelOptions.LedgerFile, _modelRuntime.Profile.Version);
@@ -394,9 +398,16 @@ public partial class TownGame : Node2D
                         _world.CreateRuleCandidate(request), "rules", null));
                 continue;
             }
+            if (ModelUnavailableReason("npc_action") is string unavailable)
+            {
+                if (TownModelDispatchState.Temporary(unavailable)) break;
+                StopFullDemoAdmission(unavailable, _modelBudgetView?.StopReason is not null);
+                TownModelDispatchState.CompleteNpcFallback(_world, request, unavailable);
+                continue;
+            }
             var identity = new ModelRequestIdentity(_world.GetView().BranchId, _world.SessionId, request.LogicalRequestId, request.ResidentId, request.ActivityRevision);
             string body = _frozen.TryGetValue(request.LogicalRequestId, out var old) ? old.InputJson : TownModelProtocol.BuildRequest(request);
-            bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
+            bool originalRecorded = _modelBudgetView!.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
             var frozen = new FrozenModelRequest(identity, old?.Stage ?? _modelRuntime.NewRequestStage(_scenario, "npc_action"),
                 body, request.IsRecovery || originalRecorded, TimeSpan.FromSeconds(request.RemainingWaitSeconds));
             _inputHost.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
@@ -423,9 +434,10 @@ public partial class TownGame : Node2D
                 _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
                 _activeModelRequests.Remove(key);
                 _modelCompletions.Add(result);
+                ObserveModelCompletion(result);
                 ActionCandidate? candidate = null;
                 string? error = result.FailureCode;
-                StopFullDemoAdmission(error);
+                StopFullDemoAdmission(result.BudgetAfter?.StopReason ?? error, result.BudgetAfter?.StopReason is not null);
                 if (result.Succeeded && result.CandidateJson != null)
                 {
                     try { candidate = TownModelProtocol.Parse(result.CandidateJson); }
@@ -441,21 +453,48 @@ public partial class TownGame : Node2D
         }
         catch (Exception error)
         {
-            string code = error is ModelException modelError ? modelError.Code : "model_unavailable";
+            string code = error is ModelException modelError ? modelError.StopReason ?? modelError.Code : "model_unavailable";
             _mainThread.Enqueue(() =>
             {
                 _activeModelRequests.Remove(key);
                 if (_world.SessionId != frozen.Identity.SessionId) return;
                 _journal.Append("dispatch_rejected", new { request.LogicalRequestId, request.ResidentId, code });
-                StopFullDemoAdmission(code);
-                if (code is "concurrency_limit" or "budget_concurrency_limit") return;
-                string attempt = "not-sent-" + Guid.NewGuid().ToString("N");
-                if (_world.MarkDispatched(request.LogicalRequestId, attempt))
-                    _world.ReceiveResult(new(_world.SessionId, request.LogicalRequestId, attempt, request.ResidentId, null, "rule_fallback", code));
-                Toast("真实调用暂不可用，已明确转为规则回退。");
+                _modelDispatchState.ObserveFailure(code);
+                StopFullDemoAdmission(code, error is ModelException { StopReason: not null });
+                if (TownModelDispatchState.Temporary(code)) return;
+                TownModelDispatchState.CompleteNpcFallback(_world, request, code);
+                Toast(TownDialogueHost.FailureText(code));
             });
         }
         finally { _admissionClocks.TryRemove(key, out _); }
+    }
+
+    private string? ModelUnavailableReason(string kind)
+    {
+        if (kind == "player_text" && _mode != "real")
+        {
+            string? fixture = Argument("--dialogue-fixture=");
+            if (fixture == "stopped-fingerprint") return "fingerprint_not_registered";
+            if (fixture == "stage-limit") return "stage_limit";
+            if (fixture == "account-unavailable") return "account_unavailable";
+        }
+        if (_mode != "real" || _model is null) return null;
+        try
+        {
+            _modelBudgetView = _model.Budget;
+            return _modelDispatchState.UnavailableReason(_modelBudgetView, _modelRuntime.Profile, _modelRuntime.NewRequestStage(_scenario, kind));
+        }
+        catch (ModelException error) { _modelBudgetView = null; _modelDispatchState.ObserveFailure(error.Code); return error.StopReason ?? error.Code; }
+    }
+
+    private void ObserveModelCompletion(ModelCompletion completion)
+    {
+        _modelDispatchState.ObserveFailure(completion.BudgetAfter?.StopReason ?? completion.FailureCode);
+        if (completion.ProviderWarningCode == "fingerprint_changed")
+        {
+            _providerWarning = "模型服务指纹发生变化：已按登记型号、用量与价格记录；反馈仍须通过格式和世界检查。";
+            Toast(_providerWarning, 7);
+        }
     }
 
     private void SyncActors()

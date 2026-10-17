@@ -61,9 +61,9 @@ public sealed class TownFullDemoWindow(TownFullDemoPlan plan, int day)
         or "authentication_failed" or "account_unavailable" or "account_currency_unverified" or "account_check_rejected"
         or "model_not_registered" or "fingerprint_not_registered" or "ledger_update_failed" or "ledger_read_failed"
         or "request_journal_failed" or "completion_journal_failed";
-    public bool RejectAdmission(string? code)
+    public bool RejectAdmission(string? code, bool ledgerStopped = false)
     {
-        if (!StopsDispatch(code)) return false;
+        if (code is null || !ledgerStopped && !StopsDispatch(code)) return false;
         Stop(code!);
         return true;
     }

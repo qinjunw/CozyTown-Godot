@@ -307,11 +307,16 @@ public partial class TownGame
             text.AppendLine($"{(int)entry.WorldMinute % 1440 / 60:00}:{(int)entry.WorldMinute % 60:00}  {SourceLabel(entry.Source)} · {ActivityLabel(entry.Reason)}");
         if (_model != null)
         {
-            var budget = _model.Budget;
-            text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
-            if (_modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual)
-                text.AppendLine($"人工试玩 {budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual)} / {_modelRuntime.Profile.StageLimits[TownModelRuntimeProfile.Manual]} 次 · NPC 与玩家共享");
-            if (budget.StopReason != null) text.AppendLine("派发已停：" + budget.StopReason);
+            string? unavailable = ModelUnavailableReason("npc_action");
+            if (_modelBudgetView is { } budget)
+            {
+                text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+                if (_modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual)
+                    text.AppendLine($"人工试玩 {budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual)} / {_modelRuntime.Profile.StageLimits[TownModelRuntimeProfile.Manual]} 次 · NPC 与玩家共享");
+            }
+            if (unavailable is not null)
+                text.AppendLine((TownModelDispatchState.Temporary(unavailable) ? "派发等待：" : "派发已停：") + TownDialogueHost.FailureText(unavailable));
+            if (_providerWarning is not null) text.AppendLine(_providerWarning);
         }
         double scroll = _inspectorBody.GetVScrollBar().Value;
         _inspectorBody.Text = text.ToString();

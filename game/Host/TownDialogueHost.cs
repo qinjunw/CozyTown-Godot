@@ -24,7 +24,7 @@ public sealed class TownDialogueHost(TownWorld world, IPlayerDialogueRetirements
         PersistTermination(Current, "closed");
         return world.OpenPlayerDialogue(residentId) is not null;
     }
-    public PlayerDialogueRequest? Generate(IReadOnlyCollection<string> pauseReasons) => TextAllowed(pauseReasons) && Current is { } current
+    public PlayerDialogueRequest? Generate(IReadOnlyCollection<string> pauseReasons, string? unavailableReason = null) => unavailableReason is null && TextAllowed(pauseReasons) && Current is { } current
         ? world.RequestPlayerDialogue(current.Id) : null;
     public bool Present(IReadOnlyCollection<string> pauseReasons)
     {
@@ -91,10 +91,21 @@ public sealed class TownDialogueHost(TownWorld world, IPlayerDialogueRetirements
         "logical_timeout" or "logical_wait_expired" or "request_timeout" or "response_late" => "等待时间已用完，保留固定回应。",
         "player_text_schema_invalid" or "candidate_empty" or "candidate_not_object" => "回复格式不符合单段文本要求，保留固定回应。",
         "concurrency_limit" or "budget_concurrency_limit" => "正在等待共用模型槽位。",
+        "money_wait" => "在途请求占用金额预留，结算后再试。",
         "recovery_limit" => "这次请求已经使用过恢复补发额度，保留固定回应。",
-        "money_limit" or "total_limit" or "stage_limit" or "ledger_stopped" => "共用实验额度不可用，保留固定回应。",
+        "money_limit" => "剩余金额不足以预留下一次请求，保留固定回应。",
+        "total_limit" => "共享预算的总次数已用完，保留固定回应。",
+        "stage_limit" => "当前阶段的发送次数已用完；人工试玩中 NPC 与玩家共享八次，保留固定回应。",
+        "ledger_stopped" => "共享账本已停止派发，请查看观察记录中的原始停止原因。",
+        "fingerprint_not_registered" => "模型服务版本与评测登记不符，已停止派发；需要核验版本，保留固定回应。",
+        "model_not_registered" => "返回型号未登记，已停止派发，保留固定回应。",
+        "usage_invalid_or_missing" or "usage_out_of_bounds" => "回复用量不完整或超出登记范围，保留预留并停止派发。",
+        "account_currency_unverified" => "账户币种未通过 CNY 检查，已停止派发，保留固定回应。",
         "player_dialogue_profile_unavailable" => "当前实验未启用玩家对话额度，保留固定回应。",
-        "authentication_failed" or "account_unavailable" => "模型服务认证或账户不可用，保留固定回应。",
+        "authentication_failed" or "account_check_rejected" => "模型服务认证或账户检查被拒绝，保留固定回应。",
+        "account_unavailable" => "模型账户不可用，已停止派发，保留固定回应。",
+        "ledger_busy" => "共享账本正被其他进程使用，请稍后再试。",
+        _ when code.StartsWith("ledger_", StringComparison.Ordinal) => "共享账本无法核验，已停止派发。（" + code + "）",
         _ => "模型回复未完成，保留固定回应。（" + code + "）"
     };
 }

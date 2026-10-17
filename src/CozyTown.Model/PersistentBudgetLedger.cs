@@ -84,7 +84,7 @@ public sealed class PersistentBudgetLedger
         void Reject(string reason)
         {
             recordAdmission?.Invoke(new(stage, logicalRequestId, recovery, null, reason, before, before));
-            throw new ModelException(reason);
+            throw new ModelException(reason, reason == "ledger_stopped" ? ledger.StopReason : null);
         }
         if (ledger.StopReason != null) Reject("ledger_stopped");
         if (!Profile.StageLimits.ContainsKey(stage) || string.IsNullOrWhiteSpace(logicalRequestId))
