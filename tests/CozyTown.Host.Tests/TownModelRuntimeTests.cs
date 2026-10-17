@@ -31,6 +31,7 @@ public sealed class TownModelRuntimeTests
         Assert.That(gate.UnavailableReason(empty with { StopReason = "fingerprint_not_registered" }, profile, ModelStage.Manual), Is.EqualTo("fingerprint_not_registered"));
         var held = new BudgetAttempt("one", "manual", "request", false, "reserved", true, 2110000, 0, null, null, null);
         Assert.That(gate.UnavailableReason(empty with { ReservedMicros = 4220000, SlotsHeld = 2, Attempts = [held] }, profile, ModelStage.Manual), Is.EqualTo("concurrency_limit"));
+        Assert.That(gate.UnavailableReason(empty with { ReservedMicros = 4220000, SlotsHeld = 2, Attempts = [held with { Status = "unknown" }] }, profile, ModelStage.Manual), Is.EqualTo("unknown_slots_held"));
         Assert.That(gate.UnavailableReason(empty with { SettledMicros = 1000000, ReservedMicros = 2110000, SlotsHeld = 1, Attempts = [held] }, profile, ModelStage.Manual), Is.EqualTo("money_wait"));
         Assert.That(gate.UnavailableReason(empty, profile, ModelStage.Manual), Is.Null);
         var spent = held with { SlotHeld = false, ReservedCostMicros = 0, Status = "settled" };
@@ -39,6 +40,7 @@ public sealed class TownModelRuntimeTests
         Assert.That(gate.UnavailableReason(empty, profile, ModelStage.Manual), Is.EqualTo("account_currency_unverified"));
         Assert.That(TownModelDispatchState.Temporary("concurrency_limit"), Is.True);
         Assert.That(TownModelDispatchState.Temporary("money_wait"), Is.True);
+        Assert.That(TownModelDispatchState.Temporary("unknown_slots_held"), Is.True);
         Assert.That(TownModelDispatchState.Temporary("stage_limit"), Is.False);
     }
 

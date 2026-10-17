@@ -21,11 +21,12 @@ public sealed class TownModelDispatchState
         string name = ModelBudgetProfile.StageName(stage);
         if (!profile.StageLimits.TryGetValue(name, out int limit)) return "stage_invalid";
         if (budget.Attempts.Count(a => a.Stage == name) >= limit) return "stage_limit";
-        if (budget.SlotsHeld >= profile.ConcurrentLimit) return "concurrency_limit";
+        if (budget.SlotsHeld >= profile.ConcurrentLimit)
+            return budget.Attempts.Any(a => a.SlotHeld && a.Status == "unknown") ? "unknown_slots_held" : "concurrency_limit";
         if (budget.AvailableMicros < profile.ReserveMicros) return budget.SlotsHeld > 0 ? "money_wait" : "money_limit";
         return null;
     }
-    public static bool Temporary(string? code) => code is "concurrency_limit" or "budget_concurrency_limit" or "money_wait" or "ledger_busy";
+    public static bool Temporary(string? code) => code is "concurrency_limit" or "budget_concurrency_limit" or "unknown_slots_held" or "money_wait" or "ledger_busy";
 
     public static bool CompleteNpcFallback(TownWorld world, DecisionRequest request, string reason)
     {

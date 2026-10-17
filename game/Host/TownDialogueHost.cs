@@ -91,6 +91,7 @@ public sealed class TownDialogueHost(TownWorld world, IPlayerDialogueRetirements
         "logical_timeout" or "logical_wait_expired" or "request_timeout" or "response_late" => "等待时间已用完，保留固定回应。",
         "player_text_schema_invalid" or "candidate_empty" or "candidate_not_object" => "回复格式不符合单段文本要求，保留固定回应。",
         "concurrency_limit" or "budget_concurrency_limit" => "正在等待共用模型槽位。",
+        "unknown_slots_held" => "已有请求的生成状态未知，仍占用物理槽位；需要核验，重启或读档不会释放。",
         "money_wait" => "在途请求占用金额预留，结算后再试。",
         "recovery_limit" => "这次请求已经使用过恢复补发额度，保留固定回应。",
         "money_limit" => "剩余金额不足以预留下一次请求，保留固定回应。",

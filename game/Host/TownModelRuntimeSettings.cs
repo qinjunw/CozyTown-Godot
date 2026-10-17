@@ -65,4 +65,3 @@ public sealed class TownModelRuntimeProfile
                 ? ModelStage.PlayerDialogue : scenario == "baseline" ? ModelStage.Baseline : ModelStage.Counterfactual;
     }
 }
-
