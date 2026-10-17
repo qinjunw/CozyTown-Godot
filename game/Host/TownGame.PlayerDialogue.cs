@@ -12,6 +12,11 @@ public partial class TownGame
     private void GeneratePlayerDialogue()
     {
         if (_fatal || DialogueHost.Current is null || !_pauseReasons.Contains("dialogue") || !TownDialogueHost.TextAllowed(_pauseReasons)) return;
+        if (ModelUnavailableReason("player_text") is string unavailable)
+        {
+            if (!TownModelDispatchState.Temporary(unavailable)) StopFullDemoAdmission(unavailable, _modelBudgetView?.StopReason is not null);
+            Toast(TownDialogueHost.FailureText(unavailable)); return;
+        }
         double now = _hostClock.Elapsed.TotalSeconds;
         double preceding = _fullDemoFixed ? 0 : Math.Max(0, now - _lastHostSeconds);
         _inputHost.FlushPausedElapsed(preceding);
@@ -52,10 +57,20 @@ public partial class TownGame
                 {
                     if (!_modelRuntime.RealPlayerDialogueEnabled)
                         DialogueHost.CompleteFixed(request, "{}", "player_dialogue_profile_unavailable");
+                    else if (ModelUnavailableReason("player_text") is string unavailable)
+                    {
+                        if (!TownModelDispatchState.Temporary(unavailable))
+                        {
+                            StopFullDemoAdmission(unavailable, _modelBudgetView?.StopReason is not null);
+                            string attempt = "not-sent-" + request.LogicalRequestId;
+                            if (DialogueHost.Acknowledge(request.PlayerSessionId, request.LogicalRequestId, attempt))
+                                DialogueHost.Complete(request, _world.SessionId, attempt, null, "rule_fallback", unavailable, 60 - request.RemainingWaitSeconds);
+                        }
+                    }
                     else if (_activeModelRequests.Count < 2)
                     {
                         _frozen.TryGetValue(request.LogicalRequestId, out var old);
-                        bool originalRecorded = _model.Budget.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
+                        bool originalRecorded = _modelBudgetView!.Attempts.Any(a => a.LogicalRequestId == request.LogicalRequestId && !a.Recovery);
                         var frozen = DialogueHost.Freeze(request, old?.Stage ?? _modelRuntime.NewRequestStage(_scenario, "player_text"),
                             old?.InputJson, originalRecorded);
                         _inputHost.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
@@ -101,7 +116,8 @@ public partial class TownGame
                 _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
                 _activeModelRequests.Remove(key);
                 _modelCompletions.Add(result);
-                StopFullDemoAdmission(result.FailureCode);
+                ObserveModelCompletion(result);
+                StopFullDemoAdmission(result.BudgetAfter?.StopReason ?? result.FailureCode, result.BudgetAfter?.StopReason is not null);
                 if (result.DispatchedAtUtc is null && _world.SessionId == frozen.Identity.SessionId)
                     _world.MarkPlayerDialogueDispatched(request.PlayerSessionId, request.LogicalRequestId, result.Dispatch.AttemptId);
                 DialogueHost.Complete(request, frozen.Identity.SessionId, result.Dispatch.AttemptId,
@@ -110,13 +126,14 @@ public partial class TownGame
         }
         catch (Exception error)
         {
-            string code = error is ModelException modelError ? modelError.Code : "model_unavailable";
+            string code = error is ModelException modelError ? modelError.StopReason ?? modelError.Code : "model_unavailable";
             _mainThread.Enqueue(() =>
             {
                 _activeModelRequests.Remove(key);
                 if (_world.SessionId != frozen.Identity.SessionId) return;
-                StopFullDemoAdmission(code);
-                if (code is "concurrency_limit" or "budget_concurrency_limit") return;
+                _modelDispatchState.ObserveFailure(code);
+                StopFullDemoAdmission(code, error is ModelException { StopReason: not null });
+                if (TownModelDispatchState.Temporary(code)) return;
                 string attempt = "not-sent-" + request.LogicalRequestId;
                 if (_world.MarkPlayerDialogueDispatched(request.PlayerSessionId, request.LogicalRequestId, attempt))
                     DialogueHost.Complete(request, frozen.Identity.SessionId, attempt, null, "rule_fallback", code, 60 - request.RemainingWaitSeconds);
@@ -137,14 +154,19 @@ public partial class TownGame
         var display = current.Displays.Last();
         _dialogueText.Text = display.Text;
         _generateDialogue.Text = _mode == "real" ? "生成一段反馈" : "生成一段 · 固定示例";
-        _generateDialogue.Disabled = current.Request is not null || !TownDialogueHost.TextAllowed(_pauseReasons) || _fatal;
+        string? unavailable = ModelUnavailableReason("player_text");
+        _generateDialogue.Disabled = current.Request is not null || unavailable is not null || !TownDialogueHost.TextAllowed(_pauseReasons) || _fatal;
         bool waiting = current.Request is not null && current.TerminalReason is null;
         _dialogueStatus.Text = waiting
             ? !TownDialogueHost.TextAllowed(_pauseReasons) ? "其他暂停生效中 · 回复会封存，恢复后继续显示。"
                 : $"{(current.SealedResult is not null ? "回复已封存" : current.Request!.AttemptId is null ? "排队等待共用模型槽位" : "等待这一段回复")} · 剩余 {current.Request!.RemainingWaitSeconds:0} 秒"
             : current.TerminalReason?.StartsWith("persisted_", StringComparison.Ordinal) == true ? "这次生成已在先前分支终结，保留存档中的固定回应。"
             : display.Error is not null ? "规则回退 · " + TownDialogueHost.FailureText(display.Error)
+            : unavailable is not null && current.Request is null ? "生成不可用 · " + TownDialogueHost.FailureText(unavailable)
             : display.Source == "fixed_dialogue" ? "固定回应 · 可选择生成一段反馈。"
             : display.Source == "fixed_model" ? "固定客户端示例 · 本次交谈已生成一段。" : "模型反馈 · 本次交谈已生成一段。";
+        if (_providerWarning is not null) _dialogueStatus.Text += "\n" + _providerWarning;
+        else if (_mode != "real" && Argument("--dialogue-fixture=") == "fingerprint-changed")
+            _dialogueStatus.Text += "\n固定样例：模型服务指纹发生变化，试玩记录变化后继续；本入口不发送请求。";
     }
 }

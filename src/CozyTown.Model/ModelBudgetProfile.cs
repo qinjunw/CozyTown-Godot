@@ -45,7 +45,7 @@ public sealed class ModelBudgetProfile
         _ => throw new ModelException("budget_profile_not_registered")
     };
 
-    internal static string StageName(ModelStage stage) => stage switch
+    public static string StageName(ModelStage stage) => stage switch
     {
         ModelStage.Baseline => "baseline", ModelStage.Counterfactual => "counterfactual",
         ModelStage.PlayerDialogue => "player_dialogue", ModelStage.Manual => "manual",

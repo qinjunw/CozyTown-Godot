@@ -39,6 +39,11 @@ public sealed class TownModelRuntimeProfile
         _ => throw new InvalidDataException("Replay budget profile is not registered.")
     };
     public bool RealPlayerDialogueEnabled => IsFullDemo;
+    public DeepSeekOptions ConfigureProvider(DeepSeekOptions options)
+    {
+        if (options.BudgetProfileVersion != Profile.Version) throw new InvalidDataException("Provider and runtime budget profiles differ.");
+        return options with { ExecutionPurpose = ExecutionPurpose };
+    }
 
     public static TownModelRuntimeProfile Resolve(string profileVersion, string executionPurpose)
     {

@@ -19,6 +19,7 @@
     <ProjectReference Include="../../tools/CozyTown.Play/CozyTown.Play.csproj" Aliases="PlayTool" />
     <Compile Include="../../game/Host/TownRunJournal.cs" Link="TownRunJournal.cs" />
     <Compile Include="../../game/Host/TownModelRuntimeSettings.cs" Link="TownModelRuntimeSettings.cs" />
+    <Compile Include="../../game/Host/TownModelDispatchState.cs" Link="TownModelDispatchState.cs" />
     <Compile Include="../../game/Host/TownModelProtocol.cs" Link="TownModelProtocol.cs" />
     <Compile Include="../../game/Host/TownFullDemoPlan.cs" Link="TownFullDemoPlan.cs" />
     <Compile Include="../../game/Host/ModelDispatchGate.cs" Link="ModelDispatchGate.cs" />

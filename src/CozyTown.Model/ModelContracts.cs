@@ -22,7 +22,9 @@ public sealed record ModelCompletion(
     TimeSpan Elapsed, int? HttpStatus, string? ProviderRequestId, string? ReturnedModel,
     string? SystemFingerprint, string? FinishReason, string? CandidateJson, ModelUsage? Usage,
     string? FailureCode, bool GenerationEnded, bool BudgetSettled, bool SlotHeld,
-    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null, BudgetSnapshot? BudgetAfter = null)
+    long? ConservativeCostMicros, TimeSpan? LogicalElapsedToArrival = null, BudgetSnapshot? BudgetAfter = null,
+    string? ProviderWarningCode = null, string? ExpectedSystemFingerprint = null, string ExecutionPurpose = "legacy",
+    int? ResponseProjectionVersion = null)
 {
     public bool Succeeded => FailureCode is null;
 }
@@ -41,7 +43,7 @@ public sealed record BudgetAdmission(string Stage, string LogicalRequestId, bool
 
 public sealed record DeepSeekOptions(string CredentialFile, string LedgerFile,
     string ExpectedSystemFingerprint = "aeb56401ca74e127821c4f9126dcb669",
-    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion);
+    string BudgetProfileVersion = ModelBudgetProfile.FirstSliceVersion, string ExecutionPurpose = "legacy");
 
 public sealed record BudgetAttempt(string AttemptId, string Stage, string LogicalRequestId,
     bool Recovery, string Status, bool SlotHeld, long ReservedCostMicros,
@@ -54,7 +56,8 @@ public sealed record BudgetSnapshot(string BudgetId, string Currency, long Limit
     public long AvailableMicros => LimitMicros - SettledMicros - ReservedMicros;
 }
 
-public sealed class ModelException(string code) : Exception(code)
+public sealed class ModelException(string code, string? stopReason = null) : Exception(code)
 {
     public string Code { get; } = code;
+    public string? StopReason { get; } = stopReason;
 }
