@@ -590,6 +590,45 @@ try {
         if ($economyReport.contentFingerprint -ne $summary.contentChecks['economy-fixture'].fingerprint) { throw 'Graphical economy export and content validation differ.' }
         $summary.economyChecks['export-economy-graphical'] = [ordered]@{ passed = $true; checks = @($economyReport.checks).Count; contentFingerprint = $economyReport.contentFingerprint; screenshots = $economyReport.screenshots }
     }
+    $launcherDirectory = Join-Path $windows 'launcher'
+    $null = Invoke-CheckedProcess 'publish-play-launcher' $dotnet @('publish', 'tools/CozyTown.Play/CozyTown.Play.csproj',
+        '-c', 'Release', '-r', 'win-x64', '--self-contained', 'true', '-p:RestoreLockedMode=true', '-o', $launcherDirectory) 600
+    Copy-Item -LiteralPath (Join-Path $repo 'tools/CozyTown.Play/launcher.example.json') -Destination $launcherDirectory
+    foreach ($script in @('new-play-entries.ps1', 'play-entry.ps1')) {
+        Copy-Item -LiteralPath (Join-Path $PSScriptRoot $script) -Destination $launcherDirectory
+    }
+    $launcherCheckDirectory = Join-Path $repo "artifacts/launcher-check/$runId"
+    New-Item -ItemType Directory -Path $launcherCheckDirectory | Out-Null
+    $packageFiles = @(Get-ChildItem -LiteralPath $windows -File -Recurse | Sort-Object FullName | ForEach-Object {
+        [ordered]@{ path = [IO.Path]::GetRelativePath($windows, $_.FullName).Replace('\', '/'); bytes = $_.Length
+            sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() }
+    })
+    $packageManifest = Join-Path $launcherCheckDirectory 'package-files.json'
+    [ordered]@{ sourceCommit = $summary.sourceCommit; files = $packageFiles } |
+        ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $packageManifest -Encoding utf8
+    $launcherSettings = Join-Path $launcherCheckDirectory 'launcher.local.json'
+    [ordered]@{
+        gameExecutable = [IO.Path]::GetRelativePath($launcherCheckDirectory, $executable)
+        modelConfig = 'model.unused.json'
+        executionPurpose = 'manual'
+        realDataDirectory = 'data/real'
+        offlineDataDirectory = 'data/offline'
+        packageManifest = 'package-files.json'
+        expectedSourceCommit = $summary.sourceCommit
+        packageManifestSha256 = (Get-FileHash -LiteralPath $packageManifest -Algorithm SHA256).Hash.ToLowerInvariant()
+    } | ConvertTo-Json | Set-Content -LiteralPath $launcherSettings -Encoding utf8
+    $launcherExecutable = Join-Path $launcherDirectory 'CozyTown.Play.exe'
+    $launcherCheck = Invoke-CheckedProcess 'launcher-offline-precheck' $launcherExecutable @('--offline',
+        "--settings=$launcherSettings", '--check-only') -WorkingDirectory $windows -Environment $runtimeEnvironment | ConvertFrom-Json
+    if ($launcherCheck.passed -ne $true -or $launcherCheck.checkOnly -ne $true -or $launcherCheck.mode -ne 'offline' -or
+        $launcherCheck.sourceCommit -ne $summary.sourceCommit -or $launcherCheck.packageFiles -ne $packageFiles.Count -or
+        $launcherCheck.gameStarted -ne $false -or $launcherCheck.realModelRequestsSent -ne 0 -or $launcherCheck.ledgerWritten -ne $false -or
+        (Test-Path -LiteralPath (Join-Path $launcherCheckDirectory 'data')) -or
+        (Test-Path -LiteralPath (Join-Path $launcherCheckDirectory 'model.unused.json'))) {
+        throw 'Published launcher failed its offline, read-only package precheck.'
+    }
+    $launcherCheck | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $output 'launcher-precheck.json') -Encoding utf8
+    $summary.launcherCheck = $launcherCheck
     $summary.passed = $true
 }
 catch {
