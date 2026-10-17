@@ -103,8 +103,9 @@ public partial class TownGame : Node2D
             _scenario = Argument("--scenario=") ?? "baseline";
             if (Argument("--scene-replay=") is string replayPath)
                 _scenario = TownReplay.ReadPackage(replayPath).InitialSnapshot.State.InitialStateId;
-            if (Argument("--dialogue-fixture=") is string dialogueFixture && dialogueFixture is not ("success" or "delayed" or "invalid" or "timeout" or "budget"))
-                throw new InvalidDataException("Dialogue fixture must be success, delayed, invalid, timeout or budget.");
+            if (Argument("--dialogue-fixture=") is string dialogueFixture && dialogueFixture is not ("success" or "delayed" or "invalid" or "timeout" or "budget"
+                or "fingerprint-changed" or "stopped-fingerprint" or "stage-limit" or "account-unavailable"))
+                throw new InvalidDataException("Dialogue fixture must be success, delayed, invalid, timeout, budget, fingerprint-changed, stopped-fingerprint, stage-limit or account-unavailable.");
             _map = GetNode<Node2D>("Map");
             _camera = GetNode<Camera2D>("Camera");
             _loaded = TownContentLoader.Load(_map, _scenario);
