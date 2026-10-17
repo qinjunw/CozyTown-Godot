@@ -1,0 +1,10 @@
+{
+  "gameExecutable": "../../candidate/windows/CozyTown.exe",
+  "modelConfig": "../model.local.json",
+  "executionPurpose": "manual",
+  "realDataDirectory": "../play-data/real",
+  "offlineDataDirectory": "../play-data/offline",
+  "packageManifest": "package-files.json",
+  "expectedSourceCommit": "<candidate-source-commit>",
+  "packageManifestSha256": "<package-files.json-sha256>"
+}
