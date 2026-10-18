@@ -6,6 +6,8 @@ CozyTown 的独立 Godot 重构项目，面向 Windows/PC，保留小镇生活�
 
 当前默认入口为四人小镇切片：玩家移动、观察和交谈，居民独立决定邀请、回应、赴约及资源交换，支持日程、暂停、完整逻辑存档和运行记录导出。真实模型通过独立 C# 适配器接入；默认启动采用规则模式。操作与配置见[切片使用说明](docs/PLAYABLE_SLICE.md)，实际通过项及待验收项见[验证记录](docs/verification/four-resident-slice.md)。
 
+当前人工试玩使用[Windows 双击入口](docs/REAL_PLAY_LAUNCHER.md)：`Start-Real-Model.cmd` 读取已绑定候选和本机配置，`Start-Offline.cmd` 使用独立数据目录启动规则模式。源码登记的 `manual-play-v1` 为独立 CNY 5、最多 96 次人工共享预算，NPC 行动、玩家反馈、失败与恢复共池；启动程序只打开已有账本。源码注册和离线预检不表示本机预算已初始化或该候选已通过真实试玩。
+
 玩家现可查看钱包、背包与五格快捷栏，并在杂货铺买卖物品；双方资产及操作去重随存档恢复。初态、报价和验证入口见[玩家资产与商店操作](docs/PLAYER_ECONOMY.md)。六块菜地支持三种作物的种植、浇水和收获，每日 05:00 结算成长与商店补给；玩家可在家选择休息 1～12 小时，见[种植与睡眠操作](docs/PLAYER_FARMING.md)。
 
 鸡舍支持喂食、清晨产蛋和领取，池塘提供三种鱼与空钩结果，厨房提供五份配方。产物可直接出售或加工后出售；材料、待领产物及钓鱼随机状态随存档恢复，见[养鸡、钓鱼与烹饪](docs/PLAYER_PRODUCTION.md)。自动与 Windows 操作结果见[生产验证记录](docs/verification/player-production.md)，操作步骤见[人工验收清单](docs/verification/player-production-manual-checklist.md)。
@@ -38,9 +40,11 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 保存恢复采用完整逻辑快照，不兼容时保护当前世界并拒绝读取；真实请求续接受独立预算账本约束。状态、失败处理与回放输入见[存档与回放合同](docs/SAVE_REPLAY_CONTRACT.md)。[离线核心回放 CLI](docs/REPLAY.md)重算规则、预算与父分支前缀，逐边界核对完整状态；[Godot 场景回放](docs/SCENE_REPLAY.md)在源场景和 Windows 导出中重新执行碰撞查询。固定包绑定其源码摘要，修改模拟源码后须重新生成并验证。
 
-真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 的[未达标结果和全部失败样本](docs/verification/full-demo-real-2026-10-11.md)保留，旧账本已停止且余量未转移。独立 `full-demo-v2` 已在冻结 `f955` 候选上完成两组真实评测，71 次预算尝试、70 次 HTTP 共保守扣减 CNY 0.290836；该评测封存时 `manual` 已用 0/8。后续 `576ae64` 的 M01 已由用户确认通过，当前人工用量以现存共享账本和观察手册为准，不据旧报告刷新额度或新增授权。指标、失败、回放及交付限制见[第二轮报告](docs/verification/full-demo-real-v2-2026-10-11.md)。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
+真实模型采用 DeepSeek `deepseek-flash`，由 C# 直接接入；首轮实验的 48 次发送已用尽。参数、费用预留、恢复补发和失败验收见[真实模型接入合同](docs/REAL_MODEL_CONTRACT.md)。完整 Demo v1 的[未达标结果和全部失败样本](docs/verification/full-demo-real-2026-10-11.md)保留，旧账本已停止且余量未转移。历史 `full-demo-v2` 已在冻结 `f955` 候选上完成两组真实评测，71 次预算尝试、70 次 HTTP 共保守扣减 CNY 0.290836；该评测封存时 `manual` 已用 0/8。后续 `576ae64` 的 M01 已由用户确认通过；这些样本及八次阶段额度保持历史预算归属，不转入独立试玩池。指标、失败、回放及交付限制见[第二轮报告](docs/verification/full-demo-real-v2-2026-10-11.md)。登记检查见[第二轮预算验证](docs/verification/full-demo-budget-v2-2026-10-11.md)，历史执行入口见[完整 Demo 运行说明](docs/FULL_DEMO_RUN.md)，阶段和通过标准见[跨日评测合同](docs/FULL_DEMO_EVALUATION_CONTRACT.md)。真实服务验证与离线测试分开统计。
 
 ## 迭代入口
+
+模块职责、公开接口与修改 NPC 人设、日程、动作、模型接入及存档观察的入口见[架构与 NPC 实验修改索引](docs/ARCHITECTURE.md)。
 
 GitHub Issues 保存路线地图、原生子任务、领取与阻塞关系。入口见 [Wayfinder](docs/wayfinder/README.md)，操作见 [GitHub tracker](docs/wayfinder/github-tracker.md)。
 

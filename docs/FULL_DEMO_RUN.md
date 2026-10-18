@@ -1,5 +1,7 @@
 # 完整 Demo 运行与离线验证
 
+本页保留 `full-demo-v1`／`full-demo-v2` 正式评测驱动与历史试玩流程。当前独立 `manual-play-v1` 人工试玩从[Windows 双击入口](REAL_PLAY_LAUNCHER.md)进入；该配置不能用于本页的正式评测驱动。
+
 完整 Demo 驱动使用[跨日评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)和注册输入 [full-demo-input.json](../game/Content/full-demo-input.json)。`fixed` 与 `real` 执行同一顺序：购买种子和饲料、种植浇水、喂鸡、首日窗口、两次 12 小时睡眠、领蛋再喂食、次日窗口中的保存读取，以及依次与 Mina、Eli、Ren、Sora 交谈。
 
 冻结候选 `f9551c19eb1866ba79cc1312ca7821004fbb7fa1` 已通过完整离线门、两组 v2 真实评测及四份真实包的 12 次离线回放，结果见[第二轮报告](verification/full-demo-real-v2-2026-10-11.md)。用户已于 2026-10-11 通过[玩家对话人工验收](verification/player-dialogue-manual.md)，并确认 `576ae64` 候选的[七组综合离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。当前制品渠道与验收证据见[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)，最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。[旧宿主记录](verification/full-demo-host-2026-10-10.md)和 [v1 未达标结果](verification/full-demo-real-2026-10-11.md)保留原候选与样本归属。
@@ -44,11 +46,11 @@ pwsh -NoProfile -File tools/windows/verify-full-demo.ps1 `
 
 两次 12 小时睡眠跨一次 05:00 晨间结算。四段玩家文本按冻结的居民顺序生成，对话期间世界暂停；菜单、失焦、读取及故障暂停仍阻止派发和展示。关闭或切换居民终结旧生成，恢复保留原请求内容及阶段。详见[玩家对话合同](PLAYER_DIALOGUE_CONTRACT.md)和[保存续接合同](SAVE_REPLAY_CONTRACT.md)。
 
-## 真实评测与最终试玩配置
+## 历史真实评测与 v2 试玩配置
 
 真实模式需要仓库外的显式本机配置；模板见 [full-demo.example.json](../src/CozyTown.Model/full-demo.example.json)。配置包含 `credentialFile`、`ledgerFile`、`expectedSystemFingerprint`、`budgetProfileVersion`，其中路径必须为绝对路径，本次 profile 为 `full-demo-v2`。旧 v1 仍可显式选择，但必须使用自己的账本、世界身份和存档；两个版本互相拒绝串用。凭据、实际路径和真实账本不进入输入包或 Git。
 
-v1 已停止，v2 已显式登记并完成本轮真实评测；核对结果见[预算记录](verification/full-demo-budget-v2-2026-10-11.md)和[第二轮报告](verification/full-demo-real-v2-2026-10-11.md)。最终试玩复用现存共享 v2 账本，只能使用尚未花费的 `manual` 八次；不得重新初始化账本或转移旧余量。以下停止与初始化命令仅记录本轮登记流程，不是试玩前置步骤。
+v1 已停止，v2 已显式登记并完成本轮真实评测；核对结果见[预算记录](verification/full-demo-budget-v2-2026-10-11.md)和[第二轮报告](verification/full-demo-real-v2-2026-10-11.md)。当时的试玩复用共享 v2 账本，只能使用尚未花费的 `manual` 八次；不得重新初始化账本或转移旧余量。以下停止与初始化命令仅记录该轮登记流程，不是当前试玩前置步骤。
 
 历史停止操作在旧评测进程退出后执行，并保留独立收据：
 
@@ -77,7 +79,7 @@ dotnet run --project tools/CozyTown.Budget -- `
 
 资源对照使用 `--scenario=counterfactual`，并引用同一独立预算账本。两组 NPC 新请求分别计入 `baseline`、`counterfactual`，每阶段最多 40 次；两组玩家文本共用 `player_dialogue`，最多 8 次。完整预算总上限人民币 5 元、96 次发送，NPC、玩家及恢复共享两个物理槽。恢复保留冻结请求的原阶段，阶段额度不互借。
 
-最终用户真实试玩显式配置现存共享 v2 账本，并使用单独用途：
+历史 v2 用户试玩显式配置该共享账本，并使用单独用途：
 
 ```text
 <windows-export>/CozyTown.exe -- --model-config=<absolute-local-model.json> --execution-purpose=manual --data-dir=<new-absolute-manual-directory>

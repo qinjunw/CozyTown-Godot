@@ -37,22 +37,23 @@
 | `first-slice-v1`（缺省） | `cozytown-godot-first-slice-20260920-v1` | 48：probe 4、baseline 22、counterfactual 22 | 原 schema 1 |
 | `full-demo-v1` | `cozytown-godot-full-demo-20261010-v1` | 96：baseline 40、counterfactual 40、player_dialogue 8、manual 8 | schema 2，包含 `profileVersion` |
 | `full-demo-v2` | `cozytown-godot-full-demo-20261011-v2` | 96：baseline 40、counterfactual 40、player_dialogue 8、manual 8 | schema 2，包含 `profileVersion` |
+| `manual-play-v1` | `cozytown-godot-manual-play-20261017-v1` | 96：仅 manual 96 | schema 2，包含 `profileVersion` |
 
-三份配置均为 CNY 5,000,000 microCNY、每次预留 2,110,000、最多两个物理槽。`ModelBudgetProfile` 只提供这三份注册值；账本中的身份、版本、金额、阶段和并发必须逐项匹配。首切片 schema 1 更新不写新增版本字段，原探针工具继续使用原配置。`PersistentBudgetLedger` 的静态常量仍表示首切片；选择完整 Demo 时使用实例 `Profile` 或 `Snapshot()`。v1 与 v2 的注册对象和预算身份独立，即使限额相同也不能互相打开账本。
+四份配置均为 CNY 5,000,000 microCNY、每次预留 2,110,000、最多两个物理槽。`ModelBudgetProfile` 只提供这四份注册值；账本中的身份、版本、金额、阶段和并发必须逐项匹配。首切片 schema 1 更新不写新增版本字段，原探针工具继续使用原配置。`PersistentBudgetLedger` 的静态常量仍表示首切片；其他配置使用实例 `Profile` 或 `Snapshot()`。各注册对象和预算身份独立，即使限额相同也不能互相打开账本。
 
-`DeepSeekOptions` 第四参数 `BudgetProfileVersion` 缺省为 `first-slice-v1`，第三参数继续表示系统指纹。[完整 Demo 模板](full-demo.example.json)用于构造模型库选项；实际绝对路径保存在忽略的本机配置。该模板不自动启用游戏宿主，宿主阶段路由和真实运行由[完整 Demo 综合评测](https://github.com/qinjunw/CozyTown-Godot/issues/25)接续。
+`DeepSeekOptions` 第四参数 `BudgetProfileVersion` 缺省为 `first-slice-v1`，第三参数继续表示系统指纹。[独立试玩模板](manual-play.example.json)与[历史完整 Demo 模板](full-demo.example.json)用于构造模型库选项；实际绝对路径保存在忽略的本机配置。`manual-play-v1` 必须显式设置第五参数 `ExecutionPurpose="manual"`，拒绝 `legacy` 和 `experiment`，所有请求及恢复都使用 `ModelStage.Manual`。游戏入口与只读预检见[Windows 真实试玩入口](../../docs/REAL_PLAY_LAUNCHER.md)。
 
-新完整 Demo 预算只由 `PersistentBudgetLedger.InitializeNew(path, profileVersion)` 或下列离线工具显式初始化，`profileVersion` 仅接受已注册的 v1／v2。当前授权使用 v2；先完成最终候选完整离线门，再选定唯一账本位置并创建父目录，执行一次：
+新预算只由 `PersistentBudgetLedger.InitializeNew(path, profileVersion)` 或下列离线工具显式初始化，`profileVersion` 接受 `full-demo-v1`、`full-demo-v2` 和 `manual-play-v1`。现实启用在费用授权、最终候选离线验证和制品核验后，选定唯一账本位置并创建父目录，执行一次：
 
 ```powershell
-dotnet run --project tools/CozyTown.Budget/CozyTown.Budget.csproj -c Release -- --initialize --profile full-demo-v2 --ledger-file <new-absolute-ledger-path>
+dotnet run --project tools/CozyTown.Budget/CozyTown.Budget.csproj -c Release -- --initialize --profile manual-play-v1 --ledger-file '<new-absolute-ledger-path>'
 ```
 
 工具创建新账本和持久锁标记、刷新文件并输出零消耗快照，不读取凭据或访问服务。现有账本、锁标记或 `.previous` 备份任一存在即拒绝；竞争初始化最多一个进程成功。中断留下的标记保留，普通启动和恢复不补建、不恢复备份。保持所选路径，不以换目录、复制或删除账本刷新同一预算。首切片没有新增初始化入口。
 
 `PersistentBudgetLedger.Stop(reason)` 保留第一次停止原因和全部尝试、费用、预留及槽位，之后拒绝新准入。预算 CLI 的 `--stop --profile <registered-profile> --ledger-file <existing-absolute-path> --reason <reason-code>` 调用该接口，输出停止前后视图；重复停止不会退还用量。显式停旧 v1、初始化新 v2 的操作顺序及收据要求见[完整 Demo 运行说明](../../docs/FULL_DEMO_RUN.md)。初始化和停止失败均输出 JSON `code` 及非零退出码。
 
-完整 Demo 使用 `ModelStage.PlayerDialogue` 与 `ModelStage.Manual` 映射到 `player_dialogue`、`manual`；NPC 和玩家使用同一金额及槽位池。恢复必须沿用原阶段，阶段间不能转移额度。`manual` 的八次仅供用户最终试玩；综合评测驱动负责该阶段的进入条件。注册配置和初始化功能不增加付费重跑授权。
+完整 Demo 使用 `ModelStage.PlayerDialogue` 与 `ModelStage.Manual` 映射到 `player_dialogue`、`manual`；其中人工八次保持历史评测预算归属。独立试玩的 96 次全部映射到 `manual`，NPC 行动、玩家反馈、失败及恢复共用金额、次数和槽位；持久准入成功即计次。恢复必须沿用原阶段，阶段间不能转移额度。正式评测驱动拒绝独立试玩配置，普通启动不初始化账本或自动发送真实请求。
 
 ## 离线验证
 
@@ -62,6 +63,6 @@ dotnet run --project tools/CozyTown.Budget/CozyTown.Budget.csproj -c Release -- 
 & ./.local/tools/dotnet/dotnet.exe test tests/CozyTown.Model.Tests/CozyTown.Model.Tests.csproj --configuration Release
 ```
 
-测试使用临时目录中的合成凭据和公开探针账本快照，不读本机凭据或实时账本，不发送外部请求。覆盖探针 4 次/2,212 微元消耗承接、三份配置隔离、显式初始化和停止、费用与槽位、错误响应、记录失败、两个子进程竞争初始化/槽位/恢复、终止占额进程后的再次打开及额度不回退。原 v1 离线结果见[预算配置验证](../../docs/verification/full-demo-budget-2026-10-10.md)，v2 登记结果见[第二轮预算登记验证](../../docs/verification/full-demo-budget-v2-2026-10-11.md)。
+测试使用临时目录中的合成凭据和公开探针账本快照，不读本机凭据或实时账本，不发送外部请求。覆盖探针 4 次/2,212 微元消耗承接、注册配置隔离、显式初始化和停止、费用与槽位、错误响应、记录失败、两个子进程竞争初始化/槽位/恢复、终止占额进程后的再次打开及额度不回退。原 v1 离线结果见[预算配置验证](../../docs/verification/full-demo-budget-2026-10-10.md)，v2 登记结果见[第二轮预算登记验证](../../docs/verification/full-demo-budget-v2-2026-10-11.md)。
 
 传输解析和账本字段源自本仓库 `a672eb58c8b1d0e8db35272677dc17cf55c66ead` 中的独立探针。此库保留其账本格式，但采用游戏合同允许其他请求继续排队的未知状态规则；探针程序保持原有首错停止策略。
