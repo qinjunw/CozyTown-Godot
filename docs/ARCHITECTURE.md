@@ -23,6 +23,8 @@
 
 `ModelCompletion.Succeeded` 只表示模型层没有失败代码；`response_received` 表示结果已封存。世界执行以 `candidate_executed` 为准，拒绝为 `candidate_rejected`。真实决定需关联 `source=real_model`；`rule_fallback` 单独记录规则回退。模型台词、传输成功和规则回退均不能代替真实模型行动已经执行的证据。
 
+观察面板的[最近决定摘要](../game/Host/TownResidentDecisionSummary.cs)从现有事件和当前会话的 NPC 完成记录关联请求、候选与上述世界事实。`invite` 或 `propose_exchange` 执行分别只表示发出邀请或报价；资源交付以 `resource_transferred` 记录为准。
+
 ## NPC 修改索引
 
 | 目标 | 修改类型与文件 | 公共检查入口 |

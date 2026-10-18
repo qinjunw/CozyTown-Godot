@@ -13,11 +13,17 @@ namespace CozyTown.Host.Tests;
 [TestFixture]
 public sealed class TownRealModelReplayTests
 {
-    [TestCase("success", null)]
-    [TestCase("duplicate", "duplicate_json_property")]
-    [TestCase("malformed", "invalid_json")]
-    [TestCase("http-error", "provider_http_failure")]
-    public async Task ProviderArrivalAndExportKeepReplayFactsWithoutReasoningOrErrorBodies(string mode, string? expectedFailure)
+    [TestCase("success", null, "full-demo-v2", "mina")]
+    [TestCase("duplicate", "duplicate_json_property", "full-demo-v2", "mina")]
+    [TestCase("malformed", "invalid_json", "full-demo-v2", "mina")]
+    [TestCase("http-error", "provider_http_failure", "full-demo-v2", "mina")]
+    [TestCase("success", null, "manual-play-v1", "mina")]
+    [TestCase("success", null, "manual-play-v1", "eli")]
+    [TestCase("success", null, "manual-play-v1", "ren")]
+    [TestCase("success", null, "manual-play-v1", "sora")]
+    [TestCase("malformed", "invalid_json", "manual-play-v1", "mina")]
+    [TestCase("http-error", "provider_http_failure", "manual-play-v1", "mina")]
+    public async Task ProviderArrivalAndExportKeepReplayFactsWithoutReasoningOrErrorBodies(string mode, string? expectedFailure, string profileVersion, string residentId)
     {
         string root = Path.Combine(Path.GetTempPath(), "cozytown-response-replay-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -25,22 +31,24 @@ public sealed class TownRealModelReplayTests
         {
             string credentials = Path.Combine(root, "credentials.json"), ledgerPath = Path.Combine(root, "ledger.json");
             File.WriteAllText(credentials, "{\"test\":{\"Todo\":\"CozyTown\",\"testingAPIKey\":\"fixed-offline-key\"}}");
-            var ledger = PersistentBudgetLedger.InitializeNew(ledgerPath, "full-demo-v2");
+            var runtime = TownModelRuntimeProfile.Resolve(profileVersion, "manual");
+            var ledger = PersistentBudgetLedger.InitializeNew(ledgerPath, profileVersion);
             var content = TownPlayerDialogueReplayTests.TownPlayerDialogueTestsContent();
             var world = new TownWorld(content, budgetId: ledger.Profile.BudgetId);
+            world.SetPlayerPosition(world.State.Residents.Single(r => r.Id == residentId).Position);
             var input = new TownInputHost(content, world);
             using var journal = new TownRunJournal(Path.Combine(root, "runs"), world.State.BranchId, new { schemaVersion = 2 });
-            journal.StartReplay(content, world, input); journal.SetReplayBudget(ledger.Snapshot(), TownReplayBudgetProfile.FullDemoV2);
-            var dialogue = new TownDialogueHost(world); dialogue.Open("mina", []); input.Pause("dialogue", true);
+            journal.StartReplay(content, world, input); journal.SetReplayBudget(ledger.Snapshot(), runtime.ReplayProfile);
+            var dialogue = new TownDialogueHost(world); dialogue.Open(residentId, []); input.Pause("dialogue", true);
             var request = dialogue.Generate(input.State.PauseReasons)!;
-            var frozen = dialogue.Freeze(request, ModelStage.Manual);
+            var frozen = dialogue.Freeze(request, runtime.NewRequestStage("baseline", "player_text"));
             input.FreezeRequest(request.LogicalRequestId, TownJson.Serialize(frozen));
             journal.BeforeSendOnHost = dispatch =>
             {
                 Assert.That(dialogue.Acknowledge(request.PlayerSessionId, request.LogicalRequestId, dispatch.AttemptId), Is.True);
                 return Task.CompletedTask;
             };
-            using var client = new DeepSeekClient(new(credentials, ledgerPath, "registered", "full-demo-v2", "manual"), journal, new ProviderHandler(mode));
+            using var client = new DeepSeekClient(runtime.ConfigureProvider(new(credentials, ledgerPath, "registered", profileVersion)), journal, new ProviderHandler(mode));
             client.ResponseArrived += (dispatch, elapsed) => world.MarkPlayerDialogueResponseArrived(world.SessionId,
                 request.PlayerSessionId, request.LogicalRequestId, dispatch.AttemptId, elapsed.TotalSeconds);
             var completion = await client.SendAsync(frozen);
@@ -50,6 +58,9 @@ public sealed class TownRealModelReplayTests
                 "real_model", completion.FailureCode, completion.LogicalElapsedToArrival!.Value.TotalSeconds);
             dialogue.Present(input.State.PauseReasons);
             Assert.That(completion.FailureCode, Is.EqualTo(expectedFailure));
+            Assert.That(dialogue.Current!.ResidentId, Is.EqualTo(residentId));
+            Assert.That(dialogue.Current.Displays.Last().Source, Is.EqualTo(expectedFailure is null ? "real_model" : "rule_fallback"));
+            Assert.That(ledger.Snapshot().Attempts.Single().Stage, Is.EqualTo("manual"));
             var package = journal.CaptureReplay();
             Assert.That(TownReplay.Run(package).Passed, Is.True, TownJson.Serialize(TownReplay.Run(package)));
             string archivePath = Path.Combine(root, "export.zip"); journal.ExportSnapshotZip(archivePath);

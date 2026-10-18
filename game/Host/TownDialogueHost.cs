@@ -96,7 +96,7 @@ public sealed class TownDialogueHost(TownWorld world, IPlayerDialogueRetirements
         "recovery_limit" => "这次请求已经使用过恢复补发额度，保留固定回应。",
         "money_limit" => "剩余金额不足以预留下一次请求，保留固定回应。",
         "total_limit" => "共享预算的总次数已用完，保留固定回应。",
-        "stage_limit" => "当前阶段的发送次数已用完；人工试玩中 NPC 与玩家共享八次，保留固定回应。",
+        "stage_limit" => "当前阶段的发送次数已用完，保留固定回应；用量与上限见观察面板。",
         "ledger_stopped" => "共享账本已停止派发，请查看观察记录中的原始停止原因。",
         "fingerprint_not_registered" => "模型服务版本与评测登记不符，已停止派发；需要核验版本，保留固定回应。",
         "model_not_registered" => "返回型号未登记，已停止派发，保留固定回应。",
