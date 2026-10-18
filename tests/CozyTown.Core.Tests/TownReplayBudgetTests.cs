@@ -6,6 +6,22 @@ namespace CozyTown.Core.Tests;
 [TestFixture]
 public sealed class TownReplayBudgetTests
 {
+    [Test]
+    public void ManualPlayRecordingRecomputesItsIndependentManualAdmission()
+    {
+        var profile = new TownReplayBudgetProfile("manual-play-v1", "cozytown-godot-manual-play-20261017-v1", "CNY",
+            5_000_000, 2_110_000, 96, 2, new() { ["manual"] = 96 });
+        var initial = Empty() with { BudgetId = profile.BudgetId };
+        var budget = new TownReplayBudget(initial, profile);
+        var expected = initial with { TotalAttempts = 1, SlotsHeld = 1, ReservedMicros = 2_110_000,
+            Attempts = [Reserved(FirstAttempt, "manual-npc") with { Stage = "manual" }] };
+
+        budget.Reserve("manual", "manual-npc", FirstAttempt, false, "accepted", expected);
+
+        Assert.That(TownJson.Serialize(budget.Snapshot()), Is.EqualTo(TownJson.Serialize(expected)));
+        budget.Reserve("baseline", "experiment", SecondAttempt, false, "attempt_identity_invalid", expected);
+    }
+
     [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
     [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
     public void FullDemoRecordingUsesItsOwnStageAndTotalLimits(string version, string budgetId)

@@ -11,7 +11,7 @@ public static class BudgetCommand
         {
             if (args.SequenceEqual(new[] { "--help" }))
             {
-                output.WriteLine("CozyTown.Budget --initialize --profile <full-demo-v1|full-demo-v2> --ledger-file <new-absolute-path>");
+                output.WriteLine("CozyTown.Budget --initialize --profile <full-demo-v1|full-demo-v2|manual-play-v1> --ledger-file <new-absolute-path>");
                 output.WriteLine("CozyTown.Budget --stop --profile <registered-profile> --ledger-file <existing-absolute-path> --reason <reason-code>");
                 output.WriteLine("Initialization never resets existing files. Stop preserves all attempts, costs, slots and the first stop reason.");
                 return 0;
