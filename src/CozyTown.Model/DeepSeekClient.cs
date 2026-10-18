@@ -38,7 +38,8 @@ public sealed class DeepSeekClient : IDisposable
         _key = CredentialReader.Read(options.CredentialFile);
         _expectedFingerprint = options.ExpectedSystemFingerprint;
         if (options.ExecutionPurpose is not ("legacy" or "experiment" or "manual")
-            || options.BudgetProfileVersion == ModelBudgetProfile.FirstSliceVersion && options.ExecutionPurpose != "legacy")
+            || options.BudgetProfileVersion == ModelBudgetProfile.FirstSliceVersion && options.ExecutionPurpose != "legacy"
+            || options.BudgetProfileVersion == ModelBudgetProfile.ManualPlayVersion && options.ExecutionPurpose != "manual")
             throw new ModelException("execution_purpose_invalid");
         _executionPurpose = options.ExecutionPurpose;
         _http = new(testHandler ?? new HttpClientHandler

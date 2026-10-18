@@ -9,15 +9,132 @@ namespace CozyTown.Model.Tests;
 [TestFixture]
 public sealed class DeepSeekClientTests
 {
+    [TestCase("legacy")]
+    [TestCase("experiment")]
+    public void ManualPlayProfileRejectsNonManualPurposeBeforeAnyHttp(string purpose)
+    {
+        using var fixture = new ModelFixture();
+        string path = Path.Combine(fixture.Root, "manual-play.json");
+        var ledger = PersistentBudgetLedger.InitializeNew(path, "manual-play-v1");
+        var handler = new FakeHandler("success");
+
+        BudgetLedgerTests.AssertCode("execution_purpose_invalid", () =>
+        {
+            using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+                BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: purpose), new MemoryJournal(), handler);
+        });
+
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(ledger.Snapshot().TotalAttempts, Is.Zero);
+    }
+
+    [TestCase(ModelStage.Baseline)]
+    [TestCase(ModelStage.Counterfactual)]
+    [TestCase(ModelStage.PlayerDialogue)]
+    public void ManualPlayProfileRejectsNonManualStagesBeforeAnyHttp(ModelStage stage)
+    {
+        using var fixture = new ModelFixture();
+        string path = Path.Combine(fixture.Root, "manual-play.json");
+        PersistentBudgetLedger.InitializeNew(path, "manual-play-v1");
+        var handler = new FakeHandler("success");
+        using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+            BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: "manual"), new MemoryJournal(), handler);
+
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(Request() with { Stage = stage }))!.Code,
+            Is.EqualTo("execution_stage_mismatch"));
+
+        Assert.That(handler.TotalCalls, Is.Zero);
+        Assert.That(client.Budget.TotalAttempts, Is.Zero);
+    }
+
     [Test]
-    public async Task ManualFingerprintChangeIsRecordedAndSettledWithoutStoppingTheSharedBudget()
+    public async Task ManualNpcPlayerRecoveryAndUnpostedAdmissionShareNinetySixAttemptsAfterReopen()
+    {
+        using var fixture = new ModelFixture();
+        string path = Path.Combine(fixture.Root, "manual-play.json");
+        PersistentBudgetLedger.InitializeNew(path, "manual-play-v1");
+        var handler = new FakeHandler("success");
+        using (var unposted = new DeepSeekClient(new(fixture.CredentialPath, path,
+                   BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: "manual"),
+                   new MemoryJournal { RejectRequestCode = "host_request_retired_before_send" }, handler))
+        {
+            var result = await unposted.SendAsync(Request("retired") with { Stage = ModelStage.Manual });
+            Assert.That(result.FailureCode, Is.EqualTo("host_request_retired_before_send"));
+            Assert.That(unposted.Budget.TotalAttempts, Is.EqualTo(1));
+            Assert.That(unposted.Budget.SettledMicros, Is.Zero);
+            Assert.That(unposted.Budget.SlotsHeld, Is.Zero);
+            Assert.That(handler.ChatCalls, Is.Zero);
+        }
+        using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+            BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: "manual"), new MemoryJournal(), handler);
+        var recovery = Request("retired") with { Stage = ModelStage.Manual, IsRecovery = true };
+        Assert.That((await client.SendAsync(recovery)).Succeeded, Is.True);
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(recovery))!.Code, Is.EqualTo("recovery_limit"));
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(recovery with { IsRecovery = false }))!.Code,
+            Is.EqualTo("logical_request_already_sent"));
+        for (int i = 2; i < 96; i++)
+        {
+            var request = Request("manual-" + i) with { Stage = ModelStage.Manual };
+            if (i % 2 == 0) request = request with { Identity = request.Identity with { Kind = "player_text", PlayerSessionId = "player-" + i } };
+            Assert.That((await client.SendAsync(request)).Succeeded, Is.True);
+        }
+
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await client.SendAsync(Request("excess") with { Stage = ModelStage.Manual }))!.Code,
+            Is.EqualTo("total_limit"));
+        var restored = PersistentBudgetLedger.OpenExisting(path, "manual-play-v1").Snapshot();
+        Assert.Multiple(() =>
+        {
+            Assert.That(restored.TotalAttempts, Is.EqualTo(96));
+            Assert.That(restored.SettledMicros, Is.EqualTo(26_600));
+            Assert.That(restored.Attempts.Count(a => a.Recovery), Is.EqualTo(1));
+            Assert.That(restored.Attempts.All(a => a.Stage == "manual"), Is.True);
+            Assert.That(restored.SlotsHeld, Is.Zero);
+            Assert.That(handler.ChatCalls, Is.EqualTo(95));
+        });
+    }
+
+    [Test]
+    public async Task ManualHttpFailuresKeepTwoUnknownSlotsAndPreventAnyThirdPostAfterReopen()
+    {
+        using var fixture = new ModelFixture();
+        string path = Path.Combine(fixture.Root, "manual-play.json");
+        PersistentBudgetLedger.InitializeNew(path, "manual-play-v1");
+        var handler = new FakeHandler("http-502");
+        using (var client = new DeepSeekClient(new(fixture.CredentialPath, path,
+                   BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: "manual"), new MemoryJournal(), handler))
+        {
+            Assert.That((await client.SendAsync(Request("npc") with { Stage = ModelStage.Manual })).FailureCode, Is.EqualTo("provider_http_failure"));
+            var player = Request("player") with { Stage = ModelStage.Manual,
+                Identity = new("run", "session", "player", "sora", 7, "player_text", "dialogue") };
+            Assert.That((await client.SendAsync(player)).FailureCode, Is.EqualTo("provider_http_failure"));
+        }
+        var restored = PersistentBudgetLedger.OpenExisting(path, "manual-play-v1");
+        using var reopened = new DeepSeekClient(new(fixture.CredentialPath, path,
+            BudgetProfileVersion: "manual-play-v1", ExecutionPurpose: "manual"), new MemoryJournal(), handler);
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await reopened.SendAsync(Request("third") with { Stage = ModelStage.Manual }))!.Code,
+            Is.EqualTo("concurrency_limit"));
+        Assert.That(restored.Snapshot().TotalAttempts, Is.EqualTo(2));
+        Assert.That(restored.Snapshot().ReservedMicros, Is.EqualTo(4_220_000));
+        Assert.That(restored.Snapshot().SlotsHeld, Is.EqualTo(2));
+        Assert.That(handler.ChatCalls, Is.EqualTo(2));
+        foreach (var attempt in restored.Snapshot().Attempts)
+            restored.MarkUnknown(attempt.AttemptId, "later_generation_ended", true);
+        Assert.That(Assert.ThrowsAsync<ModelException>(async () => await reopened.SendAsync(Request("third") with { Stage = ModelStage.Manual }))!.Code,
+            Is.EqualTo("money_limit"));
+        Assert.That(restored.Snapshot().ReservedMicros, Is.EqualTo(4_220_000));
+        Assert.That(handler.ChatCalls, Is.EqualTo(2));
+    }
+
+    [TestCase("full-demo-v2")]
+    [TestCase("manual-play-v1")]
+    public async Task ManualFingerprintChangeIsRecordedAndSettledWithoutStoppingTheSharedBudget(string profileVersion)
     {
         using var fixture = new ModelFixture();
         string path = Path.Combine(fixture.Root, "manual.json");
-        PersistentBudgetLedger.InitializeNew(path, "full-demo-v2");
+        PersistentBudgetLedger.InitializeNew(path, profileVersion);
         var journal = new MemoryJournal();
         using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
-            BudgetProfileVersion: "full-demo-v2", ExecutionPurpose: "manual"), journal, new FakeHandler("fingerprint-mismatch"));
+            BudgetProfileVersion: profileVersion, ExecutionPurpose: "manual"), journal, new FakeHandler("fingerprint-mismatch"));
         var result = await client.SendAsync(Request() with { Stage = ModelStage.Manual });
         Assert.Multiple(() =>
         {
@@ -61,16 +178,21 @@ public sealed class DeepSeekClientTests
         Assert.That(handler.TotalCalls, Is.Zero);
     }
 
-    [TestCase("model-mismatch", "model_not_registered")]
-    [TestCase("no-usage", "usage_invalid_or_missing")]
-    [TestCase("invalid-cache", "usage_invalid_or_missing")]
-    [TestCase("no-fingerprint", "fingerprint_not_registered")]
-    public async Task ManualPolicyStillRejectsUnverifiedModelUsageOrMissingFingerprint(string mode, string code)
+    [TestCase("full-demo-v2", "model-mismatch", "model_not_registered")]
+    [TestCase("full-demo-v2", "no-usage", "usage_invalid_or_missing")]
+    [TestCase("full-demo-v2", "invalid-cache", "usage_invalid_or_missing")]
+    [TestCase("full-demo-v2", "no-fingerprint", "fingerprint_not_registered")]
+    [TestCase("manual-play-v1", "model-mismatch", "model_not_registered")]
+    [TestCase("manual-play-v1", "no-usage", "usage_invalid_or_missing")]
+    [TestCase("manual-play-v1", "invalid-cache", "usage_invalid_or_missing")]
+    [TestCase("manual-play-v1", "no-fingerprint", "fingerprint_not_registered")]
+    [TestCase("manual-play-v1", "invalid-secret-finish", "generation_terminal_unverified")]
+    public async Task ManualPolicyStillRejectsUnverifiedModelUsageOrMissingFingerprint(string profileVersion, string mode, string code)
     {
         using var fixture = new ModelFixture(); string path = Path.Combine(fixture.Root, "manual.json");
-        PersistentBudgetLedger.InitializeNew(path, "full-demo-v2");
+        PersistentBudgetLedger.InitializeNew(path, profileVersion);
         using var client = new DeepSeekClient(new(fixture.CredentialPath, path,
-            BudgetProfileVersion: "full-demo-v2", ExecutionPurpose: "manual"), new MemoryJournal(), new FakeHandler(mode));
+            BudgetProfileVersion: profileVersion, ExecutionPurpose: "manual"), new MemoryJournal(), new FakeHandler(mode));
         var result = await client.SendAsync(Request() with { Stage = ModelStage.Manual });
         Assert.That(result.FailureCode, Is.EqualTo(code));
         Assert.That(result.ProviderWarningCode, Is.Null);
