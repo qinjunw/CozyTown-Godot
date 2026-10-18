@@ -339,12 +339,19 @@ public static class TownReplay
                         Compare(JsonNode.Parse(frozenRequest.GetRawText()), JsonNode.Parse(input.GetProperty("dispatch").GetProperty("request").GetRawText()), "model.frozenRequest");
                     if (trace.Command == "model_response_arrived")
                     {
+                        if (package.BudgetProfile?.Version == "manual-play-v1")
+                        {
+                            using var body = JsonDocument.Parse(input.GetProperty("responseBody").GetString()!);
+                            Compare(JsonSerializer.SerializeToNode("manual"), JsonNode.Parse(body.RootElement.GetProperty("executionPurpose").GetRawText()), "model.executionPurpose");
+                        }
                         if (!arrivals.TryAdd(attempt, input.Clone())) throw new ReplayMismatch("model.arrival", "unique response", attempt);
                         if (playerArrivals.TryGetValue(attempt, out var worldArrival)) ValidatePlayerArrival(worldArrival, input);
                         if (npcArrivals.TryGetValue(attempt, out var npcArrival)) ValidateNpcArrival(npcArrival, input);
                     }
                     else if (trace.Command == "model_completion_persisted")
                     {
+                        if (package.BudgetProfile?.Version == "manual-play-v1")
+                            Compare(JsonSerializer.SerializeToNode("manual"), JsonNode.Parse(input.GetProperty("executionPurpose").GetRawText()), "model.executionPurpose");
                         if (input.GetProperty("arrivedAtUtc").ValueKind != JsonValueKind.Null && !arrivals.ContainsKey(attempt))
                             throw new ReplayMismatch("model.arrival", "body arrival before persistence", "missing");
                         if (!completions.TryAdd(attempt, input.Clone())) throw new ReplayMismatch("model.completion", "unique persistence", attempt);

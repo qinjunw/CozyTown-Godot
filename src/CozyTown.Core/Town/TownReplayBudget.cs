@@ -23,6 +23,8 @@ public sealed record TownReplayBudgetProfile(string Version, string BudgetId, st
         5_000_000, 2_110_000, 96, 2, new() { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 });
     public static TownReplayBudgetProfile FullDemoV2 => new("full-demo-v2", "cozytown-godot-full-demo-20261011-v2", "CNY",
         5_000_000, 2_110_000, 96, 2, new() { ["baseline"] = 40, ["counterfactual"] = 40, ["player_dialogue"] = 8, ["manual"] = 8 });
+    public static TownReplayBudgetProfile ManualPlay => new("manual-play-v1", "cozytown-godot-manual-play-20261017-v1", "CNY",
+        5_000_000, 2_110_000, 96, 2, new() { ["manual"] = 96 });
 }
 
 public sealed class TownReplayBudget
@@ -40,6 +42,7 @@ public sealed class TownReplayBudget
         _profile = TownJson.Clone(profile ?? TownReplayBudgetProfile.FirstSlice);
         var known = _profile.Version switch { "first-slice-budget-v1" => TownReplayBudgetProfile.FirstSlice, "full-demo-v1" => TownReplayBudgetProfile.FullDemo,
             "full-demo-v2" => TownReplayBudgetProfile.FullDemoV2,
+            "manual-play-v1" => TownReplayBudgetProfile.ManualPlay,
             _ => throw new InvalidDataException("Unsupported replay budget profile: " + _profile.Version) };
         Require("budget.profile", JsonElement.DeepEquals(JsonSerializer.SerializeToElement(known, TownJson.Options), JsonSerializer.SerializeToElement(_profile, TownJson.Options)), "registered budget limits", _profile.Version);
         Validate(initialState);
