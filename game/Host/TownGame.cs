@@ -431,14 +431,9 @@ public partial class TownGame : Node2D
             responseJournal.RecordReplayInput("model_mailbox_enqueued", new { dispatch = result.Dispatch });
             _mainThread.Enqueue(() =>
             {
-                _journal.ImportRetiredCompletion(responseJournal, result);
-                _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
-                _activeModelRequests.Remove(key);
-                _modelCompletions.Add(result);
-                ObserveModelCompletion(result);
+                EnterModelCompletionMailbox(responseJournal, result, key);
                 ActionCandidate? candidate = null;
                 string? error = result.FailureCode;
-                StopFullDemoAdmission(result.BudgetAfter?.StopReason ?? error, result.BudgetAfter?.StopReason is not null);
                 if (result.Succeeded && result.CandidateJson != null)
                 {
                     try { candidate = TownModelProtocol.Parse(result.CandidateJson); }
@@ -468,6 +463,16 @@ public partial class TownGame : Node2D
             });
         }
         finally { _admissionClocks.TryRemove(key, out _); }
+    }
+
+    private void EnterModelCompletionMailbox(TownRunJournal responseJournal, ModelCompletion result, string key)
+    {
+        _journal.ImportRetiredCompletion(responseJournal, result);
+        _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
+        _activeModelRequests.Remove(key);
+        _modelCompletions.Add(result);
+        ObserveModelCompletion(result);
+        StopFullDemoAdmission(result.BudgetAfter?.StopReason ?? result.FailureCode, result.BudgetAfter?.StopReason is not null);
     }
 
     private string? ModelUnavailableReason(string kind)

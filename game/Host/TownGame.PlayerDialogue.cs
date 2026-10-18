@@ -112,12 +112,7 @@ public partial class TownGame
             responseJournal.RecordReplayInput("model_mailbox_enqueued", new { dispatch = result.Dispatch });
             _mainThread.Enqueue(() =>
             {
-                _journal.ImportRetiredCompletion(responseJournal, result);
-                _journal.RecordReplayInput("model_mailbox_entered", new { dispatch = result.Dispatch });
-                _activeModelRequests.Remove(key);
-                _modelCompletions.Add(result);
-                ObserveModelCompletion(result);
-                StopFullDemoAdmission(result.BudgetAfter?.StopReason ?? result.FailureCode, result.BudgetAfter?.StopReason is not null);
+                EnterModelCompletionMailbox(responseJournal, result, key);
                 if (result.DispatchedAtUtc is null && _world.SessionId == frozen.Identity.SessionId)
                     _world.MarkPlayerDialogueDispatched(request.PlayerSessionId, request.LogicalRequestId, result.Dispatch.AttemptId);
                 DialogueHost.Complete(request, frozen.Identity.SessionId, result.Dispatch.AttemptId,
