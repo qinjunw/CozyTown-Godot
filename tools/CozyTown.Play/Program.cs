@@ -127,7 +127,7 @@ public static class PlayCommand
 
     private static object? BudgetReport(BudgetSnapshot? budget, ModelBudgetProfile? profile) => budget is null ? null : new
     {
-        profile = profile!.Version, currency = budget.Currency, totalUsed = budget.TotalAttempts, totalLimit = profile.TotalLimit,
+        profile = profile!.Version, budget.BudgetId, currency = budget.Currency, totalUsed = budget.TotalAttempts, totalLimit = profile.TotalLimit,
         manualUsed = budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual),
         manualLimit = profile.StageLimits[TownModelRuntimeProfile.Manual], budget.SettledMicros, budget.ReservedMicros,
         budget.AvailableMicros, budget.SlotsHeld, concurrentLimit = profile.ConcurrentLimit, reservePerRequestMicros = profile.ReserveMicros,

@@ -11,10 +11,11 @@ namespace CozyTown.Host.Tests;
 
 public sealed class PlayCommandTests
 {
-    [Test]
-    public void ManualCheckUsesRegisteredProfileAndPreservesSyntheticLedgerWithoutStartingGame()
+    [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2", 8)]
+    [TestCase("manual-play-v1", "cozytown-godot-manual-play-20261017-v1", 96)]
+    public void ManualCheckUsesRegisteredProfileAndPreservesSyntheticLedgerWithoutStartingGame(string profile, string budgetId, int manualLimit)
     {
-        using var fixture = new LaunchFixture();
+        using var fixture = new LaunchFixture(profile);
         byte[] before = File.ReadAllBytes(fixture.Ledger);
         var result = fixture.Check("--real");
         Assert.That(result.Exit, Is.Zero, result.Output + result.Error);
@@ -25,6 +26,10 @@ public sealed class PlayCommandTests
             Assert.That(report.RootElement.GetProperty("packageFiles").GetInt32(), Is.EqualTo(2));
             Assert.That(report.RootElement.GetProperty("gameStarted").GetBoolean(), Is.False);
             Assert.That(report.RootElement.GetProperty("budget").GetProperty("manualUsed").GetInt32(), Is.Zero);
+            Assert.That(report.RootElement.GetProperty("budget").GetProperty("profile").GetString(), Is.EqualTo(profile));
+            Assert.That(report.RootElement.GetProperty("budget").GetProperty("budgetId").GetString(), Is.EqualTo(budgetId));
+            Assert.That(report.RootElement.GetProperty("budget").GetProperty("totalLimit").GetInt32(), Is.EqualTo(96));
+            Assert.That(report.RootElement.GetProperty("budget").GetProperty("manualLimit").GetInt32(), Is.EqualTo(manualLimit));
             Assert.That(report.RootElement.GetProperty("commandArguments").EnumerateArray().Select(a => a.GetString()),
                 Is.EqualTo(new[] { "--", "--model-config=<local-config>", "--execution-purpose=manual", "--data-dir=<separate-data>" }));
             Assert.That(result.Output + result.Error, Does.Not.Contain(fixture.Root).And.Not.Contain(LaunchFixture.Key));
@@ -33,10 +38,11 @@ public sealed class PlayCommandTests
         });
     }
 
-    [Test]
-    public void OfflineCheckDoesNotReadModelConfigurationCredentialsOrLedger()
+    [TestCase("full-demo-v2")]
+    [TestCase("manual-play-v1")]
+    public void OfflineCheckDoesNotReadModelConfigurationCredentialsOrLedger(string profile)
     {
-        using var fixture = new LaunchFixture();
+        using var fixture = new LaunchFixture(profile);
         File.Delete(Path.Combine(fixture.Root, "model.json"));
         File.Delete(Path.Combine(fixture.Root, "credential.json"));
         File.Delete(fixture.Ledger);
@@ -53,10 +59,11 @@ public sealed class PlayCommandTests
         });
     }
 
-    [Test]
-    public void PublishedCommandBoundaryEmitsRedactedCheckReportWithoutStartingSyntheticExecutable()
+    [TestCase("full-demo-v2")]
+    [TestCase("manual-play-v1")]
+    public void PublishedCommandBoundaryEmitsRedactedCheckReportWithoutStartingSyntheticExecutable(string profile)
     {
-        using var fixture = new LaunchFixture();
+        using var fixture = new LaunchFixture(profile);
         string dotnet = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(object).Assembly.Location)!, "../../..", "dotnet.exe"));
         var start = new ProcessStartInfo(dotnet) { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true };
         foreach (string argument in new[] { typeof(PlayCommand).Assembly.Location, "--real", "--check-only", "--settings=" + fixture.Settings })
@@ -199,18 +206,18 @@ public sealed class PlayCommandTests
         public string Root { get; } = Path.Combine(Path.GetTempPath(), "cozytown-play-" + Guid.NewGuid().ToString("N"));
         public string Ledger => Path.Combine(Root, "ledger.json");
         public string Settings => Path.Combine(Root, "launcher.json");
-        public LaunchFixture()
+        public LaunchFixture(string profileVersion = ModelBudgetProfile.FullDemoV2Version)
         {
             Directory.CreateDirectory(Path.Combine(Root, "package"));
             File.WriteAllText(Path.Combine(Root, "package", "CozyTown.exe"), "synthetic executable; must never run");
             File.WriteAllText(Path.Combine(Root, "package", "CozyTown.pck"), "synthetic content");
             File.WriteAllText(Path.Combine(Root, "credential.json"), JsonSerializer.Serialize(new
                 { fixture = new { Todo = "CozyTown", testingAPIKey = Key } }));
-            PersistentBudgetLedger.InitializeNew(Ledger, ModelBudgetProfile.FullDemoV2Version);
+            PersistentBudgetLedger.InitializeNew(Ledger, profileVersion);
             File.WriteAllText(Path.Combine(Root, "model.json"), TownJson.Serialize(new
             {
                 credentialFile = Path.Combine(Root, "credential.json"), ledgerFile = Ledger,
-                expectedSystemFingerprint = "another-registered-fingerprint", budgetProfileVersion = "full-demo-v2"
+                expectedSystemFingerprint = "another-registered-fingerprint", budgetProfileVersion = profileVersion
             }));
             File.WriteAllText(Path.Combine(Root, "manifest.json"), TownJson.Serialize(new
             {

@@ -241,7 +241,7 @@ public sealed class TownRunJournal : IModelJournal, IDisposable
     private static readonly JsonSerializerOptions CompactJson = new(TownJson.Options) { WriteIndented = false };
 }
 
-// Missing runtime fields retain the first-slice save contract; full-demo saves must persist both.
+// Missing runtime fields retain the first-slice save contract; later profiles must persist both.
 public sealed record TownHostSnapshot(int SchemaVersion, string WorldJson, string SourceRunDirectoryName,
     long JournalRecordCount, double UnconsumedSeconds, string DecisionMode, string Stage,
     Dictionary<string, FrozenModelRequest> ModelRequests, TownPoint[]? PlayerRoute = null, int PlayerRouteCursor = 0,
@@ -299,7 +299,7 @@ public static class TownSaveFile
             throw new InvalidDataException("Host snapshot branch or stage differs from its world snapshot.");
         var runtime = TownModelRuntimeProfile.Resolve(snapshot.BudgetProfileVersion, snapshot.ExecutionPurpose);
         if (state.BudgetId != runtime.BudgetId
-            || runtime.IsFullDemo && snapshot.Stage is not ("baseline" or "counterfactual"))
+            || runtime.Profile.Version != ModelBudgetProfile.FirstSliceVersion && snapshot.Stage is not ("baseline" or "counterfactual"))
             throw new InvalidDataException("Host snapshot budget identity or scenario differs from its registered profile.");
         if (snapshot.DecisionMode == "rules" && snapshot.ModelRequests.Count != 0)
             throw new InvalidDataException("Rules-mode snapshot contains real model requests.");

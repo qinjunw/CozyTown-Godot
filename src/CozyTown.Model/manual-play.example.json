@@ -1,0 +1,6 @@
+{
+  "credentialFile": "<absolute-private-credentials.json>",
+  "ledgerFile": "<absolute-manual-play-v1-ledger.json>",
+  "expectedSystemFingerprint": "<registered-provider-fingerprint>",
+  "budgetProfileVersion": "manual-play-v1"
+}

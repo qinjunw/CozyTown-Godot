@@ -1,5 +1,6 @@
 using System.Text;
 using CozyTown.Core.Town;
+using CozyTown.Model;
 using Godot;
 
 namespace CozyTown.Game;
@@ -265,7 +266,9 @@ public partial class TownGame
     {
         int minute = (int)_view.WorldMinute % 1440;
         _clock.Text = $"春日 · 第 {(long)_view.WorldMinute / 1440 + 1} 天    {minute / 60:00}:{minute % 60:00}" + (_pauseReasons.Count > 0 ? "  · 暂停" : "");
-        _modeLabel.Text = _scenario is "farming-capacity-fixture" or "production-capacity-fixture" ? "满包验证初态" : _mode == "real" ? "真实模型" : "规则模拟";
+        _modeLabel.Text = _scenario is "farming-capacity-fixture" or "production-capacity-fixture" ? "满包验证初态" : _mode != "real" ? "规则模拟"
+            : _modelRuntime.Profile.Version == ModelBudgetProfile.ManualPlayVersion ? "真实模型 · 独立人工试玩"
+            : _modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual ? "真实模型 · 历史评测池试玩" : "真实模型 · 正式评测";
         ResidentState? nearest = _view.Residents.Where(r => r.Position.DistanceTo(_view.PlayerPosition) <= 42)
             .OrderBy(r => r.Position.DistanceTo(_view.PlayerPosition)).FirstOrDefault();
         string? productionId = NearbyProductionId();
@@ -302,6 +305,7 @@ public partial class TownGame
             text.AppendLine("\n最近的约定\n" + ActivityLabel(meeting.Stage));
             foreach (string line in meeting.Dialogue.TakeLast(4)) text.AppendLine(line);
         }
+        text.AppendLine("\n" + TownResidentDecisionSummary.Format(resident, _view.BranchId, _world.SessionId, _recentEvents, _modelCompletions));
         text.AppendLine("\n最近发生");
         foreach (TownEvent entry in _recentEvents.Where(e => e.ResidentId == resident.Id).TakeLast(6))
             text.AppendLine($"{(int)entry.WorldMinute % 1440 / 60:00}:{(int)entry.WorldMinute % 60:00}  {SourceLabel(entry.Source)} · {ActivityLabel(entry.Reason)}");
@@ -310,7 +314,8 @@ public partial class TownGame
             string? unavailable = ModelUnavailableReason("npc_action");
             if (_modelBudgetView is { } budget)
             {
-                text.AppendLine($"\n共用实验额度\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
+                string budgetLabel = _modelRuntime.Profile.Version == ModelBudgetProfile.ManualPlayVersion ? "独立人工试玩额度" : "共用实验额度";
+                text.AppendLine($"\n{budgetLabel} · {_modelRuntime.Profile.Version}\n{budget.TotalAttempts} / {_modelRuntime.Profile.TotalLimit} 次 · 预留 {budget.ReservedMicros / 1_000_000m:0.######} 元\n保守扣减 {budget.SettledMicros / 1_000_000m:0.######} 元");
                 if (_modelRuntime.ExecutionPurpose == TownModelRuntimeProfile.Manual)
                     text.AppendLine($"人工试玩 {budget.Attempts.Count(a => a.Stage == TownModelRuntimeProfile.Manual)} / {_modelRuntime.Profile.StageLimits[TownModelRuntimeProfile.Manual]} 次 · NPC 与玩家共享");
             }
