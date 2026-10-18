@@ -39,7 +39,8 @@ public static class TownResidentDecisionSummary
             {
                 "invite" => "（等待对方回应）", "propose_exchange" => "（等待对方接受报价）", _ => ""
             })
-            : decision is null ? "尚未执行" : "已拒绝" + RejectionReason(decision.Reason);
+            : decision is null ? resident.PendingRequestId == requestId ? "尚未执行" : "记录不足"
+                : "已拒绝" + RejectionReason(decision.Reason);
         string fallback = source != "规则回退" && related.Any(e => e.Kind == "rule_fallback") ? "\n回退：规则回退" : "";
         return activity + $"\n最近决定 {ShortRequest(requestId)}\n来源：{source}；候选：{CandidateText(candidate)}\n世界：{outcome}" + fallback;
     }

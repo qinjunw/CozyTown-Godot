@@ -211,6 +211,30 @@ public sealed class TownResidentDecisionSummaryTests
         });
     }
 
+    [TestCase(null, "candidate_executed")]
+    [TestCase("eli", "candidate_rejected")]
+    public void EvictedWorldOutcomeIsReportedAsInsufficientRecordsInsteadOfUnexecuted(string? target, string outcomeKind)
+    {
+        var world = World();
+        var request = world.GetDecisionRequests().Single(r => r.ResidentId == "mina");
+        var candidate = new ActionCandidate("wait", target, null, null, 0, 0, null, "wait");
+        var completion = Completion(world, request, candidate);
+        Dispatch(world, request, candidate);
+        world.Advance(0, 0);
+        for (int i = 0; i < 121; i++)
+            Assert.That(world.SetPlayerPosition(new(160 + i % 2, 160)), Is.True);
+        var view = world.GetView();
+        var resident = view.Residents.Single(r => r.Id == "mina");
+        var recentEvents = world.Events.Where(e => e.Kind is not ("time_input" or "space_query")).TakeLast(120).ToArray();
+        Assert.That(resident.PendingRequestId, Is.Null);
+        Assert.That(world.Events.Any(e => e.LogicalRequestId == request.LogicalRequestId && e.Kind == outcomeKind), Is.True);
+        Assert.That(recentEvents.Any(e => e.LogicalRequestId == request.LogicalRequestId), Is.False);
+
+        string summary = TownResidentDecisionSummary.Format(resident, view.BranchId, world.SessionId, recentEvents, [completion]);
+
+        Assert.That(summary, Does.Contain("世界：记录不足").And.Not.Contain("世界：尚未执行"));
+    }
+
     [Test]
     public void ExecutedSaleProposalStillAwaitsTheBuyerInsteadOfClaimingACompletedExchange()
     {
