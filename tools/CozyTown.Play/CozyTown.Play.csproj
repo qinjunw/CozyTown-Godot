@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/CozyTown.Core/CozyTown.Core.csproj" />
+    <ProjectReference Include="../../src/CozyTown.Model/CozyTown.Model.csproj" />
+    <Compile Include="../../game/Host/TownModelRuntimeSettings.cs" Link="TownModelRuntimeSettings.cs" />
+  </ItemGroup>
+</Project>

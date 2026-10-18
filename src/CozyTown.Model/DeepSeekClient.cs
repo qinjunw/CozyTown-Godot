@@ -19,6 +19,7 @@ public sealed class DeepSeekClient : IDisposable
     private readonly HttpClient _http;
     private readonly string _key;
     private readonly string _expectedFingerprint;
+    private readonly string _executionPurpose;
     private readonly SemaphoreSlim _accountGate = new(1);
     private bool _accountVerified;
 
@@ -36,6 +37,11 @@ public sealed class DeepSeekClient : IDisposable
         _ledger = PersistentBudgetLedger.OpenExisting(options.LedgerFile, options.BudgetProfileVersion);
         _key = CredentialReader.Read(options.CredentialFile);
         _expectedFingerprint = options.ExpectedSystemFingerprint;
+        if (options.ExecutionPurpose is not ("legacy" or "experiment" or "manual")
+            || options.BudgetProfileVersion == ModelBudgetProfile.FirstSliceVersion && options.ExecutionPurpose != "legacy"
+            || options.BudgetProfileVersion == ModelBudgetProfile.ManualPlayVersion && options.ExecutionPurpose != "manual")
+            throw new ModelException("execution_purpose_invalid");
+        _executionPurpose = options.ExecutionPurpose;
         _http = new(testHandler ?? new HttpClientHandler
         {
             AllowAutoRedirect = false, UseCookies = false, AutomaticDecompression = DecompressionMethods.None
@@ -52,6 +58,7 @@ public sealed class DeepSeekClient : IDisposable
         var logicalWait = Stopwatch.StartNew();
         ValidateRequest(request);
         cancellationToken.ThrowIfCancellationRequested();
+        if (_ledger.Snapshot().StopReason is string stopReason) throw new ModelException("ledger_stopped", stopReason);
         using (var admissionDeadline = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken))
         {
             admissionDeadline.CancelAfter(request.RemainingWait);
@@ -66,7 +73,7 @@ public sealed class DeepSeekClient : IDisposable
         DateTimeOffset? sentAt = null, arrivedAt = null;
         TimeSpan? logicalElapsedToArrival = null;
         int? httpStatus = null;
-        string? providerId = null, model = null, fingerprint = null, finish = null, candidate = null, failure = null;
+        string? providerId = null, model = null, fingerprint = null, finish = null, candidate = null, failure = null, warning = null;
         ModelUsage? usage = null;
         bool ended = false, settled = false;
         var duration = new Stopwatch();
@@ -92,44 +99,25 @@ public sealed class DeepSeekClient : IDisposable
             logicalElapsedToArrival = logicalWait.Elapsed;
             duration.Stop();
             NotifyArrival(dispatch, logicalElapsedToArrival.Value);
-            await _journal.WriteResponseArrivalAsync(dispatch, ContainsSecret(body) ? null : body,
+            var parsed = ParseResponse(body, httpStatus.Value);
+            await _journal.WriteResponseArrivalAsync(dispatch, ProjectResponse(parsed, httpStatus.Value),
                 logicalElapsedToArrival.Value, CancellationToken.None).ConfigureAwait(false);
+            providerId = parsed.Id; model = parsed.Model; fingerprint = parsed.Fingerprint;
+            finish = parsed.Finish; candidate = parsed.Candidate; usage = parsed.Usage; ended = parsed.GenerationEnded;
+            if (usage is not null && fingerprint != _expectedFingerprint) warning = "fingerprint_changed";
             if (!response.IsSuccessStatusCode)
             {
-                failure = httpStatus switch
-                {
-                    401 or 403 => "authentication_failed", 402 => "account_unavailable",
-                    429 => "rate_limited", _ => "provider_http_failure"
-                };
+                failure = parsed.FailureCode!;
                 _ledger.MarkUnknown(attempt.AttemptId, failure, false,
                     httpStatus is 401 or 403 or 402);
             }
             else
             {
-                using var document = JsonDocument.Parse(body);
-                var root = document.RootElement;
-                JsonData.RequireUniqueProperties(root);
-                ParseGeneration(root, out providerId, out model, out fingerprint, out finish, out candidate);
-                ended = true;
-                if (ContainsSecret(providerId) || ContainsSecret(model) || ContainsSecret(fingerprint) || ContainsSecret(candidate))
-                {
-                    providerId = model = fingerprint = candidate = null;
-                    throw new ModelException("response_secret_echo");
-                }
-                if (model != RequestedModel) throw new ModelException("model_not_registered");
-                if (fingerprint != _expectedFingerprint) throw new ModelException("fingerprint_not_registered");
-                usage = ParseUsage(root);
+                if (usage is null) throw new ModelException(parsed.FailureCode ?? "usage_invalid_or_missing");
                 _ledger.Settle(attempt.AttemptId, usage.PromptTokens, usage.CompletionTokens);
                 settled = true;
                 if (duration.Elapsed >= timeout) failure = "response_late";
-                else if (finish != "stop") failure = "generation_" + finish;
-                else if (string.IsNullOrWhiteSpace(candidate)) failure = "candidate_empty";
-                else
-                {
-                    using var parsed = JsonDocument.Parse(candidate);
-                    JsonData.RequireUniqueProperties(parsed.RootElement);
-                    if (parsed.RootElement.ValueKind != JsonValueKind.Object) failure = "candidate_not_object";
-                }
+                else failure = parsed.FailureCode;
             }
         }
         catch (Exception error)
@@ -165,7 +153,8 @@ public sealed class DeepSeekClient : IDisposable
         finish = SafeMetadata(finish);
         var completion = new ModelCompletion(dispatch, sentAt, arrivedAt, duration.Elapsed,
             httpStatus, providerId, model, fingerprint, finish, candidate, usage, failure,
-            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival, finalBudget);
+            ended, settled, finalAttempt?.SlotHeld ?? true, settled ? finalAttempt?.SettledCostMicros : null, logicalElapsedToArrival, finalBudget,
+            warning, SafeMetadata(_expectedFingerprint), _executionPurpose, arrivedAt is null ? null : 1);
         try { await _journal.WriteCompletionAsync(completion, CancellationToken.None).ConfigureAwait(false); }
         catch
         {
@@ -239,6 +228,8 @@ public sealed class DeepSeekClient : IDisposable
 
     private void ValidateRequest(FrozenModelRequest request)
     {
+        if (_executionPurpose == "manual" && request?.Stage != ModelStage.Manual)
+            throw new ModelException("execution_stage_mismatch");
         if (request is not null && !_ledger.Profile.StageLimits.ContainsKey(ModelBudgetProfile.StageName(request.Stage)))
             throw new ModelException("stage_invalid");
         if (request?.Identity is not { } identity || new[] { identity.RunId, identity.SessionId,
@@ -319,6 +310,62 @@ public sealed class DeepSeekClient : IDisposable
             return new(p, c, total, hit, miss);
         }
         catch { throw new ModelException("usage_invalid_or_missing"); }
+    }
+
+    private sealed record ParsedResponse(string? Id, string? Model, string? Fingerprint, string? Finish,
+        string? Candidate, ModelUsage? Usage, string? FailureCode, bool GenerationEnded);
+
+    // Validate the original document, including properties that will not be persisted.
+    private ParsedResponse ParseResponse(string body, int status)
+    {
+        string? id = null, model = null, fingerprint = null, finish = null, candidate = null, failure = null;
+        ModelUsage? usage = null;
+        bool generationEnded = false;
+        try
+        {
+            if (status is < 200 or >= 300)
+                throw new ModelException(status switch
+                {
+                    401 or 403 => "authentication_failed", 402 => "account_unavailable",
+                    429 => "rate_limited", _ => "provider_http_failure"
+                });
+            using var document = JsonDocument.Parse(body);
+            JsonData.RequireUniqueProperties(document.RootElement);
+            ParseGeneration(document.RootElement, out id, out model, out fingerprint, out finish, out candidate);
+            generationEnded = true;
+            if (ContainsSecret(id) || ContainsSecret(model) || ContainsSecret(fingerprint) || ContainsSecret(candidate))
+            {
+                id = model = fingerprint = candidate = null;
+                throw new ModelException("response_secret_echo");
+            }
+            if (model != RequestedModel) throw new ModelException("model_not_registered");
+            if (string.IsNullOrWhiteSpace(fingerprint) || SafeMetadata(fingerprint) is null
+                || fingerprint != _expectedFingerprint && _executionPurpose != "manual")
+                throw new ModelException("fingerprint_not_registered");
+            usage = ParseUsage(document.RootElement);
+            if (finish != "stop") throw new ModelException("generation_" + finish);
+            if (string.IsNullOrWhiteSpace(candidate)) throw new ModelException("candidate_empty");
+            using var parsed = JsonDocument.Parse(candidate);
+            JsonData.RequireUniqueProperties(parsed.RootElement);
+            if (parsed.RootElement.ValueKind != JsonValueKind.Object) throw new ModelException("candidate_not_object");
+        }
+        catch (Exception error) { failure = ErrorCode(error); }
+        return new(id, model, fingerprint, finish, candidate, usage, failure, generationEnded);
+    }
+
+    // The projection retains validation facts and excludes reasoning, unused fields and HTTP error bodies.
+    private string ProjectResponse(ParsedResponse response, int status)
+    {
+        var usage = response.Usage;
+        return JsonSerializer.Serialize(new
+        {
+            projectionVersion = 1, httpStatus = status, validationFailure = response.FailureCode, generationEnded = response.GenerationEnded,
+            id = SafeMetadata(response.Id), model = SafeMetadata(response.Model), system_fingerprint = SafeMetadata(response.Fingerprint),
+            choices = new[] { new { index = 0, finish_reason = SafeMetadata(response.Finish), message = new { role = "assistant", content = SafeCandidate(response.Candidate) } } },
+            usage = usage is null ? null : new { prompt_tokens = usage.PromptTokens, completion_tokens = usage.CompletionTokens,
+                total_tokens = usage.TotalTokens, prompt_cache_hit_tokens = usage.CacheHitTokens, prompt_cache_miss_tokens = usage.CacheMissTokens },
+            executionPurpose = _executionPurpose, expectedSystemFingerprint = SafeMetadata(_expectedFingerprint)
+        });
     }
 
     private bool ContainsSecret(string? text, int depth = 0)

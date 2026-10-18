@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "cozytown.core": {
+        "type": "Project"
+      },
+      "cozytown.model": {
+        "type": "Project"
+      }
+    },
+    "net10.0/win-x64": {}
+  }
+}

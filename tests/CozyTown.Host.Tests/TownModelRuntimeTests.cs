@@ -8,6 +8,55 @@ namespace CozyTown.Host.Tests;
 [TestFixture]
 public sealed class TownModelRuntimeTests
 {
+    [TestCase("manual", "manual")]
+    [TestCase("experiment", "experiment")]
+    public void RuntimePurposeSelectsProviderPolicyWithoutAcceptingItFromLocalConfiguration(string purpose, string expected)
+    {
+        string untrusted = """
+            {"credentialFile":"C:\\external\\credentials.json","ledgerFile":"C:\\external\\ledger.json",
+             "budgetProfileVersion":"full-demo-v2","executionPurpose":"manual"}
+            """;
+        Assert.Throws<System.Text.Json.JsonException>(() => TownJson.Deserialize<TownModelRuntimeSettings>(untrusted));
+        var local = new TownModelRuntimeSettings("C:\\external\\credentials.json", "C:\\external\\ledger.json", BudgetProfileVersion: "full-demo-v2");
+        Assert.That(local.ToOptions().ExecutionPurpose, Is.EqualTo("legacy"));
+        Assert.That(TownModelRuntimeProfile.Resolve("full-demo-v2", purpose).ConfigureProvider(local.ToOptions()).ExecutionPurpose, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void DispatchAvailabilityRetainsStopCauseAndDistinguishesTemporaryOccupancyFromExhaustion()
+    {
+        var profile = ModelBudgetProfile.FullDemoV2;
+        var gate = new TownModelDispatchState();
+        var empty = new BudgetSnapshot(profile.BudgetId, "CNY", profile.LimitMicros, 0, 0, 0, 0, null, []);
+        Assert.That(gate.UnavailableReason(empty with { StopReason = "fingerprint_not_registered" }, profile, ModelStage.Manual), Is.EqualTo("fingerprint_not_registered"));
+        var held = new BudgetAttempt("one", "manual", "request", false, "reserved", true, 2110000, 0, null, null, null);
+        Assert.That(gate.UnavailableReason(empty with { ReservedMicros = 4220000, SlotsHeld = 2, Attempts = [held] }, profile, ModelStage.Manual), Is.EqualTo("concurrency_limit"));
+        Assert.That(gate.UnavailableReason(empty with { ReservedMicros = 4220000, SlotsHeld = 2, Attempts = [held with { Status = "unknown" }] }, profile, ModelStage.Manual), Is.EqualTo("unknown_slots_held"));
+        Assert.That(gate.UnavailableReason(empty with { SettledMicros = 1000000, ReservedMicros = 2110000, SlotsHeld = 1, Attempts = [held] }, profile, ModelStage.Manual), Is.EqualTo("money_wait"));
+        Assert.That(gate.UnavailableReason(empty, profile, ModelStage.Manual), Is.Null);
+        var spent = held with { SlotHeld = false, ReservedCostMicros = 0, Status = "settled" };
+        Assert.That(gate.UnavailableReason(empty with { Attempts = Enumerable.Repeat(spent, 8).ToArray(), TotalAttempts = 8 }, profile, ModelStage.Manual), Is.EqualTo("stage_limit"));
+        gate.ObserveFailure("account_currency_unverified");
+        Assert.That(gate.UnavailableReason(empty, profile, ModelStage.Manual), Is.EqualTo("account_currency_unverified"));
+        Assert.That(TownModelDispatchState.Temporary("concurrency_limit"), Is.True);
+        Assert.That(TownModelDispatchState.Temporary("money_wait"), Is.True);
+        Assert.That(TownModelDispatchState.Temporary("unknown_slots_held"), Is.True);
+        Assert.That(TownModelDispatchState.Temporary("stage_limit"), Is.False);
+    }
+
+    [Test]
+    public void StoppedNpcOpportunityUsesExplicitRulesOnceAndKeepsWorldReplayable()
+    {
+        var content = TownPlayerDialogueReplayTests.TownPlayerDialogueTestsContent();
+        var world = new TownWorld(content); var input = new TownInputHost(content, world);
+        var recording = new TownRecording(content, world, input);
+        world.Advance(.01, 0); var request = world.GetDecisionRequests().First();
+        Assert.That(TownModelDispatchState.CompleteNpcFallback(world, request, "fingerprint_not_registered"), Is.True);
+        world.Advance(.01, 0);
+        Assert.That(TownModelDispatchState.CompleteNpcFallback(world, request, "fingerprint_not_registered"), Is.False);
+        Assert.That(world.GetView().PendingDecisions.Any(p => p.Request.LogicalRequestId == request.LogicalRequestId), Is.False);
+        Assert.That(TownReplay.Run(recording.Complete()).Passed, Is.True);
+    }
     [TestCase("full-demo-v1", "cozytown-godot-full-demo-20261010-v1")]
     [TestCase("full-demo-v2", "cozytown-godot-full-demo-20261011-v2")]
     public void CompleteExperimentSelectsItsOwnIdentityAndBothReplayAndRequestStages(string version, string budgetId)

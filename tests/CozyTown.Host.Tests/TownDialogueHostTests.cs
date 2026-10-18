@@ -8,6 +8,33 @@ namespace CozyTown.Host.Tests;
 [TestFixture]
 public sealed class TownDialogueHostTests
 {
+    [Test]
+    public void KnownModelStopDoesNotCreateAnotherPlayerRequestAndDoesNotDiscardAnInFlightReply()
+    {
+        var world = new TownWorld(Content()); var host = new TownDialogueHost(world);
+        Assert.That(host.Open("mina", []), Is.True);
+        Assert.That(host.Generate(["dialogue"], "fingerprint_not_registered"), Is.Null);
+        Assert.That(host.Current!.Request, Is.Null);
+        var request = host.Generate(["dialogue"])!;
+        host.CompleteFixed(request, "{\"text\":\"在途回复仍可显示。\"}");
+        Assert.That(host.Generate(["dialogue"], "account_unavailable"), Is.Null);
+        Assert.That(host.Present(["dialogue"]), Is.True);
+        Assert.That(host.Current!.Displays.Last().Text, Is.EqualTo("在途回复仍可显示。"));
+    }
+
+    [TestCase("fingerprint_not_registered", "服务版本")]
+    [TestCase("account_currency_unverified", "币种")]
+    [TestCase("authentication_failed", "认证")]
+    [TestCase("stage_limit", "阶段")]
+    [TestCase("total_limit", "总次数")]
+    [TestCase("money_limit", "金额")]
+    [TestCase("money_wait", "预留")]
+    [TestCase("concurrency_limit", "槽位")]
+    [TestCase("ledger_invalid", "账本")]
+    public void FailurePresentationNamesTheObservedCause(string code, string text)
+    {
+        Assert.That(TownDialogueHost.FailureText(code), Does.Contain(text));
+    }
     private static TownContent Content()
     {
         string[] ids = ["mina", "eli", "ren", "sora"];

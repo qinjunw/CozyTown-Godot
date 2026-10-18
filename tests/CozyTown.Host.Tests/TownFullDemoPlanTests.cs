@@ -51,4 +51,16 @@ public sealed class TownFullDemoPlanTests
         Assert.That(window.StopReason, Is.EqualTo(reason));
         Assert.That(window.OrdinaryAdmissions, Is.Zero);
     }
+
+    [Test]
+    public void KnownLedgerStopEndsTheWindowWithItsCauseWhileTemporaryOccupancyDoesNot()
+    {
+        var window = new TownFullDemoWindow(Plan(), 1);
+        Assert.That(window.RejectAdmission("concurrency_limit"), Is.False);
+        Assert.That(window.RejectAdmission("money_wait"), Is.False);
+        Assert.That(window.StopReason, Is.Null);
+        Assert.That(window.RejectAdmission("usage_invalid_or_missing", ledgerStopped: true), Is.True);
+        Assert.That(window.StopReason, Is.EqualTo("usage_invalid_or_missing"));
+        Assert.That(window.TryAdmit(false), Is.False);
+    }
 }

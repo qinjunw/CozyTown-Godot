@@ -29,7 +29,8 @@ public sealed class PersistentBudgetLedger
     public static PersistentBudgetLedger InitializeNew(string path, string profileVersion)
     {
         var profile = ModelBudgetProfile.Get(profileVersion);
-        if (profile != ModelBudgetProfile.FullDemo && profile != ModelBudgetProfile.FullDemoV2)
+        if (profile != ModelBudgetProfile.FullDemo && profile != ModelBudgetProfile.FullDemoV2
+            && profile != ModelBudgetProfile.ManualPlay)
             throw new ModelException("ledger_initialization_profile_invalid");
         path = Path.GetFullPath(path);
         if (File.Exists(path) || File.Exists(path + ".lock") || File.Exists(path + ".previous"))
@@ -84,7 +85,7 @@ public sealed class PersistentBudgetLedger
         void Reject(string reason)
         {
             recordAdmission?.Invoke(new(stage, logicalRequestId, recovery, null, reason, before, before));
-            throw new ModelException(reason);
+            throw new ModelException(reason, reason == "ledger_stopped" ? ledger.StopReason : null);
         }
         if (ledger.StopReason != null) Reject("ledger_stopped");
         if (!Profile.StageLimits.ContainsKey(stage) || string.IsNullOrWhiteSpace(logicalRequestId))

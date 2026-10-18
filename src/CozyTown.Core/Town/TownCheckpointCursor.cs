@@ -1,4 +1,5 @@
 using System.IO.Compression;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -30,27 +31,95 @@ public sealed class TownCheckpointCursor
         else
         {
             if (expected is null || basis != previous || basis <= 0) throw new InvalidDataException("Checkpoint delta is missing its preceding base boundary.");
-            var changes = TownCheckpointEncoding.Decode(delta!)!.AsArray();
-            foreach (var item in changes)
-            {
-                var change = item!.AsObject();
-                string[] path = change["path"]!.AsArray().Select(p => p!.GetValue<string>()).ToArray();
-                if (path.Length == 0) throw new InvalidDataException("Checkpoint delta cannot replace the root.");
-                JsonNode? owner = expected;
-                for (int i = 0; i < path.Length - 1; i++)
-                    owner = owner is JsonArray array ? array[int.Parse(path[i], System.Globalization.CultureInfo.InvariantCulture)] : owner![path[i]];
-                JsonNode? value = change["value"]?.DeepClone();
-                string key = path[^1];
-                if (owner is JsonArray target) target[int.Parse(key, System.Globalization.CultureInfo.InvariantCulture)] = value;
-                else
-                {
-                    if (owner is not JsonObject targetObject || !targetObject.ContainsKey(key)) throw new InvalidDataException("Checkpoint delta references an absent field.");
-                    targetObject[key] = value;
-                }
-            }
+            ApplyChanges(expected, TownCheckpointEncoding.Decode(delta!));
         }
         previous = boundary;
         return expected;
+    }
+
+    private static void ApplyChanges(JsonNode expected, JsonNode? decoded)
+    {
+        bool versioned = decoded is JsonObject;
+        JsonArray changes;
+        if (decoded is JsonArray legacy) changes = legacy;
+        else if (decoded is JsonObject envelope)
+        {
+            Fields(envelope, "version", "changes");
+            if (envelope["version"]?.GetValue<int>() != 2) throw new InvalidDataException("Unsupported checkpoint delta version.");
+            changes = envelope["changes"] as JsonArray ?? throw new InvalidDataException("Checkpoint delta changes must be an array.");
+        }
+        else throw new InvalidDataException("Checkpoint delta must be a legacy array or versioned object.");
+
+        var paths = new HashSet<string>(StringComparer.Ordinal);
+        var parents = new HashSet<string>(StringComparer.Ordinal);
+        var operations = new List<(JsonObject Change, JsonNode Owner, string Key)>();
+        foreach (var item in changes)
+        {
+            var change = item as JsonObject ?? throw new InvalidDataException("Checkpoint change must be an object.");
+            bool splice = versioned && change.ContainsKey("splice");
+            Fields(change, "path", splice ? "splice" : "value");
+            var parts = change["path"] as JsonArray ?? throw new InvalidDataException("Checkpoint path must be an array.");
+            string[] path = parts.Select(p => p?.GetValue<string>() ?? throw new InvalidDataException("Checkpoint path components must be strings.")).ToArray();
+            if (path.Length == 0) throw new InvalidDataException("Checkpoint delta cannot replace the root.");
+            string identity = JsonSerializer.Serialize(path);
+            if (!paths.Add(identity) || parents.Contains(identity)) throw new InvalidDataException("Checkpoint paths must not overlap or repeat.");
+            for (int i = 1; i < path.Length; i++)
+            {
+                string parent = JsonSerializer.Serialize(path[..i]);
+                if (paths.Contains(parent)) throw new InvalidDataException("Checkpoint paths must not overlap or repeat.");
+                parents.Add(parent);
+            }
+            JsonNode owner = expected;
+            for (int i = 0; i < path.Length - 1; i++)
+                owner = Child(owner, path[i]) ?? throw new InvalidDataException("Checkpoint path traverses null.");
+            var target = Child(owner, path[^1]);
+            if (splice)
+            {
+                var edit = change["splice"] as JsonObject ?? throw new InvalidDataException("Checkpoint splice must be an object.");
+                Fields(edit, "baseLength", "index", "removeCount", "items");
+                var array = target as JsonArray ?? throw new InvalidDataException("Checkpoint splice target must be an array.");
+                int index = edit["index"]!.GetValue<int>(), remove = edit["removeCount"]!.GetValue<int>();
+                if (edit["baseLength"]!.GetValue<int>() != array.Count || index < 0 || index > array.Count || remove < 0 || remove > array.Count - index)
+                    throw new InvalidDataException("Checkpoint splice has an invalid base length or range.");
+                if (edit["items"] is not JsonArray) throw new InvalidDataException("Checkpoint splice items must be an array.");
+            }
+            operations.Add((change, owner, path[^1]));
+        }
+        // Validate the entire patch before changing the cursor's preceding checkpoint.
+        foreach (var (change, owner, key) in operations)
+        {
+            if (change["splice"] is JsonObject edit)
+            {
+                var array = (JsonArray)Child(owner, key)!;
+                int index = edit["index"]!.GetValue<int>(), remove = edit["removeCount"]!.GetValue<int>();
+                for (int i = 0; i < remove; i++) array.RemoveAt(index);
+                var items = (JsonArray)edit["items"]!;
+                for (int i = 0; i < items.Count; i++) array.Insert(index + i, items[i]?.DeepClone());
+            }
+            else if (owner is JsonArray array) array[Index(key, array.Count)] = change["value"]?.DeepClone();
+            else owner[key] = change["value"]?.DeepClone();
+        }
+    }
+
+    private static JsonNode? Child(JsonNode owner, string key) => owner switch
+    {
+        JsonArray array => array[Index(key, array.Count)],
+        JsonObject obj when obj.ContainsKey(key) => obj[key],
+        _ => throw new InvalidDataException("Checkpoint path references an absent field or non-container.")
+    };
+
+    private static int Index(string value, int count)
+    {
+        if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int index)
+            || index.ToString(CultureInfo.InvariantCulture) != value || index >= count)
+            throw new InvalidDataException("Checkpoint path has an invalid array index.");
+        return index;
+    }
+
+    private static void Fields(JsonObject value, params string[] names)
+    {
+        if (value.Count != names.Length || names.Any(name => !value.ContainsKey(name)))
+            throw new InvalidDataException("Checkpoint operation fields are missing or unsupported.");
     }
 }
 
@@ -82,6 +151,7 @@ internal static class TownCheckpointEncoding
     internal static string Difference(JsonNode previous, JsonNode next)
     {
         var changes = new JsonArray();
+        bool hasSplice = false;
         void Visit(JsonNode? before, JsonNode? after, string[] path)
         {
             if (JsonNode.DeepEquals(before, after)) return;
@@ -90,14 +160,28 @@ internal static class TownCheckpointEncoding
                 foreach (var pair in first) Visit(pair.Value, second[pair.Key], [.. path, pair.Key]);
                 return;
             }
-            if (before is JsonArray a && after is JsonArray b && a.Count == b.Count)
+            if (before is JsonArray a && after is JsonArray b)
             {
-                for (int i = 0; i < a.Count; i++) Visit(a[i], b[i], [.. path, i.ToString(System.Globalization.CultureInfo.InvariantCulture)]);
+                if (a.Count == b.Count)
+                    for (int i = 0; i < a.Count; i++) Visit(a[i], b[i], [.. path, i.ToString(System.Globalization.CultureInfo.InvariantCulture)]);
+                else
+                {
+                    int prefix = 0, suffix = 0;
+                    while (prefix < Math.Min(a.Count, b.Count) && JsonNode.DeepEquals(a[prefix], b[prefix])) prefix++;
+                    while (suffix < Math.Min(a.Count, b.Count) - prefix && JsonNode.DeepEquals(a[a.Count - suffix - 1], b[b.Count - suffix - 1])) suffix++;
+                    var items = new JsonArray();
+                    for (int i = prefix; i < b.Count - suffix; i++) items.Add(b[i]?.DeepClone());
+                    changes.Add(new JsonObject { ["path"] = JsonSerializer.SerializeToNode(path), ["splice"] = new JsonObject
+                    {
+                        ["baseLength"] = a.Count, ["index"] = prefix, ["removeCount"] = a.Count - prefix - suffix, ["items"] = items
+                    } });
+                    hasSplice = true;
+                }
                 return;
             }
             changes.Add(new JsonObject { ["path"] = JsonSerializer.SerializeToNode(path), ["value"] = after?.DeepClone() });
         }
         Visit(previous, next, []);
-        return Encode(changes);
+        return Encode(hasSplice ? new JsonObject { ["version"] = 2, ["changes"] = changes } : changes);
     }
 }

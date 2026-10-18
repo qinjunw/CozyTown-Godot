@@ -36,17 +36,28 @@ public sealed class TownModelRuntimeProfile
         ModelBudgetProfile.FirstSliceVersion => TownReplayBudgetProfile.FirstSlice,
         ModelBudgetProfile.FullDemoVersion => TownReplayBudgetProfile.FullDemo,
         ModelBudgetProfile.FullDemoV2Version => TownReplayBudgetProfile.FullDemoV2,
+        ModelBudgetProfile.ManualPlayVersion => TownReplayBudgetProfile.ManualPlay,
         _ => throw new InvalidDataException("Replay budget profile is not registered.")
     };
-    public bool RealPlayerDialogueEnabled => IsFullDemo;
+    public bool RealPlayerDialogueEnabled => IsFullDemo || Profile.Version == ModelBudgetProfile.ManualPlayVersion;
+    public DeepSeekOptions ConfigureProvider(DeepSeekOptions options)
+    {
+        if (options.BudgetProfileVersion != Profile.Version) throw new InvalidDataException("Provider and runtime budget profiles differ.");
+        return options with { ExecutionPurpose = ExecutionPurpose };
+    }
 
     public static TownModelRuntimeProfile Resolve(string profileVersion, string executionPurpose)
     {
         ModelBudgetProfile profile;
         try { profile = ModelBudgetProfile.Get(profileVersion); }
         catch (ModelException error) { throw new InvalidDataException("Model budget profile is not registered.", error); }
-        if (profile.Version == ModelBudgetProfile.FirstSliceVersion ? executionPurpose != Legacy
-            : executionPurpose is not (Experiment or Manual))
+        bool allowed = profile.Version switch
+        {
+            ModelBudgetProfile.FirstSliceVersion => executionPurpose == Legacy,
+            ModelBudgetProfile.ManualPlayVersion => executionPurpose == Manual,
+            _ => executionPurpose is Experiment or Manual
+        };
+        if (!allowed)
             throw new InvalidDataException("Execution purpose does not belong to the selected model budget profile.");
         return new(profile, executionPurpose);
     }
