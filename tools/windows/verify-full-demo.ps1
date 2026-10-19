@@ -26,31 +26,45 @@ function Assert-FrozenSource {
 Assert-FrozenSource
 if ([string]::IsNullOrWhiteSpace($ReviewReceipt)) { throw 'ReviewReceipt is required before full-demo verification.' }
 $ReviewReceipt = [IO.Path]::GetFullPath($ReviewReceipt)
-$reviewDocument = Get-Content -LiteralPath $ReviewReceipt -Raw | ConvertFrom-Json -Depth 20
+$reviewJson = Get-Content -LiteralPath $ReviewReceipt -Raw
+$reviewDocument = $reviewJson | ConvertFrom-Json -Depth 20
 if ($reviewDocument.schemaVersion -isnot [long] -or $reviewDocument.schemaVersion -ne 1 -or
     @($reviewDocument.reviews).Count -ne 2) { throw 'Independent review receipt must contain schema 1 and exactly two review axes.' }
+$receiptJson = [Text.Json.JsonDocument]::Parse($reviewJson)
+try {
+    $completedField = $receiptJson.RootElement.GetProperty('completedAtUtc')
+    if ($completedField.ValueKind -ne [Text.Json.JsonValueKind]::String) {
+        throw 'Independent review receipt needs a UTC ISO completion timestamp string.'
+    }
+    $completedText = $completedField.GetString()
+}
+finally { $receiptJson.Dispose() }
 $completedAt = [DateTimeOffset]::MinValue
-if ($reviewDocument.completedAtUtc -is [DateTime]) {
-    $completedAt = [DateTimeOffset] $reviewDocument.completedAtUtc
+if ($completedText -cnotmatch '\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|\+00:00)\z' -or
+    -not [DateTimeOffset]::TryParse($completedText, [Globalization.CultureInfo]::InvariantCulture,
+        [Globalization.DateTimeStyles]::None, [ref] $completedAt)) {
+    throw 'Independent review receipt needs a UTC ISO completion timestamp string.'
 }
-elseif (-not [DateTimeOffset]::TryParse($reviewDocument.completedAtUtc, [ref] $completedAt)) {
-    throw 'Independent review receipt needs a UTC completion timestamp.'
+foreach ($review in $reviewDocument.reviews) {
+    if ($review.axis -isnot [string] -or $review.status -isnot [string] -or $review.status -cne 'completed' -or
+        $review.blockingFindings -isnot [long] -or $review.blockingFindings -ne 0 -or
+        $review.reviewerId -isnot [string] -or [string]::IsNullOrWhiteSpace($review.reviewerId)) {
+        throw 'Independent review receipt needs completed review entries with string axes, zero blocking findings and reviewer identities.'
+    }
 }
-if ($completedAt.Offset -ne [TimeSpan]::Zero) { throw 'Independent review receipt needs a UTC completion timestamp.' }
 foreach ($axis in @('standards', 'spec')) {
-    $matches = @($reviewDocument.reviews | Where-Object { $_.axis -ceq $axis })
-    if ($matches.Count -ne 1 -or $matches[0].status -cne 'completed' -or
-        $matches[0].blockingFindings -isnot [long] -or $matches[0].blockingFindings -ne 0 -or
-        [string]::IsNullOrWhiteSpace($matches[0].reviewerId)) {
-        throw "Independent review receipt needs one completed $axis review with zero blocking findings and a reviewer identity."
+    if (@($reviewDocument.reviews | Where-Object { $_.axis -ceq $axis }).Count -ne 1) {
+        throw "Independent review receipt needs exactly one $axis review."
     }
 }
 if ($reviewDocument.reviews[0].reviewerId -eq $reviewDocument.reviews[1].reviewerId) {
     throw 'Independent review receipt requires different reviewers for Standards and Spec.'
 }
 $sourceTree = git -C $repo rev-parse "$ExpectedCommit^{tree}"
-if ($LASTEXITCODE -ne 0 -or $reviewDocument.sourceCommit -cne $ExpectedCommit -or
-    $reviewDocument.sourceTreeSha -cne $sourceTree -or $reviewDocument.baseCommit -cnotmatch '^[0-9a-f]{40}$') {
+if ($LASTEXITCODE -ne 0 -or $reviewDocument.sourceCommit -isnot [string] -or
+    $reviewDocument.sourceTreeSha -isnot [string] -or $reviewDocument.baseCommit -isnot [string] -or
+    $reviewDocument.sourceCommit -cne $ExpectedCommit -or $reviewDocument.sourceTreeSha -cne $sourceTree -or
+    $reviewDocument.baseCommit -cnotmatch '^[0-9a-f]{40}$') {
     throw 'Independent review receipt source commit, tree or base identity does not match the frozen candidate.'
 }
 git -C $repo merge-base --is-ancestor $reviewDocument.baseCommit $ExpectedCommit 2>$null
@@ -58,7 +72,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Independent review receipt base is not an ance
 git -C $repo diff --quiet $reviewDocument.baseCommit $ExpectedCommit
 if ($LASTEXITCODE -ne 1) { throw 'Independent review receipt must cover a nonempty change from its base.' }
 $reviewReports = @(foreach ($review in $reviewDocument.reviews) {
-    if ([string]::IsNullOrWhiteSpace($review.reportPath) -or $review.reportSha256 -cnotmatch '^[0-9a-f]{64}$') {
+    if ($review.reportPath -isnot [string] -or $review.reportSha256 -isnot [string] -or
+        [string]::IsNullOrWhiteSpace($review.reportPath) -or $review.reportSha256 -cnotmatch '^[0-9a-f]{64}$') {
         throw 'Independent review report needs a file path and SHA-256.'
     }
     $reportPath = [IO.Path]::GetFullPath($review.reportPath, (Split-Path $ReviewReceipt))
@@ -72,7 +87,7 @@ $reviewReports = @(foreach ($review in $reviewDocument.reviews) {
 })
 $reviewEvidence = [ordered]@{ path = $ReviewReceipt
     sha256 = (Get-FileHash -LiteralPath $ReviewReceipt -Algorithm SHA256).Hash.ToLowerInvariant()
-    baseCommit = $reviewDocument.baseCommit; completedAtUtc = $reviewDocument.completedAtUtc
+    baseCommit = $reviewDocument.baseCommit; completedAtUtc = $completedText
     reviews = $reviewReports }
 if ($ReviewPreflightOnly) {
     [ordered]@{ passed = $true; mode = 'review_preflight'; sourceCommit = $ExpectedCommit
