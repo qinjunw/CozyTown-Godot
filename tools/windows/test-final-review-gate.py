@@ -82,9 +82,11 @@ class FinalReviewGateTests(unittest.TestCase):
             "pending": lambda: self.receipt["reviews"][1].update(status="pending"),
             "blocking": lambda: self.receipt["reviews"][0].update(blockingFindings=1),
             "text count": lambda: self.receipt["reviews"][0].update(blockingFindings="0"),
+            "boolean count": lambda: self.receipt["reviews"][0].update(blockingFindings=False),
             "same reviewer": lambda: self.receipt["reviews"][1].update(reviewerId="offline-standards-reviewer"),
             "blank reviewer": lambda: self.receipt["reviews"][0].update(reviewerId=" "),
             "wrong schema": lambda: self.receipt.update(schemaVersion=2),
+            "boolean schema": lambda: self.receipt.update(schemaVersion=True),
             "missing completion": lambda: self.receipt.update(completedAtUtc=""),
         }
         for label, change in changes.items():
@@ -152,6 +154,58 @@ class FinalReviewGateTests(unittest.TestCase):
         self.assertNotEqual(0, moved.returncode)
         self.assertIn("Git HEAD differs from ExpectedCommit", moved.stderr)
         self.assertFalse((self.repo / "artifacts").exists())
+
+    def test_boolean_axes_cannot_hide_a_pending_review_with_blocking_findings(self):
+        self.receipt["reviews"][0]["axis"] = True
+        self.receipt["reviews"][1].update(axis=False, status="pending", blockingFindings=1)
+        result = self.command()
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Independent review receipt", result.stderr)
+        self.assertFalse((self.repo / "artifacts").exists())
+
+    def test_review_completion_status_must_be_a_json_string(self):
+        for review in self.receipt["reviews"]:
+            review["status"] = True
+        result = self.command()
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Independent review receipt", result.stderr)
+        self.assertFalse((self.repo / "artifacts").exists())
+
+    def test_source_commit_and_tree_must_be_json_strings(self):
+        original = json.dumps(self.receipt)
+        for field in ("sourceCommit", "sourceTreeSha", "baseCommit"):
+            with self.subTest(field=field):
+                self.receipt = json.loads(original)
+                self.receipt[field] = True
+                result = self.command()
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn("Independent review receipt", result.stderr)
+                self.assertFalse((self.repo / "artifacts").exists())
+
+    def test_review_identity_and_report_binding_must_use_json_strings(self):
+        original = json.dumps(self.receipt)
+        numeric_report = self.evidence / "123"
+        numeric_report.write_bytes((self.evidence / "standards.md").read_bytes())
+        for field, value in (("reviewerId", 42), ("reportPath", 123), ("reportSha256", True)):
+            with self.subTest(field=field):
+                self.receipt = json.loads(original)
+                self.receipt["reviews"][0][field] = value
+                result = self.command()
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn("Independent review", result.stderr)
+                self.assertFalse((self.repo / "artifacts").exists())
+
+    def test_completion_time_requires_a_utc_iso_json_string(self):
+        for value, accepted in (("Thu, 01 Jan 2026 00:00:00 GMT", False), (True, False),
+                                ("2026-01-01T00:00:00Z", True),
+                                ("2026-01-01T00:00:00.1234567+00:00", True)):
+            with self.subTest(value=value):
+                self.receipt["completedAtUtc"] = value
+                result = self.command()
+                self.assertEqual(accepted, result.returncode == 0, result.stdout + result.stderr)
+                if not accepted:
+                    self.assertIn("Independent review receipt", result.stderr)
+                self.assertFalse((self.repo / "artifacts").exists())
 
 
 if __name__ == "__main__":

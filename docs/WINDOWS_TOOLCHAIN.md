@@ -49,7 +49,7 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 }
 ```
 
-`sourceCommit` 必须等于 `ExpectedCommit` 及当前 HEAD，树必须匹配；`baseCommit` 必须是其祖先且存在非空差异。缺轴、未完成、有阻断、报告不存在或空白、摘要不符均拒绝。先执行不需要工具链的预检，再启动完整验证：
+标识及报告绑定字段必须是 JSON 字符串；`schemaVersion`、`blockingFindings` 必须是整数。`completedAtUtc` 使用含秒的 UTC ISO 时间字符串，以 `Z` 或 `+00:00` 结尾，可包含小数秒。`sourceCommit` 必须等于 `ExpectedCommit` 及当前 HEAD，树必须匹配；`baseCommit` 必须是其祖先且存在非空差异。缺轴、未完成、有阻断、报告不存在或空白、摘要不符均拒绝。先执行不需要工具链的预检，再启动完整验证：
 
 ```powershell
 pwsh -File tools/windows/verify-full-demo.ps1 -ExpectedCommit <full-commit-sha> -ReviewReceipt <absolute-receipt.json> -ReviewPreflightOnly
