@@ -21,6 +21,47 @@ pwsh -File tools/windows/verify.ps1 -Graphical
 
 双击输出目录中的 `windows/CozyTown.exe` 可打开诊断场景。分发时保留整个 `windows/` 目录，其中包括 `.pck` 和 `data_CozyTown.Game_windows_x86_64/`。仅复制 EXE 无法组成完整程序。
 
+## 正式完整 Demo 验证
+
+`verify-full-demo.ps1` 在启动构建、场景矩阵和分支回放前，要求固定源码的独立 Standards、Spec 审查已完成且无阻断发现。开发期间的 `verify.ps1`、构建和定向测试沿用原入口。
+
+审查者将收据与报告保存在仓库外。收据格式如下，所有摘要替换为实际值，两个报告由不同审查者提供；`reportPath` 相对于收据目录，也可使用绝对路径：
+
+```json
+{
+  "schemaVersion": 1,
+  "sourceCommit": "<full-commit-sha>",
+  "sourceTreeSha": "<full-tree-sha>",
+  "baseCommit": "<full-base-commit-sha>",
+  "completedAtUtc": "<UTC-ISO-timestamp>",
+  "reviews": [
+    {
+      "axis": "standards", "status": "completed", "blockingFindings": 0,
+      "reviewerId": "<standards-reviewer>", "reportPath": "standards.md",
+      "reportSha256": "<report-sha256>"
+    },
+    {
+      "axis": "spec", "status": "completed", "blockingFindings": 0,
+      "reviewerId": "<spec-reviewer>", "reportPath": "spec.md",
+      "reportSha256": "<report-sha256>"
+    }
+  ]
+}
+```
+
+标识及报告绑定字段必须是 JSON 字符串；`schemaVersion`、`blockingFindings` 必须是整数。`completedAtUtc` 使用含秒的 UTC ISO 时间字符串，以 `Z` 或 `+00:00` 结尾，可包含小数秒。`sourceCommit` 必须等于 `ExpectedCommit` 及当前 HEAD，树必须匹配；`baseCommit` 必须是其祖先且存在非空差异。缺轴、未完成、有阻断、报告不存在或空白、摘要不符均拒绝。先执行不需要工具链的预检，再启动完整验证：
+
+```powershell
+pwsh -File tools/windows/verify-full-demo.ps1 -ExpectedCommit <full-commit-sha> -ReviewReceipt <absolute-receipt.json> -ReviewPreflightOnly
+pwsh -File tools/windows/verify-full-demo.ps1 -ExpectedCommit <full-commit-sha> -ReviewReceipt <absolute-receipt.json>
+```
+
+完整验证报告保存收据及两轴报告的身份和摘要，每个重型子进程前后复核源码、输入及审查文件未变化。预检通过只证明文件合同符合要求；实际审查结论由独立审查者负责。离线 fixture 的合成收据仅测试命令边界，不能代替最终审查：
+
+```powershell
+python tools/windows/test-final-review-gate.py
+```
+
 ## 场景与证据范围
 
 `game/Main.tscn` 的 Advance 按钮调用独立核心累加 120；Save / reload 将 JSON 写入磁盘并恢复到新实例。普通运行写入 `user://toolchain-probe.json`。计数是工具链探针，不代表世界时间；该 JSON 也不是正式游戏存档合同。
@@ -73,12 +114,35 @@ if ($LASTEXITCODE -ne 0) { throw 'Test restore failed.' }
 
 单个附件最大为 1,900,000,000 字节。压缩包超过此值时，按字节拆为 `.part001` 等附件；manifest 的 `assets` 保留顺序、各段长度和摘要，`archive` 保留原 ZIP 的总长度和摘要。成功包省去逐边界 `data/`，失败包保留全部诊断文件。归档拒绝符号链接、重复或不安全的 ZIP 路径。
 
-使用具有本仓库 write/push 权限的 GitHub 账号打开 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)，选择对应 run/attempt 的 Draft Release，下载 `manifest.json` 及其 `assets` 中的全部附件到一个新目录；仅有读取权限的账号不能列出草稿，见[GitHub 草稿列表权限](https://docs.github.com/en/rest/releases/releases#list-releases)。也可以使用登录同一有权账号的 GitHub CLI：
+使用具有本仓库 write/push 权限的 GitHub 账号打开 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)，选择对应 run/attempt 的 Draft Release，下载 `manifest.json` 及其 `assets` 中的全部附件到一个新目录；仅有读取权限的账号不能列出草稿，见[GitHub 草稿列表权限](https://docs.github.com/en/rest/releases/releases#list-releases)。也可以使用登录同一有权账号的 GitHub CLI。在 PowerShell 7 中替换标签和下载目录占位符后运行：
 
 ```powershell
-gh release download ci-windows-<run-id>-<attempt> --repo qinjunw/CozyTown-Godot --dir <download-directory>
-pwsh -File tools/windows/ci-release.ps1 -Mode Verify -PackageRoot <download-directory>
+$repository = 'qinjunw/CozyTown-Godot'
+$releaseTag = 'ci-windows-<run-id>-<attempt>'
+$downloadDirectory = '<download-directory>'
+$pagesJson = & gh api --paginate --slurp "repos/$repository/releases?per_page=100"
+if ($LASTEXITCODE -ne 0) { throw 'Cannot list Draft Releases.' }
+$pages = ConvertFrom-Json -InputObject ($pagesJson -join "`n") -NoEnumerate
+$matchingReleases = @(foreach ($page in $pages) {
+    foreach ($release in $page) {
+        if ($release.tag_name -ceq $releaseTag) { $release }
+    }
+})
+if ($matchingReleases.Count -ne 1) { throw 'Expected exactly one release with this tag.' }
+$releaseJson = & gh api "repos/$repository/releases/$($matchingReleases[0].id)"
+if ($LASTEXITCODE -ne 0) { throw 'Cannot read Draft Release metadata by ID.' }
+$release = ConvertFrom-Json -InputObject ($releaseJson -join "`n")
+if ($release.tag_name -cne $releaseTag -or $release.draft -ne $true) {
+    throw 'Release ID does not identify the requested Draft Release.'
+}
+$release.html_url
+& gh release download $releaseTag --repo $repository --dir $downloadDirectory
+if ($LASTEXITCODE -ne 0) { throw 'Draft Release download failed.' }
+pwsh -File tools/windows/ci-release.ps1 -Mode Verify -PackageRoot $downloadDirectory
+if ($LASTEXITCODE -ne 0) { throw 'Draft Release package verification failed.' }
 ```
+
+草稿的 `/releases/tags/<tag>` 查询可能返回 404。上述命令遍历全部 Release 列表页，以大小写完全一致的标签唯一匹配，再按 ID 读取元数据；浏览链接使用返回的 `html_url`。下载仍使用现有 `gh release download` 入口。
 
 校验命令先检查各附件，再按 manifest 顺序重组分段，核对完整 ZIP 和每个解压成员的长度、SHA-256 与清单。CI 发布步骤还核对服务器返回的附件长度和 digest，并实际下载同一草稿后执行此校验。取用程序时解压 ZIP，保留 `<verification-run>/windows/` 的全部文件。
 
