@@ -3,13 +3,83 @@
 param(
     [Parameter(Mandatory)] [ValidatePattern('^[0-9a-f]{40}$')] [string] $ExpectedCommit,
     [string] $ToolsRoot,
-    [string] $InputFile
+    [string] $InputFile,
+    [string] $ReviewReceipt,
+    [switch] $ReviewPreflightOnly
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 if (-not $IsWindows) { throw 'Windows x64 is required for full-demo verification.' }
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+
+function Assert-FrozenSource {
+    $head = git -C $repo rev-parse HEAD
+    if ($LASTEXITCODE -ne 0 -or $head -ne $ExpectedCommit) { throw 'Git HEAD differs from ExpectedCommit.' }
+    # Godot rewrites tracked import metadata while importing; gameplay, content and scripts remain frozen.
+    $dirty = @(git -C $repo status --porcelain --untracked-files=all | Where-Object {
+        -not ($_.StartsWith(' M game/Art/') -and $_.EndsWith('.import'))
+    })
+    if ($LASTEXITCODE -ne 0 -or $dirty.Count -gt 0) { throw 'Candidate has uncommitted files outside generated art import metadata.' }
+}
+
+Assert-FrozenSource
+if ([string]::IsNullOrWhiteSpace($ReviewReceipt)) { throw 'ReviewReceipt is required before full-demo verification.' }
+$ReviewReceipt = [IO.Path]::GetFullPath($ReviewReceipt)
+$reviewDocument = Get-Content -LiteralPath $ReviewReceipt -Raw | ConvertFrom-Json -Depth 20
+if ($reviewDocument.schemaVersion -isnot [long] -or $reviewDocument.schemaVersion -ne 1 -or
+    @($reviewDocument.reviews).Count -ne 2) { throw 'Independent review receipt must contain schema 1 and exactly two review axes.' }
+$completedAt = [DateTimeOffset]::MinValue
+if ($reviewDocument.completedAtUtc -is [DateTime]) {
+    $completedAt = [DateTimeOffset] $reviewDocument.completedAtUtc
+}
+elseif (-not [DateTimeOffset]::TryParse($reviewDocument.completedAtUtc, [ref] $completedAt)) {
+    throw 'Independent review receipt needs a UTC completion timestamp.'
+}
+if ($completedAt.Offset -ne [TimeSpan]::Zero) { throw 'Independent review receipt needs a UTC completion timestamp.' }
+foreach ($axis in @('standards', 'spec')) {
+    $matches = @($reviewDocument.reviews | Where-Object { $_.axis -ceq $axis })
+    if ($matches.Count -ne 1 -or $matches[0].status -cne 'completed' -or
+        $matches[0].blockingFindings -isnot [long] -or $matches[0].blockingFindings -ne 0 -or
+        [string]::IsNullOrWhiteSpace($matches[0].reviewerId)) {
+        throw "Independent review receipt needs one completed $axis review with zero blocking findings and a reviewer identity."
+    }
+}
+if ($reviewDocument.reviews[0].reviewerId -eq $reviewDocument.reviews[1].reviewerId) {
+    throw 'Independent review receipt requires different reviewers for Standards and Spec.'
+}
+$sourceTree = git -C $repo rev-parse "$ExpectedCommit^{tree}"
+if ($LASTEXITCODE -ne 0 -or $reviewDocument.sourceCommit -cne $ExpectedCommit -or
+    $reviewDocument.sourceTreeSha -cne $sourceTree -or $reviewDocument.baseCommit -cnotmatch '^[0-9a-f]{40}$') {
+    throw 'Independent review receipt source commit, tree or base identity does not match the frozen candidate.'
+}
+git -C $repo merge-base --is-ancestor $reviewDocument.baseCommit $ExpectedCommit 2>$null
+if ($LASTEXITCODE -ne 0) { throw 'Independent review receipt base is not an ancestor of the frozen candidate.' }
+git -C $repo diff --quiet $reviewDocument.baseCommit $ExpectedCommit
+if ($LASTEXITCODE -ne 1) { throw 'Independent review receipt must cover a nonempty change from its base.' }
+$reviewReports = @(foreach ($review in $reviewDocument.reviews) {
+    if ([string]::IsNullOrWhiteSpace($review.reportPath) -or $review.reportSha256 -cnotmatch '^[0-9a-f]{64}$') {
+        throw 'Independent review report needs a file path and SHA-256.'
+    }
+    $reportPath = [IO.Path]::GetFullPath($review.reportPath, (Split-Path $ReviewReceipt))
+    if (-not (Test-Path -LiteralPath $reportPath -PathType Leaf) -or
+        [string]::IsNullOrWhiteSpace([IO.File]::ReadAllText($reportPath)) -or
+        (Get-FileHash -LiteralPath $reportPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $review.reportSha256) {
+        throw "Independent review report is missing, empty or differs from its SHA-256: $reportPath"
+    }
+    [ordered]@{ axis = $review.axis; status = $review.status; blockingFindings = $review.blockingFindings
+        reviewerId = $review.reviewerId; reportPath = $reportPath; reportSha256 = $review.reportSha256 }
+})
+$reviewEvidence = [ordered]@{ path = $ReviewReceipt
+    sha256 = (Get-FileHash -LiteralPath $ReviewReceipt -Algorithm SHA256).Hash.ToLowerInvariant()
+    baseCommit = $reviewDocument.baseCommit; completedAtUtc = $reviewDocument.completedAtUtc
+    reviews = $reviewReports }
+if ($ReviewPreflightOnly) {
+    [ordered]@{ passed = $true; mode = 'review_preflight'; sourceCommit = $ExpectedCommit
+        sourceTreeSha = $sourceTree; independentReviews = $reviewEvidence } | ConvertTo-Json -Depth 10
+    return
+}
+
 if (-not $ToolsRoot) { $ToolsRoot = Join-Path $repo '.local/tools' }
 $ToolsRoot = [IO.Path]::GetFullPath($ToolsRoot)
 $dotnet = Join-Path $ToolsRoot 'dotnet/dotnet.exe'
@@ -44,13 +114,15 @@ $expectedInputSha256 = $null
 $expectedSimulationDigest = $null
 
 function Assert-FrozenCandidate {
-    $head = git -C $repo rev-parse HEAD
-    if ($LASTEXITCODE -ne 0 -or $head -ne $ExpectedCommit) { throw 'Git HEAD differs from ExpectedCommit.' }
-    # Godot rewrites tracked import metadata while importing; gameplay, content and scripts remain frozen.
-    $dirty = @(git -C $repo status --porcelain --untracked-files=all | Where-Object {
-        -not ($_.StartsWith(' M game/Art/') -and $_.EndsWith('.import'))
-    })
-    if ($LASTEXITCODE -ne 0 -or $dirty.Count -gt 0) { throw 'Candidate has uncommitted files outside generated art import metadata.' }
+    Assert-FrozenSource
+    if ((Get-FileHash -LiteralPath $ReviewReceipt -Algorithm SHA256).Hash.ToLowerInvariant() -cne $reviewEvidence.sha256) {
+        throw 'Independent review receipt changed during verification.'
+    }
+    foreach ($review in $reviewEvidence.reviews) {
+        if ((Get-FileHash -LiteralPath $review.reportPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $review.reportSha256) {
+            throw 'Independent review report changed during verification.'
+        }
+    }
     if ((Get-FileHash -LiteralPath $InputFile -Algorithm SHA256).Hash.ToLowerInvariant() -ne $inputFileSha256) {
         throw 'Frozen input file changed during verification.'
     }
@@ -251,6 +323,7 @@ function Assert-ReplayReport {
 }
 
 $summary = [ordered]@{ schemaVersion = 1; passed = $false; sourceCommit = $ExpectedCommit
+    sourceTreeSha = $sourceTree; independentReviews = $reviewEvidence
     startedAtUtc = [DateTime]::UtcNow.ToString('O'); mode = 'fixed'; realHttpSends = 0; graphicalRequested = $false
     realAcceptanceEvaluated = $false
     inputFileSha256 = $inputFileSha256; explicitInput = $explicitInput
