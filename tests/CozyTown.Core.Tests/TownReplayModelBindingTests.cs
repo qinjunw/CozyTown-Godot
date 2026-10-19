@@ -251,13 +251,48 @@ public sealed class TownReplayModelBindingTests
         Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
     }
 
-    [TestCase(false, "request_timeout")]
-    [TestCase(true, "authentication_failed")]
-    public void FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(bool responseArrived, string failure)
+    [TestCase(false, "request_timeout", null)]
+    [TestCase(true, "authentication_failed", "{\"error\":\"fixture\"}")]
+    [TestCase(true, "provider_http_failure", "<html>502 Bad Gateway</html>")]
+    [TestCase(true, "provider_http_failure", "upstream unavailable")]
+    public void FailedNpcCompletionRetainsItsBudgetAndIdentityBindings(bool responseArrived, string failure, string? responseBody)
     {
-        var fixture = new Fixture(); fixture.CompleteFailure(responseArrived, failure);
+        var fixture = new Fixture(); fixture.CompleteFailure(responseArrived, failure, responseBody);
         var report = TownReplay.Run(fixture.Recording.Complete());
         Assert.That(report.Passed, Is.True, TownJson.Serialize(report));
+    }
+
+    [TestCase("<html>502 Bad Gateway</html>", 1, "invalid_recording", "input")]
+    [TestCase("{\"error\":\"fixture\"}", 1, "divergence", "model.responseProjectionVersion")]
+    [TestCase("{\"projectionVersion\":1}", 2, "divergence", "model.responseProjectionVersion")]
+    [TestCase(null, 1, "divergence", "model.responseProjectionVersion")]
+    public void VersionedFailedCompletionRequiresItsRecordedProjection(string? responseBody, int version, string code, string field)
+    {
+        var fixture = new Fixture(); fixture.CompleteFailure(true, "provider_http_failure", responseBody);
+        var package = AlterInput(fixture.Recording.Complete(), "model_completion_persisted",
+            node => node["responseProjectionVersion"] = version);
+
+        var report = TownReplay.Run(package);
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("model_completion_persisted"));
+        Assert.That(report.Code, Is.EqualTo(code));
+        Assert.That(report.Field, Is.EqualTo(field));
+    }
+
+    [Test]
+    public void FailedCompletionWithCandidateRequiresItsRecordedJsonResponse()
+    {
+        var fixture = new Fixture();
+        fixture.CompleteResponse(TownJson.Serialize(fixture.Candidate), null, "provider_http_failure", "provider_http_failure");
+        var package = AlterInput(fixture.Recording.Complete(), "model_response_arrived",
+            node => node["responseBody"] = "<html>502 Bad Gateway</html>");
+
+        var report = TownReplay.Run(package);
+
+        Assert.That(report.Passed, Is.False);
+        Assert.That(report.Command, Is.EqualTo("model_completion_persisted"));
+        Assert.That(report.Code, Is.EqualTo("invalid_recording"));
     }
 
     [TestCase("full-demo-v1")]
@@ -359,11 +394,11 @@ public sealed class TownReplayModelBindingTests
             World.Advance(.1, 0);
         }
 
-        public void CompleteFailure(bool responseArrived, string failure)
+        public void CompleteFailure(bool responseArrived, string failure, string? responseBody = "{\"error\":\"fixture\"}")
         {
             if (responseArrived)
             {
-                Recording.RecordExternal("model_response_arrived", new { dispatch = Dispatch, responseBody = "{\"error\":\"fixture\"}", elapsed = TimeSpan.FromSeconds(2) });
+                Recording.RecordExternal("model_response_arrived", new { dispatch = Dispatch, responseBody, elapsed = TimeSpan.FromSeconds(2) });
                 World.MarkResponseArrived(World.SessionId, Request.LogicalRequestId, Attempt, 2);
             }
             Recording.RecordExternal("model_completion_persisted", new { dispatch = Dispatch, dispatchedAtUtc = DateTimeOffset.UnixEpoch,

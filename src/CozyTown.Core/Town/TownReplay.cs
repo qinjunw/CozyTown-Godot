@@ -365,15 +365,17 @@ public static class TownReplay
                                 var candidate = body.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
                                 if (candidate != input.GetProperty("candidateJson").GetString()) throw new ReplayMismatch("model.candidateJson", candidate, input.GetProperty("candidateJson").GetString());
                             }
-                            if (arrival.GetProperty("responseBody").ValueKind == JsonValueKind.String)
+                            bool versioned = input.TryGetProperty("responseProjectionVersion", out var projectionVersion) && projectionVersion.ValueKind != JsonValueKind.Null;
+                            bool legacyFailure = !versioned && input.GetProperty("candidateJson").ValueKind == JsonValueKind.Null
+                                && input.GetProperty("failureCode").ValueKind == JsonValueKind.String;
+                            if (arrival.GetProperty("responseBody").ValueKind == JsonValueKind.String && !legacyFailure)
                             {
                                 using var body = JsonDocument.Parse(arrival.GetProperty("responseBody").GetString()!);
-                                if (input.TryGetProperty("responseProjectionVersion", out var projectionVersion) && projectionVersion.ValueKind != JsonValueKind.Null
-                                    && (projectionVersion.GetInt32() != 1 || !body.RootElement.TryGetProperty("projectionVersion", out _)))
+                                if (versioned && (projectionVersion.GetInt32() != 1 || !body.RootElement.TryGetProperty("projectionVersion", out _)))
                                     throw new ReplayMismatch("model.responseProjectionVersion", "versioned response projection", "missing or unsupported");
                                 if (body.RootElement.TryGetProperty("projectionVersion", out _)) ValidateResponseProjection(body.RootElement, input);
                             }
-                            else if (input.TryGetProperty("responseProjectionVersion", out var projectionVersion) && projectionVersion.ValueKind != JsonValueKind.Null)
+                            else if (versioned)
                                 throw new ReplayMismatch("model.responseProjectionVersion", "versioned response projection", "missing");
                         }
                     }
