@@ -26,10 +26,12 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Check CI release packaging with offline fixtures
+      - name: Check delivery commands with offline fixtures
         run: |
           python tools/windows/test-ci-release.py
           if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
+          python tools/windows/test-final-review-gate.py
+          if ($LASTEXITCODE -ne 0) { throw 'Final review preflight checks failed.' }
       - name: Install pinned portable tools
         run: ./tools/windows/install-toolchain.ps1
       - name: Check model probe with offline fixtures
@@ -66,10 +68,12 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - name: Check CI release packaging with offline fixtures
+      - name: Check delivery commands with offline fixtures
         run: |
           python tools/windows/test-ci-release.py
           if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
+          python tools/windows/test-final-review-gate.py
+          if ($LASTEXITCODE -ne 0) { throw 'Final review preflight checks failed.' }
       - name: Install pinned portable tools
         run: ./tools/windows/install-toolchain.ps1
       - name: Check model probe with offline fixtures

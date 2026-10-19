@@ -8,4 +8,4 @@
 - [领域语言](../../CONTEXT.md)
 - [GitHub tracker 操作](github-tracker.md)
 
-用户已确认 Windows/PC 优先、Godot .NET + 独立 C# 核心、首版使用新存档，以及 Unity 项目只作独立参考。建图和研究用于确定实施路线；仓库当前尚未交付可运行 Demo。
+当前试玩入口与操作见[项目 README](../../README.md)，票据状态与验收结论见 [GitHub Issues](https://github.com/qinjunw/CozyTown-Godot/issues)。

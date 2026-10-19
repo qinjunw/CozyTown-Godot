@@ -14,15 +14,16 @@
 
 ## 固定客户端验证
 
-在待验证提交的干净检出中，从仓库根目录运行：
+在待验证提交的干净检出中，先取得绑定该提交及其树的独立 Standards、Spec 审查收据，格式见[正式完整 Demo 验证](WINDOWS_TOOLCHAIN.md#正式完整-demo-验证)。从仓库根目录运行：
 
 ```powershell
 $fullDemoCommit = git rev-parse HEAD
 pwsh -NoProfile -File tools/windows/verify-full-demo.ps1 `
-    -ExpectedCommit $fullDemoCommit -ToolsRoot '<toolchain-root>'
+    -ExpectedCommit $fullDemoCommit -ToolsRoot '<toolchain-root>' `
+    -ReviewReceipt '<absolute-review-receipt.json>'
 ```
 
-`ExpectedCommit` 必须为完整的 40 位提交哈希。脚本核对运行前后的提交和未提交文件；Godot 自动重写的已有美术 `.import` 元数据单独允许。其他源码、内容、脚本或文档变动会停止本轮。`ToolsRoot` 指向 [Windows 工具链](../tools/windows/toolchain.lock.json)的安装目录。可选 `-InputFile '<absolute-input.json>'` 显式选择外部输入；脚本保存原文件及 SHA-256，并检查它在运行期间没有改变。
+`ExpectedCommit` 必须为完整的 40 位提交哈希。收据不完整、有阻断、源码或报告摘要不匹配时，脚本在启动重型子进程前拒绝；追加 `-ReviewPreflightOnly` 可单独检查这一步。脚本核对运行前后的提交和未提交文件；Godot 自动重写的已有美术 `.import` 元数据单独允许。其他源码、内容、脚本或文档变动会停止本轮。`ToolsRoot` 指向 [Windows 工具链](../tools/windows/toolchain.lock.json)的安装目录。可选 `-InputFile '<absolute-input.json>'` 显式选择外部输入；脚本保存原文件及 SHA-256，并检查它在运行期间没有改变。
 
 脚本依次执行：
 
