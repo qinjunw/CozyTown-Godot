@@ -106,19 +106,29 @@ foreach ($configuration in @('Debug', 'ExportDebug', 'ExportRelease')) {
 if ($LASTEXITCODE -ne 0) { throw 'Test restore failed.' }
 ```
 
-正常验证设置 `RestoreLockedMode=true`，导出中的隐式 restore 也受约束。GitHub Actions 的 Windows toolchain 工作流在 Windows runner 上执行相同的无界面流程。具体运行结论以对应提交的 Actions 结果、验证报告和[制品验收票](https://github.com/qinjunw/CozyTown-Godot/issues/38)为准。
+正常验证设置 `RestoreLockedMode=true`，导出中的隐式 restore 也受约束。GitHub Actions 的 Windows toolchain 工作流在 Windows runner 上执行相同的无界面流程。具体运行结论以对应提交的 Actions 结果及验证报告为准，候选程序的人工试玩单独记录。
 
-## 公开 CI 与维护者 Draft Release
+## 当前 CI 候选与预发布
 
-公开仓库的同仓库 PR、main 推送和手动运行继续执行离线检查、构建、测试、场景验证和 Windows 导出启动；验证输出在 runner 上打包，但跳过私有发布步骤。当前工作流没有公开制品上传步骤，新包不会上传到 Release 或 Actions artifacts；公众可查看 Actions 日志，并按本页从源码构建。公开状态不改变既有 Draft Release 的发布状态。
+Windows toolchain 工作流对同仓库事件和 fork PR 分别使用 `verify`、`verify-fork` job 执行离线检查、构建、测试、场景验证及 Windows 导出启动。两个名称供分支保护使用，按事件来源选择执行；构建 CI 仅有 `contents: read` 权限，不创建 Release。固定验证不加载私人模型凭据，也不消耗真实模型预算。
 
-仅当仓库为 private 时，同仓库 PR、main 推送和手动运行使用唯一标签 `ci-windows-<run-id>-<attempt>`，将验证输出上传到该私有仓库的 Draft Release。每次运行创建新标签和草稿，不覆盖旧归档。验证成功时，`windows-toolchain.zip` 包含每次运行的完整 `windows/`，以及全部顶层 JSON、TRX 和日志；验证失败时，`windows-toolchain-failure.zip` 包含完整 `artifacts/verification/`。构建、测试、导出、打包、上传或下载校验失败均使工作流失败。
+main 的成功 CI 运行提供名为 `windows-candidate-<run-id>-<attempt>` 的 Actions Artifact，保留 14 天。下载需要登录 GitHub；解压 Artifact 后可取得程序 ZIP、`candidate.json` 和 `SHA256SUMS.txt`。候选身份、摘要核验及下载步骤见 [Windows 候选交付](WINDOWS_DELIVERY.md)。程序需完整解压后运行，操作和人工验收记录见[试玩说明](PLAYTEST.md)。
 
-`manifest.json` 记录仓库、工作流、run ID、attempt、事件、实际验证源码提交和树、Release 目标提交和树、验证报告摘要及全部 ZIP 成员的路径、长度和 SHA-256。PR 使用实际合成提交作为 `sourceCommit`，Release 标签指向 PR head；两者树摘要不一致时拒绝打包。不能把标签目标改写成验证源码身份。
+候选 Artifact 是指定 CI 运行的交付物，不是已公开的 Release。维护者在 main 上手动运行 `Prepare Windows prerelease`，填写 `run_id`、`version` 和 `expected_sha256`；摘要指内层 `CozyTown-windows-x64-<sha12>.zip`，不是 Actions Artifact 外层 ZIP 或服务端 Artifact 摘要。工作流调用 `delivery.ps1` 的 `PrepareDraft` 模式，从成功的 main 运行下载并核验候选，然后将同一程序包及其身份、摘要文件放入草稿预发布。准备草稿不重新构建程序，也不自动公开；人工验收通过后再按交付说明发布。
 
-单个附件最大为 1,900,000,000 字节。压缩包超过此值时，按字节拆为 `.part001` 等附件；manifest 的 `assets` 保留顺序、各段长度和摘要，`archive` 保留原 ZIP 的总长度和摘要。成功包省去逐边界 `data/`，失败包保留全部诊断文件。归档拒绝符号链接、重复或不安全的 ZIP 路径。
+试玩时记录 Artifact 名称中的 run/attempt、源码提交和内层程序 ZIP 摘要，准备草稿时再次核对。同一 run 重跑后若无法取回原程序包，应停止交付并重新核验，不沿用旧包的人工验收结果。
 
-维护者取用既有草稿时，使用具有本仓库 write/push 权限的 GitHub 账号打开 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)，选择对应 run/attempt 的 Draft Release，下载 `manifest.json` 及其 `assets` 中的全部附件到一个新目录；仅有读取权限的账号不能列出草稿，见[GitHub 草稿列表权限](https://docs.github.com/en/rest/releases/releases#list-releases)。也可以使用登录同一有权账号的 GitHub CLI。在 PowerShell 7 中替换标签和下载目录占位符后运行：
+`delivery.ps1` 的 `Package`、`Verify` 与 `PrepareDraft` 参数和输入约束统一维护在[交付说明](WINDOWS_DELIVERY.md)。完整 Demo 的独立审查收据要求仍按本页[正式完整 Demo 验证](#正式完整-demo-验证)执行；普通 CI 候选通过不替代该完整门、真实模型评测或人工 GUI 验收。仅改变 CI、文档或包交付的流程 PR 按受影响的自动检查和包校验验收，不要求重跑全部历史人工矩阵。首次公开 alpha 的最低试玩与扩展回归分级见 [PLAYTEST](PLAYTEST.md)，后续功能变更按影响范围提升必测要求。历史候选的结果保持原源码归属。
+
+## 历史私有 CI 归档与取件
+
+`ci-release.ps1` 保留为历史私有归档工具，不属于当前 CI 候选或草稿预发布流程。历史运行以标签 `ci-windows-<run-id>-<attempt>` 在当时的私有仓库中保存 Draft Release，每次创建新归档。成功包 `windows-toolchain.zip` 包含完整 `windows/` 和顶层 JSON、TRX、日志；失败包 `windows-toolchain-failure.zip` 保存完整 `artifacts/verification/`。仓库公开或新增交付流程均不会自动发布这些旧草稿；历史制品验收来源见[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)。
+
+历史 `manifest.json` 记录仓库、工作流、run ID、attempt、事件、实际验证源码提交和树、Release 目标提交和树、验证报告摘要及全部 ZIP 成员的路径、长度和 SHA-256。PR 使用实际合成提交作为 `sourceCommit`，Release 标签指向 PR head；两者树摘要不一致时拒绝打包。不能把标签目标改写成验证源码身份。
+
+历史工具的单个附件最大为 1,900,000,000 字节。压缩包超过此值时，按字节拆为 `.part001` 等附件；manifest 的 `assets` 保留顺序、各段长度和摘要，`archive` 保留原 ZIP 的总长度和摘要。成功包省去逐边界 `data/`，失败包保留全部诊断文件。归档拒绝符号链接、重复或不安全的 ZIP 路径。
+
+取用既有草稿需要具有本仓库 write/push 权限的 GitHub 账号。打开 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)，选择对应 run/attempt 的 Draft Release，将 `manifest.json` 及其 `assets` 中的全部附件下载到一个新目录；仅有读取权限的账号不能列出草稿，见[GitHub 草稿列表权限](https://docs.github.com/en/rest/releases/releases#list-releases)。也可使用登录同一有权账号的 GitHub CLI，在 PowerShell 7 中替换标签和下载目录占位符后运行：
 
 ```powershell
 $repository = 'qinjunw/CozyTown-Godot'
@@ -148,11 +158,11 @@ if ($LASTEXITCODE -ne 0) { throw 'Draft Release package verification failed.' }
 
 草稿的 `/releases/tags/<tag>` 查询可能返回 404。上述命令遍历全部 Release 列表页，以大小写完全一致的标签唯一匹配，再按 ID 读取元数据；浏览链接使用返回的 `html_url`。下载仍使用现有 `gh release download` 入口。
 
-校验命令先检查各附件，再按 manifest 顺序重组分段，核对完整 ZIP 和每个解压成员的长度、SHA-256 与清单。CI 发布步骤还核对服务器返回的附件长度和 digest，并实际下载同一草稿后执行此校验。取用程序时解压 ZIP，保留 `<verification-run>/windows/` 的全部文件。
+历史工具的 Verify 命令先检查各附件，再按 manifest 顺序重组分段，核对完整 ZIP 和每个解压成员的长度、SHA-256 与清单。旧 Publish 路径还核对服务器返回的附件长度和 digest，并实际下载同一草稿后执行此校验。取用程序时解压 ZIP，保留 `<verification-run>/windows/` 的全部文件。
 
-发布 job 的 `contents: write` 是 job 级权限，因需读取同一 runner 的验证文件而与构建共处；仅同仓库事件进入 `verify` job，发布步骤另要求事件中的仓库 private 标志为真；`GH_TOKEN` 仅注入最后发布步骤，checkout 不保留凭据。脚本在创建标签前复核 GitHub run/attempt/event、PR head 归属及仓库 private 状态。fork PR 使用独立的 `verify-fork`、`contents: read` job 执行完整验证，不能发布草稿。两个 job 名称保持为分支保护所需的 `verify` 与 `verify-fork`，按事件来源选择执行。固定验证不加载私人模型凭据，也不消耗真实模型预算。
+旧 Publish 路径在创建标签前复核 GitHub run/attempt/event、PR head 归属及仓库 private 状态；这些限制属于历史私有归档合同，不能用于描述当前公开候选工作流。
 
-离线命令边界检查使用小型固定输出，覆盖公开/私有与同仓库/fork 发布路由、验证失败拒绝成功打包、成功收集、完整失败诊断、分段重组、无效输入和损坏附件：
+历史工具的离线命令边界检查使用小型固定输出，覆盖验证失败拒绝成功打包、成功收集、完整失败诊断、分段重组、无效输入和损坏附件：
 
 ```powershell
 python tools/windows/test-ci-release.py

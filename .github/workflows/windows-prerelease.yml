@@ -1,0 +1,48 @@
+name: Prepare Windows prerelease
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful main Windows toolchain run ID
+        required: true
+        type: string
+      version:
+        description: Prerelease version (v0.1.0-alpha.1)
+        required: true
+        type: string
+      expected_sha256:
+        description: SHA-256 of the exact candidate program ZIP
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-prerelease
+  cancel-in-progress: false
+
+jobs:
+  prepare-draft:
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      actions: read
+    runs-on: windows-2025
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare and verify unpublished prerelease draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_RUN_ID: ${{ inputs.run_id }}
+          CANDIDATE_VERSION: ${{ inputs.version }}
+          CANDIDATE_SHA256: ${{ inputs.expected_sha256 }}
+        run: |
+          ./tools/windows/delivery.ps1 -Mode PrepareDraft -PackageRoot artifacts/prerelease-download -Repository $env:GITHUB_REPOSITORY -RunId $env:CANDIDATE_RUN_ID -Version $env:CANDIDATE_VERSION -ExpectedSha256 $env:CANDIDATE_SHA256

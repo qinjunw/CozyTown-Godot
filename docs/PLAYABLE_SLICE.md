@@ -6,6 +6,8 @@
 
 ## 启动与操作
 
+下载 CI 候选后无需本地构建，按 [Windows 交付指引](WINDOWS_DELIVERY.md)校验并运行 `Start-Playtest.cmd`；验收步骤见 [人工试玩清单](PLAYTEST.md)。
+
 在 Windows x64 上安装工具链并运行 `pwsh -File tools/windows/verify.ps1` 后，打开其输出目录中的 `windows/CozyTown.exe`。`-Graphical` 可另运行图形检查并捕获截图。保留整个 `windows` 目录，程序使用随包提供的 .NET 运行时。工具安装和检查范围见 [Windows 工具链](WINDOWS_TOOLCHAIN.md)。
 
 | 操作 | 结果 |
