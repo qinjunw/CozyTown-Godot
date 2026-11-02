@@ -59,6 +59,48 @@ def draft_release_fixture(arguments):
     return 0
 
 
+class WorkflowRoutingTests(unittest.TestCase):
+    def test_publish_routes_only_private_same_repository_packages(self):
+        # Evaluate the workflow's actual predicates on fixed event/outcome inputs.
+        # This deliberately supports only the existing boolean condition vocabulary.
+        workflow = (ROOT / ".github/workflows/windows-toolchain.yml").read_text()
+        verify, fork = workflow.split("  verify-fork:")
+        job_condition = verify.split("    if: ", 1)[1].splitlines()[0]
+        publish_condition = verify.split("- name: Publish and verify private Draft Release", 1)[1].split("if: ", 1)[1].splitlines()[0]
+        fork_condition = fork.split("    if: ", 1)[1].splitlines()[0]
+        for private in (False, True):
+            for event, same, expected_job in (
+                ("push", True, "verify"),
+                ("workflow_dispatch", True, "verify"),
+                ("pull_request", True, "verify"),
+                ("pull_request", False, "verify-fork"),
+            ):
+                for package in ("success", "failure", "skipped"):
+                    with self.subTest(private=private, event=event, same=same, package=package):
+                        values = {
+                            "github.event_name": repr(event),
+                            "github.event.pull_request.head.repo.full_name": repr("owner/repo" if same else "fork/repo"),
+                            "github.event.repository.private": repr(private),
+                            "github.repository": repr("owner/repo"),
+                            "steps.package.outcome": repr(package),
+                            "always()": "True",
+                        }
+                        def evaluate(condition):
+                            for key, value in values.items():
+                                condition = condition.replace(key, value)
+                            condition = condition.replace("&&", " and ").replace("||", " or ")
+                            return eval(condition, {"__builtins__": {}}, {})
+                        selected = evaluate(job_condition)
+                        self.assertEqual(expected_job == "verify", selected)
+                        self.assertEqual(expected_job == "verify-fork", evaluate(fork_condition))
+                        want = private and same and package == "success"
+                        self.assertEqual(want, selected and evaluate(publish_condition))
+        self.assertIn("contents: read", fork)
+        self.assertNotIn("contents: write", fork)
+        self.assertNotIn("-Mode Publish", fork)
+        self.assertNotIn("continue-on-error:", workflow)
+
+
 class ReleaseCommandTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
@@ -175,6 +217,12 @@ class ReleaseCommandTests(unittest.TestCase):
         self.write("windows/CozyTown.exe", b"fixed executable")
         result = self.command("success", "-MaximumAssetBytes", "2147483648")
         self.assertNotEqual(0, result.returncode)
+        self.assertFalse(self.package.exists())
+
+    def test_success_rejects_failed_verification_even_with_an_export(self):
+        self.report(passed=False)
+        self.write("windows/CozyTown.exe", b"fixed executable")
+        self.assertNotEqual(0, self.command().returncode)
         self.assertFalse(self.package.exists())
 
     def test_success_rejects_a_report_from_another_source(self):

@@ -50,7 +50,7 @@ jobs:
         run: |
           ./tools/windows/ci-release.ps1 -Mode Package -VerificationRoot artifacts/verification -PackageRoot artifacts/ci-release -Repository $env:GITHUB_REPOSITORY -RunId $env:GITHUB_RUN_ID -RunAttempt $env:GITHUB_RUN_ATTEMPT -HeadSha $env:CI_HEAD_SHA -Event $env:GITHUB_EVENT_NAME -Outcome $env:CI_VERIFICATION_OUTCOME
       - name: Publish and verify private Draft Release
-        if: always() && steps.package.outcome == 'success'
+        if: always() && github.event.repository.private && steps.package.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: ./tools/windows/ci-release.ps1 -Mode Publish -PackageRoot artifacts/ci-release
