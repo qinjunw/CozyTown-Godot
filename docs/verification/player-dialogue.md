@@ -28,7 +28,7 @@ dotnet build game/CozyTown.Game.csproj
 
 ## Windows 用户操作清单
 
-状态：2026-10-11 用户反馈“对话验收通过了，按规范关票并继续推进真实评测吧。”此前交付的 `de520bab` 离线候选及[四组人工清单](player-dialogue-manual.md)据此记为通过。用户未提供逐项观察或截图；本记录不补写这些信息。真实服务样本由完整 Demo 综合评测承接。
+状态：用户于 2026-10-11 确认 `de520bab` 离线候选的[四组人工清单](player-dialogue-manual.md)通过。通过依据为用户反馈；未提供逐项观察或截图。此记录不覆盖后续候选，真实服务样本单独记录。
 
 以下保留复测步骤，使用同一候选构建的普通入口，保留运行记录目录与使用的 `--dialogue-fixture`。
 
@@ -42,7 +42,7 @@ dotnet build game/CozyTown.Game.csproj
 
 ## 新评测预算接线
 
-完整 Demo 的 `player_dialogue` 阶段已接通 `TownGame.PlayerDialogue.cs` 的真实模式分支与 `SendPlayerDialogueAsync`、`TownDialogueHost.Freeze` 的阶段参数及 `TownSaveFile.ValidateHostSnapshot` 的阶段校验。玩家传输使用 `player_text` 身份、同一客户端/账本/两物理槽及持久终结 registry；接线和离线证据见[宿主验证记录](full-demo-host-2026-10-10.md)。实际服务样本待综合评测。首切片旧 profile 的真实玩家入口明确回退。
+完整 Demo 的 `player_dialogue` 阶段已接通 `TownGame.PlayerDialogue.cs` 的真实模式分支与 `SendPlayerDialogueAsync`、`TownDialogueHost.Freeze` 的阶段参数及 `TownSaveFile.ValidateHostSnapshot` 的阶段校验。玩家传输使用 `player_text` 身份、同一客户端/账本/两物理槽及持久终结 registry；接线和离线证据见[宿主验证记录](full-demo-host-2026-10-10.md)。本记录不含真实服务样本；后续样本见 [v1 未达标结果](full-demo-real-2026-10-11.md)及 [v2 评测结果](full-demo-real-v2-2026-10-11.md)，分别保留其候选归属。首切片旧 profile 的真实玩家入口明确回退。
 
 ## 固定候选
 

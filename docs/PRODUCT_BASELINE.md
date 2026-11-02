@@ -49,7 +49,7 @@
 
 ## 参考基线与来源
 
-参考项目版本为 [CozyTown `68a1dde`](https://github.com/qinjunw/CozyTown/tree/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa)。后续引入更新时，逐次注明来源提交及采用原因，不追随源仓库的移动分支隐式改变基线。
+历史参考项目版本为 [CozyTown `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`](https://github.com/qinjunw/CozyTown/tree/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa)。以下 Unity 来源链接需要该私有参考仓库的访问权限；本项目当前操作与模块入口见[小镇操作](PLAYABLE_SLICE.md)和[架构索引](ARCHITECTURE.md)。后续引入更新时，逐次注明来源提交及采用原因，不追随源仓库的移动分支隐式改变基线。
 
 - [MVP 产品需求](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/docs/PRD.md)：小镇玩法目标。
 - [Agent 实验平台范围](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/docs/wayfinder/agent-world/platform-milestone.md)：四人、观察、连续性和重复实验目标；其中实现状态以更新证据为准。

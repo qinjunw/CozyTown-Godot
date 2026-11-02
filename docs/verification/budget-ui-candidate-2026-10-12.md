@@ -1,6 +1,6 @@
 # 预算显示修复与新 Windows 候选
 
-2026-10-12。对应[显示实际预算上限与人工阶段用量](https://github.com/qinjunw/CozyTown-Godot/issues/43)。新候选运行时源码为 `576ae64e38f854bb22b13186e6a9d2ecc9799d72`，模拟源码摘要为 `301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf`。本页记录离线候选；实际画面与键鼠操作仍待[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
+2026-10-12。对应[显示实际预算上限与人工阶段用量](https://github.com/qinjunw/CozyTown-Godot/issues/43)。新候选运行时源码为 `576ae64e38f854bb22b13186e6a9d2ecc9799d72`，模拟源码摘要为 `301c4b46357a6ccfec5480a42d0f1d10ca2c4f9f8beebc5381f85a5bb55ed1cf`。本页记录该候选的离线检查；后续[七组操作及可选真实 M01 的用户通过反馈](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)仍归属该候选，不覆盖后续源码。
 
 ## 变更与来源
 

@@ -1,4 +1,8 @@
-# 首切片美术来源与图集布局
+# 美术来源、许可状态与图集布局
+
+本仓库已包含 [game/Art/](../../game/Art/) 中的 16 张 PNG；[catalog.json](../../game/Art/catalog.json) 登记纹理路径、角色绑定和物品格位映射。使用这些已入库资源无需访问 Unity 参考仓库。本页保留来源版本、逐文件 SHA-256、图集规格及历史核查范围。
+
+## 引入记录
 
 2026-10-08 生产增补：鸡舍复用 `bld_town_functions_64.png` 和匹配屋顶的 `(64,64,64,64)` 区域。复制固定参考提交的 `Assets/CozyTown/Art/Production/Props/prop_hen_states_16.png` 到 `game/Art/Props/prop_hen_states_16.png`，实际 PNG 为 48×16、1,262 字节，SHA-256 `430f2761df7a932dcd734abf178c950525bac66bf562fd062afc552c2da661a8` 与固定 Git LFS 对象一致。三格从左到右为未喂食、已喂食、待领产物；`ChickenView.cs` 按已提交的母鸡状态选择一格，以最近邻采样显示，没有重采样或改色。池塘与厨房沿用已有图集及入口。
 
@@ -12,7 +16,11 @@
 
 固定来源为 [CozyTown `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`](https://github.com/qinjunw/CozyTown/tree/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa)。下表的“固定提交”通过该提交的 Git LFS `oid sha256` 与实际 PNG 校验；“工作区”是参考项目中尚未提交的文件，以表内 SHA-256 固定本次输入。所有源路径均为 `Assets/CozyTown/Art/Production/` 加上表内路径，目标路径为 `game/Art/` 加上相同路径。
 
-源项目的 [ArtSource 说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/README.md)记载生成式源稿和原生像素编译流程。[T1 生成记录](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Generated/T1/GENERATION_LOG.md)记载四位居民与住宅源图由项目使用内置图像生成工具制作；[路灯说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Authored/L1/README.md)记载路灯直接使用原生像素源制作。所选目录及项目已跟踪文件中未发现单独的素材许可证。此次沿用用户已授权复用的项目素材，不为其添加或声明新的开源许可证。
+Unity 参考仓库为私有仓库，本页指向它的提交及文件链接需要该仓库的访问权限。以下来源说明和参考记录哈希保留引入时的登记；参考源稿与工作区说明文件未包含在本仓库中，公开读者可核对已入库 PNG 的字节身份，但无法仅凭本仓库重新核验源稿内容或生成过程。
+
+源项目的 [ArtSource 说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/README.md)记载生成式源稿和原生像素编译流程。[T1 生成记录](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Generated/T1/GENERATION_LOG.md)记载四位居民与住宅源图由项目使用内置图像生成工具制作；[路灯说明](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/ArtSource/Authored/L1/README.md)记载路灯直接使用原生像素源制作。
+
+本仓库未提供这些素材的独立许可证。来源登记及文件哈希用于标识素材，公开可访问这些文件不构成素材的许可声明；本页不授予额外使用或分发权利。
 
 | 路径 | 来源 | SHA-256 |
 | --- | --- | --- |
@@ -32,7 +40,15 @@
 | `Props/prop_town_functions_96x64.png` | 固定提交 | `87ca3014a699cf597cdfa76a48087cd623ecb56701e44b3b5c602dc0b4c9f2f8` |
 | `Props/prop_town_lamp_16x32.png` | 固定提交 | `53ab31dd4073eda9676ac249656b1120d9d14953c4a31fff7b0c0902d3e9d5cd` |
 
-工作区更新的说明保留在参考项目，下面的哈希标识本次读取的记录；这些文件没有被误写为固定提交的内容。
+在本仓库根目录运行以下 PowerShell 命令，可计算资源目录中全部已登记纹理的 SHA-256；与上表及引入记录中的物品图集哈希对照：
+
+```powershell
+(Get-Content game/Art/catalog.json -Raw | ConvertFrom-Json).textures | ForEach-Object {
+    Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path game ($_.Substring(6)))
+}
+```
+
+工作区更新的说明保留在参考项目，下面的哈希标识引入时读取的记录；它们不属于上述固定提交，当前本仓库也不包含这些说明文件的正文。哈希登记不能替代对原文件的核查。
 
 | 参考项目内路径 | 记录内容 | SHA-256 |
 | --- | --- | --- |
