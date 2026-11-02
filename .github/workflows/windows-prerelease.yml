@@ -12,7 +12,7 @@ on:
         required: true
         type: string
       expected_sha256:
-        description: SHA-256 of the exact ZIP tested locally
+        description: SHA-256 of the exact candidate program ZIP
         required: true
         type: string
 
