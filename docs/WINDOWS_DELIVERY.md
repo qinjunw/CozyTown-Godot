@@ -9,7 +9,7 @@
 | 位置 | 用途与访问方式 | 下一步 |
 | --- | --- | --- |
 | Actions 的 `windows-candidate-<run-id>-<attempt>` Artifact | main 成功运行的候选；登录 GitHub 后下载，保留 14 天 | 校验、解压，在本机试玩 |
-| Releases 中的 Draft | 维护者可见的发布草稿，资产来自已验收的同一个 CI 程序 ZIP | 核对验收记录与附件，等待发布确认 |
+| Releases 中的 Draft | 维护者可见的发布草稿，资产来自指定 CI 程序 ZIP，可在人工验收前准备 | 核对附件并完成最低试玩，确认后才公开 |
 | 已发布的 Pre-release | 面向公众的预发布版本 | 下载已发布附件；预发布标记不会限制公众访问 |
 
 自动构建与准备草稿均不公开发布 Release。是否已经有公开运行包，以 [Releases 列表](https://github.com/qinjunw/CozyTown-Godot/releases)为准。Artifact 的登录要求和网页下载入口见 [GitHub 下载说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts)。
@@ -67,7 +67,7 @@ pwsh -File tools/windows/delivery.ps1 -Mode Verify `
 
 ## 4. 维护者准备同包草稿
 
-先取得 [PLAYTEST](PLAYTEST.md)的 alpha 最低必测结果与明确的通过反馈，同时记录扩展项覆盖和未测范围，保留原程序 ZIP 和摘要。草稿准备只搬运已构建的同包资产，不为发布重新编译。
+先确定成功 main 运行中的候选，并按第 2 节核验其内层程序 ZIP 摘要，保留原 ZIP 与摘要文件。Draft 可在人工验收前准备，供维护者取用待验收资产；创建成功仅表示同包草稿已就绪，不表示人工通过。草稿准备只搬运已构建的同包资产，不为发布重新编译。
 
 具有仓库写入权限的维护者在 GitHub 操作：
 
@@ -78,23 +78,22 @@ pwsh -File tools/windows/delivery.ps1 -Mode Verify `
 | --- | --- |
 | `run_id` | 已成功的 main **Windows toolchain** run ID，不是本次准备草稿的运行 ID |
 | `version` | 未使用的版本标签，例如 `v0.1.0-alpha.1` |
-| `expected_sha256` | 本机已验收的**内层程序 ZIP**完整 SHA-256 |
+| `expected_sha256` | 指定候选已核验的**内层程序 ZIP**完整 SHA-256，无需先完成人工试玩 |
 
 3. 打开 Releases 中生成的草稿，核对版本、源码提交、原 CI 链接、ZIP 文件名与摘要。资产应包含原程序 ZIP、`candidate.json` 和 `SHA256SUMS.txt`。
-4. 保持为 Draft，等待公开发布确认。如果原 Artifact 已过期，或重跑后无法取得与验收摘要一致的原包，停止准备；重新生成、核验和记录候选，不沿用旧包的通过结论。
+4. 保持为 Draft，按 [PLAYTEST](PLAYTEST.md)进行最低试玩并记录扩展回归覆盖。如果原 Artifact 已过期，或重跑后无法取得与指定摘要一致的原包，停止准备；重新生成、核验和记录候选。若已有人工结果，不沿用到不同的包。
 
-需要使用 CLI 的维护者，可在安装了 PowerShell 7、GitHub CLI，并已登录具备仓库写入权限的账号后，从相应源码检出运行：
+需要使用 CLI 的维护者，可安装 GitHub CLI，登录具备仓库写入权限的账号后触发同一受信工作流：
 
 ```powershell
-pwsh -File tools/windows/delivery.ps1 -Mode PrepareDraft `
-  -PackageRoot '<new-candidate-download-directory>' `
-  -Repository 'qinjunw/CozyTown-Godot' `
-  -RunId '<successful-main-run-id>' `
-  -Version 'v0.1.0-alpha.1' `
-  -ExpectedSha256 '<tested-program-zip-sha256>'
+gh workflow run windows-prerelease.yml `
+  --repo qinjunw/CozyTown-Godot --ref main `
+  -f run_id='<successful-main-run-id>' `
+  -f version='v0.1.0-alpha.1' `
+  -f expected_sha256='<verified-candidate-program-zip-sha256>'
 ```
 
-此模式从指定成功 main 运行下载候选，核对摘要后创建带附件的 draft/prerelease；它不公开发布。使用新的下载目录，不覆盖已有候选或历史 Release。网页手动触发的权限与步骤见 [GitHub 手动工作流说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。
+该命令仅发起远端运行，须到 Actions 等待成功后再核对草稿。`delivery.ps1` 的 `PrepareDraft` 模式只允许在 main 上的受信手动工作流内执行，本机直接运行该模式会被拒绝。工作流从指定成功 main 运行下载候选，核对摘要后创建带附件的 draft/prerelease，不公开发布，也不覆盖已有历史 Release。网页手动触发的权限与步骤见 [GitHub 手动工作流说明](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)。
 
 ### CI 打包输入
 
@@ -115,7 +114,7 @@ pwsh -File tools/windows/delivery.ps1 -Mode Package `
 
 ## 5. 验收确认后公开
 
-公开操作由维护者在取得本候选的人工验收和发布确认后执行：
+公开操作由维护者在本候选 Q01～Q05、M01～M04 全部通过、扩展回归未测范围已披露，并取得明确发布确认后执行：
 
 1. 在 Releases 打开本次草稿的编辑页，核对待发布的版本、源码、CI 链接和已验收 ZIP 摘要。
 2. 发布说明写明已测项目、Windows 环境、已知问题和未测项目。新候选不能引用旧候选的人工或真实模型结果作为本版通过依据。
