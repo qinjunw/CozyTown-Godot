@@ -12,10 +12,8 @@ permissions:
 jobs:
   verify:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-    # This job needs its verification files on the same runner as the publisher.
-    # Only same-repository events receive write permission; forks use verify-fork.
     permissions:
-      contents: write
+      contents: read
     runs-on: windows-2025
     timeout-minutes: 30
     defaults:
@@ -30,6 +28,8 @@ jobs:
         run: |
           python tools/windows/test-ci-release.py
           if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
+          python tools/windows/test-delivery.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows delivery checks failed.' }
           python tools/windows/test-final-review-gate.py
           if ($LASTEXITCODE -ne 0) { throw 'Final review preflight checks failed.' }
       - name: Install pinned portable tools
@@ -41,19 +41,22 @@ jobs:
       - name: Build, test, and run the Windows export
         id: verification
         run: ./tools/windows/verify.ps1
-      - name: Package Windows verification evidence
-        id: package
-        if: always() && (steps.verification.outcome == 'success' || steps.verification.outcome == 'failure')
+      - name: Package Windows candidate
+        id: candidate
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.verification.outcome == 'success'
         env:
-          CI_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-          CI_VERIFICATION_OUTCOME: ${{ steps.verification.outcome }}
+          CI_SOURCE_COMMIT: ${{ github.sha }}
         run: |
-          ./tools/windows/ci-release.ps1 -Mode Package -VerificationRoot artifacts/verification -PackageRoot artifacts/ci-release -Repository $env:GITHUB_REPOSITORY -RunId $env:GITHUB_RUN_ID -RunAttempt $env:GITHUB_RUN_ATTEMPT -HeadSha $env:CI_HEAD_SHA -Event $env:GITHUB_EVENT_NAME -Outcome $env:CI_VERIFICATION_OUTCOME
-      - name: Publish and verify private Draft Release
-        if: always() && github.event.repository.private && steps.package.outcome == 'success'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: ./tools/windows/ci-release.ps1 -Mode Publish -PackageRoot artifacts/ci-release
+          ./tools/windows/delivery.ps1 -Mode Package -VerificationRoot artifacts/verification -PackageRoot artifacts/windows-candidate -Repository $env:GITHUB_REPOSITORY -RunId $env:GITHUB_RUN_ID -RunAttempt $env:GITHUB_RUN_ATTEMPT -SourceCommit $env:CI_SOURCE_COMMIT
+      - name: Upload Windows candidate
+        if: success() && steps.candidate.outcome == 'success'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/windows-candidate/*
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 14
 
   verify-fork:
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
@@ -72,6 +75,8 @@ jobs:
         run: |
           python tools/windows/test-ci-release.py
           if ($LASTEXITCODE -ne 0) { throw 'CI release command checks failed.' }
+          python tools/windows/test-delivery.py
+          if ($LASTEXITCODE -ne 0) { throw 'Windows delivery checks failed.' }
           python tools/windows/test-final-review-gate.py
           if ($LASTEXITCODE -ne 0) { throw 'Final review preflight checks failed.' }
       - name: Install pinned portable tools

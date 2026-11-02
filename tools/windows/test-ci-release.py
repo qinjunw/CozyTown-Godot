@@ -60,13 +60,13 @@ def draft_release_fixture(arguments):
 
 
 class WorkflowRoutingTests(unittest.TestCase):
-    def test_publish_routes_only_private_same_repository_packages(self):
+    def test_candidates_route_only_successful_main_pushes(self):
         # Evaluate the workflow's actual predicates on fixed event/outcome inputs.
         # This deliberately supports only the existing boolean condition vocabulary.
         workflow = (ROOT / ".github/workflows/windows-toolchain.yml").read_text()
         verify, fork = workflow.split("  verify-fork:")
         job_condition = verify.split("    if: ", 1)[1].splitlines()[0]
-        publish_condition = verify.split("- name: Publish and verify private Draft Release", 1)[1].split("if: ", 1)[1].splitlines()[0]
+        publish_condition = verify.split("- name: Package Windows candidate", 1)[1].split("if: ", 1)[1].splitlines()[0]
         fork_condition = fork.split("    if: ", 1)[1].splitlines()[0]
         for private in (False, True):
             for event, same, expected_job in (
@@ -82,7 +82,9 @@ class WorkflowRoutingTests(unittest.TestCase):
                             "github.event.pull_request.head.repo.full_name": repr("owner/repo" if same else "fork/repo"),
                             "github.event.repository.private": repr(private),
                             "github.repository": repr("owner/repo"),
-                            "steps.package.outcome": repr(package),
+                            "steps.verification.outcome": repr(package),
+                            "github.ref": repr("refs/heads/main" if event != "pull_request" else "refs/pull/1/merge"),
+                            "success()": repr(package == "success"),
                             "always()": "True",
                         }
                         def evaluate(condition):
@@ -93,8 +95,10 @@ class WorkflowRoutingTests(unittest.TestCase):
                         selected = evaluate(job_condition)
                         self.assertEqual(expected_job == "verify", selected)
                         self.assertEqual(expected_job == "verify-fork", evaluate(fork_condition))
-                        want = private and same and package == "success"
+                        want = event == "push" and package == "success"
                         self.assertEqual(want, selected and evaluate(publish_condition))
+        self.assertNotIn("contents: write", workflow)
+        self.assertNotIn("ci-release.ps1", workflow)
         self.assertIn("contents: read", fork)
         self.assertNotIn("contents: write", fork)
         self.assertNotIn("-Mode Publish", fork)
