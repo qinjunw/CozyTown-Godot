@@ -77,6 +77,13 @@ function Assert-Candidate([string] $Root, [string] $Digest) {
         Assert-Path $file.path
         if ($file.bytes -lt 0 -or $file.sha256 -cnotmatch '^[0-9a-f]{64}$' -or -not $inventory.TryAdd($file.path, $file)) { throw 'Invalid candidate file inventory.' }
     }
+    foreach ($path in $inventory.Keys) {
+        $separator = $path.IndexOf('/')
+        while ($separator -ge 0) {
+            if ($inventory.ContainsKey($path.Substring(0, $separator))) { throw 'Candidate contains a file/directory prefix conflict.' }
+            $separator = $path.IndexOf('/', $separator + 1)
+        }
+    }
     Assert-Required @($inventory.Keys)
     foreach ($required in @('START-HERE.md', 'Start-Playtest.cmd')) {
         if (-not $inventory.ContainsKey($required)) { throw "Candidate is missing $required." }
@@ -129,7 +136,7 @@ if ($Mode -eq 'Package') {
     Assert-NoLinks $parent
     $null = New-Item -ItemType Directory -Path $package
     $short = $SourceCommit.Substring(0,12)
-    $launcher = "@echo off`r`nsetlocal`r`ncd /d `"%~dp0`"`r`n`"%~dp0CozyTown.exe`" -- `"--data-dir=%LOCALAPPDATA%\CozyTown-Godot\Playtests\$short`"`r`n"
+    $launcher = "@echo off`r`nsetlocal DisableDelayedExpansion`r`ncd /d `"%~dp0`"`r`n`"%~dp0CozyTown.exe`" -- `"--data-dir=%LOCALAPPDATA%\CozyTown-Godot\Playtests\$short`"`r`n"
     $guide = "# Windows playtest candidate`n`nSource: $SourceCommit`nCI: https://github.com/$Repository/actions/runs/$RunId/attempts/$RunAttempt`n`nKeep the complete extracted directory. Double-click Start-Playtest.cmd for offline rules mode. Playtest data is isolated by source under LOCALAPPDATA/CozyTown-Godot/Playtests/$short. F5 saves; after closing and reopening, F9 loads that save. Do not pass private model configuration for this playtest.`n`nRecord the source, ZIP SHA-256, CI run, tested actions and observed failures with your acceptance result. This candidate is awaiting human acceptance.`n"
     $generated = @{ 'Start-Playtest.cmd' = $launcher; 'START-HERE.md' = $guide }
     $inventory = [Collections.Generic.List[object]]::new()

@@ -1,5 +1,6 @@
 """Offline candidate delivery checks; GitHub operations use a filesystem fixture."""
 import hashlib
+import io
 import json
 import os
 import pathlib
@@ -83,6 +84,56 @@ class DeliveryTests(unittest.TestCase):
         self.write_report()
         (self.windows / 'CozyTown.pck').unlink()
         self.assertNotEqual(0, self.package_command().returncode)
+
+    def test_playtest_cmd_preserves_bang_paths_with_inherited_delayed_expansion(self):
+        receipt = self.package_ok()
+        install = self.root / 'installed 测试 & (space)!'
+        with zipfile.ZipFile(self.package / receipt['archive']['name']) as archive:
+            archive.extractall(install)
+        source = self.root / 'Recorder.cs'
+        source.write_text('class Recorder { static void Main(string[] args) { '
+                          'System.IO.File.WriteAllLines(System.Environment.GetEnvironmentVariable("RECORDER_OUTPUT"), args); } }')
+        compiler = pathlib.Path(os.environ['SystemRoot']) / 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
+        built = subprocess.run([str(compiler), '/nologo', '/out:' + str(install / 'CozyTown.exe'), str(source)],
+                               capture_output=True, text=True)
+        self.assertEqual(0, built.returncode, built.stdout + built.stderr)
+        local = self.root / 'local data 测试 & (space)!'
+        output = self.root / 'arguments.txt'
+        env = dict(os.environ, LOCALAPPDATA=str(local), RECORDER_OUTPUT=str(output))
+        for expansion in ('off', 'on'):
+            with self.subTest(delayed_expansion=expansion):
+                output.unlink(missing_ok=True)
+                result = subprocess.run(['cmd', '/d', '/v:' + expansion, '/c', 'Start-Playtest.cmd'],
+                                        cwd=install, env=env, capture_output=True)
+                self.assertEqual(0, result.returncode, repr(result.stdout + result.stderr))
+                self.assertTrue(output.exists(), repr(result.stdout + result.stderr))
+                self.assertEqual(['--', '--data-dir=' + str(local / 'CozyTown-Godot' / 'Playtests' / SHA[:12])],
+                                 output.read_text(encoding='utf-8-sig').splitlines())
+
+    def test_verify_rejects_file_directory_prefix_conflicts_in_either_order(self):
+        original = self.package_ok()
+        archive = self.package / original['archive']['name']
+        original_bytes = archive.read_bytes()
+        for parent in ('collision.dll', 'COLLISION.dll'):
+            for reverse in (False, True):
+                with self.subTest(parent=parent, reverse=reverse):
+                    receipt = json.loads(json.dumps(original))
+                    members = [('data_CozyTown.Game_windows_x86_64/' + parent, b'parent'),
+                               ('data_CozyTown.Game_windows_x86_64/collision.dll/child.dll', b'child')]
+                    if reverse:
+                        members.reverse()
+                    with zipfile.ZipFile(io.BytesIO(original_bytes)) as source, zipfile.ZipFile(archive, 'w') as target:
+                        for item in source.infolist():
+                            target.writestr(item, source.read(item))
+                        for path, contents in members:
+                            target.writestr(path, contents)
+                            receipt['files'].append(dict(path=path, bytes=len(contents), sha256=hashlib.sha256(contents).hexdigest()))
+                    receipt['archive'].update(bytes=archive.stat().st_size, sha256=hashlib.sha256(archive.read_bytes()).hexdigest())
+                    (self.package / 'candidate.json').write_text(json.dumps(receipt))
+                    (self.package / 'SHA256SUMS.txt').write_text(receipt['archive']['sha256'] + '  ' + archive.name + '\n')
+                    result = self.command('Verify', '-ExpectedSha256', receipt['archive']['sha256'])
+                    self.assertNotEqual(0, result.returncode)
+                    self.assertIn('file/directory prefix conflict', result.stderr)
 
     def test_runtime_createdump_executables_ship_but_other_executables_do_not(self):
         # File locations observed in the 2026-10-18 Windows export, not a release candidate.
