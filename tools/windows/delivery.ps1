@@ -41,6 +41,7 @@ function Assert-Path([string] $Path) {
             $_.StartsWith('.') -or
             $_ -match '^(?i:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)' }).Count) { throw "Unsafe candidate path: $Path" }
     $runtime = 'data_CozyTown.Game_windows_x86_64/'
+    if ($Path -cin @('data_CozyTown.Game_windows_x86_64/createdump.exe', 'launcher/createdump.exe')) { return }
     if ($Path -in @('CozyTown.exe', 'CozyTown.console.exe', 'CozyTown.pck', 'START-HERE.md', 'Start-Playtest.cmd')) { return }
     if ($Path -in @('launcher/launcher.example.json', 'launcher/new-play-entries.ps1', 'launcher/play-entry.ps1', 'launcher/CozyTown.Play.exe')) { return }
     if ($Path -cmatch '^launcher/[^/]+\.(dll|pdb)$' -or $Path -cmatch '^launcher/[^/]+\.(deps|runtimeconfig)\.json$') { return }

@@ -84,6 +84,27 @@ class DeliveryTests(unittest.TestCase):
         (self.windows / 'CozyTown.pck').unlink()
         self.assertNotEqual(0, self.package_command().returncode)
 
+    def test_runtime_createdump_executables_ship_but_other_executables_do_not(self):
+        # File locations observed in the 2026-10-18 Windows export, not a release candidate.
+        for directory in ('data_CozyTown.Game_windows_x86_64', 'launcher'):
+            (self.windows / directory / 'createdump.exe').write_bytes(b'runtime dump utility fixture')
+        receipt = self.package_ok()
+        with zipfile.ZipFile(self.package / receipt['archive']['name']) as archive:
+            for directory in ('data_CozyTown.Game_windows_x86_64', 'launcher'):
+                self.assertEqual(b'runtime dump utility fixture', archive.read(directory + '/createdump.exe'))
+        result = self.command('Verify', '-ExpectedSha256', receipt['archive']['sha256'])
+        self.assertEqual(0, result.returncode, result.stderr)
+        shutil.rmtree(self.package)
+        for directory in ('data_CozyTown.Game_windows_x86_64', 'launcher'):
+            with self.subTest(directory=directory):
+                unexpected = self.windows / directory / 'unexpected.exe'
+                unexpected.write_bytes(b'not a runtime utility')
+                result = self.package_command()
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn('Unexpected file', result.stderr)
+                self.assertFalse(self.package.exists())
+                unexpected.unlink()
+
     def test_duplicate_runs_extra_files_and_existing_output_rejected(self):
         other = self.verification / 'other'
         shutil.copytree(self.run, other)
