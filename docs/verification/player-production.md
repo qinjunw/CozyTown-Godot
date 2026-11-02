@@ -1,6 +1,6 @@
 # 养鸡、钓鱼与烹饪验证记录
 
-2026-10-08，对应[贯通养鸡、钓鱼与烹饪生产循环](https://github.com/qinjunw/CozyTown-Godot/issues/19)。候选 `73863087c44c2cd91d4f29dac0083e3317153203` 通过 325 项 C# 测试和八次 Godot 生产场景检查。Windows 键鼠操作完成养鸡、五份配方、成品出售、再投入及满包拒绝与腾格领取；用户随后确认交接的腾格后钓鱼和最终恢复验收通过，并要求合并、关闭票据。
+2026-10-08，对应[贯通养鸡、钓鱼与烹饪生产循环](https://github.com/qinjunw/CozyTown-Godot/issues/19)。候选 `73863087c44c2cd91d4f29dac0083e3317153203` 通过 325 项 C# 测试和八次 Godot 生产场景检查。Windows 键鼠操作完成养鸡、五份配方、成品出售、再投入及满包拒绝与腾格领取；用户于同日确认交接的腾格后钓鱼和最终恢复验收通过。
 
 ## 输入与自动检查
 
@@ -43,9 +43,9 @@ C# 测试没有失败或跳过。既有四人场景、经济、种植和 Windows
 
 导出图形普通场景汇集恢复前后分支的 75 条玩家命令：70 次成功、5 次拒绝；其中生产命令 40 条，35 次成功（包含一次空钩）、5 次拒绝。容量场景共 16 条命令，11 次成功、5 次拒绝，其中生产命令 8 条。计数包含恢复后丢弃的先前尝试，不等同于最终快照回执字典大小。
 
-输入与完整检查点见[普通样例](evidence/player-production/production-input-checkpoints.json)和[容量样例](evidence/player-production/production-capacity-input-checkpoints.json)；空间查询样例见[普通空间样例](evidence/player-production/production-space-samples.json)和[容量空间样例](evidence/player-production/production-capacity-spatial-samples.json)。完整核心和 Godot 场景回放执行器尚待后继票交付，本次没有执行完整记录回放。
+输入与完整检查点见[普通样例](evidence/player-production/production-input-checkpoints.json)和[容量样例](evidence/player-production/production-capacity-input-checkpoints.json)；空间查询样例见[普通空间样例](evidence/player-production/production-space-samples.json)和[容量空间样例](evidence/player-production/production-capacity-spatial-samples.json)。该候选在本次验证中没有执行完整记录回放；当前回放入口见[核心回放](../REPLAY.md)和[场景回放](../SCENE_REPLAY.md)，其结果不计入本次历史验证。
 
-## Windows 操作与人工交接
+## Windows 操作与人工验收
 
 实际操作使用同一候选的 Windows 导出包，请求窗口分辨率为 1920×1080。原生捕获返回 962×570 JPEG，包含窗口标题栏；这些文件保留原始像素。自动图形检查另提供 1280×720 PNG。两类截图的尺寸和输入方式分别记录。
 
@@ -63,9 +63,9 @@ C# 测试没有失败或跳过。既有四人场景、经济、种植和 Windows
 
 六次恢复均核对双方资产、生产、农场、世界分钟、新分支、父分支、来源快照和日志前缀。七次生产拒绝逐项核对未发生部分变更。汇总见[实际操作核验](evidence/player-production/manual-summary.json)，逐命令相关状态投影见[人工操作检查点](evidence/player-production/manual-input-checkpoints.json)，已保存档案与容量未保存进度见[状态来源](evidence/player-production/manual-final-snapshots.json)。输入设备归属依据操作方声明，日志本身不编码鼠标或键盘来源。
 
-用户于 2026-10-08 要求后续实机验收由其人工执行。代理在五格组领取成功后停止 UI 操作，冻结已有文件，并交付[人工验收清单](player-production-manual-checklist.md)。用户随后在本项目聊天回复“验收通过了,你合并和关票吧”，确认两项交接检查通过并授权合并与关闭。
+该候选的五格组冻结记录止于领取成功；[人工验收清单](player-production-manual-checklist.md)中的腾格后钓鱼和最终状态恢复由用户执行。验收来源为用户于 2026-10-08 在本项目会话中的确认，两项交接检查均通过。
 
-这项人工确认单独归属用户反馈；上述 31 条命令和冻结 `manual-*.json` 仍记录代理停止操作时的范围，保留历史 `partial_pending_human` 状态。用户后续操作单独以其验收反馈记录。
+用户确认与冻结记录分别归档：上述 31 条命令和冻结 `manual-*.json` 保留冻结时的覆盖范围和历史 `partial_pending_human` 状态；用户后续操作单独以其验收反馈记录。
 
 ## 证据与交付限制
 
@@ -75,4 +75,4 @@ C# 测试没有失败或跳过。既有四人场景、经济、种植和 Windows
 
 本地 Windows 完整目录另打包为 `artifacts/verification/20261008T072203Z-b9a0e31b/CozyTown-production-7386308.zip`，大小 78,278,031 字节，SHA-256 为 `4cec05cdeff00ff3e0bcec61fdbfc604d9a4d2e3e20c091c9248ff65b2d458c7`。解压后保留整个 `windows` 目录，再运行 `CozyTown.exe`。压缩包只含可运行候选，人工验收数据目录单独保留。
 
-本票使用离线规则与固定模型客户端，没有新增付费模型调用。上述生产验收不代替后续完整回放、跨日真实模型评测或最终 Demo 用户验收。
+本次验证使用离线规则与固定模型客户端，没有新增付费模型调用。上述生产验收范围不覆盖完整回放、跨日真实模型评测或最终 Demo 用户验收。

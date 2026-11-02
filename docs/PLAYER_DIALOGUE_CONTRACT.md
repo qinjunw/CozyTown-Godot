@@ -1,6 +1,6 @@
 # 玩家模型对话合同
 
-本合同对应[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。2026-10-10 用户确认对话暂停世界、关闭或切人终结旧会话，并恢复保存时的面板与逻辑状态。[实现玩家可选模型对话与会话续接](https://github.com/qinjunw/CozyTown-Godot/issues/21)已进入集成分支，通过固定客户端与核心回放检查，用户已于 2026-10-11 通过 Windows 人工验收；证据见[验证记录](verification/player-dialogue.md)。冻结候选 `f9551c1` 的[第二轮真实评测](verification/full-demo-real-v2-2026-10-11.md)已展示 8 段玩家文本，错误会话展示为零；用户另已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。样本和人工反馈保留各自源码归属，回放绑定修复见[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)。
+本合同规定玩家模型对话的交互、暂停、终结与保存边界，来源为[确定玩家模型对话的暂停与派发边界](https://github.com/qinjunw/CozyTown-Godot/issues/20)。操作见 [玩家对话说明](PLAYER_DIALOGUE.md)，`de520bab` 离线候选的自动检查与 2026-10-11 人工验收见[验证记录](verification/player-dialogue.md)。后续真实样本、综合操作及回放修复按各自候选记录，见 [完整 Demo 历史验收范围](FULL_DEMO_RUN.md#历史候选与验收范围)；历史结果不表示当前源码重新通过同样验收。
 
 ## 交互范围
 
@@ -35,7 +35,7 @@
 
 派发保存队列与轮转游标，对当前符合条件的请求公平调度；暂停造成 NPC 暂时不具备派发条件时保留其排队状态。玩家会话的窄范围准入不受理 NPC 行动，恢复补发也经过相同预算和槽位准入。
 
-既有首轮预算的 48 次发送已全部使用。对话实现和普通验证使用固定客户端；[完整 Demo 的独立预算](FULL_DEMO_EVALUATION_CONTRACT.md)已获用户批准，真实发送须在新配置接线、依赖和离线验证门完成后执行。余额或旧金额余量不构成新发送授权。
+普通验证使用固定客户端。真实玩家生成必须使用启用玩家阶段的已登记配置与现有账本；当前人工试玩见 [Windows 试玩入口](REAL_PLAY_LAUNCHER.md)，历史正式评测见[完整 Demo 评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。首切片配置没有玩家阶段，旧预算及旧存档不能自动升级或返还额度。新的真实实验须先明确范围、预算和验证条件，账户余额或旧金额余量不构成新发送依据。
 
 ## 保存与恢复
 

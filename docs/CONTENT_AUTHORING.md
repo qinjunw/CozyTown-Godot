@@ -4,7 +4,9 @@
 
 ## 证据与选项
 
-Unity 参考提交的 [TownLocalObservation2D.TryConfigureDevelopmentMap](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Unity/Npc/TownLocalObservation2D.cs) 使用住宅数、地点坐标、节点路径识别开发地图；部分位置或层级改变会使观察登记失效。重构保留局部观察行为目标，重新定义登记方式。
+当前内容提取与联合校验入口为本仓库的 [TownContentLoader.Load](../game/Host/TownContentLoader.cs) 和 [TownContent.Create](../src/CozyTown.Core/Town/TownContent.cs)。
+
+历史设计参考为 Unity `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa` 的 [TownLocalObservation2D.TryConfigureDevelopmentMap](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Unity/Npc/TownLocalObservation2D.cs)，链接需要 CozyTown 私有参考仓库访问权限。该实现使用住宅数、地点坐标、节点路径识别开发地图；部分位置或层级改变会使观察登记失效。重构保留局部观察行为目标，重新定义登记方式。
 
 Godot 的场景与 Resource 都支持文本序列化，C# 导出属性可在 Inspector 编辑；因此 AI 改文件与可视化编辑并不互斥。Resource 导出的 Node 属性不能作为跨内容引用方案，官方诊断 GD0107 要求这类属性处于 Node 派生类中。业务引用应使用明确身份，由宿主解析。[TSCN 格式](https://docs.godotengine.org/en/4.7/engine_details/file_formats/tscn.html)、[Resources](https://docs.godotengine.org/en/4.7/tutorials/scripting/resources.html)、[C# 导出属性](https://docs.godotengine.org/en/4.7/tutorials/scripting/c_sharp/c_sharp_exports.html)、[GD0107](https://docs.godotengine.org/en/4.7/tutorials/scripting/c_sharp/diagnostics/GD0107.html)。
 

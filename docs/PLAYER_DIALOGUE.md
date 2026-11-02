@@ -1,6 +1,6 @@
 # 玩家对话操作与状态
 
-靠近居民后按 E，或点击交谈按钮，打开固定回应。面板内的“生成一段反馈”由玩家显式触发，一次会话最多生成一段；四位居民均使用同一入口。普通规则模式使用固定客户端，按钮标注“固定示例”，不联网。当前首切片真实预算配置没有玩家对话阶段，选择生成会显示“当前实验未启用玩家对话额度”并保留固定回应；完整 Demo 的阶段接线由[综合评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)承接。
+靠近居民后按 E，或点击交谈按钮，打开固定回应。面板内的“生成一段反馈”由玩家显式触发，一次会话最多生成一段；四位居民均使用同一入口。普通规则模式使用固定客户端，按钮标注“固定示例”，不联网。真实模式需要显式配置和现有预算账本，人工试玩使用 [Windows 试玩入口](REAL_PLAY_LAUNCHER.md)的 `manual-play-v1`。历史 `first-slice-v1` 没有玩家对话阶段，选择生成会显示“当前实验未启用玩家对话额度”并保留固定回应；完整 Demo 的评测阶段见[综合评测合同](FULL_DEMO_EVALUATION_CONTRACT.md)。
 
 打开对话会暂停世界与 NPC。仅对话面板暂停时，当前玩家请求可派发和显示；Esc 打开叠加菜单，或应用失焦后，新派发和新文本展示暂停。已经开始的传输仍可封存完整结果。菜单关闭或重新聚焦后继续当前会话。点击“继续散步”关闭对话；对话内点击顶部另一位附近居民的头像会终结旧会话并打开新会话，新会话需要再次点击生成。
 
@@ -15,7 +15,7 @@ F5 保存面板目标、会话、冻结输入、等待余量、封存结果、�
 以下参数用于离线验收，不接受模型配置。每次用独立数据目录运行，避免覆盖玩家存档：
 
 ```powershell
-CozyTown.exe --dialogue-fixture=delayed --data-dir=<absolute-test-directory>
+& '<export-directory>/CozyTown.exe' -- --dialogue-fixture=delayed --data-dir='<absolute-test-directory>'
 ```
 
 | `--dialogue-fixture` | 生成后的行为 |
@@ -40,4 +40,4 @@ CozyTown.exe --dialogue-fixture=delayed --data-dir=<absolute-test-directory>
 
 世界事件分别记录会话打开、请求输入、派发、完整到达、封存响应、文本校验、展示、关闭、外部终结与经历提交，并携带会话和原逻辑身份。世界快照 schema 为 5，规则版本为 `town-social-player-dialogue-v5`；旧 schema 拒读并保护当前世界。
 
-自动化范围和待用户执行的 Windows 清单见[玩家对话验证记录](verification/player-dialogue.md)。
+自动检查范围见[玩家对话验证记录](verification/player-dialogue.md)，复测步骤见 [Windows 人工清单](verification/player-dialogue-manual.md)。2026-10-11 的人工通过记录归属 `de520bab` 离线候选；后续真实样本和综合操作结果见 [完整 Demo 的历史验收范围](FULL_DEMO_RUN.md#历史候选与验收范围)，不表示当前源码已经重新完成同样验收。

@@ -42,7 +42,7 @@
 
 ## 内容与确定性补给
 
-地块位置和玩家休息入口由 `game/World/TownMap.tscn` 的地点标记维护；`game/Content/town.json` 的 `farming` 定义作物条件、地块引用、床地点与商店补给表。条件和报价采用固定 Unity [默认内容](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Runtime/Content/DefaultMvpContent.cs)作为参考。
+地块位置和玩家休息入口由 [TownMap.tscn](../game/World/TownMap.tscn) 的地点标记维护；[town.json](../game/Content/town.json) 的 `farming` 定义作物条件、地块引用、床地点与商店补给表。条件和报价参考 Unity `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa` 的 [DefaultMvpContent.cs](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Runtime/Content/DefaultMvpContent.cs)，链接需要 CozyTown 私有参考仓库访问权限。
 
 商店每日 05:00 用当日确定性结果替换整份库存，保留商店钱包。前日剩余或玩家售出的物品不追加到新库存。生成结果由世界种子 12345、商店身份、日期、算法版本和配置项顺序确定，同日重复读取不重抽；种子、概率、数量范围及最少供应种类数都进入模拟内容指纹。
 
@@ -66,4 +66,4 @@
 
 种植消耗、收获产出与商店库存替换有独立来源记录，普通交易仍按双方守恒校验。快照保存每块地的作物身份、成长、浇水、成熟、种植代次与已收获次数，连同晨间游标、晨间回执和操作回执共同校验。已接受但尚未消费的时间也进入快照；恢复前检查必要字段、内容引用和按记录重建的资产及地块状态。
 
-运行包交付输入和检查点。完整核心回放与 Godot 场景回放执行器由后续票交付；存读档或导出成功不代表已经执行记录回放。
+运行包保存输入和检查点，可通过[离线核心回放](REPLAY.md)与 [Godot 场景回放](SCENE_REPLAY.md)核对；后者需使用匹配的引擎与场景依赖。存读档或导出成功不代表已经执行记录回放，也不代表回放通过。

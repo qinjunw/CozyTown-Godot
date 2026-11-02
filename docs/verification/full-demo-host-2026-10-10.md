@@ -66,4 +66,4 @@ pwsh -NoProfile -File tools/windows/verify-full-demo.ps1 `
 
 本次主原始目录为 ignored `artifacts/full-demo-verification/20261010T083840Z-76ab7239/`，保留全部运行记录、父前缀和六个 ZIP（包含额外 Windows 默认运行）。关联统一门与矩阵目录见哈希清单。完整主目录、新 Windows 包、关联报告/日志/TRX、失败和故障探针另存本机证据集合 `20261010-full-demo-host-evidence`；统一业务门的大型原始 data 仍留在工作树。Git 仅保存本报告与摘要清单，大 ZIP 未提交到 Git 历史。
 
-玩家对话人工清单仍[待用户执行](player-dialogue-manual.md)，真实综合评测仍未执行。本票离线通过不关闭这两项验收。
+本报告采集时，玩家对话人工清单与真实综合评测尚未执行，以上离线结果不包含这两项验收。后续[对话人工反馈](player-dialogue-manual.md)、[v1 未达标结果](full-demo-real-2026-10-11.md)及 [v2 评测结果](full-demo-real-v2-2026-10-11.md)分别记录其候选、样本与限制。

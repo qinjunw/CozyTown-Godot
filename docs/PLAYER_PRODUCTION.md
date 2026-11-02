@@ -73,7 +73,9 @@
 
 ## 来源、记录与恢复
 
-母鸡规则、鱼类区间和五份配方参考固定 Unity 提交 `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`：
+当前生产定义见本仓库的 [town.json](../game/Content/town.json)，操作规则与随机状态由 [TownProduction](../src/CozyTown.Core/Town/TownProduction.cs) 实现，快照校验见 [TownProductionSnapshot](../src/CozyTown.Core/Town/TownProductionSnapshot.cs)。
+
+母鸡规则、鱼类区间和五份配方参考固定 Unity 提交 `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`。以下历史来源位于私有 CozyTown 参考仓库，需要该仓库的访问权限：
 
 - [默认内容](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Runtime/Content/DefaultMvpContent.cs)提供资源、鱼类、配方和初始母鸡定义。
 - [养殖服务](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Runtime/Livestock/InMemoryLivestockService.cs)提供喂食、单份待领产物和领取失败保留规则。
@@ -82,4 +84,4 @@
 
 生产操作使用独立操作身份并参与共享经济输入顺序。重复投递同一身份及参数返回原结果，不重复扣料、产出或抽值；同一身份更换参数会拒绝。宿主将成功与拒绝的 `player_production_command`、结果、随机状态前后值及世界检查点持久写入后，才发布候选世界。
 
-快照包含母鸡状态、生产代次及领取计数、钓鱼算法版本、随机状态、抽取计数和操作回执，连同晨间游标及玩家资产校验。运行记录支持按输入和检查点检查首次差异；完整核心及 Godot 场景回放执行器仍由后续票交付，保存或恢复成功不代表已经执行完整记录回放。
+快照包含母鸡状态、生产代次及领取计数、钓鱼算法版本、随机状态、抽取计数和操作回执，连同晨间游标及玩家资产校验。导出的运行记录可通过[核心 CLI](REPLAY.md)重算生产输入与完整检查点，也可通过 [Godot 场景回放](SCENE_REPLAY.md)重新执行空间查询；两者均在首个分歧停止。场景回放还需匹配记录的场景、引擎与模拟源码摘要，旧记录的支持范围以各回放入口的版本和依赖检查为准。保存或恢复成功不能代替完整记录回放的结果。

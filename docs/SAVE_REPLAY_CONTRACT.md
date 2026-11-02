@@ -104,9 +104,9 @@
 
 第一次分歧即停止，报告边界序号、实体/字段、预期与实际、相关输入和版本。身份、资产、阶段、去重与逻辑待办精确比较；位置按版本化数值合同的容差比较。已实现的执行入口、记录边界和限制见[回放说明](REPLAY.md)。
 
-## 公开验证入口与验收（待实现）
+## 公开验证入口与验收判据
 
-核心提供可直接测试的捕获快照、预检恢复、切换候选状态、推进输入与比较检查点入口；Godot 提供 headless 场景验证入口及 Windows 操作入口。故障输入通过这些入口控制文件失败、传输完成顺序与空间事实；不直接改资产或活动来伪造结果。
+核心提供可直接测试的捕获快照、预检恢复、切换候选状态、推进输入与比较检查点入口；Godot 提供 headless 场景验证入口及 Windows 操作入口。故障输入通过这些入口控制文件失败、传输完成顺序与空间事实；不直接改资产或活动来伪造结果。下表规定验收判据，各候选的实际覆盖与限制以本文件开头链接的验证记录为准。
 
 | 用例 | 通过判据 |
 | --- | --- |
@@ -130,6 +130,8 @@
 | 删除运行记录中段或所需版本内容 | 明确缺口或缺依赖，拒绝宣称完整回放通过 |
 
 ## 参考证据的边界
+
+本仓库的快照实现见 [TownSnapshot.cs](../src/CozyTown.Core/Town/TownSnapshot.cs)，回放实现见 [TownReplay.cs](../src/CozyTown.Core/Town/TownReplay.cs)与[场景回放说明](SCENE_REPLAY.md)。以下历史来源固定为 Unity `68a1dde7c7099f3e9ee7e975141d0bf9d18099aa`，链接需要 CozyTown 私有参考仓库访问权限。
 
 Unity 固定提交的[完整快照矩阵](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Tests/PlayMode/CompleteWorldSnapshotMatrixPlayModeTests.cs)与[存储故障测试](https://github.com/qinjunw/CozyTown/blob/68a1dde7c7099f3e9ee7e975141d0bf9d18099aa/Assets/CozyTown/Tests/EditMode/Save/JsonFileSaveStorageTests.cs)提供无副作用捕获、途中续接、预检失败、文件失败及提交后故障的参考用例。它们在本轮仅作源码与归档证据核验，未重新运行，也不算 Godot 验收。
 

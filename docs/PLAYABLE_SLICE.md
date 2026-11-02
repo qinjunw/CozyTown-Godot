@@ -6,7 +6,7 @@
 
 ## 启动与操作
 
-在 Windows x64 上运行 `tools/windows/verify.ps1 -Graphical` 后，打开其输出目录中的 `windows/CozyTown.exe`。保留整个 `windows` 目录，程序使用随包提供的 .NET 运行时。构建前的工具安装见 [Windows 工具链](WINDOWS_TOOLCHAIN.md)。
+在 Windows x64 上安装工具链并运行 `pwsh -File tools/windows/verify.ps1` 后，打开其输出目录中的 `windows/CozyTown.exe`。`-Graphical` 可另运行图形检查并捕获截图。保留整个 `windows` 目录，程序使用随包提供的 .NET 运行时。工具安装和检查范围见 [Windows 工具链](WINDOWS_TOOLCHAIN.md)。
 
 | 操作 | 结果 |
 | --- | --- |
@@ -32,17 +32,17 @@
 
 ## 真实模型运行
 
-以下配置对应原首切片预算，其 48 次发送已经用尽。完整 Demo 的配置和用户试玩入口见[完整 Demo 运行说明](FULL_DEMO_RUN.md)。冻结候选 `f9551c1` 已完成[两组 v2 真实评测](verification/full-demo-real-v2-2026-10-11.md)；用户已确认 `576ae64` 候选的[七组离线操作及可选真实 M01](https://github.com/qinjunw/CozyTown-Godot/issues/26#issuecomment-6111460458)通过。回放绑定修复另有[新源码离线复核](verification/replay-outcome-binding-2026-10-12.md)。当前制品渠道与验收证据见[将 Windows CI 制品转存私有 Release 并保留失败诊断](https://github.com/qinjunw/CozyTown-Godot/issues/38)，最终交付状态见[验收并交付完整 Demo Windows 候选](https://github.com/qinjunw/CozyTown-Godot/issues/26)。
+当前独立人工试玩使用 `manual-play-v1`；候选绑定、本机模型配置、已有账本检查与双击入口生成见 [Windows 试玩入口](REAL_PLAY_LAUNCHER.md)。新克隆不包含这些本机配置或入口。真实启动后，居民自主请求与玩家显式生成共用同一人工额度；启动前核对现有账本状态，不重置或重新初始化已使用的预算。
 
-复制 `game/Content/local-model.example.json` 到忽略的 `.local/` 目录，填入仓库外凭据文件和**现有**预算账本的绝对路径。凭据 JSON 必须有且只有一个 `Todo=CozyTown` 项及其 `testingAPIKey`。模板不能直接用于运行，程序不会创建新预算账本。
+直接运行匹配候选时，使用根据 [manual-play.example.json](../src/CozyTown.Model/manual-play.example.json)填写的忽略配置，凭据和现有账本使用仓库外绝对路径，`budgetProfileVersion` 为 `manual-play-v1`。模板不能直接用于运行，游戏不会创建新预算账本。真实与规则模式使用分开的数据目录：
 
 ```powershell
-& '<export-directory>/CozyTown.exe' -- --model-config='<absolute-local-config>'
+& '<export-directory>/CozyTown.exe' -- --model-config='<absolute-local-config>' --execution-purpose=manual --data-dir='<absolute-real-data-directory>'
 ```
 
 普通真实模式同样受总预算、阶段上限、超时、并发和恢复补发限制。基准为默认初态；`--scenario=counterfactual` 只切换资源分布。规则启动不能静默读取真实模式存档；必须显式提供模型配置。预算、候选来源和拒绝原因可在观察手册及 JSONL 中查看。
 
-真实实验的两组执行前条件、停止条件及样本口径见[预登记计划](verification/four-resident-run-plan.md)。`--real-experiment` 是受限实验入口，配合绝对 `--report=`、`--data-dir=` 和可选 `--screenshot=` 输出证据；不要通过重跑或新建账本刷新额度。
+历史首切片与完整 Demo 正式评测使用各自的配置、输入和预算，见 [首切片预登记计划](verification/four-resident-run-plan.md)及 [完整 Demo 运行说明](FULL_DEMO_RUN.md)。`--real-experiment` 和 `--full-demo-evaluation=real` 属于受限评测入口，不能使用 `manual-play-v1`。历史样本、失败与人工验收仅证明各自候选的结果，见 [历史候选与验收范围](FULL_DEMO_RUN.md#历史候选与验收范围)。
 
 ## 内容编辑与验证
 
