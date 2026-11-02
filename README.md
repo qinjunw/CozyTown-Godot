@@ -8,7 +8,7 @@ Windows/PC 小镇生活与四居民 AI Agent 实验 Demo，使用 Godot .NET 和
 
 main 成功的 **Windows toolchain** CI 提供 Windows x64 候选 Artifact，保留 14 天，需要登录 GitHub 下载。按 [下载与校验指引](docs/WINDOWS_DELIVERY.md)取指定运行的候选，先解压 Artifact 外层 ZIP，再校验并解压内层程序 ZIP；无需安装 Godot 或 .NET SDK。
 
-双击程序目录的 `Start-Playtest.cmd`，以独立数据目录运行离线规则与固定客户端；按 [人工试玩清单](docs/PLAYTEST.md)记录通过、失败和未测项。保存后重开用 F9 读取该候选进度。公开版本以 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)中实际已发布的附件为准；维护者草稿在人工验收和发布确认后公开。
+双击程序目录的 `Start-Playtest.cmd`，以独立数据目录运行离线规则与固定客户端；按 [人工试玩清单](docs/PLAYTEST.md)完成 alpha 最低必测并记录扩展回归的通过、失败和未测项。保存后重开用 F9 读取该候选进度。公开版本以 [Releases](https://github.com/qinjunw/CozyTown-Godot/releases)中实际已发布的附件为准；维护者草稿在人工验收和发布确认后公开。
 
 ## 从源码运行
 

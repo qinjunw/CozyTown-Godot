@@ -2,6 +2,8 @@
 
 不编译源码也可以使用 CI 生成的 Windows x64 候选包。CI 是 GitHub 自动运行的构建与检查；候选包通过自动检查后，仍需在本机完成[人工试玩清单](PLAYTEST.md)。
 
+仅修改 CI、文档或包交付且未改变游戏代码时，流程 PR 按受影响的自动检查与包校验结果验收，不要求重跑全部历史人工矩阵。首次公开 alpha 按试玩清单的最低范围另行确认；扩展回归按实际覆盖记录并在发布说明披露。
+
 ## 三种包的区别
 
 | 位置 | 用途与访问方式 | 下一步 |
@@ -14,7 +16,7 @@
 
 ## 1. 下载指定 CI 候选
 
-先取得维护者提供的 **main 成功运行链接、源码提交和程序 ZIP 的 SHA-256**。不要仅凭“最新一次”选择包；PR 检查结果不能替代 main 的发布候选。
+先确定维护者指定的 **main 成功运行链接和源码提交**，下载后从外层摘要文件取得程序 ZIP 的 SHA-256。不要仅凭“最新一次”选择包；PR 检查结果不能替代 main 的发布候选。
 
 1. 登录 GitHub，打开提供的运行链接；也可以从仓库的 [Actions](https://github.com/qinjunw/CozyTown-Godot/actions)选择 **Windows toolchain**。
 2. 确认运行已成功，分支为 `main`，提交与待验收版本一致。点击提交链接可复制完整源码提交；运行页 URL 中 `actions/runs/` 后的数字是 run ID。
@@ -28,7 +30,7 @@ candidate-directory/
   SHA256SUMS.txt
 ```
 
-`<sha12>` 是源码提交的前 12 位。`candidate.json` 供校验工具核对来源与文件清单，不要求人工逐字段阅读。`SHA256SUMS.txt` 记录**内层程序 ZIP**的摘要；GitHub 下载的外层 Artifact ZIP 是另一份文件，不能混用其摘要。
+`<sha12>` 是源码提交的前 12 位。`candidate.json` 供校验工具核对来源与文件清单，`archive.sha256` 为程序 ZIP 摘要；人工可以直接读取同目录的 `SHA256SUMS.txt`，不需要逐字段阅读 JSON。这两份文件都在程序 ZIP 外部。GitHub 下载的外层 Artifact ZIP 是另一份文件，不能混用其摘要。
 
 如果页面没有候选 Artifact，先确认选中了成功的 main 运行。候选过期、上传失败或被删除时停止取件；请维护者重新生成候选，重新记录 run、attempt 和 ZIP 摘要并核验。重跑即使使用同一源码，也不能静默替换已验收的程序 ZIP。
 
@@ -40,7 +42,7 @@ candidate-directory/
 Get-FileHash -LiteralPath '<candidate-directory>/CozyTown-windows-x64-<sha12>.zip' -Algorithm SHA256
 ```
 
-将显示的 64 位 `Hash` 与维护者给出的**程序 ZIP SHA-256**逐字核对，并核对 `SHA256SUMS.txt`。若摘要、源码或 run/attempt 不一致，不把该包用于原候选的验收或发布，重新取得正确候选。
+将显示的 64 位 `Hash` 与外层 `SHA256SUMS.txt`（或 `candidate.json` 的 `archive.sha256`）逐字核对。维护者已给出待验收或已验收摘要时，还须与该摘要一致。若摘要、源码或 run/attempt 不一致，不把该包用于原候选的验收或发布，重新取得正确候选。
 
 已有仓库和 PowerShell 7 的读者，也可以从仓库根目录使用完整校验入口：
 
@@ -56,8 +58,8 @@ pwsh -File tools/windows/delivery.ps1 -Mode Verify `
 
 1. 将通过校验的 `CozyTown-windows-x64-<sha12>.zip` 再次“全部解压”到新的程序目录。
 2. 保留整个目录。根目录包含 `START-HERE.md`、`Start-Playtest.cmd`、`CozyTown.exe`、`.pck` 及随包运行时；仅复制 EXE 无法运行完整游戏。
-3. 阅读 `START-HERE.md`，双击 **Start-Playtest.cmd**。默认居民使用离线规则，玩家生成反馈使用固定客户端示例，不发送真实模型请求。
-4. 按 [PLAYTEST](PLAYTEST.md)填写结果。先完成快速检查，再做完整发布验收；开始前记录源码提交、程序 ZIP 摘要及 run/attempt。
+3. 阅读 `START-HERE.md` 中的源码与 run 身份，双击 **Start-Playtest.cmd**。程序 ZIP 自身摘要从外层文件取得。默认居民使用离线规则，玩家生成反馈使用固定客户端示例，不发送真实模型请求。
+4. 按 [PLAYTEST](PLAYTEST.md)填写结果。公开 alpha 的最低项为 Q01～Q05、M01～M04；其余扩展回归可按时间与功能影响范围选择，实际未测项写入发布说明。开始前记录源码提交、程序 ZIP 摘要及 run/attempt。
 
 该入口的数据目录为 `%LOCALAPPDATA%\CozyTown-Godot\Playtests\<sha12>`，与普通游戏目录分开。关闭后重开同一入口会启动新世界；按 **F9** 才读取该候选先前用 **F5** 保存的进度。同源码候选会复用这个目录，重新测试时先确认是否已有同候选存档，并保留旧记录。
 
@@ -65,7 +67,7 @@ pwsh -File tools/windows/delivery.ps1 -Mode Verify `
 
 ## 4. 维护者准备同包草稿
 
-先取得 [PLAYTEST](PLAYTEST.md)的完整发布验收结果与明确的通过反馈，保留原程序 ZIP 和摘要。草稿准备只搬运已构建的同包资产，不为发布重新编译。
+先取得 [PLAYTEST](PLAYTEST.md)的 alpha 最低必测结果与明确的通过反馈，同时记录扩展项覆盖和未测范围，保留原程序 ZIP 和摘要。草稿准备只搬运已构建的同包资产，不为发布重新编译。
 
 具有仓库写入权限的维护者在 GitHub 操作：
 

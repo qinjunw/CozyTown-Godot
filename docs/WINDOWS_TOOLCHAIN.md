@@ -118,7 +118,7 @@ main 的成功 CI 运行提供名为 `windows-candidate-<run-id>-<attempt>` 的 
 
 试玩时记录 Artifact 名称中的 run/attempt、源码提交和内层程序 ZIP 摘要，准备草稿时再次核对。同一 run 重跑后若无法取回原程序包，应停止交付并重新核验，不沿用旧包的人工验收结果。
 
-`delivery.ps1` 的 `Package`、`Verify` 与 `PrepareDraft` 参数和输入约束统一维护在[交付说明](WINDOWS_DELIVERY.md)。完整 Demo 的独立审查收据要求仍按本页[正式完整 Demo 验证](#正式完整-demo-验证)执行；普通 CI 候选通过不替代该完整门、真实模型评测或人工 GUI 验收。历史候选的结果保持原源码归属。
+`delivery.ps1` 的 `Package`、`Verify` 与 `PrepareDraft` 参数和输入约束统一维护在[交付说明](WINDOWS_DELIVERY.md)。完整 Demo 的独立审查收据要求仍按本页[正式完整 Demo 验证](#正式完整-demo-验证)执行；普通 CI 候选通过不替代该完整门、真实模型评测或人工 GUI 验收。仅改变 CI、文档或包交付的流程 PR 按受影响的自动检查和包校验验收，不要求重跑全部历史人工矩阵。首次公开 alpha 的最低试玩与扩展回归分级见 [PLAYTEST](PLAYTEST.md)，后续功能变更按影响范围提升必测要求。历史候选的结果保持原源码归属。
 
 ## 历史私有 CI 归档与取件
 
